@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="height:40px"></div>
+  <h1 style="text-align:center"><b>Das Team</b> </h1>
+  <hr>
+  <h5>Wir sind ein kleines Team aus Potsdam und Berlin, das sich am #wirvsvirus Hackathon der Bundesregierung beteiligt hat. Unsere Plattform verfolgt das Ziel, Studierende und Helfende mit Krankenhäusern, Hausarztpraxen, Gesundheitsämtern und anderen Einrichtungen des Gesundheitswesens zu verbinden. Wir gehen davon aus, dass es in der Corona-Krise zu einem Personalmangel kommen wird. Hier kann es notwendig werden, auf Studierende (besonders auf Medizinstudierende) oder Auszubildende zurückzugreifen, um dem erhöhten Personalbedarf Rechnung zu tragen oder auch Mitarbeiter* innen, die z.B. aufgrund einer eigenen Erkrankung ausfallen, zu ersetzen.</h4>
+  <div style="height:40px"></div>
+  <div class="row">
+    <!-- Team Member 1 -->
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow">
+        <img src="{% static 'img/freya_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Freya Behrens</h5>
+          <div class="card-text text-black-50">Informatikstudentin (TU Berlin)</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 2 -->
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow" style="height:100%">
+        <div style="height:40%"></div>
+        <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="{% static 'img/logo.jpg' %}" class="card-img-top" alt="..."  width="300px"></a>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0"> </h5>
+          <div class="card-text text-black-50"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow">
+        <img src="{% static 'img/baschdl_gray.jpeg' %}" class="card-img-top" alt="..."  width="300px">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Sebastian Bischoff</h5>
+          <div class="card-text text-black-50">Mathematikstudent (EPFL/TU München)</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 3 -->
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow">
+        <img src="{% static 'img/andi_gray.jpeg' %}" class="card-img-top" alt="..." width="300px">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Andreas Kind</h5>
+          <div class="card-text text-black-50">Medizinstudent (Charité Berlin)</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 4 -->
+    <!-- Team Member 5 -->
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow">
+        <img src="{% static 'img/bjarne_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Bjarne Sievers</h5>
+          <div class="card-text text-black-50">Informatikstudent (Uni Leipzig)</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-5">
+      <div class="card border-0 shadow">
+        <img src="{% static 'img/jonathan_gray.png' %}" class="card-img-top" alt="..." width="300px">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Jonathan Sauder</h5>
+          <div class="card-text text-black-50">Informatikstudent (TU Berlin)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:40px"></div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+</div>
+{% endblock %}

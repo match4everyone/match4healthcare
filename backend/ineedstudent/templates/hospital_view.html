@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+
+{% block title %}
+{{hospital.firmenname}}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h2>{{hospital.firmenname}} </h2>
+                <div class="font-weight-light">in  {{hospital.plz}}</div>
+
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{hospital.sonstige_infos}}</li>
+            <li class="list-group-item text-muted"> Meldete euch bei: {{hospital.ansprechpartner}} <br> Telefon: {{hospital.phone}} <br> Mail: {{hospital.email}}</li>
+
+      </ul>
+    </div>
+</div>
+<hr>
+{% endblock %}

@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  backend:
+    volumes:
+      - './backend:/matchmedisvsvirus-backend'
+    ports:
+      - '80:8000'
+    networks:
+      - network
+    env_file:
+      - backend.prod.env
+      - database.prod.env
+    environment:
+     - DJANGO_SETTINGS_MODULE=matchmedisvsvirus.settings.production
+    command: gunicorn -c /matchmedisvsvirus-backend/gunicorn.conf.py matchmedisvsvirus.wsgi
+
+  database:
+    image: postgres
+    volumes:
+     - ./database/data:/var/lib/postgresql/data
+     - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    restart: always
+    env_file:
+     - database.prod.env
+    expose:
+     -  5432
+    networks:
+     - network
+
+networks:
+ network:

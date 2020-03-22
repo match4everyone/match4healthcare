@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Vielen Dank
+{% endblock %}
+
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="container">
+    Vielen Dank für die Registrierung. Wir kontaktieren Sie, sobald sich passende Freiwillige bei uns eingetragen haben.
+</div>
+<br>
+<br>
+
+{% endblock %}

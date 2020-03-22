@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Vielen Dank
+{% endblock %}
+
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="container">
+    Vielen Dank für deine Registrierung. Wir kontaktieren dich, sobald eine medizinische Einrichtung deine Hilfe benötigt.
+</div>
+<br>
+<br>
+
+{% endblock %}
