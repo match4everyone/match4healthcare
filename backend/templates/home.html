@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 Home
@@ -18,9 +19,9 @@ Home
       </div class="container">
     </div>
     <div class="col-md-5 m-1 p-3">
-        <p>Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen, <br>
+        <p>{% blocktrans %} Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,{% endblocktrans %} <br>
         <br>
-        wir wollen euch über diese Plattform die Möglichkeit bieten, bei der Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, den Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen Pool an Fachkräften bereitzustellen, die bereit sind, in Notsituationen auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir euch euren Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer Arztpraxis oder einem Gesundheitsamt zuweisen können.</p>
+        {% blocktrans %} wir wollen euch über diese Plattform die Möglichkeit bieten, bei der Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, den Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen Pool an Fachkräften bereitzustellen, die bereit sind, in Notsituationen auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir euch euren Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer Arztpraxis oder einem Gesundheitsamt zuweisen können.{% endblocktrans %}</p>
     </div>
       <div class="col-md-5 order-last order-md-0 center-block m-1 p-3" >
          <iframe id="video" src="https://www.youtube-nocookie.com/embed/XjnWuCSqAtY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -34,16 +35,16 @@ Home
         </script>
       </div>
       <div class="col-md-5 m-1 p-3">
-        <h2>Ich will helfen</h2>
-        <p>Ich habe Erfahrung um in dieser Notsituation medizinisch helfen zu können: ich studiere Medizin, habe bereits in der Pflege gearbeitet, bin Rettungssanitäter oder habe andere relevante Fähigkeiten. Ich möchte mit Möglichkeiten zu helfen kontaktiert werden!</p>
-        <p><a class="btn btn-primary" href="/mapview" role="button">Zur Karte &raquo;</a></p>
-        <p><a class="btn btn-primary" href="/iamstudent/student_registration" role="button">Registriere Mich &raquo;</a></p>
+        <h2>{% blocktrans %} Ich will helfen{% endblocktrans %}</h2>
+        <p>{% blocktrans %} Ich habe Erfahrung um in dieser Notsituation medizinisch helfen zu können: ich studiere Medizin, habe bereits in der Pflege gearbeitet, bin Rettungssanitäter oder habe andere relevante Fähigkeiten. Ich möchte mit Möglichkeiten zu helfen kontaktiert werden!{% endblocktrans %}</p>
+        <p><a class="btn btn-primary" href="/mapview" role="button">{% blocktrans %} Zur Karte{% endblocktrans %} &raquo;</a></p>
+        <p><a class="btn btn-primary" href="/iamstudent/student_registration" role="button">{% blocktrans %} Registriere Mich{% endblocktrans %} &raquo;</a></p>
       </div>
       <div class="col-md-5 m-1 p-3">
-        <h2>Ich brauche Unterstützung</h2>
-        <p>Ich arbeite in einem Krankenhaus oder einer Praxis und brauche Unterstützung um den Ansturm der nCOV-19 Patienten zu bewältigen. Ich suche gezielt Fachkräfte, welche mich bei meiner Arbeit im Gesundheitswesen unterstützen können.</p>
-        <p><a class="btn btn-primary" href="/ineedstudent/hospital_map" role="button">Zur Karte &raquo;</a></p>
-        <p><a class="btn btn-primary" href="/ineedstudent/hospital_registration" role="button">Anzeige stellen &raquo;</a></p>
+        <h2>{% blocktrans %} Ich brauche Unterstützung{% endblocktrans %}</h2>
+        <p>{% blocktrans %} Ich arbeite in einem Krankenhaus oder einer Praxis und brauche Unterstützung um den Ansturm der nCOV-19 Patienten zu bewältigen. Ich suche gezielt Fachkräfte, welche mich bei meiner Arbeit im Gesundheitswesen unterstützen können.{% endblocktrans %}</p>
+        <p><a class="btn btn-primary" href="/ineedstudent/hospital_map" role="button">{% blocktrans %} Zur Karte{% endblocktrans %} &raquo;</a></p>
+        <p><a class="btn btn-primary" href="/ineedstudent/hospital_registration" role="button">{% blocktrans %} Anzeige stellen{% endblocktrans %} &raquo;</a></p>
       </div>
     </div>
 
