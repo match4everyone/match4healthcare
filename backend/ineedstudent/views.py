@@ -35,9 +35,6 @@ def list_by_plz(request, countrycode, plz, distance):
         # TODO: niceren error werfen
         return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
-
-    # TODO Consult with others how this should behave!
     if distance==0:
         f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz, countrycode=countrycode))
     else:
@@ -75,10 +72,9 @@ def hospital_registration(request):
 
 
 
-# Should be safe against BREACH attack because we don't have user input in reponse body
-@gzip_page
+
 def hospital_overview(request):
-    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
+    locations_and_number = prepare_students()
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -86,20 +82,16 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-@lru_cache()
-def prepare_hospitals(ttl_hash=None):
+def prepare_students():
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
-        cc = student.countrycode
         plz = student.plz
-        key = cc + "_" + plz
-        if key in locations_and_number:
-            locations_and_number[key]["count"] += 1
+        if plz in locations_and_number:
+            locations_and_number[plz]["count"] += 1
         else:
-            lat, lon, ort = plzs[cc][plz]
-            locations_and_number[key] = {
-                "countrycode": cc,
+            lat, lon, ort = plzs[plz]
+            locations_and_number[plz] = {
                 "plz": plz,
                 "count": 1,
                 "lat": lat,
@@ -109,18 +101,12 @@ def prepare_hospitals(ttl_hash=None):
     return locations_and_number
 
 
-def hospital_list(request, countrycode, plz):
-
-    if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen
-        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
-        
-    lat, lon, ort = plzs[countrycode][plz]
+def hospital_list(request, plz):
+    lat, lon, ort = plzs[plz]
 
     table = HospitalTable(Hospital.objects.filter(plz=plz))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
-        'countrycode': countrycode,
         'plz': plz,
         'ort': ort,
         'table': table}

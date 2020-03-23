@@ -98,6 +98,7 @@ def create_skills(fields, radio_type):
         c = Column(radio_type(f), css_class='form-group col-md-6 mb-0')
         col.append(c)
     rows.append(Row(*col, css_class="form-row"))
+    print(rows)
     return rows
 
 
@@ -108,13 +109,12 @@ def create_radio_progress_indicator(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-info", template='input_buttongroup-progress_indicator.html')
 
 class StudentForm(forms.ModelForm):
-
-
     class Meta:
         model = Student
         exclude = ['uuid', 'registration_date','user']
         labels = form_labels
         help_texts = {
+            'availability_start': _('Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21'),
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'plz': _('Bitte gib deine Postleitzahl ein'),
             'countrycode': _('Bitte wähle ein Land aus'),
@@ -142,10 +142,6 @@ class StudentForm(forms.ModelForm):
             Row(
                 Column('plz', css_class='form-group col-md-6 mb-0'),
                 Column('countrycode', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('availability_start',  input_type="date", css_class='form-group col-md-6 mb-0'),
                 Column('semester', css_class='form-group col-md-4 mb-0'),
                 Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'

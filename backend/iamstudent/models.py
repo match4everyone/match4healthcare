@@ -13,11 +13,6 @@ def validate_semester(value):
     else:
         return value
 
-def validate_plz(value):
-    if value not in plzs:
-        raise ValidationError(_('Dies ist keine Postleitzahl in Deutschland.'))
-    else:
-        return value
 
 class Student(models.Model):
     """A typical class defining a model, derived from the Model class."""
@@ -35,10 +30,22 @@ class Student(models.Model):
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
+
+    COUNTRY_CODE_CHOICES = [
+        ("DE", 'Deutschland'),
+        ("AT", 'Österreich'),
+    ]
+    countrycode = models.CharField(
+        max_length=2,
+        choices=COUNTRY_CODE_CHOICES,
+        default="DE",
+    )
     #Allgemeines
 
     # vorerkrankungen
     # Berufserfahrung
+
+    # TODO add more validators!
 
     # Bezahlung
 
@@ -105,6 +112,10 @@ class Student(models.Model):
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
         return self.user.email
+
+    def clean(self):
+        if self.plz not in plzs[self.countrycode]:
+            raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))
 
 import django_filters
 from django import forms
