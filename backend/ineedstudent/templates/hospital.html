@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 Registrierung - Krankenhäuser
@@ -16,14 +17,14 @@ Registrierung - Krankenhäuser
     <p>
 	<br>
 	<br>
-        Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden könnt, gebt eure Anprechpartner und
-        Infos an!
+        {% blocktrans %}Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden könnt, gebt eure Anprechpartner und
+        Infos an!{% endblocktrans %}
     </p>
 </div>
 <div class="container">
     <div class="card border-primary">
         <div class="card-header">
-            Registrierung - Hilfesuchendes Krankenhaus o.Ä.
+            {% blocktrans %}Registrierung - Hilfesuchendes Krankenhaus o.Ä.{% endblocktrans %}
         </div>
         <div class="card-body">
             <form action="hospital_registration" method="post">

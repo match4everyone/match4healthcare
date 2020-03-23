@@ -1,0 +1,525 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-23 00:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: iamstudent/forms.py:28 iamstudent/forms.py:29
+msgid "Writer"
+msgstr ""
+
+#: iamstudent/forms.py:31
+msgid "Wohnort"
+msgstr "Postal code"
+
+#: iamstudent/forms.py:32
+msgid "Email"
+msgstr ""
+
+#: iamstudent/forms.py:34
+msgid "Semester"
+msgstr ""
+
+#: iamstudent/forms.py:35
+msgid "Ich bin aktuell immatrikuliert"
+msgstr "I am currently a student"
+
+#: iamstudent/forms.py:36
+msgid "Ich bin verfügbar ab"
+msgstr "I am available from"
+
+#: iamstudent/forms.py:38
+msgid "Ich benötige eine Vergütung"
+msgstr "I need a compensation"
+
+#: iamstudent/forms.py:40
+msgid "Famulaturreife"
+msgstr ""
+
+#: iamstudent/forms.py:41
+msgid "M2 absolviert"
+msgstr ""
+
+#: iamstudent/forms.py:42
+msgid "Berufserfahrung in Monaten"
+msgstr "Work experience in months"
+
+#: iamstudent/forms.py:44
+msgid "Arzt/Ärztin"
+msgstr "Medical doctor"
+
+#: iamstudent/forms.py:45
+msgid "Pfleger*in"
+msgstr "Caregiver"
+
+#: iamstudent/forms.py:46
+msgid "Pflegehelfer*in"
+msgstr ""
+
+#: iamstudent/forms.py:47
+msgid "Anästhesiepfleger*in"
+msgstr ""
+
+#: iamstudent/forms.py:48
+msgid "Intensivpfleger*in"
+msgstr ""
+
+#: iamstudent/forms.py:49
+msgid "OTA"
+msgstr ""
+
+#: iamstudent/forms.py:50
+msgid "MFA"
+msgstr ""
+
+#: iamstudent/forms.py:51
+msgid "MTA/LTA"
+msgstr ""
+
+#: iamstudent/forms.py:52
+msgid "RTA"
+msgstr ""
+
+#: iamstudent/forms.py:53
+msgid "Rettungssanitäter*in"
+msgstr ""
+
+#: iamstudent/forms.py:54
+msgid "Kinderbetreuer*in"
+msgstr ""
+
+#: iamstudent/forms.py:55
+msgid "Hebamme"
+msgstr ""
+
+#: iamstudent/forms.py:56
+msgid "Sprechstundenhilfe"
+msgstr ""
+
+#: iamstudent/forms.py:57
+msgid "Labortechnische Assistenz"
+msgstr ""
+
+#: iamstudent/forms.py:59
+msgid "Famulatur"
+msgstr ""
+
+#: iamstudent/forms.py:60
+msgid "Pflegepraktika"
+msgstr ""
+
+#: iamstudent/forms.py:61
+msgid "FSJ im Krankenhaus"
+msgstr ""
+
+#: iamstudent/forms.py:63
+msgid "Corona Screening in der ZINA"
+msgstr ""
+
+#: iamstudent/forms.py:64
+msgid "Unterstützung der Pflege"
+msgstr ""
+
+#: iamstudent/forms.py:65
+msgid "Hilfe im Transportdienst"
+msgstr ""
+
+#: iamstudent/forms.py:66
+msgid "Kinderbetreuung"
+msgstr ""
+
+#: iamstudent/forms.py:67
+msgid "generelle Labortätigkeiten"
+msgstr ""
+
+#: iamstudent/forms.py:68
+msgid "DRK Blutspende (auch Vorklinik)"
+msgstr ""
+
+#: iamstudent/forms.py:69
+msgid "Telefon Hotline"
+msgstr ""
+
+#: iamstudent/forms.py:70
+msgid "Abstriche"
+msgstr ""
+
+#: iamstudent/forms.py:71
+msgid "Patientenpflege (Waschen)"
+msgstr ""
+
+#: iamstudent/forms.py:72
+msgid "Patientenlagerung"
+msgstr ""
+
+#: iamstudent/forms.py:73
+msgid "OP Assistenz"
+msgstr ""
+
+#: iamstudent/forms.py:74
+msgid "Blutentnahmedienst"
+msgstr ""
+
+#: iamstudent/forms.py:75
+msgid "Entgegennahme und Bearbeitung von Anrufen Hilfesuchender"
+msgstr ""
+
+#: iamstudent/forms.py:76
+msgid "Infektionsnachverfolgung"
+msgstr ""
+
+#: iamstudent/forms.py:77
+msgid "Patientenaufnahme"
+msgstr ""
+
+#: iamstudent/forms.py:78
+msgid "EDV Kenntnisse"
+msgstr ""
+
+#: iamstudent/forms.py:79
+msgid "Zugänge Legen"
+msgstr ""
+
+#: iamstudent/forms.py:80
+msgid "Arztbriefe schreiben"
+msgstr ""
+
+#: iamstudent/forms.py:81
+msgid "Blutkulturen abnehmen"
+msgstr ""
+
+#: iamstudent/forms.py:82
+msgid "Infusionen mischen"
+msgstr ""
+
+#: iamstudent/forms.py:83
+msgid "EKG schreiben"
+msgstr ""
+
+#: iamstudent/forms.py:84
+msgid "Ultraschall"
+msgstr ""
+
+#: iamstudent/forms.py:85
+msgid "BGAs"
+msgstr ""
+
+#: iamstudent/forms.py:86
+msgid "Beatmungsgeräte Bedienen"
+msgstr ""
+
+#: iamstudent/forms.py:116
+msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
+msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
+
+#: iamstudent/forms.py:117
+msgid ""
+"Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
+msgstr "Medical institutions may contact you via this email address"
+
+#: iamstudent/forms.py:118
+msgid "Bitte gib deine Postleitzahl ein"
+msgstr "Please enter your zip code"
+
+#: iamstudent/forms.py:119 iamstudent/forms.py:120 iamstudent/forms.py:121
+msgid "in Monaten"
+msgstr "in monts"
+
+#: iamstudent/forms.py:155
+msgid "Berufsausbildung"
+msgstr "Professional training"
+
+#: iamstudent/forms.py:156
+msgid ""
+"Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder "
+"angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen "
+"habt, dann müsst ihr nichts weiter angeben."
+msgstr ""
+"Please indicate here which professional training you have already completed "
+"or started. If you have not started one of the vocational training courses, "
+"you do not need to enter anything."
+
+#: iamstudent/forms.py:160
+msgid "Fähigkeiten"
+msgstr "Skills"
+
+#: iamstudent/forms.py:161
+msgid ""
+"Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. "
+"Damit können wir den individualisierbarere Suchanfragen für die "
+"Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, "
+"grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit "
+"ausgeführt habt."
+msgstr ""
+"Here you can indicate which activities and skills you have mastered. This "
+"will enable us to create more individualized search queries for those "
+"seeking help. In addition, you can use the traffic light system (red, "
+"yellow, green) to indicate how often you have already performed this "
+"activity."
+
+#: iamstudent/models.py:11
+msgid "Semester darf nicht negativ sein"
+msgstr "Semester has to be positive"
+
+#: iamstudent/models.py:17
+msgid "Dies ist keine Postleitzahl in Deutschland."
+msgstr ""
+
+#: iamstudent/templates/student.html:20
+msgid "Liebe Studierende und Helfende,"
+msgstr "Dear students and volunteers,"
+
+#: iamstudent/templates/student.html:22
+msgid ""
+"Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, "
+"Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese "
+"nach Unterstützung suchen. Hierfür bitten wir euch, die folgenden Daten "
+"anzugeben, damit wir euch mit den entsprechenden Gesuchen verbinden können."
+msgstr ""
+"The aim of this project is to connect you with hospitals, general "
+"practitioners and health authorities in your area if they are looking for "
+"support. For this purpose, we ask you to provide the following information "
+"so that we can connect you with the appropriate requests."
+
+#: iamstudent/templates/student.html:26
+msgid ""
+"Zuvor möchten wir euch zu eurer und der allgemeinen Sicherheit über einige "
+"Punkte aufklären:"
+msgstr ""
+"Beforehand we would like to inform you about some points concerning your "
+"safety and the general safety:"
+
+#: iamstudent/templates/student.html:28
+msgid ""
+"1. Vergewissert euch, bevor ihr euch für eine Tätigkeit verpflichtet, welche "
+"<mark>Haftpflichrichtlinien</mark> für euch gelten werden."
+msgstr ""
+"1. Make sure, before you commit yourself to an activity, which "
+"<mark>liability guidelines</mark> will apply to you "
+
+#: iamstudent/templates/student.html:30
+msgid ""
+"2. Bitte bedenkt, dass Vollzeitstudierende nicht gleichzeitig eine "
+"Vollzeitstelle belegen dürfen. Überlegt euch demnach gut, <mark>in welchem "
+"Ausmaß ihr euch für Hilfe bereiterklären könnt</mark>. Falls ihr eine "
+"Vollzeitarbeit über diesen Weg aufnehmen wollt, müsst ihr häufig ein "
+"Urlaubssemester einlegen."
+msgstr ""
+"Please remember that full-time students are not allowed to take a full-time "
+"job at the same time. Therefore, <mark>think carefully about the extent to "
+"which you can volunteer</mark>. If you want to take volunteer full-time job, "
+"you will often have to take a semester off. "
+
+#: iamstudent/templates/student.html:32
+msgid ""
+"3. Bitte bedenkt zuvor, dass ihr bei jeglichen Tätigkeiten in Kontakt mit "
+"anderen Menschen kommt und damit eine erhöhte Ansteckungs- und "
+"Infektionsgefahr einhergeht. Solltet ihr selbst <mark>positiv auf nCOV-19 "
+"getestet worden sein oder Symptome zeigen</mark> (Husten, Fieber, "
+"Abgeschlagenheit) oder sogar zur Risikogruppe gehören, dann ist aufgrund der "
+"Infektionsgefahr davon abzusehen sich im Gesundheitswesen zu betätigen, um "
+"das Risiko der Übertragung zu verringern."
+msgstr ""
+"3. Please consider beforehand that you will come into contact with other "
+"people and that this will increase the risk of infection. If you yourself "
+"have <mark>tested positive for nCOV-19 or show symptoms</mark> (cough, "
+"fever, fatigue) or are at risk, then due to the risk of infection, you "
+"should refrain from working in the healthcare sector to reduce the risk of "
+"transmission."
+
+#: iamstudent/templates/student.html:37
+msgid "Registrierung - Studierende & Helfer"
+msgstr "Registration - students & volunteers"
+
+#: iamstudent/views.py:31
+msgid "Invalid value"
+msgstr ""
+
+#: iamstudent/views.py:105
+msgid "subject :)"
+msgstr ""
+
+#: iamstudent/views.py:106
+#, python-format
+msgid "I want to hire you person of gender %s!, Contact me here: %s"
+msgstr ""
+
+#: ineedstudent/forms.py:16
+msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
+msgstr ""
+
+#: ineedstudent/forms.py:20
+msgid "Postleitzahl"
+msgstr "Postal code"
+
+#: ineedstudent/forms.py:21
+msgid "Name der Institution"
+msgstr "Name of institution"
+
+#: ineedstudent/forms.py:22
+msgid "Wichtige Infos über Euch und den potentiellen Einsatzbereich"
+msgstr "Important information about you and the potential field of application"
+
+#: ineedstudent/templates/hospital.html:19
+msgid ""
+"Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden "
+"könnt, gebt eure Anprechpartner und\n"
+"        Infos an!"
+msgstr ""
+"Please enter your contact persons and information so that we can upload your "
+"offer and can contact you! "
+
+#: ineedstudent/templates/hospital.html:26
+msgid "Registrierung - Hilfesuchendes Krankenhaus o.Ä."
+msgstr "Registration - hospital seeking help"
+
+#: matchmedisvsvirus/settings/common.py:112
+msgid "English"
+msgstr ""
+
+#: matchmedisvsvirus/settings/common.py:113
+msgid "German"
+msgstr ""
+
+#: templates/about.html:12
+msgid "Das Team"
+msgstr "The team"
+
+#: templates/about.html:14
+msgid ""
+"Wir sind ein kleines Team aus Potsdam und Berlin, das sich am #wirvsvirus "
+"Hackathon der Bundesregierung beteiligt hat. Unsere Plattform verfolgt das "
+"Ziel, Studierende und Helfende mit Krankenhäusern, Hausarztpraxen, "
+"Gesundheitsämtern und anderen Einrichtungen des Gesundheitswesens zu "
+"verbinden. Wir gehen davon aus, dass es in der Corona-Krise zu einem "
+"Personalmangel kommen wird. Hier kann es notwendig werden, auf Studierende "
+"(besonders auf Medizinstudierende) oder Auszubildende zurückzugreifen, um "
+"dem erhöhten Personalbedarf Rechnung zu tragen oder auch Mitarbeiter* innen, "
+"die z.B. aufgrund einer eigenen Erkrankung ausfallen, zu ersetzen."
+msgstr ""
+"We are a small team from Potsdam and Berlin that participated in the "
+"#wirvsvirus Hackathon of the German government. Our platform pursues the "
+"goal of connecting students and volunteers with hospitals, family doctor's "
+"offices, health authorities and other health care institutions. We assume "
+"that there will be a shortage of staff during the Corona crisis. In this "
+"case, it may become necessary to call on students (especially medical "
+"students) or trainees in order to meet the increased demand for personnel or "
+"to replace employees internally who are absent, e.g. due to their own "
+"illness."
+
+#: templates/about.html:23
+msgid "Informatikstudentin (TU Berlin)"
+msgstr "Computer science student (TU Berlin)"
+
+#: templates/about.html:43
+msgid "Mathematikstudent (EPFL/TU München)"
+msgstr "Mathematics student (EPFL/TU Munich)"
+
+#: templates/about.html:53
+msgid "Medizinstudent (Charité Berlin)"
+msgstr "Medical student (Charité Berlin)"
+
+#: templates/about.html:64
+msgid "Informatikstudent (Uni Leipzig)"
+msgstr "Computer science student (Uni Leipzig)"
+
+#: templates/about.html:73
+msgid "Informatikstudent (TU Berlin)"
+msgstr "Computer science student (TU Berlin)"
+
+#: templates/base.html:67 templates/home.html:38
+msgid "Ich will helfen"
+msgstr "I want to help"
+
+#: templates/base.html:70
+msgid "Ich brauche Hilfe"
+msgstr "I need help"
+
+#: templates/base.html:73
+msgid "Krankenhauskarte"
+msgstr "Map of hospitals"
+
+#: templates/base.html:76
+msgid "Helferkarte"
+msgstr "Map of volunteers"
+
+#: templates/base.html:85
+msgid "Impressum"
+msgstr "Imprint"
+
+#: templates/home.html:22
+msgid " Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,"
+msgstr " Dear medical students, volunteers, doctors,"
+
+#: templates/home.html:24
+msgid ""
+" wir wollen euch über diese Plattform die Möglichkeit bieten, bei der "
+"Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, den "
+"Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen Pool "
+"an Fachkräften bereitzustellen, die bereit sind, in Notsituationen "
+"auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir euch euren "
+"Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer Arztpraxis "
+"oder einem Gesundheitsamt zuweisen können."
+msgstr ""
+"we want to use this platform to offer you the opportunity to help with the "
+"management of the corona crisis in Germany. Our aim is to provide hospitals, "
+"doctors' practices and health authorities in Germany with a pool of "
+"professionals who are prepared to help out in emergency situations and take "
+"on important tasks. We want to be able to assign you to a hospital, a "
+"doctor's practice or a health office according to your experience and skills."
+
+#: templates/home.html:39
+msgid ""
+"Ich habe Erfahrung um in dieser Notsituation medizinisch helfen zu können: "
+"ich studiere Medizin, habe bereits in der Pflege gearbeitet, bin "
+"Rettungssanitäter oder habe andere relevante Fähigkeiten. Ich möchte mit "
+"Möglichkeiten zu helfen kontaktiert werden!"
+msgstr ""
+"I have the experience to be able to help in this medical emergency "
+"situation: I am studying medicine, have worked in nursing, am a paramedic or "
+"have other relevant skills. I would like to be contacted with possibilities "
+"to help!"
+
+#: templates/home.html:40 templates/home.html:46
+msgid " Zur Karte"
+msgstr " Show map"
+
+#: templates/home.html:41
+msgid " Registriere Mich"
+msgstr " Register"
+
+#: templates/home.html:44
+msgid "Ich brauche Unterstützung"
+msgstr "I need support"
+
+#: templates/home.html:45
+msgid ""
+"Ich arbeite in einem Krankenhaus oder einer Praxis und brauche Unterstützung "
+"um den Ansturm der nCOV-19 Patienten zu bewältigen. Ich suche gezielt "
+"Fachkräfte, welche mich bei meiner Arbeit im Gesundheitswesen unterstützen "
+"können."
+msgstr ""
+"I work in a hospital or medical practice and need support to manage the "
+"onrush of nCOV-19 patients. I am specifically looking for professionals who "
+"can support me in my work in the healthcare sector."
+
+#: templates/home.html:47
+msgid " Anzeige stellen"
+msgstr " List need for help"
+
+# msgid "Ich will helfen"
+# msgstr "I want to help"
