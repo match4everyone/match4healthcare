@@ -21,19 +21,21 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
-def list_by_plz(request, plz, distance):
+def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
-    lat, lon, ort = plzs[plz]
+    lat, lon, ort = plzs[countrycode][plz]
 
+    # TODO Consult with others how this should behave!
     if distance==0:
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz))
+        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz, countrycode=countrycode))
     else:
-        close_plzs = get_plzs_close_to(plz, distance)
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz__in=close_plzs))
+        close_plzs = get_plzs_close_to(countrycode, plz, distance)
+        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz__in=close_plzs, countrycode=countrycode))
 
     context = {
         'plz': plz,
+        'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
         'filter': f,
@@ -76,12 +78,14 @@ def prepare_students():
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
+        cc = student.countrycode
         plz = student.plz
         if plz in locations_and_number:
-            locations_and_number[plz]["count"] += 1
+            locations_and_number[cc][plz]["count"] += 1
         else:
-            lat, lon, ort = plzs[plz]
-            locations_and_number[plz] = {
+            lat, lon, ort = plzs[cc][plz]
+            locations_and_number[cc][plz] = {
+                "countrycode": cc,
                 "plz": plz,
                 "count": 1,
                 "lat": lat,
@@ -91,12 +95,13 @@ def prepare_students():
     return locations_and_number
 
 
-def hospital_list(request, plz):
-    lat, lon, ort = plzs[plz]
+def hospital_list(request, countrycode, plz):
+    lat, lon, ort = plzs[countrycode][plz]
 
     table = HospitalTable(Hospital.objects.filter(plz=plz))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
+        'countrycode': countrycode,
         'plz': plz,
         'ort': ort,
         'table': table}

@@ -39,7 +39,6 @@ Karte der Hilfsbereiten
 
  </script>
  {% for location in locations %}
-
  <script type="text/javascript">
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {
        color: 'blue',
@@ -48,7 +47,7 @@ Karte der Hilfsbereiten
        fillOpcity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('In {{ location.ort }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.plz }}/0>Detailansicht</a>')
+   .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.plz }}/0>Detailansicht</a>')
    .addTo(mymap);
  </script>
  {% endfor %}

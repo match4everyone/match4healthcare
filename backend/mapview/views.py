@@ -21,12 +21,16 @@ def prepare_students():
     locations_and_number = {}
     i=0
     for student in students:
+        cc = student.countrycode
         plz = student.plz
-        if plz in locations_and_number:
-            locations_and_number[plz]["count"] += 1
+        key = cc + "_" + plz
+
+        if key in locations_and_number:
+            locations_and_number[cc + "_" + plz]["count"] += 1
         else:
-            lat, lon, ort = plzs[plz]
-            locations_and_number[plz] = {
+            lat, lon, ort = plzs[cc][plz]
+            locations_and_number[key] = {
+                "countrycode": cc,
                 "plz": plz,
                 "count": 1,
                 "lat": lat,

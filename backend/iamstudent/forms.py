@@ -27,20 +27,21 @@ BERUF2_wo = ['ba_famulatur', 'ba_pflegepraktika', 'ba_fsj_krankenhaus']
 form_labels = {
     'uuid': _('Writer'),
     'registration_date': _('Writer'),
-    
+
     'plz': _('Wohnort'),
+    'countrycode': _('Land'),
     'email': _('Email'),
-    
+
     'semester': _('Semester'),
     'immatrikuliert': _('Ich bin aktuell immatrikuliert'),
     'availability_start': _('Ich bin verfügbar ab'),
-    
+
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
-    
+
     'famulaturreife': _('Famulaturreife'),
     'm2absolviert': _('M2 absolviert'),
     'berufserfahrung_monate': _('Berufserfahrung in Monaten'),
-    
+
     'ba_arzt': _('Arzt/Ärztin'),
     'ba_krankenpflege': _('Pfleger*in'),
     'ba_pflegehilfe': _('Pflegehelfer*in'),
@@ -55,11 +56,11 @@ form_labels = {
     'ba_hebamme': _('Hebamme'),
     'ba_sprechstundenhilfe': _('Sprechstundenhilfe'),
     'ba_labortechnische_assistenz': _('Labortechnische Assistenz'),
-    
+
     'ba_famulatur': _('Famulatur'),
     'ba_pflegepraktika': _('Pflegepraktika'),
     'ba_fsj_krankenhaus': _('FSJ im Krankenhaus'),
-    
+
     'skill_coronascreening': _('Corona Screening in der ZINA'),
     'skill_pflegeunterstuetzung': _('Unterstützung der Pflege'),
     'skill_transportdienst': _('Hilfe im Transportdienst'),
@@ -97,7 +98,6 @@ def create_skills(fields, radio_type):
         c = Column(radio_type(f), css_class='form-group col-md-6 mb-0')
         col.append(c)
     rows.append(Row(*col, css_class="form-row"))
-    print(rows)
     return rows
 
 
@@ -129,7 +129,7 @@ class StudentForm(forms.ModelForm):
             self.fields[field].required = False
         for field in BERUF2_wo:
             self.fields[field].required = False
-        
+
         self.helper = FormHelper()
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
@@ -139,6 +139,7 @@ class StudentForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 Column('plz', css_class='form-group col-md-6 mb-0'),
+                Column('countrycode', css_class='form-group col-md-6 mb-0'),
                 Column('semester', css_class='form-group col-md-4 mb-0'),
                 Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'
