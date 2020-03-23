@@ -8,6 +8,5 @@ django-tables2
 djangorestframework>=3.4.4
 djangorestframework-filters
 gunicorn
-psycopg2
 whitenoise
 whitenoise[brotli]
