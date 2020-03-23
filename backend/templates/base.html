@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!doctype html>
 <html lang="en">
@@ -15,6 +16,42 @@
     {% endblock %}
   </head>
   <body>
+  <style>
+.cr {
+  width: 250px;
+  padding: 16px;
+  position: absolute;
+  text-align: center;
+  color: #f0f0f0;
+}
+
+.cr-sticky {
+  position: fixed;
+}
+
+/* Positions */
+
+.cr-top    { top: 25px; }
+.cr-bottom { bottom: 25px; }
+.cr-left   { left: -50px; }
+.cr-right  { right: -50px; }
+
+/* Rotations */
+
+.cr-top.cr-left,
+.cr-bottom.cr-right {
+  transform: rotate(-45deg);
+}
+
+.cr-top.cr-right,
+.cr-bottom.cr-left {
+  transform: rotate(45deg);
+}
+
+/* Colors */
+
+.cr-green     { background-color: #cc1a5d; }
+</style><div class="cr cr-bottom cr-left cr-sticky cr-green">Demo Version</div>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="/">Helping Health</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,16 +64,16 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item {% if "student_registration" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/iamstudent/student_registration">Ich will helfen</a>
+          <a class="nav-link" href="/iamstudent/student_registration">{% blocktrans %}Ich will helfen{% endblocktrans %}</a>
         </li>
         <li class="nav-item  {% if "hospital_registration" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/ineedstudent/hospital_registration">Ich brauche Hilfe</a>
+          <a class="nav-link" href="/ineedstudent/hospital_registration">{% blocktrans %}Ich brauche Hilfe{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "hospital_map" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/ineedstudent/hospital_map">Krankenhauskarte</a>
+          <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Krankenhauskarte{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/mapview">Helferkarte</a>
+          <a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
         </ul>
         <!--</div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" class="navbarsExampleDefault">-->
@@ -45,7 +82,7 @@
           <a class="nav-link" href="/about">About</a>
         </li>
         <li class="nav-item {% if "impressum" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/impressum">Impressum</a>
+          <a class="nav-link" href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a>
         </li>
       </ul>
       </div>
