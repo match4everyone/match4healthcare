@@ -24,6 +24,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+
     lat, lon, ort = plzs[countrycode][plz]
 
     # TODO Consult with others how this should behave!
@@ -80,11 +84,12 @@ def prepare_students():
     for student in students:
         cc = student.countrycode
         plz = student.plz
-        if plz in locations_and_number:
-            locations_and_number[cc][plz]["count"] += 1
+        key = cc + "_" + plz
+        if key in locations_and_number:
+            locations_and_number[key]["count"] += 1
         else:
             lat, lon, ort = plzs[cc][plz]
-            locations_and_number[cc][plz] = {
+            locations_and_number[key] = {
                 "countrycode": cc,
                 "plz": plz,
                 "count": 1,
@@ -96,6 +101,11 @@ def prepare_students():
 
 
 def hospital_list(request, countrycode, plz):
+
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+        
     lat, lon, ort = plzs[countrycode][plz]
 
     table = HospitalTable(Hospital.objects.filter(plz=plz))

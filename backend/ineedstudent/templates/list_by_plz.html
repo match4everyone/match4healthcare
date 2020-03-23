@@ -55,6 +55,13 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
   </div>
   <div class="card-body">
     <div class="form-group">
+      <p> Land: </p>
+      <select name="countrycode" class="form-control" id="countrycode">
+       <option value="DE">Deutschland</option>
+       <option value="AT">Österreich</option>
+     </select>
+    </div>
+    <div class="form-group">
       <p> Postleitzahl: </p>
       <input id="plz" value="{{ plz }}" class="form-control">
     </div>
@@ -78,6 +85,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
 		<tr>
 			<th data-field="id" data-checkbox="true">Auswahl</th>
 			<th data-field="plz" data-sortable="true">Postleitzahl</th>
+      <th data-field="countrycode" data-sortable="true">Land</th>
 			<th data-field="availability_start" data-sortable="true">Verfügar ab</th>
       <th data-field="braucht_bezahlung" data-filter-control="select" data-sortable="true">Bezahlung</th>
       <th data-field="semester" data-filter-control="select" data-sortable="true">Medizinstudium (Semester)</th>
@@ -103,6 +111,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
     <tr>
       <td class="bs-checkbox"><input name="btSelectItem" type="checkbox"></td>
       <td id="{{stud.id}}">{{ stud.plz }}</td>
+      <td>{{ stud.countrycode }}</td>
       <td>{{ stud.availability_start }}</td>
       <td>{% if stud.braucht_bezahlung == 1 %}            Freiwillig  {% elif stud.braucht_bezahlung == 2 %}Minijob{% else %}Vollzeit{% endif %}</td>
       <td>{% if stud.semester > 0 %}{{ stud.semester }} {% else %} - {% endif %}</td>
@@ -158,7 +167,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
 
   var getrequest = function(){
     //console.log($('#plz').attr("value"));
-    window.location = "/ineedstudent/students/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+    window.location = "/ineedstudent/students/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
   }
 </script>
 {% endblock %}

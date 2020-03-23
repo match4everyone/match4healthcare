@@ -1,6 +1,9 @@
 from django.db import models
 import uuid
 from datetime import datetime
+from django.core.exceptions import ValidationError
+from mapview.utils import plzs
+from django.utils.translation import gettext as _
 
 # Create your models here.
 class Hospital(models.Model):
@@ -36,6 +39,11 @@ class Hospital(models.Model):
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
         return self.email
+
+    def clean(self):
+        if self.plz not in plzs[self.countrycode]:
+            raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))
+
 """
 class JobRequirement(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)

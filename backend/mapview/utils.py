@@ -33,7 +33,7 @@ def get_plzs_close_to(countrycode, plz, distance_in_km):
     lon1, lat1, _ = plzs[countrycode][plz]
 
     close = []
-    for other_plz, (lon2, lat2, ort) in plzs.items():
+    for other_plz, (lon2, lat2, ort) in plzs[countrycode].items():
         dist = haversine(lon1, lat1, lon2, lat2)
         if dist < distance_in_km:
             close.append(other_plz)

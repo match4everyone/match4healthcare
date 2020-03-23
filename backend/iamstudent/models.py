@@ -111,7 +111,8 @@ class Student(models.Model):
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
-            raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))
+            print(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode)
+            raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
 import django_filters
 from django import forms

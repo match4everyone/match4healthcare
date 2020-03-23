@@ -18,6 +18,7 @@ class HospitalFormO(ModelForm):
 
         labels = {
             'plz': _('Postleitzahl'),
+            'countrycode': _('Land'),
             'firmenname': _('Name der Institution'),
             'sonstige_infos': _('Wichtige Infos über Euch und den potentiellen Einsatzbereich')
         }
@@ -31,11 +32,10 @@ class HospitalFormO(ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
-                'firmenname',
-                Row(Column('ansprechpartner'),
-                Column('email')),
-                Row(Column('telefon'),
-                Column('plz')),'sonstige_infos'
+                Row(Column('firmenname') , Column('ansprechpartner')),
+                Row(Column('telefon'), Column('email')),
+                Row(Column('plz'), Column('countrycode')),
+                'sonstige_infos'
         )
 
 
