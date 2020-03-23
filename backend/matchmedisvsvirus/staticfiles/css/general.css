@@ -1,3 +1,80 @@
-body{
-    margin-top: 55px;
+@import url("https://use.typekit.net/sxd4iee.css");
+@font-face {
+  font-family: 'proxima-nova';
+  font-style: normal;
+  font-weight: 300;
+}
+body {
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 300;
+  color: #4f4f4f
+}
+.home-title {
+  background-image: url(/static/img/title.jpg);
+  padding: 200px 0px 200px 0px;
+  background-size: cover;
+}
+h1, h2, h3 {
+  color: #000943
+}
+.logo-header {
+  margin-bottom: 50px;
+}
+.home-box h2 {
+  font-size: 2.3rem
+}
+.home-box {
+  margin-top: -50px;
+}
+.home-box > div > div {
+  padding: 70px 10px 70px 45px;
+}
+.box-left {
+  background-color: #ed0a71;
+}
+.box-right {
+  background-color: #000943;
+}
+.equal {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+.equal > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+b {
+  font-weight: 700;
+}
+.btn-lg {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: .9rem 1rem;
+}
+.btn-lg.blue {
+  background-color: #000943;
+  border-color: #000943;
+  border: 0px;
+}
+.btn-lg.blue:hover {
+  background-color: #001079;
+}
+.btn-lg.pink {
+  background-color: #ed0a71;
+  border-color: #ed0a71;
+  border: 0px;
+}
+.btn-lg.pink:hover {
+  background-color: #f73a90;
+}
+div.boxed {
+  border: 4px solid #efefef;
+  border-radius: 10px;
+  padding: 35px 0 35px 0;
+}
+.logos-home > img {
+  margin: 0 15px;
 }
