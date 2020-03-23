@@ -55,6 +55,13 @@ After changes to the Docker configuration, you have to restart and build the con
 - load test data:
 `python3 manage.py loaddata fixture.json`
 
+## Translation
+- Add translatable strings in python with `_("Welcome to my site.")` and import `from django.utils.translation import gettext as _` ([Documentation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#internationalization-in-python-code))
+- Add translatable strings in templates with `{% blocktrans %}This string will have {{ value }} inside.{% endblocktrans %}` or alternatively with the `trans` block ([Documentation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#internationalization-in-template-code))
+- Update the translation file
+`django-admin makemessages -l en`
+- Edit translations in `backend/locale/en/LC_MESSAGES/django.po`
+
 ## Production
 Set `SECRET_KEY` in `backend.prod.env` for django and `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` for postgres on your host machine.
 Start the system with `docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build`.
