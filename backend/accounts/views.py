@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
@@ -197,3 +197,10 @@ def change_hospital_approval(request,uuid):
     if h.is_approved:
         send_mails_for(h)
     return HttpResponseRedirect('/accounts/approve_hospitals')
+
+@login_required
+def delete_me(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    return render(request,'deleted_user.html')

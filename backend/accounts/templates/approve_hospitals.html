@@ -18,16 +18,30 @@
 {% block content %}
 <hr>
 <div class="container">
-    <p>Profil: <a role="button" class="btn btn-info" href="logout">logout</a> <a role="button" class="btn btn-info" href="password_change">change password</a></p>
+    <p>
+        Profil:
+        <a role="button" class="btn btn-primary" href="logout">Logout</a>
+        <a role="button" class="btn btn-primary" href="/accounts/password_change">Change Password</a>
+        <!-- In case the staff should be able to delete themselves:
+        <a role="button" class="btn btn-secondary" href="delete_me">delete my profile</a>
+        -->
+    </p>
     <p></p>
     <hr>
-    <p><h1>Liebes Staff-Mitglied,</h1></p>
-    <p>Hier kannst du Hospitals, die sich angemeldet haben, <mark>die Berechtigung geben, Studierende anzusehen und zu kontaktieren</mark> wenn alles gut aussieht, auf der ersten Tabelle. Wenn sie Mist machen, kannst du ihnen in der zweiten Tabelle die <mark>Berechtigung wieder entziehen</mark>.</p>
+    <p>
+    <h1>Liebes Staff-Mitglied,</h1></p>
+    <p>Hier kannst du Hospitals, die sich angemeldet haben,
+        <mark>die Berechtigung geben, Studierende anzusehen und zu kontaktieren</mark>
+        wenn alles gut aussieht, auf der ersten Tabelle. Wenn sie Mist machen, kannst du ihnen in der zweiten Tabelle
+        die
+        <mark>Berechtigung wieder entziehen</mark>
+        .
+    </p>
 
     <hr>
     <div class="card border-info">
         <div class="card-header">
-           {% blocktrans %}Diese Hospitals warten auf deinen Approval {% endblocktrans %}
+            {% blocktrans %}Diese Hospitals warten auf deinen Approval {% endblocktrans %}
         </div>
         <div class="card-body">
             {% render_table table_unapproved %}
@@ -36,7 +50,8 @@
     <hr>
     <div class="card ">
         <div class="card-header">
-           {% blocktrans %}Diese Hospitals wurden schon approved, du kannst ihnen aber jederzeit die Berechtigung entziehen. {% endblocktrans %}
+            {% blocktrans %}Diese Hospitals wurden schon approved, du kannst ihnen aber jederzeit die Berechtigung
+            entziehen. {% endblocktrans %}
         </div>
         <div class="card-body">
             {% render_table table_approved %}
