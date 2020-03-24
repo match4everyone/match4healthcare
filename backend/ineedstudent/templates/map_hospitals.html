@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
 
 {% block title %}
-{% blocktrans %}Karte der Hilfesuchenden{% endblocktrans %}
+Karte der Hilfesuchenden
 {% endblock %}
 
 {% block header %}
@@ -56,8 +55,8 @@
  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
    <div class="mx-auto order-0">
      <select name="countrycode" id="countrycode">
-      <option value="DE">{% blocktrans %}Deutschland{% endblocktrans %}</option>
-      <option value="AT">{% blocktrans %}Österreich{% endblocktrans %}</option>
+      <option value="DE">Deutschland</option>
+      <option value="AT">Österreich</option>
     </select>
       <input type="text" id="search" class="form" placeholder="Postleitzahl">
       <button class="btn btn-secondary" role="button" onclick="gototable()">Direktsuche &raquo;</button>

@@ -1,10 +1,12 @@
 from django.db import models
 import uuid
 from datetime import datetime
+
+from accounts.models import User
 from django.core.exceptions import ValidationError
 from mapview.utils import plzs
 from django.utils.translation import gettext as _
-from accounts.models import User
+
 
 # Create your models here.
 class Hospital(models.Model):
@@ -15,8 +17,8 @@ class Hospital(models.Model):
 
 
     COUNTRY_CODE_CHOICES = [
-        ("DE", _('Deutschland')),
-        ("AT", _('Österreich')),
+        ("DE", 'Deutschland'),
+        ("AT", 'Österreich'),
     ]
     countrycode = models.CharField(
         max_length=2,
@@ -58,5 +60,5 @@ class JobRequirement(models.Model):
 
     class Meta:
         ordering = ['uuid']
-        
+
 """

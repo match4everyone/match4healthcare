@@ -52,7 +52,7 @@ class Student(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
-    plz = models.CharField(max_length=5, null=True, validators=[validate_plz])
+    plz = models.CharField(max_length=5, null=True)
 
     semester = models.IntegerField(null=True, validators=[validate_semester])
     immatrikuliert = models.BooleanField(default=False)
@@ -115,7 +115,8 @@ class Student(models.Model):
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
-            raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))
+            print(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode)
+            raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
 import django_filters
 from django import forms

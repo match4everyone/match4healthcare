@@ -47,20 +47,26 @@ Karte der Hilfsbereiten
        fillOpcity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.plz }}/0>Detailansicht</a>')
+   .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>Detailansicht</a>')
    .addTo(mymap);
  </script>
  {% endfor %}
 
  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
    <div class="mx-auto order-0">
-      <input type="text" id="search" class="form">
-      <button class="btn btn-secondary" role="button" onclick="gototable()" >Suche nach Postleitzahl &raquo;</button>
+     <select name="countrycode" id="countrycode">
+      <option value="DE">Deutschland</option>
+      <option value="AT">Österreich</option>
+    </select>
+      <input type="text" id="search" class="form" placeholder="Postleitzahl">
+      <button class="btn btn-secondary" role="button" onclick="gototable()">Direktsuche &raquo;</button>
     </div>
    </nav>
   <script type="text/javascript">
     var gototable = function() {
-      window.location = "/ineedstudent/students/" + $('#search').val() + "/0"
+      if ($('#search').val()) {
+        window.location = "/ineedstudent/students/" + $('#countrycode').val() + "/" + $('#search').val() + "/0"
+      }
     }
   </script>
 
