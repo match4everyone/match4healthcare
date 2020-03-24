@@ -19,13 +19,50 @@ class Student(models.Model):
 
     class Bezahlung(models.IntegerChoices):
         UNENTGELTLICH = 1
-        MINIJOB = 2
-        VOLLZEIT = 3
+        BEZAHLUNG = 4
+
+    class Verfuegbarkeiten(models.IntegerChoices):
+        TEN = 1
+        TWENTY = 2
+        THIRTY = 3
+        FOURTY = 4
 
     class Ampel(models.IntegerChoices):
         ROT = 1
         GELB = 2
         GRUEN = 3
+
+    class Umkreise(models.IntegerChoices):
+        LESSFIVE = 1
+        LESSTEN = 2
+        LESSTWENTY = 3
+        MORETWENTY = 4
+
+    class Ausbildungen(models.IntegerChoices):
+        ARZT = 1
+        MEDSTUD = 2
+        MFA = 3
+        MTA = 4
+        MTLA = 5
+        NOTFALLSANI = 6
+        PFLEGESTUD = 7
+        SANI = 8
+        ZAHNI = 9
+        KINDERBETREUUNG = 10
+        SONSTIGE = 11
+
+    class Arzttyp(models.IntegerChoices):
+        ANAESTHESIE = 1
+        CHIRURGIE = 2
+        INNERE = 3
+        INTENSIV = 4
+        NOTAUFNAHME = 5
+        ANDERE = 6
+    
+    class MedstudAbschnitt(models.IntegerChoices):
+        VORKLINIK = 1
+        KLINIK = 2
+        PJ = 3
 
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -52,59 +89,52 @@ class Student(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
-    plz = models.CharField(max_length=5, null=True)
     name_first = models.CharField(max_length=50, default='')
     name_last = models.CharField(max_length=50, default='')
     phone_number = models.CharField(max_length=100, blank=True, default='')
 
-    semester = models.IntegerField(null=True, validators=[validate_semester])
-    immatrikuliert = models.BooleanField(default=False)
+    plz = models.CharField(max_length=5, null=True)
+    umkreis = models.IntegerField(choices=Umkreise.choices, null=True, blank=False)
     availability_start = models.DateField(null=True)
-    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices, default=Bezahlung.UNENTGELTLICH)
 
-    ba_arzt = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_krankenpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_pflegehilfe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_anaesthesiepflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_intensivpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_ota = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_mfa = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_mta_lta = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_rta = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_rettungssanitaeter = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_kinderbetreuung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_hebamme = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_sprechstundenhilfe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_labortechnische_assistenz = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
+    wunsch_ort_arzt = models.BooleanField(default=False)
+    wunsch_ort_gesundheitsamt = models.BooleanField(default=False)
+    wunsch_ort_krankenhaus = models.BooleanField(default=False)
+    wunsch_ort_pflege = models.BooleanField(default=False)
+    wunsch_ort_rettungsdienst = models.BooleanField(default=False)
+    wunsch_ort_labor = models.BooleanField(default=False)
 
-    ba_famulatur = models.CharField(max_length=100,default='')
-    ba_pflegepraktika = models.CharField(max_length=100,default='')
-    ba_fsj_krankenhaus = models.CharField(max_length=100,default='')
+    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices, default=Bezahlung.UNENTGELTLICH) # RADIO BUTTONS IM FORM!
 
-    skill_coronascreening = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_pflegeunterstuetzung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_transportdienst = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_kinderbetreuung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_labortaetigkeiten = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_drkblutspende = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_hotline = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_abstriche = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenlagerung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_opassistenz = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_blutentnahmedienst = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_anrufe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_infektionsnachverfolgung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenaufnahme = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_edvkenntnisse = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_zugaengelegen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_arztbriefeschreiben = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_blutkulturenabnehmen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_infusionenmischen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_ekgschreiben = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_ultraschall = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_bgas = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_beatmungsgeraetebedienen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
+    zeitliche_verfuegbarkeit = models.IntegerField(choices=Verfuegbarkeiten.choices, null=True, blank=False)
+
+    vorausbildung_typ_krankenpflege = models.BooleanField(default=False)
+    vorausbildung_typ_intensiv = models.BooleanField(default=False)
+    vorausbildung_typ_innere = models.BooleanField(default=False)
+    vorausbildung_typ_anaesthesie = models.BooleanField(default=False)
+    vorausbildung_typ_pflege = models.BooleanField(default=False)
+    vorausbildung_typ_rettungsdienst = models.BooleanField(default=False)
+    vorausbildung_typ_hebamme = models.BooleanField(default=False)
+    vorausbildung_typ_labor = models.BooleanField(default=False)
+    vorausbildung_typ_verwaltunglogistik = models.BooleanField(default=False)
+    vorausbildung_typ_fsjgesundheitswesen = models.BooleanField(default=False)
+    vorausbildung_typ_blutentnahmedienst = models.BooleanField(default=False)
+    vorausbildung_typ_kinderbetreuung = models.BooleanField(default=False)
+
+    ausbildung_typ = models.IntegerField(choices=Ausbildungen.choices, null=True, blank=False)
+    ausbildung_typ_sonstige = models.CharField(max_length=50, default='')
+
+    ausbildung_arzt_typ = models.IntegerField(choices=Arzttyp.choices, null=True)
+    ausbildung_arzt_typ_sonstige = models.CharField(max_length=50, default='')
+
+    ausbildung_medstud_abschnitt = models.IntegerField(choices=MedstudAbschnitt.choices, null=True)
+    ausbildung_medstud_famulaturen_anaesthesie = models.BooleanField(default=False)
+    ausbildung_medstud_famulaturen_chirurgie = models.BooleanField(default=False)
+    ausbildung_medstud_famulaturen_innere = models.BooleanField(default=False)
+    ausbildung_medstud_famulaturen_intensiv = models.BooleanField(default=False)
+    ausbildung_medstud_famulaturen_notaufnahme = models.BooleanField(default=False)
+
+    ausbildung_medstud_anerkennung_noetig = models.BooleanField(default=False)
 
     # Metadata
     class Meta:
