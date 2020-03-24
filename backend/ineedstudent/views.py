@@ -17,10 +17,13 @@ import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from accounts.decorator import student_required, hospital_required
 
 
 # Create your views here.
-
+@login_required
+@hospital_required
 def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
@@ -42,7 +45,7 @@ def list_by_plz(request, countrycode, plz, distance):
         'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
-        'filter': f,
+        'filter': f
     }
 
     return HttpResponse(template.render(context, request))
@@ -130,4 +133,4 @@ class HospitalTable(tables.Table):
 
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    return render(request, 'hospital_view.html', {'hospital': h})
+    return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})

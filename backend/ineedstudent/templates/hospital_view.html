@@ -24,7 +24,10 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{hospital.sonstige_infos}}</li>
-            <li class="list-group-item text-muted"> {% blocktrans %}Meldete euch bei: {{hospital.ansprechpartner}} <br> Telefon: {{hospital.phone}} <br> Mail: {{hospital.email}}{% endblocktrans %}</li>
+            <li class="list-group-item text-muted">
+                {% blocktrans %}Meldete euch bei: {% endblocktrans %} {{hospital.ansprechpartner}}
+                <br> {% blocktrans %}Telefon:{% endblocktrans %} {{hospital.telefon}}
+                <br> {% blocktrans %}Mail:{% endblocktrans %} {{mail}}</li>
 
       </ul>
     </div>
