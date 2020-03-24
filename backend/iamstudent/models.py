@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from mapview.utils import plzs
 from django.utils.translation import gettext as _
+from accounts.models import User
 
 
 def validate_semester(value):
@@ -30,6 +31,9 @@ class Student(models.Model):
         ROT = 1
         GELB = 2
         GRUEN = 3
+
+    ## Database stuff
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     #Allgemeines
 

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'mapview',
     'iamstudent',
     'ineedstudent',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,8 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+AUTH_USER_MODEL = 'accounts.User'
 
 USE_L10N = True
 

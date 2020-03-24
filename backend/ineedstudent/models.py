@@ -2,10 +2,14 @@ from django.db import models
 import uuid
 from datetime import datetime
 from iamstudent.models import validate_plz
+from accounts.models import User
 
 # Create your models here.
 class Hospital(models.Model):
     """A typical class defining a model, derived from the Model class."""
+
+    ## Datenbankfeatures
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     ## Kontaktdaten
     email = models.EmailField(unique=True)

@@ -26,6 +26,7 @@ urlpatterns = [
     path('mapview/', include('mapview.urls')),
     path('iamstudent/', include('iamstudent.urls')),
     path('ineedstudent/', include('ineedstudent.urls')),
+    path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('', views.home),
     path('about/', views.about),
