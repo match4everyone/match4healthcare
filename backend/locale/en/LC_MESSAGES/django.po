@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 15:42+0000\n"
+"POT-Creation-Date: 2020-03-24 15:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,14 +23,10 @@ msgid "Noch kein Account?"
 msgstr "No account yet?"
 
 #: accounts/templates/registration/login.html:40
-#, fuzzy
-#| msgid "Ich will helfen"
 msgid "Ich bin helfende/r"
 msgstr "I want to help"
 
 #: accounts/templates/registration/login.html:41
-#, fuzzy
-#| msgid "Ich brauche Unterstützung"
 msgid "Ich habe Bedarf an Unterstützung"
 msgstr "I need support"
 
@@ -490,8 +486,6 @@ msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
 #: iamstudent/models.py:120 ineedstudent/models.py:51
-#, fuzzy
-#| msgid "Bitte gib deine Postleitzahl ein"
 msgid " ist keine Postleitzahl in "
 msgstr " is not a valid ZIP code in "
 
@@ -539,8 +533,6 @@ msgstr ""
 "offer and can contact you! "
 
 #: iamstudent/templates/send_mail_hospital.html:29
-#, fuzzy
-#| msgid " Registriere Mich"
 msgid "Registrierung"
 msgstr " Register"
 
@@ -566,7 +558,7 @@ msgstr ""
 
 #: ineedstudent/forms.py:16
 msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
-msgstr ""
+msgstr "Field of application? Requirements? ... and nice remarks :) "
 
 #: ineedstudent/forms.py:20
 msgid "Postleitzahl"
@@ -582,11 +574,11 @@ msgstr "Important information about you and the potential field of application"
 
 #: ineedstudent/forms.py:54
 msgid "Schicke Mails"
-msgstr ""
+msgstr "Send Mails"
 
 #: ineedstudent/forms.py:55
 msgid "Schicke Mails + Erstelle Anzeige"
-msgstr ""
+msgstr "Send Mails and advertise requirement"
 
 #: ineedstudent/templates/hospital_view.html:27
 #, python-format
@@ -596,38 +588,36 @@ msgid ""
 msgstr ""
 
 #: ineedstudent/templates/list_hospitals_by_plz.html:6
-#, python-format
-msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht"
-msgstr ""
-
 #: ineedstudent/templates/list_hospitals_by_plz.html:23
 #, python-format
 msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
-msgstr ""
+msgstr "Help is needed in %(ort)s (%(plz)s):"
 
 #: ineedstudent/templates/map_hospitals.html:7
 msgid "Karte der Hilfesuchenden"
-msgstr ""
+msgstr "Facility Map"
 
 #: ineedstudent/templates/map_hospitals.html:58
 #: mapview/templates/mapview/map.html:57
 msgid "Deutschland"
-msgstr ""
+msgstr "Germany"
 
 #: ineedstudent/templates/map_hospitals.html:59
 #: mapview/templates/mapview/map.html:58
 msgid "Österreich"
-msgstr ""
+msgstr "Austria"
 
 #: ineedstudent/templates/thanks_hospital.html:21
 msgid ""
 "Vielen Dank für die Registrierung. Wir kontaktieren Sie, sobald sich "
 "passende Freiwillige bei uns eingetragen haben."
 msgstr ""
+"Thank you for registering. We will contact you as soon as matching "
+"supporters have registered."
 
 #: mapview/templates/mapview/map.html:7
 msgid "Karte der Hilfsbereiten"
-msgstr ""
+msgstr "Supporter Map"
 
 #: matchmedisvsvirus/settings/common.py:119
 msgid "English"
@@ -639,7 +629,7 @@ msgstr ""
 
 #: templates/about.html:6 templates/base.html:30
 msgid "Über uns"
-msgstr ""
+msgstr "About us"
 
 #: templates/about.html:12
 msgid "Das Team"
@@ -751,14 +741,10 @@ msgid "Wir sind eine"
 msgstr "We are a"
 
 #: templates/home.html:105
-#, fuzzy
-#| msgid "Name der Institution"
 msgid "Institution"
 msgstr "Institution"
 
 #: templates/home.html:106
-#, fuzzy
-#| msgid "Ich brauche Unterstützung"
 msgid "Wir haben Bedarf an Unterstützung."
 msgstr "We need supporters"
 
@@ -772,7 +758,7 @@ msgid ""
 "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
 "Monaten im Gesundheitswesen noch viel präsenter denn je."
 msgstr ""
-"D uring the past Weeks and Month Faith in helping those in need, love for "
+"During the past weeks and month faith in helping those in need, love for "
 "medicine and the support of each other have been more present in our "
 "healthcare system than ever before."
 
@@ -785,9 +771,9 @@ msgid ""
 "vernetzt werden."
 msgstr ""
 "It is precisely for this reason that we need a simple and foremost efficient "
-"interface between the medical Facilities and professionals.An interface that "
-"allows Supporters and those in need to quickly and easily connect with each "
-"other "
+"interface between the medical facilities and professionals. An interface "
+"that allows supporters and those in need to quickly and easily connect with "
+"each other "
 
 #: templates/home.html:125
 msgid ""
@@ -804,8 +790,6 @@ msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
 #: templates/home.html:131
-#, fuzzy
-#| msgid "Ich brauche Unterstützung"
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
 
