@@ -3,6 +3,8 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
+
+from matchmedisvsvirus.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
@@ -42,7 +44,6 @@ def student_signup(request):
         # check whether it's valid:
         if form.is_valid():
             user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
-            login(request, user)
             template = loader.get_template('thanks_student.html')
             return HttpResponse(template.render({}, request))
 
@@ -58,22 +59,22 @@ def register_student_in_db(request, mail):
     # todo send mail with link to pwd
     pwd = User.objects.make_random_password()
     username = mail  # generate_random_username()
-    send_password(username, pwd)
     user = User.objects.create(username=username, is_student=True, email=username)
     user.set_password(pwd)
     user.save()
     student = Student.objects.create(user=user)
     student = StudentForm(request.POST, instance=student)
     student.save()
+    send_password(username, pwd, student.cleaned_data['name_first'])
     return user, student
 
 
-def send_password(email, pwd):
+def send_password(email, pwd,name):
     send_mail(subject=_('Willkommen bei match4healthcare'),
               message=_(
-                  'Hallo,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
-                  email, pwd)),
-              from_email='noreply@medisvs.spahr.uberspace.de',
+                  'Hallo %s,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
+                  name, email, pwd)),
+              from_email=NOREPLY_MAIL,
               # TODO adaptive email adress
               recipient_list=[email])
 
