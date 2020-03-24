@@ -179,7 +179,7 @@ class StudentForm(forms.ModelForm):
                   HTML("<p>{}</p> <br>".format(_("Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
             *create_skills(SKILLS, create_radio_traffic_light),
             HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere Mich'),
+            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-lg'),
             HTML("</p>")
         )
 
