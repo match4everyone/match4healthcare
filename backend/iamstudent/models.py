@@ -38,8 +38,6 @@ class Student(models.Model):
         LESSTWENTY = 3
         MORETWENTY = 4
 
-
-
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
@@ -72,8 +70,6 @@ class Student(models.Model):
     umkreis = models.IntegerField(choices=Umkreise.choices, null=True, blank=False)
     availability_start = models.DateField(null=True)
 
-
-
     braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices,
                                             default=Bezahlung.UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
 
@@ -94,16 +90,9 @@ class Student(models.Model):
     vorausbildung_typ_kinderbetreuung = models.BooleanField(default=False)
     """
 
-    ### TODO:
+    datenschutz_zugestimmt = models.BooleanField(default=False)
 
-    # ausbildung_mfa_details
-    # ausbildung_mta_details
-    # ausbildung_mtla_details
-    # ausbildung_notfallsani_details
-    # ausbildung_pflegestud_details
-    # ausbildung_sani_details
-    # ausbildung_zahni_details
-    # ausbildung_kindebetreuung_details
+
 
     # Metadata
     class Meta:
@@ -123,7 +112,7 @@ class Student(models.Model):
 wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
 wunschorte_prefix = 'wunsch_ort'
 for w in wunschorte:
-    Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(),w.lower()), models.BooleanField(default=False))
+    Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
 
 
 class Arzttyp(models.IntegerChoices):
@@ -139,6 +128,24 @@ class MedstudAbschnitt(models.IntegerChoices):
     VORKLINIK = 1
     KLINIK = 2
     PJ = 3
+
+
+class ZahnstudAbschnitt(models.IntegerChoices):
+    VORKLINIK = 1
+    KLINIK = 2
+
+
+class MFAAbschnitt(models.IntegerChoices):
+    JAHR_1 = 1
+    JAHR_2 = 2
+    JAHR_3 = 3
+    BERUFSTAETIG = 4
+
+
+class NOTFALLSANIAbschnitt(models.IntegerChoices):
+    JAHR_1 = 1
+    JAHR_2 = 2
+    BERUFSTAETIG = 4
 
 
 AUSBILDUNGS_TYPEN = {
@@ -159,32 +166,33 @@ AUSBILDUNGS_TYPEN = {
         },
     'MFA':
         {
-            'todo': models.BooleanField(default=False)
+            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
         },
     'MTLA':
         {
-            'todo': models.BooleanField(default=False)
+            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
         },
     'MTA': {
-        'todo': models.BooleanField(default=False)
+        'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
     },
     'NOTFALLSANI': {
-        'todo': models.BooleanField(default=False)
+        'abschnitt': models.IntegerField(choices=NOTFALLSANIAbschnitt.choices, null=True),
     },
     'SANI': {
-        'todo': models.BooleanField(default=False)
+
     },
     'ZAHNI': {
-        'todo': models.BooleanField(default=False)
+        'abschnitt': models.IntegerField(choices=ZahnstudAbschnitt.choices, null=True)
     },
     'KINDERBETREUNG': {
-        'todo': models.BooleanField(default=False)
+        'ausgebildet': models.BooleanField(default=False),
+        'vorerfahrung': models.BooleanField(default=False),
     },
     'SONSTIGE': {
-        'todo': models.BooleanField(default=False)
+        'eintragen': models.CharField(max_length=200, default=False)
     },
 }
-AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(),range(len(AUSBILDUNGS_TYPEN))))
+AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))
 
 for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
@@ -192,7 +200,6 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
         Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
 
 """End"""
-
 
 import django_filters
 from django import forms
