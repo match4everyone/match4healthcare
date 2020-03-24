@@ -136,6 +136,19 @@ class Student(models.Model):
 
     ausbildung_medstud_anerkennung_noetig = models.BooleanField(default=False)
 
+
+    ### TODO: 
+
+    # ausbildung_mfa_details
+    # ausbildung_mta_details
+    # ausbildung_mtla_details
+    # ausbildung_notfallsani_details
+    # ausbildung_pflegestud_details
+    # ausbildung_sani_details
+    # ausbildung_zahni_details
+    # ausbildung_kindebetreuung_details
+    
+
     # Metadata
     class Meta:
         ordering = ['plz']
@@ -157,10 +170,7 @@ class StudentFilter(django_filters.FilterSet):
 
     class Meta:
         model = Student
-        fields = {
-            'semester': ['lt', 'gt'],
-            'ba_arzt': ['isnull']
-        }
+        fields = {}
         filter_overrides = {
             models.BooleanField: {
                 'filter_class': django_filters.BooleanFilter,
