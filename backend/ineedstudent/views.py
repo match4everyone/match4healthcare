@@ -20,6 +20,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from accounts.decorator import student_required, hospital_required
 
+from functools import lru_cache
+import time
+
 from django.views.decorators.gzip import gzip_page
 
 
