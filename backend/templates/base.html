@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!doctype html>
 <html lang="en">
@@ -9,7 +10,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <title>{% block title %}
-    {% endblock %} | HelpingHealth</title>
+    {% endblock %} | match4healthcare </title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     {% block header %}
     {% endblock %}
@@ -24,7 +25,7 @@
 
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarsExampleDefault">
       <ul class="navbar-nav ml-auto">
- 
+
 		  <li class="nav-item {% if "about" in request.path %}active{% endif %}">
           <a class="nav-link" href="/about">About</a>
         </li>
@@ -35,7 +36,7 @@
           <a class="nav-link" href="/ineedstudent/hospital_registration">Ich brauche Hilfe</a>
         </li>
         <li class="nav-item {% if "hospital_map" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/ineedstudent/hospital_map">Krankenhauskarte</a>
+          <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Krankenhauskarte{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
 			<a class="nav-link" href="/mapview">Helferkarte</a>
@@ -51,10 +52,10 @@
           {% endblock %}
   <footer class="footer">
 	  <div class="container">
-	 
+
     <p>Ein Projekt im Rahmen des <a href="https://wirvsvirushackathon.org/" target="_blank">#WirVsVirus Hackathons</a>. <a href="/impressum">Impressum</a> und <a href="/impressum">Datenschutz</a>.</p>
 		  </div>
-		  
+
   </footer>
         <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">')</script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

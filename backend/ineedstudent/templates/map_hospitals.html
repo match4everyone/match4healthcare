@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-Karte der Hilfesuchenden
+{% blocktrans %}Karte der Hilfesuchenden{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -47,20 +48,26 @@ Karte der Hilfesuchenden
        fillOpacity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('In {{ location.ort }} (PLZ {{location.plz }}) gibt es {{ location.count }} Orte, an welchen Hilfe gebraucht wird. <a href=/ineedstudent/hospitals/{{ location.plz }}>Detailansicht</a>')
+   .bindPopup('In {{ location.ort }} {{ location.countrycode }}(PLZ {{location.plz }}) gibt es {{ location.count }} Orte, an welchen Hilfe gebraucht wird. <a href=/ineedstudent/hospitals/{{location.countrycode}}/{{ location.plz }}>Detailansicht</a>')
    .addTo(mymap);
  </script>
  {% endfor %}
 
- <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+ <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-light">
    <div class="mx-auto order-0">
-      <input type="text" id="search" class="form">
-      <button class="btn btn-secondary" role="button" onclick="gototable()" >Suche nach Postleitzahl &raquo;</button>
+     <select name="countrycode" id="countrycode">
+      <option value="DE">{% blocktrans %}Deutschland{% endblocktrans %}</option>
+      <option value="AT">{% blocktrans %}Österreich{% endblocktrans %}</option>
+    </select>
+      <input type="text" id="search" class="form" placeholder="Postleitzahl">
+      <button class="btn btn-secondary" role="button" onclick="gototable()">Direktsuche &raquo;</button>
     </div>
    </nav>
   <script type="text/javascript">
     var gototable = function() {
-      window.location = "/ineedstudent/hospitals/" + $('#search').val();
+      if ($('#search').val()) {
+        window.location = "/ineedstudent/hospitals/" + $('#countrycode').val() + "/" + $('#search').val();
+      }
     }
   </script>
 {% endblock %}

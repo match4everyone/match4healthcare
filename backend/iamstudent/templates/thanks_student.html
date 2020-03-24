@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 
 {% block title %}
-Vielen Dank
+{% blocktrans %}Vielen Dank{% endblocktrans %}
 {% endblock %}
 
 
@@ -18,7 +18,7 @@ Vielen Dank
 <br>
 <br>
 <div class="container">
-    Vielen Dank für deine Registrierung. Wir kontaktieren dich, sobald eine medizinische Einrichtung deine Hilfe benötigt.
+    {% blocktrans %}Vielen Dank für deine Registrierung. Wir kontaktieren dich, sobald eine medizinische Einrichtung deine Hilfe benötigt.{% endblocktrans %}
 </div>
 <br>
 <br>
