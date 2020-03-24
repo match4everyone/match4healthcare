@@ -133,3 +133,26 @@ div.boxed {
 }
 
 h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
+
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle, .btn-info:hover {
+	background-color: #ed0a71 !important;
+	border-color: #ed0a71 !important;
+	border:0px; 
+}
+
+.btn-info { background-color: #efefef; color: #888; border:0px; }
+
+@media only screen and (max-width: 675px) {
+
+.form-group > div { display:block; }
+	.form-group { margin-bottom: 0.3rem;}
+	
+	.form-group label { margin-bottom: .1rem;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+.form-group > div { display:block; }
+	.form-group { margin-bottom: 0.3rem;}
+}
+
