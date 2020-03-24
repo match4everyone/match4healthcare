@@ -14,8 +14,6 @@ from .forms import StudentEmailForm
 from iamstudent.models import Student
 
 from django.contrib.auth.decorators import login_required
-# todo: remove email from student and hospital
-
 from .decorator import student_required, hospital_required
 
 from .utils import generate_random_username
@@ -109,7 +107,7 @@ def login_redirect(request):
         return HttpResponseRedirect('profile_student')
 
     elif user.is_hospital:
-        return HttpResponseRedirect('profile_hospital')
+        return HttpResponseRedirect('ineedstudent/list_by_plz/%s'%str(user.hospital.plz))
 
     elif user.is_staff:
         #todo
