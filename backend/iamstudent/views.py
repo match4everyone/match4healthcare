@@ -27,9 +27,6 @@ def get_student(request):
             # redirect to a new URL:
             return HttpResponseRedirect('thanks')
 
-        else:
-            raise ValidationError(_('Invalid value'), code='invalid')
-
 
     # if a GET (or any other method) we'll create a blank form
     else:

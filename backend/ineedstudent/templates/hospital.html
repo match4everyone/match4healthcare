@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-Registrierung - Krankenhäuser
+{% blocktrans %}Registrierung{% endblocktrans %} - {% blocktrans %}Krankenhäuser{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -24,7 +24,7 @@ Registrierung - Krankenhäuser
 <div class="container">
     <div class="card border-primary">
         <div class="card-header">
-            {% blocktrans %}Registrierung - Hilfesuchendes Krankenhaus o.Ä.{% endblocktrans %}
+            {% blocktrans %}Registrierung{% endblocktrans %} - {% blocktrans %}Hilfesuchendes Krankenhaus o.Ä.{% endblocktrans %}
         </div>
         <div class="card-body">
             <form action="hospital_registration" method="post">

@@ -18,22 +18,35 @@ from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
 
+from django.utils.translation import gettext as _
+
+from functools import lru_cache
+import time
+from mapview.views import get_ttl_hash
+from django.views.decorators.gzip import gzip_page
+
 
 # Create your views here.
 
-def list_by_plz(request, plz, distance):
+def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
-    lat, lon, ort = plzs[plz]
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
 
+    lat, lon, ort = plzs[countrycode][plz]
+
+    # TODO Consult with others how this should behave!
     if distance==0:
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz))
+        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz, countrycode=countrycode))
     else:
-        close_plzs = get_plzs_close_to(plz, distance)
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz__in=close_plzs))
+        close_plzs = get_plzs_close_to(countrycode, plz, distance)
+        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz__in=close_plzs, countrycode=countrycode))
 
     context = {
         'plz': plz,
+        'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
         'filter': f,
@@ -62,9 +75,10 @@ def hospital_registration(request):
 
 
 
-
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def hospital_overview(request):
-    locations_and_number = prepare_students()
+    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -72,16 +86,20 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-def prepare_students():
+@lru_cache()
+def prepare_hospitals(ttl_hash=None):
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
+        cc = student.countrycode
         plz = student.plz
-        if plz in locations_and_number:
-            locations_and_number[plz]["count"] += 1
+        key = cc + "_" + plz
+        if key in locations_and_number:
+            locations_and_number[key]["count"] += 1
         else:
-            lat, lon, ort = plzs[plz]
-            locations_and_number[plz] = {
+            lat, lon, ort = plzs[cc][plz]
+            locations_and_number[key] = {
+                "countrycode": cc,
                 "plz": plz,
                 "count": 1,
                 "lat": lat,
@@ -91,12 +109,18 @@ def prepare_students():
     return locations_and_number
 
 
-def hospital_list(request, plz):
-    lat, lon, ort = plzs[plz]
+def hospital_list(request, countrycode, plz):
+
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
+        
+    lat, lon, ort = plzs[countrycode][plz]
 
     table = HospitalTable(Hospital.objects.filter(plz=plz))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
+        'countrycode': countrycode,
         'plz': plz,
         'ort': ort,
         'table': table}

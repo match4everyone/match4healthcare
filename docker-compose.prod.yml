@@ -21,6 +21,7 @@ services:
     volumes:
      - ./database/data:/var/lib/postgresql/data
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+     - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
     env_file:
      - database.prod.env
@@ -28,6 +29,7 @@ services:
      -  5432
     networks:
      - network
+    command: postgres -c config_file=/etc/postgresql.conf
 
 networks:
  network:
