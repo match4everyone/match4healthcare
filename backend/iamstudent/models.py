@@ -91,8 +91,7 @@ class Student(models.Model):
     """
 
     datenschutz_zugestimmt = models.BooleanField(default=False)
-
-
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
 
     # Metadata
     class Meta:
@@ -156,7 +155,7 @@ AUSBILDUNGS_TYPEN = {
         },
     'MEDSTUD':
         {
-            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True),
+            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True, default=None),
             'farmulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
