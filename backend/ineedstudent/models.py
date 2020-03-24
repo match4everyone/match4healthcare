@@ -11,8 +11,8 @@ class Hospital(models.Model):
 
 
     COUNTRY_CODE_CHOICES = [
-        ("DE", 'Deutschland'),
-        ("AT", 'Österreich'),
+        ("DE", _('Deutschland')),
+        ("AT", _('Österreich')),
     ]
     countrycode = models.CharField(
         max_length=2,

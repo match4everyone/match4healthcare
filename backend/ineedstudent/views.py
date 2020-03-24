@@ -18,6 +18,13 @@ from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
 
+from django.utils.translation import gettext as _
+
+from functools import lru_cache
+import time
+from mapview.views import get_ttl_hash
+from django.views.decorators.gzip import gzip_page
+
 
 # Create your views here.
 
@@ -26,7 +33,7 @@ def list_by_plz(request, countrycode, plz, distance):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
 
     lat, lon, ort = plzs[countrycode][plz]
 
@@ -68,9 +75,10 @@ def hospital_registration(request):
 
 
 
-
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def hospital_overview(request):
-    locations_and_number = prepare_students()
+    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -78,7 +86,8 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-def prepare_students():
+@lru_cache()
+def prepare_hospitals(ttl_hash=None):
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
@@ -104,7 +113,7 @@ def hospital_list(request, countrycode, plz):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
         
     lat, lon, ort = plzs[countrycode][plz]
 

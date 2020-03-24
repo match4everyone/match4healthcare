@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('semester', models.IntegerField(null=True, validators=[iamstudent.models.validate_semester])),
                 ('immatrikuliert', models.BooleanField(default=False)),
                 ('availability_start', models.DateField(null=True)),
-                ('braucht_bezahlung', models.IntegerField(choices=[(1, 'Unentgeltlich'), (2, 'Minijob'), (3, 'Vollzeit')], default=1)),
+                ('braucht_bezahlung', models.IntegerField(choices=[(1, 'Vergütung Gewünscht aber nicht Notwendig'), (2, 'Minijob'), (3, 'Vollzeit')], default=1)),
                 ('ba_arzt', models.IntegerField(choices=[(1, 'Rot'), (2, 'Gelb'), (3, 'Gruen')], default=1)),
                 ('ba_krankenpflege', models.IntegerField(choices=[(1, 'Rot'), (2, 'Gelb'), (3, 'Gruen')], default=1)),
                 ('ba_pflegehilfe', models.IntegerField(choices=[(1, 'Rot'), (2, 'Gelb'), (3, 'Gruen')], default=1)),
