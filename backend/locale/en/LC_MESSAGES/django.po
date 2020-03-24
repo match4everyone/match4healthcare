@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 16:10+0000\n"
+"POT-Creation-Date: 2020-03-24 16:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -748,6 +748,10 @@ msgstr "a Supporter"
 msgid "Ich möchte eine medizinische Einrichtung unerstützen."
 msgstr "I'd like to support a medical facility."
 
+#: templates/home.html:93
+msgid "Jetzt Hilfe anbieten"
+msgstr "Offer Support Now"
+
 #: templates/home.html:104
 msgid "Wir sind eine"
 msgstr "We are a"
@@ -759,6 +763,10 @@ msgstr "Institution"
 #: templates/home.html:106
 msgid "Wir haben Bedarf an Unterstützung."
 msgstr "We need supporters"
+
+#: templates/home.html:108
+msgid "Jetzt Hilfe suchen"
+msgstr "Find Supporters Now"
 
 #: templates/home.html:120
 msgid "Gemeinsam unser Gesundheitssystem stärken, mit einem"
