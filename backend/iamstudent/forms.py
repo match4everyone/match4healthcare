@@ -137,8 +137,18 @@ class StudentForm(forms.ModelForm):
                 Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-            HTML("<h2>TODO!!!! </h2>"),
+            Div(                
+                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("Arzt Felder"))),
+                css_id='div-ausbildung-1',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("Medizinstudent Felder"))),
+                css_id='div-ausbildung-2',
+            ),
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere Mich'),
             HTML("</p>")
