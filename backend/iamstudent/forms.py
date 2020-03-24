@@ -139,7 +139,7 @@ class StudentForm(forms.ModelForm):
             Div(
                 HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
                 Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
-                             class_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
             ),
