@@ -110,7 +110,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
     {% for stud in filter.qs %}
     <tr>
       <td class="bs-checkbox"><input name="btSelectItem" type="checkbox"></td>
-      <td id="{{stud.id}}">{{ stud.plz }}</td>
+      <td id="{{stud.user_id}}">{{ stud.plz }}</td>
       <td>{{ stud.countrycode }}</td>
       <td>{{ stud.availability_start }}</td>
       <td>{% if stud.braucht_bezahlung == 1 %}            Freiwillig  {% elif stud.braucht_bezahlung == 2 %}Minijob{% else %}Vollzeit{% endif %}</td>
