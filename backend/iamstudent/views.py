@@ -69,10 +69,21 @@ def send_mail_student_id_list(request, id_list):
 
         if form.is_valid():
             # todo check header injections!!!!
-            message = form.cleaned_data['message']
+            hospital_message = form.cleaned_data['message']
+
+
+
             subject = form.cleaned_data['subject']
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
+
+                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich.\n\nDein Match4MedisTeam\n\n%s' % (
+                    student.name_first,
+                    student.name_last,
+                    request.user.hospital.firmenname,
+                    hospital_message
+                )
+
                 mail = EmailToSend.objects.create(
                     student=student,
                     hospital=request.user.hospital,
