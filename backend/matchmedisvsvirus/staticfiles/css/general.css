@@ -38,6 +38,9 @@ h1, h2, h3 {
   padding: 70px 10px 70px 45px;
   height: 100%;
 }
+
+.home-box-description { margin-bottom: 35px;}
+
 .home-box > div > div {
   padding: 5px;
 }
