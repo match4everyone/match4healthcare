@@ -18,10 +18,19 @@ Registrierung - Studierende
     <hr>
 </div>
 <div class="container">
-    {% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
+    {% if user.is_authenticated %}
 	
-        <a class="btn btn-primary btn blue text-white btn-sm" href="#" role="button">Login</a>
+	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
+	<hr><br>
+	
+	{% else %}
+	{% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
+	
+	
+        <a  href="/accounts/login_redirect">Login</a>.
     <hr><br>
+	{% endif %}
+	
     <div class="card">
 
         <div class="card-header">
