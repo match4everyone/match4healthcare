@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 
 
 {% block title %}
-Studierende Kontaktieren
+{% blocktrans %}Studierende Kontaktieren{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -16,17 +16,17 @@ Studierende Kontaktieren
 {% block content %}
 <div class="container">
     <p>
-        Du möchtest eine Email an {{n}} Studiererende schicken.
+        {% blocktrans %}Du möchtest eine Email an {{n}} Studiererende schicken.{% endblocktrans %}
     </p>
     <p>
-        Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden könnt, gebt eure Anprechpartner und
-        Infos an!
+        {% blocktrans %}Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden könnt, gebt eure Anprechpartner und
+        Infos an!{% endblocktrans %}
     </p>
 </div>
 <div class="container">
     <div class="card border-primary">
         <div class="card-header">
-            Registrierung
+            {% blocktrans %}Registrierung{% endblocktrans %}
         </div>
         <div class="card-body">
             <form action="/iamstudent/send_mail_student/{{ids}}" method="post">

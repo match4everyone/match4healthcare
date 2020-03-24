@@ -1,4 +1,6 @@
-<h1>Select your student:</h1>
+{% load i18n %}
+
+<h1>{% blocktrans %}Select your student:{% endblocktrans %}</h1>
 <form action="send_mail_student" method="post">
     {% csrf_token %}
     {{ form }}
