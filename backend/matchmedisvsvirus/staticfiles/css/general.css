@@ -38,9 +38,9 @@ h1, h2, h3 {
   padding: 70px 10px 70px 45px;
   height: 100%;
 }
-
-.home-box-description { margin-bottom: 35px;}
-
+.home-box-description {
+  margin-bottom: 35px;
+}
 .home-box > div > div {
   padding: 5px;
 }
@@ -101,7 +101,9 @@ div.boxed {
   -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
 }
+
 @media only screen and (min-width: 768px) {
+	
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -109,6 +111,7 @@ div.boxed {
   li.nav-item:first-child > a {
     padding-left: 0 !important;
   }
+	
 }
 .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
   color: #ed0a71;
@@ -116,6 +119,8 @@ div.boxed {
 .footer {
   background: #000943;
   padding: 20px 0;
+  text-align: center;
+  font-size: .9rem;
 }
 .footer p {
   margin-bottom: 0px !important
