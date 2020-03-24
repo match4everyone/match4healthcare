@@ -28,7 +28,11 @@ ___
 ## Docker
 ### First start
 - Build images and run containers
-`docker compose-up`
+`cp docker-compose.dev.yml docker-compose.yml`
+`# edit docker-compose.yml if needed`
+`docker-compose up`
+- To Start in background later
+`docker-compose start`
 - Apply migrations
 `docker exec backend python3 manage.py migrate`
 - Collect static files

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load l10n %}
 
 {% block title %}
-Karte der Hilfsbereiten
+{% blocktrans %}Karte der Hilfsbereiten{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -36,10 +38,10 @@ Karte der Hilfsbereiten
     zoomOffset: -1,
     preferCanvas: true
   }).addTo(mymap);
-
  </script>
- {% for location in locations %}
- <script type="text/javascript">
+{% localize off %} 
+  {% for location in locations %}
+  <script type="text/javascript">
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {
        color: 'blue',
        weight: 2 + 0.5 * {{ location.count }},
@@ -49,14 +51,15 @@ Karte der Hilfsbereiten
    })
    .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>Detailansicht</a>')
    .addTo(mymap);
- </script>
- {% endfor %}
+</script>
+  {% endfor %}
+ {% endlocalize %}
 
  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
    <div class="mx-auto order-0">
      <select name="countrycode" id="countrycode">
-      <option value="DE">Deutschland</option>
-      <option value="AT">Österreich</option>
+      <option value="DE">{% blocktrans %}Deutschland{% endblocktrans %}</option>
+      <option value="AT">{% blocktrans %}Österreich{% endblocktrans %}</option>
     </select>
       <input type="text" id="search" class="form" placeholder="Postleitzahl">
       <button class="btn btn-secondary" role="button" onclick="gototable()">Direktsuche &raquo;</button>
