@@ -21,10 +21,6 @@
 
 
 {% block content %}
-<!--<form action="/iamstudent/student_registration" method="get">
-    <input type="submit" value="Register me"
-         name="Register" id="frm1_submit" />
-</form>-->
  <div id="mapid"></div>
 
 
@@ -39,7 +35,7 @@
     preferCanvas: true
   }).addTo(mymap);
  </script>
-{% localize off %} 
+{% localize off %}
   {% for location in locations %}
   <script type="text/javascript">
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {

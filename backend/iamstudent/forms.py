@@ -98,7 +98,6 @@ def create_skills(fields, radio_type):
         c = Column(radio_type(f), css_class='form-group col-md-6 mb-0')
         col.append(c)
     rows.append(Row(*col, css_class="form-row"))
-    print(rows)
     return rows
 
 
