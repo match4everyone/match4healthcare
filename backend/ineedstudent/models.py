@@ -1,18 +1,24 @@
 from django.db import models
 import uuid
 from datetime import datetime
+
+from accounts.models import User
 from django.core.exceptions import ValidationError
 from mapview.utils import plzs
 from django.utils.translation import gettext as _
+
 
 # Create your models here.
 class Hospital(models.Model):
     """A typical class defining a model, derived from the Model class."""
 
+    ## Datenbankfeatures
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
 
     COUNTRY_CODE_CHOICES = [
-        ("DE", _('Deutschland')),
-        ("AT", _('Österreich')),
+        ("DE", 'Deutschland'),
+        ("AT", 'Österreich'),
     ]
     countrycode = models.CharField(
         max_length=2,

@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from mapview.utils import plzs
 from django.utils.translation import gettext as _
+from accounts.models import User
 
 
 def validate_semester(value):
@@ -26,6 +27,9 @@ class Student(models.Model):
         GELB = 2
         GRUEN = 3
 
+    ## Database stuff
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
 
     COUNTRY_CODE_CHOICES = [
         ("DE", 'Deutschland'),
@@ -44,11 +48,11 @@ class Student(models.Model):
     # TODO add more validators!
 
     # Bezahlung
+
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
     plz = models.CharField(max_length=5, null=True)
-    email = models.EmailField(unique=True)
 
     semester = models.IntegerField(null=True, validators=[validate_semester])
     immatrikuliert = models.BooleanField(default=False)
@@ -102,12 +106,12 @@ class Student(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['email']
+        ordering = ['plz']
 
     # Methods
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.email
+        return self.user.email
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:

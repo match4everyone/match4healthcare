@@ -10,7 +10,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Ro
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date']
+        exclude = ['uuid', 'registration_date','user']
 
         help_texts = {
             'sonstige_infos': _('Einsatzbereiche? Anforderungen? ... und nette Worte :)')

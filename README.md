@@ -28,7 +28,11 @@ ___
 ## Docker
 ### First start
 - Build images and run containers
-`docker compose-up`
+`cp docker-compose.dev.yml docker-compose.yml`
+`# edit docker-compose.yml if needed`
+`docker-compose up`
+- To Start in background later
+`docker-compose start`
 - Apply migrations
 `docker exec backend python3 manage.py migrate`
 - Collect static files
@@ -40,7 +44,7 @@ ___
 File changes in python files trigger an auto-reload of the server.
 Migrations have to be executed with `docker exec backend python3 /matchedmedisvirus-backend/manage.py migrate`.
 
-After changes to the Docker configuration, you have to restart and build the containers with `docker compose-up --build`.
+After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
 ## local
 - create migration after model change:
