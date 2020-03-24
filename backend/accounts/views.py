@@ -100,7 +100,7 @@ def register_hospital_in_db(request, m):
     h = Hospital.objects.create(user=user)
     h = HospitalFormO(request.POST, instance=h)
     h.save()
-
+from django.contrib import messages
 
 @login_required
 @student_required
@@ -111,6 +111,7 @@ def edit_student_profile(request):
         form_mail = StudentEmailForm(request.POST, instance=student.user, prefix='account')
         if form_mail.is_valid():
             form_mail.save()
+            messages.success(request, 'Your password was updated successfully!', extra_tags='alert')
             form = StudentForm(instance=student, prefix='infos')
         else:
             #todo student form somehow produces an error, but ill fix it later
