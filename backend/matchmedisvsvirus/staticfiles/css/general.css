@@ -135,6 +135,6 @@ div.boxed {
 h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 
 .hidden {
-  /*display: none;*/
-  opacity: 0.2;
+  display: none;
+  /*opacity: 0.2;*/
 }
