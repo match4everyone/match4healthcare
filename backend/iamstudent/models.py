@@ -55,7 +55,7 @@ class Student(models.Model):
     plz = models.CharField(max_length=5, null=True)
     name_first = models.CharField(max_length=50, default='')
     name_last = models.CharField(max_length=50, default='')
-    phone_number = models.CharField(max_length=100, blank=True, unique=True, default='')
+    phone_number = models.CharField(max_length=100, blank=True, default='')
 
     semester = models.IntegerField(null=True, validators=[validate_semester])
     immatrikuliert = models.BooleanField(default=False)
