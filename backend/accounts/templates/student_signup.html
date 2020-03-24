@@ -18,14 +18,17 @@ Registrierung - Studierende
             let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
             this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
         },
-        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, visibility) {
+        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
-            if (visibility) {
+            if (setVisibility) {
                 section.classList.remove('hidden')
             } else {
-                section.classList.add('hidden')
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
+                section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
             }
+            
         },
     }
 
