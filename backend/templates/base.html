@@ -27,7 +27,7 @@
       <ul class="navbar-nav ml-auto">
 
 		  <li class="nav-item {% if "about" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="/about">{% blocktrans %}Über uns{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "signup_student" in request.path %}active{% endif %} hide-home">
           <a class="nav-link" href="/accounts/signup_student">Ich will helfen</a>
@@ -39,7 +39,7 @@
           <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Krankenhauskarte{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
-			<a class="nav-link" href="/mapview">Helferkarte</a>
+			<a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
 		  </li>
         </ul>
         <!--</div>
@@ -53,7 +53,7 @@
   <footer class="footer">
 	  <div class="container">
 
-    <p>Ein Projekt im Rahmen des <a href="https://wirvsvirushackathon.org/" target="_blank">#WirVsVirus Hackathons</a>. <a href="/impressum">Impressum</a> und <a href="/impressum">Datenschutz</a>.</p>
+    <p>{% blocktrans %}Ein Projekt im Rahmen des{% endblocktrans %} <a href="https://wirvsvirushackathon.org/" target="_blank">#WirVsVirus Hackathons</a>. <a href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a> {% blocktrans %}und{% endblocktrans %} <a href="/impressum">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
 		  </div>
 
   </footer>

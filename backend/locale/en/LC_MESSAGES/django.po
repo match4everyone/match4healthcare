@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 03:29+0000\n"
+"POT-Creation-Date: 2020-03-24 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -280,7 +280,7 @@ msgstr ""
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
-#: iamstudent/models.py:115 ineedstudent/models.py:45
+#: iamstudent/models.py:114 ineedstudent/models.py:45
 #, fuzzy
 #| msgid "Bitte gib deine Postleitzahl ein"
 msgid " ist keine Postleitzahl in "
@@ -656,7 +656,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: templates/about.html:6
+#: templates/about.html:6 templates/base.html:30
 msgid "Über uns"
 msgstr ""
 
@@ -706,91 +706,88 @@ msgstr "Computer science student (Uni Leipzig)"
 msgid "Informatikstudent (TU Berlin)"
 msgstr "Computer science student (TU Berlin)"
 
-#: templates/base.html:67 templates/home.html:38
-msgid "Ich will helfen"
-msgstr "I want to help"
-
-#: templates/base.html:70
-msgid "Ich brauche Hilfe"
-msgstr "I need help"
-
-#: templates/base.html:73
+#: templates/base.html:39
 msgid "Krankenhauskarte"
 msgstr "Map of hospitals"
 
-#: templates/base.html:76
+#: templates/base.html:42
 msgid "Helferkarte"
 msgstr "Map of volunteers"
 
-#: templates/base.html:85
+#: templates/base.html:56
+msgid "Ein Projekt im Rahmen des"
+msgstr ""
+
+#: templates/base.html:56
 msgid "Impressum"
 msgstr "Imprint"
 
-#: templates/base.html:93
-msgid ""
-"Ein Projekt im Rahmen des <a href=\"https://wirvsvirushackathon.org/\" "
-"target=\"_blank\">#WirVsVirus Hackathons"
+#: templates/base.html:56
+msgid "und"
 msgstr ""
 
-#: templates/home.html:22
-msgid " Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,"
-msgstr " Dear medical students, volunteers, doctors,"
-
-#: templates/home.html:24
-msgid ""
-" wir wollen euch über diese Plattform die Möglichkeit bieten, bei der "
-"Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, den "
-"Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen Pool "
-"an Fachkräften bereitzustellen, die bereit sind, in Notsituationen "
-"auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir euch euren "
-"Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer Arztpraxis "
-"oder einem Gesundheitsamt zuweisen können."
+#: templates/base.html:56
+msgid "Datenschutz"
 msgstr ""
-"we want to use this platform to offer you the opportunity to help with the "
-"management of the corona crisis in Germany. Our aim is to provide hospitals, "
-"doctors' practices and health authorities in Germany with a pool of "
-"professionals who are prepared to help out in emergency situations and take "
-"on important tasks. We want to be able to assign you to a hospital, a "
-"doctor's practice or a health office according to your experience and skills."
 
-#: templates/home.html:39
-msgid ""
-"Ich habe Erfahrung um in dieser Notsituation medizinisch helfen zu können: "
-"ich studiere Medizin, habe bereits in der Pflege gearbeitet, bin "
-"Rettungssanitäter oder habe andere relevante Fähigkeiten. Ich möchte mit "
-"Möglichkeiten zu helfen kontaktiert werden!"
-msgstr ""
-"I have the experience to be able to help in this medical emergency "
-"situation: I am studying medicine, have worked in nursing, am a paramedic or "
-"have other relevant skills. I would like to be contacted with possibilities "
-"to help!"
+#~ msgid "Ich will helfen"
+#~ msgstr "I want to help"
 
-#: templates/home.html:40 templates/home.html:46
-msgid " Zur Karte"
-msgstr " Show map"
+#~ msgid "Ich brauche Hilfe"
+#~ msgstr "I need help"
 
-#: templates/home.html:41
-msgid " Registriere Mich"
-msgstr " Register"
+#~ msgid " Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,"
+#~ msgstr " Dear medical students, volunteers, doctors,"
 
-#: templates/home.html:44
-msgid "Ich brauche Unterstützung"
-msgstr "I need support"
+#~ msgid ""
+#~ " wir wollen euch über diese Plattform die Möglichkeit bieten, bei der "
+#~ "Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, "
+#~ "den Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen "
+#~ "Pool an Fachkräften bereitzustellen, die bereit sind, in Notsituationen "
+#~ "auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir euch "
+#~ "euren Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer "
+#~ "Arztpraxis oder einem Gesundheitsamt zuweisen können."
+#~ msgstr ""
+#~ "we want to use this platform to offer you the opportunity to help with "
+#~ "the management of the corona crisis in Germany. Our aim is to provide "
+#~ "hospitals, doctors' practices and health authorities in Germany with a "
+#~ "pool of professionals who are prepared to help out in emergency "
+#~ "situations and take on important tasks. We want to be able to assign you "
+#~ "to a hospital, a doctor's practice or a health office according to your "
+#~ "experience and skills."
 
-#: templates/home.html:45
-msgid ""
-"Ich arbeite in einem Krankenhaus oder einer Praxis und brauche Unterstützung "
-"um den Ansturm der nCOV-19 Patienten zu bewältigen. Ich suche gezielt "
-"Fachkräfte, welche mich bei meiner Arbeit im Gesundheitswesen unterstützen "
-"können."
-msgstr ""
-"I work in a hospital or medical practice and need support to manage the "
-"onrush of nCOV-19 patients. I am specifically looking for professionals who "
-"can support me in my work in the healthcare sector."
+#~ msgid ""
+#~ "Ich habe Erfahrung um in dieser Notsituation medizinisch helfen zu "
+#~ "können: ich studiere Medizin, habe bereits in der Pflege gearbeitet, bin "
+#~ "Rettungssanitäter oder habe andere relevante Fähigkeiten. Ich möchte mit "
+#~ "Möglichkeiten zu helfen kontaktiert werden!"
+#~ msgstr ""
+#~ "I have the experience to be able to help in this medical emergency "
+#~ "situation: I am studying medicine, have worked in nursing, am a paramedic "
+#~ "or have other relevant skills. I would like to be contacted with "
+#~ "possibilities to help!"
 
-#: templates/home.html:47
-msgid " Anzeige stellen"
-msgstr " List need for help"
+#~ msgid " Zur Karte"
+#~ msgstr " Show map"
+
+#~ msgid " Registriere Mich"
+#~ msgstr " Register"
+
+#~ msgid "Ich brauche Unterstützung"
+#~ msgstr "I need support"
+
+#~ msgid ""
+#~ "Ich arbeite in einem Krankenhaus oder einer Praxis und brauche "
+#~ "Unterstützung um den Ansturm der nCOV-19 Patienten zu bewältigen. Ich "
+#~ "suche gezielt Fachkräfte, welche mich bei meiner Arbeit im "
+#~ "Gesundheitswesen unterstützen können."
+#~ msgstr ""
+#~ "I work in a hospital or medical practice and need support to manage the "
+#~ "onrush of nCOV-19 patients. I am specifically looking for professionals "
+#~ "who can support me in my work in the healthcare sector."
+
+#~ msgid " Anzeige stellen"
+#~ msgstr " List need for help"
 
 #~ msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
 #~ msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
