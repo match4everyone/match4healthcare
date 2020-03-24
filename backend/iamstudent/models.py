@@ -150,12 +150,12 @@ class NOTFALLSANIAbschnitt(models.IntegerChoices):
 AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
-            'typ': models.IntegerField(choices=Arzttyp.choices, null=True),
+            'typ': models.IntegerField(choices=Arzttyp.choices, blank=True,null=True),
             'sonstige': models.CharField(max_length=50, default='')
         },
     'MEDSTUD':
         {
-            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True, default=None),
+            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True, blank=True),
             'farmulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
@@ -165,17 +165,17 @@ AUSBILDUNGS_TYPEN = {
         },
     'MFA':
         {
-            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
+            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True,null=True),
         },
     'MTLA':
         {
-            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
+            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True,null=True),
         },
     'MTA': {
-        'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, null=True),
+        'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True, null=True),
     },
     'NOTFALLSANI': {
-        'abschnitt': models.IntegerField(choices=NOTFALLSANIAbschnitt.choices, null=True),
+        'abschnitt': models.IntegerField(choices=NOTFALLSANIAbschnitt.choices, blank=True,null=True),
     },
     'SANI': {
 
