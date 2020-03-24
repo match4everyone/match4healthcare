@@ -28,16 +28,14 @@ ___
 ## Docker
 ### First start
 - Build images and run containers
-`cp docker-compose.dev.yml docker-compose.yml`
-`# edit docker-compose.yml if needed`
-`docker-compose up`
-- To Start in background later
+`docker-compose -f docker-compose.dev.yml up --build`
+- Start previously built containers in background
 `docker-compose start`
 - Apply migrations
 `docker exec backend python3 manage.py migrate`
 - Collect static files
 `docker exec backend python3 manage.py collectstatic`
-- load test data:
+- Load test data:
 `docker exec backend python3 manage.py loaddata fixture.json`
 
 ### Development
