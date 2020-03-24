@@ -15,24 +15,23 @@ Registrierung - Studierende
 {% block content %}
 
 <div class="container">
-    Sign up pls
+<hr>
 </div>
 <div class="container">
     <div class="card border-primary">
         <div class="card-header">
-            LALALLALA
+            Hospital Signup
         </div>
         <div class="card-body">
             <div class="row">
     <div class="col-md-8 col-sm-10 col-12">
-      <h2>Sign up as a {{ user_type }}</h2>
       <form method="post"  action="signup_hospital">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
-          <p>Jetzt deine Ansprechinformationan</p>
+
           {% crispy form_info form_info.helper %}
-          <h2>Gebe Deine Accountdaten An</h2>
-            {{ form_signup|crispy }}
+          <p>Vergebe ein Passwort für deine Anmeldung</p>
+          {{ form_signup|crispy }}
 
         <button type="submit" class="btn btn-success">Sign up</button>
       </form>

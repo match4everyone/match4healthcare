@@ -12,6 +12,7 @@ class HospitalSignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = []#['email']
 
     @transaction.atomic
     def save(self):
