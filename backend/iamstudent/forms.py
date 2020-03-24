@@ -111,6 +111,8 @@ def create_radio_traffic_light(field):
 def create_radio_progress_indicator(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-info", template='input_buttongroup-progress_indicator.html')
 
+
+
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
@@ -188,3 +190,47 @@ class StudentFormAndMail(StudentForm):
 class EmailForm(forms.Form):
     student_id = forms.CharField(max_length=100)
     contact_adress = forms.EmailField()
+
+
+class StudentFormEditProfile(StudentForm):
+    def __init__(self, *args, **kwargs):
+        super(StudentFormEditProfile, self).__init__(*args, **kwargs)
+        self.helper.layout = Layout(
+            Row(
+                Column('name_first', css_class='form-group col-md-6 mb-0'),
+                Column('name_last', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('plz', css_class='form-group col-md-6 mb-0'),
+                Column('countrycode', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('availability_start', css_class='form-group col-md-6 mb-0'),
+                Column('semester', css_class='form-group col-md-4 mb-0'),
+                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('phone_number', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+            HTML("<p>{}</p> <br>".format(_(
+                "Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
+            *create_skills(BERUF, create_radio_progress_indicator),
+            Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
+                css_class='form-row'),
+            HTML("<h2>{}</h2>".format(_("Fähigkeiten"))),
+            HTML("<p>{}</p> <br>".format(_(
+                "Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
+            *create_skills(SKILLS, create_radio_traffic_light),
+            HTML('<p class="text-center">'),
+            Submit('submit', _('Eintrag updaten')),
+            HTML("</p>")
+        )

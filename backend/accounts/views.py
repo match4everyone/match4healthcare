@@ -9,7 +9,7 @@ from ineedstudent.forms import HospitalFormO
 from ineedstudent.models import Hospital
 from django.shortcuts import render
 
-from iamstudent.forms import StudentForm, StudentFormAndMail
+from iamstudent.forms import StudentForm, StudentFormEditProfile
 from .forms import StudentEmailForm
 from iamstudent.models import Student
 
@@ -103,25 +103,46 @@ def register_hospital_in_db(request, m):
 from django.contrib import messages
 
 @login_required
+def login_redirect(request):
+    user = request.user
+
+    if user.is_student:
+        return HttpResponseRedirect('profile_student')
+
+    elif user.is_hospital:
+        return HttpResponseRedirect('profile_hospital')
+
+    elif user.is_staff:
+        #todo
+        return HttpResponse('what to do?')
+
+    else:
+        #todo: throw 404
+        HttpResponse('Something wrong in database')
+
+
+
 @student_required
 def edit_student_profile(request):
     student = request.user.student
 
     if request.method == 'POST':
-        form_mail = StudentEmailForm(request.POST, instance=student.user, prefix='account')
-        if form_mail.is_valid():
+        form_mail = StudentEmailForm(request.POST or None, instance=student.user, prefix='account')
+        if 'account-email' in request.POST and form_mail.is_valid():
             form_mail.save()
-            messages.success(request, 'Your password was updated successfully!', extra_tags='alert')
-            form = StudentForm(instance=student, prefix='infos')
+            messages.success(request, _('Deine Email wurde erfolgreich geändert!'), extra_tags='alert-success')
+            form = StudentFormEditProfile(instance=student, prefix='infos')
         else:
             #todo student form somehow produces an error, but ill fix it later
-            form = StudentForm(request.POST, instance=student, prefix='infos')
+            form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form_mail = StudentEmailForm( instance=student.user, prefix='account')
+
             if form.is_valid():
                 form.save()
 
     else:
-        form = StudentForm(instance=student, prefix='infos')
+        form = StudentFormEditProfile(instance=student, prefix='infos')
         form_mail = StudentEmailForm(instance=student.user,prefix='account')
 
     return render(request, 'student_edit.html', {'form': form, 'emailform': form_mail})

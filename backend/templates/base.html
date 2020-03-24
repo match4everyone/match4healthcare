@@ -41,9 +41,15 @@
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
 			<a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
 		  </li>
-      <li class="nav-item {% if "login" in request.path %}active{% endif %}">
-        <a class="nav-link" href="/accounts/login">{% blocktrans %}Login{% endblocktrans %}</a>
+        {% if user.is_authenticated %}
+        <li class="nav-item {% if "profile" in request.path %}active{% endif %}">
+        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Mein Profil{% endblocktrans %}</a>
       </li>
+        {% else %}
+      <li class="nav-item {% if "login" in request.path %}active{% endif %}">
+        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
+        </li>  {% endif %}
+
         </ul>
         <!--</div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" class="navbarsExampleDefault">-->
