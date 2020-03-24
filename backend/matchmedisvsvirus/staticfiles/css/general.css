@@ -1,3 +1,127 @@
-body{
-    margin-top: 55px;
+@import url("https://use.typekit.net/sxd4iee.css");
+@font-face {
+  font-family: 'proxima-nova';
+  font-style: normal;
+  font-weight: 300;
+}
+body {
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 300;
+  color: #4f4f4f;
+  margin-top: 100px;
+}
+.footer a, .footer p {
+  color: #fff;
+}
+.home-title {
+  background-image: url(/static/img/title.jpg);
+  background-position: center;
+  padding: 200px 0px 200px 0px;
+  background-size: cover;
+}
+.home-title h1 {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+h1, h2, h3 {
+  color: #000943
+}
+.logo-header {
+  margin-bottom: 50px;
+}
+.home-box h2 {
+  font-size: 2.3rem;
+}
+.home-box {
+  margin-top: -50px;
+}
+.home-box > div > div > div {
+  padding: 70px 10px 70px 45px;
+  height: 100%;
+}
+.home-box-description {
+  margin-bottom: 35px;
+}
+.home-box > div > div {
+  padding: 5px;
+}
+.box-left {
+  background-color: #ed0a71;
+}
+.box-right {
+  background-color: #000943;
+}
+.equal {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+.equal > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+b {
+  font-weight: 700;
+}
+.btn-lg {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: .9rem 1rem;
+}
+.btn-lg.blue {
+  background-color: #000943;
+  border-color: #000943;
+  border: 0px;
+}
+.btn-lg.blue:hover {
+  background-color: #000839;
+}
+.btn-lg.pink {
+  background-color: #ed0a71;
+  border-color: #ed0a71;
+  border: 0px;
+}
+.btn-lg.pink:hover {
+  background-color: #c0085b;
+}
+div.boxed {
+  border: 4px solid #efefef;
+  border-radius: 10px;
+  padding: 35px 0 35px 0;
+}
+.logos-home > img {
+  margin: 0 15px;
+}
+.nav-link {
+  font-weight: 600;
+}
+.navbar {
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
+}
+
+@media only screen and (min-width: 768px) {
+	
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  li.nav-item:first-child > a {
+    padding-left: 0 !important;
+  }
+	
+}
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+  color: #ed0a71;
+}
+.footer {
+  background: #000943;
+  padding: 20px 0;
+  text-align: center;
+  font-size: .9rem;
+}
+.footer p {
+  margin-bottom: 0px !important
 }

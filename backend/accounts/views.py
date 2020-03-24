@@ -24,6 +24,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.core.mail import BadHeaderError, send_mail
 
 from django.utils.translation import gettext as _
+from django.template import loader
 
 from django.http import HttpResponse
 from django.db import transaction
@@ -40,8 +41,8 @@ def student_signup(request):
             register_student_in_db(request, mail=form.cleaned_data['email'])
             # form.save()
             # redirect to a new URL:
-            return HttpResponse('thanks')
-
+            template = loader.get_template('thanks_student.html')
+            return HttpResponse(template.render({}, request))
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -81,7 +82,8 @@ def hospital_signup(request):
 
         if all([form_info.is_valid(), form_user.is_valid()]):
             register_hospital_in_db(request, form_info.cleaned_data['email'])
-            return HttpResponse('registered both of you')
+            template = loader.get_template('thanks_hospital.html')
+            return HttpResponse(template.render({}, request))
     else:
         form_info = HospitalFormO(
             initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
