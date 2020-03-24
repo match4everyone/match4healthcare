@@ -6,6 +6,7 @@
 }
 body {
   font-family: 'proxima-nova', sans-serif !important;
+	-webkit-font-smoothing: antialiased;
   font-weight: 300;
   color: #4f4f4f;
   margin-top: 100px;
@@ -90,7 +91,7 @@ div.boxed {
   border-radius: 10px;
   padding: 35px 0 35px 0;
 }
-.logos-home > img {
+.logos-home > a > img {
   margin: 0 15px;
 }
 .nav-link {
@@ -116,6 +117,11 @@ div.boxed {
 .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
   color: #ed0a71;
 }
+
+.navbar-light .navbar-nav .nav-link { color: #000943; }
+
+.navbar-light .navbar-nav .nav-link:hover { color: #ed0a71; } 
+
 .footer {
   background: #000943;
   padding: 20px 0;
@@ -125,3 +131,5 @@ div.boxed {
 .footer p {
   margin-bottom: 0px !important
 }
+
+h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
