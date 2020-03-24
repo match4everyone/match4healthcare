@@ -191,12 +191,17 @@ AUSBILDUNGS_TYPEN = {
         'eintragen': models.CharField(max_length=200, default=False)
     },
 }
+
 AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))
 
+columns = []
 for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
+    columns.append('ausbildung_typ_%s' % ausbildungs_typ.lower())
     Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
     for key, field in felder.items():
+        columns.append('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()))
         Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
+print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
 
 """End"""
 

@@ -42,25 +42,6 @@ form_labels = {
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
-    'famulaturreife': _('Famulaturreife'),
-    'm2absolviert': _('M2 absolviert'),
-    'berufserfahrung_monate': _('Berufserfahrung in Monaten'),
-
-    'ba_arzt': _('Arzt/Ärztin'),
-    'ba_krankenpflege': _('Pfleger*in'),
-    'ba_pflegehilfe': _('Pflegehelfer*in'),
-    'ba_anaesthesiepflege': _('Anästhesiepfleger*in'),
-    'ba_intensivpflege': _('Intensivpfleger*in'),
-    'ba_ota': _('OTA'),
-    'ba_mfa': _('MFA'),
-    'ba_mta_lta': _('MTA/LTA'),
-    'ba_rta': _('RTA'),
-    'ba_rettungssanitaeter': _('Rettungssanitäter*in'),
-    'ba_kinderbetreuung': _('Kinderbetreuer*in'),
-    'ba_hebamme': _('Hebamme'),
-    'ba_sprechstundenhilfe': _('Sprechstundenhilfe'),
-    'ba_labortechnische_assistenz': _('Labortechnische Assistenz'),
-
 }
 
 
@@ -84,12 +65,6 @@ class StudentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
         self.fields['phone_number'].required = False
-        # for field in SKILLS:
-        #    self.fields[field].required = False
-        # for field in BERUF:
-        #    self.fields[field].required = False
-        # for field in BERUF2_wo:
-        #    self.fields[field].required = False
 
         self.helper = FormHelper()
         self.helper.form_id = 'id-exampleForm'
@@ -156,7 +131,13 @@ class StudentForm(forms.ModelForm):
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items()
             ]
             ,
-
+            HTML('<hr>'),
+            HTML('<p class="text-left">'),
+            'datenschutz_zugestimmt',
+            HTML("</p>"),
+            HTML('<p class="text-left">'),
+            'einwilligung_datenweitergabe',
+            HTML("</p>"),
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere Mich'),
             HTML("</p>")
