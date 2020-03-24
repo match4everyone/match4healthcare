@@ -15,7 +15,7 @@ Registrierung - Studierende
 {% block content %}
 
 <div style="height:40px"></div>
-<div class="container">
+<div class="container" style="margin-bottom: 45px;">
 	
     {% if user.is_authenticated %}
 	
@@ -45,7 +45,7 @@ Registrierung - Studierende
                         <p>Vergebe ein Passwort für deine Anmeldung</p>
                         {{ form_signup|crispy }}
 
-                        <button type="submit" class="btn btn-success">Sign up</button>
+                        <button type="submit" class="btn blue text-white btn-md">Sign up</button>
                     </form>
                 
            

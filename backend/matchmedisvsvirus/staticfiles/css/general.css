@@ -86,6 +86,16 @@ b {
   font-weight: 300;
   padding: .9rem 1rem;
 }
+
+.btn-md.blue {
+ background-color: #000943;
+  border-color: #000943;
+  border: 0px;	
+}
+
+.btn-md.blue:hover {
+  background-color: #ed0a71;
+}
 .btn-lg.blue {
   background-color: #000943;
   border-color: #000943;
