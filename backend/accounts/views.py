@@ -13,6 +13,7 @@ from ineedstudent.views import ApprovalHospitalTable, HospitalTable
 from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
 from iamstudent.models import Student
+from iamstudent.views import send_mails_for
 
 from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
@@ -192,4 +193,6 @@ def change_hospital_approval(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
     h.is_approved = not h.is_approved
     h.save()
+    if h.is_approved:
+        send_mails_for(h)
     return HttpResponseRedirect('/accounts/approve_hospitals')

@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from iamstudent.models import Student
+from iamstudent.models import Student, EmailToSend
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
@@ -234,3 +234,14 @@ class StudentFormEditProfile(StudentForm):
             Submit('submit', _('Eintrag updaten')),
             HTML("</p>")
         )
+
+class EmailToSendForm(forms.ModelForm):
+
+    class Meta:
+        model = EmailToSend
+        fields = ['subject','message']
+        labels = {'subject': _('Betreff'),
+                  'message': _('Nachrichtentext')}
+        help_texts = {
+            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
+        }

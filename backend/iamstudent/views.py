@@ -7,15 +7,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
-from .forms import StudentForm, EmailForm
-from .models import Student
+from .forms import StudentForm, EmailToSendForm, EmailForm
+from .models import Student, EmailToSend
 
 from ineedstudent.forms import HospitalFormExtra
 from ineedstudent.models import Hospital
 
 from django.contrib.auth.decorators import login_required
 from accounts.decorator import student_required, hospital_required
-
 
 
 def get_student(request):
@@ -42,8 +41,8 @@ def thx(request):
     return render(request, 'thanks_student.html')
 
 
-def successful_mail(requets):
-    return HttpResponse("Mail was sent :)")
+def successful_mail(request):
+    return render(request,'emails_sent.html')
 
 
 def send_mail_student(request):
@@ -58,49 +57,51 @@ def send_mail_student(request):
         form = EmailForm()
     return render(request, 'mail.html', {'form': form})
 
+
 @login_required
 @hospital_required
 def send_mail_student_id_list(request, id_list):
     id_list = id_list.split('_')
-    # existierende anzeige benutzen
 
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = HospitalFormExtra(request.POST)
+        form = EmailToSendForm(request.POST)
 
-        # check whether it's valid:
         if form.is_valid():
-            submit = request.POST.get('submit')
-
-
-            message = 'Hey! \n  %s, Contact me here: %s \n %s' % (form.cleaned_data['sonstige_infos'],
-                                                            form.cleaned_data['ansprechpartner'],
-                                                            form.cleaned_data['email'])
-
+            # todo check header injections!!!!
+            message = form.cleaned_data['message']
+            subject = form.cleaned_data['subject']
             for student_id in id_list:
-                student = Student.objects.get(id=student_id)
-                contact =form.cleaned_data['email']
-
-                # TODO: Demo
-                #send_mail(subject=_('[Name der App] Offered a job.'),
-                #          message=message,
-                #          from_email='noreply@medisvs.spahr.uberspace.de',
-                #          recipient_list=[student.email])
-            if 'Erstelle Anzeige' in submit:
-                form.save()
-                return HttpResponse('Dies ist noch eine Demo. Im Release-Programm wären emails jetzt erfolgreich verschickt und eine dauerhafte Anzeige gespeichert.')
-                #TODO Demo
-                #return HttpResponse('mails geschickt und anzeige gestellt')
-            else:
-                return HttpResponse('Dies ist noch eine Demo. Im Release-Programm wären emails jetzt erfolgreich verschickt')
-                #TODO Demo
-                #return HttpResponse('mails geschickt und KEINE anzeige gestellt')
-
-        # if a GET (or any other method) we'll create a blank form
+                student = Student.objects.get(user_id=student_id)
+                mail = EmailToSend.objects.create(
+                    student=student,
+                    hospital=request.user.hospital,
+                    message=message,
+                    subject=subject)
+                mail.save()
+            if request.user.hospital.is_approved:
+                send_mails_for(request.user.hospital)
+            return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
-        form = HospitalFormExtra()
+        hospital = request.user.hospital
+        form = EmailToSendForm(initial={'subject': '[Match4Medis] Ein Ort braucht Deine Hilfe',
+                                        'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.email)})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
+
+
+def send_mails_for(hospital):
+    emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+    for m in emails:
+        send_mail(m.subject,
+                  m.message,
+                  'noreply@medisvs.spahr.uberspace.de',
+                  [m.student.user.email]
+                  )
+        # todo: muss noch asynchron werden ...celery?
+        m.was_sent = True
+        m.save()
+
 
 def notify_student(student_id, contact):
     student = Student.objects.get(id=student_id)
