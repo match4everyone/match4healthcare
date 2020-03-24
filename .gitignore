@@ -192,4 +192,7 @@ psd
 thumb
 sketch
 
+# Ignore local docker-compose file, in case you make a copy for local changes
+docker-compose.yml
+
 # End of https://www.gitignore.io/api/react,django,python
