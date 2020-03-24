@@ -68,5 +68,11 @@
         window.location = "/ineedstudent/hospitals/" + $('#countrycode').val() + "/" + $('#search').val();
       }
     }
+    $("#search").keyup(function(event) {
+        if (event.keyCode === 13) {
+            gototable();
+        }
+    });
+
   </script>
 {% endblock %}
