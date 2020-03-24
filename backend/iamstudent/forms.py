@@ -61,6 +61,35 @@ form_labels = {
     'ba_sprechstundenhilfe': _('Sprechstundenhilfe'),
     'ba_labortechnische_assistenz': _('Labortechnische Assistenz'),
 
+# Form Labels for qualifications
+
+    'ausbildung_typ_arzt': _('Arzt/Ärztin'),
+    'ausbildung_typ_arzt_typ': _('Fachbereich'),
+    'ausbildung_typ_arzt_sonstige': _('Sonstige:'),
+    'ausbildung_typ_medstud': _('Medizinstudent_in'),
+    'ausbildung_typ_medstud_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_medstud_farmulaturen_anaesthesie': _('Famulatur Anästhesie'),
+    'ausbildung_typ_medstud_famulaturen_chirurgie': _('Famulatur Chirurgie'),
+    'ausbildung_typ_medstud_famulaturen_innere': _('Famulatur Innere'),
+    'ausbildung_typ_medstud_famulaturen_intensiv': _('Famulatur Intensivmedizin'),
+    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Famulatur Notaufnahme'),
+    'ausbildung_typ_medstud_anerkennung_noetig': _('Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+    'ausbildung_typ_mfa': _('Medizinische_r Fachangestellte_r'),
+    'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_mtla': _('Medizinisch-technische_r Laboratoriumsassistent_in'),
+    'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_mta': _('Medizinisch-technische_r Assistent_in'),
+    'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter_in/Rettungssanitäter_in'),
+    'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_sani': _('Rettungssanitäter_in/Rettungshelfer_in'),
+    'ausbildung_typ_zahni': _('Zahnmedizinstudent_in'),
+    'ausbildung_typ_zahni_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_kinderbetreung': _('Kinderbetreuer_in'),
+    'ausbildung_typ_kinderbetreung_ausgebildet': _('Abgeschlossene Ausbildung'),
+    'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
+    'ausbildung_typ_sonstige': _('Sonstige'),
+    'ausbildung_typ_sonstige_eintragen':_('Bitte die Qualifikationen hier eintragen')
 }
 
 
@@ -145,7 +174,7 @@ class StudentForm(forms.ModelForm):
             ),
             *[
                 Div(
-                    HTML("<h2>{}</h2>".format(_("%s Felder" % ausbildungstyp))),
+                    HTML("<h2>{}</h2>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
                         Column('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower()),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
