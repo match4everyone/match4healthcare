@@ -22,7 +22,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-@lru_cache()
+@lru_cache(maxsize=1)
 def prepare_students(ttl_hash=None):
     # Source: https://stackoverflow.com/questions/31771286/python-in-memory-cache-with-time-to-live
     del ttl_hash  # to emphasize we don't use it and to shut pylint up
