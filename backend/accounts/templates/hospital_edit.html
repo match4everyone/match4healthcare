@@ -41,7 +41,7 @@ Registrierung - Studierende
             </div>
             <div class="card-body">
                 <p><a role="button" class="btn btn-info" href="logout">logout</a></p>
-                <p><a role="button" class="btn btn-info" href="password_change">change password</a></p>
+                <p><a role="button" class="btn btn-info" href="/accounts/password_change">change password</a></p>
                 <form action="profile_hospital" method="post">
                     {% csrf_token %}
                     {{emailform|crispy}}

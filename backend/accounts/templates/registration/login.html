@@ -36,6 +36,9 @@ Registrierung - Studierende
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <hr>
+            <h4>{% blocktrans %}Passwort vergessen?{% endblocktrans %}</h4>
+            <a href="/accounts/password_reset"><p>{% blocktrans %}Passwort zurücksetzen{% endblocktrans %}</p></a>
+            <hr>
             <h4>{% blocktrans %}Noch kein Account?{% endblocktrans %}</h4>
             <a href="/accounts/signup_student"><p>{% blocktrans %}Ich bin helfende/r{% endblocktrans %}</p></a>
             <a href="/accounts/signup_hospital"><p>{% blocktrans %}Ich habe Bedarf an Unterstützung{% endblocktrans %}</p></a>
