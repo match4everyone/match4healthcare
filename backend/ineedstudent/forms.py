@@ -51,5 +51,5 @@ class HospitalFormExtra(HospitalFormO):
     def __init__(self, *args, **kwargs):
         super(HospitalFormExtra, self).__init__(*args, **kwargs)
         # !!! namen der knöpe dürfen nicht verändert werden, sonst geht code woanders kaputt
-        self.helper.add_input(Submit('submit', 'Schicke Mails'))
-        self.helper.add_input(Submit('submit', 'Schicke Mails + Erstelle Anzeige'))
+        self.helper.add_input(Submit('submit', _('Schicke Mails')))
+        self.helper.add_input(Submit('submit', _('Schicke Mails + Erstelle Anzeige')))

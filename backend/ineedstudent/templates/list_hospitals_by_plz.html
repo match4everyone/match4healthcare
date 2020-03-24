@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-In {{ort}} ({{plz}}) wird Hilfe gebraucht
+{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -19,7 +20,7 @@ In {{ort}} ({{plz}}) wird Hilfe gebraucht
 <div class="container">
     <div class="card">
         <div class="card-header">
-            In {{ort}} ({{plz}}) wird Hilfe gebraucht:
+            {% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
         </div>
         <div class="card-body">
             {% render_table table %}

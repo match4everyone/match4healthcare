@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-23 00:08+0000\n"
+"POT-Creation-Date: 2020-03-24 03:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,224 +26,229 @@ msgstr ""
 msgid "Wohnort"
 msgstr "Postal code"
 
-#: iamstudent/forms.py:32
+#: iamstudent/forms.py:32 ineedstudent/forms.py:21
+#: ineedstudent/templates/list_by_plz.html:89
+msgid "Land"
+msgstr ""
+
+#: iamstudent/forms.py:33
 msgid "Email"
 msgstr ""
 
-#: iamstudent/forms.py:34
+#: iamstudent/forms.py:35
 msgid "Semester"
 msgstr ""
 
-#: iamstudent/forms.py:35
+#: iamstudent/forms.py:36
 msgid "Ich bin aktuell immatrikuliert"
 msgstr "I am currently a student"
 
-#: iamstudent/forms.py:36
+#: iamstudent/forms.py:37
 msgid "Ich bin verfügbar ab"
 msgstr "I am available from"
 
-#: iamstudent/forms.py:38
+#: iamstudent/forms.py:39
 msgid "Ich benötige eine Vergütung"
 msgstr "I need a compensation"
 
-#: iamstudent/forms.py:40
+#: iamstudent/forms.py:41
 msgid "Famulaturreife"
 msgstr ""
 
-#: iamstudent/forms.py:41
+#: iamstudent/forms.py:42
 msgid "M2 absolviert"
 msgstr ""
 
-#: iamstudent/forms.py:42
+#: iamstudent/forms.py:43
 msgid "Berufserfahrung in Monaten"
 msgstr "Work experience in months"
 
-#: iamstudent/forms.py:44
+#: iamstudent/forms.py:45 ineedstudent/templates/list_by_plz.html:94
 msgid "Arzt/Ärztin"
 msgstr "Medical doctor"
 
-#: iamstudent/forms.py:45
+#: iamstudent/forms.py:46
 msgid "Pfleger*in"
 msgstr "Caregiver"
 
-#: iamstudent/forms.py:46
+#: iamstudent/forms.py:47
 msgid "Pflegehelfer*in"
 msgstr ""
 
-#: iamstudent/forms.py:47
+#: iamstudent/forms.py:48
 msgid "Anästhesiepfleger*in"
 msgstr ""
 
-#: iamstudent/forms.py:48
+#: iamstudent/forms.py:49
 msgid "Intensivpfleger*in"
 msgstr ""
 
-#: iamstudent/forms.py:49
+#: iamstudent/forms.py:50 ineedstudent/templates/list_by_plz.html:99
 msgid "OTA"
 msgstr ""
 
-#: iamstudent/forms.py:50
+#: iamstudent/forms.py:51 ineedstudent/templates/list_by_plz.html:101
 msgid "MFA"
 msgstr ""
 
-#: iamstudent/forms.py:51
+#: iamstudent/forms.py:52
 msgid "MTA/LTA"
 msgstr ""
 
-#: iamstudent/forms.py:52
+#: iamstudent/forms.py:53
 msgid "RTA"
 msgstr ""
 
-#: iamstudent/forms.py:53
+#: iamstudent/forms.py:54
 msgid "Rettungssanitäter*in"
 msgstr ""
 
-#: iamstudent/forms.py:54
+#: iamstudent/forms.py:55
 msgid "Kinderbetreuer*in"
 msgstr ""
 
-#: iamstudent/forms.py:55
+#: iamstudent/forms.py:56
 msgid "Hebamme"
 msgstr ""
 
-#: iamstudent/forms.py:56
+#: iamstudent/forms.py:57
 msgid "Sprechstundenhilfe"
 msgstr ""
 
-#: iamstudent/forms.py:57
+#: iamstudent/forms.py:58
 msgid "Labortechnische Assistenz"
 msgstr ""
 
-#: iamstudent/forms.py:59
+#: iamstudent/forms.py:60
 msgid "Famulatur"
 msgstr ""
 
-#: iamstudent/forms.py:60
+#: iamstudent/forms.py:61
 msgid "Pflegepraktika"
 msgstr ""
 
-#: iamstudent/forms.py:61
+#: iamstudent/forms.py:62
 msgid "FSJ im Krankenhaus"
 msgstr ""
 
-#: iamstudent/forms.py:63
+#: iamstudent/forms.py:64
 msgid "Corona Screening in der ZINA"
 msgstr ""
 
-#: iamstudent/forms.py:64
+#: iamstudent/forms.py:65
 msgid "Unterstützung der Pflege"
 msgstr ""
 
-#: iamstudent/forms.py:65
+#: iamstudent/forms.py:66
 msgid "Hilfe im Transportdienst"
 msgstr ""
 
-#: iamstudent/forms.py:66
+#: iamstudent/forms.py:67
 msgid "Kinderbetreuung"
 msgstr ""
 
-#: iamstudent/forms.py:67
+#: iamstudent/forms.py:68
 msgid "generelle Labortätigkeiten"
 msgstr ""
 
-#: iamstudent/forms.py:68
+#: iamstudent/forms.py:69
 msgid "DRK Blutspende (auch Vorklinik)"
 msgstr ""
 
-#: iamstudent/forms.py:69
+#: iamstudent/forms.py:70
 msgid "Telefon Hotline"
 msgstr ""
 
-#: iamstudent/forms.py:70
+#: iamstudent/forms.py:71
 msgid "Abstriche"
 msgstr ""
 
-#: iamstudent/forms.py:71
+#: iamstudent/forms.py:72
 msgid "Patientenpflege (Waschen)"
 msgstr ""
 
-#: iamstudent/forms.py:72
+#: iamstudent/forms.py:73
 msgid "Patientenlagerung"
 msgstr ""
 
-#: iamstudent/forms.py:73
+#: iamstudent/forms.py:74
 msgid "OP Assistenz"
 msgstr ""
 
-#: iamstudent/forms.py:74
+#: iamstudent/forms.py:75
 msgid "Blutentnahmedienst"
 msgstr ""
 
-#: iamstudent/forms.py:75
+#: iamstudent/forms.py:76
 msgid "Entgegennahme und Bearbeitung von Anrufen Hilfesuchender"
 msgstr ""
 
-#: iamstudent/forms.py:76
+#: iamstudent/forms.py:77
 msgid "Infektionsnachverfolgung"
 msgstr ""
 
-#: iamstudent/forms.py:77
+#: iamstudent/forms.py:78
 msgid "Patientenaufnahme"
 msgstr ""
 
-#: iamstudent/forms.py:78
+#: iamstudent/forms.py:79
 msgid "EDV Kenntnisse"
 msgstr ""
 
-#: iamstudent/forms.py:79
+#: iamstudent/forms.py:80
 msgid "Zugänge Legen"
 msgstr ""
 
-#: iamstudent/forms.py:80
+#: iamstudent/forms.py:81
 msgid "Arztbriefe schreiben"
 msgstr ""
 
-#: iamstudent/forms.py:81
+#: iamstudent/forms.py:82
 msgid "Blutkulturen abnehmen"
 msgstr ""
 
-#: iamstudent/forms.py:82
+#: iamstudent/forms.py:83
 msgid "Infusionen mischen"
 msgstr ""
 
-#: iamstudent/forms.py:83
+#: iamstudent/forms.py:84
 msgid "EKG schreiben"
 msgstr ""
 
-#: iamstudent/forms.py:84
+#: iamstudent/forms.py:85
 msgid "Ultraschall"
 msgstr ""
 
-#: iamstudent/forms.py:85
+#: iamstudent/forms.py:86
 msgid "BGAs"
 msgstr ""
 
-#: iamstudent/forms.py:86
+#: iamstudent/forms.py:87
 msgid "Beatmungsgeräte Bedienen"
 msgstr ""
 
 #: iamstudent/forms.py:116
-msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
-msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
-
-#: iamstudent/forms.py:117
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: iamstudent/forms.py:118
+#: iamstudent/forms.py:117
 msgid "Bitte gib deine Postleitzahl ein"
 msgstr "Please enter your zip code"
+
+#: iamstudent/forms.py:118
+msgid "Bitte wähle ein Land aus"
+msgstr ""
 
 #: iamstudent/forms.py:119 iamstudent/forms.py:120 iamstudent/forms.py:121
 msgid "in Monaten"
 msgstr "in monts"
 
-#: iamstudent/forms.py:155
+#: iamstudent/forms.py:156
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: iamstudent/forms.py:156
+#: iamstudent/forms.py:157
 msgid ""
 "Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder "
 "angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen "
@@ -253,11 +258,11 @@ msgstr ""
 "or started. If you have not started one of the vocational training courses, "
 "you do not need to enter anything."
 
-#: iamstudent/forms.py:160
+#: iamstudent/forms.py:161
 msgid "Fähigkeiten"
 msgstr "Skills"
 
-#: iamstudent/forms.py:161
+#: iamstudent/forms.py:162
 msgid ""
 "Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. "
 "Damit können wir den individualisierbarere Suchanfragen für die "
@@ -275,9 +280,88 @@ msgstr ""
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
-#: iamstudent/models.py:17
-msgid "Dies ist keine Postleitzahl in Deutschland."
+#: iamstudent/models.py:115 ineedstudent/models.py:45
+#, fuzzy
+#| msgid "Bitte gib deine Postleitzahl ein"
+msgid " ist keine Postleitzahl in "
+msgstr "Please enter your zip code"
+
+#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: ineedstudent/templates/list_by_plz.html:119
+#: ineedstudent/templates/list_by_plz.html:120
+#: ineedstudent/templates/list_by_plz.html:121
+#: ineedstudent/templates/list_by_plz.html:122
+#: ineedstudent/templates/list_by_plz.html:123
+#: ineedstudent/templates/list_by_plz.html:124
+#: ineedstudent/templates/list_by_plz.html:125
+#: ineedstudent/templates/list_by_plz.html:126
+#: ineedstudent/templates/list_by_plz.html:127
+#: ineedstudent/templates/list_by_plz.html:128
+msgid "Angefangen"
 msgstr ""
+
+#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: ineedstudent/templates/list_by_plz.html:130
+#: ineedstudent/templates/list_by_plz.html:131
+msgid "Nie"
+msgstr ""
+
+#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: ineedstudent/templates/list_by_plz.html:120
+#: ineedstudent/templates/list_by_plz.html:121
+#: ineedstudent/templates/list_by_plz.html:122
+#: ineedstudent/templates/list_by_plz.html:123
+#: ineedstudent/templates/list_by_plz.html:124
+#: ineedstudent/templates/list_by_plz.html:125
+#: ineedstudent/templates/list_by_plz.html:126
+#: ineedstudent/templates/list_by_plz.html:127
+#: ineedstudent/templates/list_by_plz.html:128
+msgid "Abgeschlossen"
+msgstr ""
+
+#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: ineedstudent/templates/list_by_plz.html:130
+#: ineedstudent/templates/list_by_plz.html:131
+msgid "Selten"
+msgstr ""
+
+#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: ineedstudent/templates/list_by_plz.html:130
+#: ineedstudent/templates/list_by_plz.html:131
+msgid "Erfahren"
+msgstr ""
+
+#: iamstudent/templates/mail.html:3
+msgid "Select your student:"
+msgstr ""
+
+#: iamstudent/templates/send_mail_hospital.html:7
+msgid "Studierende Kontaktieren"
+msgstr ""
+
+#: iamstudent/templates/send_mail_hospital.html:19
+#, python-format
+msgid "Du möchtest eine Email an %(n)s Studiererende schicken."
+msgstr ""
+
+#: iamstudent/templates/send_mail_hospital.html:22
+#: ineedstudent/templates/hospital.html:20
+msgid ""
+"Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden "
+"könnt, gebt eure Anprechpartner und\n"
+"        Infos an!"
+msgstr ""
+"Please enter your contact persons and information so that we can upload your "
+"offer and can contact you! "
+
+#: iamstudent/templates/send_mail_hospital.html:29
+#: ineedstudent/templates/hospital.html:6
+#: ineedstudent/templates/hospital.html:27
+#, fuzzy
+#| msgid " Registriere Mich"
+msgid "Registrierung"
+msgstr " Register"
 
 #: iamstudent/templates/student.html:20
 msgid "Liebe Studierende und Helfende,"
@@ -345,15 +429,22 @@ msgstr ""
 msgid "Registrierung - Studierende & Helfer"
 msgstr "Registration - students & volunteers"
 
-#: iamstudent/views.py:31
-msgid "Invalid value"
+#: iamstudent/templates/thanks_student.html:6
+#: ineedstudent/templates/thanks_hospital.html:6
+msgid "Vielen Dank"
 msgstr ""
 
-#: iamstudent/views.py:105
+#: iamstudent/templates/thanks_student.html:21
+msgid ""
+"Vielen Dank für deine Registrierung. Wir kontaktieren dich, sobald eine "
+"medizinische Einrichtung deine Hilfe benötigt."
+msgstr ""
+
+#: iamstudent/views.py:102
 msgid "subject :)"
 msgstr ""
 
-#: iamstudent/views.py:106
+#: iamstudent/views.py:103
 #, python-format
 msgid "I want to hire you person of gender %s!, Contact me here: %s"
 msgstr ""
@@ -362,37 +453,211 @@ msgstr ""
 msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
 msgstr ""
 
-#: ineedstudent/forms.py:20
+#: ineedstudent/forms.py:20 ineedstudent/templates/list_by_plz.html:88
 msgid "Postleitzahl"
 msgstr "Postal code"
 
-#: ineedstudent/forms.py:21
+#: ineedstudent/forms.py:22
 msgid "Name der Institution"
 msgstr "Name of institution"
 
-#: ineedstudent/forms.py:22
+#: ineedstudent/forms.py:23
 msgid "Wichtige Infos über Euch und den potentiellen Einsatzbereich"
 msgstr "Important information about you and the potential field of application"
 
-#: ineedstudent/templates/hospital.html:19
-msgid ""
-"Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden "
-"könnt, gebt eure Anprechpartner und\n"
-"        Infos an!"
+#: ineedstudent/forms.py:54
+msgid "Schicke Mails"
 msgstr ""
-"Please enter your contact persons and information so that we can upload your "
-"offer and can contact you! "
 
-#: ineedstudent/templates/hospital.html:26
-msgid "Registrierung - Hilfesuchendes Krankenhaus o.Ä."
+#: ineedstudent/forms.py:55
+msgid "Schicke Mails + Erstelle Anzeige"
+msgstr ""
+
+#: ineedstudent/models.py:14 ineedstudent/templates/list_by_plz.html:61
+#: ineedstudent/templates/map_hospitals.html:59
+#: mapview/templates/mapview/map.html:59
+msgid "Deutschland"
+msgstr ""
+
+#: ineedstudent/models.py:15 ineedstudent/templates/list_by_plz.html:62
+#: ineedstudent/templates/map_hospitals.html:60
+#: mapview/templates/mapview/map.html:60
+msgid "Österreich"
+msgstr ""
+
+#: ineedstudent/templates/hospital.html:6
+#, fuzzy
+#| msgid "Krankenhauskarte"
+msgid "Krankenhäuser"
+msgstr "Map of hospitals"
+
+#: ineedstudent/templates/hospital.html:27
+#, fuzzy
+#| msgid "Registrierung - Hilfesuchendes Krankenhaus o.Ä."
+msgid "Hilfesuchendes Krankenhaus o.Ä."
 msgstr "Registration - hospital seeking help"
 
-#: matchmedisvsvirus/settings/common.py:112
-msgid "English"
+#: ineedstudent/templates/hospital_view.html:27
+#, python-format
+msgid ""
+"Meldete euch bei: %(hospital.ansprechpartner)s <br> Telefon: "
+"%(hospital.phone)s <br> Mail: %(hospital.email)s"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:7
+#, python-format
+msgid "Hilfsbereite studierende in %(ort)s (Postleitzahl %(plz)s)"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:9
+#, python-format
+msgid "Hilfsbereite studierende in der Nähe %(ort)s (Postleitzahl %(plz)s)"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:32
+#, python-format
+msgid "Hilfsbereite Studierende in %(ort)s (Postleitzahl %(plz)s)"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:34
+#, python-format
+msgid "Hilfsbereite Studierende in der Nähe von %(ort)s (Postleitzahl %(plz)s)"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:66
+#, fuzzy
+#| msgid "Postleitzahl"
+msgid "Postleitzahl:"
+msgstr "Postal code"
+
+#: ineedstudent/templates/list_by_plz.html:70
+msgid "Und im Umkreis von (km):"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:74
+msgid "Filtern!"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:87
+msgid "Auswahl"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:90
+#, fuzzy
+#| msgid "Ich bin verfügbar ab"
+msgid "Verfügbar ab"
+msgstr "I am available from"
+
+#: ineedstudent/templates/list_by_plz.html:91
+msgid "Bezahlung"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:92
+msgid "Medizinstudium (Semester)"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:95
+msgid "Krankenpfleger_in"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:96
+#, fuzzy
+#| msgid "Pfleger*in"
+msgid "Pflegehelfer_in"
+msgstr "Caregiver"
+
+#: ineedstudent/templates/list_by_plz.html:97
+msgid "Anaesthesiepfleger_in"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:98
+msgid "Intensivpfleger_in"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:100
+msgid "MTA"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:102
+msgid "MTA LTA"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:103
+msgid "MTA RTA"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:105
+msgid "Coronascreening"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:106
+#, fuzzy
+#| msgid "Ich brauche Unterstützung"
+msgid "Pflegeunterstützung"
+msgstr "I need support"
+
+#: ineedstudent/templates/list_by_plz.html:117
+msgid "Freiwillig"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:117
+msgid "Minijob"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:117
+msgid "Vollzeit"
+msgstr ""
+
+#: ineedstudent/templates/list_by_plz.html:138
+msgid "Email an ausgewählte Studierende schicken"
+msgstr ""
+
+#: ineedstudent/templates/list_hospitals_by_plz.html:6
+#, python-format
+msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht"
+msgstr ""
+
+#: ineedstudent/templates/list_hospitals_by_plz.html:23
+#, python-format
+msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
+msgstr ""
+
+#: ineedstudent/templates/map_hospitals.html:6
+msgid "Karte der Hilfesuchenden"
+msgstr ""
+
+#: ineedstudent/templates/thanks_hospital.html:21
+msgid ""
+"Vielen Dank für die Registrierung. Wir kontaktieren Sie, sobald sich "
+"passende Freiwillige bei uns eingetragen haben."
+msgstr ""
+
+#: ineedstudent/views.py:36 ineedstudent/views.py:116
+#, fuzzy
+#| msgid "Postleitzahl"
+msgid "Postleitzahl: "
+msgstr "Postal code"
+
+#: ineedstudent/views.py:36 ineedstudent/views.py:116
+#, fuzzy
+#| msgid "Bitte gib deine Postleitzahl ein"
+msgid " ist keine valide Postleitzahl in "
+msgstr "Please enter your zip code"
+
+#: mapview/templates/mapview/map.html:6
+msgid "Karte der Hilfsbereiten"
 msgstr ""
 
 #: matchmedisvsvirus/settings/common.py:113
+msgid "English"
+msgstr ""
+
+#: matchmedisvsvirus/settings/common.py:114
 msgid "German"
+msgstr ""
+
+#: templates/about.html:6
+msgid "Über uns"
 msgstr ""
 
 #: templates/about.html:12
@@ -461,6 +726,12 @@ msgstr "Map of volunteers"
 msgid "Impressum"
 msgstr "Imprint"
 
+#: templates/base.html:93
+msgid ""
+"Ein Projekt im Rahmen des <a href=\"https://wirvsvirushackathon.org/\" "
+"target=\"_blank\">#WirVsVirus Hackathons"
+msgstr ""
+
 #: templates/home.html:22
 msgid " Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,"
 msgstr " Dear medical students, volunteers, doctors,"
@@ -521,5 +792,5 @@ msgstr ""
 msgid " Anzeige stellen"
 msgstr " List need for help"
 
-# msgid "Ich will helfen"
-# msgstr "I want to help"
+#~ msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
+#~ msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"

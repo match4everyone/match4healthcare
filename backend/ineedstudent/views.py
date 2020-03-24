@@ -18,6 +18,8 @@ from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
 
+from django.utils.translation import gettext as _
+
 from functools import lru_cache
 import time
 from mapview.views import get_ttl_hash
@@ -31,7 +33,7 @@ def list_by_plz(request, countrycode, plz, distance):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
 
     lat, lon, ort = plzs[countrycode][plz]
 
@@ -111,7 +113,7 @@ def hospital_list(request, countrycode, plz):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+        return HttpResponse(_("Postleitzahl: ") + plz + _(" ist keine valide Postleitzahl in ") + countrycode)
         
     lat, lon, ort = plzs[countrycode][plz]
 

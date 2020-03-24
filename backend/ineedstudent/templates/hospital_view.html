@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
@@ -23,7 +24,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{hospital.sonstige_infos}}</li>
-            <li class="list-group-item text-muted"> Meldete euch bei: {{hospital.ansprechpartner}} <br> Telefon: {{hospital.phone}} <br> Mail: {{hospital.email}}</li>
+            <li class="list-group-item text-muted"> {% blocktrans %}Meldete euch bei: {{hospital.ansprechpartner}} <br> Telefon: {{hospital.phone}} <br> Mail: {{hospital.email}}{% endblocktrans %}</li>
 
       </ul>
     </div>
