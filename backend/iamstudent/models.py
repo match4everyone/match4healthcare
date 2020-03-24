@@ -53,11 +53,13 @@ class Student(models.Model):
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
     plz = models.CharField(max_length=5, null=True)
+    name_first = models.CharField(max_length=50, default='')
+    name_last = models.CharField(max_length=50, default='')
+    phone_number = models.CharField(max_length=100, blank=True, default='')
 
     semester = models.IntegerField(null=True, validators=[validate_semester])
     immatrikuliert = models.BooleanField(default=False)
     availability_start = models.DateField(null=True)
-
     braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices, default=Bezahlung.UNENTGELTLICH)
 
     ba_arzt = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)

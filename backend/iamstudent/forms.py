@@ -28,6 +28,10 @@ form_labels = {
     'uuid': _('Writer'),
     'registration_date': _('Writer'),
 
+    'name_first': _('Vorname'),
+    'name_last': _('Nachname'),
+    'phone_number': _('Telefonnummer'),
+
     'plz': _('Wohnort'),
     'countrycode': _('Land'),
     'email': _('Email'),
@@ -124,6 +128,7 @@ class StudentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
+        self.fields['phone_number'].required = False
         for field in SKILLS:
             self.fields[field].required = False
         for field in BERUF:
@@ -139,6 +144,11 @@ class StudentForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Row(
+                Column('name_first', css_class='form-group col-md-6 mb-0'),
+                Column('name_last', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
                 Column('plz', css_class='form-group col-md-6 mb-0'),
                 Column('countrycode', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
@@ -151,6 +161,10 @@ class StudentForm(forms.ModelForm):
             ),
             Row(
                 Column('email', css_class='form-group col-md-6 mb-0'),
+                Column('phone_number', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
