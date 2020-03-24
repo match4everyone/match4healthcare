@@ -11,6 +11,13 @@ body {
   color: #4f4f4f;
   margin-top: 100px;
 }
+a {
+color:	#ed0a71;
+}
+a:hover {
+color:	#8c0442;
+	text-decoration: none;
+}
 .footer a, .footer p {
   color: #fff;
 }
@@ -23,7 +30,7 @@ body {
 .home-title h1 {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
   color: #000943
 }
 .logo-header {
@@ -142,7 +149,7 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 
 .btn-info { background-color: #efefef; color: #888; border:0px; }
 
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 575px) {
 
 .form-group > div { display:block; }
 	.form-group { margin-bottom: 0.3rem;}
@@ -156,3 +163,18 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 	.form-group { margin-bottom: 0.3rem;}
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+	
+	.navbar > .container { width: 100%; max-width: none; padding-left: 0px; padding-right: 0px; }
+
+	.navbar-brand > img { width: 150px !important;}
+	.navbar-light .navbar-nav .nav-link { font-size: .9rem; padding-left: .5rem; padding-right: .5rem;
+	}
+	
+}
+
+.login-card {
+	
+	padding: 30px; 
+	
+}

@@ -13,8 +13,8 @@ Registrierung - Studierende
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <hr>
+<div class="container" style="padding: 30px 0px; ">
+   
     {% if form.non_field_errors %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {% for error in form.non_field_errors %}
@@ -25,9 +25,10 @@ Registrierung - Studierende
         </button>
     </div>
     {% endif %}
-    <div class="card">
-        <div class="col-lg-4 col-md-6 col-sm-8 col-12">
-            <h2>Login</h2>
+	 <div class="col-lg-6 col-md-10 col-sm-12 col-12" style="margin: 0 auto;">
+    <div class="card login-card">
+       
+            <h1 class="font-weight-light">Login</h1>
             <form method="post" novalidate>
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
@@ -36,11 +37,11 @@ Registrierung - Studierende
  <button type="submit" class="btn blue text-white btn-lg">Log in</button>
             </form>
             <hr>
-            <h4>{% blocktrans %}Noch kein Account?{% endblocktrans %}</h4>
-            <a href="/accounts/signup_student"><p>{% blocktrans %}Ich bin helfende/r{% endblocktrans %}</p></a>
-            <a href="/accounts/signup_hospital"><p>{% blocktrans %}Ich habe Bedarf an Unterstützung{% endblocktrans %}</p></a>
+            <h4  class="font-weight-light">{% blocktrans %}Noch kein Account?{% endblocktrans %}</h4>
+            <a href="/accounts/signup_student"><p style="margin-bottom: 0px;">{% blocktrans %}Ich bin Helfende/r{% endblocktrans %}</p></a>
+            <a href="/accounts/signup_hospital"><p>{% blocktrans %}Wir sind eine Institution{% endblocktrans %}</p></a>
         </div>
     </div>
 </div>
-<hr>s
+
 {% endblock %}
