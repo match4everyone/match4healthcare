@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from mapview.utils import plzs
 from django.utils.translation import gettext as _
 from accounts.models import User
+from ineedstudent.models import Hospital
 
 
 def validate_semester(value):
@@ -139,3 +140,16 @@ class StudentFilter(django_filters.FilterSet):
                 },
             },
         }
+
+class EmailToSend(models.Model):
+
+    subject = models.CharField(max_length=200,default='')
+    message = models.TextField(default='')
+    was_sent = models.BooleanField(default=False)
+
+
+    student = models.ForeignKey(Student,on_delete=models.CASCADE)
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)

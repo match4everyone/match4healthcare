@@ -1,20 +1,27 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
+
+from matchmedisvsvirus.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
 from ineedstudent.models import Hospital
 from django.shortcuts import render
+from ineedstudent.views import ApprovalHospitalTable, HospitalTable
 
 from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
 from iamstudent.models import Student
+from iamstudent.views import send_mails_for
 
 from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
@@ -37,7 +44,6 @@ def student_signup(request):
         # check whether it's valid:
         if form.is_valid():
             user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
-            login(request, user)
             template = loader.get_template('thanks_student.html')
             return HttpResponse(template.render({}, request))
 
@@ -53,22 +59,22 @@ def register_student_in_db(request, mail):
     # todo send mail with link to pwd
     pwd = User.objects.make_random_password()
     username = mail  # generate_random_username()
-    send_password(username, pwd)
     user = User.objects.create(username=username, is_student=True, email=username)
     user.set_password(pwd)
     user.save()
     student = Student.objects.create(user=user)
     student = StudentForm(request.POST, instance=student)
     student.save()
+    send_password(username, pwd, student.cleaned_data['name_first'])
     return user, student
 
 
-def send_password(email, pwd):
+def send_password(email, pwd,name):
     send_mail(subject=_('Willkommen bei match4healthcare'),
               message=_(
-                  'Hallo,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
-                  email, pwd)),
-              from_email='noreply@medisvs.spahr.uberspace.de',
+                  'Hallo %s,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
+                  name, email, pwd)),
+              from_email=NOREPLY_MAIL,
               # TODO adaptive email adress
               recipient_list=[email])
 
@@ -116,8 +122,7 @@ def login_redirect(request):
         return HttpResponseRedirect('profile_hospital')
 
     elif user.is_staff:
-        #todo
-        return HttpResponse('what to do?')
+        return HttpResponseRedirect('approve_hospitals')
 
     else:
         #todo: throw 404
@@ -173,3 +178,29 @@ def edit_hospital_profile(request):
         form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
     return render(request, 'hospital_edit.html', {'form': form, 'emailform': form_mail})
+
+@login_required
+@staff_member_required
+def approve_hospitals(request):
+    table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
+    table_approved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
+    table_unapproved.paginate(page=request.GET.get("page", 1), per_page=5)
+    return render(request, 'approve_hospitals.html', {'table_approved': table_approved, 'table_unapproved': table_unapproved})
+
+@login_required
+@staff_member_required
+def change_hospital_approval(request,uuid):
+    h = Hospital.objects.get(uuid=uuid)
+    h.is_approved = not h.is_approved
+    h.save()
+    if h.is_approved:
+        send_mails_for(h)
+    return HttpResponseRedirect('/accounts/approve_hospitals')
+
+@login_required
+def delete_me(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    return render(request,'deleted_user.html')

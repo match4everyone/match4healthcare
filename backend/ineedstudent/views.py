@@ -138,6 +138,16 @@ class HospitalTable(tables.Table):
         fields = ['firmenname','ansprechpartner','telefon','plz']
         exclude = ['uuid','registration_date','id']
 
+class ApprovalHospitalTable(HospitalTable):
+    info = TemplateColumn(template_name='info_button.html')
+    status = TemplateColumn(template_name='approval_button.html')
+    class Meta:
+        model = Hospital
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ['firmenname','ansprechpartner','telefon','plz']
+        exclude = ['uuid','registration_date','id']
+
+
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
     return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
