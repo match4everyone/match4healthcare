@@ -61,56 +61,7 @@ form_labels = {
     'ba_sprechstundenhilfe': _('Sprechstundenhilfe'),
     'ba_labortechnische_assistenz': _('Labortechnische Assistenz'),
 
-    'ba_famulatur': _('Famulatur'),
-    'ba_pflegepraktika': _('Pflegepraktika'),
-    'ba_fsj_krankenhaus': _('FSJ im Krankenhaus'),
-
-    'skill_coronascreening': _('Corona Screening in der ZINA'),
-    'skill_pflegeunterstuetzung': _('Unterstützung der Pflege'),
-    'skill_transportdienst': _('Hilfe im Transportdienst'),
-    'skill_kinderbetreuung': _('Kinderbetreuung'),
-    'skill_labortaetigkeiten': _('generelle Labortätigkeiten'),
-    'skill_drkblutspende': _('DRK Blutspende (auch Vorklinik)'),
-    'skill_hotline': _('Telefon Hotline'),
-    'skill_abstriche': _('Abstriche'),
-    'skill_patientenpflege': _('Patientenpflege (Waschen)'),
-    'skill_patientenlagerung': _('Patientenlagerung'),
-    'skill_opassistenz': _('OP Assistenz'),
-    'skill_blutentnahmedienst': _('Blutentnahmedienst'),
-    'skill_anrufe': _('Entgegennahme und Bearbeitung von Anrufen Hilfesuchender'),
-    'skill_infektionsnachverfolgung': _('Infektionsnachverfolgung'),
-    'skill_patientenaufnahme': _('Patientenaufnahme'),
-    'skill_edvkenntnisse': _('EDV Kenntnisse'),
-    'skill_zugaengelegen': _('Zugänge Legen'),
-    'skill_arztbriefeschreiben': _('Arztbriefe schreiben'),
-    'skill_blutkulturenabnehmen': _('Blutkulturen abnehmen'),
-    'skill_infusionenmischen': _('Infusionen mischen'),
-    'skill_ekgschreiben': _('EKG schreiben'),
-    'skill_ultraschall': _('Ultraschall'),
-    'skill_bgas': _('BGAs'),
-    'skill_beatmungsgeraetebedienen': _('Beatmungsgeräte Bedienen'),
 }
-
-
-def create_skills(fields, radio_type):
-    rows = []
-    col = []
-    for f in fields:
-        if len(col) == 2:
-            rows.append(Row(*col, css_class="form-row"))
-            col = []
-        c = Column(radio_type(f), css_class='form-group col-md-6 mb-0')
-        col.append(c)
-    rows.append(Row(*col, css_class="form-row"))
-    return rows
-
-
-def create_radio_traffic_light(field):
-    return RadioButtons(field, option_label_class="btn btn-sm btn-light", template='input_buttongroup-traffic_light.html')
-
-def create_radio_progress_indicator(field):
-    return RadioButtons(field, option_label_class="btn btn-sm btn-info", template='input_buttongroup-progress_indicator.html')
-
 
 
 class StudentForm(forms.ModelForm):
@@ -126,17 +77,19 @@ class StudentForm(forms.ModelForm):
             'ba_famulatur': _('in Monaten'),
             'ba_pflegepraktika': _('in Monaten'),
             'ba_fsj_krankenhaus': _('in Monaten'),
+            'plz': _('bevorzugter Einsatzort'),
+            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.'),
         }
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
         self.fields['phone_number'].required = False
-        for field in SKILLS:
-            self.fields[field].required = False
-        for field in BERUF:
-            self.fields[field].required = False
-        for field in BERUF2_wo:
-            self.fields[field].required = False
+        #for field in SKILLS:
+        #    self.fields[field].required = False
+        #for field in BERUF:
+        #    self.fields[field].required = False
+        #for field in BERUF2_wo:
+        #    self.fields[field].required = False
 
         self.helper = FormHelper()
         self.helper.form_id = 'id-exampleForm'
@@ -151,33 +104,41 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('plz', css_class='form-group col-md-6 mb-0'),
-                Column('countrycode', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                Column('semester', css_class='form-group col-md-4 mb-0'),
-                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
                 Column('email', css_class='form-group col-md-6 mb-0'),
                 Column('phone_number', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
+
+
+            HTML("<h2>{}</h2>".format(_("Einsatz"))),
+            Row(
+                Column('plz', css_class='form-group col-md-4 mb-0'),
+                Column('countrycode', css_class='form-group col-md-4 mb-0'),
+                Column('umkreis', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('availability_start', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            
+            HTML("<h5>{}</h5>".format(_("Wunscheinsatzort"))),
+            Row(
+                Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_krankenhaus', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_pflege', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_rettungsdienst', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_labor', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
             Row(
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
+                Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-            HTML("<p>{}</p> <br>".format(_("Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
-            *create_skills(BERUF, create_radio_progress_indicator),
-            Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
-                css_class='form-row'),
-            HTML("<h2>{}</h2>".format(_("Fähigkeiten"))),
-                  HTML("<p>{}</p> <br>".format(_("Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
-            *create_skills(SKILLS, create_radio_traffic_light),
+            HTML("<h2>TODO!!!! </h2>"),
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere Mich'),
             HTML("</p>")
@@ -221,15 +182,7 @@ class StudentFormEditProfile(StudentForm):
                 css_class='form-row'
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-            HTML("<p>{}</p> <br>".format(_(
-                "Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
-            *create_skills(BERUF, create_radio_progress_indicator),
-            Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
-                css_class='form-row'),
-            HTML("<h2>{}</h2>".format(_("Fähigkeiten"))),
-            HTML("<p>{}</p> <br>".format(_(
-                "Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
-            *create_skills(SKILLS, create_radio_traffic_light),
+            # TODO: alle neuen felder hier auch hinzufügen!!!!!
             HTML('<p class="text-center">'),
             Submit('submit', _('Eintrag updaten')),
             HTML("</p>")
