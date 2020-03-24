@@ -20,6 +20,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from accounts.decorator import student_required, hospital_required
 
+from functools import lru_cache
+import time
+
+from django.views.decorators.gzip import gzip_page
+
 
 # Create your views here.
 @login_required
@@ -70,10 +75,10 @@ def hospital_registration(request):
 
 
 
-
-
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def hospital_overview(request):
-    locations_and_number = prepare_students()
+    locations_and_number = prepare_students(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -81,7 +86,8 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-def prepare_students():
+@lru_cache(maxsize=1)
+def prepare_students(ttl_hash=None):
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
