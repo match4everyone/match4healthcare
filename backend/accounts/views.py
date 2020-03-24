@@ -25,7 +25,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
-
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import BadHeaderError, send_mail
 
 from django.utils.translation import gettext as _
@@ -44,8 +44,8 @@ def student_signup(request):
         # check whether it's valid:
         if form.is_valid():
             user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
-            template = loader.get_template('thanks_student.html')
-            return HttpResponse(template.render({}, request))
+            send_password_set_email(form.cleaned_data['email'])
+            return HttpResponseRedirect("/iamstudent/thanks")
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -53,6 +53,12 @@ def student_signup(request):
 
     return render(request, 'student_signup.html', {'form': form})
 
+
+def send_password_set_email(email, template='registration/password_reset_email_.html'):
+    form = PasswordResetForm({'email': email})
+    if form.is_valid():
+        # TODO: check how this domain override thing works
+        form.save(email_template_name=template, domain_override="localhost:8000")
 
 @transaction.atomic
 def register_student_in_db(request, mail):
@@ -65,11 +71,11 @@ def register_student_in_db(request, mail):
     student = Student.objects.create(user=user)
     student = StudentForm(request.POST, instance=student)
     student.save()
-    send_password(username, pwd, student.cleaned_data['name_first'])
+    #send_password(username, pwd, student.cleaned_data['name_first'])
     return user, student
 
 
-def send_password(email, pwd,name):
+def send_password(email, pwd, name):
     send_mail(subject=_('Willkommen bei match4healthcare'),
               message=_(
                   'Hallo %s,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
@@ -133,6 +139,10 @@ def login_redirect(request):
 @student_required
 def edit_student_profile(request):
     student = request.user.student
+
+    if not request.user.validated_email:
+        request.user.validated_email = True
+        request.user.save()
 
     if request.method == 'POST':
         form_mail = StudentEmailForm(request.POST or None, instance=student.user, prefix='account')
