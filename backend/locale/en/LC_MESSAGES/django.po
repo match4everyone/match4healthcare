@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 15:53+0000\n"
+"POT-Creation-Date: 2020-03-24 16:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,12 +31,12 @@ msgid "Ich habe Bedarf an Unterstützung"
 msgstr "I need support"
 
 #: accounts/templates/registration/logout.html:19
-msgid " Thanks for spending some quality time with the Web site today. "
-msgstr ""
+msgid "Danke, dass Du heute etwas Zeit mit der Website verbracht hast."
+msgstr "Thanks for spending some quality time with this website."
 
 #: accounts/templates/registration/logout.html:21
-msgid "Log in again' "
-msgstr ""
+msgid "Neu anmelden"
+msgstr "Login again"
 
 #: accounts/templates/registration/password_change_done.html:18
 #: accounts/templates/registration/password_change_form.html:18
@@ -63,28 +63,40 @@ msgstr ""
 
 #: accounts/templates/registration/password_reset_done.html:19
 msgid ""
-" We’ve emakjhhiled you instructions for setting your password, if an account "
-"exists with the email you entered. You should receive them shortly."
+"Wenn es zu der e-Mail Adresse einene Account gibt, haben wir Dir Anweisungen "
+"zum Setzen eines neuen Passworts gesendet. Sie sollten in Kürze eintreffen."
 msgstr ""
+"If an account is registered under the given e-Mail address we have mailedyou "
+"instructions for setting a new password. You should receive them shortly."
 
 #: accounts/templates/registration/password_reset_done.html:21
 msgid ""
-" If you don’t receive an email, please make sure you’ve entered the address "
-"you registered with, and check your spam folder. "
+"Wenn Du kein e-Mail erhälst, prüfe bitte die eingegebene e-Mail Adresse und "
+"schau in Deinen Spam-Ordner. "
 msgstr ""
+"If you don't receive an e-Mail from us, please double-check the entered e-"
+"Mail addressand your spam folder."
 
 #: accounts/templates/registration/password_reset_form.html:13
+#, fuzzy
+#| msgid ""
+#| "Hast du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
+#| "wir senden dir ein Neues zu."
 msgid ""
-"Forgotten your password? Enter your email address below, and we’ll email "
-"instructions for setting a new one. "
+"Hast Du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und wir "
+"senden dir ein Neues zu."
 msgstr ""
+"Have you forgotten your password? Enter your e-mail address below and "
+"we'llsend you a new one."
 
 #: accounts/templates/registration/password_reset_form.html:19
-msgid "Email address"
-msgstr ""
+msgid "e-Mail Adresse"
+msgstr "e-mail address"
 
 #: accounts/templates/registration/password_reset_form.html:22
-msgid "Passwort zurücksetzen "
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passwort zurücksetzen"
 msgstr "Reset password"
 
 #: accounts/templates/student_edit.html:34 templates/base.html:46
