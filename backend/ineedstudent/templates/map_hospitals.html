@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load l10n %}
 
 {% block title %}
 {% blocktrans %}Karte der Hilfesuchenden{% endblocktrans %}
@@ -40,7 +41,8 @@
  </script>
  {% for location in locations %}
 
- <script type="text/javascript">
+<script type="text/javascript">
+  {% localize off %}
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {
        color: 'red',
        weight: 13 + {{ location.count }},
@@ -48,9 +50,10 @@
        fillOpacity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('In {{ location.ort }} {{ location.countrycode }}(PLZ {{location.plz }}) gibt es {{ location.count }} Orte, an welchen Hilfe gebraucht wird. <a href=/ineedstudent/hospitals/{{location.countrycode}}/{{ location.plz }}>Detailansicht</a>')
+   .bindPopup('In {{ location.ort }} {{ location.countrycode }}(PLZ {{location.plz }}) gibt es {{ location.count|localize }} Orte, an welchen Hilfe gebraucht wird. <a href=/ineedstudent/hospitals/{{location.countrycode}}/{{ location.plz }}>Detailansicht</a>')
    .addTo(mymap);
- </script>
+  {% endlocalize %}
+</script>
  {% endfor %}
 
  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
