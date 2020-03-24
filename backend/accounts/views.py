@@ -9,7 +9,7 @@ from ineedstudent.forms import HospitalFormO
 from ineedstudent.models import Hospital
 from django.shortcuts import render
 
-from iamstudent.forms import StudentForm, StudentFormEditProfile
+from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm
 from iamstudent.models import Student
 
