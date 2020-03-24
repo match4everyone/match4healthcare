@@ -181,7 +181,7 @@ AUSBILDUNGS_TYPEN = {
 
     },
     'ZAHNI': {
-        'abschnitt': models.IntegerField(choices=ZahnstudAbschnitt.choices, null=True)
+        'abschnitt': models.IntegerField(choices=ZahnstudAbschnitt.choices, null=True, blank=True)
     },
     'KINDERBETREUNG': {
         'ausgebildet': models.BooleanField(default=False),
