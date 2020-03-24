@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <br>
+    <h1> {% blocktrans %}Mein Profil{% endblocktrans %} </h1>
+    <br>
+
+    <div class="container">
+        <div class="card border-primary">
+            <div class="card-header">
+                {% blocktrans %}Account{% endblocktrans %}
+            </div>
+            <div class="card-body">
+                <p><a role="button" class="btn btn-info" href="logout">logout</a></p>
+                <p><a role="button" class="btn btn-info" href="password_change">change password</a></p>
+                <form action="profile_student" method="post">
+                    {% csrf_token %}
+                    {{emailform|crispy}}
+                    <button type="submit" class="btn btn-info">Update Mail</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="card border-primary">
+            <div class="card-header">
+                {% blocktrans %}Daten{% endblocktrans %}
+            </div>
+            <div class="card-body">
+                <form action="profile_student" method="post">
+                    {% csrf_token %}
+                    {% crispy form form.helper %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endblock %}

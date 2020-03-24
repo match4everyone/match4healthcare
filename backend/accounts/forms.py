@@ -21,6 +21,18 @@ class HospitalSignUpForm(UserCreationForm):
         user.save()
         return user
 
+class StudentEmailForm(forms.ModelForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ['email']
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.username = user.email
+        user.save()
+        return user
+
 
 class StudentSignUpForm(UserCreationForm):
 

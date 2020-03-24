@@ -74,7 +74,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
 EMAIL_HOST_PASSWORD = 'jonathan'
 EMAIL_USE_TLS = False
-
+"""
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+"""
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

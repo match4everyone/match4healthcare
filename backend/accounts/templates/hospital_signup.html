@@ -15,7 +15,7 @@ Registrierung - Studierende
 {% block content %}
 
 <div class="container">
-<hr>
+    <hr>
 </div>
 <div class="container">
     <div class="card border-primary">
@@ -24,20 +24,21 @@ Registrierung - Studierende
         </div>
         <div class="card-body">
             <div class="row">
-    <div class="col-md-8 col-sm-10 col-12">
-      <form method="post"  action="signup_hospital">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
+                <div class="col-md-8 col-sm-10 col-12">
 
-          {% crispy form_info form_info.helper %}
-          <p>Vergebe ein Passwort für deine Anmeldung</p>
-          {{ form_signup|crispy }}
+                    <form method="post" action="signup_hospital">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
 
-        <button type="submit" class="btn btn-success">Sign up</button>
-      </form>
-    </div>
+                        {% crispy form_info form_info.helper %}
+                        <p>Vergebe ein Passwort für deine Anmeldung</p>
+                        {{ form_signup|crispy }}
+
+                        <button type="submit" class="btn btn-success">Sign up</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<hr>
-{% endblock %}
+    <hr>
+    {% endblock %}
