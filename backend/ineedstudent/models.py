@@ -49,16 +49,3 @@ class Hospital(models.Model):
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))
-
-"""
-class JobRequirement(models.Model):
-    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    hospital = models.CharField(max_length=100, blank=True)
-
-
-    muss_krankenpflege = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ['uuid']
-
-"""
