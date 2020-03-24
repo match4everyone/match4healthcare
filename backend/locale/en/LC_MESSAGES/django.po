@@ -129,7 +129,7 @@ msgstr "Nursing internship"
 
 #: iamstudent/forms.py:62
 msgid "FSJ im Krankenhaus"
-msgstr ""
+msgstr "Voluntary social year at a hospital"
 
 #: iamstudent/forms.py:64
 msgid "Corona Screening in der ZINA"
