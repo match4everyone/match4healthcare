@@ -15,27 +15,21 @@ Registrierung - Studierende
 {% block content %}
 
 <div class="container">
+    <div style="height:40px"></div>
+    <h1 class="font-weight-light"> {% blocktrans %}Du sitzt zuhause und kannst in der aktuellen Situation helfen?{% endblocktrans %} </h1>
     <br>
-    <br>
-    <h1> {% blocktrans %}Liebe Studierende und Helfende,{% endblocktrans %} </h1>
-    <br>
-    <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir euch, die folgenden Daten anzugeben, damit wir euch mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
+    <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir dich, die folgenden Daten anzugeben, damit wir dich mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
     <br>
    
 </div>
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            {% blocktrans %}Registrierung - Studierende & Helfer{% endblocktrans %}
-        </div>
-        <div class="card-body">
+   
             <form action="signup_student" method="post">
                 {% csrf_token %}
                 {{form_mail}}
                 {% crispy form form.helper %}
             </form>
-        </div>
-    </div>
+       
 </div>
 
 <script type="text/javascript">
