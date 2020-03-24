@@ -21,8 +21,9 @@
 
 
 {% block content %}
+<div>
  <div id="mapid" style="z-index:1;"></div>
-
+</div>
 
  <script type="text/javascript">
    var mymap = L.map('mapid').setView([51.13, 10.018], 6);
@@ -51,20 +52,7 @@
   {% endfor %}
  {% endlocalize %}
 
- <nav class="navbar navbar-bottom navbar-expand-sm navbar-dark bg-light" style="z-index:2;">
-   <div class="mx-auto order-0">
-       {% if user.is_authenticated and user.is_hospital %}
-     <select name="countrycode" id="countrycode">
-      <option value="DE">{% blocktrans %}Deutschland{% endblocktrans %}</option>
-      <option value="AT">{% blocktrans %}Österreich{% endblocktrans %}</option>
-    </select>
-      <input type="text" id="search" class="form" placeholder="Postleitzahl">
-      <button class="btn btn-primary btn blue text-white btn-md" role="button" onclick="gototable()">{% blocktrans %}Direktsuche{% endblocktrans %} &raquo;</button>
-       {% else %}
-       <a class="btn btn-primary" href="/accounts/signup_hospital" role="button">{% blocktrans %}Als Hospital anmelden und Helfer finden{% endblocktrans %}</a>
-       {% endif %}
-    </div>
-   </nav>
+ 
   <script type="text/javascript">
   var gototable = function() {
       if ($('#search').val()) {
