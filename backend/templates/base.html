@@ -35,9 +35,6 @@
         <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home">
           <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche Hilfe{% endblocktrans %}</a>
         </li>
-        <li class="nav-item {% if "hospital_map" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Krankenhauskarte{% endblocktrans %}</a>
-        </li>
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
 			<a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
 		  </li>
