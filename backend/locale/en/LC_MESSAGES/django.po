@@ -734,15 +734,15 @@ msgstr "Data protection"
 
 #: templates/home.html:79
 msgid "In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden."
-msgstr "In Times of crisis we connect supporters and those in need."
+msgstr "In times of crisis we connect supporters and those in need."
 
 #: templates/home.html:89
 msgid "Ich bin"
-msgstr "I am"
+msgstr "I am a"
 
 #: templates/home.html:90
 msgid "Helfende/r"
-msgstr "a Supporter"
+msgstr "Supporter"
 
 #: templates/home.html:91
 msgid "Ich möchte eine medizinische Einrichtung unerstützen."
@@ -750,7 +750,7 @@ msgstr "I'd like to support a medical facility."
 
 #: templates/home.html:104
 msgid "Wir sind eine"
-msgstr "We are a"
+msgstr "We are an"
 
 #: templates/home.html:105
 msgid "Institution"

@@ -5,17 +5,15 @@ from django.views.generic import CreateView
 
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from ineedstudent.forms import HospitalFormO
+from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
 from ineedstudent.models import Hospital
 from django.shortcuts import render
 
 from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import StudentEmailForm
+from .forms import StudentEmailForm, HospitalEmailForm
 from iamstudent.models import Student
 
 from django.contrib.auth.decorators import login_required
-# todo: remove email from student and hospital
-
 from .decorator import student_required, hospital_required
 
 from .utils import generate_random_username
@@ -38,9 +36,8 @@ def student_signup(request):
 
         # check whether it's valid:
         if form.is_valid():
-            register_student_in_db(request, mail=form.cleaned_data['email'])
-            # form.save()
-            # redirect to a new URL:
+            user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
+            login(request, user)
             template = loader.get_template('thanks_student.html')
             return HttpResponse(template.render({}, request))
 
@@ -60,9 +57,10 @@ def register_student_in_db(request, mail):
     user = User.objects.create(username=username, is_student=True, email=username)
     user.set_password(pwd)
     user.save()
-    h = Student.objects.create(user=user)
-    h = StudentForm(request.POST, instance=h)
-    h.save()
+    student = Student.objects.create(user=user)
+    student = StudentForm(request.POST, instance=student)
+    student.save()
+    return user, student
 
 
 def send_password(email, pwd):
@@ -81,9 +79,13 @@ def hospital_signup(request):
         form_user = HospitalSignUpForm(request.POST)
 
         if all([form_info.is_valid(), form_user.is_valid()]):
-            register_hospital_in_db(request, form_info.cleaned_data['email'])
-            template = loader.get_template('thanks_hospital.html')
-            return HttpResponse(template.render({}, request))
+            user, hospital = register_hospital_in_db(request, form_info.cleaned_data['email'])
+            plz = form_info.cleaned_data['plz']
+            countrycode = form_info.cleaned_data['countrycode']
+            distance = 0
+            login(request, user)
+            return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
+
     else:
         form_info = HospitalFormO(
             initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
@@ -96,9 +98,11 @@ def hospital_signup(request):
 def register_hospital_in_db(request, m):
     u = User.objects.create(username=m)
     user = HospitalSignUpForm(request.POST, instance=u).save()
-    h = Hospital.objects.create(user=user)
-    h = HospitalFormO(request.POST, instance=h)
-    h.save()
+    hospital = Hospital.objects.create(user=user)
+    hospital = HospitalFormO(request.POST, instance=hospital)
+    hospital.save()
+    return user, hospital
+
 from django.contrib import messages
 
 @login_required
@@ -120,7 +124,7 @@ def login_redirect(request):
         HttpResponse('Something wrong in database')
 
 
-
+@login_required
 @student_required
 def edit_student_profile(request):
     student = request.user.student
@@ -132,7 +136,6 @@ def edit_student_profile(request):
             messages.success(request, _('Deine Email wurde erfolgreich geändert!'), extra_tags='alert-success')
             form = StudentFormEditProfile(instance=student, prefix='infos')
         else:
-            #todo student form somehow produces an error, but ill fix it later
             form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
             messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form_mail = StudentEmailForm( instance=student.user, prefix='account')
@@ -145,3 +148,28 @@ def edit_student_profile(request):
         form_mail = StudentEmailForm(instance=student.user,prefix='account')
 
     return render(request, 'student_edit.html', {'form': form, 'emailform': form_mail})
+
+@login_required
+@hospital_required
+def edit_hospital_profile(request):
+    hospital = request.user.hospital
+
+    if request.method == 'POST':
+        form_mail = HospitalEmailForm(request.POST or None, instance=request.user, prefix='account')
+        if 'account-email' in request.POST and form_mail.is_valid():
+            form_mail.save()
+            messages.success(request, _('Deine Email wurde erfolgreich geändert!'), extra_tags='alert-success')
+            form = HospitalFormEditProfile(instance=hospital, prefix='infos')
+        else:
+            form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+            form_mail = HospitalEmailForm( instance=request.user, prefix='account')
+
+            if form.is_valid():
+                form.save()
+
+    else:
+        form = HospitalFormEditProfile(instance=hospital, prefix='infos')
+        form_mail = HospitalEmailForm(instance=request.user,prefix='account')
+
+    return render(request, 'hospital_edit.html', {'form': form, 'emailform': form_mail})
