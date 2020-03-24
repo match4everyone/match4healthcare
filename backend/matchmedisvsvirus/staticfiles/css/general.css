@@ -139,6 +139,10 @@ div.boxed {
   margin-bottom: 0px !important
 }
 
+.footer a:hover {
+  text-decoration: underline;
+}
+
 h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle, .btn-info:hover {
