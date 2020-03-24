@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 16:27+0000\n"
+"POT-Creation-Date: 2020-03-24 16:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/hospital_edit.html:34
+#: accounts/templates/student_edit.html:34 templates/base.html:46
+msgid "Mein Profil"
+msgstr "My profile"
+
+#: accounts/templates/hospital_edit.html:40
+#: accounts/templates/student_edit.html:40
+msgid "Account"
+msgstr "Account"
+
+#: accounts/templates/hospital_edit.html:55
+#: accounts/templates/student_edit.html:55
+msgid "Daten"
+msgstr "Data"
+
+#: accounts/templates/hospital_signup.html:21
+msgid " schon registriert? Hier geht es zum "
+msgstr ""
+
+#: accounts/templates/hospital_signup.html:27
+#, fuzzy
+#| msgid "Registrierung - Studierende & Helfer"
+msgid "  Registrierung - Hilfesuchende "
+msgstr "Registration - students & volunteers"
 
 #: accounts/templates/registration/login.html:39
 msgid "Noch kein Account?"
@@ -99,18 +124,6 @@ msgstr "e-mail address"
 msgid "Passwort zurücksetzen"
 msgstr "Reset password"
 
-#: accounts/templates/student_edit.html:34 templates/base.html:46
-msgid "Mein Profil"
-msgstr "My profile"
-
-#: accounts/templates/student_edit.html:40
-msgid "Account"
-msgstr "Account"
-
-#: accounts/templates/student_edit.html:55
-msgid "Daten"
-msgstr "Data"
-
 #: accounts/templates/student_signup.html:20
 msgid "Liebe Studierende und Helfende,"
 msgstr "Dear students and volunteers,"
@@ -177,11 +190,11 @@ msgstr ""
 msgid "Registrierung - Studierende & Helfer"
 msgstr "Registration - students & volunteers"
 
-#: accounts/views.py:69
+#: accounts/views.py:67
 msgid "Willkommen bei match4healthcare"
 msgstr "Welcome to match4healthcare"
 
-#: accounts/views.py:71
+#: accounts/views.py:69
 #, python-format
 msgid ""
 "Hallo,\n"
@@ -208,11 +221,11 @@ msgstr ""
 "Thank you and kind Regards,\n"
 "Your match4healthcare Team"
 
-#: accounts/views.py:132
+#: accounts/views.py:136 accounts/views.py:161
 msgid "Deine Email wurde erfolgreich geändert!"
 msgstr "Your e-Mail address has been updated!"
 
-#: accounts/views.py:137
+#: accounts/views.py:140 accounts/views.py:165
 msgid "Deine Daten wurden erfolgreich geändert!"
 msgstr "Your profile has been updated!"
 
@@ -559,11 +572,11 @@ msgid ""
 "medizinische Einrichtung deine Hilfe benötigt."
 msgstr ""
 
-#: iamstudent/views.py:102
+#: iamstudent/views.py:107
 msgid "subject :)"
 msgstr ""
 
-#: iamstudent/views.py:103
+#: iamstudent/views.py:108
 #, python-format
 msgid "I want to hire you person of gender %s!, Contact me here: %s"
 msgstr ""
@@ -592,11 +605,22 @@ msgstr "Send Mails"
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
-#: ineedstudent/templates/hospital_view.html:27
-#, python-format
-msgid ""
-"Meldete euch bei: %(hospital.ansprechpartner)s <br> Telefon: "
-"%(hospital.phone)s <br> Mail: %(hospital.email)s"
+#: ineedstudent/forms.py:61
+msgid "Profil Aktualisieren"
+msgstr ""
+
+#: ineedstudent/templates/hospital_view.html:28
+msgid "Meldete euch bei: "
+msgstr ""
+
+#: ineedstudent/templates/hospital_view.html:29
+#, fuzzy
+#| msgid "Telefonnummer"
+msgid "Telefon:"
+msgstr "Phone Number"
+
+#: ineedstudent/templates/hospital_view.html:30
+msgid "Mail:"
 msgstr ""
 
 #: ineedstudent/templates/list_hospitals_by_plz.html:6
@@ -610,12 +634,12 @@ msgid "Karte der Hilfesuchenden"
 msgstr "Facility Map"
 
 #: ineedstudent/templates/map_hospitals.html:58
-#: mapview/templates/mapview/map.html:57
+#: mapview/templates/mapview/map.html:58
 msgid "Deutschland"
 msgstr "Germany"
 
 #: ineedstudent/templates/map_hospitals.html:59
-#: mapview/templates/mapview/map.html:58
+#: mapview/templates/mapview/map.html:59
 msgid "Österreich"
 msgstr "Austria"
 
@@ -630,6 +654,14 @@ msgstr ""
 #: mapview/templates/mapview/map.html:7
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
+
+#: mapview/templates/mapview/map.html:62
+msgid "Direktsuche"
+msgstr ""
+
+#: mapview/templates/mapview/map.html:64
+msgid "Als Hospital anmelden und Helfer finden"
+msgstr ""
 
 #: matchmedisvsvirus/settings/common.py:119
 msgid "English"
