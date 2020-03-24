@@ -29,15 +29,15 @@ msgstr "Postal code"
 #: iamstudent/forms.py:32 ineedstudent/forms.py:21
 #: ineedstudent/templates/list_by_plz.html:89
 msgid "Land"
-msgstr ""
+msgstr Country"
 
 #: iamstudent/forms.py:33
 msgid "Email"
-msgstr ""
+msgstr "e-Mail"
 
 #: iamstudent/forms.py:35
 msgid "Semester"
-msgstr ""
+msgstr "Study Semester"
 
 #: iamstudent/forms.py:36
 msgid "Ich bin aktuell immatrikuliert"
@@ -45,19 +45,19 @@ msgstr "I am currently a student"
 
 #: iamstudent/forms.py:37
 msgid "Ich bin verfügbar ab"
-msgstr "I am available from"
+msgstr "I am available starting"
 
 #: iamstudent/forms.py:39
 msgid "Ich benötige eine Vergütung"
-msgstr "I need a compensation"
+msgstr "I require compensation"
 
 #: iamstudent/forms.py:41
 msgid "Famulaturreife"
-msgstr ""
+msgstr "Qualified for internships"
 
 #: iamstudent/forms.py:42
 msgid "M2 absolviert"
-msgstr ""
+msgstr "2nd major exam (M2) completed"
 
 #: iamstudent/forms.py:43
 msgid "Berufserfahrung in Monaten"
@@ -73,43 +73,43 @@ msgstr "Caregiver"
 
 #: iamstudent/forms.py:47
 msgid "Pflegehelfer*in"
-msgstr ""
+msgstr "Care assistant"
 
 #: iamstudent/forms.py:48
 msgid "Anästhesiepfleger*in"
-msgstr ""
+msgstr "Nurse anesthetist"
 
 #: iamstudent/forms.py:49
 msgid "Intensivpfleger*in"
-msgstr ""
+msgstr "Nurse ICU"
 
 #: iamstudent/forms.py:50 ineedstudent/templates/list_by_plz.html:99
 msgid "OTA"
-msgstr ""
+msgstr "Surgeon Assistant"
 
 #: iamstudent/forms.py:51 ineedstudent/templates/list_by_plz.html:101
 msgid "MFA"
-msgstr ""
+msgstr "GP Nurse"
 
 #: iamstudent/forms.py:52
 msgid "MTA/LTA"
-msgstr ""
+msgstr "Medical Technologist"
 
 #: iamstudent/forms.py:53
 msgid "RTA"
-msgstr ""
+msgstr "Medical Technologist (Radiology)"
 
 #: iamstudent/forms.py:54
 msgid "Rettungssanitäter*in"
-msgstr ""
+msgstr "Paramedic/EMT"
 
 #: iamstudent/forms.py:55
 msgid "Kinderbetreuer*in"
-msgstr ""
+msgstr "Child Carer"
 
 #: iamstudent/forms.py:56
 msgid "Hebamme"
-msgstr ""
+msgstr "Midwife"
 
 #: iamstudent/forms.py:57
 msgid "Sprechstundenhilfe"
@@ -117,15 +117,15 @@ msgstr ""
 
 #: iamstudent/forms.py:58
 msgid "Labortechnische Assistenz"
-msgstr ""
+msgstr "Medical Laboratory Scientist"
 
 #: iamstudent/forms.py:60
 msgid "Famulatur"
-msgstr ""
+msgstr "Clinical Internship"
 
 #: iamstudent/forms.py:61
 msgid "Pflegepraktika"
-msgstr ""
+msgstr "Nursing internship"
 
 #: iamstudent/forms.py:62
 msgid "FSJ im Krankenhaus"
