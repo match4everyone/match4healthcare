@@ -8,6 +8,7 @@ from .models import User
 from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
 from ineedstudent.models import Hospital
 from django.shortcuts import render
+from ineedstudent.views import ApprovalHospitalTable, HospitalTable
 
 from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
@@ -15,6 +16,9 @@ from iamstudent.models import Student
 
 from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
@@ -116,8 +120,7 @@ def login_redirect(request):
         return HttpResponseRedirect('profile_hospital')
 
     elif user.is_staff:
-        #todo
-        return HttpResponse('what to do?')
+        return HttpResponseRedirect('approve_hospitals')
 
     else:
         #todo: throw 404
@@ -173,3 +176,20 @@ def edit_hospital_profile(request):
         form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
     return render(request, 'hospital_edit.html', {'form': form, 'emailform': form_mail})
+
+@login_required
+@staff_member_required
+def approve_hospitals(request):
+    table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
+    table_approved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
+    table_unapproved.paginate(page=request.GET.get("page", 1), per_page=5)
+    return render(request, 'approve_hospitals.html', {'table_approved': table_approved, 'table_unapproved': table_unapproved})
+
+@login_required
+@staff_member_required
+def change_hospital_approval(request,uuid):
+    h = Hospital.objects.get(uuid=uuid)
+    h.is_approved = not h.is_approved
+    h.save()
+    return HttpResponseRedirect('/accounts/approve_hospitals')
