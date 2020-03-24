@@ -66,9 +66,9 @@ def register_student_in_db(request, mail):
 
 
 def send_password(email, pwd):
-    send_mail(subject=_('Willkommen bei match4medis'),
+    send_mail(subject=_('Willkommen bei match4healthcare'),
               message=_(
-                  'Hallo,\n\ndu willst helfen und hast dich gerade bei match4medis registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4medis Team' % (
+                  'Hallo,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
                   email, pwd)),
               from_email='noreply@medisvs.spahr.uberspace.de',
               # TODO adaptive email adress
