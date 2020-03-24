@@ -15,5 +15,6 @@ urlpatterns = [
     path('login_redirect',views.login_redirect,name='login_redirect'),
     path('signup_student', views.student_signup, name='student_signup'),
     path('signup_hospital', views.hospital_signup, name='hospital_signup'),
-    path('profile_student',views.edit_student_profile, name='edit_student_profile')
+    path('profile_student',views.edit_student_profile, name='edit_student_profile'),
+    path('profile_hospital',views.edit_hospital_profile, name='edit_hospital_profile')
 ]

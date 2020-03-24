@@ -13,6 +13,9 @@ from .models import Student
 from ineedstudent.forms import HospitalFormExtra
 from ineedstudent.models import Hospital
 
+from django.contrib.auth.decorators import login_required
+from accounts.decorator import student_required, hospital_required
+
 
 
 def get_student(request):
@@ -55,6 +58,8 @@ def send_mail_student(request):
         form = EmailForm()
     return render(request, 'mail.html', {'form': form})
 
+@login_required
+@hospital_required
 def send_mail_student_id_list(request, id_list):
     id_list = id_list.split('_')
     # existierende anzeige benutzen

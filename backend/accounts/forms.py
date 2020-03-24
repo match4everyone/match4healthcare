@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.db import transaction
 
 from .models import User
@@ -33,6 +33,18 @@ class StudentEmailForm(forms.ModelForm):
         user.save()
         return user
 
+
+class HospitalEmailForm(forms.ModelForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ['email']
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.username = user.email
+        user.save()
+        return user
 
 class StudentSignUpForm(UserCreationForm):
 

@@ -17,10 +17,19 @@ import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from accounts.decorator import student_required, hospital_required
+
+from functools import lru_cache
+from mapview.views import get_ttl_hash
+import time
+
+from django.views.decorators.gzip import gzip_page
 
 
 # Create your views here.
-
+@login_required
+@hospital_required
 def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
@@ -42,7 +51,7 @@ def list_by_plz(request, countrycode, plz, distance):
         'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
-        'filter': f,
+        'filter': f
     }
 
     return HttpResponse(template.render(context, request))
@@ -67,10 +76,10 @@ def hospital_registration(request):
 
 
 
-
-
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def hospital_overview(request):
-    locations_and_number = prepare_students()
+    locations_and_number = prepare_students(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -78,7 +87,8 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-def prepare_students():
+@lru_cache(maxsize=1)
+def prepare_students(ttl_hash=None):
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
@@ -130,4 +140,4 @@ class HospitalTable(tables.Table):
 
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    return render(request, 'hospital_view.html', {'hospital': h})
+    return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
