@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from iamstudent.models import Student
+from iamstudent.models import Student, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
@@ -20,8 +20,8 @@ SKILLS = ['skill_coronascreening', 'skill_pflegeunterstuetzung', 'skill_transpor
 
 BERUF = [
     'ba_arzt', 'ba_krankenpflege', 'ba_pflegehilfe', 'ba_anaesthesiepflege', 'ba_intensivpflege', 'ba_ota', 'ba_mfa',
-     'ba_mta_lta', 'ba_rta', 'ba_rettungssanitaeter', 'ba_kinderbetreuung', 'ba_hebamme', 'ba_sprechstundenhilfe',
-     'ba_labortechnische_assistenz']
+    'ba_mta_lta', 'ba_rta', 'ba_rettungssanitaeter', 'ba_kinderbetreuung', 'ba_hebamme', 'ba_sprechstundenhilfe',
+    'ba_labortechnische_assistenz']
 BERUF2_wo = ['ba_famulatur', 'ba_pflegepraktika', 'ba_fsj_krankenhaus']
 
 form_labels = {
@@ -67,7 +67,7 @@ form_labels = {
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        exclude = ['uuid', 'registration_date','user']
+        exclude = ['uuid', 'registration_date', 'user']
         labels = form_labels
         help_texts = {
             'availability_start': _('Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21'),
@@ -84,11 +84,11 @@ class StudentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
         self.fields['phone_number'].required = False
-        #for field in SKILLS:
+        # for field in SKILLS:
         #    self.fields[field].required = False
-        #for field in BERUF:
+        # for field in BERUF:
         #    self.fields[field].required = False
-        #for field in BERUF2_wo:
+        # for field in BERUF2_wo:
         #    self.fields[field].required = False
 
         self.helper = FormHelper()
@@ -109,7 +109,6 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-
             HTML("<h2>{}</h2>".format(_("Einsatz"))),
             Row(
                 Column('plz', css_class='form-group col-md-4 mb-0'),
@@ -121,7 +120,7 @@ class StudentForm(forms.ModelForm):
                 Column('availability_start', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            
+
             HTML("<h5>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
@@ -137,107 +136,34 @@ class StudentForm(forms.ModelForm):
                 Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Div(                
-                HTML("<h2>{}</h2>".format(_("Vorausbildung"))),
-                Row(
-                    Column('vorausbildung_typ_krankenpflege', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_intensiv', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_innere', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_anaesthesie', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_pflege', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_rettungsdienst', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_hebamme', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_labor', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_verwaltunglogistik', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_fsjgesundheitswesen', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_blutentnahmedienst', css_class='form-group col-md-6 mb-0'),
-                    Column('vorausbildung_typ_kinderbetreuung', css_class='form-group col-md-6 mb-0'),
-                ),
-                css_id='div-berufsausbildung-dropdown',
-            ),
             Div(
                 HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-                Row(
-                    Column('ausbildung_typ', css_class='form-group col-md-6 mb-0', css_id='ausbildung-typ'),
-                    Column('ausbildung_typ_sonstige', css_class='form-group col-md-6 mb-0', css_id='ausbildung-sonstige'),
-                ),
+                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                             class_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                      AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
             ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("Arzt Felder"))),
-                Row(
-                    Column('ausbildung_arzt_typ', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_arzt_typ_sonstige', css_class='form-group col-md-6 mb-0'),
-                ),
-                css_id='div-ausbildung-1',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("Medizinstudent Felder"))),
-                Row(
-                    Column('ausbildung_medstud_abschnitt', css_class='form-group col-md-6 mb-0'),
-                ),
-                Row(
-                    Column('ausbildung_medstud_famulaturen_anaesthesie', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_medstud_famulaturen_chirurgie', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_medstud_famulaturen_innere', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_medstud_famulaturen_intensiv', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_medstud_famulaturen_notaufnahme', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_medstud_anerkennung_noetig', css_class='form-group col-md-6 mb-0'),
-                ),
-                css_id='div-ausbildung-2',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("MFA Felder"))),
-                css_id='div-ausbildung-3',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("MTA Felder"))),
-                css_id='div-ausbildung-4',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("MTLA Felder"))),
-                css_id='div-ausbildung-5',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("NOTFALLSANI Felder"))),
-                css_id='div-ausbildung-6',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("PFLEGESTUD Felder"))),
-                css_id='div-ausbildung-7',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("SANI Felder"))),
-                css_id='div-ausbildung-8',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("ZAHNI Felder"))),
-                css_id='div-ausbildung-9',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("Kinderbetreuung Felder"))),
-                css_id='div-ausbildung-10',
-                css_class='hidden',
-            ),
-            Div(
-                HTML("<h2>{}</h2>".format(_("Sonstige Felder"))),
-                css_id='div-ausbildung-11',
-                css_class='hidden',
-            ),
+            *[
+                Div(
+                    HTML("<h2>{}</h2>".format(_("%s Felder" % ausbildungstyp))),
+                    Row(*[
+                        Column('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower()),
+                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                        for f in felder.keys()
+                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                    , css_class='hidden'
+                )
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items()
+            ]
+            ,
 
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere Mich'),
             HTML("</p>")
         )
+
+        print(self.helper.layout)
+
 
 class StudentFormAndMail(StudentForm):
     email = forms.EmailField()

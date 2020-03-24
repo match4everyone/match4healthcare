@@ -38,35 +38,10 @@ class Student(models.Model):
         LESSTWENTY = 3
         MORETWENTY = 4
 
-    class Ausbildungen(models.IntegerChoices):
-        ARZT = 1
-        MEDSTUD = 2
-        MFA = 3
-        MTA = 4
-        MTLA = 5
-        NOTFALLSANI = 6
-        PFLEGESTUD = 7
-        SANI = 8
-        ZAHNI = 9
-        KINDERBETREUUNG = 10
-        SONSTIGE = 11
 
-    class Arzttyp(models.IntegerChoices):
-        ANAESTHESIE = 1
-        CHIRURGIE = 2
-        INNERE = 3
-        INTENSIV = 4
-        NOTAUFNAHME = 5
-        ANDERE = 6
-    
-    class MedstudAbschnitt(models.IntegerChoices):
-        VORKLINIK = 1
-        KLINIK = 2
-        PJ = 3
 
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-
 
     COUNTRY_CODE_CHOICES = [
         ("DE", 'Deutschland'),
@@ -77,7 +52,7 @@ class Student(models.Model):
         choices=COUNTRY_CODE_CHOICES,
         default="DE",
     )
-    #Allgemeines
+    # Allgemeines
 
     # vorerkrankungen
     # Berufserfahrung
@@ -97,17 +72,14 @@ class Student(models.Model):
     umkreis = models.IntegerField(choices=Umkreise.choices, null=True, blank=False)
     availability_start = models.DateField(null=True)
 
-    wunsch_ort_arzt = models.BooleanField(default=False)
-    wunsch_ort_gesundheitsamt = models.BooleanField(default=False)
-    wunsch_ort_krankenhaus = models.BooleanField(default=False)
-    wunsch_ort_pflege = models.BooleanField(default=False)
-    wunsch_ort_rettungsdienst = models.BooleanField(default=False)
-    wunsch_ort_labor = models.BooleanField(default=False)
 
-    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices, default=Bezahlung.UNENTGELTLICH) # RADIO BUTTONS IM FORM!
+
+    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices,
+                                            default=Bezahlung.UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
 
     zeitliche_verfuegbarkeit = models.IntegerField(choices=Verfuegbarkeiten.choices, null=True, blank=False)
 
+    """
     vorausbildung_typ_krankenpflege = models.BooleanField(default=False)
     vorausbildung_typ_intensiv = models.BooleanField(default=False)
     vorausbildung_typ_innere = models.BooleanField(default=False)
@@ -120,24 +92,9 @@ class Student(models.Model):
     vorausbildung_typ_fsjgesundheitswesen = models.BooleanField(default=False)
     vorausbildung_typ_blutentnahmedienst = models.BooleanField(default=False)
     vorausbildung_typ_kinderbetreuung = models.BooleanField(default=False)
+    """
 
-    ausbildung_typ = models.IntegerField(choices=Ausbildungen.choices, null=True, blank=False)
-    ausbildung_typ_sonstige = models.CharField(max_length=50, default='')
-
-    ausbildung_arzt_typ = models.IntegerField(choices=Arzttyp.choices, null=True)
-    ausbildung_arzt_typ_sonstige = models.CharField(max_length=50, default='')
-
-    ausbildung_medstud_abschnitt = models.IntegerField(choices=MedstudAbschnitt.choices, null=True)
-    ausbildung_medstud_famulaturen_anaesthesie = models.BooleanField(default=False)
-    ausbildung_medstud_famulaturen_chirurgie = models.BooleanField(default=False)
-    ausbildung_medstud_famulaturen_innere = models.BooleanField(default=False)
-    ausbildung_medstud_famulaturen_intensiv = models.BooleanField(default=False)
-    ausbildung_medstud_famulaturen_notaufnahme = models.BooleanField(default=False)
-
-    ausbildung_medstud_anerkennung_noetig = models.BooleanField(default=False)
-
-
-    ### TODO: 
+    ### TODO:
 
     # ausbildung_mfa_details
     # ausbildung_mta_details
@@ -147,7 +104,6 @@ class Student(models.Model):
     # ausbildung_sani_details
     # ausbildung_zahni_details
     # ausbildung_kindebetreuung_details
-    
 
     # Metadata
     class Meta:
@@ -162,12 +118,88 @@ class Student(models.Model):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
+
+"""Add stufff to model"""
+wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
+wunschorte_prefix = 'wunsch_ort'
+for w in wunschorte:
+    Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(),w.lower()), models.BooleanField(default=False))
+
+
+class Arzttyp(models.IntegerChoices):
+    ANAESTHESIE = 1
+    CHIRURGIE = 2
+    INNERE = 3
+    INTENSIV = 4
+    NOTAUFNAHME = 5
+    ANDERE = 6
+
+
+class MedstudAbschnitt(models.IntegerChoices):
+    VORKLINIK = 1
+    KLINIK = 2
+    PJ = 3
+
+
+AUSBILDUNGS_TYPEN = {
+    'ARZT':
+        {
+            'typ': models.IntegerField(choices=Arzttyp.choices, null=True),
+            'sonstige': models.CharField(max_length=50, default='')
+        },
+    'MEDSTUD':
+        {
+            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True),
+            'farmulaturen_anaesthesie': models.BooleanField(default=False),
+            'famulaturen_chirurgie': models.BooleanField(default=False),
+            'famulaturen_innere': models.BooleanField(default=False),
+            'famulaturen_intensiv': models.BooleanField(default=False),
+            'famulaturen_notaufnahme': models.BooleanField(default=False),
+            'anerkennung_noetig': models.BooleanField(default=False)
+        },
+    'MFA':
+        {
+            'todo': models.BooleanField(default=False)
+        },
+    'MTLA':
+        {
+            'todo': models.BooleanField(default=False)
+        },
+    'MTA': {
+        'todo': models.BooleanField(default=False)
+    },
+    'NOTFALLSANI': {
+        'todo': models.BooleanField(default=False)
+    },
+    'SANI': {
+        'todo': models.BooleanField(default=False)
+    },
+    'ZAHNI': {
+        'todo': models.BooleanField(default=False)
+    },
+    'KINDERBETREUNG': {
+        'todo': models.BooleanField(default=False)
+    },
+    'SONSTIGE': {
+        'todo': models.BooleanField(default=False)
+    },
+}
+AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(),range(len(AUSBILDUNGS_TYPEN))))
+
+for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
+    Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
+    for key, field in felder.items():
+        Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
+
+"""End"""
+
+
 import django_filters
 from django import forms
 from django.db import models
 
-class StudentFilter(django_filters.FilterSet):
 
+class StudentFilter(django_filters.FilterSet):
     class Meta:
         model = Student
         fields = {}
