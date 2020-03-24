@@ -18,6 +18,10 @@ from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
 
+from functools import lru_cache
+import time
+from mapview.views import get_ttl_hash
+
 
 # Create your views here.
 
@@ -70,7 +74,7 @@ def hospital_registration(request):
 
 
 def hospital_overview(request):
-    locations_and_number = prepare_students()
+    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
@@ -78,7 +82,8 @@ def hospital_overview(request):
     return HttpResponse(template.render(context, request))
 
 
-def prepare_students():
+@lru_cache()
+def prepare_hospitals(ttl_hash=None):
     students = Hospital.objects.all()
     locations_and_number = {}
     for student in students:
