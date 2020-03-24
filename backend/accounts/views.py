@@ -88,8 +88,7 @@ def hospital_signup(request):
         form_info = HospitalFormO(
             initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
         form_user = HospitalSignUpForm()
-        form_info.helper.form_tag = False
-
+    form_info.helper.form_tag = False
     return render(request, 'hospital_signup.html', {'form_info': form_info, 'form_signup': form_user})
 
 
