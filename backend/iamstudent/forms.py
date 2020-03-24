@@ -144,11 +144,59 @@ class StudentForm(forms.ModelForm):
             Div(
                 HTML("<h2>{}</h2>".format(_("Arzt Felder"))),
                 css_id='div-ausbildung-1',
+                css_class='hidden',
             ),
             Div(
                 HTML("<h2>{}</h2>".format(_("Medizinstudent Felder"))),
                 css_id='div-ausbildung-2',
+                css_class='hidden',
             ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("MFA Felder"))),
+                css_id='div-ausbildung-3',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("MTA Felder"))),
+                css_id='div-ausbildung-4',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("MTLA Felder"))),
+                css_id='div-ausbildung-5',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("NOTFALLSANI Felder"))),
+                css_id='div-ausbildung-6',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("PFLEGESTUD Felder"))),
+                css_id='div-ausbildung-7',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("SANI Felder"))),
+                css_id='div-ausbildung-8',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("ZAHNI Felder"))),
+                css_id='div-ausbildung-9',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("Kinderbetreuung Felder"))),
+                css_id='div-ausbildung-10',
+                css_class='hidden',
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("Sonstige Felder"))),
+                css_id='div-ausbildung-11',
+                css_class='hidden',
+            ),
+
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere Mich'),
             HTML("</p>")
