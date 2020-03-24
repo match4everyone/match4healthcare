@@ -138,7 +138,24 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(                
+                HTML("<h2>{}</h2>".format(_("Vorausbildung"))),
+                Column('vorausbildung_typ_krankenpflege', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_intensiv', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_innere', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_anaesthesie', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_pflege', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_rettungsdienst', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_hebamme', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_labor', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_verwaltunglogistik', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_fsjgesundheitswesen', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_blutentnahmedienst', css_class='form-group col-md-6 mb-0'),
+                Column('vorausbildung_typ_kinderbetreuung', css_class='form-group col-md-6 mb-0'),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            Div(
                 HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                Column('ausbildung_typ', css_class='form-group col-md-6 mb-0'),
                 css_id='div-berufsausbildung-dropdown',
             ),
             Div(
