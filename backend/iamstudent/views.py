@@ -38,7 +38,7 @@ def get_student(request):
 
 
 def thx(request):
-    return render(request, 'thanks_student.html')
+    return render(request, 'thanks.html')
 
 
 def successful_mail(request):
