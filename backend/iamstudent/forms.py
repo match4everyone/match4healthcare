@@ -158,8 +158,8 @@ class StudentForm(forms.ModelForm):
             Div(
                 HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
                 Row(
-                    Column('ausbildung_typ', css_class='form-group col-md-6 mb-0'),
-                    Column('ausbildung_typ_sonstige', css_class='form-group col-md-6 mb-0'),
+                    Column('ausbildung_typ', css_class='form-group col-md-6 mb-0', css_id='ausbildung-typ'),
+                    Column('ausbildung_typ_sonstige', css_class='form-group col-md-6 mb-0', css_id='ausbildung-sonstige'),
                 ),
                 css_id='div-berufsausbildung-dropdown',
             ),
