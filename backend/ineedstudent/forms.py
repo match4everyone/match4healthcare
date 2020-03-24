@@ -53,3 +53,9 @@ class HospitalFormExtra(HospitalFormO):
         # !!! namen der knöpe dürfen nicht verändert werden, sonst geht code woanders kaputt
         self.helper.add_input(Submit('submit', _('Schicke Mails')))
         self.helper.add_input(Submit('submit', _('Schicke Mails + Erstelle Anzeige')))
+
+class HospitalFormEditProfile(HospitalFormO):
+
+    def __init__(self, *args, **kwargs):
+        super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
+        self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
