@@ -168,6 +168,9 @@ class StudentForm(forms.ModelForm):
             HTML("</p>")
         )
 
+class StudentFormAndMail(StudentForm):
+    email = forms.EmailField()
+
 
 class EmailForm(forms.Form):
     student_id = forms.CharField(max_length=100)

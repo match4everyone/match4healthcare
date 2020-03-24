@@ -9,7 +9,7 @@ from ineedstudent.forms import HospitalFormO
 from ineedstudent.models import Hospital
 from django.shortcuts import render
 
-from iamstudent.forms import StudentForm
+from iamstudent.forms import StudentForm, StudentFormAndMail
 from .forms import StudentEmailForm
 from iamstudent.models import Student
 
@@ -33,7 +33,7 @@ def student_signup(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = StudentForm(request.POST)
+        form = StudentFormAndMail(request.POST)
 
         # check whether it's valid:
         if form.is_valid():
@@ -45,7 +45,7 @@ def student_signup(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = StudentForm()
+        form = StudentFormAndMail()
 
     return render(request, 'student_signup.html', {'form': form})
 

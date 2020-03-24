@@ -46,7 +46,6 @@ class Student(models.Model):
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
     plz = models.CharField(max_length=5, null=True, validators=[validate_plz])
-    email = models.EmailField(unique=True)
 
     semester = models.IntegerField(null=True, validators=[validate_semester])
     immatrikuliert = models.BooleanField(default=False)
@@ -100,12 +99,12 @@ class Student(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['email']
+        ordering = ['plz']
 
     # Methods
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.email
+        return self.user.email
 
 import django_filters
 from django import forms
