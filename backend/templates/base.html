@@ -30,10 +30,10 @@
           <a class="nav-link" href="/about">{% blocktrans %}Über uns{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "signup_student" in request.path %}active{% endif %} hide-home">
-          <a class="nav-link" href="/accounts/signup_student">Ich will helfen</a>
+          <a class="nav-link" href="/accounts/signup_student">{% blocktrans %}Ich will helfen{% endblocktrans %}</a>
         </li>
         <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home">
-          <a class="nav-link" href="/accounts/signup_hospital">Ich brauche Hilfe</a>
+          <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche Hilfe{% endblocktrans %}</a>
         </li>
         <li class="nav-item {% if "hospital_map" in request.path %}active{% endif %}">
           <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Krankenhauskarte{% endblocktrans %}</a>
