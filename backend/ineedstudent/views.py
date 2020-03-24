@@ -21,6 +21,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from functools import lru_cache
 import time
 from mapview.views import get_ttl_hash
+from django.views.decorators.gzip import gzip_page
 
 
 # Create your views here.
@@ -72,7 +73,8 @@ def hospital_registration(request):
 
 
 
-
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def hospital_overview(request):
     locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')

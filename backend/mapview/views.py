@@ -8,8 +8,11 @@ from iamstudent.models import Student
 from functools import lru_cache
 import time
 
+from django.views.decorators.gzip import gzip_page
 
 
+# Should be safe against BREACH attack because we don't have user input in reponse body
+@gzip_page
 def index(request):
     locations_and_number = prepare_students(ttl_hash=get_ttl_hash())
     template = loader.get_template('mapview/map.html')
