@@ -14,10 +14,9 @@ Registrierung - Studierende
 
 {% block content %}
 
+<div style="height:40px"></div>
 <div class="container">
-    <hr>
-</div>
-<div class="container">
+	
     {% if user.is_authenticated %}
 	
 	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
@@ -31,13 +30,11 @@ Registrierung - Studierende
     <hr><br>
 	{% endif %}
 	
-    <div class="card">
 
-        <div class="card-header">
-          {% blocktrans %}  Registrierung - Hilfesuchende {% endblocktrans %}
-        </div>
-        <div class="card-body">
-            <div class="row">
+    <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Sie brauchen in Ihrer Institution aktuell Hilfe?{% endblocktrans %} </h1>
+	<h2 class="font-weight-light match4hc-title">Wir verbinden Helfende und Hilfesuchenden zu einem Match4Healthcare!</h2>
+       
+            <div class="row" style="margin-top:30px;">
                 <div class="col-md-8 col-sm-10 col-12">
 
                     <form method="post" action="signup_hospital">
@@ -50,9 +47,10 @@ Registrierung - Studierende
 
                         <button type="submit" class="btn btn-success">Sign up</button>
                     </form>
-                </div>
-            </div>
+                
+           
         </div>
     </div>
-    <hr>
+    
+</div>
     {% endblock %}

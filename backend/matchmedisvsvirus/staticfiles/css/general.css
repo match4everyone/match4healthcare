@@ -18,6 +18,15 @@ a:hover {
 color:	#8c0442;
 	text-decoration: none;
 }
+
+h2.match4hc-title { color: #ed0a71; font-size: 1.3rem; }
+
+h1.match4hc-title {
+font-weight: 600 !important;
+font-size: 1.7rem;
+margin-bottom: 0px;
+}
+
 .footer a, .footer p {
   color: #fff;
 }

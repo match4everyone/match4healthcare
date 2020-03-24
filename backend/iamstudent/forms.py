@@ -170,7 +170,7 @@ class StudentForm(forms.ModelForm):
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+            HTML("<h3>{}</h3>".format(_("Berufsausbildung"))),
             HTML("<p>{}</p> <br>".format(_("Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
             *create_skills(BERUF, create_radio_progress_indicator),
             Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
