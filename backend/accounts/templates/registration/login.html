@@ -27,15 +27,18 @@ Registrierung - Studierende
     {% endif %}
     <div class="card">
         <div class="col-lg-4 col-md-6 col-sm-8 col-12">
-            <h2>Log in</h2>
+            <h2>Login</h2>
             <form method="post" novalidate>
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
                 {{ form.username|as_crispy_field }}
                 {{ form.password|as_crispy_field }}
-                <button type="submit" class="btn btn-primary">Log in</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <hr>
+            <h4>{% blocktrans %}Noch kein Account?{% endblocktrans %}</h4>
+            <a href="/accounts/signup_student"><p>{% blocktrans %}Ich bin helfende/r{% endblocktrans %}</p></a>
+            <a href="/accounts/signup_hospital"><p>{% blocktrans %}Ich habe Bedarf an Unterstützung{% endblocktrans %}</p></a>
         </div>
     </div>
 </div>
