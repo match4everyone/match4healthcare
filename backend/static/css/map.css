@@ -1,21 +1,49 @@
-#mapid { position: absolute; top: 100px; right: 0; bottom: 61px; left: 0; width: 100%; min-height: 300px; }
-.leaflet-bottom.leaflet-right { top: 0;}
+#mapid {
+  min-height: 500px;
+}
+@media only screen and (max-width: 767px) {
+  .map-dropdown, .map-input {
+    margin-bottom: 5px;
+  }
+}
+.map-dropdown {
+  height: 2.35rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.map-input {
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-
+}
 head {
-	Background-color:#7dd1c5;
-	font-family:'Open Sans', sans-serif;
+  Background-color: #7dd1c5;
+  font-family: 'Open Sans', sans-serif;
 }
 .mt-2 {
-	background-color:black;
-	color:white;
-	text-align:center;
-	font-family:'Bebas Neue', sans-serif;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
 }
-
 h2 {
-	font-family:'Bebas Neue', sans-serif;
-	text-align:center;
+  font-family: 'Bebas Neue', sans-serif;
+  text-align: center;
 }
-
 /*form {
 	font-family:'Open Sans', sans-serif;
   margin: 2%;
@@ -62,7 +90,6 @@ label[for=id_braucht_bezahlung]::before {
     white-space: pre;
     text-align:center;
 }*/
-
-body{
-	background-color:#cfdce3;
+body {
+  background-color: #cfdce3;
 }
