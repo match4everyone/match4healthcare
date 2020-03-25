@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend
-from matchmedisvsvirus.settings.common import NOREPLY_MAIL
+from match4healthcare.settings.common import NOREPLY_MAIL
 
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
