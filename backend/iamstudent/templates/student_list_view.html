@@ -20,9 +20,10 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Die Suche Filtern
+            Orte filtern
         </div>
         <div class="card-body">
+
             <div class="form-group">
                 <p> Land: </p>
                 <select name="countrycode" class="form-control" id="countrycode">
@@ -40,39 +41,54 @@
             </div>
             <button type="submit" class="btn blue text-white btn-lg" onclick="getrequest()">
                 <span class="glyphicon glyphicon-search"></span>Filtern!
+            </button>
         </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Blas filtern
+        </div>
+        <div class="card-body">
+            <form method="get">
+                {{ filter.form.as_p }}
+                <input type="submit"/>
+            </form>
+        </div>
+        <div class="card-body">
+            {% render_table table %}
+        </div>
+
+    </div>
+    <p>
+        <button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken
+            &raquo;
         </button>
-    </div>
-    <div class="card-body">
-        {% render_table table %}
-    </div>
-    <p><button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken &raquo;</button></p>
-</div>
+    </p>
 
 </div>
 <hr>
 <script>
 
-    var send = function(){
-    var li = [];
-    $('.table-selector').each(function(){
-         console.log($(this));
-        if($(this).val()){
-        li.push($(this).attr("id"));
+    var send = function () {
+        var li = [];
+        $('.table-selector').each(function () {
+            console.log($(this));
+            if ($(this).val()) {
+                li.push($(this).attr("id"));
+            }
+
+            console.log($(this));
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("Bitte wählen Sie mindestens einen Studierenden zum Kontaktieren aus!")
         }
+    };
 
-       console.log($(this));
-    });
-    if (li.length>0){
-      window.location = ("/iamstudent/send_mail_student/"+ li.join("_"));
-    } else {
-      alert("Bitte wählen Sie mindestens einen Studierenden zum Kontaktieren aus!")
+    var getrequest = function () {
+        //console.log($('#plz').attr("value"));
+        window.location = "/ineedstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
     }
-  };
-
-    var getrequest = function(){
-    //console.log($('#plz').attr("value"));
-    window.location = "/ineedstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
-  }
 </script>
 {% endblock %}
