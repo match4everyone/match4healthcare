@@ -176,7 +176,7 @@ class StudentForm(forms.ModelForm):
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden'
+                    , css_class='hidden ausbildung-addon'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ]

@@ -169,11 +169,6 @@ div.boxed {
   margin-bottom: 0px !important
 }
 
-.hidden {
-  display: none;
-  /*opacity: 0.2;*/
-}
-
 .footer a:hover {
   text-decoration: underline;
 }
@@ -219,6 +214,7 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 	
 }
 
+
 .login-form { padding:45px 0 65px 0;}
 
 ul { padding-left: 1rem; }
@@ -227,3 +223,20 @@ form .blue {margin-top:15px;}
 .login-form .blue  { margin-top: 0px; }
 
 .login-card h4 { font-size: 1.3rem; }
+
+
+/*
+Student Form
+*/
+
+.ausbildung-addon {
+  max-height:500px;
+  transition: max-height 600ms 0ms, opacity 600ms 0ms;
+  overflow: hidden;
+}
+
+
+.ausbildung-addon.hidden {
+  opacity: 0;
+  max-height: 0px;
+}

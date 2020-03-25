@@ -54,10 +54,10 @@ def student_signup(request):
     return render(request, 'student_signup.html', {'form': form})
 
 
-def send_password_set_email(email, host, template='registration/password_reset_email_.html'):
+def send_password_set_email(email, host, template='registration/password_set_email_.html'):
     form = PasswordResetForm({'email': email})
     if form.is_valid():
-        form.save(email_template_name=template, domain_override=host)
+        form.save(html_email_template_name=template, domain_override=host)
 
 @transaction.atomic
 def register_student_in_db(request, mail):
