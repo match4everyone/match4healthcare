@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block header %}
-<style>.footer { position: absolute; width:100%; bottom: 0; z-index: 2; }</style>
+<style>.footer { z-index: 2; } </style>
+
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
  crossorigin=""/>
@@ -21,11 +23,50 @@
 
 
 {% block content %}
-<div>
+  {% if user.is_authenticated and user.is_hospital %}
+ <nav class="navbar navbar-expand-sm navbar-dark bg-light search-map">
+   <div class="container"><div class="order-0">
+     
+     <select name="countrycode" id="countrycode" class="map-dropdown">
+      <option value="DE">{% blocktrans %}Deutschland{% endblocktrans %}</option>
+      <option value="AT">{% blocktrans %}Österreich{% endblocktrans %}</option>
+    </select>
+      <input type="text" id="search" class="form textinput textInput map-input" placeholder="Postleitzahl">
+      <button class="btn btn-primary btn blue text-white btn-md" role="button" onclick="gototable()">{% blocktrans %}Direktsuche{% endblocktrans %} &raquo;</button>
+      
+     
+    </div>
+	 </div>
+   </nav>
+  {% endif %}
+<script type="text/javascript">
+
+	 $(document).ready(function () {
+	
+  
+$(window).on("resize", function () {
+	var height = $(window).height();
+		var navHeight = $('.navbar').outerHeight();
+		var searchHeight = $('.search-map').innerHeight();
+	var footerHeight = $('.footer').innerHeight();
+		
+        var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
+	
+	$(".map-container").height(newHeight);map.invalidateSize(); 
+}
+			
+			).trigger("resize");
+		
+		 
+});
+
+</script>
+<div class="map-container">
  <div id="mapid" style="z-index:1;"></div>
 </div>
 
  <script type="text/javascript">
+	 
    var mymap = L.map('mapid').setView([51.13, 10.018], 6);
    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9zYXVkZXIiLCJhIjoiY2s4MWNxa2QzMDNkejNrcDVhbzV6MDMxYSJ9.O4sLC7VSSgy4S7EKjNoG1g', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -34,7 +75,11 @@
     tileSize: 512,
     zoomOffset: -1,
     preferCanvas: true
-  }).addTo(mymap);
+  }).addTo(mymap); 
+	 
+	 
+	 
+
  </script>
 {% localize off %}
   {% for location in locations %}

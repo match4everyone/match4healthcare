@@ -27,6 +27,7 @@ font-size: 1.7rem;
 margin-bottom: 0px;
 }
 .navbar {min-height:100px;}
+.search-map { min-height: 50px; z-index:2;}
 .footer a, .footer p {
   color: #fff;
 }
@@ -127,6 +128,12 @@ div.boxed {
   -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
   -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
+}
+
+@media only screen and (max-width: 767px) {
+	body { margin-top: 0px; }
+	.navbar { position: relative
+}
 }
 
 @media only screen and (min-width: 768px) {
