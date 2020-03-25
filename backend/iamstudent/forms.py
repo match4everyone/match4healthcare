@@ -121,7 +121,6 @@ class StudentForm(forms.ModelForm):
         exclude = ['uuid', 'registration_date','user']
         labels = form_labels
         help_texts = {
-            'availability_start': _('Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21'),
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'plz': _('Bitte gib deine Postleitzahl ein'),
             'countrycode': _('Bitte wähle ein Land aus'),
@@ -172,7 +171,7 @@ class StudentForm(forms.ModelForm):
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+            HTML("<h3>{}</h3>".format(_("Berufsausbildung"))),
             HTML("<p>{}</p> <br>".format(_("Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
             *create_skills(BERUF, create_radio_progress_indicator),
             Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
@@ -181,7 +180,7 @@ class StudentForm(forms.ModelForm):
                   HTML("<p>{}</p> <br>".format(_("Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
             *create_skills(SKILLS, create_radio_traffic_light),
             HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-lg'),
+            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
             HTML("</p>")
         )
 
