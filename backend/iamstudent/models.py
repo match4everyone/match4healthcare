@@ -219,8 +219,17 @@ AUSBILDUNGS_TYPEN = {
     'SANI': {
 
     },
+    'HEBAMME': {
+
+    },
+    'FSJ': {
+
+    },
     'ZAHNI': {
         'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, blank=True)
+    },
+    'PHYSIO':{
+        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
     },
     'KINDERBETREUNG': {
         'ausgebildet': models.BooleanField(default=False),

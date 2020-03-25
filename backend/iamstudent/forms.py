@@ -32,7 +32,10 @@ form_labels = {
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications
-
+    'ausbildung_typ_physio': _('Physiotherapeut'),
+    'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_hebamme': _('Habamme'),
+    'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
     'ausbildung_typ_arzt': _('Arzt/Ärztin'),
     'ausbildung_typ_arzt_typ': _('Fachbereich'),
     'ausbildung_typ_arzt_sonstige': _('Sonstige:'),
