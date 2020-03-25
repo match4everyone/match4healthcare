@@ -8,11 +8,34 @@
 {% endblock %}
 
 {% block header %}
-<style>
+<style type="text/css">
 .footer { z-index: 2; } 
 </style>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+<script type="text/javascript">
+	
+	window.addEventListener('load', function() {
+	
+  
+$(window).on("resize", function () {
+	
+		var height = $(window).height();
+		var navHeight = $('.navbar').outerHeight();
+		var searchHeight = $('.search-map').innerHeight();
+		var footerHeight = $('.footer').innerHeight();
+		
+        var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
+	
+		$("#mapid").height(newHeight);mymap.invalidateSize();
+	
+	
+}	
+			).trigger("resize");
+		
+		 
+										});
+</script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
  crossorigin=""/>
 <link rel="stylesheet" href="{% static 'css/map.css' %}">
@@ -52,27 +75,6 @@
     preferCanvas: true,
 	   
   }).addTo(mymap); 
-	
-	window.addEventListener('load', function() {
-	
-  
-$(window).on("resize", function () {
-	
-		var height = $(window).height();
-		var navHeight = $('.navbar').outerHeight();
-		var searchHeight = $('.search-map').innerHeight();
-		var footerHeight = $('.footer').innerHeight();
-		
-        var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
-	
-		$("#mapid").height(newHeight);mymap.invalidateSize();
-	
-	
-}	
-			).trigger("resize");
-		
-		 
-										});
 
  </script> 
 {% localize off %}
