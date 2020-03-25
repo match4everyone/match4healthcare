@@ -108,7 +108,7 @@ class StudentForm(forms.ModelForm):
         help_texts = {
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
-            'plz': _('bevorzugter Einsatzort'),
+            'plz': _('bevorzugter Einsatzort als Postleitzahl'),
             'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
         }
 
