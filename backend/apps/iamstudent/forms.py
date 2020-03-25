@@ -25,10 +25,7 @@ form_labels = {
     'countrycode': _('Land'),
     'email': _('Email'),
 
-    'semester': _('Semester'),
-    'immatrikuliert': _('Ich bin aktuell immatrikuliert'),
     'availability_start': _('Ich bin verfügbar ab'),
-
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications

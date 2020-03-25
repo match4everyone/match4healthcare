@@ -68,6 +68,12 @@ class HospitalFormEditProfile(HospitalFormO):
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
+        self.helper.layout = Layout(
+                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('telefon')),
+                Row(Column('plz'), Column('countrycode')),
+                'sonstige_infos'
+        )
 
     def clean_email(self):
         email = self.cleaned_data['email']
