@@ -29,9 +29,9 @@ BEZAHLUNG_CHOICES = (
 
 
 CHECKBOX_CHOICES = [
-            ('unknown', _('Egal')),#Unknown
-            ('true', _('Muss')),
-            ('false', _('Darf Nicht')),
+            ('unknown', _('egal')),#Unknown
+            ('true', _('muss')),
+            ('false', _('darf nicht')),
         ]
 
 

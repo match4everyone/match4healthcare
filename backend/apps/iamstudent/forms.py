@@ -100,6 +100,10 @@ def ButtonGroup(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
                         template='input_buttongroup-any_indicator.html')
 
+def ButtonGroupBool(field):
+    return RadioButtons(field, option_label_class="btn btn-sm btn-light",
+                        template='input_buttongroup-egalmuss_indicator.html')
+
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -265,20 +269,12 @@ class EmailToSendForm(forms.ModelForm):
         }
 
 class PersistenStudentFilterForm(forms.ModelForm):
-    #executions = ['%s = forms.NullBooleanField(widget=MyRadioSelect)' % a for a in  AUSBILDUNGS_TYPEN_COLUMNS]
-    #for e in executions:
-    #    exec(e)
-
-
 
     class Meta:
         model = PersistenStudentFilterModel
 
         labels = form_labels
         exclude = ['hospital']
-        #widgets = {
-        #    AUSBILDUNGS_TYPEN_COLUMNS[0]: MyRadioSelect
-        #}
 
     def __init__(self, *args, **kwargs):
         super(PersistenStudentFilterForm, self).__init__(*args, **kwargs)
@@ -292,10 +288,8 @@ class PersistenStudentFilterForm(forms.ModelForm):
         for k in AUSBILDUNGS_DETAIL_COLUMNS:
             self.fields[k].required = False
         self.helper.layout = Layout(
-            #Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
             Div(
-                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-                Row(*[Column(ButtonGroup('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                Row(*[Column(ButtonGroupBool('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
@@ -314,6 +308,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ]
         )
-        self.helper.add_input(Submit('submit', _('Aktualisieren')))
-        print(self.helper.layout)
+        self.helper.form_tag = False
+        #self.helper.add_input(Submit('submit', _('Aktualisieren')))
+
 

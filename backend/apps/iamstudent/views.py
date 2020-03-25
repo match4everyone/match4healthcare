@@ -127,6 +127,16 @@ def notify_student(student_id, contact):
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
+    print(countrycode)
+    print(plz)
+    print(distance)
+    print(request.GET.get('countrycode', 1))
+    print(request.GET.get('plz', 2))
+    print(request.GET.get('distance', 3))
+
+    countrycode = request.GET.get('countrycode', countrycode)
+    plz = request.GET.get('plz', plz)
+    distance = int(request.GET.get('distance', distance))
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
@@ -157,7 +167,8 @@ def student_list_view(request, countrycode, plz, distance):
         'table': table,
         'filter_jobrequireform' : filter_jobrequireform,
         'filter_availability' : filter_availability,
-        'filter_origin': f
+        'filter_origin': f,
+        'n': f.qs.count()
     }
 
     return render(request, 'student_list_view.html', context)

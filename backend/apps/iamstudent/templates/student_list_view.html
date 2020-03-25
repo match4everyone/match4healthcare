@@ -11,40 +11,45 @@
 <script type="text/javascript">
 
     var signUpHelper = {
-        handleQualificationInput : function handleQualificationInput(event) {
+        handleQualificationInput: function handleQualificationInput(event) {
             let sourceElement = event.srcElement;
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
             let buttonStatus = false;
-            if (selectedFilterValue === "true")
-            {
-                 buttonStatus = true;
+            if (selectedFilterValue === "true") {
+                buttonStatus = true;
             }
 
-            this.setQualificationSectionVisibility(qualificationId, buttonStatus )
+            this.setQualificationSectionVisibility(qualificationId, buttonStatus)
         },
-        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
+        setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
             if (setVisibility) {
                 section.classList.remove('hidden')
             } else {
                 section.classList.add('hidden');
-                section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
-                section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
+                section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+                    checkbox.checked = false
+                })
+                section.querySelectorAll("input[type='text'], select").forEach((textbox) => {
+                    textbox.value = ''
+                })
             }
 
         },
     }
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
         qualifikationSelectors.forEach(element => {
-            element.addEventListener("click", (event) => { signUpHelper.handleQualificationInput(event) })
+            element.addEventListener("click", (event) => {
+                signUpHelper.handleQualificationInput(event)
+            })
 
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
-            signUpHelper.handleQualificationInput({ srcElement: element });
+            signUpHelper.handleQualificationInput({srcElement: element});
         })
 
     });
@@ -62,75 +67,81 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Ort
+            An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
         </div>
+        <form method="get">
         <div class="card-body">
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <p> Land: </p>
+                        <select name="countrycode" class="form-control" id="countrycode">
+                            <option value="DE">Deutschland</option>
+                            <option value="AT">Österreich</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <p> Postleitzahl: </p>
+                        <input name="plz" id="plz" value="{{ plz }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <p> Und im Umkreis von (km): </p>
+                        <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="form-group">
-                <p> Land: </p>
-                <select name="countrycode" class="form-control" id="countrycode">
-                    <option value="DE">Deutschland</option>
-                    <option value="AT">Österreich</option>
-                </select>
+        <div class="card">
+            <div class="card-header">
+                Was für eine Ausbildung sollen die Helfer haben?
             </div>
-            <div class="form-group">
-                <p> Postleitzahl: </p>
-                <input id="plz" value="{{ plz }}" class="form-control">
-            </div>
-            <div class="form-group">
-                <p> Und im Umkreis von (km): </p>
-                <input id="umkreis" value="{{ distance }}" class="form-control">
-            </div>
-            <button type="submit" class="btn blue text-white btn-lg" onclick="getrequest()">
-                <span class="glyphicon glyphicon-search"></span>Filtern!
-            </button>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            Verfügbarkeit
-        </div>
-        <div class="card-body">
-            <form method="get">
+            <div class="card-body">
+
                 {% crispy filter_jobrequireform filter_jobrequireform.helper %}
-            </form>
+
+            </div>
         </div>
-    </div>
+        <div class="card">
+            <div class="card-header">
+                Ab wann sollen die Helfer verfügbar sein?
+            </div>
+            <div class="card-body">
+
+                {{ filter_availability.form.as_p }}
+
+            </div>
+
+        </div>
+        <input type="submit"/>
+    </form>
+    <hr>
     <div class="card">
         <div class="card-header">
-            Eigenschaften
+            Wir haben
+            <mark>{{n}} Helfer</mark>
+            gefunden, die zu deiner Suche passen.
         </div>
         <div class="card-body">
-            <form method="get">
-                {{ filter_availability.form.as_p  }}
-                <input type="submit" />
-            </form>
-            <form method="get">
-                {{ filter_origin.form.as_p  }}
-                <input type="submit" />
-            </form>
-
+            {# Für Table view behalten x render_table table x #}
+            <p>
+                <button class="btn blue text-white btn-lg" onclick="sendall()">
+                    Email an {{n}} Helfer schicken &raquo;
+                </button>
+                {% comment %}
+                Für Table View behalten
+                <button class="btn blue text-white btn-lg" onclick="send()">
+                    Email an AUSGEWÄHLTE Studierende schicken &raquo;
+                </button>
+                {% endcomment %}
+            </p>
         </div>
 
     </div>
-    <div class="card">
-        <div class="card-header">
-            Table
-        </div>
-        <div class="card-body">
-            {% render_table table %}
-        </div>
-
-    </div>
-    <p>
-        <button class="btn blue text-white btn-lg" onclick="sendall()">
-            Email an ALLE Studierenden schicken &raquo;
-        </button>
-        <button class="btn blue text-white btn-lg" onclick="send()">
-            Email an AUSGEWÄHLTE Studierende schicken &raquo;
-        </button>
-    </p>
-
 </div>
 <hr>
 <script>
@@ -155,7 +166,7 @@
         var li = [];
         $('.table-selector').each(function () {
 
-                li.push($(this).attr("id"));
+            li.push($(this).attr("id"));
 
         });
         if (li.length > 0) {
@@ -167,12 +178,12 @@
 
     var getrequest = function () {
         //console.log($('#plz').attr("value"));
-        window.location = "/iamstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+        window.location = "/ineedstudent/students/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
     }
 </script>
 <script type="text/javascript">
-$( document ).ready(function() {
-    $("#id_availability_start").attr("type", "date");
-});
+    $(document).ready(function () {
+        $("#id_availability_start").attr("type", "date");
+    });
 </script>
 {% endblock %}
