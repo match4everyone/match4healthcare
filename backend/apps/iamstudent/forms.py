@@ -33,7 +33,7 @@ form_labels = {
 
     # Form Labels for qualifications
     'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login">Pflegereserve</a>)</em>'),
-    'ausbildung_typ_pflege_abschnitt': _('Ausbilsungsabschnitt'),
+    'ausbildung_typ_pflege_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_physio': _('Physiotherapeut_in'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Entbindungshelfer_in'),
