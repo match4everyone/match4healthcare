@@ -13,15 +13,11 @@
     var signUpHelper = {
         handleQualificationInput : function handleQualificationInput(event) {
             let sourceElement = event.srcElement;
-            let qualificationSelected = true;
-            if (event.srcElement.checked && (sourceElement.value === "unknown" || sourceElement.value === 'false')){
-                qualificationSelected = false;
-            }
-            console.log(qualificationSelected)
+            let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
+            let qualificationId = containingDiv.id.split("-").slice(-1)
+            let selectedFilterValue = sourceElement.querySelector("input").value
 
-            // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
-            let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
-            this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
+            this.setQualificationSectionVisibility(qualificationId, selectedFilterValue !== "unknown" )
         },
         setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
@@ -38,9 +34,9 @@
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
         qualifikationSelectors.forEach(element => {
-            element.addEventListener("input", (event) => { signUpHelper.handleQualificationInput(event) })
+            element.addEventListener("click", (event) => { signUpHelper.handleQualificationInput(event) })
 
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
             signUpHelper.handleQualificationInput({ srcElement: element });
