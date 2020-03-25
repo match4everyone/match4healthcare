@@ -6,6 +6,8 @@ from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from mapview.utils import plzs, get_plzs_close_to
+from .tables import StudentTable
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend
@@ -120,3 +122,35 @@ def notify_student(student_id, contact):
               message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
               from_email='noreply@medisvs.spahr.uberspace.de',
               recipient_list=[student.email])
+
+@login_required
+@hospital_required
+def student_list_view(request, countrycode, plz, distance):
+    print('start')
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+
+    lat, lon, ort = plzs[countrycode][plz]
+
+    # TODO Consult with others how this should behave!
+    if distance==0:
+        qs = Student.objects.filter(plz=plz, countrycode=countrycode)
+    else:
+        close_plzs = get_plzs_close_to(countrycode, plz, distance)
+        qs = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
+
+    table = StudentTable(qs)
+
+    context = {
+        'plz': plz,
+        'countrycode': countrycode,
+        'ort': ort,
+        'distance': distance,
+        'table': table
+    }
+
+    return render(request, 'student_list_view.html', context)
+
+
+
