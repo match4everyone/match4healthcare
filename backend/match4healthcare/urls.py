@@ -1,4 +1,4 @@
-"""Match4healthcare URL Configuration
+"""match4healthcare URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from Match4healthcare import views
-from Match4healthcare.settings import common as settings
+from match4healthcare import views
+from match4healthcare.settings import common as settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
