@@ -32,7 +32,7 @@ form_labels = {
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications
-    'ausbildung_typ_pflege': _('Pflege (melde Dich auch hier: https://pflegereserve.de/#/login)'),
+    'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login">Pflegereserve</a>)</em>'),
     'ausbildung_typ_pflege_abschnitt': _('Ausbilsungsabschnitt'),
     'ausbildung_typ_physio': _('Physiotherapeut_in'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
@@ -109,7 +109,7 @@ class StudentForm(forms.ModelForm):
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
             'plz': _('bevorzugter Einsatzort als Postleitzahl'),
-            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
+           # 'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
         }
 
     def __init__(self, *args, **kwargs):
@@ -178,7 +178,7 @@ class StudentForm(forms.ModelForm):
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
                     , css_class='hidden'
                 )
-                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items()
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ]
             ,
             HTML('<hr>'),
