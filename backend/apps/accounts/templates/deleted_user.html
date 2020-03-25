@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+<p>{% blocktrans %} Dein Account wurde gelöscht. {% endblocktrans %}</p>
+
+</div>
+{% endblock %}

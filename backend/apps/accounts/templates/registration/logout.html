@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<hr>
+<div class="container">
+<p>{% blocktrans %}Danke, dass Du heute etwas Zeit mit der Website verbracht hast.{% endblocktrans %}</p>
+
+<p><a href="/accounts/login_redirect">{% blocktrans %}Neu anmelden{% endblocktrans %}</a></p>
+</div>
+{% endblock %}

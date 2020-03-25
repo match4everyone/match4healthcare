@@ -4,7 +4,7 @@ services:
 
   backend:
     volumes:
-      - './backend:/matchmedisvsvirus-backend'
+      - './backend:/match4healthcare-backend'
     ports:
       - '80:8000'
     networks:
@@ -13,8 +13,8 @@ services:
       - backend.prod.env
       - database.prod.env
     environment:
-     - DJANGO_SETTINGS_MODULE=matchmedisvsvirus.settings.production
-    command: gunicorn -c /matchmedisvsvirus-backend/gunicorn.conf.py matchmedisvsvirus.wsgi
+     - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
+    command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
   database:
     image: postgres
