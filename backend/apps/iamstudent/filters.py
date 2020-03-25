@@ -19,7 +19,7 @@ class StudentAvailabilityFilter(filters.FilterSet):
 
     #ausbilguns_arzt = filters.BooleanFilter(field_name='ausbildung_typ_arzt',widget=MyRadioSelect)
     bla = filters.MultipleChoiceFilter(field_name='braucht_bezahlung',choices=BEZAHLUNG_CHOICES,widget=forms.CheckboxSelectMultiple)
-    avail = filters.DateFilter(field_name='availability_start',lookup_expr='lte')#,widget=forms.DateField)
+    availability_start = filters.DateFilter(field_name='availability_start',lookup_expr='lte')#,widget=forms.DateField)
     class Meta:
         model = Student
         fields ={

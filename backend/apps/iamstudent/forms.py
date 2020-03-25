@@ -290,7 +290,8 @@ class PersistenStudentFilterForm(forms.ModelForm):
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
             ),
-            *[
+            # todo einblenden der anderen felder
+            """*[
                 Div(
                     HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
@@ -301,7 +302,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                     , css_class='hidden'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ]
+            ]"""
         )
         self.helper.add_input(Submit('submit', _('Aktualisieren')))
 

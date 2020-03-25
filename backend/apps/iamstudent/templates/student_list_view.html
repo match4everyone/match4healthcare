@@ -76,8 +76,11 @@
 
     </div>
     <p>
+        <button class="btn blue text-white btn-lg" onclick="sendall()">
+            Email an ALLE Studierenden schicken &raquo;
+        </button>
         <button class="btn blue text-white btn-lg" onclick="send()">
-            Email an ausgewählte Studierende schicken &raquo;
+            Email an AUSGEWÄHLTE Studierende schicken &raquo;
         </button>
     </p>
 
@@ -88,12 +91,11 @@
     var send = function () {
         var li = [];
         $('.table-selector').each(function () {
-            console.log($(this));
             if ($(this).val()) {
                 li.push($(this).attr("id"));
             }
 
-            console.log($(this));
+
         });
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
@@ -102,9 +104,28 @@
         }
     };
 
+    var sendall = function () {
+        var li = [];
+        $('.table-selector').each(function () {
+
+                li.push($(this).attr("id"));
+
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("Leider gibt es keine Studierenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden.")
+        }
+    };
+
     var getrequest = function () {
         //console.log($('#plz').attr("value"));
         window.location = "/iamstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
     }
+</script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $("#id_availability_start").attr("type", "date");
+});
 </script>
 {% endblock %}
