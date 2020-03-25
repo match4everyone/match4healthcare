@@ -10,7 +10,7 @@ from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.accounts.models import User
-from .widgets import MyRadioSelect, NullBooleanRadioSelect
+from crispy_forms.bootstrap import InlineRadios
 
 import logging
 
@@ -272,7 +272,11 @@ class PersistenStudentFilterForm(forms.ModelForm):
     class Meta:
         model = PersistenStudentFilterModel
 
+        labels = form_labels
         exclude = ['hospital']
+        #widgets = {
+        #    AUSBILDUNGS_TYPEN_COLUMNS[0]: MyRadioSelect
+        #}
 
     def __init__(self, *args, **kwargs):
         super(PersistenStudentFilterForm, self).__init__(*args, **kwargs)
@@ -280,12 +284,16 @@ class PersistenStudentFilterForm(forms.ModelForm):
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'get'
+
         self.helper.form_action = 'submit_survey'
+        self.helper.form_style = 'inline'
+        #for k in AUSBILDUNGS_TYPEN_COLUMNS:
+        #    self.fields[k].required = False
         self.helper.layout = Layout(
             #Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
             Div(
                 HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                Row(*[Column(ButtonGroup('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
@@ -305,4 +313,5 @@ class PersistenStudentFilterForm(forms.ModelForm):
             ]"""
         )
         self.helper.add_input(Submit('submit', _('Aktualisieren')))
+        print(self.helper.layout)
 

@@ -144,8 +144,8 @@ def student_list_view(request, countrycode, plz, distance):
 
     filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs_place)
     qs = filter_availability.qs
-
-    table = StudentTable(StudentJobRequirementsFilter(request.GET, queryset=qs).qs)
+    f  =StudentJobRequirementsFilter(request.GET, queryset=qs)
+    table = StudentTable(f.qs)
 
     filter_jobrequireform = PersistenStudentFilterForm(request.GET)
 
@@ -157,6 +157,7 @@ def student_list_view(request, countrycode, plz, distance):
         'table': table,
         'filter_jobrequireform' : filter_jobrequireform,
         'filter_availability' : filter_availability,
+        'filter_origin': f
     }
 
     return render(request, 'student_list_view.html', context)

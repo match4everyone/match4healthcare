@@ -197,14 +197,13 @@ NOTFALLSANI_CHOICES = (
 )
 
 
-UNKNOWN = 0
-TRUE = 1
-FALSE = 2
-CHECKBOX_CHOICES = (
-            (UNKNOWN, _('Unknown')),
-            (TRUE, _('Yes')),
-            (FALSE, _('No')),
-        )
+
+CHECKBOX_CHOICES = [
+            ('unknown', _('Egal')),#Unknown
+            ('true', _('Muss')),
+            ('false', _('Darf Nicht')),
+        ]
+
 
 
 AUSBILDUNGS_TYPEN = {
@@ -275,7 +274,7 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
     columns.append(a_typ)
     Student.add_to_class(a_typ, models.BooleanField(default=False))
-    PersistenStudentFilterModel.add_to_class(a_typ, models.NullBooleanField(blank=True))
+    PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
     for key, field in felder.items():
         if key == 'empty':
