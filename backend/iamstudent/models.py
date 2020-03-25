@@ -6,37 +6,57 @@ from mapview.utils import plzs
 from django.utils.translation import gettext as _
 from accounts.models import User
 
-
 def validate_semester(value):
     if value < 0:
         raise ValidationError(_("Semester darf nicht negativ sein"))
     else:
         return value
 
+def validate_checkbox(value):
+    if value != True:
+        raise ValidationError(_("You have to accept this"), code='invalid')
+    else:
+        return value
+
 
 class Student(models.Model):
-    """A typical class defining a model, derived from the Model class."""
 
-    class Bezahlung(models.IntegerChoices):
-        UNENTGELTLICH = 1
-        BEZAHLUNG = 4
+    #class Bezahlung(models.IntegerChoices):
+    UNENTGELTLICH = 1
+    BEZAHLUNG = 4
+    BEZAHLUNG_CHOICES = (
+        (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
+        (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+    )
 
-    class Verfuegbarkeiten(models.IntegerChoices):
-        TEN = 1
-        TWENTY = 2
-        THIRTY = 3
-        FOURTY = 4
+    #class Verfuegbarkeiten(models.IntegerChoices):
+    TEN = 1
+    TWENTY = 2
+    THIRTY = 3
+    FOURTY = 4
+    VERFUEGBARKEIT_CHOICES = (
+        (TEN, _('10h pro Woche')),
+        (TWENTY, _('20h pro Woche')),
+        (THIRTY, _('30h pro Woche')),
+        (FOURTY, _('40h pro Woche')),
+    )
 
     class Ampel(models.IntegerChoices):
         ROT = 1
         GELB = 2
         GRUEN = 3
 
-    class Umkreise(models.IntegerChoices):
-        LESSFIVE = 1
-        LESSTEN = 2
-        LESSTWENTY = 3
-        MORETWENTY = 4
+    #class Umkreise(models.IntegerChoices):
+    LESSFIVE = 1
+    LESSTEN = 2
+    LESSTWENTY = 3
+    MORETWENTY = 4
+    UMKREIS_CHOICES = (
+        (LESSFIVE, _('<5 km')),
+        (LESSTEN, _('<10 km')),
+        (LESSTWENTY, _('<20 km')),
+        (MORETWENTY, _('>20 km')),
+    )
 
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -67,31 +87,16 @@ class Student(models.Model):
     phone_number = models.CharField(max_length=100, blank=True, default='')
 
     plz = models.CharField(max_length=5, null=True)
-    umkreis = models.IntegerField(choices=Umkreise.choices, null=True, blank=False)
+    umkreis = models.IntegerField(choices=UMKREIS_CHOICES, null=True, blank=False)
     availability_start = models.DateField(null=True)
 
-    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices,
-                                            default=Bezahlung.UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
+    braucht_bezahlung = models.IntegerField(choices=BEZAHLUNG_CHOICES,
+                                            default=UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
 
-    zeitliche_verfuegbarkeit = models.IntegerField(choices=Verfuegbarkeiten.choices, null=True, blank=False)
+    zeitliche_verfuegbarkeit = models.IntegerField(choices=VERFUEGBARKEIT_CHOICES, null=True, blank=False)
 
-    """
-    vorausbildung_typ_krankenpflege = models.BooleanField(default=False)
-    vorausbildung_typ_intensiv = models.BooleanField(default=False)
-    vorausbildung_typ_innere = models.BooleanField(default=False)
-    vorausbildung_typ_anaesthesie = models.BooleanField(default=False)
-    vorausbildung_typ_pflege = models.BooleanField(default=False)
-    vorausbildung_typ_rettungsdienst = models.BooleanField(default=False)
-    vorausbildung_typ_hebamme = models.BooleanField(default=False)
-    vorausbildung_typ_labor = models.BooleanField(default=False)
-    vorausbildung_typ_verwaltunglogistik = models.BooleanField(default=False)
-    vorausbildung_typ_fsjgesundheitswesen = models.BooleanField(default=False)
-    vorausbildung_typ_blutentnahmedienst = models.BooleanField(default=False)
-    vorausbildung_typ_kinderbetreuung = models.BooleanField(default=False)
-    """
-
-    datenschutz_zugestimmt = models.BooleanField(default=False)
-    einwilligung_datenweitergabe = models.BooleanField(default=False)
+    datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
+    einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
     # Metadata
     class Meta:
@@ -114,48 +119,76 @@ for w in wunschorte:
     Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
 
 
-class Arzttyp(models.IntegerChoices):
-    ANAESTHESIE = 1
-    CHIRURGIE = 2
-    INNERE = 3
-    INTENSIV = 4
-    NOTAUFNAHME = 5
-    ANDERE = 6
+#class Arzttyp(models.IntegerChoices):
+ANAESTHESIE = 1
+CHIRURGIE = 2
+INNERE = 3
+INTENSIV = 4
+NOTAUFNAHME = 5
+ANDERE = 6
+ARZT_CHOICES = (
+    (ANAESTHESIE, _('Anästhesie')),
+    (CHIRURGIE, _('Chirurgie')),
+    (INNERE, _('Innere Medizin')),
+    (INTENSIV, _('Intensivstation')),
+    (NOTAUFNAHME, _('Notaufnahme')),
+    (ANDERE, _('Andere')),
+)
 
 
-class MedstudAbschnitt(models.IntegerChoices):
-    VORKLINIK = 1
-    KLINIK = 2
-    PJ = 3
+#class MedstudAbschnitt(models.IntegerChoices):
+VORKLINIK = 1
+KLINIK = 2
+PJ = 3
+MEDSTUD_CHOICES = (
+    (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
+    (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
+    (PJ, _('Praktisches Jahr')),
+)
 
 
-class ZahnstudAbschnitt(models.IntegerChoices):
-    VORKLINIK = 1
-    KLINIK = 2
+#class ZahnstudAbschnitt(models.IntegerChoices):
+VORKLINIK = 1
+KLINIK = 2
+ZAHNSTUD_CHOICES = (
+    (VORKLINIK, _('Vorklinischer Teil')),
+    (KLINIK, _('Klinischer Teil')),
+)
 
 
-class MFAAbschnitt(models.IntegerChoices):
-    JAHR_1 = 1
-    JAHR_2 = 2
-    JAHR_3 = 3
-    BERUFSTAETIG = 4
+#class MFAAbschnitt(models.IntegerChoices):
+JAHR_1 = 1
+JAHR_2 = 2
+JAHR_3 = 3
+BERUFSTAETIG = 4
+MFA_CHOICES = (
+    (JAHR_1, _('1. Jahr')),
+    (JAHR_2, _('2. Jahr')),
+    (JAHR_3, _('3. Jahr')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
 
 
-class NOTFALLSANIAbschnitt(models.IntegerChoices):
-    JAHR_1 = 1
-    JAHR_2 = 2
-    BERUFSTAETIG = 4
+#class NOTFALLSANIAbschnitt(models.IntegerChoices):
+JAHR_1 = 1
+JAHR_2 = 2
+BERUFSTAETIG = 4
+NOTFALLSANI_CHOICES = (
+    (JAHR_1, _('1. Jahr')),
+    (JAHR_2, _('2. Jahr')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
 
 
 AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
-            'typ': models.IntegerField(choices=Arzttyp.choices, blank=True,null=True),
-            'sonstige': models.CharField(max_length=50, default='')
+            'typ': models.IntegerField(choices=ARZT_CHOICES, blank=True,null=True),
+            'sonstige': models.CharField(max_length=50, blank=True, default='')
         },
     'MEDSTUD':
         {
-            'abschnitt': models.IntegerField(choices=MedstudAbschnitt.choices, null=True, blank=True),
+            'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, blank=True),
             'farmulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
@@ -165,30 +198,30 @@ AUSBILDUNGS_TYPEN = {
         },
     'MFA':
         {
-            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True,null=True),
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
         },
     'MTLA':
         {
-            'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True,null=True),
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
         },
     'MTA': {
-        'abschnitt': models.IntegerField(choices=MFAAbschnitt.choices, blank=True, null=True),
+        'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True, null=True),
     },
     'NOTFALLSANI': {
-        'abschnitt': models.IntegerField(choices=NOTFALLSANIAbschnitt.choices, blank=True,null=True),
+        'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, blank=True,null=True),
     },
     'SANI': {
 
     },
     'ZAHNI': {
-        'abschnitt': models.IntegerField(choices=ZahnstudAbschnitt.choices, null=True, blank=True)
+        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, null=True, blank=True)
     },
     'KINDERBETREUNG': {
         'ausgebildet': models.BooleanField(default=False),
         'vorerfahrung': models.BooleanField(default=False),
     },
     'SONSTIGE': {
-        'eintragen': models.CharField(max_length=200, default=False)
+        'eintragen': models.CharField(max_length=200, blank=True, default=False)
     },
 }
 
