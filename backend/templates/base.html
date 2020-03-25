@@ -3,12 +3,18 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'img/favicon/apple-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/favicon/apple-icon-60x60.png' %}">
@@ -19,7 +25,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'img/favicon/apple-icon-144x144.png' %}">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicon/apple-icon-152x152.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'img/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/favicon/android-icon-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/favicon/favicon-96x96.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
@@ -27,64 +33,80 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-      <title>{% block title %}
-    {% endblock %} | match4healthcare </title>
+    <title>{% block title %} {% endblock %} | match4healthcare </title>
 
     {% block header %}
     {% endblock %}
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar navbar-expand-md fixed-top navbar-light bg-white">
-		<div class="container">
-      <a class="navbar-brand" href="/"><img src="{% static 'img/match4healthcare-logo.svg' %}" width="200px"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/match4healthcare-logo.svg' %}" width="200px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarsExampleDefault">
-      <ul class="navbar-nav ml-auto">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
 
-		  <li class="nav-item {% if "about" in request.path %}active{% endif %}">
-          <a class="nav-link" href="/about">{% blocktrans %}Über uns{% endblocktrans %}</a>
-        </li>
-        <li class="nav-item {% if "signup_student" in request.path %}active{% endif %} hide-home">
-          <a class="nav-link" href="/accounts/signup_student">{% blocktrans %}Ich will helfen{% endblocktrans %}</a>
-        </li>
-        <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home">
-          <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche Hilfe{% endblocktrans %}</a>
-        </li>
-        <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
-			<a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
-		  </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item {% if "profile" in request.path %}active{% endif %}">
-        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Mein Profil{% endblocktrans %}</a>
-      </li>
-        {% else %}
-      <li class="nav-item {% if "login" in request.path %}active{% endif %}">
-        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
-        </li>  {% endif %}
+                    <li class="nav-item {% if "about" in request.path %}active{% endif %}">
+                        <a class="nav-link" href="/about">{% blocktrans %}Über uns{% endblocktrans %}</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item {% if "signup_student" in request.path %}active{% endif %} hide-home">
+                        <a class="nav-link" href="/accounts/signup_student">{% blocktrans %}Ich will
+                            helfen{% endblocktrans %}</a>
+                    </li>
+                    <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home">
+                        <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche
+                            Hilfe{% endblocktrans %}</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
+                        <a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item {% if "profile" in request.path %}active{% endif %}">
+                        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Mein
+                            Profil{% endblocktrans %}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item {% if "login" in request.path %}active{% endif %}">
+                        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
+                    </li>
+                    {% endif %}
 
-        </ul>
-        <!--</div>
+                </ul>
+                <!--</div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" class="navbarsExampleDefault">-->
 
-      </div>
-		</div>
-      </nav>
+            </div>
+        </div>
+    </nav>
     <div class="content">
-          {% block content %}
-          {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
-  <footer class="footer">
-	  <div class="container">
+    <footer class="footer">
+        <div class="container">
 
-    <p>{% blocktrans %}Ein Projekt im Rahmen des{% endblocktrans %} <a href="https://wirvsvirushackathon.org/" target="_blank">#WirVsVirus Hackathons</a>. <a href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a> {% blocktrans %}und{% endblocktrans %} <a href="/impressum">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
-		  </div>
+            <p>{% blocktrans %}Ein Projekt im Rahmen des{% endblocktrans %} <a href="https://wirvsvirushackathon.org/"
+                    target="_blank">#WirVsVirus Hackathons</a>. <a
+                    href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a>
+                {% blocktrans %}und{% endblocktrans %} <a
+                    href="/impressum">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
+        </div>
 
-  </footer>
-        <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">')</script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js" integrity="sha384-VoPFvGr9GxhDT3n8vqqZ46twP5lgex+raTCfICQy73NLhN7ZqSfCtfSn4mLA2EFA" crossorigin="anonymous"></script>
-  </body>
+    </footer>
+    <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"
+        integrity="sha384-VoPFvGr9GxhDT3n8vqqZ46twP5lgex+raTCfICQy73NLhN7ZqSfCtfSn4mLA2EFA"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
