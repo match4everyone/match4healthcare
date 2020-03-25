@@ -34,7 +34,7 @@ form_labels = {
     # Form Labels for qualifications
     'ausbildung_typ_pflege': _('Pflege (melde Dich auch hier: https://pflegereserve.de/#/login)'),
     'ausbildung_typ_pflege_abschnitt': _('Ausbilsungsabschnitt'),
-    'ausbildung_typ_physio': _('Physiotherapeut'),
+    'ausbildung_typ_physio': _('Physiotherapeut_in'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Hebamme'),
     'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
