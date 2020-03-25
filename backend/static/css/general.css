@@ -10,9 +10,6 @@ body {
   font-weight: 300;
   color: #4f4f4f;
   margin-top: 100px;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
 }
 
 .content {
