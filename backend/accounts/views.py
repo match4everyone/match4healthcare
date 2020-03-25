@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from matchmedisvsvirus.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
+from ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
 from ineedstudent.models import Hospital
 from django.shortcuts import render
 from ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -86,7 +86,7 @@ def send_password(email, pwd, name):
 
 def hospital_signup(request):
     if request.method == 'POST':
-        form_info = HospitalFormO(request.POST)
+        form_info = HospitalFormInfoSignUp(request.POST)
         form_user = HospitalSignUpForm(request.POST)
 
         if all([form_info.is_valid(), form_user.is_valid()]):
@@ -98,7 +98,7 @@ def hospital_signup(request):
             return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
 
     else:
-        form_info = HospitalFormO(
+        form_info = HospitalFormInfoSignUp(
             initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
         form_user = HospitalSignUpForm()
     form_info.helper.form_tag = False
@@ -110,7 +110,7 @@ def register_hospital_in_db(request, m):
     u = User.objects.create(username=m)
     user = HospitalSignUpForm(request.POST, instance=u).save()
     hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormO(request.POST, instance=hospital)
+    hospital = HospitalFormInfoSignUp(request.POST, instance=hospital)
     hospital.save()
     return user, hospital
 

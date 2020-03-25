@@ -1,6 +1,7 @@
 from django.forms import *
 from ineedstudent.models import Hospital
 from django.db import models
+from django import forms
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
@@ -72,3 +73,6 @@ class HospitalFormEditProfile(HospitalFormO):
         if User.objects.filter(email=email).exists():
             raise ValidationError(_("Diese Email ist bereits vergeben"))
         return email
+
+class HospitalFormInfoSignUp(HospitalFormO):
+    email = forms.EmailField()
