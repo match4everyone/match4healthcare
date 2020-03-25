@@ -165,6 +165,11 @@ div.boxed {
   margin-bottom: 0px !important
 }
 
+.hidden {
+  display: none;
+  /*opacity: 0.2;*/
+}
+
 .footer a:hover {
   text-decoration: underline;
 }

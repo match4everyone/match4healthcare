@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from iamstudent.models import Student, EmailToSend
+from iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -11,20 +11,7 @@ from crispy_forms.bootstrap import InlineRadios
 from iamstudent.custom_crispy import RadioButtons
 from accounts.models import User
 
-SKILLS = ['skill_coronascreening', 'skill_pflegeunterstuetzung', 'skill_transportdienst', 'skill_kinderbetreuung',
-          'skill_labortaetigkeiten', 'skill_drkblutspende', 'skill_hotline', 'skill_abstriche', 'skill_patientenpflege',
-          'skill_patientenlagerung', 'skill_opassistenz', 'skill_blutentnahmedienst', 'skill_anrufe',
-          'skill_infektionsnachverfolgung',
-          'skill_patientenaufnahme', 'skill_edvkenntnisse', 'skill_zugaengelegen', 'skill_arztbriefeschreiben',
-          'skill_blutkulturenabnehmen', 'skill_infusionenmischen', 'skill_ekgschreiben', 'skill_ultraschall',
-          'skill_bgas',
-          'skill_beatmungsgeraetebedienen']
-
-BERUF = [
-    'ba_arzt', 'ba_krankenpflege', 'ba_pflegehilfe', 'ba_anaesthesiepflege', 'ba_intensivpflege', 'ba_ota', 'ba_mfa',
-     'ba_mta_lta', 'ba_rta', 'ba_rettungssanitaeter', 'ba_kinderbetreuung', 'ba_hebamme', 'ba_sprechstundenhilfe',
-     'ba_labortechnische_assistenz']
-BERUF2_wo = ['ba_famulatur', 'ba_pflegepraktika', 'ba_fsj_krankenhaus']
+import logging
 
 form_labels = {
     'uuid': _('Writer'),
@@ -44,100 +31,62 @@ form_labels = {
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
-    'famulaturreife': _('Famulaturreife'),
-    'm2absolviert': _('M2 absolviert'),
-    'berufserfahrung_monate': _('Berufserfahrung in Monaten'),
 
-    'ba_arzt': _('Arzt/Ärztin'),
-    'ba_krankenpflege': _('Pfleger*in'),
-    'ba_pflegehilfe': _('Pflegehelfer*in'),
-    'ba_anaesthesiepflege': _('Anästhesiepfleger*in'),
-    'ba_intensivpflege': _('Intensivpfleger*in'),
-    'ba_ota': _('OTA'),
-    'ba_mfa': _('MFA'),
-    'ba_mta_lta': _('MTA/LTA'),
-    'ba_rta': _('RTA'),
-    'ba_rettungssanitaeter': _('Rettungssanitäter*in'),
-    'ba_kinderbetreuung': _('Kinderbetreuer*in'),
-    'ba_hebamme': _('Hebamme'),
-    'ba_sprechstundenhilfe': _('Sprechstundenhilfe'),
-    'ba_labortechnische_assistenz': _('Labortechnische Assistenz'),
+# Form Labels for qualifications
 
-    'ba_famulatur': _('Famulatur'),
-    'ba_pflegepraktika': _('Pflegepraktika'),
-    'ba_fsj_krankenhaus': _('FSJ im Krankenhaus'),
-
-    'skill_coronascreening': _('Corona Screening in der ZINA'),
-    'skill_pflegeunterstuetzung': _('Unterstützung der Pflege'),
-    'skill_transportdienst': _('Hilfe im Transportdienst'),
-    'skill_kinderbetreuung': _('Kinderbetreuung'),
-    'skill_labortaetigkeiten': _('generelle Labortätigkeiten'),
-    'skill_drkblutspende': _('DRK Blutspende (auch Vorklinik)'),
-    'skill_hotline': _('Telefon Hotline'),
-    'skill_abstriche': _('Abstriche'),
-    'skill_patientenpflege': _('Patientenpflege (Waschen)'),
-    'skill_patientenlagerung': _('Patientenlagerung'),
-    'skill_opassistenz': _('OP Assistenz'),
-    'skill_blutentnahmedienst': _('Blutentnahmedienst'),
-    'skill_anrufe': _('Entgegennahme und Bearbeitung von Anrufen Hilfesuchender'),
-    'skill_infektionsnachverfolgung': _('Infektionsnachverfolgung'),
-    'skill_patientenaufnahme': _('Patientenaufnahme'),
-    'skill_edvkenntnisse': _('EDV Kenntnisse'),
-    'skill_zugaengelegen': _('Zugänge Legen'),
-    'skill_arztbriefeschreiben': _('Arztbriefe schreiben'),
-    'skill_blutkulturenabnehmen': _('Blutkulturen abnehmen'),
-    'skill_infusionenmischen': _('Infusionen mischen'),
-    'skill_ekgschreiben': _('EKG schreiben'),
-    'skill_ultraschall': _('Ultraschall'),
-    'skill_bgas': _('BGAs'),
-    'skill_beatmungsgeraetebedienen': _('Beatmungsgeräte Bedienen'),
+    'ausbildung_typ_arzt': _('Arzt/Ärztin'),
+    'ausbildung_typ_arzt_typ': _('Fachbereich'),
+    'ausbildung_typ_arzt_sonstige': _('Sonstige:'),
+    'ausbildung_typ_medstud': _('Medizinstudent_in'),
+    'ausbildung_typ_medstud_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_medstud_farmulaturen_anaesthesie': _('Famulatur Anästhesie'),
+    'ausbildung_typ_medstud_famulaturen_chirurgie': _('Famulatur Chirurgie'),
+    'ausbildung_typ_medstud_famulaturen_innere': _('Famulatur Innere'),
+    'ausbildung_typ_medstud_famulaturen_intensiv': _('Famulatur Intensivmedizin'),
+    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Famulatur Notaufnahme'),
+    'ausbildung_typ_medstud_anerkennung_noetig': _('Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+    'ausbildung_typ_mfa': _('Medizinische_r Fachangestellte_r'),
+    'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_mtla': _('Medizinisch-technische_r Laboratoriumsassistent_in'),
+    'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_mta': _('Medizinisch-technische_r Assistent_in'),
+    'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter_in/Rettungssanitäter_in'),
+    'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_sani': _('Rettungssanitäter_in/Rettungshelfer_in'),
+    'ausbildung_typ_zahni': _('Zahnmedizinstudent_in'),
+    'ausbildung_typ_zahni_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_kinderbetreung': _('Kinderbetreuer_in'),
+    'ausbildung_typ_kinderbetreung_ausgebildet': _('Abgeschlossene Ausbildung'),
+    'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
+    'ausbildung_typ_sonstige': _('Sonstige'),
+    'ausbildung_typ_sonstige_eintragen':_('Bitte die Qualifikationen hier eintragen'),
+    'datenschutz_zugestimmt':_('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
+    'einwilligung_datenweitergabe':_('Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
+    'wunsch_ort_arzt':_('Arztpraxis/Ordination'),
+    'wunsch_ort_gesundheitsamt':_('Gesundheitsamt'),
+    'wunsch_ort_krankenhaus':_('Krankeneinrichtungen'),
+    'wunsch_ort_pflege':_('Pflegeeinrichtungen'),
+    'wunsch_ort_rettungsdienst':_('Rettungsdienst'),
+    'wunsch_ort_labor':_('Labor'),
 }
-
-
-def create_skills(fields, radio_type):
-    rows = []
-    col = []
-    for f in fields:
-        if len(col) == 2:
-            rows.append(Row(*col, css_class="form-row"))
-            col = []
-        c = Column(radio_type(f), css_class='form-group col-md-6 mb-0')
-        col.append(c)
-    rows.append(Row(*col, css_class="form-row"))
-    return rows
-
-
-def create_radio_traffic_light(field):
-    return RadioButtons(field, option_label_class="btn btn-sm btn-light", template='input_buttongroup-traffic_light.html')
-
-def create_radio_progress_indicator(field):
-    return RadioButtons(field, option_label_class="btn btn-sm btn-info", template='input_buttongroup-progress_indicator.html')
-
 
 
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        exclude = ['uuid', 'registration_date','user']
+        exclude = ['uuid', 'registration_date', 'user']
         labels = form_labels
         help_texts = {
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
-            'plz': _('Bitte gib deine Postleitzahl ein'),
             'countrycode': _('Bitte wähle ein Land aus'),
-            'ba_famulatur': _('in Monaten'),
-            'ba_pflegepraktika': _('in Monaten'),
-            'ba_fsj_krankenhaus': _('in Monaten'),
+            'plz': _('bevorzugter Einsatzort'),
+            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.'),
         }
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
         self.fields['phone_number'].required = False
-        for field in SKILLS:
-            self.fields[field].required = False
-        for field in BERUF:
-            self.fields[field].required = False
-        for field in BERUF2_wo:
-            self.fields[field].required = False
 
         self.helper = FormHelper()
         self.helper.form_id = 'id-exampleForm'
@@ -152,44 +101,77 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('plz', css_class='form-group col-md-6 mb-0'),
-                Column('countrycode', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                Column('semester', css_class='form-group col-md-4 mb-0'),
-                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
                 Column('email', css_class='form-group col-md-6 mb-0'),
                 Column('phone_number', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
+
+            HTML("<h2>{}</h2>".format(_("Einsatz"))),
             Row(
-                Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
+                Column('plz', css_class='form-group col-md-4 mb-0'),
+                Column('countrycode', css_class='form-group col-md-4 mb-0'),
+                Column('umkreis', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
-            HTML("<h3>{}</h3>".format(_("Berufsausbildung"))),
-            HTML("<p>{}</p> <br>".format(_("Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
-            *create_skills(BERUF, create_radio_progress_indicator),
-            Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
-                css_class='form-row'),
-            HTML("<h2>{}</h2>".format(_("Fähigkeiten"))),
-                  HTML("<p>{}</p> <br>".format(_("Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
-            *create_skills(SKILLS, create_radio_traffic_light),
+            Row(
+                Column('availability_start', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            HTML("<h5>{}</h5>".format(_("Wunscheinsatzort"))),
+            Row(
+                Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_krankenhaus', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_pflege', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_rettungsdienst', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_labor', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
+                Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Div(
+                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                      AUSBILDUNGS_TYPEN.keys()]),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            *[
+                Div(
+                    HTML("<h2>{}</h2>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    Row(*[
+                        Column('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower()),
+                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                        for f in felder.keys()
+                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                    , css_class='hidden'
+                )
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items()
+            ]
+            ,
+            HTML('<hr>'),
+            HTML('<p class="text-left">'),
+            'datenschutz_zugestimmt',
+            HTML("</p>"),
+            HTML('<p class="text-left">'),
+            'einwilligung_datenweitergabe',
+            HTML("</p>"),
             HTML('<p class="text-center">'),
             Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
             HTML("</p>")
         )
+
+        logging.debug(self.helper.layout)
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise ValidationError(_("Diese Email ist bereits vergeben"))
         return email
-
 
 
 class StudentFormAndMail(StudentForm):
@@ -230,15 +212,7 @@ class StudentFormEditProfile(StudentForm):
                 css_class='form-row'
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-            HTML("<p>{}</p> <br>".format(_(
-                "Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen habt, dann müsst ihr nichts weiter angeben."))),
-            *create_skills(BERUF, create_radio_progress_indicator),
-            Row(*[Column(f, css_class='form-group ') for f in BERUF2_wo],
-                css_class='form-row'),
-            HTML("<h2>{}</h2>".format(_("Fähigkeiten"))),
-            HTML("<p>{}</p> <br>".format(_(
-                "Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. Damit können wir den individualisierbarere Suchanfragen für die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit ausgeführt habt."))),
-            *create_skills(SKILLS, create_radio_traffic_light),
+            # TODO: alle neuen felder hier auch hinzufügen!!!!!
             HTML('<p class="text-center">'),
             Submit('submit', _('Eintrag updaten')),
             HTML("</p>")
