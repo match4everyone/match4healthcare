@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.iamstudent',
     'apps.ineedstudent',
     'apps.accounts',
+    'djcelery_email',   # Asynchronous mail scheduler over celery
 ]
 
 MIDDLEWARE = [
@@ -145,13 +146,3 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-
-# Celery asynchronous mails
-INSTALLED_APPS += ("djcelery_email",)
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-
-CELERY_EMAIL_TASK_CONFIG = {
-    'rate_limit': '50/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
-    'name': 'djcelery_email_send',
-    'ignore_result': False,
-}

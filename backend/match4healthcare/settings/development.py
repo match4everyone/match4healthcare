@@ -21,8 +21,20 @@ DATABASES = {
 }
 
 # ##### CELARY CONFIGURATION ############################
-CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@localhost:5672'
-CELERY_TASK_SERIALIZER = 'pickle'
-CELERY_RESULT_SERIALIZER = 'pickle'
-CELERY_RESULT_BACKEND = "amqp"
-CELERY_ACCEPT_CONTENT =['pickle', 'json', 'msgpack', 'yaml']
+USE_ASYNC = False
+
+if USE_ASYNC:
+    # Celery asynchronous mails
+    EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
+    CELERY_EMAIL_TASK_CONFIG = {
+        'rate_limit': '50/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
+        'name': 'djcelery_email_send',
+        'ignore_result': False,
+    }
+
+    CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@localhost:5672'
+    CELERY_TASK_SERIALIZER = 'pickle'
+    CELERY_RESULT_SERIALIZER = 'pickle'
+    CELERY_RESULT_BACKEND = "amqp"
+    CELERY_ACCEPT_CONTENT =['pickle', 'json', 'msgpack', 'yaml']

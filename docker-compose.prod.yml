@@ -9,9 +9,11 @@ services:
       - '80:8000'
     networks:
       - network
+      - celery_network
     env_file:
       - backend.prod.env
       - database.prod.env
+      - celery.prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
@@ -31,5 +33,41 @@ services:
      - network
     command: postgres -c config_file=/etc/postgresql.conf
 
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.8
+    env_file:
+      - celery.prod.env
+    networks:
+      - celery_network
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq # Volume mount instead of bind mount. Please change to the same as the database
+
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - './backend:/match4healthcare-backend'
+    networks:
+      - network
+      - celery_network
+    env_file:
+      - backend.prod.env
+      - database.prod.env
+      - celery.prod.env
+    environment:
+     - C_FORCE_ROOT=true
+     - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
+    command: celery -A match4healthcare worker -l info
+    depends_on:
+      - database
+      - rabbit
+
 networks:
- network:
+  network:
+  celery_network:
+
+volumes:
+  rabbit_data:
+  #postgres_data:
