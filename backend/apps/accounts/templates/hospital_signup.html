@@ -15,7 +15,7 @@ Registrierung - Studierende
 {% block content %}
 
 <div style="height:40px"></div>
-<div class="container" style="margin-bottom: 45px;">
+<div class="container" style="margin-bottom: 55px;">
 	
     {% if user.is_authenticated %}
 	
@@ -35,17 +35,17 @@ Registrierung - Studierende
 	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Wir verbinden Helfende und Hilfesuchenden zu einem match4Healthcare!{% endblocktrans %}</h2>
        
             <div class="row" style="margin-top:30px;">
-                <div class="col-md-8 col-sm-10 col-12">
+                <div class="col-lg-10 col-sm-12 col-12">
 
                     <form method="post" action="signup_hospital">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ next }}">
 
                         {% crispy form_info form_info.helper %}
-                        <p>Vergebe ein Passwort für deine Anmeldung</p>
+                        <h4>Vergeben Sie ein Passwort für die Anmeldung</h4>
                         {{ form_signup|crispy }}
 
-                        <button type="submit" class="btn blue text-white btn-md">Sign up</button>
+                        <button type="submit" class="btn blue text-white btn-md">Registriere mich</button>
                     </form>
                 
            

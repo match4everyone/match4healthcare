@@ -31,30 +31,33 @@ Registrierung - Studierende
     {% endfor %}
 
     {% endif %}
-    <h1> {% blocktrans %}Mein Profil{% endblocktrans %} </h1>
+  
+	<h1 class="font-weight-light match4hc-title">{% blocktrans %}Ihre Daten{% endblocktrans %}</h1>
+		<h2 class="font-weight-light match4hc-title">{% blocktrans %}Aktualisieren Sie jederzeit Ihre Kontaktinfos.{% endblocktrans %}</h2>
+	
     <br>
 
-        <div class="card">
+        <div class="card" style="margin-bottom:35px;">
             <div class="card-header">
-                {% blocktrans %}Account{% endblocktrans %}
+                {% blocktrans %}Account Details{% endblocktrans %}
             </div>
             <div class="card-body">
                 <p>
-                    <a role="button" class="btn btn-primary" href="logout">Logout</a>
-                    <a role="button" class="btn btn-primary" href="/accounts/password_change">Change Password</a>
-                    <a role="button" class="btn btn-secondary" href="delete_me">Delete My Profile</a>
+                    <a role="button" class="btn blue text-white btn-md" href="logout">Logout</a>
+                    <a role="button" class="btn blue text-white btn-md" href="/accounts/password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
+                    <a role="button" class="btn btn-info" href="delete_me">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
                 </p>
                 <form action="profile_hospital" method="post">
                     {% csrf_token %}
                     {{emailform|crispy}}
-                    <button type="submit" class="btn btn-info">Update Mail</button>
+                    <button type="submit" class="btn btn-info">{% blocktrans %}E-Mail Adresse aktualisieren{% endblocktrans %}</button>
                 </form>
             </div>
         </div>
-        <hr>
+        
         <div class="card">
             <div class="card-header">
-                {% blocktrans %}Daten{% endblocktrans %}
+                {% blocktrans %}Informationen über Ihre Institution{% endblocktrans %}
             </div>
             <div class="card-body">
                 <form action="profile_hospital" method="post">

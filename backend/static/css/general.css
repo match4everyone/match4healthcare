@@ -191,7 +191,6 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 @media only screen and (max-width: 575px) {
 
 .form-group > div { display:block; }
-	.form-group { margin-bottom: 0.3rem;}
 	
 	.form-group label { margin-bottom: .1rem;}
 }
@@ -199,8 +198,10 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
 .form-group > div { display:block; }
-	.form-group { margin-bottom: 0.3rem;}
+	
 }
+
+.form-group label { margin-bottom: 0.2rem;}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) { 
 	
@@ -217,3 +218,12 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 	padding: 30px; 
 	
 }
+
+.login-form { padding:45px 0 65px 0;}
+
+ul { padding-left: 1rem; }
+form .blue {margin-top:15px;}
+
+.login-form .blue  { margin-top: 0px; }
+
+.login-card h4 { font-size: 1.3rem; }
