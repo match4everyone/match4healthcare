@@ -31,8 +31,7 @@ form_labels = {
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
-
-# Form Labels for qualifications
+    # Form Labels for qualifications
 
     'ausbildung_typ_arzt': _('Arzt/Ärztin'),
     'ausbildung_typ_arzt_typ': _('Fachbereich'),
@@ -44,7 +43,8 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_innere': _('Famulatur Innere'),
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Famulatur Intensivmedizin'),
     'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Famulatur Notaufnahme'),
-    'ausbildung_typ_medstud_anerkennung_noetig': _('Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+    'ausbildung_typ_medstud_anerkennung_noetig': _(
+        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
     'ausbildung_typ_mfa': _('Medizinische_r Fachangestellte_r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mtla': _('Medizinisch-technische_r Laboratoriumsassistent_in'),
@@ -60,16 +60,33 @@ form_labels = {
     'ausbildung_typ_kinderbetreung_ausgebildet': _('Abgeschlossene Ausbildung'),
     'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
     'ausbildung_typ_sonstige': _('Sonstige'),
-    'ausbildung_typ_sonstige_eintragen':_('Bitte die Qualifikationen hier eintragen'),
-    'datenschutz_zugestimmt':_('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
-    'einwilligung_datenweitergabe':_('Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
-    'wunsch_ort_arzt':_('Arztpraxis/Ordination'),
-    'wunsch_ort_gesundheitsamt':_('Gesundheitsamt'),
-    'wunsch_ort_krankenhaus':_('Krankeneinrichtungen'),
-    'wunsch_ort_pflege':_('Pflegeeinrichtungen'),
-    'wunsch_ort_rettungsdienst':_('Rettungsdienst'),
-    'wunsch_ort_labor':_('Labor'),
+    'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
+    'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
+    'einwilligung_datenweitergabe': _(
+        'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
+    'wunsch_ort_arzt': _('Arztpraxis/Ordination'),
+    'wunsch_ort_gesundheitsamt': _('Gesundheitsamt'),
+    'wunsch_ort_krankenhaus': _('Krankeneinrichtungen'),
+    'wunsch_ort_pflege': _('Pflegeeinrichtungen'),
+    'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
+    'wunsch_ort_labor': _('Labor'),
 }
+fields_for_button_group = ['ausbildung_typ_arzt_typ',
+                           'ausbildung_typ_medstud_abschnitt',
+                           'ausbildung_typ_mfa_abschnitt',
+                           'ausbildung_typ_mtla_abschnitt',
+                           'ausbildung_typ_mta_abschnitt',
+                           'ausbildung_typ_notfallsani_abschnitt',
+                           'ausbildung_typ_zahni_abschnitt']
+
+def button_group(field):
+    if field in fields_for_button_group:
+        return ButtonGroup(field)
+    return field
+
+def ButtonGroup(field):
+    return RadioButtons(field, option_label_class="btn btn-sm btn-light", template='input_buttongroup-any_indicator.html')
+
 
 
 class StudentForm(forms.ModelForm):
@@ -144,7 +161,7 @@ class StudentForm(forms.ModelForm):
                 Div(
                     HTML("<h2>{}</h2>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
-                        Column('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower()),
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
@@ -225,13 +242,10 @@ class StudentFormEditProfile(StudentForm):
         return email
 
 
-
-
 class EmailToSendForm(forms.ModelForm):
-
     class Meta:
         model = EmailToSend
-        fields = ['subject','message']
+        fields = ['subject', 'message']
         labels = {'subject': _('Betreff'),
                   'message': _('Nachrichtentext')}
         help_texts = {

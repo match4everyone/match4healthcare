@@ -119,7 +119,7 @@ wunschorte_prefix = 'wunsch_ort'
 for w in wunschorte:
     Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
 
-
+KEINE_ANGABE = 0
 #class Arzttyp(models.IntegerChoices):
 ANAESTHESIE = 1
 CHIRURGIE = 2
@@ -128,12 +128,12 @@ INTENSIV = 4
 NOTAUFNAHME = 5
 ANDERE = 6
 ARZT_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
     (ANAESTHESIE, _('Anästhesie')),
     (CHIRURGIE, _('Chirurgie')),
     (INNERE, _('Innere Medizin')),
     (INTENSIV, _('Intensivstation')),
-    (NOTAUFNAHME, _('Notaufnahme')),
-    (ANDERE, _('Andere')),
+    (NOTAUFNAHME, _('Notaufnahme'))
 )
 
 
@@ -142,6 +142,7 @@ VORKLINIK = 1
 KLINIK = 2
 PJ = 3
 MEDSTUD_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
     (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
     (PJ, _('Praktisches Jahr')),
@@ -152,6 +153,7 @@ MEDSTUD_CHOICES = (
 VORKLINIK = 1
 KLINIK = 2
 ZAHNSTUD_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil')),
     (KLINIK, _('Klinischer Teil')),
 )
@@ -163,6 +165,7 @@ JAHR_2 = 2
 JAHR_3 = 3
 BERUFSTAETIG = 4
 MFA_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
     (JAHR_1, _('1. Jahr')),
     (JAHR_2, _('2. Jahr')),
     (JAHR_3, _('3. Jahr')),
@@ -171,20 +174,22 @@ MFA_CHOICES = (
 
 
 #class NOTFALLSANIAbschnitt(models.IntegerChoices):
+
 JAHR_1 = 1
 JAHR_2 = 2
 BERUFSTAETIG = 4
 NOTFALLSANI_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
     (JAHR_1, _('1. Jahr')),
     (JAHR_2, _('2. Jahr')),
-    (BERUFSTAETIG, _('Berufstätig')),
+    (BERUFSTAETIG, _('Berufstätig'))
 )
 
 
 AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
-            'typ': models.IntegerField(choices=ARZT_CHOICES, blank=True,null=True),
+            'typ': models.IntegerField(choices=ARZT_CHOICES, default=0,null=True),
             'sonstige': models.CharField(max_length=50, blank=True, default='')
         },
     'MEDSTUD':
@@ -199,23 +204,23 @@ AUSBILDUNGS_TYPEN = {
         },
     'MFA':
         {
-            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0,null=True),
         },
     'MTLA':
         {
-            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0,null=True),
         },
     'MTA': {
-        'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True, null=True),
+        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
     },
     'NOTFALLSANI': {
-        'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, blank=True,null=True),
+        'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, default=0,null=True),
     },
     'SANI': {
 
     },
     'ZAHNI': {
-        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, null=True, blank=True)
+        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, blank=True)
     },
     'KINDERBETREUNG': {
         'ausgebildet': models.BooleanField(default=False),
