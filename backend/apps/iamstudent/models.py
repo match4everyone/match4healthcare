@@ -48,15 +48,15 @@ class Student(models.Model):
         GRUEN = 3
 
     #class Umkreise(models.IntegerChoices):
-    LESSFIVE = 1
-    LESSTEN = 2
-    LESSTWENTY = 3
-    MORETWENTY = 4
+    LESSTEN = 1
+    LESSTWENTY = 2
+    LESSFOURTY = 3
+    MOREFOURTY = 4
     UMKREIS_CHOICES = (
-        (LESSFIVE, _('<5 km')),
         (LESSTEN, _('<10 km')),
         (LESSTWENTY, _('<20 km')),
-        (MORETWENTY, _('>20 km')),
+        (LESSFOURTY, _('<40 km')),
+        (MOREFOURTY, _('>40 km')),
     )
 
     ## Database stuff
