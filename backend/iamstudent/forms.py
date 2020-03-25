@@ -2,12 +2,14 @@
 from django import forms
 from iamstudent.models import Student, EmailToSend
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from iamstudent.custom_crispy import RadioButtons
+from accounts.models import User
 
 SKILLS = ['skill_coronascreening', 'skill_pflegeunterstuetzung', 'skill_transportdienst', 'skill_kinderbetreuung',
           'skill_labortaetigkeiten', 'skill_drkblutspende', 'skill_hotline', 'skill_abstriche', 'skill_patientenpflege',
@@ -183,6 +185,14 @@ class StudentForm(forms.ModelForm):
             HTML("</p>")
         )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email
+
+
+
 class StudentFormAndMail(StudentForm):
     email = forms.EmailField()
 
@@ -234,6 +244,15 @@ class StudentFormEditProfile(StudentForm):
             Submit('submit', _('Eintrag updaten')),
             HTML("</p>")
         )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email
+
+
+
 
 class EmailToSendForm(forms.ModelForm):
 

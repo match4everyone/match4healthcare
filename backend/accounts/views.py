@@ -44,7 +44,7 @@ def student_signup(request):
         # check whether it's valid:
         if form.is_valid():
             user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
-            send_password_set_email(form.cleaned_data['email'])
+            send_password_set_email(form.cleaned_data['email'], request.META['HTTP_HOST'])
             return HttpResponseRedirect("/iamstudent/thanks")
 
     # if a GET (or any other method) we'll create a blank form
@@ -54,11 +54,10 @@ def student_signup(request):
     return render(request, 'student_signup.html', {'form': form})
 
 
-def send_password_set_email(email, template='registration/password_reset_email_.html'):
+def send_password_set_email(email, host, template='registration/password_reset_email_.html'):
     form = PasswordResetForm({'email': email})
     if form.is_valid():
-        # TODO: check how this domain override thing works
-        form.save(email_template_name=template, domain_override="localhost:8000")
+        form.save(email_template_name=template, domain_override=host)
 
 @transaction.atomic
 def register_student_in_db(request, mail):
