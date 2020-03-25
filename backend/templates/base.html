@@ -54,6 +54,7 @@
                     <li class="nav-item {% if "about" in request.path %}active{% endif %}">
                         <a class="nav-link" href="/about">{% blocktrans %}Über uns{% endblocktrans %}</a>
                     </li>
+                    {% if not user.is_authenticated %}
                     <li class="nav-item {% if "signup_student" in request.path %}active{% endif %} hide-home">
                         <a class="nav-link" href="/accounts/signup_student">{% blocktrans %}Ich will
                             helfen{% endblocktrans %}</a>
@@ -62,6 +63,7 @@
                         <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche
                             Hilfe{% endblocktrans %}</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
                         <a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
                     </li>
@@ -73,7 +75,8 @@
                     {% else %}
                     <li class="nav-item {% if "login" in request.path %}active{% endif %}">
                         <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
-                    </li> {% endif %}
+                    </li>
+                    {% endif %}
 
                 </ul>
                 <!--</div>
