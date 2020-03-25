@@ -40,11 +40,11 @@ Home
 		.logo-header { display:none; }
 
 		.home-title {
-  background-image: url(/static/img/mobile-bg-blank.jpg);
+  background-image: url({% static 'img/mobile-bg-blank.jpg' %});
 			padding: 120px 0px 70px 0px;
 			background-position:top;
-
-}
+  }
+  
 		.home-title h1 { font-size: 2rem;
 		color: #000943 !important;
 			text-align:center;
@@ -55,9 +55,10 @@ Home
 
 		.home-box-description { margin-bottom: 15px;}
 
-		.navbar { background-image: url(/static/img/mobile-bg-blank.jpg); background-size: cover;}
-
-	}
+		.navbar { 
+      background-image: url({% static 'img/mobile-bg-blank.jpg' %}); 
+      background-size: cover;}
+	  }
 
 	.navbar { -webkit-box-shadow: none;
 -moz-box-shadow: none;
@@ -75,7 +76,7 @@ Home
   <div class="home-title">
     <div class="container">
       <div class="row align-self-center align-items-center">
-        <div class="col-md-8 col-xl-5"> <img src="/static/img/match4healthcare-logo.svg" width="320px" class="logo-header">
+        <div class="col-md-8 col-xl-5"> <img src="{% static 'img/match4healthcare-logo.svg' %}" width="320px" class="logo-header">
           <h1 class="text-white font-weight-light">{% blocktrans %}In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden.{% endblocktrans %}</h1>
         </div>
       </div>
@@ -90,7 +91,7 @@ Home
           <b>{% blocktrans %}Helfende/r{% endblocktrans %}</b></h2>
         <p class="text-white home-box-description">{% blocktrans %}Ich möchte eine medizinische Einrichtung unerstützen.{% endblocktrans %}</p>
         <a href="/accounts/signup_student">
-        <button type="button" class="btn blue text-white btn-lg">Jetzt Hilfe anbieten
+        <button type="button" class="btn blue text-white btn-lg">{% blocktrans %}Jetzt Hilfe anbieten{% endblocktrans %}
         <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
         </svg>
@@ -105,7 +106,7 @@ Home
           <b>{% blocktrans %}Institution{% endblocktrans %}</b></h2>
         <p class="text-white home-box-description">{% blocktrans %}Wir haben Bedarf an Unterstützung.{% endblocktrans %}</p>
         <a href="/accounts/signup_hospital">
-        <button type="button" class="btn text-white btn-lg pink">Jetzt Hilfe suchen
+        <button type="button" class="btn text-white btn-lg pink">{% blocktrans %}Jetzt Hilfe suchen{% endblocktrans %}
         <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
           <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
@@ -117,31 +118,29 @@ Home
   <div class="container" style="margin-top:55px;">
 <div class="row">
       <div class="col-md-12" style="text-align: left; margin: 0 auto;">
-        <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Gemeinsam unser Gesundheitssystem stärken, mit einem{% endblocktrans %} <img src="/static/img/match4healthcare-logo-text.svg" width="180px" style="vertical-align: baseline"></h2>
+        <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Gemeinsam unser Gesundheitssystem stärken, mit einem{% endblocktrans %} <img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline"></h2>
 		  <hr style="width:60%; margin: 0 auto; margin-bottom:45px; border-width: 2px; ">
       </div>
-	 
-	  <div class="col-lg-5" style="text-align: center; margin-bottom: 55px;">	  
-		  <div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZwdMESJav0" allowfullscreen></iframe>
-</div>
-	  </div>
-	
-	
- 
-      <div class="col-lg-7" style="text-align: left; margin-bottom: 55px;">
+
+      <div class="col-lg-7 order-sm-2 order-lg-3" style="text-align: left; margin-bottom: 55px;">
         <p>{% blocktrans %}Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je.{% endblocktrans %}</p>
         <p>{% blocktrans %}Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und vor allen Dingen eine effiziente Schnittstelle, zwischen den medizinischen Einrichtungen und Fachkräften. Eine Schnittstelle, die es ermöglicht, dass Hilfebietende und Hilfesuchende schnell und unkompliziert miteinander vernetzt werden.{% endblocktrans %}</p>
         <p>{% blocktrans %}Die Plattform "match4healthcare" bietet die ideale Schnittstelle zur schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor allem zu Zeiten wie jetzt die ideale Problemlösung.{% endblocktrans %}</p>
       </div>
-	
+	 
+	  <div class="col-lg-5 order-sm-3 order-lg-2" style="text-align: center; margin-bottom: 55px;">	  
+		  <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZwdMESJav0" allowfullscreen></iframe>
+      </div>
+	  </div>
+	</div></div></main>
 		  </div>
       <div class="col-lg-9 boxed logos-home" style="text-align: center; margin: 0 auto; margin-bottom: 45px;">
         <h2 style="text-align:center; font-size: 1.3rem; font-weight: 300; margin-bottom: 15px;  ">{% blocktrans %}Ein gemeinsames Projekt von{% endblocktrans %}</h2>
-        <a href="https://www.medis-vs-covid19.de" target="_blank"><img src="/static/img/medis-vs-covid.jpg" height="60px"></a> <a href="https://www.bvmd.de/" target="_blank"><img src="/static/img/bvmd.jpeg" height="80px"></a> <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="/static/img/hackaton.jpg" height="50px" style="margin:0px;"></a> </div>
+        <a href="https://www.medis-vs-covid19.de" target="_blank"><img src="{% static 'img/medis-vs-covid.jpg' %}" height="60px"></a> <a href="https://www.bvmd.de/" target="_blank"><img src="{% static 'img/bvmd.jpeg' %}" height="80px"></a> <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="{% static 'img/hackaton.jpg' %}" height="50px" style="margin:0px;"></a> </div>
       <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto; margin-bottom: 45px;">
         <h2 style="text-align:center; font-size: 1.3rem; font-weight: 300; margin-bottom: 15px;">{% blocktrans %}Mit Unterstützung von{% endblocktrans %}</h2>
-        <img src="/static/img/BAEK.png" height="60px"> <img src="/static/img/KBV-logo.png" height="80px" > <img src="/static/img/Hashtag-Gesundheit.png" height="50px"> <img src="/static/img/Budndnisjunger.jpg" height="130px"> <img src="/static/img/aerzteblatt_logo.svg" height="20px"> </div>
+        <img src="{% static 'img/BAEK.png' %}" height="60px"> <img src="{% static 'img/KBV-logo.png' %}" height="80px" > <img src="{% static 'img/Hashtag-Gesundheit.png' %}" height="50px"> <img src="{% static 'img/Budndnisjunger.jpg' %}" height="130px"> <img src="{% static 'img/aerzteblatt_logo.svg' %}" height="20px"> </div>
 
   </div>
 

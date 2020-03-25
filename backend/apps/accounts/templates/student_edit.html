@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+    <br>
+    <br>
+    {% if messages %}
+
+
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+    <h1> {% blocktrans %}Mein Profil{% endblocktrans %} </h1>
+    <br>
+
+    <div class="container">
+        <div class="card border-primary">
+            <div class="card-header">
+                {% blocktrans %}Account{% endblocktrans %}
+            </div>
+            <div class="card-body">
+                <p>
+                    <a role="button" class="btn btn-primary" href="logout">Logout</a>
+                    <a role="button" class="btn btn-primary" href="password_change">Change Password</a>
+                    <a role="button" class="btn btn-secondary" href="delete_me">Delete My Profile</a>
+                </p>
+                <form action="profile_student" method="post">
+                    {% csrf_token %}
+                    {{emailform|crispy}}
+                    <button type="submit" class="btn btn-info">Update Mail</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="card border-primary">
+            <div class="card-header">
+                {% blocktrans %}Daten{% endblocktrans %}
+            </div>
+            <div class="card-body">
+                <form action="profile_student" method="post">
+                    {% csrf_token %}
+                    {% crispy form form.helper %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endblock %}

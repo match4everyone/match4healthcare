@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+{% blocktrans %}Studierende Kontaktieren{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+
+    <p>
+
+    </p>
+</div>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h4>{% blocktrans %}Anzeige versenden{% endblocktrans %}</h4>
+        </div>
+        <div class="card-body">
+            <form action="/iamstudent/send_mail_student/{{ids}}" method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <p>
+       <button type="submit" class="btn btn-success">Sende Mails</button>
+                    {% blocktrans %}Du möchtest eine Email an <mark>{{n}} Studiererende</mark> schicken.{% endblocktrans %}
+    </p>
+                </form>
+        </div>
+    </div>
+    <hr>
+</div>
+{% endblock %}
