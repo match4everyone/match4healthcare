@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-25 01:39+0000\n"
+"POT-Creation-Date: 2020-03-25 02:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,12 +58,12 @@ msgid "Daten"
 msgstr "Data"
 
 #: accounts/templates/hospital_signup.html:22
-#: accounts/templates/student_signup.html:21
+#: accounts/templates/student_signup.html:58
 msgid " Sie sind bereits angemeldet. Hier geht es zum "
 msgstr ""
 
 #: accounts/templates/hospital_signup.html:26
-#: accounts/templates/student_signup.html:25
+#: accounts/templates/student_signup.html:62
 msgid " Schon registriert? Hier geht es zum "
 msgstr ""
 
@@ -189,11 +189,11 @@ msgstr ""
 msgid "Passwort zurücksetzen "
 msgstr "Reset password"
 
-#: accounts/templates/student_signup.html:33
+#: accounts/templates/student_signup.html:70
 msgid "Du sitzt zuhause und kannst in der aktuellen Situation helfen?"
 msgstr ""
 
-#: accounts/templates/student_signup.html:38
+#: accounts/templates/student_signup.html:75
 #, fuzzy
 #| msgid ""
 #| "Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, "
@@ -263,303 +263,367 @@ msgstr "Your e-Mail address has been updated!"
 msgid "Deine Daten wurden erfolgreich geändert!"
 msgstr "Your profile has been updated!"
 
-#: iamstudent/forms.py:30 iamstudent/forms.py:31
+#: iamstudent/forms.py:17 iamstudent/forms.py:18
 msgid "Writer"
 msgstr ""
 
-#: iamstudent/forms.py:33
+#: iamstudent/forms.py:20
 msgid "Vorname"
 msgstr "Given Name"
 
-#: iamstudent/forms.py:34
+#: iamstudent/forms.py:21
 msgid "Nachname"
 msgstr "Family Name"
 
-#: iamstudent/forms.py:35
+#: iamstudent/forms.py:22
 msgid "Telefonnummer"
 msgstr "Phone Number"
 
-#: iamstudent/forms.py:37
+#: iamstudent/forms.py:24
 msgid "Wohnort"
 msgstr "Postal code"
 
-#: iamstudent/forms.py:38 ineedstudent/forms.py:21
+#: iamstudent/forms.py:25 ineedstudent/forms.py:21
 msgid "Land"
 msgstr "Country"
 
-#: iamstudent/forms.py:39
+#: iamstudent/forms.py:26
 msgid "Email"
 msgstr "e-Mail"
 
-#: iamstudent/forms.py:41
+#: iamstudent/forms.py:28
 msgid "Semester"
 msgstr "Study Semester"
 
-#: iamstudent/forms.py:42
+#: iamstudent/forms.py:29
 msgid "Ich bin aktuell immatrikuliert"
 msgstr "I am currently a student"
 
-#: iamstudent/forms.py:43
+#: iamstudent/forms.py:30
 msgid "Ich bin verfügbar ab"
 msgstr "I am available starting"
 
-#: iamstudent/forms.py:45
+#: iamstudent/forms.py:32 iamstudent/models.py:30
 msgid "Ich benötige eine Vergütung"
 msgstr "I require compensation"
 
-#: iamstudent/forms.py:47
-msgid "Famulaturreife"
-msgstr "Qualified for internships"
-
-#: iamstudent/forms.py:48
-msgid "M2 absolviert"
-msgstr "2nd major exam (M2) completed"
-
-#: iamstudent/forms.py:49
-msgid "Berufserfahrung in Monaten"
-msgstr "Work experience in months"
-
-#: iamstudent/forms.py:51
+#: iamstudent/forms.py:37
 msgid "Arzt/Ärztin"
 msgstr "Medical doctor"
 
+#: iamstudent/forms.py:38
+msgid "Fachbereich"
+msgstr ""
+
+#: iamstudent/forms.py:39
+msgid "Sonstige:"
+msgstr ""
+
+#: iamstudent/forms.py:40
+#, fuzzy
+#| msgid "Medizinstudent (Charité Berlin)"
+msgid "Medizinstudent_in"
+msgstr "Medical student (Charité Berlin)"
+
+#: iamstudent/forms.py:41 iamstudent/forms.py:49 iamstudent/forms.py:51
+#: iamstudent/forms.py:53 iamstudent/forms.py:55 iamstudent/forms.py:58
+msgid "Ausbildungsabschnitt"
+msgstr ""
+
+#: iamstudent/forms.py:42
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Famulatur Anästhesie"
+msgstr "Qualified for internships"
+
+#: iamstudent/forms.py:43
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Famulatur Chirurgie"
+msgstr "Qualified for internships"
+
+#: iamstudent/forms.py:44
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Famulatur Innere"
+msgstr "Qualified for internships"
+
+#: iamstudent/forms.py:45
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Famulatur Intensivmedizin"
+msgstr "Qualified for internships"
+
+#: iamstudent/forms.py:46
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Famulatur Notaufnahme"
+msgstr "Qualified for internships"
+
+#: iamstudent/forms.py:47
+msgid ""
+"Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
+"Famulatur) ist wichtig"
+msgstr ""
+
+#: iamstudent/forms.py:48
+msgid "Medizinische_r Fachangestellte_r"
+msgstr ""
+
+#: iamstudent/forms.py:50
+msgid "Medizinisch-technische_r Laboratoriumsassistent_in"
+msgstr ""
+
 #: iamstudent/forms.py:52
-msgid "Pfleger*in"
-msgstr "Caregiver"
-
-#: iamstudent/forms.py:53
-msgid "Pflegehelfer*in"
-msgstr "Care assistant"
-
-#: iamstudent/forms.py:54
-msgid "Anästhesiepfleger*in"
-msgstr "Nurse anesthetist"
-
-#: iamstudent/forms.py:55
-msgid "Intensivpfleger*in"
-msgstr "Nurse ICU"
-
-#: iamstudent/forms.py:56
-msgid "OTA"
-msgstr "Surgeon Assistant"
-
-#: iamstudent/forms.py:57
-msgid "MFA"
-msgstr "GP Nurse"
-
-#: iamstudent/forms.py:58
-msgid "MTA/LTA"
-msgstr "Medical Technologist"
-
-#: iamstudent/forms.py:59
-msgid "RTA"
-msgstr "Medical Technologist (Radiology)"
-
-#: iamstudent/forms.py:60
-msgid "Rettungssanitäter*in"
-msgstr "Paramedic/EMT"
-
-#: iamstudent/forms.py:61
-msgid "Kinderbetreuer*in"
-msgstr "Child Carer"
-
-#: iamstudent/forms.py:62
-msgid "Hebamme"
-msgstr "Midwife"
-
-#: iamstudent/forms.py:63
-msgid "Sprechstundenhilfe"
-msgstr "Medical secretary"
-
-#: iamstudent/forms.py:64
-msgid "Labortechnische Assistenz"
+#, fuzzy
+#| msgid "Labortechnische Assistenz"
+msgid "Medizinisch-technische_r Assistent_in"
 msgstr "Medical Laboratory Scientist"
 
+#: iamstudent/forms.py:54
+#, fuzzy
+#| msgid "Rettungssanitäter*in"
+msgid "Notfallsanitäter_in/Rettungssanitäter_in"
+msgstr "Paramedic/EMT"
+
+#: iamstudent/forms.py:56
+#, fuzzy
+#| msgid "Rettungssanitäter*in"
+msgid "Rettungssanitäter_in/Rettungshelfer_in"
+msgstr "Paramedic/EMT"
+
+#: iamstudent/forms.py:57
+msgid "Zahnmedizinstudent_in"
+msgstr ""
+
+#: iamstudent/forms.py:59
+#, fuzzy
+#| msgid "Kinderbetreuer*in"
+msgid "Kinderbetreuer_in"
+msgstr "Child Carer"
+
+#: iamstudent/forms.py:60
+#, fuzzy
+#| msgid "Abgeschlossen"
+msgid "Abgeschlossene Ausbildung"
+msgstr "Completed"
+
+#: iamstudent/forms.py:61
+msgid "Lediglich Erfahrungen"
+msgstr ""
+
+#: iamstudent/forms.py:62
+msgid "Sonstige"
+msgstr ""
+
+#: iamstudent/forms.py:63
+msgid "Bitte die Qualifikationen hier eintragen"
+msgstr ""
+
+#: iamstudent/forms.py:64
+msgid "Hiermit akzeptiere ich die Datenschutzbedingungen."
+msgstr ""
+
+#: iamstudent/forms.py:65
+msgid ""
+"Ich bestätige, dass meine Angaben korrekt sind und ich der Institution "
+"meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner "
+"Kontaktdaten an die Institutionen bin ich einverstanden."
+msgstr ""
+
 #: iamstudent/forms.py:66
-msgid "Famulatur"
-msgstr "Clinical Internship"
+msgid "Arztpraxis/Ordination"
+msgstr ""
 
 #: iamstudent/forms.py:67
-msgid "Pflegepraktika"
-msgstr "Nursing internship"
+msgid "Gesundheitsamt"
+msgstr ""
 
 #: iamstudent/forms.py:68
-msgid "FSJ im Krankenhaus"
-msgstr "Voluntary social year at a hospital"
+msgid "Krankeneinrichtungen"
+msgstr ""
+
+#: iamstudent/forms.py:69
+#, fuzzy
+#| msgid "Pfleger*in"
+msgid "Pflegeeinrichtungen"
+msgstr "Caregiver"
 
 #: iamstudent/forms.py:70
-msgid "Corona Screening in der ZINA"
-msgstr "Corona Screening at central emergency admissions"
+#, fuzzy
+#| msgid "Rettungssanitäter*in"
+msgid "Rettungsdienst"
+msgstr "Paramedic/EMT"
 
 #: iamstudent/forms.py:71
-msgid "Unterstützung der Pflege"
-msgstr "Nursing Support"
-
-#: iamstudent/forms.py:72
-msgid "Hilfe im Transportdienst"
-msgstr "Transportation Support"
-
-#: iamstudent/forms.py:73
-msgid "Kinderbetreuung"
-msgstr "Child Care"
-
-#: iamstudent/forms.py:74
-msgid "generelle Labortätigkeiten"
-msgstr "general Laboratory tasks"
-
-#: iamstudent/forms.py:75
-msgid "DRK Blutspende (auch Vorklinik)"
-msgstr "Red Cross Blood Donations (preclinical too)"
-
-#: iamstudent/forms.py:76
-msgid "Telefon Hotline"
-msgstr "Phone Hotline"
-
-#: iamstudent/forms.py:77
-msgid "Abstriche"
-msgstr "Taking Smears"
-
-#: iamstudent/forms.py:78
-msgid "Patientenpflege (Waschen)"
-msgstr "Patient Nursing (washing)"
-
-#: iamstudent/forms.py:79
-msgid "Patientenlagerung"
-msgstr "Patient Positioning"
-
-#: iamstudent/forms.py:80
-msgid "OP Assistenz"
-msgstr "OR Assistence"
+msgid "Labor"
+msgstr ""
 
 #: iamstudent/forms.py:81
-msgid "Blutentnahmedienst"
-msgstr "Blood Sampling"
-
-#: iamstudent/forms.py:82
-msgid "Entgegennahme und Bearbeitung von Anrufen Hilfesuchender"
-msgstr "Phone Hotline"
-
-#: iamstudent/forms.py:83
-msgid "Infektionsnachverfolgung"
-msgstr "Contact Tracing"
-
-#: iamstudent/forms.py:84
-msgid "Patientenaufnahme"
-msgstr "Patient admissions"
-
-#: iamstudent/forms.py:85
-msgid "EDV Kenntnisse"
-msgstr "IT Knowledge"
-
-#: iamstudent/forms.py:86
-msgid "Zugänge Legen"
-msgstr "IV lines"
-
-#: iamstudent/forms.py:87
-msgid "Arztbriefe schreiben"
-msgstr "Writing discharge letters"
-
-#: iamstudent/forms.py:88
-msgid "Blutkulturen abnehmen"
-msgstr "Drawing Blood Cultures"
-
-#: iamstudent/forms.py:89
-msgid "Infusionen mischen"
-msgstr "Preparing IV therapy"
-
-#: iamstudent/forms.py:90
-msgid "EKG schreiben"
-msgstr "Taking ECGs"
-
-#: iamstudent/forms.py:91
-msgid "Ultraschall"
-msgstr "Ultrasound"
-
-#: iamstudent/forms.py:92
-msgid "BGAs"
-msgstr "Blood Gas Sampling"
-
-#: iamstudent/forms.py:93
-msgid "Beatmungsgeräte Bedienen"
-msgstr "Respirator Settings"
-
-#: iamstudent/forms.py:124
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: iamstudent/forms.py:125
-msgid "Bitte gib deine Postleitzahl ein"
-msgstr "Please enter your zip code"
-
-#: iamstudent/forms.py:126
+#: iamstudent/forms.py:82
 msgid "Bitte wähle ein Land aus"
 msgstr "Please select your country"
 
-#: iamstudent/forms.py:127 iamstudent/forms.py:128 iamstudent/forms.py:129
-msgid "in Monaten"
-msgstr "in monts"
+#: iamstudent/forms.py:83
+msgid "bevorzugter Einsatzort"
+msgstr ""
 
-#: iamstudent/forms.py:174 iamstudent/forms.py:232
+#: iamstudent/forms.py:84
+msgid "Hotline, Teststation etc."
+msgstr ""
+
+#: iamstudent/forms.py:109
+msgid "Einsatz"
+msgstr ""
+
+#: iamstudent/forms.py:121
+msgid "Wunscheinsatzort"
+msgstr ""
+
+#: iamstudent/forms.py:137 iamstudent/forms.py:214
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: iamstudent/forms.py:175 iamstudent/forms.py:234
-msgid ""
-"Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen oder "
-"angefangen habt. Falls ihr eine der Berufsausbildungen nicht angefangen "
-"habt, dann müsst ihr nichts weiter angeben."
-msgstr ""
-"Please indicate here which professional training you have already completed "
-"or started. If you have not started one of the vocational training courses, "
-"you do not need to enter anything."
-
-#: iamstudent/forms.py:179 iamstudent/forms.py:238
-msgid "Fähigkeiten"
-msgstr "Skills"
-
-#: iamstudent/forms.py:180 iamstudent/forms.py:240
-msgid ""
-"Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr beherrscht. "
-"Damit können wir den individualisierbarere Suchanfragen für die "
-"Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, gelb, "
-"grün) eine Aussage darüber abgeben, wie oft ihr bereits diese Tätigkeit "
-"ausgeführt habt."
-msgstr ""
-"Here you can indicate which activities and skills you have mastered. This "
-"will enable us to create more individualized search queries for those "
-"seeking help. In addition, you can use the traffic light system (red, "
-"yellow, green) to indicate how often you have already performed this "
-"activity."
-
-#: iamstudent/forms.py:190 iamstudent/forms.py:250 ineedstudent/forms.py:44
+#: iamstudent/forms.py:173 iamstudent/forms.py:224 ineedstudent/forms.py:44
 #: ineedstudent/forms.py:73
 msgid "Diese Email ist bereits vergeben"
 msgstr ""
 
-#: iamstudent/forms.py:243
+#: iamstudent/forms.py:217
 msgid "Eintrag updaten"
 msgstr "Update entry"
 
-#: iamstudent/forms.py:261
+#: iamstudent/forms.py:235
 msgid "Betreff"
 msgstr ""
 
-#: iamstudent/forms.py:262
+#: iamstudent/forms.py:236
 msgid "Nachrichtentext"
 msgstr ""
 
-#: iamstudent/forms.py:264
+#: iamstudent/forms.py:238
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr ""
 
-#: iamstudent/models.py:13
+#: iamstudent/models.py:12
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
-#: iamstudent/models.py:121 ineedstudent/models.py:52
+#: iamstudent/models.py:18
+msgid "You have to accept this"
+msgstr ""
+
+#: iamstudent/models.py:29
+msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
+msgstr ""
+
+#: iamstudent/models.py:39
+msgid "10h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:40
+msgid "20h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:41
+msgid "30h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:42
+msgid "40h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:56
+msgid "<5 km"
+msgstr ""
+
+#: iamstudent/models.py:57
+msgid "<10 km"
+msgstr ""
+
+#: iamstudent/models.py:58
+msgid "<20 km"
+msgstr ""
+
+#: iamstudent/models.py:59
+msgid ">20 km"
+msgstr ""
+
+#: iamstudent/models.py:113 ineedstudent/models.py:52
 msgid " ist keine Postleitzahl in "
 msgstr " is not a valid ZIP code in "
+
+#: iamstudent/models.py:131
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Anästhesie"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:132
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Chirurgie"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:133
+msgid "Innere Medizin"
+msgstr ""
+
+#: iamstudent/models.py:134
+#, fuzzy
+#| msgid "Institution"
+msgid "Intensivstation"
+msgstr "Institution"
+
+#: iamstudent/models.py:135
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Notaufnahme"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:136
+msgid "Andere"
+msgstr ""
+
+#: iamstudent/models.py:145
+msgid "Vorklinischer Teil (1.-5. Semester)"
+msgstr ""
+
+#: iamstudent/models.py:146
+msgid "Klinischer Teil (6.-10. Semester)"
+msgstr ""
+
+#: iamstudent/models.py:147
+msgid "Praktisches Jahr"
+msgstr ""
+
+#: iamstudent/models.py:155
+msgid "Vorklinischer Teil"
+msgstr ""
+
+#: iamstudent/models.py:156
+msgid "Klinischer Teil"
+msgstr ""
+
+#: iamstudent/models.py:166 iamstudent/models.py:178
+msgid "1. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:167 iamstudent/models.py:179
+msgid "2. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:168
+msgid "3. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:169 iamstudent/models.py:180
+msgid "Berufstätig"
+msgstr ""
 
 #: iamstudent/templates/emails_sent.html:19
 msgid " Die Helfer wurden kontaktiert. "
@@ -845,35 +909,6 @@ msgstr "Supported by"
 #~ msgid "  Registrierung - Hilfesuchende "
 #~ msgstr "Registration - students & volunteers"
 
-#~ msgid ""
-#~ "Wenn es zu der e-Mail Adresse einene Account gibt, haben wir Dir "
-#~ "Anweisungen zum Setzen eines neuen Passworts gesendet. Sie sollten in "
-#~ "Kürze eintreffen."
-#~ msgstr ""
-#~ " We’ve emailed you instructions for setting your password, if an account "
-#~ "exists with the email you entered. You should receive them shortly."
-
-#~ msgid ""
-#~ "Wenn Du kein e-Mail erhälst, prüfe bitte die eingegebene e-Mail Adresse "
-#~ "und schau in Deinen Spam-Ordner. "
-#~ msgstr ""
-#~ "If you don't receive an e-Mail from us, please double-check the entered e-"
-#~ "Mail addressand your spam folder."
-
-#, fuzzy
-#~| msgid ""
-#~| "Hast du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
-#~| "wir senden dir ein Neues zu."
-#~ msgid ""
-#~ "Hast Du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
-#~ "wir senden dir ein Neues zu."
-#~ msgstr ""
-#~ "Have you forgotten your password? Enter your e-mail address below and "
-#~ "we'll send you a new one."
-
-#~ msgid "e-Mail Adresse"
-#~ msgstr "e-mail address"
-
 #~ msgid "Liebe Studierende und Helfende,"
 #~ msgstr "Dear students and volunteers,"
 
@@ -924,6 +959,186 @@ msgstr "Supported by"
 
 #~ msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
 #~ msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
+
+#~ msgid "Famulaturreife"
+#~ msgstr "Qualified for internships"
+
+#~ msgid "M2 absolviert"
+#~ msgstr "2nd major exam (M2) completed"
+
+#~ msgid "Berufserfahrung in Monaten"
+#~ msgstr "Work experience in months"
+
+#~ msgid "Pfleger*in"
+#~ msgstr "Caregiver"
+
+#~ msgid "Pflegehelfer*in"
+#~ msgstr "Care assistant"
+
+#~ msgid "Anästhesiepfleger*in"
+#~ msgstr "Nurse anesthetist"
+
+#~ msgid "Intensivpfleger*in"
+#~ msgstr "Nurse ICU"
+
+#~ msgid "OTA"
+#~ msgstr "Surgeon Assistant"
+
+#~ msgid "MFA"
+#~ msgstr "GP Nurse"
+
+#~ msgid "MTA/LTA"
+#~ msgstr "Medical Technologist"
+
+#~ msgid "RTA"
+#~ msgstr "Medical Technologist (Radiology)"
+
+#~ msgid "Rettungssanitäter*in"
+#~ msgstr "Paramedic/EMT"
+
+#~ msgid "Kinderbetreuer*in"
+#~ msgstr "Child Carer"
+
+#~ msgid "Hebamme"
+#~ msgstr "Midwife"
+
+#~ msgid "Sprechstundenhilfe"
+#~ msgstr "Medical secretary"
+
+#~ msgid "Labortechnische Assistenz"
+#~ msgstr "Medical Laboratory Scientist"
+
+#~ msgid "Famulatur"
+#~ msgstr "Clinical Internship"
+
+#~ msgid "Pflegepraktika"
+#~ msgstr "Nursing internship"
+
+#~ msgid "FSJ im Krankenhaus"
+#~ msgstr "Voluntary social year at a hospital"
+
+#~ msgid "Corona Screening in der ZINA"
+#~ msgstr "Corona Screening at central emergency admissions"
+
+#~ msgid "Unterstützung der Pflege"
+#~ msgstr "Nursing Support"
+
+#~ msgid "Hilfe im Transportdienst"
+#~ msgstr "Transportation Support"
+
+#~ msgid "Kinderbetreuung"
+#~ msgstr "Child Care"
+
+#~ msgid "generelle Labortätigkeiten"
+#~ msgstr "general Laboratory tasks"
+
+#~ msgid "DRK Blutspende (auch Vorklinik)"
+#~ msgstr "Red Cross Blood Donations (preclinical too)"
+
+#~ msgid "Telefon Hotline"
+#~ msgstr "Phone Hotline"
+
+#~ msgid "Abstriche"
+#~ msgstr "Taking Smears"
+
+#~ msgid "Patientenpflege (Waschen)"
+#~ msgstr "Patient Nursing (washing)"
+
+#~ msgid "Patientenlagerung"
+#~ msgstr "Patient Positioning"
+
+#~ msgid "OP Assistenz"
+#~ msgstr "OR Assistence"
+
+#~ msgid "Blutentnahmedienst"
+#~ msgstr "Blood Sampling"
+
+#~ msgid "Entgegennahme und Bearbeitung von Anrufen Hilfesuchender"
+#~ msgstr "Phone Hotline"
+
+#~ msgid "Infektionsnachverfolgung"
+#~ msgstr "Contact Tracing"
+
+#~ msgid "Patientenaufnahme"
+#~ msgstr "Patient admissions"
+
+#~ msgid "EDV Kenntnisse"
+#~ msgstr "IT Knowledge"
+
+#~ msgid "Zugänge Legen"
+#~ msgstr "IV lines"
+
+#~ msgid "Arztbriefe schreiben"
+#~ msgstr "Writing discharge letters"
+
+#~ msgid "Blutkulturen abnehmen"
+#~ msgstr "Drawing Blood Cultures"
+
+#~ msgid "Infusionen mischen"
+#~ msgstr "Preparing IV therapy"
+
+#~ msgid "EKG schreiben"
+#~ msgstr "Taking ECGs"
+
+#~ msgid "Ultraschall"
+#~ msgstr "Ultrasound"
+
+#~ msgid "BGAs"
+#~ msgstr "Blood Gas Sampling"
+
+#~ msgid "Beatmungsgeräte Bedienen"
+#~ msgstr "Respirator Settings"
+
+#~ msgid "Bitte gib deine Postleitzahl ein"
+#~ msgstr "Please enter your zip code"
+
+#~ msgid "in Monaten"
+#~ msgstr "in months"
+
+#~ msgid "Fähigkeiten"
+#~ msgstr "Skills"
+
+#~ msgid ""
+#~ "Hier könnt ihr angeben, welche Tätigkeiten und Fähigkeiten ihr "
+#~ "beherrscht. Damit können wir den individualisierbarere Suchanfragen für "
+#~ "die Hilfesuchenden erstellen. Zudem könnt ihr über das Ampelsystem (rot, "
+#~ "gelb, grün) eine Aussage darüber abgeben, wie oft ihr bereits diese "
+#~ "Tätigkeit ausgeführt habt."
+#~ msgstr ""
+#~ "Here you can indicate which activities and skills you have mastered. This "
+#~ "will enable us to create more individualized search queries for those "
+#~ "seeking help. In addition, you can use the traffic light system (red, "
+#~ "yellow, green) to indicate how often you have already performed this "
+#~ "activity."
+
+#~ msgid ""
+#~ "Wenn es zu der e-Mail Adresse einene Account gibt, haben wir Dir "
+#~ "Anweisungen zum Setzen eines neuen Passworts gesendet. Sie sollten in "
+#~ "Kürze eintreffen."
+#~ msgstr ""
+#~ " We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+
+#~ msgid ""
+#~ "Wenn Du kein e-Mail erhälst, prüfe bitte die eingegebene e-Mail Adresse "
+#~ "und schau in Deinen Spam-Ordner. "
+#~ msgstr ""
+#~ "If you don't receive an e-Mail from us, please double-check the entered e-"
+#~ "Mail addressand your spam folder."
+
+#, fuzzy
+#~| msgid ""
+#~| "Hast du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
+#~| "wir senden dir ein Neues zu."
+#~ msgid ""
+#~ "Hast Du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
+#~ "wir senden dir ein Neues zu."
+#~ msgstr ""
+#~ "Have you forgotten your password? Enter your e-mail address below and "
+#~ "we'll send you a new one."
+
+#~ msgid "e-Mail Adresse"
+#~ msgstr "e-mail address"
 
 #~ msgid "Ich habe Bedarf an Unterstützung"
 #~ msgstr "I need support"

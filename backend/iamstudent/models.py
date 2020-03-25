@@ -7,30 +7,60 @@ from django.utils.translation import gettext as _
 from accounts.models import User
 from ineedstudent.models import Hospital
 
-
 def validate_semester(value):
     if value < 0:
         raise ValidationError(_("Semester darf nicht negativ sein"))
     else:
         return value
 
+def validate_checkbox(value):
+    if value != True:
+        raise ValidationError(_("You have to accept this"), code='invalid')
+    else:
+        return value
+
 
 class Student(models.Model):
-    """A typical class defining a model, derived from the Model class."""
 
-    class Bezahlung(models.IntegerChoices):
-        UNENTGELTLICH = 1
-        MINIJOB = 2
-        VOLLZEIT = 3
+    #class Bezahlung(models.IntegerChoices):
+    UNENTGELTLICH = 1
+    BEZAHLUNG = 4
+    BEZAHLUNG_CHOICES = (
+        (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
+        (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+    )
+
+    #class Verfuegbarkeiten(models.IntegerChoices):
+    TEN = 1
+    TWENTY = 2
+    THIRTY = 3
+    FOURTY = 4
+    VERFUEGBARKEIT_CHOICES = (
+        (TEN, _('10h pro Woche')),
+        (TWENTY, _('20h pro Woche')),
+        (THIRTY, _('30h pro Woche')),
+        (FOURTY, _('40h pro Woche')),
+    )
 
     class Ampel(models.IntegerChoices):
         ROT = 1
         GELB = 2
         GRUEN = 3
 
+    #class Umkreise(models.IntegerChoices):
+    LESSFIVE = 1
+    LESSTEN = 2
+    LESSTWENTY = 3
+    MORETWENTY = 4
+    UMKREIS_CHOICES = (
+        (LESSFIVE, _('<5 km')),
+        (LESSTEN, _('<10 km')),
+        (LESSTWENTY, _('<20 km')),
+        (MORETWENTY, _('>20 km')),
+    )
+
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-
 
     COUNTRY_CODE_CHOICES = [
         ("DE", 'Deutschland'),
@@ -41,7 +71,7 @@ class Student(models.Model):
         choices=COUNTRY_CODE_CHOICES,
         default="DE",
     )
-    #Allgemeines
+    # Allgemeines
 
     # vorerkrankungen
     # Berufserfahrung
@@ -53,59 +83,21 @@ class Student(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
-    plz = models.CharField(max_length=5, null=True)
     name_first = models.CharField(max_length=50, default='')
     name_last = models.CharField(max_length=50, default='')
     phone_number = models.CharField(max_length=100, blank=True, default='')
 
-    semester = models.IntegerField(null=True, validators=[validate_semester])
-    immatrikuliert = models.BooleanField(default=False)
+    plz = models.CharField(max_length=5, null=True)
+    umkreis = models.IntegerField(choices=UMKREIS_CHOICES, null=True, blank=False)
     availability_start = models.DateField(null=True)
-    braucht_bezahlung = models.IntegerField(choices=Bezahlung.choices, default=Bezahlung.UNENTGELTLICH)
 
-    ba_arzt = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_krankenpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_pflegehilfe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_anaesthesiepflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_intensivpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_ota = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_mfa = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_mta_lta = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_rta = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_rettungssanitaeter = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_kinderbetreuung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_hebamme = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_sprechstundenhilfe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    ba_labortechnische_assistenz = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
+    braucht_bezahlung = models.IntegerField(choices=BEZAHLUNG_CHOICES,
+                                            default=UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
 
-    ba_famulatur = models.CharField(max_length=100,default='')
-    ba_pflegepraktika = models.CharField(max_length=100,default='')
-    ba_fsj_krankenhaus = models.CharField(max_length=100,default='')
+    zeitliche_verfuegbarkeit = models.IntegerField(choices=VERFUEGBARKEIT_CHOICES, null=True, blank=False)
 
-    skill_coronascreening = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_pflegeunterstuetzung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_transportdienst = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_kinderbetreuung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_labortaetigkeiten = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_drkblutspende = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_hotline = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_abstriche = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenpflege = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenlagerung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_opassistenz = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_blutentnahmedienst = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_anrufe = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_infektionsnachverfolgung = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_patientenaufnahme = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_edvkenntnisse = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_zugaengelegen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_arztbriefeschreiben = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_blutkulturenabnehmen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_infusionenmischen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_ekgschreiben = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_ultraschall = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_bgas = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
-    skill_beatmungsgeraetebedienen = models.IntegerField(choices=Ampel.choices, default=Ampel.ROT)
+    datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
+    einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
     # Metadata
     class Meta:
@@ -120,18 +112,142 @@ class Student(models.Model):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
+
+"""Add stufff to model"""
+wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
+wunschorte_prefix = 'wunsch_ort'
+for w in wunschorte:
+    Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
+
+
+#class Arzttyp(models.IntegerChoices):
+ANAESTHESIE = 1
+CHIRURGIE = 2
+INNERE = 3
+INTENSIV = 4
+NOTAUFNAHME = 5
+ANDERE = 6
+ARZT_CHOICES = (
+    (ANAESTHESIE, _('Anästhesie')),
+    (CHIRURGIE, _('Chirurgie')),
+    (INNERE, _('Innere Medizin')),
+    (INTENSIV, _('Intensivstation')),
+    (NOTAUFNAHME, _('Notaufnahme')),
+    (ANDERE, _('Andere')),
+)
+
+
+#class MedstudAbschnitt(models.IntegerChoices):
+VORKLINIK = 1
+KLINIK = 2
+PJ = 3
+MEDSTUD_CHOICES = (
+    (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
+    (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
+    (PJ, _('Praktisches Jahr')),
+)
+
+
+#class ZahnstudAbschnitt(models.IntegerChoices):
+VORKLINIK = 1
+KLINIK = 2
+ZAHNSTUD_CHOICES = (
+    (VORKLINIK, _('Vorklinischer Teil')),
+    (KLINIK, _('Klinischer Teil')),
+)
+
+
+#class MFAAbschnitt(models.IntegerChoices):
+JAHR_1 = 1
+JAHR_2 = 2
+JAHR_3 = 3
+BERUFSTAETIG = 4
+MFA_CHOICES = (
+    (JAHR_1, _('1. Jahr')),
+    (JAHR_2, _('2. Jahr')),
+    (JAHR_3, _('3. Jahr')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
+#class NOTFALLSANIAbschnitt(models.IntegerChoices):
+JAHR_1 = 1
+JAHR_2 = 2
+BERUFSTAETIG = 4
+NOTFALLSANI_CHOICES = (
+    (JAHR_1, _('1. Jahr')),
+    (JAHR_2, _('2. Jahr')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
+AUSBILDUNGS_TYPEN = {
+    'ARZT':
+        {
+            'typ': models.IntegerField(choices=ARZT_CHOICES, blank=True,null=True),
+            'sonstige': models.CharField(max_length=50, blank=True, default='')
+        },
+    'MEDSTUD':
+        {
+            'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, blank=True),
+            'farmulaturen_anaesthesie': models.BooleanField(default=False),
+            'famulaturen_chirurgie': models.BooleanField(default=False),
+            'famulaturen_innere': models.BooleanField(default=False),
+            'famulaturen_intensiv': models.BooleanField(default=False),
+            'famulaturen_notaufnahme': models.BooleanField(default=False),
+            'anerkennung_noetig': models.BooleanField(default=False)
+        },
+    'MFA':
+        {
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
+        },
+    'MTLA':
+        {
+            'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True,null=True),
+        },
+    'MTA': {
+        'abschnitt': models.IntegerField(choices=MFA_CHOICES, blank=True, null=True),
+    },
+    'NOTFALLSANI': {
+        'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, blank=True,null=True),
+    },
+    'SANI': {
+
+    },
+    'ZAHNI': {
+        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, null=True, blank=True)
+    },
+    'KINDERBETREUNG': {
+        'ausgebildet': models.BooleanField(default=False),
+        'vorerfahrung': models.BooleanField(default=False),
+    },
+    'SONSTIGE': {
+        'eintragen': models.CharField(max_length=200, blank=True, default=False)
+    },
+}
+
+AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))
+
+columns = []
+for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
+    columns.append('ausbildung_typ_%s' % ausbildungs_typ.lower())
+    Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
+    for key, field in felder.items():
+        columns.append('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()))
+        Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
+print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
+
+"""End"""
+
 import django_filters
 from django import forms
 from django.db import models
 
-class StudentFilter(django_filters.FilterSet):
 
+class StudentFilter(django_filters.FilterSet):
     class Meta:
         model = Student
-        fields = {
-            'semester': ['lt', 'gt'],
-            'ba_arzt': ['isnull']
-        }
+        fields = {}
         filter_overrides = {
             models.BooleanField: {
                 'filter_class': django_filters.BooleanFilter,
