@@ -216,6 +216,9 @@ AUSBILDUNGS_TYPEN = {
     'NOTFALLSANI': {
         'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, default=0,null=True),
     },
+    'PFLEGE' :{
+        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
+    },
     'SANI': {
 
     },

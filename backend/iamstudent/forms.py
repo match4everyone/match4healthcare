@@ -32,6 +32,8 @@ form_labels = {
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications
+    'ausbildung_typ_pflege': _('Pflege (melde Dich auch hier: https://pflegereserve.de/#/login)'),
+    'ausbildung_typ_pflege_abschnitt': _('Ausbilsungsabschnitt'),
     'ausbildung_typ_physio': _('Physiotherapeut'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Habamme'),
@@ -82,14 +84,16 @@ fields_for_button_group = ['ausbildung_typ_arzt_typ',
                            'ausbildung_typ_notfallsani_abschnitt',
                            'ausbildung_typ_zahni_abschnitt']
 
+
 def button_group(field):
     if field in fields_for_button_group:
         return ButtonGroup(field)
     return field
 
-def ButtonGroup(field):
-    return RadioButtons(field, option_label_class="btn btn-sm btn-light", template='input_buttongroup-any_indicator.html')
 
+def ButtonGroup(field):
+    return RadioButtons(field, option_label_class="btn btn-sm btn-light",
+                        template='input_buttongroup-any_indicator.html')
 
 
 class StudentForm(forms.ModelForm):
@@ -101,7 +105,7 @@ class StudentForm(forms.ModelForm):
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
             'plz': _('bevorzugter Einsatzort'),
-            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.'),
+            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
         }
 
     def __init__(self, *args, **kwargs):
