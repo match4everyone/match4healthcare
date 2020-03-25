@@ -20,8 +20,8 @@
 <div class="container">
     <p>
         Profil:
-        <a role="button" class="btn btn-primary" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
-        <a role="button" class="btn btn-primary" href="/accounts/password_change">{% blocktrans %}Change Password{% endblocktrans %}</a>
+        <a role="button" class="btn btn-primary" href="logout">{% blocktrans %}Abmelden{% endblocktrans %}</a>
+        <a role="button" class="btn btn-primary" href="/accounts/password_change">{% blocktrans %}Kennwort ändern{% endblocktrans %}</a>
         <!-- In case the staff should be able to delete themselves:
         <a role="button" class="btn btn-secondary" href="delete_me">delete my profile</a>
         -->
@@ -43,7 +43,7 @@
     <hr>
     <div class="card border-info">
         <div class="card-header">
-            {% blocktrans %}Diese Hospitals warten auf deinen Approval{% endblocktrans %}
+            {% blocktrans %}Diese Hospitals warten auf deine Genehmigung{% endblocktrans %}
         </div>
         <div class="card-body">
             {% render_table table_unapproved %}
@@ -52,7 +52,7 @@
     <hr>
     <div class="card ">
         <div class="card-header">
-            {% blocktrans %}Diese Hospitals wurden schon approved, du kannst ihnen aber jederzeit die Berechtigung
+            {% blocktrans %}Diese Hospitals wurden schon genehmigt, du kannst ihnen aber jederzeit die Berechtigung
             entziehen. {% endblocktrans %}
         </div>
         <div class="card-body">
