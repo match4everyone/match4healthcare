@@ -239,10 +239,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
             # TODO: alle neuen felder hier auch hinzufügen!!!!!
-            HTML('<p class="text-center">'),
-            Submit('submit', _('Eintrag updaten')),
-            HTML("</p>")
-        )
+                        Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
+                  )
 
     def clean_email(self):
         email = self.cleaned_data['email']
