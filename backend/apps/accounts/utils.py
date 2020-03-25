@@ -2,7 +2,9 @@
 from random import choice
 from string import ascii_lowercase, digits
 from .models import User
-
+import logging
+logger = logging.getLogger(__name__)
+from django.contrib.auth.forms import PasswordResetForm
 
 def generate_random_username(length=16, chars=ascii_lowercase+digits, split=4, delimiter='-'):
 
@@ -18,3 +20,16 @@ def generate_random_username(length=16, chars=ascii_lowercase+digits, split=4, d
         return username
 
 
+
+def send_password_set_email(email, host, subject_template, template='registration/password_set_email_.html'):
+    form = PasswordResetForm({'email': email})
+    logger.debug("Sending Password reset to", email)
+    if form.is_valid():
+        form.save(
+            subject_template_name=subject_template,
+            html_email_template_name=template,
+            domain_override=host
+        )
+        logger.debug("Sent!")
+    else:
+        logger.warn("Email to " + str(emaiL) + " not sent because form is invalid")

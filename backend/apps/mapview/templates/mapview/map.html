@@ -58,10 +58,10 @@ $(window).on("resize", function () {
  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
  crossorigin=""/>
 <link rel="stylesheet" href="{% static 'css/map.css' %}">
-<!-- Make sure you put this AFTER Leaflet's CSS --> 
+<!-- Make sure you put this AFTER Leaflet's CSS -->
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script> 
+   crossorigin=""></script>
 {% endblock %}
 
 
@@ -91,21 +91,30 @@ $(window).on("resize", function () {
 	
 </div>
 <script type="text/javascript">
-	
+
 	var mymap = L.map('mapid').setView([51.13, 10.018], 6);
    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoiam9zYXVkZXIiLCJhIjoiY2s4MWNxa2QzMDNkejNrcDVhbzV6MDMxYSJ9.O4sLC7VSSgy4S7EKjNoG1g', {
-    attribution: ' <a href="https://www.mapbox.com/about/maps/">© Mapbox</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank"><strong>Improve this map</strong></a>',
+    attribution: ' <a href="https://www.mapbox.com/about/maps/">© Mapbox</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    preferCanvas: true,
-	   
+    preferCanvas: true, 
   }).addTo(mymap); 
 
- </script> 
+window.addEventListener('load', function() {
+  $(window).on("resize", function () {
+
+  		var height = $(window).height();
+  		var navHeight = $('.navbar').outerHeight();
+  		var searchHeight = $('.search-map').innerHeight();
+  		var footerHeight = $('.footer').innerHeight();
+  	  var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
+  		$("#mapid").height(newHeight);mymap.invalidateSize();
+}).trigger("resize");});
+</script>
 {% localize off %}
-  {% for location in locations %} 
+  {% for location in locations %}
 <script type="text/javascript">
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {
        color: 'blue',
@@ -116,9 +125,9 @@ $(window).on("resize", function () {
    })
    .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>Detailansicht</a>')
    .addTo(mymap);
-</script> 
+</script>
 {% endfor %}
- {% endlocalize %} 
+ {% endlocalize %}
 <script type="text/javascript">
   var gototable = function() {
       if ($('#search').val()) {
@@ -130,5 +139,5 @@ $(window).on("resize", function () {
           gototable();
       }
   });
-  </script> 
-{% endblock %} 
+  </script>
+{% endblock %}
