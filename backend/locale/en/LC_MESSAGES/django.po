@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-25 02:17+0000\n"
+"POT-Creation-Date: 2020-03-25 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,147 +18,152 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: accounts/templates/approve_hospitals.html:6
-#: ineedstudent/templates/list_hospitals_by_plz.html:6
-#: ineedstudent/templates/list_hospitals_by_plz.html:23
+#: apps/accounts/templates/approve_hospitals.html:6
+#: apps/ineedstudent/templates/list_hospitals_by_plz.html:6
+#: apps/ineedstudent/templates/list_hospitals_by_plz.html:23
 #, python-format
 msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
 msgstr "Help is needed in %(ort)s (%(plz)s):"
 
-#: accounts/templates/approve_hospitals.html:44
+#: apps/accounts/templates/approve_hospitals.html:44
 msgid "Diese Hospitals warten auf deinen Approval "
 msgstr ""
 
-#: accounts/templates/approve_hospitals.html:53
+#: apps/accounts/templates/approve_hospitals.html:53
 msgid ""
 "Diese Hospitals wurden schon approved, du kannst ihnen aber jederzeit die "
 "Berechtigung\n"
 "            entziehen. "
 msgstr ""
 
-#: accounts/templates/deleted_user.html:18
+#: apps/accounts/templates/deleted_user.html:18
 #, fuzzy
 #| msgid " Dein Passwort wurde geändert. "
 msgid " Dein Account wurde gelöscht. "
 msgstr "Your password has been changed."
 
-#: accounts/templates/hospital_edit.html:34
-#: accounts/templates/student_edit.html:34 templates/base.html:58
+#: apps/accounts/templates/hospital_edit.html:34
+#: apps/accounts/templates/student_edit.html:34 templates/base.html:61
 msgid "Mein Profil"
 msgstr "My profile"
 
-#: accounts/templates/hospital_edit.html:39
-#: accounts/templates/student_edit.html:40
+#: apps/accounts/templates/hospital_edit.html:39
+#: apps/accounts/templates/student_edit.html:40
 msgid "Account"
 msgstr "Account"
 
-#: accounts/templates/hospital_edit.html:57
-#: accounts/templates/student_edit.html:58
+#: apps/accounts/templates/hospital_edit.html:57
+#: apps/accounts/templates/student_edit.html:58
 msgid "Daten"
 msgstr "Data"
 
-#: accounts/templates/hospital_signup.html:22
-#: accounts/templates/student_signup.html:58
+#: apps/accounts/templates/hospital_signup.html:22
+#: apps/accounts/templates/student_signup.html:58
 msgid " Sie sind bereits angemeldet. Hier geht es zum "
 msgstr ""
 
-#: accounts/templates/hospital_signup.html:26
-#: accounts/templates/student_signup.html:62
+#: apps/accounts/templates/hospital_signup.html:26
+#: apps/accounts/templates/student_signup.html:62
 msgid " Schon registriert? Hier geht es zum "
 msgstr ""
 
-#: accounts/templates/hospital_signup.html:34
+#: apps/accounts/templates/hospital_signup.html:34
 msgid "Sie brauchen in Ihrer Institution aktuell Hilfe?"
 msgstr ""
 
-#: accounts/templates/registration/login.html:40
+#: apps/accounts/templates/hospital_signup.html:35
+#: apps/accounts/templates/student_signup.html:71
+msgid "Wir verbinden Helfende und Hilfesuchenden zu einem match4Healthcare!"
+msgstr ""
+
+#: apps/accounts/templates/registration/login.html:40
 #, fuzzy
 #| msgid "Passwort zurücksetzen "
 msgid "Passwort vergessen?"
 msgstr "Reset password"
 
-#: accounts/templates/registration/login.html:41
+#: apps/accounts/templates/registration/login.html:41
 #, fuzzy
 #| msgid "Passwort zurücksetzen "
 msgid "Passwort zurücksetzen"
 msgstr "Reset password"
 
-#: accounts/templates/registration/login.html:43
+#: apps/accounts/templates/registration/login.html:43
 msgid "Noch kein Account?"
 msgstr "No account yet?"
 
-#: accounts/templates/registration/login.html:44
+#: apps/accounts/templates/registration/login.html:44
 #, fuzzy
 #| msgid "Ich bin helfende/r"
 msgid "Ich bin Helfende/r"
 msgstr "I want to help"
 
-#: accounts/templates/registration/login.html:45
+#: apps/accounts/templates/registration/login.html:45
 #, fuzzy
 #| msgid "Wir sind eine"
 msgid "Wir sind eine Institution"
 msgstr "We are an"
 
-#: accounts/templates/registration/logout.html:19
+#: apps/accounts/templates/registration/logout.html:19
 msgid "Danke, dass Du heute etwas Zeit mit der Website verbracht hast."
 msgstr "Thanks for spending some quality time with this website."
 
-#: accounts/templates/registration/logout.html:21
+#: apps/accounts/templates/registration/logout.html:21
 msgid "Neu anmelden"
 msgstr "Login again"
 
-#: accounts/templates/registration/password_change_done_.html:18
+#: apps/accounts/templates/registration/password_change_done_.html:18
 msgid " Dein Passwort wurde geändert. "
 msgstr "Your password has been changed."
 
-#: accounts/templates/registration/password_change_form_.html:23
+#: apps/accounts/templates/registration/password_change_form_.html:23
 msgid " Please correct the error below. "
 msgstr ""
 
-#: accounts/templates/registration/password_change_form_.html:23
+#: apps/accounts/templates/registration/password_change_form_.html:23
 msgid " \"Please correct the errors below. "
 msgstr ""
 
-#: accounts/templates/registration/password_change_form_.html:28
-#: accounts/templates/registration/password_change_form_.html:49
+#: apps/accounts/templates/registration/password_change_form_.html:28
+#: apps/accounts/templates/registration/password_change_form_.html:49
 #, fuzzy
 #| msgid "Passwort zurücksetzen "
 msgid "Passwort Ändern"
 msgstr "Reset password"
 
-#: accounts/templates/registration/password_reset_complete_.html:18
+#: apps/accounts/templates/registration/password_reset_complete_.html:18
 msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen "
 msgstr ""
 
-#: accounts/templates/registration/password_reset_confirm_.html:22
+#: apps/accounts/templates/registration/password_reset_confirm_.html:22
 msgid "Neues Passwort"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_confirm_.html:35
+#: apps/accounts/templates/registration/password_reset_confirm_.html:35
 #, fuzzy
 #| msgid "Passwort zurücksetzen "
 msgid "Passwort Setzen"
 msgstr "Reset password"
 
-#: accounts/templates/registration/password_reset_confirm_.html:42
+#: apps/accounts/templates/registration/password_reset_confirm_.html:42
 msgid ""
 " Der Link zum setzen des Passworts ist nicht gültig. Eventuell wurde er "
 "bereits benutzt. "
 msgstr ""
 
-#: accounts/templates/registration/password_reset_done_.html:20
+#: apps/accounts/templates/registration/password_reset_done_.html:20
 msgid ""
 " We’ve emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
 
-#: accounts/templates/registration/password_reset_done_.html:21
+#: apps/accounts/templates/registration/password_reset_done_.html:21
 msgid ""
 " If you don’t receive an email, please make sure you’ve entered the address "
 "you registered with, and check your spam folder. "
 msgstr ""
 
-#: accounts/templates/registration/password_reset_email_.html:3
+#: apps/accounts/templates/registration/password_reset_email_.html:3
 msgid ""
 "\n"
 "Sie erhalten diese Mail um ein Passwort bei match4healthcare zu setzen.\n"
@@ -166,7 +171,7 @@ msgid ""
 "Bitte clicken sie auf den folgenden Link um ein Passwort zu wählen:\n"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_email_.html:13
+#: apps/accounts/templates/registration/password_reset_email_.html:13
 #, fuzzy
 #| msgid "Willkommen bei match4healthcare"
 msgid ""
@@ -175,25 +180,25 @@ msgid ""
 "ihr match4healthcare Team\n"
 msgstr "Welcome to match4healthcare"
 
-#: accounts/templates/registration/password_reset_form_.html:17
+#: apps/accounts/templates/registration/password_reset_form_.html:17
 #, fuzzy
 #| msgid "Passwort zurücksetzen "
 msgid "Passort vergessen?"
 msgstr "Reset password"
 
-#: accounts/templates/registration/password_reset_form_.html:18
+#: apps/accounts/templates/registration/password_reset_form_.html:18
 msgid "Gib deine Email-Addresse an und du erhältst ein neues Passwort"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_form_.html:25
+#: apps/accounts/templates/registration/password_reset_form_.html:25
 msgid "Passwort zurücksetzen "
 msgstr "Reset password"
 
-#: accounts/templates/student_signup.html:70
+#: apps/accounts/templates/student_signup.html:70
 msgid "Du sitzt zuhause und kannst in der aktuellen Situation helfen?"
 msgstr ""
 
-#: accounts/templates/student_signup.html:75
+#: apps/accounts/templates/student_signup.html:75
 #, fuzzy
 #| msgid ""
 #| "Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, "
@@ -212,11 +217,11 @@ msgstr ""
 "support. For this purpose, we ask you to provide the following information "
 "so that we can connect you with the appropriate requests."
 
-#: accounts/views.py:78
+#: apps/accounts/views.py:78
 msgid "Willkommen bei match4healthcare"
 msgstr "Welcome to match4healthcare"
 
-#: accounts/views.py:80
+#: apps/accounts/views.py:80
 #, fuzzy, python-format
 #| msgid ""
 #| "Hallo,\n"
@@ -255,427 +260,448 @@ msgstr ""
 "Thank you and kind Regards,\n"
 "Your match4healthcare Team"
 
-#: accounts/views.py:150 accounts/views.py:175
+#: apps/accounts/views.py:150 apps/accounts/views.py:175
 msgid "Deine Email wurde erfolgreich geändert!"
 msgstr "Your e-Mail address has been updated!"
 
-#: accounts/views.py:154 accounts/views.py:179
+#: apps/accounts/views.py:154 apps/accounts/views.py:179
 msgid "Deine Daten wurden erfolgreich geändert!"
 msgstr "Your profile has been updated!"
 
-#: iamstudent/forms.py:17 iamstudent/forms.py:18
+#: apps/iamstudent/forms.py:17 apps/iamstudent/forms.py:18
 msgid "Writer"
 msgstr ""
 
-#: iamstudent/forms.py:20
+#: apps/iamstudent/forms.py:20
 msgid "Vorname"
 msgstr "Given Name"
 
-#: iamstudent/forms.py:21
+#: apps/iamstudent/forms.py:21
 msgid "Nachname"
 msgstr "Family Name"
 
-#: iamstudent/forms.py:22
+#: apps/iamstudent/forms.py:22
 msgid "Telefonnummer"
 msgstr "Phone Number"
 
-#: iamstudent/forms.py:24
-msgid "Wohnort"
+#: apps/iamstudent/forms.py:24 apps/ineedstudent/forms.py:21
+msgid "Postleitzahl"
 msgstr "Postal code"
 
-#: iamstudent/forms.py:25 ineedstudent/forms.py:21
+#: apps/iamstudent/forms.py:25 apps/ineedstudent/forms.py:22
 msgid "Land"
 msgstr "Country"
 
-#: iamstudent/forms.py:26
+#: apps/iamstudent/forms.py:26
 msgid "Email"
 msgstr "e-Mail"
 
-#: iamstudent/forms.py:28
+#: apps/iamstudent/forms.py:28
 msgid "Semester"
 msgstr "Study Semester"
 
-#: iamstudent/forms.py:29
+#: apps/iamstudent/forms.py:29
 msgid "Ich bin aktuell immatrikuliert"
 msgstr "I am currently a student"
 
-#: iamstudent/forms.py:30
+#: apps/iamstudent/forms.py:30
 msgid "Ich bin verfügbar ab"
 msgstr "I am available starting"
 
-#: iamstudent/forms.py:32 iamstudent/models.py:30
+#: apps/iamstudent/forms.py:32 apps/iamstudent/models.py:30
 msgid "Ich benötige eine Vergütung"
 msgstr "I require compensation"
 
-#: iamstudent/forms.py:37
+#: apps/iamstudent/forms.py:35
+msgid ""
+"Pflege <em>(melde Dich auch bei <a href=\"https://pflegereserve.de/#/login"
+"\">Pflegereserve</a>)</em>"
+msgstr ""
+
+#: apps/iamstudent/forms.py:36
+msgid "Ausbilsungsabschnitt"
+msgstr ""
+
+#: apps/iamstudent/forms.py:37
+msgid "Physiotherapeut_in"
+msgstr ""
+
+#: apps/iamstudent/forms.py:38 apps/iamstudent/forms.py:45
+#: apps/iamstudent/forms.py:54 apps/iamstudent/forms.py:56
+#: apps/iamstudent/forms.py:58 apps/iamstudent/forms.py:60
+#: apps/iamstudent/forms.py:63
+msgid "Ausbildungsabschnitt"
+msgstr ""
+
+#: apps/iamstudent/forms.py:39
+msgid "Entbindungshelfer_in"
+msgstr ""
+
+#: apps/iamstudent/forms.py:40
+msgid "FSJ im Gesundheitswesen"
+msgstr ""
+
+#: apps/iamstudent/forms.py:41
 msgid "Arzt/Ärztin"
 msgstr "Medical doctor"
 
-#: iamstudent/forms.py:38
+#: apps/iamstudent/forms.py:42
 msgid "Fachbereich"
 msgstr ""
 
-#: iamstudent/forms.py:39
+#: apps/iamstudent/forms.py:43
 msgid "Sonstige:"
 msgstr ""
 
-#: iamstudent/forms.py:40
+#: apps/iamstudent/forms.py:44
 #, fuzzy
 #| msgid "Medizinstudent (Charité Berlin)"
 msgid "Medizinstudent_in"
 msgstr "Medical student (Charité Berlin)"
 
-#: iamstudent/forms.py:41 iamstudent/forms.py:49 iamstudent/forms.py:51
-#: iamstudent/forms.py:53 iamstudent/forms.py:55 iamstudent/forms.py:58
-msgid "Ausbildungsabschnitt"
-msgstr ""
-
-#: iamstudent/forms.py:42
+#: apps/iamstudent/forms.py:46
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Anästhesie"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:43
+#: apps/iamstudent/forms.py:47
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Chirurgie"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:44
+#: apps/iamstudent/forms.py:48
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Innere"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:45
+#: apps/iamstudent/forms.py:49
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Intensivmedizin"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:46
+#: apps/iamstudent/forms.py:50
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Notaufnahme"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:47
+#: apps/iamstudent/forms.py:52
 msgid ""
 "Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
 "Famulatur) ist wichtig"
 msgstr ""
 
-#: iamstudent/forms.py:48
+#: apps/iamstudent/forms.py:53
 msgid "Medizinische_r Fachangestellte_r"
 msgstr ""
 
-#: iamstudent/forms.py:50
+#: apps/iamstudent/forms.py:55
 msgid "Medizinisch-technische_r Laboratoriumsassistent_in"
 msgstr ""
 
-#: iamstudent/forms.py:52
+#: apps/iamstudent/forms.py:57
 #, fuzzy
 #| msgid "Labortechnische Assistenz"
 msgid "Medizinisch-technische_r Assistent_in"
 msgstr "Medical Laboratory Scientist"
 
-#: iamstudent/forms.py:54
+#: apps/iamstudent/forms.py:59
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Notfallsanitäter_in/Rettungssanitäter_in"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:56
+#: apps/iamstudent/forms.py:61
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungssanitäter_in/Rettungshelfer_in"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:57
+#: apps/iamstudent/forms.py:62
 msgid "Zahnmedizinstudent_in"
 msgstr ""
 
-#: iamstudent/forms.py:59
+#: apps/iamstudent/forms.py:64
 #, fuzzy
 #| msgid "Kinderbetreuer*in"
 msgid "Kinderbetreuer_in"
 msgstr "Child Carer"
 
-#: iamstudent/forms.py:60
+#: apps/iamstudent/forms.py:65
 #, fuzzy
 #| msgid "Abgeschlossen"
 msgid "Abgeschlossene Ausbildung"
 msgstr "Completed"
 
-#: iamstudent/forms.py:61
+#: apps/iamstudent/forms.py:66
 msgid "Lediglich Erfahrungen"
 msgstr ""
 
-#: iamstudent/forms.py:62
+#: apps/iamstudent/forms.py:67 apps/iamstudent/models.py:136
 msgid "Sonstige"
 msgstr ""
 
-#: iamstudent/forms.py:63
+#: apps/iamstudent/forms.py:68
 msgid "Bitte die Qualifikationen hier eintragen"
 msgstr ""
 
-#: iamstudent/forms.py:64
+#: apps/iamstudent/forms.py:69
 msgid "Hiermit akzeptiere ich die Datenschutzbedingungen."
 msgstr ""
 
-#: iamstudent/forms.py:65
+#: apps/iamstudent/forms.py:71
 msgid ""
 "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution "
 "meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner "
 "Kontaktdaten an die Institutionen bin ich einverstanden."
 msgstr ""
 
-#: iamstudent/forms.py:66
+#: apps/iamstudent/forms.py:72
 msgid "Arztpraxis/Ordination"
 msgstr ""
 
-#: iamstudent/forms.py:67
+#: apps/iamstudent/forms.py:73
 msgid "Gesundheitsamt"
 msgstr ""
 
-#: iamstudent/forms.py:68
+#: apps/iamstudent/forms.py:74
 msgid "Krankeneinrichtungen"
 msgstr ""
 
-#: iamstudent/forms.py:69
+#: apps/iamstudent/forms.py:75
 #, fuzzy
 #| msgid "Pfleger*in"
 msgid "Pflegeeinrichtungen"
 msgstr "Caregiver"
 
-#: iamstudent/forms.py:70
+#: apps/iamstudent/forms.py:76
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungsdienst"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:71
+#: apps/iamstudent/forms.py:77
 msgid "Labor"
 msgstr ""
 
-#: iamstudent/forms.py:81
+#: apps/iamstudent/forms.py:109
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: iamstudent/forms.py:82
+#: apps/iamstudent/forms.py:110
 msgid "Bitte wähle ein Land aus"
 msgstr "Please select your country"
 
-#: iamstudent/forms.py:83
-msgid "bevorzugter Einsatzort"
+#: apps/iamstudent/forms.py:111
+msgid "bevorzugter Einsatzort als Postleitzahl"
 msgstr ""
 
-#: iamstudent/forms.py:84
-msgid "Hotline, Teststation etc."
-msgstr ""
-
-#: iamstudent/forms.py:109
+#: apps/iamstudent/forms.py:137
 msgid "Einsatz"
 msgstr ""
 
-#: iamstudent/forms.py:121
+#: apps/iamstudent/forms.py:149
 msgid "Wunscheinsatzort"
 msgstr ""
 
-#: iamstudent/forms.py:137 iamstudent/forms.py:214
+#: apps/iamstudent/forms.py:165 apps/iamstudent/forms.py:242
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: iamstudent/forms.py:173 iamstudent/forms.py:224 ineedstudent/forms.py:44
-#: ineedstudent/forms.py:73
+#: apps/iamstudent/forms.py:201 apps/iamstudent/forms.py:252
+#: apps/ineedstudent/forms.py:45 apps/ineedstudent/forms.py:74
 msgid "Diese Email ist bereits vergeben"
 msgstr ""
 
-#: iamstudent/forms.py:217
+#: apps/iamstudent/forms.py:245
 msgid "Eintrag updaten"
 msgstr "Update entry"
 
-#: iamstudent/forms.py:235
+#: apps/iamstudent/forms.py:260
 msgid "Betreff"
 msgstr ""
 
-#: iamstudent/forms.py:236
+#: apps/iamstudent/forms.py:261
 msgid "Nachrichtentext"
 msgstr ""
 
-#: iamstudent/forms.py:238
+#: apps/iamstudent/forms.py:263
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr ""
 
-#: iamstudent/models.py:12
+#: apps/iamstudent/models.py:12
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
-#: iamstudent/models.py:18
+#: apps/iamstudent/models.py:18
 msgid "You have to accept this"
 msgstr ""
 
-#: iamstudent/models.py:29
+#: apps/iamstudent/models.py:29
 msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
 msgstr ""
 
-#: iamstudent/models.py:39
+#: apps/iamstudent/models.py:39
 msgid "10h pro Woche"
 msgstr ""
 
-#: iamstudent/models.py:40
+#: apps/iamstudent/models.py:40
 msgid "20h pro Woche"
 msgstr ""
 
-#: iamstudent/models.py:41
+#: apps/iamstudent/models.py:41
 msgid "30h pro Woche"
 msgstr ""
 
-#: iamstudent/models.py:42
+#: apps/iamstudent/models.py:42
 msgid "40h pro Woche"
 msgstr ""
 
-#: iamstudent/models.py:56
+#: apps/iamstudent/models.py:56
 msgid "<5 km"
 msgstr ""
 
-#: iamstudent/models.py:57
+#: apps/iamstudent/models.py:57
 msgid "<10 km"
 msgstr ""
 
-#: iamstudent/models.py:58
+#: apps/iamstudent/models.py:58
 msgid "<20 km"
 msgstr ""
 
-#: iamstudent/models.py:59
+#: apps/iamstudent/models.py:59
 msgid ">20 km"
 msgstr ""
 
-#: iamstudent/models.py:113 ineedstudent/models.py:52
+#: apps/iamstudent/models.py:113 apps/ineedstudent/models.py:52
 msgid " ist keine Postleitzahl in "
 msgstr " is not a valid ZIP code in "
 
-#: iamstudent/models.py:131
+#: apps/iamstudent/models.py:131
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Anästhesie"
 msgstr "Qualified for internships"
 
-#: iamstudent/models.py:132
+#: apps/iamstudent/models.py:132
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Chirurgie"
 msgstr "Qualified for internships"
 
-#: iamstudent/models.py:133
+#: apps/iamstudent/models.py:133
 msgid "Innere Medizin"
 msgstr ""
 
-#: iamstudent/models.py:134
+#: apps/iamstudent/models.py:134
 #, fuzzy
 #| msgid "Institution"
 msgid "Intensivstation"
 msgstr "Institution"
 
-#: iamstudent/models.py:135
+#: apps/iamstudent/models.py:135
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Notaufnahme"
 msgstr "Qualified for internships"
 
-#: iamstudent/models.py:136
-msgid "Andere"
+#: apps/iamstudent/models.py:145 apps/iamstudent/models.py:156
+#: apps/iamstudent/models.py:168 apps/iamstudent/models.py:182
+msgid "Keine Angabe"
 msgstr ""
 
-#: iamstudent/models.py:145
+#: apps/iamstudent/models.py:146
 msgid "Vorklinischer Teil (1.-5. Semester)"
 msgstr ""
 
-#: iamstudent/models.py:146
+#: apps/iamstudent/models.py:147
 msgid "Klinischer Teil (6.-10. Semester)"
 msgstr ""
 
-#: iamstudent/models.py:147
+#: apps/iamstudent/models.py:148
 msgid "Praktisches Jahr"
 msgstr ""
 
-#: iamstudent/models.py:155
+#: apps/iamstudent/models.py:157
 msgid "Vorklinischer Teil"
 msgstr ""
 
-#: iamstudent/models.py:156
+#: apps/iamstudent/models.py:158
 msgid "Klinischer Teil"
 msgstr ""
 
-#: iamstudent/models.py:166 iamstudent/models.py:178
+#: apps/iamstudent/models.py:169 apps/iamstudent/models.py:183
 msgid "1. Jahr"
 msgstr ""
 
-#: iamstudent/models.py:167 iamstudent/models.py:179
+#: apps/iamstudent/models.py:170 apps/iamstudent/models.py:184
 msgid "2. Jahr"
 msgstr ""
 
-#: iamstudent/models.py:168
+#: apps/iamstudent/models.py:171
 msgid "3. Jahr"
 msgstr ""
 
-#: iamstudent/models.py:169 iamstudent/models.py:180
+#: apps/iamstudent/models.py:172 apps/iamstudent/models.py:185
 msgid "Berufstätig"
 msgstr ""
 
-#: iamstudent/templates/emails_sent.html:19
+#: apps/iamstudent/templates/emails_sent.html:19
 msgid " Die Helfer wurden kontaktiert. "
 msgstr ""
 
-#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: apps/iamstudent/templates/input_buttongroup-progress_indicator.html:23
 msgid "Angefangen"
 msgstr "Started"
 
-#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
-#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: apps/iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: apps/iamstudent/templates/input_buttongroup-traffic_light.html:23
 msgid "Nie"
 msgstr "Never"
 
-#: iamstudent/templates/input_buttongroup-progress_indicator.html:23
+#: apps/iamstudent/templates/input_buttongroup-progress_indicator.html:23
 msgid "Abgeschlossen"
 msgstr "Completed"
 
-#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: apps/iamstudent/templates/input_buttongroup-traffic_light.html:23
 msgid "Selten"
 msgstr "Seldom"
 
-#: iamstudent/templates/input_buttongroup-traffic_light.html:23
+#: apps/iamstudent/templates/input_buttongroup-traffic_light.html:23
 msgid "Erfahren"
 msgstr "Experienced"
 
-#: iamstudent/templates/mail.html:3
+#: apps/iamstudent/templates/mail.html:3
 msgid "Select your student:"
 msgstr ""
 
-#: iamstudent/templates/send_mail_hospital.html:7
+#: apps/iamstudent/templates/send_mail_hospital.html:7
 msgid "Studierende Kontaktieren"
 msgstr "Contact Students"
 
-#: iamstudent/templates/send_mail_hospital.html:27
+#: apps/iamstudent/templates/send_mail_hospital.html:27
 #, fuzzy
 #| msgid " Anzeige stellen"
 msgid "Anzeige versenden"
 msgstr " List need for help"
 
-#: iamstudent/templates/send_mail_hospital.html:35
+#: apps/iamstudent/templates/send_mail_hospital.html:35
 #, fuzzy, python-format
 #| msgid "Du möchtest eine Email an %(n)s Studiererende schicken."
 msgid "Du möchtest eine Email an <mark>%(n)s Studiererende</mark> schicken."
 msgstr "You are about to send an e-Mail to %(n)s Students."
 
-#: iamstudent/templates/thanks.html:6
-#: ineedstudent/templates/thanks_hospital.html:6
+#: apps/iamstudent/templates/thanks.html:6
+#: apps/ineedstudent/templates/thanks_hospital.html:6
 msgid "Vielen Dank"
 msgstr "Thank you"
 
-#: iamstudent/templates/thanks.html:21
+#: apps/iamstudent/templates/thanks.html:21
 msgid ""
 "<h2>Willkommen bei match4healthcare,</h2>\n"
 "    <p>vielen Dank, dass du dich engagieren möchtest. Um deine Registrierung "
@@ -687,70 +713,66 @@ msgid ""
 "    "
 msgstr ""
 
-#: iamstudent/views.py:119
+#: apps/iamstudent/views.py:119
 msgid "subject :)"
 msgstr ""
 
-#: iamstudent/views.py:120
+#: apps/iamstudent/views.py:120
 #, python-format
 msgid "I want to hire you person of gender %s!, Contact me here: %s"
 msgstr ""
 
-#: ineedstudent/forms.py:16
+#: apps/ineedstudent/forms.py:17
 msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
 msgstr "Field of application? Requirements? ... and nice remarks :) "
 
-#: ineedstudent/forms.py:20
-msgid "Postleitzahl"
-msgstr "Postal code"
-
-#: ineedstudent/forms.py:22
+#: apps/ineedstudent/forms.py:23
 msgid "Name der Institution"
 msgstr "Name of institution"
 
-#: ineedstudent/forms.py:23
+#: apps/ineedstudent/forms.py:24
 msgid "Wichtige Infos über Euch und den potentiellen Einsatzbereich"
 msgstr "Important information about you and the potential field of application"
 
-#: ineedstudent/forms.py:61
+#: apps/ineedstudent/forms.py:62
 msgid "Schicke Mails"
 msgstr "Send Mails"
 
-#: ineedstudent/forms.py:62
+#: apps/ineedstudent/forms.py:63
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
-#: ineedstudent/forms.py:68
+#: apps/ineedstudent/forms.py:69
 msgid "Profil Aktualisieren"
 msgstr ""
 
-#: ineedstudent/templates/hospital_view.html:28
+#: apps/ineedstudent/templates/hospital_view.html:28
 msgid "Meldete euch bei: "
 msgstr ""
 
-#: ineedstudent/templates/hospital_view.html:29
+#: apps/ineedstudent/templates/hospital_view.html:29
 #, fuzzy
 #| msgid "Telefonnummer"
 msgid "Telefon:"
 msgstr "Phone Number"
 
-#: ineedstudent/templates/hospital_view.html:30
+#: apps/ineedstudent/templates/hospital_view.html:30
 msgid "Mail:"
 msgstr ""
 
-#: ineedstudent/templates/map_hospitals.html:7
+#: apps/ineedstudent/templates/map_hospitals.html:7
 msgid "Karte der Hilfesuchenden"
 msgstr "Facility Map"
 
-#: ineedstudent/templates/map_hospitals.html:58
+#: apps/ineedstudent/templates/map_hospitals.html:58
 msgid "Deutschland"
 msgstr "Germany"
 
-#: ineedstudent/templates/map_hospitals.html:59
+#: apps/ineedstudent/templates/map_hospitals.html:59
 msgid "Österreich"
 msgstr "Austria"
 
-#: ineedstudent/templates/thanks_hospital.html:21
+#: apps/ineedstudent/templates/thanks_hospital.html:21
 msgid ""
 "Vielen Dank für die Registrierung. Wir kontaktieren Sie, sobald sich "
 "passende Freiwillige bei uns eingetragen haben."
@@ -758,27 +780,27 @@ msgstr ""
 "Thank you for registering. We will contact you as soon as matching "
 "supporters have registered."
 
-#: mapview/templates/mapview/map.html:7
+#: apps/mapview/templates/mapview/map.html:7
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
 
-#: matchmedisvsvirus/settings/common.py:123
+#: match4healthcare/settings/common.py:123
 msgid "English"
 msgstr ""
 
-#: matchmedisvsvirus/settings/common.py:124
+#: match4healthcare/settings/common.py:124
 msgid "German"
 msgstr ""
 
-#: templates/about.html:6 templates/base.html:45
+#: templates/about.html:6 templates/base.html:48
 msgid "Über uns"
 msgstr "About us"
 
 #: templates/about.html:12
 #, fuzzy
-#| msgid "Team Match4Healthcare"
+#| msgid "Team Match4healthcare"
 msgid "Wir sind das Team von match4healthcare!"
-msgstr "Team Match4Healthcare"
+msgstr "Team match4healthcare"
 
 #: templates/about.html:14
 msgid ""
@@ -791,35 +813,35 @@ msgid ""
 "stellen uns vor:"
 msgstr ""
 
-#: templates/base.html:48
+#: templates/base.html:51
 msgid "Ich will helfen"
 msgstr "I want to help"
 
-#: templates/base.html:51
+#: templates/base.html:54
 msgid "Ich brauche Hilfe"
 msgstr "I need help"
 
-#: templates/base.html:54
+#: templates/base.html:57
 msgid "Helferkarte"
 msgstr "Map of volunteers"
 
-#: templates/base.html:62
+#: templates/base.html:65
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:79
+#: templates/base.html:82
 msgid "Ein Projekt im Rahmen des"
 msgstr "A submission of"
 
-#: templates/base.html:79
+#: templates/base.html:82
 msgid "Impressum"
 msgstr "Imprint"
 
-#: templates/base.html:79
+#: templates/base.html:82
 msgid "und"
 msgstr "and"
 
-#: templates/base.html:79
+#: templates/base.html:82
 msgid "Datenschutz"
 msgstr "Data protection"
 
@@ -903,6 +925,9 @@ msgstr "A joint project of"
 #: templates/home.html:141
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
+
+#~ msgid "Wohnort"
+#~ msgstr "Postal code"
 
 #, fuzzy
 #~| msgid "Registrierung - Studierende & Helfer"

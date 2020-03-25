@@ -1,0 +1,7 @@
+# This is a temporary file directory and should not be synced with git
+# Ignore all files
+*
+
+# Except for this .gitignore
+!.gitignore
+
