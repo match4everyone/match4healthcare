@@ -20,7 +20,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Orte filtern
+            Ort
         </div>
         <div class="card-body">
 
@@ -46,13 +46,29 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Blas filtern
+            Verfügbarkeit
         </div>
         <div class="card-body">
             <form method="get">
-                {{ filter.form.as_p }}
-                <input type="submit"/>
+                {% crispy filter_jobrequireform filter_jobrequireform.helper %}
             </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Eigenschaften
+        </div>
+        <div class="card-body">
+            <form method="get">
+                {{ filter_availability.form.as_p }}
+                <input type="submit" />
+            </form>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Table
         </div>
         <div class="card-body">
             {% render_table table %}
@@ -60,8 +76,8 @@
 
     </div>
     <p>
-        <button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken
-            &raquo;
+        <button class="btn blue text-white btn-lg" onclick="send()">
+            Email an ausgewählte Studierende schicken &raquo;
         </button>
     </p>
 
@@ -88,7 +104,7 @@
 
     var getrequest = function () {
         //console.log($('#plz').attr("value"));
-        window.location = "/ineedstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+        window.location = "/iamstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
     }
 </script>
 {% endblock %}

@@ -1,15 +1,16 @@
 # from django.forms import *
 from django import forms
-from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
+from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS, PersistenStudentFilterModel
 from django.db import models
 from django.core.exceptions import ValidationError
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Row, Column, Div, HTML
+from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.accounts.models import User
+from .widgets import MyRadioSelect, NullBooleanRadioSelect
 
 import logging
 
@@ -262,3 +263,26 @@ class EmailToSendForm(forms.ModelForm):
         help_texts = {
             'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
         }
+
+class PersistenStudentFilterForm(forms.ModelForm):
+    #executions = ['%s = forms.NullBooleanField(widget=MyRadioSelect)' % a for a in  AUSBILDUNGS_TYPEN_COLUMNS]
+    #for e in executions:
+    #    exec(e)
+
+    class Meta:
+        model = PersistenStudentFilterModel
+
+        exclude = ['hospital']
+
+    def __init__(self, *args, **kwargs):
+        super(PersistenStudentFilterForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'get'
+        self.helper.form_action = 'submit_survey'
+        self.helper.layout = Layout(
+            Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
+        )
+        self.helper.add_input(Submit('submit', _('Aktualisieren')))
+

@@ -19,45 +19,47 @@ def validate_checkbox(value):
     else:
         return value
 
+#class Bezahlung(models.IntegerChoices):
+UNENTGELTLICH = 1
+BEZAHLUNG = 4
+BEZAHLUNG_CHOICES = (
+    (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
+    (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+)
+
+#class Verfuegbarkeiten(models.IntegerChoices):
+TEN = 1
+TWENTY = 2
+THIRTY = 3
+FOURTY = 4
+VERFUEGBARKEIT_CHOICES = (
+    (TEN, _('10h pro Woche')),
+    (TWENTY, _('20h pro Woche')),
+    (THIRTY, _('30h pro Woche')),
+    (FOURTY, _('40h pro Woche')),
+)
+
+class Ampel(models.IntegerChoices):
+    ROT = 1
+    GELB = 2
+    GRUEN = 3
+
+#class Umkreise(models.IntegerChoices):
+LESSFIVE = 1
+LESSTEN = 2
+LESSTWENTY = 3
+MORETWENTY = 4
+UMKREIS_CHOICES = (
+    (LESSFIVE, _('<5 km')),
+    (LESSTEN, _('<10 km')),
+    (LESSTWENTY, _('<20 km')),
+    (MORETWENTY, _('>20 km')),
+)
+
+
 
 class Student(models.Model):
 
-    #class Bezahlung(models.IntegerChoices):
-    UNENTGELTLICH = 1
-    BEZAHLUNG = 4
-    BEZAHLUNG_CHOICES = (
-        (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
-        (BEZAHLUNG, _('Ich benötige eine Vergütung')),
-    )
-
-    #class Verfuegbarkeiten(models.IntegerChoices):
-    TEN = 1
-    TWENTY = 2
-    THIRTY = 3
-    FOURTY = 4
-    VERFUEGBARKEIT_CHOICES = (
-        (TEN, _('10h pro Woche')),
-        (TWENTY, _('20h pro Woche')),
-        (THIRTY, _('30h pro Woche')),
-        (FOURTY, _('40h pro Woche')),
-    )
-
-    class Ampel(models.IntegerChoices):
-        ROT = 1
-        GELB = 2
-        GRUEN = 3
-
-    #class Umkreise(models.IntegerChoices):
-    LESSFIVE = 1
-    LESSTEN = 2
-    LESSTWENTY = 3
-    MORETWENTY = 4
-    UMKREIS_CHOICES = (
-        (LESSFIVE, _('<5 km')),
-        (LESSTEN, _('<10 km')),
-        (LESSTWENTY, _('<20 km')),
-        (MORETWENTY, _('>20 km')),
-    )
 
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -111,6 +113,15 @@ class Student(models.Model):
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
+
+class PersistenStudentFilterModel(models.Model):
+
+    """
+    Persistent Filtering for the Student List
+    """
+
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
 
 
 """Add stufff to model"""
@@ -186,6 +197,16 @@ NOTFALLSANI_CHOICES = (
 )
 
 
+UNKNOWN = 0
+TRUE = 1
+FALSE = 2
+CHECKBOX_CHOICES = (
+            (UNKNOWN, _('Unknown')),
+            (TRUE, _('Yes')),
+            (FALSE, _('No')),
+        )
+
+
 AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
@@ -249,14 +270,28 @@ AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN
 
 columns = []
 for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
-    columns.append('ausbildung_typ_%s' % ausbildungs_typ.lower())
-    Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
+
+    # types
+    a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
+    columns.append(a_typ)
+    Student.add_to_class(a_typ, models.BooleanField(default=False))
+    PersistenStudentFilterModel.add_to_class(a_typ, models.NullBooleanField(blank=True))
+
     for key, field in felder.items():
         if key == 'empty':
             continue
-        columns.append('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()))
-        Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
-print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
+        a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
+        columns.append(a_typ_kind)
+        Student.add_to_class(a_typ_kind, field)
+
+# Generate Fields for translation
+# print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
+
+AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
+
+
+
+
 
 """End"""
 

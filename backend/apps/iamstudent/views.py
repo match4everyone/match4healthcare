@@ -8,9 +8,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
-from .filters import StudentFilter
+from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm
+from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
 from .models import Student, EmailToSend
 from match4healthcare.settings.common import NOREPLY_MAIL
 
@@ -127,22 +127,27 @@ def notify_student(student_id, contact):
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
-    print('start')
+
     if countrycode not in plzs or plz not in plzs[countrycode]:
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
-    print('---')
+
     lat, lon, ort = plzs[countrycode][plz]
 
     # TODO Consult with others how this should behave!
     if distance==0:
-        qs = Student.objects.filter(plz=plz, countrycode=countrycode)
+        qs_place = Student.objects.filter(plz=plz, countrycode=countrycode)
     else:
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        qs = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
-    print('---')
-    table = StudentTable(qs)
-    filter = StudentFilter(request.GET, queryset=Student.objects.all())
+        qs_place = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
+
+
+    filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs_place)
+    qs = filter_availability.qs
+
+    table = StudentTable(StudentJobRequirementsFilter(request.GET, queryset=qs).qs)
+
+    filter_jobrequireform = PersistenStudentFilterForm(request.GET)
 
     context = {
         'plz': plz,
@@ -150,7 +155,8 @@ def student_list_view(request, countrycode, plz, distance):
         'ort': ort,
         'distance': distance,
         'table': table,
-        'filter': filter
+        'filter_jobrequireform' : filter_jobrequireform,
+        'filter_availability' : filter_availability,
     }
 
     return render(request, 'student_list_view.html', context)
