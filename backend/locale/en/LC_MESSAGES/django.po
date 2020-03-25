@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-25 09:33+0000\n"
+"POT-Creation-Date: 2020-03-25 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,8 +284,8 @@ msgstr "Family Name"
 msgid "Telefonnummer"
 msgstr "Phone Number"
 
-#: apps/iamstudent/forms.py:24
-msgid "Wohnort"
+#: apps/iamstudent/forms.py:24 apps/ineedstudent/forms.py:21
+msgid "Postleitzahl"
 msgstr "Postal code"
 
 #: apps/iamstudent/forms.py:25 apps/ineedstudent/forms.py:22
@@ -312,206 +312,225 @@ msgstr "I am available starting"
 msgid "Ich benötige eine Vergütung"
 msgstr "I require compensation"
 
-#: apps/iamstudent/forms.py:37
-msgid "Arzt/Ärztin"
-msgstr "Medical doctor"
+#: apps/iamstudent/forms.py:35
+msgid ""
+"Pflege <em>(melde Dich auch bei <a href=\"https://pflegereserve.de/#/login"
+"\">Pflegereserve</a>)</em>"
+msgstr ""
 
-#: apps/iamstudent/forms.py:38
-msgid "Fachbereich"
+#: apps/iamstudent/forms.py:36
+msgid "Ausbilsungsabschnitt"
+msgstr ""
+
+#: apps/iamstudent/forms.py:37
+msgid "Physiotherapeut_in"
+msgstr ""
+
+#: apps/iamstudent/forms.py:38 apps/iamstudent/forms.py:45
+#: apps/iamstudent/forms.py:54 apps/iamstudent/forms.py:56
+#: apps/iamstudent/forms.py:58 apps/iamstudent/forms.py:60
+#: apps/iamstudent/forms.py:63
+msgid "Ausbildungsabschnitt"
 msgstr ""
 
 #: apps/iamstudent/forms.py:39
-msgid "Sonstige:"
+msgid "Entbindungshelfer_in"
 msgstr ""
 
 #: apps/iamstudent/forms.py:40
+msgid "FSJ im Gesundheitswesen"
+msgstr ""
+
+#: apps/iamstudent/forms.py:41
+msgid "Arzt/Ärztin"
+msgstr "Medical doctor"
+
+#: apps/iamstudent/forms.py:42
+msgid "Fachbereich"
+msgstr ""
+
+#: apps/iamstudent/forms.py:43
+msgid "Sonstige:"
+msgstr ""
+
+#: apps/iamstudent/forms.py:44
 #, fuzzy
 #| msgid "Medizinstudent (Charité Berlin)"
 msgid "Medizinstudent_in"
 msgstr "Medical student (Charité Berlin)"
 
-#: apps/iamstudent/forms.py:41 apps/iamstudent/forms.py:49
-#: apps/iamstudent/forms.py:51 apps/iamstudent/forms.py:53
-#: apps/iamstudent/forms.py:55 apps/iamstudent/forms.py:58
-msgid "Ausbildungsabschnitt"
-msgstr ""
-
-#: apps/iamstudent/forms.py:42
+#: apps/iamstudent/forms.py:46
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Anästhesie"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/forms.py:43
+#: apps/iamstudent/forms.py:47
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Chirurgie"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/forms.py:44
+#: apps/iamstudent/forms.py:48
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Innere"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/forms.py:45
+#: apps/iamstudent/forms.py:49
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Intensivmedizin"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/forms.py:46
+#: apps/iamstudent/forms.py:50
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Notaufnahme"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/forms.py:47
+#: apps/iamstudent/forms.py:52
 msgid ""
 "Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
 "Famulatur) ist wichtig"
 msgstr ""
 
-#: apps/iamstudent/forms.py:48
+#: apps/iamstudent/forms.py:53
 msgid "Medizinische_r Fachangestellte_r"
 msgstr ""
 
-#: apps/iamstudent/forms.py:50
+#: apps/iamstudent/forms.py:55
 msgid "Medizinisch-technische_r Laboratoriumsassistent_in"
 msgstr ""
 
-#: apps/iamstudent/forms.py:52
+#: apps/iamstudent/forms.py:57
 #, fuzzy
 #| msgid "Labortechnische Assistenz"
 msgid "Medizinisch-technische_r Assistent_in"
 msgstr "Medical Laboratory Scientist"
 
-#: apps/iamstudent/forms.py:54
+#: apps/iamstudent/forms.py:59
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Notfallsanitäter_in/Rettungssanitäter_in"
 msgstr "Paramedic/EMT"
 
-#: apps/iamstudent/forms.py:56
+#: apps/iamstudent/forms.py:61
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungssanitäter_in/Rettungshelfer_in"
 msgstr "Paramedic/EMT"
 
-#: apps/iamstudent/forms.py:57
+#: apps/iamstudent/forms.py:62
 msgid "Zahnmedizinstudent_in"
 msgstr ""
 
-#: apps/iamstudent/forms.py:59
+#: apps/iamstudent/forms.py:64
 #, fuzzy
 #| msgid "Kinderbetreuer*in"
 msgid "Kinderbetreuer_in"
 msgstr "Child Carer"
 
-#: apps/iamstudent/forms.py:60
+#: apps/iamstudent/forms.py:65
 #, fuzzy
 #| msgid "Abgeschlossen"
 msgid "Abgeschlossene Ausbildung"
 msgstr "Completed"
 
-#: apps/iamstudent/forms.py:61
+#: apps/iamstudent/forms.py:66
 msgid "Lediglich Erfahrungen"
 msgstr ""
 
-#: apps/iamstudent/forms.py:62
+#: apps/iamstudent/forms.py:67 apps/iamstudent/models.py:136
 msgid "Sonstige"
 msgstr ""
 
-#: apps/iamstudent/forms.py:63
+#: apps/iamstudent/forms.py:68
 msgid "Bitte die Qualifikationen hier eintragen"
 msgstr ""
 
-#: apps/iamstudent/forms.py:64
+#: apps/iamstudent/forms.py:69
 msgid "Hiermit akzeptiere ich die Datenschutzbedingungen."
 msgstr ""
 
-#: apps/iamstudent/forms.py:65
+#: apps/iamstudent/forms.py:71
 msgid ""
 "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution "
 "meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner "
 "Kontaktdaten an die Institutionen bin ich einverstanden."
 msgstr ""
 
-#: apps/iamstudent/forms.py:66
+#: apps/iamstudent/forms.py:72
 msgid "Arztpraxis/Ordination"
 msgstr ""
 
-#: apps/iamstudent/forms.py:67
+#: apps/iamstudent/forms.py:73
 msgid "Gesundheitsamt"
 msgstr ""
 
-#: apps/iamstudent/forms.py:68
+#: apps/iamstudent/forms.py:74
 msgid "Krankeneinrichtungen"
 msgstr ""
 
-#: apps/iamstudent/forms.py:69
+#: apps/iamstudent/forms.py:75
 #, fuzzy
 #| msgid "Pfleger*in"
 msgid "Pflegeeinrichtungen"
 msgstr "Caregiver"
 
-#: apps/iamstudent/forms.py:70
+#: apps/iamstudent/forms.py:76
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungsdienst"
 msgstr "Paramedic/EMT"
 
-#: apps/iamstudent/forms.py:71
+#: apps/iamstudent/forms.py:77
 msgid "Labor"
 msgstr ""
 
-#: apps/iamstudent/forms.py:81
+#: apps/iamstudent/forms.py:109
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: apps/iamstudent/forms.py:82
+#: apps/iamstudent/forms.py:110
 msgid "Bitte wähle ein Land aus"
 msgstr "Please select your country"
 
-#: apps/iamstudent/forms.py:83
-msgid "bevorzugter Einsatzort"
+#: apps/iamstudent/forms.py:111
+msgid "bevorzugter Einsatzort als Postleitzahl"
 msgstr ""
 
-#: apps/iamstudent/forms.py:84
-msgid "Hotline, Teststation etc."
-msgstr ""
-
-#: apps/iamstudent/forms.py:109
+#: apps/iamstudent/forms.py:137
 msgid "Einsatz"
 msgstr ""
 
-#: apps/iamstudent/forms.py:121
+#: apps/iamstudent/forms.py:149
 msgid "Wunscheinsatzort"
 msgstr ""
 
-#: apps/iamstudent/forms.py:137 apps/iamstudent/forms.py:214
+#: apps/iamstudent/forms.py:165 apps/iamstudent/forms.py:242
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: apps/iamstudent/forms.py:173 apps/iamstudent/forms.py:224
+#: apps/iamstudent/forms.py:201 apps/iamstudent/forms.py:252
 #: apps/ineedstudent/forms.py:45 apps/ineedstudent/forms.py:74
 msgid "Diese Email ist bereits vergeben"
 msgstr ""
 
-#: apps/iamstudent/forms.py:217
+#: apps/iamstudent/forms.py:245
 msgid "Eintrag updaten"
 msgstr "Update entry"
 
-#: apps/iamstudent/forms.py:235
+#: apps/iamstudent/forms.py:260
 msgid "Betreff"
 msgstr ""
 
-#: apps/iamstudent/forms.py:236
+#: apps/iamstudent/forms.py:261
 msgid "Nachrichtentext"
 msgstr ""
 
-#: apps/iamstudent/forms.py:238
+#: apps/iamstudent/forms.py:263
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr ""
 
@@ -591,43 +610,44 @@ msgstr "Institution"
 msgid "Notaufnahme"
 msgstr "Qualified for internships"
 
-#: apps/iamstudent/models.py:136
-msgid "Andere"
-msgstr ""
-
-#: apps/iamstudent/models.py:145
-msgid "Vorklinischer Teil (1.-5. Semester)"
+#: apps/iamstudent/models.py:145 apps/iamstudent/models.py:156
+#: apps/iamstudent/models.py:168 apps/iamstudent/models.py:182
+msgid "Keine Angabe"
 msgstr ""
 
 #: apps/iamstudent/models.py:146
-msgid "Klinischer Teil (6.-10. Semester)"
+msgid "Vorklinischer Teil (1.-5. Semester)"
 msgstr ""
 
 #: apps/iamstudent/models.py:147
+msgid "Klinischer Teil (6.-10. Semester)"
+msgstr ""
+
+#: apps/iamstudent/models.py:148
 msgid "Praktisches Jahr"
 msgstr ""
 
-#: apps/iamstudent/models.py:155
+#: apps/iamstudent/models.py:157
 msgid "Vorklinischer Teil"
 msgstr ""
 
-#: apps/iamstudent/models.py:156
+#: apps/iamstudent/models.py:158
 msgid "Klinischer Teil"
 msgstr ""
 
-#: apps/iamstudent/models.py:166 apps/iamstudent/models.py:178
+#: apps/iamstudent/models.py:169 apps/iamstudent/models.py:183
 msgid "1. Jahr"
 msgstr ""
 
-#: apps/iamstudent/models.py:167 apps/iamstudent/models.py:179
+#: apps/iamstudent/models.py:170 apps/iamstudent/models.py:184
 msgid "2. Jahr"
 msgstr ""
 
-#: apps/iamstudent/models.py:168
+#: apps/iamstudent/models.py:171
 msgid "3. Jahr"
 msgstr ""
 
-#: apps/iamstudent/models.py:169 apps/iamstudent/models.py:180
+#: apps/iamstudent/models.py:172 apps/iamstudent/models.py:185
 msgid "Berufstätig"
 msgstr ""
 
@@ -705,10 +725,6 @@ msgstr ""
 #: apps/ineedstudent/forms.py:17
 msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
 msgstr "Field of application? Requirements? ... and nice remarks :) "
-
-#: apps/ineedstudent/forms.py:21
-msgid "Postleitzahl"
-msgstr "Postal code"
 
 #: apps/ineedstudent/forms.py:23
 msgid "Name der Institution"
@@ -909,6 +925,9 @@ msgstr "A joint project of"
 #: templates/home.html:141
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
+
+#~ msgid "Wohnort"
+#~ msgstr "Postal code"
 
 #, fuzzy
 #~| msgid "Registrierung - Studierende & Helfer"
