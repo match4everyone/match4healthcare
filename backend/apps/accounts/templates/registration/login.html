@@ -14,17 +14,7 @@ Registrierung - Studierende
 
 {% block content %}
 <div class="container login-form">
-   
-    {% if form.non_field_errors %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {% for error in form.non_field_errors %}
-        <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
-        {% endfor %}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endif %}
+  
 	 <div class="col-lg-6 col-md-10 col-sm-12 col-12" style="margin: 0 auto;">
     <div class="card login-card">
        
@@ -36,6 +26,17 @@ Registrierung - Studierende
                 {{ form.password|as_crispy_field }}
  <button type="submit" class="btn blue text-white btn-md">Anmelden</button>
             </form>
+		 
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show" style="margin-top: 30px;" role="alert">
+        {% for error in form.non_field_errors %}
+        <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+        {% endfor %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
             <hr>
             <h4 class="font-weight-light">{% blocktrans %}Passwort vergessen?{% endblocktrans %}</h4>
             <a href="/accounts/password_reset"><p>{% blocktrans %}Passwort zurücksetzen{% endblocktrans %}</p></a>
@@ -43,6 +44,7 @@ Registrierung - Studierende
             <h4  class="font-weight-light">{% blocktrans %}Noch kein Account?{% endblocktrans %}</h4>
             <a href="/accounts/signup_student"><p style="margin-bottom: 0px;">{% blocktrans %}Ich bin Helfende/r{% endblocktrans %}</p></a>
             <a href="/accounts/signup_hospital"><p>{% blocktrans %}Wir sind eine Institution{% endblocktrans %}</p></a>
+		
         </div>
     </div>
 </div>
