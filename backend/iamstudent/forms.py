@@ -77,6 +77,8 @@ form_labels = {
     'wunsch_ort_labor': _('Labor'),
 }
 fields_for_button_group = ['ausbildung_typ_arzt_typ',
+'ausbildung_typ_pflege',
+                           'ausbildung_typ_physio_abschnitt',
                            'ausbildung_typ_medstud_abschnitt',
                            'ausbildung_typ_mfa_abschnitt',
                            'ausbildung_typ_mtla_abschnitt',

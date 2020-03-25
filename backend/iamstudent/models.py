@@ -194,7 +194,7 @@ AUSBILDUNGS_TYPEN = {
         },
     'MEDSTUD':
         {
-            'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, blank=True),
+            'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
             'farmulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
@@ -229,7 +229,7 @@ AUSBILDUNGS_TYPEN = {
 
     },
     'ZAHNI': {
-        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, blank=True)
+        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True)
     },
     'PHYSIO':{
         'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
@@ -239,7 +239,7 @@ AUSBILDUNGS_TYPEN = {
         'vorerfahrung': models.BooleanField(default=False),
     },
     'SONSTIGE': {
-        'eintragen': models.CharField(max_length=200, blank=True, default=False)
+        'eintragen': models.CharField(max_length=200, blank=True, default='keine')
     },
 }
 
