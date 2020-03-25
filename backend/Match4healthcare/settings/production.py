@@ -1,4 +1,4 @@
-from matchmedisvsvirus.settings.common import *
+from Match4healthcare.settings.common import *
 from django.utils.log import DEFAULT_LOGGING
 
 import logging
@@ -43,7 +43,7 @@ LOGGING = {
     	'applogfile': {
 	        'level':'ERROR',
 	        'class':'logging.handlers.RotatingFileHandler',
-	        'filename': os.path.join(PROJECT_DIR, 'matchmedisvsvirus.log'),
+	        'filename': os.path.join(PROJECT_DIR, 'Match4healthcare.log'),
 	        'maxBytes': 1024*1024*15, # 15MB
 	        'backupCount': 10,
     	},
