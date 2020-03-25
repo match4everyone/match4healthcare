@@ -3,7 +3,9 @@
 {% load i18n %}
 
 {% block title %}
+{% blocktrans %}
 Registrierung - Studierende
+{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -43,7 +45,7 @@ Registrierung - Studierende
             </div>
             <div class="card-body">
                 <p>
-                    <a role="button" class="btn blue text-white btn-md" href="logout">Logout</a>
+                    <a role="button" class="btn blue text-white btn-md" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
                     <a role="button" class="btn blue text-white btn-md" href="/accounts/password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
                     <a role="button" class="btn btn-info" href="delete_me">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
                 </p>

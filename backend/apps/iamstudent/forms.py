@@ -188,7 +188,7 @@ class StudentForm(forms.ModelForm):
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),            
-            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),          
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),          
         )
 
         logging.debug(self.helper.layout)
