@@ -19,3 +19,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'run', 'db.sqlite3'),
     }
 }
+
+# ##### CELARY CONFIGURATION ############################
+CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@localhost:5672'
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_RESULT_SERIALIZER = 'pickle'
+CELERY_RESULT_BACKEND = "amqp"
+CELERY_ACCEPT_CONTENT =['pickle', 'json', 'msgpack', 'yaml']
