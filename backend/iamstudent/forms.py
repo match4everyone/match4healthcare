@@ -9,6 +9,8 @@ from crispy_forms.layout import Submit, Layout, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from iamstudent.custom_crispy import RadioButtons
 
+import logging
+
 SKILLS = ['skill_coronascreening', 'skill_pflegeunterstuetzung', 'skill_transportdienst', 'skill_kinderbetreuung',
           'skill_labortaetigkeiten', 'skill_drkblutspende', 'skill_hotline', 'skill_abstriche', 'skill_patientenpflege',
           'skill_patientenlagerung', 'skill_opassistenz', 'skill_blutentnahmedienst', 'skill_anrufe',
@@ -173,7 +175,7 @@ class StudentForm(forms.ModelForm):
             HTML("</p>")
         )
 
-        print(self.helper.layout)
+        logging.debug(self.helper.layout)
 
 
 class StudentFormAndMail(StudentForm):
