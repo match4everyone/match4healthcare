@@ -27,6 +27,14 @@ BEZAHLUNG_CHOICES = (
     (BEZAHLUNG, _('Ich benötige eine Vergütung')),
 )
 
+
+CHECKBOX_CHOICES = [
+            ('unknown', _('Egal')),#Unknown
+            ('true', _('Muss')),
+            ('false', _('Darf Nicht')),
+        ]
+
+
 #class Verfuegbarkeiten(models.IntegerChoices):
 TEN = 1
 TWENTY = 2
@@ -123,6 +131,16 @@ class PersistenStudentFilterModel(models.Model):
     hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
 
 
+    ausbildung_typ_medstud_famulaturen_anaesthesie = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_chirurgie =models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_innere = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_intensiv = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_notaufnahme = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+
+    ausbildung_typ_medstud_anerkennung_noetig = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+
+
+
 
 """Add stufff to model"""
 wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
@@ -198,12 +216,6 @@ NOTFALLSANI_CHOICES = (
 
 
 
-CHECKBOX_CHOICES = [
-            ('unknown', _('Egal')),#Unknown
-            ('true', _('Muss')),
-            ('false', _('Darf Nicht')),
-        ]
-
 
 
 AUSBILDUNGS_TYPEN = {
@@ -217,7 +229,7 @@ AUSBILDUNGS_TYPEN = {
         {
             'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
             'empty': None,
-            'farmulaturen_anaesthesie': models.BooleanField(default=False),
+            'famulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
             'famulaturen_intensiv': models.BooleanField(default=False),
@@ -282,7 +294,12 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
         AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
         Student.add_to_class(a_typ_kind, field)
         # todo: switch type
-        PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+        if 'abschnitt' in a_typ_kind:
+            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+        elif 'famulatu' in a_typ_kind or 'noetig' in a_typ_kind:
+            pass
+        else:
+            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
 
 # Generate Fields for translation
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
