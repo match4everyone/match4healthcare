@@ -21,7 +21,7 @@ form_labels = {
     'name_last': _('Nachname'),
     'phone_number': _('Telefonnummer'),
 
-    'plz': _('Wohnort'),
+    'plz': _('Postleitzahl'),
     'countrycode': _('Land'),
     'email': _('Email'),
 
