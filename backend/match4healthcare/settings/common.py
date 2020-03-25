@@ -48,7 +48,7 @@ MIDDLEWARE = [
     
 ]
 
-ROOT_URLCONF = 'Match4healthcare.urls'
+ROOT_URLCONF = 'match4healthcare.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 NOREPLY_MAIL = 'noreply@medisvs.spahr.uberspace.de'
 
-WSGI_APPLICATION = 'Match4healthcare.wsgi.application'
+WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
 EMAIL_HOST = 'spahr.uberspace.de'
 EMAIL_PORT = 587

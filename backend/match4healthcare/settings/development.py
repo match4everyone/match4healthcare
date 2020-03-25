@@ -1,4 +1,4 @@
-from Match4healthcare.settings.common import *
+from match4healthcare.settings.common import *
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
