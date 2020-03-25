@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div style="height:40px"></div>
+<div class="container" style="margin-bottom: 45px;">
+	
+    {% if user.is_authenticated %}
+	
+	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
+	<hr><br>
+	
+	{% else %}
+	{% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
+	
+	
+        <a  href="/accounts/login_redirect">Login</a>.
+    <hr><br>
+	{% endif %}
+	
+
+    <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Sie brauchen in Ihrer Institution aktuell Hilfe?{% endblocktrans %} </h1>
+	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Wir verbinden Helfende und Hilfesuchenden zu einem match4Healthcare!{% endblocktrans %}</h2>
+       
+            <div class="row" style="margin-top:30px;">
+                <div class="col-md-8 col-sm-10 col-12">
+
+                    <form method="post" action="signup_hospital">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
+
+                        {% crispy form_info form_info.helper %}
+                        <p>Vergebe ein Passwort für deine Anmeldung</p>
+                        {{ form_signup|crispy }}
+
+                        <button type="submit" class="btn blue text-white btn-md">Sign up</button>
+                    </form>
+                
+           
+        </div>
+    </div>
+    
+</div>
+    {% endblock %}
