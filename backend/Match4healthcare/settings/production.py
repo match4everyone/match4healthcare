@@ -11,7 +11,8 @@ DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.de', 'medis-vs-covid19.de']
+ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.de',
+                 'medis-vs-covid19.de']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -23,7 +24,7 @@ DATABASES = {
         'USER': os.environ.get('POSTGRES_USER', ''),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
         'HOST': 'database',
-	'PORT': '5432',
+        'PORT': '5432',
     }
 }
 
@@ -40,16 +41,16 @@ LOGGING = {
         }
     },
     'handlers': {
-    	'applogfile': {
-	        'level':'ERROR',
-	        'class':'logging.handlers.RotatingFileHandler',
-	        'filename': os.path.join(PROJECT_DIR, 'Match4healthcare.log'),
-	        'maxBytes': 1024*1024*15, # 15MB
-	        'backupCount': 10,
-    	},
+        'applogfile': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'run', 'Match4healthcare.log'),
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+        },
     },
     'loggers': {
-	'django': {
+        'django': {
             'handlers': ['applogfile'],
             'level': 'ERROR',
             'propagate': True,
