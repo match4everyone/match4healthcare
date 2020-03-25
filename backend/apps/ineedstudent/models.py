@@ -9,8 +9,8 @@ from django.utils.translation import gettext as _
 
 
 # Create your models here.
+"""A typical class defining a model, derived from the Model class."""
 class Hospital(models.Model):
-    """A typical class defining a model, derived from the Model class."""
 
     ## Datenbankfeatures
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -37,6 +37,7 @@ class Hospital(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
+    appears_in_map = models.BooleanField(default=True)
 
     # Metadata
     class Meta:

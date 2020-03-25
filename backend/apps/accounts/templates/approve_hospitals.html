@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% blocktrans %}Verwalte Hilfesuchende (Admin){% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -29,6 +29,7 @@
     <p></p>
     <hr>
     <p>
+      {% blocktrans %}
     <h1>Liebes Staff-Mitglied,</h1></p>
     <p>Hier kannst du Hospitals, die sich angemeldet haben,
         <mark>die Berechtigung geben, Studierende anzusehen und zu kontaktieren</mark>
@@ -37,7 +38,7 @@
         <mark>Berechtigung wieder entziehen</mark>
         .
     </p>
-
+    {% endblockrans %}
     <hr>
     <div class="card border-info">
         <div class="card-header">
