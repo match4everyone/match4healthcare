@@ -16,8 +16,13 @@
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
+            let buttonStatus = false;
+            if (selectedFilterValue === "true")
+            {
+                 buttonStatus = true;
+            }
 
-            this.setQualificationSectionVisibility(qualificationId, selectedFilterValue !== "unknown" )
+            this.setQualificationSectionVisibility(qualificationId, buttonStatus )
         },
         setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
@@ -98,6 +103,10 @@
         <div class="card-body">
             <form method="get">
                 {{ filter_availability.form.as_p  }}
+                <input type="submit" />
+            </form>
+            <form method="get">
+                {{ filter_origin.form.as_p  }}
                 <input type="submit" />
             </form>
 
