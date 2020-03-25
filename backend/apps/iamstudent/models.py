@@ -267,12 +267,11 @@ AUSBILDUNGS_TYPEN = {
 
 AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))
 
-columns = []
+AUSBILDUNGS_DETAIL_COLUMNS = []
 for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
 
     # types
     a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
-    columns.append(a_typ)
     Student.add_to_class(a_typ, models.BooleanField(default=False))
     PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
@@ -280,8 +279,10 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
         if key == 'empty':
             continue
         a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
-        columns.append(a_typ_kind)
+        AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
         Student.add_to_class(a_typ_kind, field)
+        # todo: switch type
+        PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
 
 # Generate Fields for translation
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))

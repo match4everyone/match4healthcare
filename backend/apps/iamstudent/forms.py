@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS, PersistenStudentFilterModel
+from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLUMNS,AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS, PersistenStudentFilterModel
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -287,8 +287,8 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
         self.helper.form_action = 'submit_survey'
         self.helper.form_style = 'inline'
-        #for k in AUSBILDUNGS_TYPEN_COLUMNS:
-        #    self.fields[k].required = False
+        for k in AUSBILDUNGS_DETAIL_COLUMNS:
+            self.fields[k].required = False
         self.helper.layout = Layout(
             #Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
             Div(
@@ -299,7 +299,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                 css_id='div-berufsausbildung-dropdown',
             ),
             # todo einblenden der anderen felder
-            """*[
+            *[
                 Div(
                     HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
@@ -310,7 +310,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                     , css_class='hidden'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ]"""
+            ]
         )
         self.helper.add_input(Submit('submit', _('Aktualisieren')))
         print(self.helper.layout)
