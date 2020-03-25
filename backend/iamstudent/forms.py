@@ -78,12 +78,9 @@ class StudentForm(forms.ModelForm):
         help_texts = {
             'availability_start': _('Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21'),
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
-            'plz': _('Bitte gib deine Postleitzahl ein'),
             'countrycode': _('Bitte wähle ein Land aus'),
-            'ba_famulatur': _('in Monaten'),
-            'ba_pflegepraktika': _('in Monaten'),
-            'ba_fsj_krankenhaus': _('in Monaten'),
             'plz': _('bevorzugter Einsatzort'),
+            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.'),
         }
 
     def __init__(self, *args, **kwargs):
