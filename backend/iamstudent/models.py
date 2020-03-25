@@ -128,12 +128,12 @@ INTENSIV = 4
 NOTAUFNAHME = 5
 ANDERE = 6
 ARZT_CHOICES = (
-    (KEINE_ANGABE, _('Keine Angabe')),
     (ANAESTHESIE, _('Anästhesie')),
     (CHIRURGIE, _('Chirurgie')),
     (INNERE, _('Innere Medizin')),
     (INTENSIV, _('Intensivstation')),
-    (NOTAUFNAHME, _('Notaufnahme'))
+    (NOTAUFNAHME, _('Notaufnahme')),
+    (KEINE_ANGABE, _('Sonstige'))
 )
 
 
@@ -190,11 +190,13 @@ AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
             'typ': models.IntegerField(choices=ARZT_CHOICES, default=0,null=True),
-            #'sonstige': models.CharField(max_length=50, blank=True, default='')
+            'empty': None,
+            'sonstige': models.CharField(max_length=50, blank=True, default='anderer Bereich')
         },
     'MEDSTUD':
         {
             'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
+            'empty': None,
             'farmulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
@@ -250,6 +252,8 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     columns.append('ausbildung_typ_%s' % ausbildungs_typ.lower())
     Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
     for key, field in felder.items():
+        if key == 'empty':
+            continue
         columns.append('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()))
         Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
 print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))

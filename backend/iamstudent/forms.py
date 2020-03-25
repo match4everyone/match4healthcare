@@ -88,6 +88,8 @@ fields_for_button_group = ['ausbildung_typ_arzt_typ',
 
 
 def button_group(field):
+    if 'empty' in field:
+        return Column()
     if field in fields_for_button_group:
         return ButtonGroup(field)
     return field
@@ -168,7 +170,7 @@ class StudentForm(forms.ModelForm):
             ),
             *[
                 Div(
-                    HTML("<h2>{}</h2>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
                         Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
