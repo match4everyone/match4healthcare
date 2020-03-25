@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-25 08:48+0000\n"
+"POT-Creation-Date: 2020-03-25 09:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: match4healthcare/settings/common.py:123
-msgid "English"
-msgstr ""
-
-#: Match4healthcare/settings/common.py:124
-msgid "German"
-msgstr ""
 
 #: apps/accounts/templates/approve_hospitals.html:6
 #: apps/ineedstudent/templates/list_hospitals_by_plz.html:6
@@ -77,6 +69,11 @@ msgstr ""
 
 #: apps/accounts/templates/hospital_signup.html:34
 msgid "Sie brauchen in Ihrer Institution aktuell Hilfe?"
+msgstr ""
+
+#: apps/accounts/templates/hospital_signup.html:35
+#: apps/accounts/templates/student_signup.html:71
+msgid "Wir verbinden Helfende und Hilfesuchenden zu einem match4Healthcare!"
 msgstr ""
 
 #: apps/accounts/templates/registration/login.html:40
@@ -291,7 +288,7 @@ msgstr "Phone Number"
 msgid "Wohnort"
 msgstr "Postal code"
 
-#: apps/iamstudent/forms.py:25 apps/ineedstudent/forms.py:21
+#: apps/iamstudent/forms.py:25 apps/ineedstudent/forms.py:22
 msgid "Land"
 msgstr "Country"
 
@@ -498,7 +495,7 @@ msgid "Berufsausbildung"
 msgstr "Professional training"
 
 #: apps/iamstudent/forms.py:173 apps/iamstudent/forms.py:224
-#: apps/ineedstudent/forms.py:44 apps/ineedstudent/forms.py:73
+#: apps/ineedstudent/forms.py:45 apps/ineedstudent/forms.py:74
 msgid "Diese Email ist bereits vergeben"
 msgstr ""
 
@@ -705,31 +702,31 @@ msgstr ""
 msgid "I want to hire you person of gender %s!, Contact me here: %s"
 msgstr ""
 
-#: apps/ineedstudent/forms.py:16
+#: apps/ineedstudent/forms.py:17
 msgid "Einsatzbereiche? Anforderungen? ... und nette Worte :)"
 msgstr "Field of application? Requirements? ... and nice remarks :) "
 
-#: apps/ineedstudent/forms.py:20
+#: apps/ineedstudent/forms.py:21
 msgid "Postleitzahl"
 msgstr "Postal code"
 
-#: apps/ineedstudent/forms.py:22
+#: apps/ineedstudent/forms.py:23
 msgid "Name der Institution"
 msgstr "Name of institution"
 
-#: apps/ineedstudent/forms.py:23
+#: apps/ineedstudent/forms.py:24
 msgid "Wichtige Infos über Euch und den potentiellen Einsatzbereich"
 msgstr "Important information about you and the potential field of application"
 
-#: apps/ineedstudent/forms.py:61
+#: apps/ineedstudent/forms.py:62
 msgid "Schicke Mails"
 msgstr "Send Mails"
 
-#: apps/ineedstudent/forms.py:62
+#: apps/ineedstudent/forms.py:63
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
-#: apps/ineedstudent/forms.py:68
+#: apps/ineedstudent/forms.py:69
 msgid "Profil Aktualisieren"
 msgstr ""
 
@@ -770,6 +767,14 @@ msgstr ""
 #: apps/mapview/templates/mapview/map.html:7
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
+
+#: match4healthcare/settings/common.py:123
+msgid "English"
+msgstr ""
+
+#: match4healthcare/settings/common.py:124
+msgid "German"
+msgstr ""
 
 #: templates/about.html:6 templates/base.html:48
 msgid "Über uns"

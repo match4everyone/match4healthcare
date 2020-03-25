@@ -27,7 +27,7 @@ class Hospital(models.Model):
     )
 
     ## Kontaktdaten
-    email = models.EmailField(unique=True)
+    #email = models.EmailField(unique=True)
     sonstige_infos = models.TextField(default='')
     ansprechpartner = models.CharField(max_length=100,default='')
     telefon = models.CharField(max_length=100,default='')
@@ -40,12 +40,12 @@ class Hospital(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['email']
+        ordering = ['registration_date']
 
     # Methods
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.email
+        return self.uuid
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
