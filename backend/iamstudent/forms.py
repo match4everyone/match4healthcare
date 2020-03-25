@@ -36,7 +36,7 @@ form_labels = {
     'ausbildung_typ_pflege_abschnitt': _('Ausbilsungsabschnitt'),
     'ausbildung_typ_physio': _('Physiotherapeut'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_hebamme': _('Habamme'),
+    'ausbildung_typ_hebamme': _('Hebamme'),
     'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
     'ausbildung_typ_arzt': _('Arzt/Ärztin'),
     'ausbildung_typ_arzt_typ': _('Fachbereich'),

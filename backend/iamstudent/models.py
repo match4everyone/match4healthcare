@@ -190,7 +190,7 @@ AUSBILDUNGS_TYPEN = {
     'ARZT':
         {
             'typ': models.IntegerField(choices=ARZT_CHOICES, default=0,null=True),
-            'sonstige': models.CharField(max_length=50, blank=True, default='')
+            #'sonstige': models.CharField(max_length=50, blank=True, default='')
         },
     'MEDSTUD':
         {
