@@ -282,7 +282,26 @@ class PersistenStudentFilterForm(forms.ModelForm):
         self.helper.form_method = 'get'
         self.helper.form_action = 'submit_survey'
         self.helper.layout = Layout(
-            Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
+            #Row(*[Column(Field(a,widget=MyRadioSelect), css_class='form-group col-md-6 mb-0') for a in AUSBILDUNGS_TYPEN_COLUMNS])
+            Div(
+                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                      AUSBILDUNGS_TYPEN.keys()]),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            *[
+                Div(
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                        for f in felder.keys()
+                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                    , css_class='hidden'
+                )
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
+            ]
         )
         self.helper.add_input(Submit('submit', _('Aktualisieren')))
 
