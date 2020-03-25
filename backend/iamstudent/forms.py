@@ -73,7 +73,15 @@ form_labels = {
     'ausbildung_typ_kinderbetreung_ausgebildet': _('Abgeschlossene Ausbildung'),
     'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
     'ausbildung_typ_sonstige': _('Sonstige'),
-    'ausbildung_typ_sonstige_eintragen':_('Bitte die Qualifikationen hier eintragen')
+    'ausbildung_typ_sonstige_eintragen':_('Bitte die Qualifikationen hier eintragen'),
+    'datenschutz_zugestimmt':_('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
+    'einwilligung_datenweitergabe':_('Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
+    'wunsch_ort_arzt':_('Arztpraxis/Ordination'),
+    'wunsch_ort_gesundheitsamt':_('Gesundheitsamt'),
+    'wunsch_ort_krankenhaus':_('Krankeneinrichtungen'),
+    'wunsch_ort_pflege':_('Pflegeeinrichtungen'),
+    'wunsch_ort_rettungsdienst':_('Rettungsdienst'),
+    'wunsch_ort_labor':_('Labor'),
 }
 
 
@@ -91,7 +99,6 @@ class StudentForm(forms.ModelForm):
             'ba_pflegepraktika': _('in Monaten'),
             'ba_fsj_krankenhaus': _('in Monaten'),
             'plz': _('bevorzugter Einsatzort'),
-            'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.'),
         }
 
     def __init__(self, *args, **kwargs):
