@@ -3,7 +3,9 @@
 {% load i18n %}
 
 {% block title %}
+{% blocktrans %}
 Registrierung - Studierende
+{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -41,14 +43,14 @@ Registrierung - Studierende
             </div>
             <div class="card-body">
                 <p>
-                    <a role="button" class="btn btn-primary" href="logout">Logout</a>
-                    <a role="button" class="btn btn-primary" href="password_change">Change Password</a>
-                    <a role="button" class="btn btn-secondary" href="delete_me">Delete My Profile</a>
+                    <a role="button" class="btn btn-primary" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
+                    <a role="button" class="btn btn-primary" href="password_change">{% blocktrans %}Change Password{% endblocktrans %}</a>
+                    <a role="button" class="btn btn-secondary" href="delete_me">{% blocktrans %}Delete My Profile{% endblocktrans %}</a>
                 </p>
                 <form action="profile_student" method="post">
                     {% csrf_token %}
                     {{emailform|crispy}}
-                    <button type="submit" class="btn btn-info">Update Mail</button>
+                    <button type="submit" class="btn btn-info">{% blocktrans %}Update Mail{% endblocktrans %}</button>
                 </form>
             </div>
         </div>

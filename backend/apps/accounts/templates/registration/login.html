@@ -3,7 +3,9 @@
 {% load i18n %}
 
 {% block title %}
+{% blocktrans %}
 Registrierung - Studierende
+{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -18,7 +20,7 @@ Registrierung - Studierende
 	 <div class="col-lg-6 col-md-10 col-sm-12 col-12" style="margin: 0 auto;">
     <div class="card login-card">
        
-            <h1 class="font-weight-light">Login</h1>
+            <h1 class="font-weight-light">{% blocktrans %}Login{% endblocktrans %}</h1>
             <form method="post" novalidate>
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
