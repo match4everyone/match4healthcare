@@ -29,9 +29,9 @@ BEZAHLUNG_CHOICES = (
 
 
 CHECKBOX_CHOICES = [
-            ('unknown', _('egal')),#Unknown
+            ('unknown', _('egal')),
             ('true', _('muss')),
-            ('false', _('darf nicht')),
+            #('false', _('darf nicht')),
         ]
 
 
@@ -109,6 +109,8 @@ class Student(models.Model):
     datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
+    sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
+
     # Metadata
     class Meta:
         ordering = ['plz']
@@ -170,21 +172,27 @@ ARZT_CHOICES = (
 VORKLINIK = 1
 KLINIK = 2
 PJ = 3
+ASSIST = 4
+FACH = 5
 MEDSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
     (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
     (PJ, _('Praktisches Jahr')),
+    (ASSIST, _('Assistenzarzt')),
+    (FACH,_('Facharzt'))
 )
 
 
 #class ZahnstudAbschnitt(models.IntegerChoices):
 VORKLINIK = 1
 KLINIK = 2
+ABGESCHLOSSEN = 3
 ZAHNSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil')),
     (KLINIK, _('Klinischer Teil')),
+    (ABGESCHLOSSEN, _('Abgeschlossen'))
 )
 
 
@@ -215,16 +223,7 @@ NOTFALLSANI_CHOICES = (
 )
 
 
-
-
-
 AUSBILDUNGS_TYPEN = {
-    'ARZT':
-        {
-            'typ': models.IntegerField(choices=ARZT_CHOICES, default=0,null=True),
-            'empty': None,
-            'sonstige': models.CharField(max_length=50, blank=True, default='anderer Bereich')
-        },
     'MEDSTUD':
         {
             'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
@@ -234,6 +233,8 @@ AUSBILDUNGS_TYPEN = {
             'famulaturen_innere': models.BooleanField(default=False),
             'famulaturen_intensiv': models.BooleanField(default=False),
             'famulaturen_notaufnahme': models.BooleanField(default=False),
+            'empty': None,
+            'empty': None,
             'anerkennung_noetig': models.BooleanField(default=False)
         },
     'MFA':
@@ -271,10 +272,7 @@ AUSBILDUNGS_TYPEN = {
     'KINDERBETREUNG': {
         'ausgebildet': models.BooleanField(default=False),
         'vorerfahrung': models.BooleanField(default=False),
-    },
-    'SONSTIGE': {
-        'eintragen': models.CharField(max_length=200, blank=True, default='keine')
-    },
+    }
 }
 
 AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))

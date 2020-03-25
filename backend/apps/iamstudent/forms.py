@@ -39,16 +39,14 @@ form_labels = {
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Entbindungshelfer_in'),
     'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
-    'ausbildung_typ_arzt': _('Arzt/Ärztin'),
-    'ausbildung_typ_arzt_typ': _('Fachbereich'),
     'ausbildung_typ_arzt_sonstige': _('Sonstige:'),
-    'ausbildung_typ_medstud': _('Medizinstudent_in'),
+    'ausbildung_typ_medstud': _('Medizinstudent_in / Arzt / Ärztin'),
     'ausbildung_typ_medstud_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_medstud_farmulaturen_anaesthesie': _('Famulatur Anästhesie'),
-    'ausbildung_typ_medstud_famulaturen_chirurgie': _('Famulatur Chirurgie'),
-    'ausbildung_typ_medstud_famulaturen_innere': _('Famulatur Innere'),
-    'ausbildung_typ_medstud_famulaturen_intensiv': _('Famulatur Intensivmedizin'),
-    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Famulatur Notaufnahme'),
+    'ausbildung_typ_medstud_famulaturen_anaesthesie': _('Anästhesie'),
+    'ausbildung_typ_medstud_famulaturen_chirurgie': _('Chirurgie'),
+    'ausbildung_typ_medstud_famulaturen_innere': _('Innere'),
+    'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
+    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
         'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
     'ausbildung_typ_mfa': _('Medizinische_r Fachangestellte_r'),
@@ -67,6 +65,8 @@ form_labels = {
     'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
     'ausbildung_typ_sonstige': _('Sonstige'),
     'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
+
+    'sonstige_qualifikationen': _('Weitere Qualifikationen'),
     'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
     'einwilligung_datenweitergabe': _(
         'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
@@ -77,7 +77,7 @@ form_labels = {
     'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
     'wunsch_ort_labor': _('Labor'),
 }
-fields_for_button_group = ['ausbildung_typ_arzt_typ',
+fields_for_button_group = [
 'ausbildung_typ_pflege_abschnitt',
                            'ausbildung_typ_physio_abschnitt',
                            'ausbildung_typ_medstud_abschnitt',
@@ -102,7 +102,8 @@ def ButtonGroup(field):
 
 def ButtonGroupBool(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
-                        template='input_buttongroup-egalmuss_indicator.html')
+                        template='input_buttongroup-any_indicator.html')
+                        #template='input_buttongroup-egalmuss_indicator.html')
 
 
 class StudentForm(forms.ModelForm):
@@ -184,7 +185,8 @@ class StudentForm(forms.ModelForm):
                     , css_class='hidden'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ]
+            ],
+            'sonstige_qualifikationen'
             ,
             HTML('<hr>'),
             HTML('<p class="text-left">'),
@@ -272,7 +274,9 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
     class Meta:
         model = PersistenStudentFilterModel
-
+        initial = {
+            'ausbildung_typ_mfa': 'unkown'
+        }
         labels = form_labels
         exclude = ['hospital']
 
@@ -287,6 +291,10 @@ class PersistenStudentFilterForm(forms.ModelForm):
         self.helper.form_style = 'inline'
         for k in AUSBILDUNGS_DETAIL_COLUMNS:
             self.fields[k].required = False
+
+        for k in AUSBILDUNGS_TYPEN.keys():
+            self.fields['ausbildung_typ_%s' % k.lower()].required = False
+
         self.helper.layout = Layout(
             Div(
                 Row(*[Column(ButtonGroupBool('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
