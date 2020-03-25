@@ -9,6 +9,7 @@ from django.utils.translation import gettext as _
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend
+from matchmedisvsvirus.settings.common import NOREPLY_MAIL
 
 from ineedstudent.forms import HospitalFormExtra
 from ineedstudent.models import Hospital
@@ -96,7 +97,7 @@ def send_mail_student_id_list(request, id_list):
     else:
         hospital = request.user.hospital
         form = EmailToSendForm(initial={'subject': '[Match4Medis] Ein Ort braucht Deine Hilfe',
-                                        'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.email)})
+                                        'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.user.email)})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
 
@@ -106,10 +107,9 @@ def send_mails_for(hospital):
     for m in emails:
         send_mail(m.subject,
                   m.message,
-                  'noreply@medisvs.spahr.uberspace.de',
+                  NOREPLY_MAIL,
                   [m.student.user.email]
                   )
-        # todo: muss noch asynchron werden ...celery?
         m.was_sent = True
         m.save()
 
