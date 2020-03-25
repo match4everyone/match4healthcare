@@ -9,7 +9,7 @@ wir wollen euch über [diese Plattform](https://helping-health.from-de.com/) die
 
 Du hast Erfahrung um in dieser Notsituation medinizisch helfen zu können? Du studierst medizin, hast bereits in der Pflege gearbeitet, bist Rettungssanitäter oder hast andere relevante Fähigkeiten? Dann kannst du dich hier bei [Helping Health](https://helping-health.from-de.com/iamstudent/student_registration) registrieren um kontaktiert zu werden, wenn deine Unterstützun gebraucht wird.
 
-![Screenshot 1](backend/match4healthcare/static/img/screenshot1.jpg)
+![Screenshot 1](backend/static/img/screenshot1.jpg)
 
 
 ### An Gesundheitseinrichtungen die Unterstützung brauchen
@@ -17,9 +17,9 @@ Du hast Erfahrung um in dieser Notsituation medinizisch helfen zu können? Du st
 Du arbeitest in einem Krankenhaus oder einer Praxis und brauchst Unterstützung um den Ansturm der nCOV-19 Patienten zu bewältigen? Du suchst gezielt Fachkräfte, welche dich bei deiner Arbeit im Gesundheitswesen unterstützen können? Einen Überblick
 über bereits angemeldete Fachkräfte findest du hier bei [Helping Health](https://helping-health.from-de.com/mapview/)
 
-![Screenshot 2](backend/match4healthcare/static/img/screenshot2.jpg)
+![Screenshot 2](backend/static/img/screenshot2.jpg)
 
-![Screenshot 3](backend/match4healthcare/static/img/screenshot3.jpg)
+![Screenshot 3](backend/static/img/screenshot3.jpg)
 
 ___
 
