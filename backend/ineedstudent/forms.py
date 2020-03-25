@@ -4,8 +4,8 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
-
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Row, Column
+from accounts.models import User
 
 class HospitalFormO(ModelForm):
     class Meta:
@@ -38,6 +38,13 @@ class HospitalFormO(ModelForm):
                 'sonstige_infos'
         )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email
+
+
 
 
 class HospitalForm(HospitalFormO):
@@ -59,3 +66,9 @@ class HospitalFormEditProfile(HospitalFormO):
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email

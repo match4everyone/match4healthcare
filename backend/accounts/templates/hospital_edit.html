@@ -21,27 +21,29 @@ Registrierung - Studierende
     {% if messages %}
 
 
-        {% for message in messages %}
-        <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-            {{ message }}
-        </div>
-        {% endfor %}
+        {{ message }}
+    </div>
+    {% endfor %}
 
     {% endif %}
     <h1> {% blocktrans %}Mein Profil{% endblocktrans %} </h1>
     <br>
 
-    <div class="container">
-        <div class="card border-primary">
+        <div class="card">
             <div class="card-header">
                 {% blocktrans %}Account{% endblocktrans %}
             </div>
             <div class="card-body">
-                <p><a role="button" class="btn btn-info" href="logout">logout</a></p>
-                <p><a role="button" class="btn btn-info" href="password_change">change password</a></p>
+                <p>
+                    <a role="button" class="btn btn-primary" href="logout">Logout</a>
+                    <a role="button" class="btn btn-primary" href="/accounts/password_change">Change Password</a>
+                    <a role="button" class="btn btn-secondary" href="delete_me">Delete My Profile</a>
+                </p>
                 <form action="profile_hospital" method="post">
                     {% csrf_token %}
                     {{emailform|crispy}}
@@ -50,7 +52,7 @@ Registrierung - Studierende
             </div>
         </div>
         <hr>
-        <div class="card border-primary">
+        <div class="card">
             <div class="card-header">
                 {% blocktrans %}Daten{% endblocktrans %}
             </div>
@@ -61,6 +63,6 @@ Registrierung - Studierende
                 </form>
             </div>
         </div>
-    </div>
-    <hr>
+</div>
+<br>
     {% endblock %}

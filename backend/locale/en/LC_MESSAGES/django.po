@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 23:58+0000\n"
+"POT-Creation-Date: 2020-03-25 02:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,174 +18,220 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: accounts/templates/approve_hospitals.html:6
+#: ineedstudent/templates/list_hospitals_by_plz.html:6
+#: ineedstudent/templates/list_hospitals_by_plz.html:23
+#, python-format
+msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
+msgstr "Help is needed in %(ort)s (%(plz)s):"
+
+#: accounts/templates/approve_hospitals.html:44
+msgid "Diese Hospitals warten auf deinen Approval "
+msgstr ""
+
+#: accounts/templates/approve_hospitals.html:53
+msgid ""
+"Diese Hospitals wurden schon approved, du kannst ihnen aber jederzeit die "
+"Berechtigung\n"
+"            entziehen. "
+msgstr ""
+
+#: accounts/templates/deleted_user.html:18
+#, fuzzy
+#| msgid " Dein Passwort wurde geändert. "
+msgid " Dein Account wurde gelöscht. "
+msgstr "Your password has been changed."
+
 #: accounts/templates/hospital_edit.html:34
-#: accounts/templates/student_edit.html:34 templates/base.html:43
+#: accounts/templates/student_edit.html:34 templates/base.html:58
 msgid "Mein Profil"
 msgstr "My profile"
 
-#: accounts/templates/hospital_edit.html:40
+#: accounts/templates/hospital_edit.html:39
 #: accounts/templates/student_edit.html:40
 msgid "Account"
 msgstr "Account"
 
-#: accounts/templates/hospital_edit.html:55
-#: accounts/templates/student_edit.html:55
+#: accounts/templates/hospital_edit.html:57
+#: accounts/templates/student_edit.html:58
 msgid "Daten"
 msgstr "Data"
 
-#: accounts/templates/hospital_signup.html:21
-msgid " schon registriert? Hier geht es zum "
+#: accounts/templates/hospital_signup.html:22
+#: accounts/templates/student_signup.html:58
+msgid " Sie sind bereits angemeldet. Hier geht es zum "
 msgstr ""
 
-#: accounts/templates/hospital_signup.html:27
-#, fuzzy
-#| msgid "Registrierung - Studierende & Helfer"
-msgid "  Registrierung - Hilfesuchende "
-msgstr "Registration - students & volunteers"
+#: accounts/templates/hospital_signup.html:26
+#: accounts/templates/student_signup.html:62
+msgid " Schon registriert? Hier geht es zum "
+msgstr ""
 
-#: accounts/templates/registration/login.html:39
+#: accounts/templates/hospital_signup.html:34
+msgid "Sie brauchen in Ihrer Institution aktuell Hilfe?"
+msgstr ""
+
+#: accounts/templates/registration/login.html:40
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passwort vergessen?"
+msgstr "Reset password"
+
+#: accounts/templates/registration/login.html:41
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passwort zurücksetzen"
+msgstr "Reset password"
+
+#: accounts/templates/registration/login.html:43
 msgid "Noch kein Account?"
 msgstr "No account yet?"
 
-#: accounts/templates/registration/login.html:40
-msgid "Ich bin helfende/r"
+#: accounts/templates/registration/login.html:44
+#, fuzzy
+#| msgid "Ich bin helfende/r"
+msgid "Ich bin Helfende/r"
 msgstr "I want to help"
 
-#: accounts/templates/registration/login.html:41
-msgid "Ich habe Bedarf an Unterstützung"
-msgstr "I need support"
+#: accounts/templates/registration/login.html:45
+#, fuzzy
+#| msgid "Wir sind eine"
+msgid "Wir sind eine Institution"
+msgstr "We are an"
 
 #: accounts/templates/registration/logout.html:19
-msgid " Thanks for spending some quality time with the Web site today. "
-msgstr ""
+msgid "Danke, dass Du heute etwas Zeit mit der Website verbracht hast."
+msgstr "Thanks for spending some quality time with this website."
 
 #: accounts/templates/registration/logout.html:21
-msgid "Log in again' "
-msgstr ""
+msgid "Neu anmelden"
+msgstr "Login again"
 
-#: accounts/templates/registration/password_change_done.html:18
-#: accounts/templates/registration/password_change_form.html:18
+#: accounts/templates/registration/password_change_done_.html:18
 msgid " Dein Passwort wurde geändert. "
 msgstr "Your password has been changed."
 
-#: accounts/templates/registration/password_change_form.html:27
+#: accounts/templates/registration/password_change_form_.html:23
 msgid " Please correct the error below. "
 msgstr ""
 
-#: accounts/templates/registration/password_change_form.html:27
+#: accounts/templates/registration/password_change_form_.html:23
 msgid " \"Please correct the errors below. "
 msgstr ""
 
-#: accounts/templates/registration/password_change_form.html:32
-msgid ""
-"Please enter your old password, for security’s sake, and then enter your new "
-"password twice so we can verify you typed it in correctly. "
+#: accounts/templates/registration/password_change_form_.html:28
+#: accounts/templates/registration/password_change_form_.html:49
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passwort Ändern"
+msgstr "Reset password"
+
+#: accounts/templates/registration/password_reset_complete_.html:18
+msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen "
 msgstr ""
 
-#: accounts/templates/registration/password_change_form.html:60
-msgid "Change my password "
+#: accounts/templates/registration/password_reset_confirm_.html:22
+msgid "Neues Passwort"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_done.html:19
+#: accounts/templates/registration/password_reset_confirm_.html:35
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passwort Setzen"
+msgstr "Reset password"
+
+#: accounts/templates/registration/password_reset_confirm_.html:42
 msgid ""
-" We’ve emakjhhiled you instructions for setting your password, if an account "
+" Der Link zum setzen des Passworts ist nicht gültig. Eventuell wurde er "
+"bereits benutzt. "
+msgstr ""
+
+#: accounts/templates/registration/password_reset_done_.html:20
+msgid ""
+" We’ve emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
 
-#: accounts/templates/registration/password_reset_done.html:21
+#: accounts/templates/registration/password_reset_done_.html:21
 msgid ""
 " If you don’t receive an email, please make sure you’ve entered the address "
 "you registered with, and check your spam folder. "
 msgstr ""
 
-#: accounts/templates/registration/password_reset_form.html:13
+#: accounts/templates/registration/password_reset_email_.html:3
 msgid ""
-"Forgotten your password? Enter your email address below, and we’ll email "
-"instructions for setting a new one. "
+"\n"
+"Sie erhalten diese Mail um ein Passwort bei match4healthcare zu setzen.\n"
+"\n"
+"Bitte clicken sie auf den folgenden Link um ein Passwort zu wählen:\n"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_form.html:19
-msgid "Email address"
+#: accounts/templates/registration/password_reset_email_.html:13
+#, fuzzy
+#| msgid "Willkommen bei match4healthcare"
+msgid ""
+"\n"
+"Vielen Dank,\n"
+"ihr match4healthcare Team\n"
+msgstr "Welcome to match4healthcare"
+
+#: accounts/templates/registration/password_reset_form_.html:17
+#, fuzzy
+#| msgid "Passwort zurücksetzen "
+msgid "Passort vergessen?"
+msgstr "Reset password"
+
+#: accounts/templates/registration/password_reset_form_.html:18
+msgid "Gib deine Email-Addresse an und du erhältst ein neues Passwort"
 msgstr ""
 
-#: accounts/templates/registration/password_reset_form.html:22
+#: accounts/templates/registration/password_reset_form_.html:25
 msgid "Passwort zurücksetzen "
 msgstr "Reset password"
 
-#: accounts/templates/student_signup.html:57
-msgid "Liebe Studierende und Helfende,"
-msgstr "Dear students and volunteers,"
+#: accounts/templates/student_signup.html:70
+msgid "Du sitzt zuhause und kannst in der aktuellen Situation helfen?"
+msgstr ""
 
-#: accounts/templates/student_signup.html:59
+#: accounts/templates/student_signup.html:75
+#, fuzzy
+#| msgid ""
+#| "Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, "
+#| "Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese "
+#| "nach Unterstützung suchen. Hierfür bitten wir euch, die folgenden Daten "
+#| "anzugeben, damit wir euch mit den entsprechenden Gesuchen verbinden "
+#| "können."
 msgid ""
 "Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, "
 "Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese "
-"nach Unterstützung suchen. Hierfür bitten wir euch, die folgenden Daten "
-"anzugeben, damit wir euch mit den entsprechenden Gesuchen verbinden können."
+"nach Unterstützung suchen. Hierfür bitten wir dich, die folgenden Daten "
+"anzugeben, damit wir dich mit den entsprechenden Gesuchen verbinden können."
 msgstr ""
 "The aim of this project is to connect you with hospitals, general "
 "practitioners and health authorities in your area if they are looking for "
 "support. For this purpose, we ask you to provide the following information "
 "so that we can connect you with the appropriate requests."
 
-#: accounts/templates/student_signup.html:63
-msgid ""
-"Zuvor möchten wir euch zu eurer und der allgemeinen Sicherheit über einige "
-"Punkte aufklären:"
-msgstr ""
-"Beforehand we would like to inform you about some points concerning your "
-"safety and the general safety:"
-
-#: accounts/templates/student_signup.html:65
-msgid ""
-"1. Vergewissert euch, bevor ihr euch für eine Tätigkeit verpflichtet, welche "
-"<mark>Haftpflichrichtlinien</mark> für euch gelten werden."
-msgstr ""
-"1. Make sure, before you commit yourself to an activity, which "
-"<mark>liability guidelines</mark> will apply to you "
-
-#: accounts/templates/student_signup.html:67
-msgid ""
-"2. Bitte bedenkt, dass Vollzeitstudierende nicht gleichzeitig eine "
-"Vollzeitstelle belegen dürfen. Überlegt euch demnach gut, <mark>in welchem "
-"Ausmaß ihr euch für Hilfe bereiterklären könnt</mark>. Falls ihr eine "
-"Vollzeitarbeit über diesen Weg aufnehmen wollt, müsst ihr häufig ein "
-"Urlaubssemester einlegen."
-msgstr ""
-"Please remember that full-time students are not allowed to take a full-time "
-"job at the same time. Therefore, <mark>think carefully about the extent to "
-"which you can volunteer</mark>. If you want to take volunteer full-time job, "
-"you will often have to take a semester off. "
-
-#: accounts/templates/student_signup.html:69
-msgid ""
-"3. Bitte bedenkt zuvor, dass ihr bei jeglichen Tätigkeiten in Kontakt mit "
-"anderen Menschen kommt und damit eine erhöhte Ansteckungs- und "
-"Infektionsgefahr einhergeht. Solltet ihr selbst <mark>positiv auf nCOV-19 "
-"getestet worden sein oder Symptome zeigen</mark> (Husten, Fieber, "
-"Abgeschlagenheit) oder sogar zur Risikogruppe gehören, dann ist aufgrund der "
-"Infektionsgefahr davon abzusehen sich im Gesundheitswesen zu betätigen, um "
-"das Risiko der Übertragung zu verringern."
-msgstr ""
-"3. Please consider beforehand that you will come into contact with other "
-"people and that this will increase the risk of infection. If you yourself "
-"have <mark>tested positive for nCOV-19 or show symptoms</mark> (cough, "
-"fever, fatigue) or are at risk, then due to the risk of infection, you "
-"should refrain from working in the healthcare sector to reduce the risk of "
-"transmission."
-
-#: accounts/templates/student_signup.html:74
-msgid "Registrierung - Studierende & Helfer"
-msgstr "Registration - students & volunteers"
-
-#: accounts/views.py:67
+#: accounts/views.py:78
 msgid "Willkommen bei match4healthcare"
 msgstr "Welcome to match4healthcare"
 
-#: accounts/views.py:69
-#, python-format
+#: accounts/views.py:80
+#, fuzzy, python-format
+#| msgid ""
+#| "Hallo,\n"
+#| "\n"
+#| "du willst helfen und hast dich gerade bei match4healthcare registriert, "
+#| "danke!\n"
+#| "\n"
+#| "Wenn du deine Daten ändern möchtest, nutze folgende Credentials:\n"
+#| "username: %s\n"
+#| "passwort: %s\n"
+#| "\n"
+#| "Vielen Dank und beste Grüße,\n"
+#| "Dein match4healthcare Team"
 msgid ""
-"Hallo,\n"
+"Hallo %s,\n"
 "\n"
 "du willst helfen und hast dich gerade bei match4healthcare registriert, "
 "danke!\n"
@@ -209,258 +255,379 @@ msgstr ""
 "Thank you and kind Regards,\n"
 "Your match4healthcare Team"
 
-#: accounts/views.py:136 accounts/views.py:161
+#: accounts/views.py:150 accounts/views.py:175
 msgid "Deine Email wurde erfolgreich geändert!"
 msgstr "Your e-Mail address has been updated!"
 
-#: accounts/views.py:140 accounts/views.py:165
+#: accounts/views.py:154 accounts/views.py:179
 msgid "Deine Daten wurden erfolgreich geändert!"
 msgstr "Your profile has been updated!"
 
-#: iamstudent/forms.py:28 iamstudent/forms.py:29
+#: iamstudent/forms.py:17 iamstudent/forms.py:18
 msgid "Writer"
 msgstr ""
 
-#: iamstudent/forms.py:31
+#: iamstudent/forms.py:20
 msgid "Vorname"
 msgstr "Given Name"
 
-#: iamstudent/forms.py:32
+#: iamstudent/forms.py:21
 msgid "Nachname"
 msgstr "Family Name"
 
-#: iamstudent/forms.py:33
+#: iamstudent/forms.py:22
 msgid "Telefonnummer"
 msgstr "Phone Number"
 
-#: iamstudent/forms.py:35
+#: iamstudent/forms.py:24
 msgid "Wohnort"
 msgstr "Postal code"
 
-#: iamstudent/forms.py:36 ineedstudent/forms.py:21
+#: iamstudent/forms.py:25 ineedstudent/forms.py:21
 msgid "Land"
 msgstr "Country"
 
-#: iamstudent/forms.py:37
+#: iamstudent/forms.py:26
 msgid "Email"
 msgstr "e-Mail"
 
-#: iamstudent/forms.py:39
+#: iamstudent/forms.py:28
 msgid "Semester"
 msgstr "Study Semester"
 
-#: iamstudent/forms.py:40
+#: iamstudent/forms.py:29
 msgid "Ich bin aktuell immatrikuliert"
 msgstr "I am currently a student"
 
-#: iamstudent/forms.py:41
+#: iamstudent/forms.py:30
 msgid "Ich bin verfügbar ab"
 msgstr "I am available starting"
 
-#: iamstudent/forms.py:43
+#: iamstudent/forms.py:32 iamstudent/models.py:30
 msgid "Ich benötige eine Vergütung"
 msgstr "I require compensation"
 
-#: iamstudent/forms.py:48
+#: iamstudent/forms.py:37
 msgid "Arzt/Ärztin"
 msgstr "Medical doctor"
 
-#: iamstudent/forms.py:49
+#: iamstudent/forms.py:38
 msgid "Fachbereich"
 msgstr ""
 
-#: iamstudent/forms.py:50
+#: iamstudent/forms.py:39
 msgid "Sonstige:"
 msgstr ""
 
-#: iamstudent/forms.py:51
+#: iamstudent/forms.py:40
 #, fuzzy
 #| msgid "Medizinstudent (Charité Berlin)"
 msgid "Medizinstudent_in"
 msgstr "Medical student (Charité Berlin)"
 
-#: iamstudent/forms.py:52 iamstudent/forms.py:60 iamstudent/forms.py:62
-#: iamstudent/forms.py:64 iamstudent/forms.py:66 iamstudent/forms.py:69
+#: iamstudent/forms.py:41 iamstudent/forms.py:49 iamstudent/forms.py:51
+#: iamstudent/forms.py:53 iamstudent/forms.py:55 iamstudent/forms.py:58
 msgid "Ausbildungsabschnitt"
 msgstr ""
 
-#: iamstudent/forms.py:53
+#: iamstudent/forms.py:42
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Anästhesie"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:54
+#: iamstudent/forms.py:43
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Chirurgie"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:55
+#: iamstudent/forms.py:44
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Innere"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:56
+#: iamstudent/forms.py:45
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Intensivmedizin"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:57
+#: iamstudent/forms.py:46
 #, fuzzy
 #| msgid "Famulaturreife"
 msgid "Famulatur Notaufnahme"
 msgstr "Qualified for internships"
 
-#: iamstudent/forms.py:58
+#: iamstudent/forms.py:47
 msgid ""
 "Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
 "Famulatur) ist wichtig"
 msgstr ""
 
-#: iamstudent/forms.py:59
+#: iamstudent/forms.py:48
 msgid "Medizinische_r Fachangestellte_r"
 msgstr ""
 
-#: iamstudent/forms.py:61
+#: iamstudent/forms.py:50
 msgid "Medizinisch-technische_r Laboratoriumsassistent_in"
 msgstr ""
 
-#: iamstudent/forms.py:63
+#: iamstudent/forms.py:52
 #, fuzzy
 #| msgid "Labortechnische Assistenz"
 msgid "Medizinisch-technische_r Assistent_in"
 msgstr "Medical Laboratory Scientist"
 
-#: iamstudent/forms.py:65
+#: iamstudent/forms.py:54
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Notfallsanitäter_in/Rettungssanitäter_in"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:67
+#: iamstudent/forms.py:56
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungssanitäter_in/Rettungshelfer_in"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:68
+#: iamstudent/forms.py:57
 msgid "Zahnmedizinstudent_in"
 msgstr ""
 
-#: iamstudent/forms.py:70
+#: iamstudent/forms.py:59
 #, fuzzy
 #| msgid "Kinderbetreuer*in"
 msgid "Kinderbetreuer_in"
 msgstr "Child Carer"
 
-#: iamstudent/forms.py:71
+#: iamstudent/forms.py:60
 #, fuzzy
 #| msgid "Abgeschlossen"
 msgid "Abgeschlossene Ausbildung"
 msgstr "Completed"
 
-#: iamstudent/forms.py:72
+#: iamstudent/forms.py:61
 msgid "Lediglich Erfahrungen"
 msgstr ""
 
-#: iamstudent/forms.py:73
+#: iamstudent/forms.py:62
 msgid "Sonstige"
 msgstr ""
 
-#: iamstudent/forms.py:74
+#: iamstudent/forms.py:63
 msgid "Bitte die Qualifikationen hier eintragen"
 msgstr ""
 
-#: iamstudent/forms.py:75
+#: iamstudent/forms.py:64
 msgid "Hiermit akzeptiere ich die Datenschutzbedingungen."
 msgstr ""
 
-#: iamstudent/forms.py:76
+#: iamstudent/forms.py:65
 msgid ""
 "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution "
 "meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner "
 "Kontaktdaten an die Institutionen bin ich einverstanden."
 msgstr ""
 
-#: iamstudent/forms.py:77
+#: iamstudent/forms.py:66
 msgid "Arztpraxis/Ordination"
 msgstr ""
 
-#: iamstudent/forms.py:78
+#: iamstudent/forms.py:67
 msgid "Gesundheitsamt"
 msgstr ""
 
-#: iamstudent/forms.py:79
+#: iamstudent/forms.py:68
 msgid "Krankeneinrichtungen"
 msgstr ""
 
-#: iamstudent/forms.py:80
+#: iamstudent/forms.py:69
 #, fuzzy
 #| msgid "Pfleger*in"
 msgid "Pflegeeinrichtungen"
 msgstr "Caregiver"
 
-#: iamstudent/forms.py:81
+#: iamstudent/forms.py:70
 #, fuzzy
 #| msgid "Rettungssanitäter*in"
 msgid "Rettungsdienst"
 msgstr "Paramedic/EMT"
 
-#: iamstudent/forms.py:82
+#: iamstudent/forms.py:71
 msgid "Labor"
 msgstr ""
 
-#: iamstudent/forms.py:92
-msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
-msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
-
-#: iamstudent/forms.py:93
+#: iamstudent/forms.py:81
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: iamstudent/forms.py:94
-msgid "Bitte gib deine Postleitzahl ein"
-msgstr "Please enter your zip code"
-
-#: iamstudent/forms.py:95
+#: iamstudent/forms.py:82
 msgid "Bitte wähle ein Land aus"
 msgstr "Please select your country"
 
-#: iamstudent/forms.py:96 iamstudent/forms.py:97 iamstudent/forms.py:98
-msgid "in Monaten"
-msgstr "in monts"
-
-#: iamstudent/forms.py:99
+#: iamstudent/forms.py:83
 msgid "bevorzugter Einsatzort"
 msgstr ""
 
-#: iamstudent/forms.py:124
+#: iamstudent/forms.py:84
+msgid "Hotline, Teststation etc."
+msgstr ""
+
+#: iamstudent/forms.py:109
 msgid "Einsatz"
 msgstr ""
 
-#: iamstudent/forms.py:136
+#: iamstudent/forms.py:121
 msgid "Wunscheinsatzort"
 msgstr ""
 
-#: iamstudent/forms.py:152 iamstudent/forms.py:223
+#: iamstudent/forms.py:137 iamstudent/forms.py:214
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: iamstudent/forms.py:226
+#: iamstudent/forms.py:173 iamstudent/forms.py:224 ineedstudent/forms.py:44
+#: ineedstudent/forms.py:73
+msgid "Diese Email ist bereits vergeben"
+msgstr ""
+
+#: iamstudent/forms.py:217
 msgid "Eintrag updaten"
 msgstr "Update entry"
+
+#: iamstudent/forms.py:235
+msgid "Betreff"
+msgstr ""
+
+#: iamstudent/forms.py:236
+msgid "Nachrichtentext"
+msgstr ""
+
+#: iamstudent/forms.py:238
+msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
+msgstr ""
 
 #: iamstudent/models.py:12
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
-#: iamstudent/models.py:107 ineedstudent/models.py:51
+#: iamstudent/models.py:18
+msgid "You have to accept this"
+msgstr ""
+
+#: iamstudent/models.py:29
+msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
+msgstr ""
+
+#: iamstudent/models.py:39
+msgid "10h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:40
+msgid "20h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:41
+msgid "30h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:42
+msgid "40h pro Woche"
+msgstr ""
+
+#: iamstudent/models.py:56
+msgid "<5 km"
+msgstr ""
+
+#: iamstudent/models.py:57
+msgid "<10 km"
+msgstr ""
+
+#: iamstudent/models.py:58
+msgid "<20 km"
+msgstr ""
+
+#: iamstudent/models.py:59
+msgid ">20 km"
+msgstr ""
+
+#: iamstudent/models.py:113 ineedstudent/models.py:52
 msgid " ist keine Postleitzahl in "
 msgstr " is not a valid ZIP code in "
+
+#: iamstudent/models.py:131
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Anästhesie"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:132
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Chirurgie"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:133
+msgid "Innere Medizin"
+msgstr ""
+
+#: iamstudent/models.py:134
+#, fuzzy
+#| msgid "Institution"
+msgid "Intensivstation"
+msgstr "Institution"
+
+#: iamstudent/models.py:135
+#, fuzzy
+#| msgid "Famulaturreife"
+msgid "Notaufnahme"
+msgstr "Qualified for internships"
+
+#: iamstudent/models.py:136
+msgid "Andere"
+msgstr ""
+
+#: iamstudent/models.py:145
+msgid "Vorklinischer Teil (1.-5. Semester)"
+msgstr ""
+
+#: iamstudent/models.py:146
+msgid "Klinischer Teil (6.-10. Semester)"
+msgstr ""
+
+#: iamstudent/models.py:147
+msgid "Praktisches Jahr"
+msgstr ""
+
+#: iamstudent/models.py:155
+msgid "Vorklinischer Teil"
+msgstr ""
+
+#: iamstudent/models.py:156
+msgid "Klinischer Teil"
+msgstr ""
+
+#: iamstudent/models.py:166 iamstudent/models.py:178
+msgid "1. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:167 iamstudent/models.py:179
+msgid "2. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:168
+msgid "3. Jahr"
+msgstr ""
+
+#: iamstudent/models.py:169 iamstudent/models.py:180
+msgid "Berufstätig"
+msgstr ""
+
+#: iamstudent/templates/emails_sent.html:19
+msgid " Die Helfer wurden kontaktiert. "
+msgstr ""
 
 #: iamstudent/templates/input_buttongroup-progress_indicator.html:23
 msgid "Angefangen"
@@ -491,40 +658,40 @@ msgstr ""
 msgid "Studierende Kontaktieren"
 msgstr "Contact Students"
 
-#: iamstudent/templates/send_mail_hospital.html:19
-#, python-format
-msgid "Du möchtest eine Email an %(n)s Studiererende schicken."
+#: iamstudent/templates/send_mail_hospital.html:27
+#, fuzzy
+#| msgid " Anzeige stellen"
+msgid "Anzeige versenden"
+msgstr " List need for help"
+
+#: iamstudent/templates/send_mail_hospital.html:35
+#, fuzzy, python-format
+#| msgid "Du möchtest eine Email an %(n)s Studiererende schicken."
+msgid "Du möchtest eine Email an <mark>%(n)s Studiererende</mark> schicken."
 msgstr "You are about to send an e-Mail to %(n)s Students."
 
-#: iamstudent/templates/send_mail_hospital.html:22
-msgid ""
-"Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden "
-"könnt, gebt eure Anprechpartner und\n"
-"        Infos an!"
-msgstr ""
-"Please enter your contact persons and information so that we can upload your "
-"offer and can contact you! "
-
-#: iamstudent/templates/send_mail_hospital.html:29
-msgid "Registrierung"
-msgstr " Register"
-
-#: iamstudent/templates/thanks_student.html:6
+#: iamstudent/templates/thanks.html:6
 #: ineedstudent/templates/thanks_hospital.html:6
 msgid "Vielen Dank"
 msgstr "Thank you"
 
-#: iamstudent/templates/thanks_student.html:21
+#: iamstudent/templates/thanks.html:21
 msgid ""
-"Vielen Dank für deine Registrierung. Wir kontaktieren dich, sobald eine "
-"medizinische Einrichtung deine Hilfe benötigt."
+"<h2>Willkommen bei match4healthcare,</h2>\n"
+"    <p>vielen Dank, dass du dich engagieren möchtest. Um deine Registrierung "
+"zu vervollständigen, haben wir dir eine Mail mit einem Bestätigungslink an "
+"deine angegebene Mailadresse geschickt. Bitte schau in deine Mails, um dich "
+"vollständig bei uns zu registrieren und vermittelt werden zu können.</p>\n"
+"    <p>Dein Team von</p>\n"
+"    <p>match4healthcare</p>\n"
+"    "
 msgstr ""
 
-#: iamstudent/views.py:107
+#: iamstudent/views.py:119
 msgid "subject :)"
 msgstr ""
 
-#: iamstudent/views.py:108
+#: iamstudent/views.py:120
 #, python-format
 msgid "I want to hire you person of gender %s!, Contact me here: %s"
 msgstr ""
@@ -545,15 +712,15 @@ msgstr "Name of institution"
 msgid "Wichtige Infos über Euch und den potentiellen Einsatzbereich"
 msgstr "Important information about you and the potential field of application"
 
-#: ineedstudent/forms.py:54
+#: ineedstudent/forms.py:61
 msgid "Schicke Mails"
 msgstr "Send Mails"
 
-#: ineedstudent/forms.py:55
+#: ineedstudent/forms.py:62
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
-#: ineedstudent/forms.py:61
+#: ineedstudent/forms.py:68
 msgid "Profil Aktualisieren"
 msgstr ""
 
@@ -571,23 +738,15 @@ msgstr "Phone Number"
 msgid "Mail:"
 msgstr ""
 
-#: ineedstudent/templates/list_hospitals_by_plz.html:6
-#: ineedstudent/templates/list_hospitals_by_plz.html:23
-#, python-format
-msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
-msgstr "Help is needed in %(ort)s (%(plz)s):"
-
 #: ineedstudent/templates/map_hospitals.html:7
 msgid "Karte der Hilfesuchenden"
 msgstr "Facility Map"
 
 #: ineedstudent/templates/map_hospitals.html:58
-#: mapview/templates/mapview/map.html:58
 msgid "Deutschland"
 msgstr "Germany"
 
 #: ineedstudent/templates/map_hospitals.html:59
-#: mapview/templates/mapview/map.html:59
 msgid "Österreich"
 msgstr "Austria"
 
@@ -603,108 +762,64 @@ msgstr ""
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
 
-#: mapview/templates/mapview/map.html:62
-msgid "Direktsuche"
-msgstr ""
-
-#: mapview/templates/mapview/map.html:64
-msgid "Als Hospital anmelden und Helfer finden"
-msgstr ""
-
-#: matchmedisvsvirus/settings/common.py:119
+#: matchmedisvsvirus/settings/common.py:123
 msgid "English"
 msgstr ""
 
-#: matchmedisvsvirus/settings/common.py:120
+#: matchmedisvsvirus/settings/common.py:124
 msgid "German"
 msgstr ""
 
-#: templates/about.html:6 templates/base.html:30
+#: templates/about.html:6 templates/base.html:45
 msgid "Über uns"
 msgstr "About us"
 
 #: templates/about.html:12
-msgid "Das Team"
-msgstr "The team"
+#, fuzzy
+#| msgid "Team Match4Healthcare"
+msgid "Wir sind das Team von match4healthcare!"
+msgstr "Team Match4Healthcare"
 
 #: templates/about.html:14
 msgid ""
-"Wir sind ein kleines Team aus Potsdam und Berlin, das sich am #wirvsvirus "
-"Hackathon der Bundesregierung beteiligt hat. Unsere Plattform verfolgt das "
-"Ziel, Studierende und Helfende mit Krankenhäusern, Hausarztpraxen, "
-"Gesundheitsämtern und anderen Einrichtungen des Gesundheitswesens zu "
-"verbinden. Wir gehen davon aus, dass es in der Corona-Krise zu einem "
-"Personalmangel kommen wird. Hier kann es notwendig werden, auf Studierende "
-"(besonders auf Medizinstudierende) oder Auszubildende zurückzugreifen, um "
-"dem erhöhten Personalbedarf Rechnung zu tragen oder auch Mitarbeiter* innen, "
-"die z.B. aufgrund einer eigenen Erkrankung ausfallen, zu ersetzen."
+"Durch die bundesweit erfolgreich und bekannt gewordenen Initiative "
+"„Medizinstudierende vs. COVID19“ (<a href=\"https://www.medis-vs-covid19.de"
+"\" target=\"_blank\">medis-vs-covid19.de</a>), die Bundesvertretung der "
+"Medizinstudierenden in Deutschland e.V. (bvmd) und unserem Tech-Team haben "
+"wir im Rahmen des Hackathon der Bundesregierung (#wirvsvirus) eine Plattform "
+"für die Vernetzung von Hilfesuchenden und Hilfebietenden erstellt. Wir "
+"stellen uns vor:"
 msgstr ""
-"We are a small team from Potsdam and Berlin that participated in the "
-"#wirvsvirus Hackathon of the German government. Our platform pursues the "
-"goal of connecting students and volunteers with hospitals, family doctor's "
-"offices, health authorities and other health care institutions. We assume "
-"that there will be a shortage of staff during the Corona crisis. In this "
-"case, it may become necessary to call on students (especially medical "
-"students) or trainees in order to meet the increased demand for personnel or "
-"to replace employees internally who are absent, e.g. due to their own "
-"illness."
 
-#: templates/about.html:23
-msgid "Informatikstudentin (TU Berlin)"
-msgstr "Computer science student (TU Berlin)"
-
-#: templates/about.html:43
-msgid "Mathematikstudent (EPFL/TU München)"
-msgstr "Mathematics student (EPFL/TU Munich)"
-
-#: templates/about.html:53
-msgid "Medizinstudent (Charité Berlin)"
-msgstr "Medical student (Charité Berlin)"
-
-#: templates/about.html:64
-msgid "Informatikstudent (Uni Leipzig)"
-msgstr "Computer science student (Uni Leipzig)"
-
-#: templates/about.html:73
-msgid "Informatikstudent (TU Berlin)"
-msgstr "Computer science student (TU Berlin)"
-
-#: templates/about.html:84 templates/about.html:93 templates/about.html:102
-#: templates/about.html:111 templates/about.html:120 templates/about.html:129
-#: templates/about.html:138 templates/about.html:147 templates/about.html:156
-#: templates/about.html:165 templates/about.html:174 templates/about.html:183
-msgid "Team Match4Healthcare"
-msgstr "Team Match4Healthcare"
-
-#: templates/base.html:33
+#: templates/base.html:48
 msgid "Ich will helfen"
 msgstr "I want to help"
 
-#: templates/base.html:36
+#: templates/base.html:51
 msgid "Ich brauche Hilfe"
 msgstr "I need help"
 
-#: templates/base.html:39
+#: templates/base.html:54
 msgid "Helferkarte"
 msgstr "Map of volunteers"
 
-#: templates/base.html:47
+#: templates/base.html:62
 msgid "Login"
 msgstr "Login"
 
-#: templates/base.html:62
+#: templates/base.html:79
 msgid "Ein Projekt im Rahmen des"
 msgstr "A submission of"
 
-#: templates/base.html:62
+#: templates/base.html:79
 msgid "Impressum"
 msgstr "Imprint"
 
-#: templates/base.html:62
+#: templates/base.html:79
 msgid "und"
 msgstr "and"
 
-#: templates/base.html:62
+#: templates/base.html:79
 msgid "Datenschutz"
 msgstr "Data protection"
 
@@ -724,6 +839,10 @@ msgstr "Supporter"
 msgid "Ich möchte eine medizinische Einrichtung unerstützen."
 msgstr "I'd like to support a medical facility."
 
+#: templates/home.html:93
+msgid "Jetzt Hilfe anbieten"
+msgstr "Offer Support Now"
+
 #: templates/home.html:104
 msgid "Wir sind eine"
 msgstr "We are an"
@@ -736,11 +855,15 @@ msgstr "Institution"
 msgid "Wir haben Bedarf an Unterstützung."
 msgstr "We need supporters"
 
+#: templates/home.html:108
+msgid "Jetzt Hilfe suchen"
+msgstr "Find Supporters Now"
+
 #: templates/home.html:120
 msgid "Gemeinsam unser Gesundheitssystem stärken, mit einem"
 msgstr "Strenghten our healthcare systems with a"
 
-#: templates/home.html:123
+#: templates/home.html:125
 msgid ""
 "Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach "
 "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
@@ -750,7 +873,7 @@ msgstr ""
 "medicine and the support of each other have been more present in our "
 "healthcare system than ever before."
 
-#: templates/home.html:124
+#: templates/home.html:126
 msgid ""
 "Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und vor "
 "allen Dingen eine effiziente Schnittstelle, zwischen den medizinischen "
@@ -763,7 +886,7 @@ msgstr ""
 "that allows supporters and those in need to quickly and easily connect with "
 "each other "
 
-#: templates/home.html:125
+#: templates/home.html:127
 msgid ""
 "Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
 "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
@@ -773,19 +896,81 @@ msgstr ""
 "supporters and healthcare institutions and especially now the state-of-the-"
 "art solution"
 
-#: templates/home.html:128
+#: templates/home.html:138
 msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
-#: templates/home.html:131
+#: templates/home.html:141
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
+
+#, fuzzy
+#~| msgid "Registrierung - Studierende & Helfer"
+#~ msgid "  Registrierung - Hilfesuchende "
+#~ msgstr "Registration - students & volunteers"
+
+#~ msgid "Liebe Studierende und Helfende,"
+#~ msgstr "Dear students and volunteers,"
+
+#~ msgid ""
+#~ "Zuvor möchten wir euch zu eurer und der allgemeinen Sicherheit über "
+#~ "einige Punkte aufklären:"
+#~ msgstr ""
+#~ "Beforehand we would like to inform you about some points concerning your "
+#~ "safety and the general safety:"
+
+#~ msgid ""
+#~ "1. Vergewissert euch, bevor ihr euch für eine Tätigkeit verpflichtet, "
+#~ "welche <mark>Haftpflichrichtlinien</mark> für euch gelten werden."
+#~ msgstr ""
+#~ "1. Make sure, before you commit yourself to an activity, which "
+#~ "<mark>liability guidelines</mark> will apply to you "
+
+#~ msgid ""
+#~ "2. Bitte bedenkt, dass Vollzeitstudierende nicht gleichzeitig eine "
+#~ "Vollzeitstelle belegen dürfen. Überlegt euch demnach gut, <mark>in "
+#~ "welchem Ausmaß ihr euch für Hilfe bereiterklären könnt</mark>. Falls ihr "
+#~ "eine Vollzeitarbeit über diesen Weg aufnehmen wollt, müsst ihr häufig ein "
+#~ "Urlaubssemester einlegen."
+#~ msgstr ""
+#~ "Please remember that full-time students are not allowed to take a full-"
+#~ "time job at the same time. Therefore, <mark>think carefully about the "
+#~ "extent to which you can volunteer</mark>. If you want to take volunteer "
+#~ "full-time job, you will often have to take a semester off. "
+
+#~ msgid ""
+#~ "3. Bitte bedenkt zuvor, dass ihr bei jeglichen Tätigkeiten in Kontakt mit "
+#~ "anderen Menschen kommt und damit eine erhöhte Ansteckungs- und "
+#~ "Infektionsgefahr einhergeht. Solltet ihr selbst <mark>positiv auf nCOV-19 "
+#~ "getestet worden sein oder Symptome zeigen</mark> (Husten, Fieber, "
+#~ "Abgeschlagenheit) oder sogar zur Risikogruppe gehören, dann ist aufgrund "
+#~ "der Infektionsgefahr davon abzusehen sich im Gesundheitswesen zu "
+#~ "betätigen, um das Risiko der Übertragung zu verringern."
+#~ msgstr ""
+#~ "3. Please consider beforehand that you will come into contact with other "
+#~ "people and that this will increase the risk of infection. If you yourself "
+#~ "have <mark>tested positive for nCOV-19 or show symptoms</mark> (cough, "
+#~ "fever, fatigue) or are at risk, then due to the risk of infection, you "
+#~ "should refrain from working in the healthcare sector to reduce the risk "
+#~ "of transmission."
+
+#~ msgid "Registrierung - Studierende & Helfer"
+#~ msgstr "Registration - students & volunteers"
+
+#~ msgid "Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21"
+#~ msgstr "Please enter a date in the format YYYY-MM-DD, e.g. 2020-03-21"
+
+#~ msgid "Famulaturreife"
+#~ msgstr "Qualified for internships"
 
 #~ msgid "M2 absolviert"
 #~ msgstr "2nd major exam (M2) completed"
 
 #~ msgid "Berufserfahrung in Monaten"
 #~ msgstr "Work experience in months"
+
+#~ msgid "Pfleger*in"
+#~ msgstr "Caregiver"
 
 #~ msgid "Pflegehelfer*in"
 #~ msgstr "Care assistant"
@@ -808,11 +993,20 @@ msgstr "Supported by"
 #~ msgid "RTA"
 #~ msgstr "Medical Technologist (Radiology)"
 
+#~ msgid "Rettungssanitäter*in"
+#~ msgstr "Paramedic/EMT"
+
+#~ msgid "Kinderbetreuer*in"
+#~ msgstr "Child Carer"
+
 #~ msgid "Hebamme"
 #~ msgstr "Midwife"
 
 #~ msgid "Sprechstundenhilfe"
 #~ msgstr "Medical secretary"
+
+#~ msgid "Labortechnische Assistenz"
+#~ msgstr "Medical Laboratory Scientist"
 
 #~ msgid "Famulatur"
 #~ msgstr "Clinical Internship"
@@ -895,14 +1089,11 @@ msgstr "Supported by"
 #~ msgid "Beatmungsgeräte Bedienen"
 #~ msgstr "Respirator Settings"
 
-#~ msgid ""
-#~ "Bitte gebt hier an, welche Berufsausbildung ihr bereits abgeschlossen "
-#~ "oder angefangen habt. Falls ihr eine der Berufsausbildungen nicht "
-#~ "angefangen habt, dann müsst ihr nichts weiter angeben."
-#~ msgstr ""
-#~ "Please indicate here which professional training you have already "
-#~ "completed or started. If you have not started one of the vocational "
-#~ "training courses, you do not need to enter anything."
+#~ msgid "Bitte gib deine Postleitzahl ein"
+#~ msgstr "Please enter your zip code"
+
+#~ msgid "in Monaten"
+#~ msgstr "in months"
 
 #~ msgid "Fähigkeiten"
 #~ msgstr "Skills"
@@ -919,6 +1110,89 @@ msgstr "Supported by"
 #~ "seeking help. In addition, you can use the traffic light system (red, "
 #~ "yellow, green) to indicate how often you have already performed this "
 #~ "activity."
+
+#~ msgid ""
+#~ "Wenn es zu der e-Mail Adresse einene Account gibt, haben wir Dir "
+#~ "Anweisungen zum Setzen eines neuen Passworts gesendet. Sie sollten in "
+#~ "Kürze eintreffen."
+#~ msgstr ""
+#~ " We’ve emailed you instructions for setting your password, if an account "
+#~ "exists with the email you entered. You should receive them shortly."
+
+#~ msgid ""
+#~ "Wenn Du kein e-Mail erhälst, prüfe bitte die eingegebene e-Mail Adresse "
+#~ "und schau in Deinen Spam-Ordner. "
+#~ msgstr ""
+#~ "If you don't receive an e-Mail from us, please double-check the entered e-"
+#~ "Mail addressand your spam folder."
+
+#, fuzzy
+#~| msgid ""
+#~| "Hast du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
+#~| "wir senden dir ein Neues zu."
+#~ msgid ""
+#~ "Hast Du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
+#~ "wir senden dir ein Neues zu."
+#~ msgstr ""
+#~ "Have you forgotten your password? Enter your e-mail address below and "
+#~ "we'll send you a new one."
+
+#~ msgid "e-Mail Adresse"
+#~ msgstr "e-mail address"
+
+#~ msgid "Ich habe Bedarf an Unterstützung"
+#~ msgstr "I need support"
+
+#~ msgid "Das Team"
+#~ msgstr "The team"
+
+#~ msgid ""
+#~ "Wir sind ein kleines Team aus Potsdam und Berlin, das sich am #wirvsvirus "
+#~ "Hackathon der Bundesregierung beteiligt hat. Unsere Plattform verfolgt "
+#~ "das Ziel, Studierende und Helfende mit Krankenhäusern, Hausarztpraxen, "
+#~ "Gesundheitsämtern und anderen Einrichtungen des Gesundheitswesens zu "
+#~ "verbinden. Wir gehen davon aus, dass es in der Corona-Krise zu einem "
+#~ "Personalmangel kommen wird. Hier kann es notwendig werden, auf "
+#~ "Studierende (besonders auf Medizinstudierende) oder Auszubildende "
+#~ "zurückzugreifen, um dem erhöhten Personalbedarf Rechnung zu tragen oder "
+#~ "auch Mitarbeiter* innen, die z.B. aufgrund einer eigenen Erkrankung "
+#~ "ausfallen, zu ersetzen."
+#~ msgstr ""
+#~ "We are a small team from Potsdam and Berlin that participated in the "
+#~ "#wirvsvirus Hackathon of the German government. Our platform pursues the "
+#~ "goal of connecting students and volunteers with hospitals, family "
+#~ "doctor's offices, health authorities and other health care institutions. "
+#~ "We assume that there will be a shortage of staff during the Corona "
+#~ "crisis. In this case, it may become necessary to call on students "
+#~ "(especially medical students) or trainees in order to meet the increased "
+#~ "demand for personnel or to replace employees internally who are absent, e."
+#~ "g. due to their own illness."
+
+#~ msgid ""
+#~ "Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert "
+#~ "werden könnt, gebt eure Anprechpartner und\n"
+#~ "        Infos an!"
+#~ msgstr ""
+#~ "Please enter your contact persons and information so that we can upload "
+#~ "your offer and can contact you! "
+
+#~ msgid "Registrierung"
+#~ msgstr " Register"
+
+#~ msgid "Informatikstudentin (TU Berlin)"
+#~ msgstr "Computer science student (TU Berlin)"
+
+#~ msgid "Mathematikstudent (EPFL/TU München)"
+#~ msgstr "Mathematics student (EPFL/TU Munich)"
+
+#~ msgid "Medizinstudent (Charité Berlin)"
+#~ msgstr "Medical student (Charité Berlin)"
+
+#~ msgid "Informatikstudent (Uni Leipzig)"
+#~ msgstr "Computer science student (Uni Leipzig)"
+
+#~ msgid "Informatikstudent (TU Berlin)"
+#~ msgstr "Computer science student (TU Berlin)"
 
 #~ msgid "Krankenhauskarte"
 #~ msgstr "Map of hospitals"
@@ -972,9 +1246,6 @@ msgstr "Supported by"
 #~ "I work in a hospital or medical practice and need support to manage the "
 #~ "onrush of nCOV-19 patients. I am specifically looking for professionals "
 #~ "who can support me in my work in the healthcare sector."
-
-#~ msgid " Anzeige stellen"
-#~ msgstr " List need for help"
 
 #, fuzzy
 #~| msgid "Krankenhauskarte"

@@ -9,187 +9,193 @@
 {% block content %}
 <div class="container">
   <div style="height:40px"></div>
-  <h1 style="text-align:center"><b>{% blocktrans %}Das Team{% endblocktrans %}</b> </h1>
+  <h1 style="text-align:center; font-weight: 300;">{% blocktrans %}Wir sind das Team von match4healthcare!{% endblocktrans %}</h1>
   <hr>
-  <h5>{% blocktrans %}Wir sind ein kleines Team aus Potsdam und Berlin, das sich am #wirvsvirus Hackathon der Bundesregierung beteiligt hat. Unsere Plattform verfolgt das Ziel, Studierende und Helfende mit Krankenhäusern, Hausarztpraxen, Gesundheitsämtern und anderen Einrichtungen des Gesundheitswesens zu verbinden. Wir gehen davon aus, dass es in der Corona-Krise zu einem Personalmangel kommen wird. Hier kann es notwendig werden, auf Studierende (besonders auf Medizinstudierende) oder Auszubildende zurückzugreifen, um dem erhöhten Personalbedarf Rechnung zu tragen oder auch Mitarbeiter* innen, die z.B. aufgrund einer eigenen Erkrankung ausfallen, zu ersetzen.{% endblocktrans %}</h4>
+  <p class="text-center">{% blocktrans %}Durch die bundesweit erfolgreich und bekannt gewordenen Initiative „Medizinstudierende vs. COVID19“ (<a href="https://www.medis-vs-covid19.de" target="_blank">medis-vs-covid19.de</a>), die Bundesvertretung der Medizinstudierenden in Deutschland e.V. (bvmd) und unserem Tech-Team haben wir im Rahmen des Hackathon der Bundesregierung (#wirvsvirus) eine Plattform für die Vernetzung von Hilfesuchenden und Hilfebietenden erstellt. Wir stellen uns vor:{% endblocktrans %}</p>
   <div style="height:40px"></div>
   <div class="row">
     <!-- Team Member 1 -->
-    <div class="col-xl-4 col-md-6 mb-5">
-      <div class="card border-0 shadow">
-        <img src="{% static 'img/team/freya_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Freya Behrens</h5>
-          <div class="card-text text-black-50">{% blocktrans %}Informatikstudentin (TU Berlin){% endblocktrans %}</div>
-        </div>
-      </div>
-    </div>
-    <!-- Team Member 2 -->
-    <div class="col-xl-4 col-md-6 mb-5">
+  <div class="col-xl-3 col-md-6 mb-5">
       <div class="card border-0 shadow" style="height:100%">
         <div style="height:40%"></div>
-        <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="{% static 'img/logo.jpg' %}" class="card-img-top" alt="..."  width="300px"></a>
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0"> </h5>
-          <div class="card-text text-black-50"> </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4 col-md-6 mb-5">
-      <div class="card border-0 shadow">
-        <img src="{% static 'img/team/baschdl_gray.jpeg' %}" class="card-img-top" alt="..."  width="300px">
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Sebastian Bischoff</h5>
-          <div class="card-text text-black-50">{% blocktrans %}Mathematikstudent (EPFL/TU München){% endblocktrans %}</div>
-        </div>
-      </div>
-    </div>
-    <!-- Team Member 3 -->
-    <div class="col-xl-4 col-md-6 mb-5">
-      <div class="card border-0 shadow">
-        <img src="{% static 'img/team/andi_gray.jpeg' %}" class="card-img-top" alt="..." width="300px">
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Andreas Kind</h5>
-          <div class="card-text text-black-50">{% blocktrans %}Medizinstudent (Charité Berlin){% endblocktrans %}</div>
-        </div>
-      </div>
-    </div>
-    <!-- Team Member 4 -->
-    <!-- Team Member 5 -->
-    <div class="col-xl-4 col-md-6 mb-5">
-      <div class="card border-0 shadow">
-        <img src="{% static 'img/team/bjarne_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Bjarne Sievers</h5>
-          <div class="card-text text-black-50">{% blocktrans %}Informatikstudent (Uni Leipzig){% endblocktrans %}</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4 col-md-6 mb-5">
-      <div class="card border-0 shadow">
-        <img src="{% static 'img/team/jonathan_gray.png' %}" class="card-img-top" alt="..." width="300px">
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Jonathan Sauder</h5>
-          <div class="card-text text-black-50">{% blocktrans %}Informatikstudent (TU Berlin){% endblocktrans %}</div>
-        </div>
+        <a href="https://www.medis-vs-covid19.de" target="_blank"><img src="{% static 'img/team/logo-medis-vs-covid.svg' %}" class="card-img-top" alt="Medis vs. COVID-19" width="300px" style="padding: 0 5px;"></a>
+
       </div>
     </div>
 
-    <!-- Team Match4Healthcare -->
-    <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/jeremy_schmidt_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Jeremy Schmidt</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/aurica_ritter_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Aurica Ritter</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/jana_aulenkamp_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Jana Aulenkamp</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/malte_zacharias_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Malte Zacharias</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/amandeep_grewal_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+	<div class="col-xl-3 col-md-6 mb-5">
+
+		        <div class="card border-0 shadow">
+          <img src="{% static 'img/team/amandeep_grewal.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Amandeep Grewal</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
+
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/andreas_zehetner_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+
+
+    </div>
+    <!-- Team Member 2 -->
+    <div class="col-xl-3 col-md-6 mb-5">
+     <div class="card border-0 shadow">
+          <img src="{% static 'img/team/andreas_zehetner.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Andreas Zehetner</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
+
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/alexandra_diendorfer_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Alexandra Diendorfer</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/ahmed_abdel_rahman_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+    </div>
+    <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/ahmed.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Ahmed Abdel-Rahman</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/michael_neulinger_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+    </div>
+
+	      <div class="col-xl-3 col-md-6 mb-5">
+	<div class="card border-0 shadow">
+          <img src="{% static 'img/team/alexandra_diendorfer.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Alexandra Diendorfer</h5>
+          </div>
+        </div>
+    </div>
+	      <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/michael_neulinger.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Michael Neulinger</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
           </div>
         </div>
+    </div>
+	</div>
+
+	  <hr style="margin-bottom: 65px;">
+	  <div class="row">
+    <!-- Team Member 1 -->
+  <div class="col-xl-3 col-md-6 mb-5">
+      <div class="card border-0 shadow" style="height:100%">
+        <div style="height:15%"></div>
+        <a href="https://www.bvmd.de/" target="_blank"><img src="{% static 'img/team/bvmd.jpg' %}" class="card-img-top" alt="BVMD" width="300px" style="padding: 0 5px;"></a>
       </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/nicolaj_hackert_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+    </div>
+
+	<div class="col-xl-3 col-md-6 mb-5">
+
+		        <div class="card border-0 shadow">
+          <img src="{% static 'img/team/jeremy_schmidt.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
-            <h5 class="card-title mb-0">Nicolaj Hackert</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
+            <h5 class="card-title mb-0">Jeremy Schmidt</h5>
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/fabian_von_bubnoff_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
+
+
+    </div>
+    <!-- Team Member 2 -->
+    <div class="col-xl-3 col-md-6 mb-5">
+     <div class="card border-0 shadow">
+          <img src="{% static 'img/team/aurica_ritter.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Aurica Ritter</h5>
+          </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/jana_aulenkamp.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Jana Aulenkamp</h5>
+          </div>
+        </div>
+    </div>
+
+	      <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/fabian_von_bubnoff.jpg' %}" class="card-img-top" alt="..." width="300px">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Fabian von Bubnoff</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/max_joos_gray.jpg' %}" class="card-img-top" alt="..." width="300px">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Max Joos</h5>
-            <div class="card-text text-black-50">{% blocktrans %}Team Match4Healthcare{% endblocktrans %}</div>
-          </div>
-        </div>
-      </div>
-      
-    <div style="height:40px"></div>
+    </div>
 
-  </div>
+
+
+	</div>
+
+	  <hr style="margin-bottom: 65px;">
+	  <div class="row" style="margin-bottom:65px;">
+    <!-- Team Member 1 -->
+  <div class="col-xl-3 col-md-6 mb-5">
+      <div class="card border-0 shadow" style="height:100%">
+        <div style="height:40%"></div>
+        <a href="https://wirvsvirushackathon.org" target="_blank"><img src="{% static 'img/logo.jpg' %}" class="card-img-top" alt="#wirvsvirus" width="300px" style="padding: 0 5px;"></a>
+      </div>
+    </div>
+
+	<div class="col-xl-3 col-md-6 mb-5">
+
+		        <div class="card border-0 shadow">
+          <img src="{% static 'img/team/andreas_kind.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Andreas Kind</h5>
+          </div>
+        </div>
+
+
+    </div>
+    <!-- Team Member 2 -->
+    <div class="col-xl-3 col-md-6 mb-5">
+     <div class="card border-0 shadow">
+          <img src="{% static 'img/team/freya_behrens.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Freya Behrens</h5>
+          </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/sebastian_bischoff.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Sebastian Bischoff</h5>
+          </div>
+        </div>
+    </div>
+
+
+		  	      <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/bjarne_sievers.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Bjarne Sievers</h5>
+          </div>
+        </div>
+    </div>
+
+		  	      <div class="col-xl-3 col-md-6 mb-5">
+	 <div class="card border-0 shadow">
+          <img src="{% static 'img/team/jonathan_sauder.png' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Jonathan Sauder</h5>
+          </div>
+        </div>
+    </div>
+
+
+	      <div class="col-xl-3 col-md-6 mb-5">
+	<div class="card border-0 shadow">
+          <img src="{% static 'img/team/malte_zacharias.jpg' %}" class="card-img-top" alt="..." width="300px">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Malte Zacharias</h5>
+          </div>
+        </div>
+    </div>
+	</div>
+
+
   <!-- /.row -->
 
 </div>
-</div>
+
 {% endblock %}

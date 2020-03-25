@@ -52,40 +52,45 @@ Registrierung - Studierende
 {% block content %}
 
 <div class="container">
-    <br>
-    <br>
-    <h1> {% blocktrans %}Liebe Studierende und Helfende,{% endblocktrans %} </h1>
-    <br>
-    <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir euch, die folgenden Daten anzugeben, damit wir euch mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
-    <br>
-    <h2>Disclaimer</h2>
-    <br>
-    <p>{% blocktrans %}Zuvor möchten wir euch zu eurer und der allgemeinen Sicherheit über einige Punkte aufklären:{% endblocktrans %}</p>
+  	<div style="height:40px"></div>
+    {% if user.is_authenticated %}
+	
+	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
+	<hr><br>
+	
+	{% else %}
+	{% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
+	
+	
+        <a  href="/accounts/login_redirect">Login</a>.
+    <hr><br>
+	{% endif %}
+	
 
-    <p>{% blocktrans %}1. Vergewissert euch, bevor ihr euch für eine Tätigkeit verpflichtet, welche <mark>Haftpflichrichtlinien</mark> für euch gelten werden.{% endblocktrans %} </p>
-
-    <p>{% blocktrans %}2. Bitte bedenkt, dass Vollzeitstudierende nicht gleichzeitig eine Vollzeitstelle belegen dürfen. Überlegt euch demnach gut, <mark>in welchem Ausmaß ihr euch für Hilfe bereiterklären könnt</mark>. Falls ihr eine Vollzeitarbeit über diesen Weg aufnehmen wollt, müsst ihr häufig ein Urlaubssemester einlegen.{% endblocktrans %}  </p>
-
-    <p>{% blocktrans %}3. Bitte bedenkt zuvor, dass ihr bei jeglichen Tätigkeiten in Kontakt mit anderen Menschen kommt und damit eine erhöhte Ansteckungs- und Infektionsgefahr einhergeht. Solltet ihr selbst <mark>positiv auf nCOV-19 getestet worden sein oder Symptome zeigen</mark> (Husten, Fieber, Abgeschlagenheit) oder sogar zur Risikogruppe gehören, dann ist aufgrund der Infektionsgefahr davon abzusehen sich im Gesundheitswesen zu betätigen, um das Risiko der Übertragung zu verringern.{% endblocktrans %}</p>
+    <h1 class="font-weight-light match4hc-title">  {% blocktrans %}Du sitzt zuhause und kannst in der aktuellen Situation helfen?{% endblocktrans %}  </h1>
+	<h2 class="font-weight-light match4hc-title">Wir verbinden Helfende und Hilfesuchenden zu einem Match4Healthcare!</h2>
+	
+	
+    
+    <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir dich, die folgenden Daten anzugeben, damit wir dich mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
+   
 </div>
-<div class="container">
-    <div class="card border-primary">
-        <div class="card-header">
-            {% blocktrans %}Registrierung - Studierende & Helfer{% endblocktrans %}
-        </div>
-        <div class="card-body">
+
+
+<div class="container" style="margin-top: 35px;">
+   
             <form action="signup_student" method="post">
                 {% csrf_token %}
                 {{form_mail}}
                 {% crispy form form.helper %}
             </form>
-        </div>
-    </div>
+       
 </div>
-<hr>
+
 <script type="text/javascript">
 $( document ).ready(function() {
     $("#id_availability_start").attr("type", "date");
 });
 </script>
+
 {% endblock %}

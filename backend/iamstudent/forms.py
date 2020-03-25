@@ -1,13 +1,15 @@
 # from django.forms import *
 from django import forms
-from iamstudent.models import Student, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
+from iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from iamstudent.custom_crispy import RadioButtons
+from accounts.models import User
 
 import logging
 
@@ -76,7 +78,6 @@ class StudentForm(forms.ModelForm):
         exclude = ['uuid', 'registration_date', 'user']
         labels = form_labels
         help_texts = {
-            'availability_start': _('Bitte ein Datum im Format YYYY-MM-DD, also zB 2020-03-21'),
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
             'plz': _('bevorzugter Einsatzort'),
@@ -160,11 +161,17 @@ class StudentForm(forms.ModelForm):
             'einwilligung_datenweitergabe',
             HTML("</p>"),
             HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere Mich'),
+            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
             HTML("</p>")
         )
 
         logging.debug(self.helper.layout)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email
 
 
 class StudentFormAndMail(StudentForm):
@@ -210,3 +217,23 @@ class StudentFormEditProfile(StudentForm):
             Submit('submit', _('Eintrag updaten')),
             HTML("</p>")
         )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Diese Email ist bereits vergeben"))
+        return email
+
+
+
+
+class EmailToSendForm(forms.ModelForm):
+
+    class Meta:
+        model = EmailToSend
+        fields = ['subject','message']
+        labels = {'subject': _('Betreff'),
+                  'message': _('Nachrichtentext')}
+        help_texts = {
+            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
+        }
