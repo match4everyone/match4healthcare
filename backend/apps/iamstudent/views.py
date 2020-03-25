@@ -6,7 +6,7 @@ from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
-from mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentFilter
 
