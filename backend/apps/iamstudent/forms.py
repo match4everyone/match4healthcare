@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
+from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_TYPEN, AUSBILDUNGS_IDS
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -8,8 +8,8 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
-from iamstudent.custom_crispy import RadioButtons
-from accounts.models import User
+from apps.iamstudent.custom_crispy import RadioButtons
+from apps.accounts.models import User
 
 import logging
 

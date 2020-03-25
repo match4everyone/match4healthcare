@@ -2,9 +2,9 @@ from django.db import models
 import uuid
 from datetime import datetime
 
-from accounts.models import User
+from apps.accounts.models import User
 from django.core.exceptions import ValidationError
-from mapview.utils import plzs
+from apps.mapview.utils import plzs
 from django.utils.translation import gettext as _
 
 

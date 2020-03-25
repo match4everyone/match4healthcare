@@ -1,11 +1,11 @@
 from django.forms import *
-from ineedstudent.models import Hospital
+from apps.ineedstudent.models import Hospital
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Row, Column
-from accounts.models import User
+from apps.accounts.models import User
 
 class HospitalFormO(ModelForm):
     class Meta:

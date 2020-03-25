@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from mapview.utils import plzs
-from iamstudent.models import Student
+from apps.mapview.utils import plzs
+from apps.iamstudent.models import Student
 
 from functools import lru_cache
 import time

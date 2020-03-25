@@ -30,10 +30,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'django_tables2',
-    'mapview',
-    'iamstudent',
-    'ineedstudent',
-    'accounts',
+    'apps.mapview',
+    'apps.iamstudent',
+    'apps.ineedstudent',
+    'apps.accounts',
 ]
 
 MIDDLEWARE = [

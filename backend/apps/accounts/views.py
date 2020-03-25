@@ -7,15 +7,15 @@ from django.views.generic import CreateView
 from Match4healthcare.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
-from ineedstudent.models import Hospital
+from apps.ineedstudent.forms import HospitalFormO, HospitalFormEditProfile
+from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
-from ineedstudent.views import ApprovalHospitalTable, HospitalTable
+from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
 
-from iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
+from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
-from iamstudent.models import Student
-from iamstudent.views import send_mails_for
+from apps.iamstudent.models import Student
+from apps.iamstudent.views import send_mails_for
 
 from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required

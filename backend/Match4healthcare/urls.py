@@ -23,10 +23,10 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path('mapview/', include('mapview.urls')),
-    path('iamstudent/', include('iamstudent.urls')),
-    path('ineedstudent/', include('ineedstudent.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('mapview/', include('apps.mapview.urls')),
+    path('iamstudent/', include('apps.iamstudent.urls')),
+    path('ineedstudent/', include('apps.ineedstudent.urls')),
+    path('accounts/', include('apps.accounts.urls')),
     path('admin/', admin.site.urls),
     path('', views.home),
     path('about/', views.about),

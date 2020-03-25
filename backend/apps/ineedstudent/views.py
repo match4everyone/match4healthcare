@@ -1,27 +1,26 @@
 from django.shortcuts import render
 from django.template import loader
-from iamstudent.models import Student
 from django.http import HttpResponse
 
-from mapview.utils import plzs
-from iamstudent.models import Student, StudentFilter
-from ineedstudent.models import Hospital
-from ineedstudent.forms import HospitalForm
+from apps.mapview.utils import plzs
+from apps.iamstudent.models import Student, StudentFilter
+from apps.ineedstudent.models import Hospital
+from apps.ineedstudent.forms import HospitalForm
 
 from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import plzs, get_plzs_close_to
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from accounts.decorator import student_required, hospital_required
+from apps.accounts.decorator import student_required, hospital_required
 
 from functools import lru_cache
-from mapview.views import get_ttl_hash
+from apps.mapview.views import get_ttl_hash
 import time
 
 from django.views.decorators.gzip import gzip_page

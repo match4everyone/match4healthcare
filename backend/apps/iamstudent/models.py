@@ -2,10 +2,10 @@ from django.db import models
 import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
-from mapview.utils import plzs
+from apps.mapview.utils import plzs
 from django.utils.translation import gettext as _
-from accounts.models import User
-from ineedstudent.models import Hospital
+from apps.accounts.models import User
+from apps.ineedstudent.models import Hospital
 
 def validate_semester(value):
     if value < 0:

@@ -10,11 +10,11 @@ from django.utils.translation import gettext as _
 from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend
 
-from ineedstudent.forms import HospitalFormExtra
-from ineedstudent.models import Hospital
+from apps.ineedstudent.forms import HospitalFormExtra
+from apps.ineedstudent.models import Hospital
 
 from django.contrib.auth.decorators import login_required
-from accounts.decorator import student_required, hospital_required
+from apps.accounts.decorator import student_required, hospital_required
 
 
 def get_student(request):
