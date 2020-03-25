@@ -46,11 +46,30 @@
     <div class="card-body">
         {% render_table table %}
     </div>
+    <p><button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken &raquo;</button></p>
 </div>
 
 </div>
 <hr>
 <script>
+
+    var send = function(){
+    var li = [];
+    $('.table-selector').each(function(){
+         console.log($(this));
+        if($(this).val()){
+        li.push($(this).attr("id"));
+        }
+
+       console.log($(this));
+    });
+    if (li.length>0){
+      window.location = ("/iamstudent/send_mail_student/"+ li.join("_"));
+    } else {
+      alert("Bitte wählen Sie mindestens einen Studierenden zum Kontaktieren aus!")
+    }
+  };
+
     var getrequest = function(){
     //console.log($('#plz').attr("value"));
     window.location = "/ineedstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
