@@ -224,8 +224,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             Row(
                 Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                Column('semester', css_class='form-group col-md-4 mb-0'),
-                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
+                #Column('semester', css_class='form-group col-md-4 mb-0'),
+                #Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'
             ),
             Row(
