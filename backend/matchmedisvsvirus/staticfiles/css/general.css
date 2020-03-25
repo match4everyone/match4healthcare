@@ -10,7 +10,30 @@ body {
   font-weight: 300;
   color: #4f4f4f;
   margin-top: 100px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
+
+.content {
+  flex: 1;
+}
+a {
+color:	#ed0a71;
+}
+a:hover {
+color:	#8c0442;
+	text-decoration: none;
+}
+
+h2.match4hc-title { color: #ed0a71; font-size: 1.3rem; }
+
+h1.match4hc-title {
+font-weight: 600 !important;
+font-size: 1.7rem;
+margin-bottom: 0px;
+}
+.navbar {min-height:100px;}
 .footer a, .footer p {
   color: #fff;
 }
@@ -23,7 +46,7 @@ body {
 .home-title h1 {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
   color: #000943
 }
 .logo-header {
@@ -69,6 +92,16 @@ b {
   font-size: 1rem;
   font-weight: 300;
   padding: .9rem 1rem;
+}
+
+.btn-md.blue {
+ background-color: #000943;
+  border-color: #000943;
+  border: 0px;	
+}
+
+.btn-md.blue:hover {
+  background-color: #ed0a71;
 }
 .btn-lg.blue {
   background-color: #000943;
@@ -132,4 +165,46 @@ div.boxed {
   margin-bottom: 0px !important
 }
 
+.footer a:hover {
+  text-decoration: underline;
+}
+
 h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
+
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle, .btn-info:hover {
+	background-color: #ed0a71 !important;
+	border-color: #ed0a71 !important;
+	border:0px; 
+}
+
+.btn-info { background-color: #efefef; color: #888; border:0px; }
+
+@media only screen and (max-width: 575px) {
+
+.form-group > div { display:block; }
+	.form-group { margin-bottom: 0.3rem;}
+	
+	.form-group label { margin-bottom: .1rem;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+.form-group > div { display:block; }
+	.form-group { margin-bottom: 0.3rem;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+	
+	.navbar > .container { width: 100%; max-width: none; padding-left: 0px; padding-right: 0px; }
+
+	.navbar-brand > img { width: 150px !important;}
+	.navbar-light .navbar-nav .nav-link { font-size: .9rem; padding-left: .5rem; padding-right: .5rem;
+	}
+	
+}
+
+.login-card {
+	
+	padding: 30px; 
+	
+}

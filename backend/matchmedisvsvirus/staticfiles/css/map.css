@@ -1,4 +1,5 @@
-#mapid { height: 900px; width: 100%; }
+#mapid { position: absolute; top: 100px; right: 0; bottom: 61px; left: 0; width: 100%; min-height: 300px; }
+.leaflet-bottom.leaflet-right { top: 0;}
 head {
 	Background-color:#7dd1c5;
 	font-family:'Open Sans', sans-serif;

@@ -36,6 +36,7 @@ class Hospital(models.Model):
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    is_approved = models.BooleanField(default=False)
 
     # Metadata
     class Meta:

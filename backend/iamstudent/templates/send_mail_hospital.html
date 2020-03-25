@@ -14,26 +14,29 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<hr>
 <div class="container">
+
     <p>
-        {% blocktrans %}Du möchtest eine Email an {{n}} Studiererende schicken.{% endblocktrans %}
-    </p>
-    <p>
-        {% blocktrans %}Damit wir Eure Anzeigen hochladen können, und ihr auch so kontaktiert werden könnt, gebt eure Anprechpartner und
-        Infos an!{% endblocktrans %}
+
     </p>
 </div>
 <div class="container">
     <div class="card border-primary">
         <div class="card-header">
-            {% blocktrans %}Registrierung{% endblocktrans %}
+            <h4>{% blocktrans %}Anzeige versenden{% endblocktrans %}</h4>
         </div>
         <div class="card-body">
             <form action="/iamstudent/send_mail_student/{{ids}}" method="post">
                 {% csrf_token %}
-                {% crispy form form.helper %}
-            </form>
+                {{ form | crispy }}
+                <p>
+       <button type="submit" class="btn btn-success">Sende Mails</button>
+                    {% blocktrans %}Du möchtest eine Email an <mark>{{n}} Studiererende</mark> schicken.{% endblocktrans %}
+    </p>
+                </form>
         </div>
     </div>
+    <hr>
 </div>
 {% endblock %}

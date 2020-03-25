@@ -69,7 +69,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
       <p> Und im Umkreis von (km): </p>
       <input id="umkreis" value="{{ distance }}" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary" onclick="getrequest()">
+    <button type="submit" class="btn blue text-white btn-lg" onclick="getrequest()">
     <span class="glyphicon glyphicon-search"></span>Filtern!
   </div>
   </button>
@@ -110,7 +110,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
     {% for stud in filter.qs %}
     <tr>
       <td class="bs-checkbox"><input name="btSelectItem" type="checkbox"></td>
-      <td id="{{stud.id}}">{{ stud.plz }}</td>
+      <td id="{{stud.user_id}}">{{ stud.plz }}</td>
       <td>{{ stud.countrycode }}</td>
       <td>{{ stud.availability_start }}</td>
       <td>{% if stud.braucht_bezahlung == 1 %}            Freiwillig  {% elif stud.braucht_bezahlung == 2 %}Minijob{% else %}Vollzeit{% endif %}</td>
@@ -134,7 +134,7 @@ Hilfsbereite Studierende in der Nähe von {{ ort }} (Postleitzahl {{ plz }})
 	</tbody>
 </table>
 <div>
-<p><button class="btn btn-primary" onclick="send()">Email an ausgewählte Studierende schicken &raquo;</button></p>
+<p><button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken &raquo;</button></p>
 </div>
 </div>
 <script type="text/javascript">

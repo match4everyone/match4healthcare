@@ -66,7 +66,11 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/accounts/login_redirect'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+NOREPLY_MAIL = 'noreply@medisvs.spahr.uberspace.de'
 
 WSGI_APPLICATION = 'matchmedisvsvirus.wsgi.application'
 
