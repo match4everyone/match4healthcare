@@ -120,7 +120,7 @@ def login_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect('profile_student')
+        return HttpResponseRedirect('/mapview')
 
     elif user.is_hospital:
         return HttpResponseRedirect('profile_hospital')
@@ -129,7 +129,7 @@ def login_redirect(request):
         return HttpResponseRedirect('approve_hospitals')
 
     else:
-        #todo: throw 404
+        #TODO: throw 404
         HttpResponse('Something wrong in database')
 
 

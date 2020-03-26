@@ -64,6 +64,13 @@
                             Hilfe{% endblocktrans %}</a>
                     </li>
                     {% endif %}
+                    {% if user.is_authenticated and user.is_hospital %}
+                    {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
+                    <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home">
+                        <a class="nav-link" href="{{ filter_student_url }}">{% blocktrans %}Ich brauche
+                            Hilfe{% endblocktrans %}</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item {% if "mapview" in request.path %}active{% endif %}">
                         <a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a>
                     </li>
