@@ -60,9 +60,15 @@ class NamedEmptyFilterSet(filters.FilterSet):
 
 
 class StudentAvailabilityFilter(filters.FilterSet):
-    braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung',lookup_expr='gte',choices=BEZAHLUNG_CHOICES_Filter,label=_('Kann eine Vergütung angeboten werden?'),widget=forms.RadioSelect)
-    availability_start = filters.DateFilter(field_name='availability_start',lookup_expr='lte',label=_('Die Helfenden sollten verfügbar sein ab '))
-    unterkunft_gewuenscht = filters.ChoiceFilter(field_name='unterkunft_gewuenscht',label=_('Kann eine Unterkunft angeboten werden?'),choices=[('unkown',_('wissen wir nicht')),('true',_('ja')),('false',_('nein'))],widget=forms.RadioSelect)
+    braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung', lookup_expr='gte',
+                                             choices=BEZAHLUNG_CHOICES_Filter,
+                                             label=_('Kann eine Vergütung angeboten werden?'), widget=forms.RadioSelect)
+    availability_start = filters.DateFilter(field_name='availability_start', lookup_expr='lte',
+                                            label=_('Die Helfenden sollten verfügbar sein ab '))
+    unterkunft_gewuenscht = filters.ChoiceFilter(field_name='unterkunft_gewuenscht',
+                                                 label=_('Kann eine Unterkunft angeboten werden?'),
+                                                 choices=[(True, _('ja')),
+                                                          (False, _('nein'))], widget=forms.RadioSelect)
 
     class Meta:
         model = Student
