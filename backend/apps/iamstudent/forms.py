@@ -25,13 +25,12 @@ form_labels = {
     'plz': _('Postleitzahl'),
     'countrycode': _('Land'),
     'email': _('Email'),
-
     'availability_start': _('Ich bin verfügbar ab'),
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications
-    'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login">Pflegereserve</a>)</em>'),
+    'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login" target="_blank">Pflegereserve</a>)</em>'),
     'ausbildung_typ_pflege_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_physio': _('Physiotherapieauszubildende*r'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
@@ -133,6 +132,7 @@ class StudentForm(forms.ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
+  HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
                 Column('name_first', css_class='form-group col-md-6 mb-0'),
                 Column('name_last', css_class='form-group col-md-6 mb-0'),
@@ -144,7 +144,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            HTML("<h2>{}</h2>".format(_("Einsatz"))),
+            HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Über deinen Einsatz"))),
             Row(
                 Column('plz', css_class='form-group col-md-4 mb-0'),
                 Column('countrycode', css_class='form-group col-md-4 mb-0'),
@@ -156,7 +156,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            HTML("<h5>{}</h5>".format(_("Wunscheinsatzort"))),
+            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
                 Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
@@ -180,7 +180,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Berufsausbildung"))),
                 Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
@@ -200,14 +200,14 @@ class StudentForm(forms.ModelForm):
             ],
             'sonstige_qualifikationen'
             ,
-            HTML('<hr>'),
+            HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
             HTML('<p class="text-left">'),
             'datenschutz_zugestimmt',
             HTML("</p>"),
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),
-            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
+            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
             Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
         )
 

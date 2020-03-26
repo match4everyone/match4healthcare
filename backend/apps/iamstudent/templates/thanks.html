@@ -9,16 +9,42 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style type="text/css">
+    .bg-container {
+        background-image: url({% static 'img/login-bg.jpg' %});
+        background-position: center;
+        background-size: cover;
+    }
+	@media only screen and (max-width: 767px) {
+	.bg-container {background-position: left;}
+	}
+	
+</style>
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        $(window).on("resize", function() {
+
+            var height = $(window).height();
+            var navHeight = $('.navbar').outerHeight();
+            var footerHeight = $('.footer').innerHeight();
+
+            var newHeight = height - navHeight - footerHeight;
+
+            $(".login-form").height(newHeight);
+
+        }).trigger("resize");
+
+    });
+</script>
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-
+<div class="bg-container">
 <div class="container login-form">
-
-	 <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12" style="margin: 0 auto;">
+	 <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12">
     <div class="card login-card text-center align-items-center">
 
 
@@ -35,6 +61,6 @@
 </div>
 
 	</div>
-</div>
+	</div></div>
 
 {% endblock %}

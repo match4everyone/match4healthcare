@@ -34,7 +34,8 @@ class HospitalFormO(ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')),
+  Row(Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
@@ -46,7 +47,7 @@ class HospitalForm(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalForm, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', 'Registriere Mich'))
+        self.helper.add_input(Submit('submit', 'Jetzt registrieren'))
 
 class HospitalFormExtra(HospitalFormO):
 
@@ -60,9 +61,9 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', _('Daten Aktualisieren'), css_class='btn blue text-white btn-md'))
+        self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
