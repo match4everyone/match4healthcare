@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+
+{% block title %}
+{{hospital.firmenname}}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h2>{{hospital.firmenname}} </h2>
+                <div class="font-weight-light">in  {{hospital.plz}}</div>
+
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{hospital.sonstige_infos}}</li>
+            <li class="list-group-item text-muted">
+                <h4>{% blocktrans %}Kontakt:{% endblocktrans %}</h4>
+                {% if user.is_authenticated and user.is_student %}
+                {% blocktrans %}Meldet euch bei: {% endblocktrans %} {{hospital.ansprechpartner}}
+                <br> {% blocktrans %}Telefon:{% endblocktrans %} {{hospital.telefon}}
+                <br> {% blocktrans %}Mail:{% endblocktrans %} {{mail}}</li>
+                {% else %}
+                <p>{% blocktrans %}Bitte <a target="_blank" href="/accounts/signup_student">Registriere dich als Helfende_r</a> um die Kontaktdaten von {{hospital.firmenname}} zu sehen.{% endblocktrans%}</p>
+                {% endif %}
+      </ul>
+    </div>
+</div>
+<hr>
+{% endblock %}

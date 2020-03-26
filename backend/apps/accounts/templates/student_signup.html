@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Registrierung - Studierende
+{% endblock %}
+
+{% block header %}
+<script type="text/javascript">
+
+    var signUpHelper = {
+        handleQualificationInput : function handleQualificationInput(event) {
+            let sourceElement = event.srcElement;
+            let qualificationSelected = event.srcElement.checked;
+            
+            // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
+            let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
+            this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
+        },
+        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
+            let section = document.getElementById(`div-ausbildung-${id}`)
+            if (!section) return;
+            if (setVisibility) {
+                section.classList.remove('hidden')
+            } else {
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
+                section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
+            }
+            
+        },
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
+        qualifikationSelectors.forEach(element => {
+            element.addEventListener("input", (event) => { signUpHelper.handleQualificationInput(event) })
+
+            // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
+            signUpHelper.handleQualificationInput({ srcElement: element });
+        })
+            
+    });
+
+</script>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+  	<div style="height:40px"></div>
+    {% if user.is_authenticated %}
+	
+	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
+	<hr><br>
+	
+	{% else %}
+	{% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
+	
+	
+        <a  href="/accounts/login_redirect">Login</a>.
+    <hr><br>
+	{% endif %}
+	
+
+    <h1 class="font-weight-light match4hc-title">  {% blocktrans %}Du sitzt zuhause und kannst in der aktuellen Situation helfen?{% endblocktrans %}  </h1>
+	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Wir verbinden Helfende und Hilfesuchenden zu einem match4healthcare!{% endblocktrans %}</h2>
+	
+	
+    
+    <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir dich, die folgenden Daten anzugeben, damit wir dich mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
+   
+</div>
+
+
+<div class="container">
+     <div class="row" style="margin-top:30px; margin-bottom:55px;">
+                <div class="col-lg-10 col-sm-12 col-12">
+					
+            <form action="signup_student" method="post">
+                {% csrf_token %}
+                {{form_mail}}
+                {% crispy form form.helper %}
+            </form>
+       
+		 </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    $("#id_availability_start").attr("type", "date");
+});
+</script>
+
+{% endblock %}
