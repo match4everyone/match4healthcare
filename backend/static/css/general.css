@@ -197,6 +197,7 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 }
 
 .form-group label { margin-bottom: 0.2rem;}
+.form-group {margin-bottom: .5rem;}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) { 
 	
@@ -234,12 +235,14 @@ Student Form
   max-height:500px;
   transition: max-height 600ms 0ms, opacity 600ms 0ms;
   overflow: hidden;
+	margin-top:5px;
 }
 
 
 .ausbildung-addon.hidden {
   opacity: 0;
   max-height: 0px;
+	margin-top:0px;
 }
 
 
@@ -248,4 +251,9 @@ Student Form
 	border:0px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+.form-heading {
+font-weight: 600 !important;
+font-size: 1.4rem;
+margin-bottom: 15px; }
 
