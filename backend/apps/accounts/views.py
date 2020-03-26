@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 
-from match4healthcare.settings.common import NOREPLY_MAIL
+from django.conf import settings
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
