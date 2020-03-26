@@ -207,7 +207,7 @@ class StudentForm(forms.ModelForm):
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),
-            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
+            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
             Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
         )
 
@@ -262,11 +262,6 @@ class StudentFormEditProfile(StudentForm):
                         Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
                   )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
 
 
 class EmailToSendForm(forms.ModelForm):
@@ -327,5 +322,3 @@ class PersistenStudentFilterForm(forms.ModelForm):
         )
         self.helper.form_tag = False
         #self.helper.add_input(Submit('submit', _('Aktualisieren')))
-
-

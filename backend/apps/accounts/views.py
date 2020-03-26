@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from match4healthcare.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
+from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -73,43 +73,47 @@ def register_student_in_db(request, mail):
     return user, student
 
 
-def send_password(email, pwd, name):
-    send_mail(subject=_('Willkommen bei match4healthcare'),
-              message=_(
-                  'Hallo %s,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
-                  name, email, pwd)),
-              from_email=NOREPLY_MAIL,
-              # TODO adaptive email adress
-              recipient_list=[email])
-
-
 def hospital_signup(request):
     if request.method == 'POST':
         form_info = HospitalFormInfoSignUp(request.POST)
-        form_user = HospitalSignUpForm(request.POST)
 
-        if all([form_info.is_valid(), form_user.is_valid()]):
+        if form_info.is_valid():
             user, hospital = register_hospital_in_db(request, form_info.cleaned_data['email'])
-            plz = form_info.cleaned_data['plz']
-            countrycode = form_info.cleaned_data['countrycode']
-            distance = 0
-            login(request, user)
-            return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
+            send_password_set_email(
+                email=form_info.cleaned_data['email'],
+                host=request.META['HTTP_HOST'],
+                template="registration/password_set_email_hospital.html",
+                subject_template="registration/password_reset_email_subject.txt"
+            )
+            return HttpResponseRedirect("/iamstudent/thanks")
+
+
+            #plz = form_info.cleaned_data['plz']
+            #countrycode = form_info.cleaned_data['countrycode']
+            #distance = 0
+            #login(request, user)
+            #return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
 
     else:
         form_info = HospitalFormInfoSignUp(
             initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
-        form_user = HospitalSignUpForm()
+        #form_user = HospitalSignUpForm()
     form_info.helper.form_tag = False
-    return render(request, 'hospital_signup.html', {'form_info': form_info, 'form_signup': form_user})
+    return render(request, 'hospital_signup.html', {'form_info': form_info })
 
 
 @transaction.atomic
 def register_hospital_in_db(request, m):
-    u = User.objects.create(username=m)
-    user = HospitalSignUpForm(request.POST, instance=u).save()
+
+    pwd = User.objects.make_random_password()
+    user = User.objects.create(username=m, is_hospital=True, email=m)
+    user.set_password(pwd)
+    print("Saving User")
+    user.save()
+
     hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormInfoSignUp(request.POST, instance=hospital)
+    hospital = HospitalFormInfoCreate(request.POST, instance=hospital)
+    print("Saving Hospital")
     hospital.save()
     return user, hospital
 
@@ -155,10 +159,6 @@ def login_redirect(request):
 @student_required
 def edit_student_profile(request):
     student = request.user.student
-
-    if not request.user.validated_email:
-        request.user.validated_email = True
-        request.user.save()
 
     if request.method == 'POST':
         form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
@@ -220,3 +220,11 @@ def delete_me(request):
 def delete_me_ask(request):
     user = request.user
     return render(request,'deleted_user_ask.html')
+
+
+@login_required
+def validate_email(request):
+    if not request.user.validated_email:
+        request.user.validated_email = True
+        request.user.save()
+    return HttpResponseRedirect("/mapview")
