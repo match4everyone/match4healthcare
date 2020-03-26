@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.core.mail import BadHeaderError, send_mail
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -106,7 +107,7 @@ def send_mails_for(hospital):
             try:
                 send_mail(m.subject,
                           m.message,
-                          'noreply@medisvs.spahr.uberspace.de',
+                          settings.NOREPLY_MAIL,
                           [m.student.user.email]
                           )
                 # todo: muss noch asynchron werden ...celery?
@@ -123,7 +124,7 @@ def notify_student(student_id, contact):
     student = Student.objects.get(id=student_id)
     send_mail(subject=_('subject :)'),
               message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
-              from_email='noreply@medisvs.spahr.uberspace.de',
+              from_email=settings.NOREPLY_MAIL,
               recipient_list=[student.email])
 
 @login_required
