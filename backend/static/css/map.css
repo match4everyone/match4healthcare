@@ -103,3 +103,8 @@ path.leaflet-interactive  {
 
 .leaflet-container a { color: #ed0a71 }
 .leaflet-container a:hover { color: #8c0442;;  }
+
+.leaflet-popup-content-wrapper { border-radius: .5rem;}
+
+.leaflet-container {
+	font: 14px/1.5 "proxima-nova", Arial, Helvetica, sans-serif; }
