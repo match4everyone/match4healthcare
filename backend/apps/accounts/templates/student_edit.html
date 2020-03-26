@@ -33,11 +33,11 @@ Profil - Studierende
     {% endfor %}
 
     {% endif %}
-   
+
 
 
     <div class="container">
-		
+
 		<h1 class="font-weight-light match4hc-title">{% blocktrans %}Mein Profil{% endblocktrans %}</h1>
 		<h2 class="font-weight-light match4hc-title">{% blocktrans %}Aktualisiere hier jederzeit deine Angaben.{% endblocktrans %}</h2>
 		<br>
@@ -51,14 +51,9 @@ Profil - Studierende
                     <a role="button" class="btn blue text-white btn-md" href="password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
                     <a role="button" class="btn btn-info" href="delete_me">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
                 </p>
-                <form action="profile_student" method="post">
-                    {% csrf_token %}
-                    {{emailform|crispy}}
-                    <button type="submit" class="btn btn-info">{% blocktrans %}E-Mail Adresse aktualisieren{% endblocktrans %}</button>
-                </form>
             </div>
         </div>
-      
+
         <div class="card">
             <div class="card-header">
                 {% blocktrans %}Informationen über dich{% endblocktrans %}
