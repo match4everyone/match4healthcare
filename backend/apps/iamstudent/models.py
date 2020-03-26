@@ -20,11 +20,19 @@ def validate_checkbox(value):
         return value
 
 #class Bezahlung(models.IntegerChoices):
-UNENTGELTLICH = 1
-BEZAHLUNG = 4
+EGAL = 0
+# todo: im form ändern zu radio
+BEZAHLUNG = 1
+UNENTGELTLICH = 2
 BEZAHLUNG_CHOICES = (
     (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
     (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+)
+
+BEZAHLUNG_CHOICES_Filter = (
+    (EGAL, _('wissen wir noch nicht')),
+    (UNENTGELTLICH, _('nein')),
+    (BEZAHLUNG, _('ja')),
 )
 
 
@@ -221,14 +229,14 @@ AUSBILDUNGS_TYPEN = {
     'MEDSTUD':
         {
             'abschnitt': (models.IntegerField, {'choices':MEDSTUD_CHOICES, 'default':KEINE_ANGABE,'null':True}),
-            'empty': None,
+            'empty_1': None,
             'famulaturen_anaesthesie': (models.BooleanField,{'default':False}),
             'famulaturen_chirurgie': (models.BooleanField,{'default':False}),
             'famulaturen_innere': (models.BooleanField,{'default':False}),
             'famulaturen_intensiv': (models.BooleanField,{'default':False}),
             'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
-            'empty': None,
-            'empty': None,
+            'empty_2': None,
+            'empty_3': None,
             'anerkennung_noetig':(models.BooleanField,{'default':False})
         },
     'MFA':
@@ -279,7 +287,7 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
     for key, field in felder.items():
-        if key == 'empty':
+        if 'empty' in key:
             continue
         a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
         AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)

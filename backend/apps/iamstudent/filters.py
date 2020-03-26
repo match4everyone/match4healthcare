@@ -1,6 +1,11 @@
 import django_filters as filters
-from .models import Student, BEZAHLUNG_CHOICES, MEDSTUD_CHOICES, AUSBILDUNGS_TYPEN_COLUMNS
+from .models import Student, BEZAHLUNG_CHOICES, MEDSTUD_CHOICES, AUSBILDUNGS_TYPEN_COLUMNS, BEZAHLUNG_CHOICES_Filter
 import django.forms as forms
+from django.utils.translation import gettext_lazy as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Field, Row, Column, Div, HTML
+from crispy_forms.bootstrap import InlineRadios
+
 
 class StudentJobRequirementsFilter(filters.FilterSet):
 
@@ -44,27 +49,22 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
 
 class StudentAvailabilityFilter(filters.FilterSet):
-    #name_last = django_filters.CharFilter(lookup_expr='iexact')
-    #verfuegbarkeit_ab = filters.DateFromToRangeFilter(field_name='zeitliche_verfuegbarkeit')
-
-    #ausbilguns_arzt = filters.BooleanFilter(field_name='ausbildung_typ_arzt',widget=MyRadioSelect)
-    bla = filters.MultipleChoiceFilter(field_name='braucht_bezahlung',choices=BEZAHLUNG_CHOICES,widget=forms.CheckboxSelectMultiple)
-    availability_start = filters.DateFilter(field_name='availability_start',lookup_expr='lte')#,widget=forms.DateField)
-    class Meta:
-        model = Student
-        fields ={
-            #'price': ['lt', 'gt'],
-            #'availability_start': ['exact']#'date__gt'],
-        }
-
-
-"""
-class NarrowStudentFilter(filters.FilterSet):
+    braucht_bezahlung = filters.MultipleChoiceFilter(field_name='braucht_bezahlung',lookup_expr='gte',choices=BEZAHLUNG_CHOICES_Filter,label=_('Kann eine Vergütung angeboten werden?'),widget=forms.RadioSelect)
+    availability_start = filters.DateFilter(field_name='availability_start',lookup_expr='lte',label=_('Die Helfenden sollten verfügbar sein ab '))
+    unterkunft_gewuenscht = filters.MultipleChoiceFilter(field_name='unterkunft_gewuenscht',label=_('Kann eine Unterkunft angeboten werden?'),choices=[('unkown',_('wissen wir nicht')),('true',_('ja')),('false',_('nein'))],widget=forms.RadioSelect)
 
     class Meta:
         model = Student
-        fields = []
+        fields = {}
 
-    def __init__(self):
-        super(NarrowStudentFilter).__init__()
-"""
+    def __init__(self,*args, **kwargs):
+        super(StudentAvailabilityFilter, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'availability_start',
+            Row(Column(InlineRadios('braucht_bezahlung')),
+            Column(InlineRadios('unterkunft_gewuenscht')))
+        )
+        self.helper.form_tag = False
+        self.helper.form_style = 'inline'

@@ -52,6 +52,7 @@
             element.addEventListener("click", (event) => {
                 signUpHelper.handleQualificationInput(event)
             })
+            // click does not listen for changes that already occured.
 
         })
 
@@ -72,7 +73,7 @@
     <form method="get">
         <div class="card">
             <div class="card-header">
-                An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
+                Wo braucht Ihr Helfer?
             </div>
             <div class="card-body">
                 <div class="form-row">
@@ -102,7 +103,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Was für eine Ausbildung sollen die Helfer haben?
+                Was für Ausbildung(en) muss ein Helfer haben?
             </div>
             <div class="card-body">
 
@@ -112,16 +113,19 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Ab wann sollen die Helfer verfügbar sein?
+                Welche Infos über die zu vergebende Stelle sind schon bekannt?
             </div>
             <div class="card-body">
 
-                {{ filter_availability.form.as_p }}
+                {% crispy filter_availability.form filter_availability.helper %}
 
             </div>
 
         </div>
-        <input type="submit"/>
+    <br>
+    <p class="text-center">
+        <input type="submit" class="btn btn-primary" value="Filter Aktualisieren">
+        </p>
     </form>
 
     <hr>
