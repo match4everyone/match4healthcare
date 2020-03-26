@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 
-from match4healthcare.settings.common import NOREPLY_MAIL
+from django.conf import settings
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
@@ -78,7 +78,7 @@ def send_password(email, pwd, name):
               message=_(
                   'Hallo %s,\n\ndu willst helfen und hast dich gerade bei match4healthcare registriert, danke!\n\nWenn du deine Daten ändern möchtest, nutze folgende Credentials:\nusername: %s\npasswort: %s\n\nVielen Dank und beste Grüße,\nDein match4healthcare Team' % (
                   name, email, pwd)),
-              from_email=NOREPLY_MAIL,
+              from_email=settings.NOREPLY_MAIL,
               # TODO adaptive email adress
               recipient_list=[email])
 
