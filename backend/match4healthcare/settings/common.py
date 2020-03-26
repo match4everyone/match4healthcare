@@ -70,7 +70,7 @@ LOGIN_REDIRECT_URL = '/accounts/login_redirect'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-NOREPLY_MAIL = 'noreply@match4healthcare.de'
+NOREPLY_MAIL = 'match4healthcare<noreply@match4healthcare.de>'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
