@@ -18,10 +18,12 @@ from django_tables2 import TemplateColumn
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
 import time
+from apps.accounts.utils import send_password_set_email
 
 from django.views.decorators.gzip import gzip_page
 
@@ -78,27 +80,28 @@ def hospital_registration(request):
 # Should be safe against BREACH attack because we don't have user input in reponse body
 @gzip_page
 def hospital_overview(request):
-    locations_and_number = prepare_students(ttl_hash=get_ttl_hash(60))
+    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
     template = loader.get_template('map_hospitals.html')
     context = {
         'locations': list(locations_and_number.values()),
     }
     return HttpResponse(template.render(context, request))
 
-
 @lru_cache(maxsize=1)
-def prepare_students(ttl_hash=None):
-    students = Hospital.objects.all()
+def prepare_hospitals(ttl_hash=None):
+    hospitals = Hospital.objects.filter(appears_in_map=True)
     locations_and_number = {}
-    for student in students:
-        cc = student.countrycode
-        plz = student.plz
+    for hospital in hospitals:
+        cc = hospital.countrycode
+        plz = hospital.plz
         key = cc + "_" + plz
         if key in locations_and_number:
             locations_and_number[key]["count"] += 1
+            locations_and_number[key]["uuid"] = None
         else:
             lat, lon, ort = plzs[cc][plz]
             locations_and_number[key] = {
+                "uuid": hospital.uuid,
                 "countrycode": cc,
                 "plz": plz,
                 "count": 1,
@@ -143,7 +146,7 @@ class ApprovalHospitalTable(HospitalTable):
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','telefon','plz']
+        fields = ['firmenname','ansprechpartner','user','telefon','plz']
         exclude = ['uuid','registration_date','id']
 
 

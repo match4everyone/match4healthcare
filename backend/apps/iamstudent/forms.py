@@ -25,10 +25,7 @@ form_labels = {
     'countrycode': _('Land'),
     'email': _('Email'),
 
-    'semester': _('Semester'),
-    'immatrikuliert': _('Ich bin aktuell immatrikuliert'),
     'availability_start': _('Ich bin verfügbar ab'),
-
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
     # Form Labels for qualifications
@@ -189,10 +186,8 @@ class StudentForm(forms.ModelForm):
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),
-            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
-            HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
-            HTML("</p>")
+            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),          
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),          
         )
 
         logging.debug(self.helper.layout)
@@ -229,8 +224,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             Row(
                 Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                Column('semester', css_class='form-group col-md-4 mb-0'),
-                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
+                #Column('semester', css_class='form-group col-md-4 mb-0'),
+                #Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -243,10 +238,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
             # TODO: alle neuen felder hier auch hinzufügen!!!!!
-            HTML('<p class="text-center">'),
-            Submit('submit', _('Eintrag updaten')),
-            HTML("</p>")
-        )
+                        Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
+                  )
 
     def clean_email(self):
         email = self.cleaned_data['email']

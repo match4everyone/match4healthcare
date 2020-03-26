@@ -20,3 +20,9 @@ def impressum(request):
     template = loader.get_template('impressum.html')
 
     return HttpResponse(template.render(context, request))
+
+def dataprotection(request):
+    context = {}
+    template = loader.get_template('dataprotection.html')
+
+    return HttpResponse(template.render(context, request))

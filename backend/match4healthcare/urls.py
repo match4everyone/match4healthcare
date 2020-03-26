@@ -31,6 +31,7 @@ urlpatterns = [
     path('', views.home),
     path('about/', views.about),
     path('impressum/', views.impressum),
+    path('dataprotection/', views.dataprotection),
     path('android-icon-144x144.png', RedirectView.as_view(url=staticfiles_storage.url('img/favicon/android-icon-144x144.png'))),
     path('android-icon-192x192.png', RedirectView.as_view(url=staticfiles_storage.url('img/favicon/android-icon-192x192.png'))),
     path('android-icon-36x36.png', RedirectView.as_view(url=staticfiles_storage.url('img/favicon/android-icon-36x36.png'))),
