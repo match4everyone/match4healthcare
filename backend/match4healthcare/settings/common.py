@@ -122,7 +122,7 @@ USE_TZ = True
 # Translations
 # Provide a lists of languages which your site supports.
 LANGUAGES = (
-    ('en', _('Englisch')),
+    ('en', _('English')),
     ('de', _('Deutsch')),
 )
 # Set the default language for your site.

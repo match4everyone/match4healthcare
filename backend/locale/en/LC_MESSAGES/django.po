@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-26 14:44+0100\n"
-"PO-Revision-Date: 2020-03-26 14:47+0100\n"
+"POT-Creation-Date: 2020-03-26 15:19+0100\n"
+"PO-Revision-Date: 2020-03-26 15:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -165,6 +165,12 @@ msgid ""
 "Helfende suchen, filtern und diesen auf unserer Plattform direkt eine E-Mail "
 "verfassen. Der Emailversand erfolgt dann nach einer Validierung durch uns."
 msgstr ""
+"Please enter here general information about your institution. After clicking "
+"on \"Register\" you will receive an e-mail with a confirmation link. After "
+"clicking on it, you will be taken to the database. There you can search and "
+"filter helpers according to your desired criteria (educational level etc.) "
+"and send them an e-mail directly on our platform. The email will be sent out "
+"after validation by us."
 
 #: .\apps\accounts\templates\hospital_signup.html:52
 msgid "Jetzt registrieren"
@@ -731,10 +737,10 @@ msgstr "Professional training"
 #: .\apps\iamstudent\forms.py:210
 msgid ""
 "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
-"dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution "
-"allein mich und die entsprechende Institution betrifft. Insbesondere Art und "
-"Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur "
-"mich und die entsprechende Institution. Eine Haftung des Vermittlers ist "
+"dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die "
+"entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, "
+"eine etwaige Vergütung und vergleichbares betreffen nur mich und die "
+"entsprechende Institution. Eine Haftung von match4healthcare ist "
 "ausgeschlossen."
 msgstr ""
 "The service is provided free of charge. I am aware that the relationship "
@@ -928,6 +934,18 @@ msgstr "You are about to send an e-Mail to <mark>%(n)s supporters</mark>."
 #, python-format
 msgid "Helfende in der Nähe von %(ort)s (%(plz)s)"
 msgstr "Supporters close to %(ort)s (%(plz)s)"
+
+#: .\apps\iamstudent\templates\student_list_view.html:70
+msgid "An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?"
+msgstr "At which place and in which distance are you looking for supporters?"
+
+#: .\apps\iamstudent\templates\student_list_view.html:100
+msgid "Was für eine Ausbildung sollen die Helfer*innen haben?"
+msgstr "What kind of training should the supporters have?"
+
+#: .\apps\iamstudent\templates\student_list_view.html:110
+msgid "Ab wann sollen die Helfer*innen verfügbar sein?"
+msgstr "When should the supporters be available?"
 
 #: .\apps\iamstudent\templates\student_list_view.html:125
 #, python-format
@@ -1132,12 +1150,12 @@ msgid "Studierenden, der*die helfen möchte."
 msgstr "Supporters, that want to help."
 
 #: .\match4healthcare\settings\common.py:125
-msgid "Englisch"
-msgstr "english"
+msgid "English"
+msgstr "English"
 
 #: .\match4healthcare\settings\common.py:126
 msgid "Deutsch"
-msgstr "german"
+msgstr "Deutsch"
 
 #: .\templates\about.html:6 .\templates\base.html:55
 msgid "Über uns"
@@ -1291,7 +1309,7 @@ msgstr "Supported by"
 
 #: .\templates\legal-questions.html:6
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
-msgstr ""
+msgstr "Legal questions for helpers during the Corona pandemic"
 
 #~ msgid "Vergeben Sie ein Passwort für die Anmeldung"
 #~ msgstr "Provide a password for your account"
