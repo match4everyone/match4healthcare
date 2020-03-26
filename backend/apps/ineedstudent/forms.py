@@ -22,7 +22,7 @@ class HospitalFormO(ModelForm):
             'countrycode': _('Land'),
             'firmenname': _('Name der Institution'),
             'appears_in_map': _('Sichtbar und kontaktierbar für Helfende sein'),
-            'sonstige_infos': _('Wichtige Infos über Euch und den potentiellen Einsatzbereich')
+            'sonstige_infos': _('Wichtige Infos über Sie und den potentiellen Einsatzbereich')
         }
 
     def __init__(self, *args, **kwargs):
@@ -67,7 +67,7 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
+        self.helper.add_input(Submit('submit', _('Daten Aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
                 Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
                 Row(Column('telefon')),

@@ -35,7 +35,6 @@ Home
 	}
 
 
-
 	@media only screen and (max-width: 767px) {
 		.logo-header { display:none; }
 
@@ -70,6 +69,12 @@ Home
 
 	.navbar.fixed-top { position: absolute;}
 
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+	
+	.navbar > .container { width: 100%; max-width: 720px !important; padding-left: 15px; padding-right: 0px; }
+	}
+		
+		
 </style>
 
 <main role="main">
@@ -105,7 +110,12 @@ Home
         <h2 class="text-white font-weight-light">{% blocktrans %}Wir sind eine{% endblocktrans %}<br>
           <b>{% blocktrans %}Institution{% endblocktrans %}</b></h2>
         <p class="text-white home-box-description">{% blocktrans %}Wir haben Bedarf an Unterstützung.{% endblocktrans %}</p>
+        {% if user.is_authenticated and user.is_hospital %}
+        {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
+        <a href="{{ filter_student_url }}">
+        {% else %}
         <a href="/accounts/signup_hospital">
+        {% endif %}
         <button type="button" class="btn text-white btn-lg pink">{% blocktrans %}Jetzt Hilfe suchen{% endblocktrans %}
         <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
@@ -133,14 +143,15 @@ Home
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZwdMESJav0" allowfullscreen></iframe>
       </div>
 	  </div>
-	</div></div></main>
+	
+
 		  </div>
       <div class="col-lg-9 boxed logos-home" style="text-align: center; margin: 0 auto; margin-bottom: 45px;">
         <h2 style="text-align:center; font-size: 1.3rem; font-weight: 300; margin-bottom: 15px;  ">{% blocktrans %}Ein gemeinsames Projekt von{% endblocktrans %}</h2>
         <a href="https://www.medis-vs-covid19.de" target="_blank"><img src="{% static 'img/medis-vs-covid.jpg' %}" height="60px"></a> <a href="https://www.bvmd.de/" target="_blank"><img src="{% static 'img/bvmd.jpeg' %}" height="80px"></a> <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="{% static 'img/hackaton.jpg' %}" height="50px" style="margin:0px;"></a> </div>
       <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto; margin-bottom: 45px;">
         <h2 style="text-align:center; font-size: 1.3rem; font-weight: 300; margin-bottom: 15px;">{% blocktrans %}Mit Unterstützung von{% endblocktrans %}</h2>
-        <img src="{% static 'img/BAEK.png' %}" height="60px"> <img src="{% static 'img/KBV-logo.png' %}" height="80px" > <img src="{% static 'img/Hashtag-Gesundheit.png' %}" height="50px"> <img src="{% static 'img/Budndnisjunger.jpg' %}" height="130px"> <img src="{% static 'img/aerzteblatt_logo.svg' %}" height="20px"> </div>
+        <a href="https://www.bundesaerztekammer.de" target="_blank"><img src="{% static 'img/BAEK.png' %}" height="60px"></a> <a href="https://www.kbv.de/html/" target="_blank"><img src="{% static 'img/KBV-logo.png' %}" height="80px" ></a> <a href="https://hashtag-gesundheit.de" target="_blank"><img src="{% static 'img/Hashtag-Gesundheit.png' %}" height="50px"></a> <a href="https://buendnisjungeaerzte.org" target="_blank"><img src="{% static 'img/Budndnisjunger.jpg' %}" height="130px"></a> <a href="https://www.aerzteblatt.de" target="_blank"><img src="{% static 'img/aerzteblatt_logo.svg' %}" height="20px"></a> </div>
 
   </div>
 
