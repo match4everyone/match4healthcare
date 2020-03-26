@@ -63,7 +63,7 @@ window.addEventListener('load', function() {
   	  var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
   		$("#mapid").height(newHeight);mymap.invalidateSize();
 }).trigger("resize");});
-</script>
+</script> 
 {% localize off %}
   {% for location in locations %}
 <script type="text/javascript">

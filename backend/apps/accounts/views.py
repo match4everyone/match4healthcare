@@ -143,24 +143,16 @@ def edit_student_profile(request):
         request.user.save()
 
     if request.method == 'POST':
-        form_mail = StudentEmailForm(request.POST or None, instance=student.user, prefix='account')
-        if 'account-email' in request.POST and form_mail.is_valid():
-            form_mail.save()
-            messages.success(request, _('Deine Email wurde erfolgreich geändert!'), extra_tags='alert-success')
-            form = StudentFormEditProfile(instance=student, prefix='infos')
-        else:
-            form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
-            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
-            form_mail = StudentEmailForm( instance=student.user, prefix='account')
+        form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
+        messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
 
-            if form.is_valid():
-                form.save()
+        if form.is_valid():
+            form.save()
 
     else:
         form = StudentFormEditProfile(instance=student, prefix='infos')
-        form_mail = StudentEmailForm(instance=student.user,prefix='account')
 
-    return render(request, 'student_edit.html', {'form': form, 'emailform': form_mail})
+    return render(request, 'student_edit.html', {'form': form})
 
 @login_required
 @hospital_required
@@ -168,22 +160,15 @@ def edit_hospital_profile(request):
     hospital = request.user.hospital
 
     if request.method == 'POST':
-        form_mail = HospitalEmailForm(request.POST or None, instance=request.user, prefix='account')
-        if 'account-email' in request.POST and form_mail.is_valid():
-            form_mail.save()
-            messages.success(request, _('Deine Email wurde erfolgreich geändert!'), extra_tags='alert-success')
-            form = HospitalFormEditProfile(instance=hospital, prefix='infos')
-        else:
-            form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
-            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
-            form_mail = HospitalEmailForm( instance=request.user, prefix='account')
+        form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
+        messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
 
-            if form.is_valid():
-                form.save()
+        if form.is_valid():
+            form.save()
 
     else:
         form = HospitalFormEditProfile(instance=hospital, prefix='infos')
-        form_mail = HospitalEmailForm(instance=request.user,prefix='account')
+        #form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
     return render(request, 'hospital_edit.html', {'form': form, 'emailform': form_mail})
 
