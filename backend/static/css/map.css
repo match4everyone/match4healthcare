@@ -107,4 +107,9 @@ path.leaflet-interactive  {
 .leaflet-popup-content-wrapper { border-radius: .5rem;}
 
 .leaflet-container {
-	font: 14px/1.5 "proxima-nova", Arial, Helvetica, sans-serif; }
+	font: 14px/1.5 "proxima-nova", Arial, Helvetica, sans-serif; font-weight: 300;}
+
+.leaflet-container a.leaflet-popup-close-button {
+	width: 30px;
+	padding: 0;
+font: 30px/30px proxima-nova, Verdana, sans-serif;}
