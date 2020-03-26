@@ -155,7 +155,6 @@ def student_list_view(request, countrycode, plz, distance):
     filter_jobrequireform = PersistenStudentFilterForm(request.GET)
 
     enable_mail_send = (f.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
-
     context = {
         'plz': plz,
         'countrycode': countrycode,

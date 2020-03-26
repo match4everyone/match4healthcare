@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from match4healthcare.settings.common import NOREPLY_MAIL
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
+from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -108,10 +108,12 @@ def register_hospital_in_db(request, m):
     pwd = User.objects.make_random_password()
     user = User.objects.create(username=m, is_hospital=True, email=m)
     user.set_password(pwd)
+    print("Saving User")
     user.save()
 
     hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormInfoSignUp(request.POST, instance=hospital)
+    hospital = HospitalFormInfoCreate(request.POST, instance=hospital)
+    print("Saving Hospital")
     hospital.save()
     return user, hospital
 
