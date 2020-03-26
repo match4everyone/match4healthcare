@@ -53,7 +53,7 @@ form_labels = {
     'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mta': _('Medizinisch-technische/r Assistent*in'),
     'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in/Rettungsassistent*in'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in / Rettungsassistent*in'),
     'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_sani': _('Rettungssanitäter*in/Rettungshelfer*in'),
     'ausbildung_typ_zahni': _('Zahnmedizinstudent*in'),
