@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% blocktrans %}Helfende in der Nähe von {{ort}} ({{plz}}){% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -16,23 +16,18 @@
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
-            console.log(selectedFilterValue);
             let buttonXStatus = false;
             if (selectedFilterValue === "true") {
                 buttonXStatus = true;
             }
-            console.log(buttonXStatus);
 
             this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
         },
         setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
-            console.log('huhu')
-            console.log(section.classList)
             if (setVisibility) {
                 section.classList.remove('hidden')
-                console.log(section.classList)
             } else {
                 section.classList.add('hidden');
                 section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
@@ -127,9 +122,9 @@
     <hr>
     <div class="card">
         <div class="card-header">
-            Wir haben
+            <h4>{% blocktrans %}Wir haben
             <mark>{{n}} Helfer</mark>
-            gefunden, die zu deiner Suche passen.
+            gefunden, die zu deiner Suche passen.{% endblocktrans %}</h4>
         </div>
         <div class="card-body">
             <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
@@ -138,17 +133,17 @@
             </div>
             {% if enable_mail %}
             <button class="btn blue text-white btn-lg" onclick="sendall()">
-                Email an {{n}} Helfer schicken &raquo;
+                {% blocktrans %}Email an {{n}} Helfer schicken{% endblocktrans %} &raquo;
             </button>
             <button class="btn blue text-white btn-lg" onclick="send()">
-                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+                {% blocktrans %}Email an AUSGEWÄHLTE Studierende schicken{% endblocktrans %} &raquo;
             </button>
             {% else %}
             <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                Email an {{n}} Helfer schicken &raquo;
+                {% blocktrans %}Email an {{n}} Helfer schicken{% endblocktrans %} &raquo;
             </button>
             <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+                {% blocktrans %}Email an AUSGEWÄHLTE Studierende schicken{% endblocktrans %} &raquo;
             </button>
             {% endif %}
 
@@ -181,13 +176,13 @@
 
     var send = function () {
         var li = [];
-        $('tr.selected').each(function () {
+        $('tbody tr.selected').each(function () {
             li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("Bitte wählen wie mindestens einen Studierenden zum Kontaktieren aus!")
+            alert({% blocktrans %}"Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!"{% endblocktrans %})
         }
     };
 
@@ -199,7 +194,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("Leider gibt es keine Studierenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden.")
+            alert({% blocktrans %}"Leider gibt es keine Helfenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden."{% endblocktrans %})
         }
     };
 
