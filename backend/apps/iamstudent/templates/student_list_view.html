@@ -85,6 +85,7 @@
                 {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}
             </div>
             <div class="card-body">
+				
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
@@ -107,24 +108,21 @@
                             <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}
-            </div>
-            <div class="card-body">
+				</div>
+			</div>
+          <div class="card-body">
+      <p class="font-weight-bold">
+                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}</p>
+          
+           
 
                 {% crispy filter_jobrequireform filter_jobrequireform.helper %}
 
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}
-            </div>
-            <div class="card-body">
+         
+     
+             
+              <p class="font-weight-bold" style="margin-top:30px;">  {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}</p>
+					
 
                 {% crispy filter_availability.form filter_availability.helper %}
 <p>
@@ -133,7 +131,10 @@
 
             </div>
 
+        
+            
         </div>
+      
 
     </form>
         <div class="card border-danger">
