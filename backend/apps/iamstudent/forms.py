@@ -24,7 +24,6 @@ form_labels = {
     'plz': _('Postleitzahl'),
     'countrycode': _('Land'),
     'email': _('Email'),
-
     'availability_start': _('Ich bin verfügbar ab'),
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
 
@@ -120,6 +119,7 @@ class StudentForm(forms.ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
+  HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
                 Column('name_first', css_class='form-group col-md-6 mb-0'),
                 Column('name_last', css_class='form-group col-md-6 mb-0'),
@@ -131,7 +131,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            HTML("<h2>{}</h2>".format(_("Einsatz"))),
+            HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Über deinen Einsatz"))),
             Row(
                 Column('plz', css_class='form-group col-md-4 mb-0'),
                 Column('countrycode', css_class='form-group col-md-4 mb-0'),
@@ -143,7 +143,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            HTML("<h5>{}</h5>".format(_("Wunscheinsatzort"))),
+            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
                 Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
@@ -159,7 +159,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
+                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Berufsausbildung"))),
                 Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
@@ -178,7 +178,7 @@ class StudentForm(forms.ModelForm):
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ]
             ,
-            HTML('<hr>'),
+            HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
             HTML('<p class="text-left">'),
             'datenschutz_zugestimmt',
             HTML("</p>"),
