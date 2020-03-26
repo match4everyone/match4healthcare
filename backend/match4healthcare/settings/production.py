@@ -12,7 +12,7 @@ DEBUG = False
 SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.eu',
-                 'medis-vs-covid19.de']
+                 'match4healthcare.org', 'medis-vs-covid19.de']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
