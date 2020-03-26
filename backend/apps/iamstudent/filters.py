@@ -70,6 +70,9 @@ class StudentAvailabilityFilter(filters.FilterSet):
                                                  choices=[(True, _('ja')),
                                                           (False, _('nein'))], widget=forms.RadioSelect)
 
+    unterkunft_gewuenscht.field.empty_label = _('wissen wir nicht')
+    braucht_bezahlung.field.empty_label = _('wissen wir nicht')
+
     class Meta:
         model = Student
         fields = {}
