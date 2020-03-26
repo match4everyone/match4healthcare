@@ -121,7 +121,7 @@ window.addEventListener('load', function() {
        weight: 2 + 0.5 * {{ location.count }},
        fillColor: 'blue',
        fillOpacity: .2,
-       radius: 500 + 200 * {{ location.count }}
+       radius: 500 + 100 * {{ location.count }}
    })
    .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} {% if location.count > 1 %}{% blocktrans %}Studierende, die helfen möchten.{% endblocktrans %}{% else %}{% blocktrans %}Studierenden, der*die helfen möchte.{% endblocktrans %}{% endif %} {% if user.is_authenticated and user.is_student %}{% else %}<a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>{% blocktrans %}Detailansicht für Kliniken{% endblocktrans %}</a>{% endif %}')
    .addTo(mymap);
