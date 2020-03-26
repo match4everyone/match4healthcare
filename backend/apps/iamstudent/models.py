@@ -99,7 +99,7 @@ class Student(models.Model):
 
     plz = models.CharField(max_length=5, null=True)
     umkreis = models.IntegerField(choices=UMKREIS_CHOICES, null=True, blank=False)
-    availability_start = models.DateField(null=True)
+    availability_start = models.DateField(null=True,default=datetime.now)
 
     braucht_bezahlung = models.IntegerField(choices=BEZAHLUNG_CHOICES,
                                             default=UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
@@ -110,6 +110,7 @@ class Student(models.Model):
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
+    unterkunft_gewuenscht = models.BooleanField(default=False, validators=[validate_checkbox])
 
     # Metadata
     class Meta:
@@ -145,7 +146,7 @@ class PersistenStudentFilterModel(models.Model):
 
 
 """Add stufff to model"""
-wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
+wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor', 'apotheke','ueberall']
 wunschorte_prefix = 'wunsch_ort'
 for w in wunschorte:
     Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
@@ -221,6 +222,13 @@ NOTFALLSANI_CHOICES = (
     (JAHR_2, _('2. Jahr')),
     (BERUFSTAETIG, _('Berufstätig'))
 )
+ERFAHR = 1
+AUSBID_ABGESCHLOSSEN = 2
+BETREU_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (ERFAHR, _('Lediglich Erfahrungen')),
+    (AUSBID_ABGESCHLOSSEN, _('Abgeschlossene Ausbildung'))
+)
 
 
 AUSBILDUNGS_TYPEN = {
@@ -270,8 +278,7 @@ AUSBILDUNGS_TYPEN = {
         'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
     },
     'KINDERBETREUNG': {
-        'ausgebildet': models.BooleanField(default=False),
-        'vorerfahrung': models.BooleanField(default=False),
+        'ausgebildet_abschnitt': models.IntegerField(choices=BETREU_CHOICES,default=0,null=True)
     }
 }
 

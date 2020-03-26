@@ -4,6 +4,7 @@ from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLU
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
@@ -63,6 +64,7 @@ form_labels = {
     'ausbildung_typ_sonstige': _('Sonstige'),
     'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
 
+
     'sonstige_qualifikationen': _('Weitere Qualifikationen'),
     'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
     'einwilligung_datenweitergabe': _(
@@ -73,6 +75,8 @@ form_labels = {
     'wunsch_ort_pflege': _('Pflegeeinrichtungen'),
     'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
     'wunsch_ort_labor': _('Labor'),
+    'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/">Apothekenhelfen</a>)</em>'),
+    'wunsch_ort_ueberall': _('Keiner, ich helfe dort, wo ich kann'),
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
 fields_for_button_group = [
@@ -83,7 +87,8 @@ fields_for_button_group = [
                            'ausbildung_typ_mtla_abschnitt',
                            'ausbildung_typ_mta_abschnitt',
                            'ausbildung_typ_notfallsani_abschnitt',
-                           'ausbildung_typ_zahni_abschnitt']
+                           'ausbildung_typ_zahni_abschnitt'
+]
 
 
 def button_group(field):
@@ -158,11 +163,19 @@ class StudentForm(forms.ModelForm):
                 Column('wunsch_ort_pflege', css_class='form-group col-md-6 mb-0'),
                 Column('wunsch_ort_rettungsdienst', css_class='form-group col-md-6 mb-0'),
                 Column('wunsch_ort_labor', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_apotheke', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_ueberall', css_class='form-group col-md-6 mb-0'),
+
                 css_class='form-row'
             ),
             Row(
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ), Row(
                 Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),Row(
+                Column('unterkunft_gewuenscht', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Div(
