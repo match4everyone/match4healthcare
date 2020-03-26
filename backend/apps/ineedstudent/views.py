@@ -186,7 +186,7 @@ class ApprovalHospitalTable(HospitalTable):
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','user','telefon','plz']
+        fields = ['firmenname','ansprechpartner','user','telefon','plz','user__validated_email']
         exclude = ['uuid','registration_date','id']
 
 
