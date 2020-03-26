@@ -17,12 +17,14 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(
         template_name='registration/password_reset_confirm_.html',
         post_reset_login=True,
-        success_url='/mapview'
+        success_url='/accounts/validate_email'
       ) , name='password_reset_confirm_'),
     path('login/',auth_views.LoginView.as_view(template_name='registration/login.html'),name='login'),
     path('', include('django.contrib.auth.urls')),
+    path('validate_email', views.validate_email, name='validate_email'),
     path('profile_redirect', views.profile_redirect, name='profile_redirect'),
     path('login_redirect', views.login_redirect, name='login_redirect'),
+    path('delete_me_ask', views.delete_me_ask, name='delete_me_ask'),
     path('delete_me', views.delete_me, name='delete_me'),
     path('signup_student', views.student_signup, name='student_signup'),
     path('signup_hospital', views.hospital_signup, name='hospital_signup'),

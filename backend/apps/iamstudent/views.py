@@ -171,6 +171,3 @@ def student_list_view(request, countrycode, plz, distance):
     }
 
     return render(request, 'student_list_view.html', context)
-
-
-

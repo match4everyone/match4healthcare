@@ -158,10 +158,6 @@ def login_redirect(request):
 def edit_student_profile(request):
     student = request.user.student
 
-    if not request.user.validated_email:
-        request.user.validated_email = True
-        request.user.save()
-
     if request.method == 'POST':
         form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
         messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
@@ -217,3 +213,16 @@ def delete_me(request):
     logout(request)
     user.delete()
     return render(request,'deleted_user.html')
+
+@login_required
+def delete_me_ask(request):
+    user = request.user
+    return render(request,'deleted_user_ask.html')
+
+
+@login_required
+def validate_email(request):
+    if not request.user.validated_email:
+        request.user.validated_email = True
+        request.user.save()
+    return HttpResponseRedirect("/mapview")
