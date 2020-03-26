@@ -10,3 +10,4 @@ djangorestframework-filters
 gunicorn
 whitenoise
 whitenoise[brotli]
+numpy
