@@ -16,12 +16,15 @@
         <div class="col">
         <div class="btn-group" data-toggle="buttons" {% if flat_attrs %} {{ flat_attrs|safe }}{% endif %} >
             {% include 'bootstrap4/layout/field_errors_block.html' %}
-
              {% for choice in field.field.choices %}
-                <label class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
+                {% if choice.0|stringformat:"s" ==  'false' %}
+                    {# do not render the not wanted option autocomplete="off"#}
+                {% else %}
+                <label class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{% if field.value|stringformat:"s" == 'None'  %}{% if choice.0|stringformat:"s" == 'unknown' %}active {% endif %} {% endif %}{{ option_label_class }}">
                     <input autocomplete="off" type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden >
                     {{choice.1}}
-            </label>
+                </label>
+                {% endif %}
             {% endfor %}
 
             {% include 'bootstrap4/layout/help_text.html' %}

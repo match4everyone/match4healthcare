@@ -74,6 +74,8 @@ NOREPLY_MAIL = 'noreply@medisvs.spahr.uberspace.de'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
+MAX_EMAIL_BATCH_PER_HOSPITAL = 200
+
 EMAIL_HOST = 'spahr.uberspace.de'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
