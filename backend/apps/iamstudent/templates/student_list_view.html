@@ -75,8 +75,8 @@
                         <div class="form-group">
                             <p> Land: </p>
                             <select name="countrycode" class="form-control" id="countrycode">
-                                <option value="DE">Deutschland</option>
-                                <option value="AT">Österreich</option>
+                                <option {% if countrycode == 'DE' %}selected="selected"{% endif %} value="DE">Deutschland</option>
+                                <option {% if countrycode == 'AT' %}selected="selected"{% endif %} value="AT">Österreich</option>
                             </select>
                         </div>
                     </div>
