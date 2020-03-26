@@ -10,6 +10,51 @@ Profil - Studierende
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script type="text/javascript">
+
+    var signUpHelper = {
+        handleQualificationInput: function handleQualificationInput(event) {
+            let sourceElement = event.srcElement;
+            let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
+            let qualificationId = containingDiv.id.split("-").slice(-1)
+            let selectedFilterValue = sourceElement.querySelector("input").value
+            let buttonXStatus = false;
+            if (selectedFilterValue === "true") {
+                buttonXStatus = true;
+            }
+
+            this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
+        },
+        setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
+            let section = document.getElementById(`div-ausbildung-${id}`)
+            if (!section) return;
+            if (setVisibility) {
+                section.classList.remove('hidden')
+            } else {
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+                    checkbox.checked = false
+                })
+                section.querySelectorAll("input[type='text'], select").forEach((textbox) => {
+                    textbox.value = ''
+                })
+            }
+
+        },
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
+        qualifikationSelectors.forEach(element => {
+            element.addEventListener("click", (event) => {
+                signUpHelper.handleQualificationInput(event)
+            })
+
+        })
+
+    });
+
+</script>
 {% endblock %}
 
 {% load crispy_forms_tags %}
