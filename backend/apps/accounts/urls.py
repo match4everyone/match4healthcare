@@ -31,5 +31,6 @@ urlpatterns = [
     path('profile_student', views.edit_student_profile, name='edit_student_profile'),
     path('profile_hospital', views.edit_hospital_profile, name='edit_hospital_profile'),
     path('approve_hospitals', views.approve_hospitals, name='approve_hospitals'),
-    path('change_hospital_approval/<str:uuid>/', views.change_hospital_approval, name='change_hospital_approval')
+    path('change_hospital_approval/<str:uuid>/', views.change_hospital_approval, name='change_hospital_approval'),
+    path('delete_hospital/<str:uuid>/', views.delete_hospital, name='delete_hospitall'),
 ]
