@@ -11,36 +11,33 @@ Registrierung - Studierende
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 <style type="text/css">
-
-
-	
-	.bg-container {
-background-image: url(/static/img/login-bg.jpg);
-background-position: center;
-background-size: cover;}
-
+    .bg-container {
+        background-image: url(/static/img/login-bg.jpg);
+        background-position: center;
+        background-size: cover;
+    }
 </style>
 <script type="text/javascript">
-	
-	window.addEventListener('load', function() {
-	
-  
-		
-$(window).on("resize", function () {
-	
-		var height = $(window).height();
-		var navHeight = $('.navbar').outerHeight();
-		var footerHeight = $('.footer').innerHeight();
-		
-        var newHeight = height - navHeight - footerHeight;
 
-	$(".login-form").height(newHeight);
-	
-}	
-			).trigger("resize");
-		
-										});
-	
+    window.addEventListener('load', function () {
+
+
+
+        $(window).on("resize", function () {
+
+            var height = $(window).height();
+            var navHeight = $('.navbar').outerHeight();
+            var footerHeight = $('.footer').innerHeight();
+
+            var newHeight = height - navHeight - footerHeight;
+
+            $(".login-form").height(newHeight);
+
+        }
+        ).trigger("resize");
+
+    });
+
 </script>
 {% endblock %}
 
@@ -48,41 +45,49 @@ $(window).on("resize", function () {
 
 {% block content %}
 <div class="bg-container">
-<div class="container login-form">
-  
-	 <div class="col-lg-6 col-md-10 col-sm-12 col-12">
-    <div class="card login-card">
-       
-            <h1 class="font-weight-light">{% blocktrans %}Login{% endblocktrans %}</h1>
-            <form method="post" novalidate>
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-                {{ form.username|as_crispy_field }}
-                {{ form.password|as_crispy_field }}
- <button type="submit" class="btn blue text-white btn-md">Anmelden</button>
-            </form>
-		 
-    {% if form.non_field_errors %}
-    <div class="alert alert-danger alert-dismissible fade show" style="margin-top: 30px;" role="alert">
-        {% for error in form.non_field_errors %}
-        <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
-        {% endfor %}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endif %}
-            <hr>
-            <h5 style="margin-bottom:0px; font-weight:300;">{% blocktrans %}Passwort vergessen?{% endblocktrans %}</h5>
-            <a href="/accounts/password_reset"><p>{% blocktrans %}Passwort zurücksetzen{% endblocktrans %}</p></a>
-           
-            <h5 style="margin-bottom:0px; font-weight:300;">{% blocktrans %}Noch kein Account?{% endblocktrans %}</h5>
-            <a href="/accounts/signup_student"><p style="margin-bottom: 0px;">{% blocktrans %}Ich bin Helfende/r{% endblocktrans %}</p></a>
-            <a href="/accounts/signup_hospital"><p>{% blocktrans %}Wir sind eine Institution{% endblocktrans %}</p></a>
-		
+    <div class="container login-form">
+
+        <div class="col-lg-6 col-md-10 col-sm-12 col-12">
+            <div class="card login-card">
+
+                <h1 class="font-weight-light">{% blocktrans %}Login{% endblocktrans %}</h1>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {{ form.username|as_crispy_field }}
+                    {{ form.password|as_crispy_field }}
+                    <button type="submit" class="btn blue text-white btn-md">Anmelden</button>
+                </form>
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show" style="margin-top: 30px;" role="alert">
+                    {% for error in form.non_field_errors %}
+                    <p{% if forloop.last %} class="mb-0" {% endif %}>{{ error }}</p>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                {% endif %}
+                <hr>
+                <h5 style="margin-bottom:0px; font-weight:300;">{% blocktrans %}Passwort vergessen?{% endblocktrans %}
+                </h5>
+                <a href="/accounts/password_reset">
+                    <p>{% blocktrans %}Passwort zurücksetzen{% endblocktrans %}</p>
+                </a>
+
+                <h5 style="margin-bottom:0px; font-weight:300;">{% blocktrans %}Noch kein Account?{% endblocktrans %}
+                </h5>
+                <a href="/accounts/signup_student">
+                    <p style="margin-bottom: 0px;">{% blocktrans %}Ich bin Helfende/r{% endblocktrans %}</p>
+                </a>
+                <a href="/accounts/signup_hospital">
+                    <p>{% blocktrans %}Wir sind eine Institution{% endblocktrans %}</p>
+                </a>
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 {% endblock %}
