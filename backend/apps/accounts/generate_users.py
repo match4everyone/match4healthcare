@@ -68,7 +68,7 @@ def delete_fakes():
 
 def populate_db(request):
     delete_fakes()
-    n_student = 100
+    n_student = 2000
     n_hospital = 200
     plzs = np.random.choice(big_city_plzs, size=n_student)
     months = np.random.choice(np.arange(1,12),size=n_student)
