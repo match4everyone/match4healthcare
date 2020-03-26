@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Account unwiderruflich löschen?
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+ <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12" style="margin: 0 auto;">
+  <div class="card login-card text-center align-items-center">
+      <h4>{% blocktrans %}Sind Sie sicher, dass Sie Ihren Account unwiderruflich löschen möchten?{% endblocktrans %}</h4>
+      <hr>
+      <a href="delete_me"><button class="btn blue text-white btn-md">{% blocktrans %}Ja, Account löschen{% endblocktrans %}</button></a>
+      <hr>
+      <a href="/"><button class="btn blue text-white btn-md">{% blocktrans %}Nein, zurück zur Homepage{% endblocktrans %}</button></a>
+    </div>
+  </div>
+</div>
+{% endblock %}

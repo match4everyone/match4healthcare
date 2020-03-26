@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+<hr>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Die Suche Filtern
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <p> Land: </p>
+                <select name="countrycode" class="form-control" id="countrycode">
+                    <option value="DE">Deutschland</option>
+                    <option value="AT">Österreich</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <p> Postleitzahl: </p>
+                <input id="plz" value="{{ plz }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <p> Und im Umkreis von (km): </p>
+                <input id="umkreis" value="{{ distance }}" class="form-control">
+            </div>
+            <button type="submit" class="btn blue text-white btn-lg" onclick="getrequest()">
+                <span class="glyphicon glyphicon-search"></span>Filtern!
+        </div>
+        </button>
+    </div>
+    <div class="card-body">
+        {% render_table table %}
+    </div>
+    <p><button class="btn blue text-white btn-lg" onclick="send()">Email an ausgewählte Studierende schicken &raquo;</button></p>
+</div>
+
+</div>
+<hr>
+<script>
+
+    var send = function(){
+    var li = [];
+    $('.table-selector').each(function(){
+         console.log($(this));
+        if($(this).val()){
+        li.push($(this).attr("id"));
+        }
+
+       console.log($(this));
+    });
+    if (li.length>0){
+      window.location = ("/iamstudent/send_mail_student/"+ li.join("_"));
+    } else {
+      alert("Bitte wählen Sie mindestens einen Studierenden zum Kontaktieren aus!")
+    }
+  };
+
+    var getrequest = function(){
+    //console.log($('#plz').attr("value"));
+    window.location = "/ineedstudent/students_testing/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+  }
+</script>
+{% endblock %}

@@ -109,7 +109,12 @@ Home
         <h2 class="text-white font-weight-light">{% blocktrans %}Wir sind eine{% endblocktrans %}<br>
           <b>{% blocktrans %}Institution{% endblocktrans %}</b></h2>
         <p class="text-white home-box-description">{% blocktrans %}Wir haben Bedarf an Unterstützung.{% endblocktrans %}</p>
+        {% if user.is_authenticated and user.is_hospital %}
+        {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
+        <a href="{{ filter_student_url }}">
+        {% else %}
         <a href="/accounts/signup_hospital">
+        {% endif %}
         <button type="button" class="btn text-white btn-lg pink">{% blocktrans %}Jetzt Hilfe suchen{% endblocktrans %}
         <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>

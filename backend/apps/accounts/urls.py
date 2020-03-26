@@ -3,7 +3,11 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from . import views
 
+from . import generate_users
+
 urlpatterns = [
+    # uncomment for data generation
+    #path('add_data',generate_users.populate_db),
     path('logout/',auth_views.LogoutView.as_view(template_name='registration/logout.html'),name='logout'),
     path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done_.html'),name='password_change_done'),
     path('password_change',auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form_.html'),name='password_change_form'),
@@ -17,7 +21,9 @@ urlpatterns = [
       ) , name='password_reset_confirm_'),
     path('login/',auth_views.LoginView.as_view(template_name='registration/login.html'),name='login'),
     path('', include('django.contrib.auth.urls')),
+    path('profile_redirect', views.profile_redirect, name='profile_redirect'),
     path('login_redirect', views.login_redirect, name='login_redirect'),
+    path('delete_me_ask', views.delete_me_ask, name='delete_me_ask'),
     path('delete_me', views.delete_me, name='delete_me'),
     path('signup_student', views.student_signup, name='student_signup'),
     path('signup_hospital', views.hospital_signup, name='hospital_signup'),
