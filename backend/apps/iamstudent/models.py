@@ -15,7 +15,7 @@ def validate_semester(value):
 
 def validate_checkbox(value):
     if value != True:
-        raise ValidationError(_("You have to accept this"), code='invalid')
+        raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
     else:
         return value
 

@@ -67,7 +67,7 @@
     <form method="get">
         <div class="card">
             <div class="card-header">
-                An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
+                An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?
             </div>
             <div class="card-body">
                 <div class="form-row">
@@ -97,7 +97,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Was für eine Ausbildung sollen die Helfer haben?
+                Was für eine Ausbildung sollen die Helfer*innen haben?
             </div>
             <div class="card-body">
 
@@ -107,7 +107,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Ab wann sollen die Helfer verfügbar sein?
+                Ab wann sollen die Helfer*innen verfügbar sein?
             </div>
             <div class="card-body">
 
@@ -122,9 +122,7 @@
     <hr>
     <div class="card">
         <div class="card-header">
-            <h4>{% blocktrans %}Wir haben
-            <mark>{{n}} Helfer</mark>
-            gefunden, die zu deiner Suche passen.{% endblocktrans %}</h4>
+            <h4>{% blocktrans %}Wir haben <mark>{{n}} Helfer*innen</mark> gefunden, die zu deiner Suche passen.{% endblocktrans %}</h4>
         </div>
         <div class="card-body">
             <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
@@ -133,17 +131,17 @@
             </div>
             {% if enable_mail %}
             <button class="btn blue text-white btn-lg" onclick="sendall()">
-                {% blocktrans %}Email an {{n}} Helfer schicken{% endblocktrans %} &raquo;
+                {% blocktrans %}Email an {{n}} Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             <button class="btn blue text-white btn-lg" onclick="send()">
-                {% blocktrans %}Email an AUSGEWÄHLTE Studierende schicken{% endblocktrans %} &raquo;
+                {% blocktrans %}Email an <mark>ausgewählte</mark>> Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% else %}
             <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                {% blocktrans %}Email an {{n}} Helfer schicken{% endblocktrans %} &raquo;
+                {% blocktrans %}Email an {{n}} Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                {% blocktrans %}Email an AUSGEWÄHLTE Studierende schicken{% endblocktrans %} &raquo;
+                {% blocktrans %}Email an <mark>ausgewählte</mark>> Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% endif %}
 
@@ -154,7 +152,7 @@
 <hr>
 <script>
     var alertMaxMails = function () {
-        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer aus, indem du weitere Filter auswählst.');
+        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');
     };
 
     var $table = $('#table');
@@ -182,7 +180,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert({% blocktrans %}"Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!"{% endblocktrans %})
+            alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
         }
     };
 
@@ -194,7 +192,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert({% blocktrans %}"Leider gibt es keine Helfenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden."{% endblocktrans %})
+            alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Helfer*innen zu finden.{% endblocktrans %}")
         }
     };
 
