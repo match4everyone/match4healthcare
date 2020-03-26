@@ -76,7 +76,7 @@
     <form method="get">
         <div class="card">
             <div class="card-header">
-                Wo braucht Ihr Helfer?
+                {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}
             </div>
             <div class="card-body">
                 <div class="form-row">
@@ -106,7 +106,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.
+                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}
             </div>
             <div class="card-body">
 
@@ -116,7 +116,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Welche Infos über die zu vergebende Stelle sind schon bekannt?
+                {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}
             </div>
             <div class="card-body">
 
@@ -136,32 +136,30 @@
         <div class="card-header">
                 <p class="text-center">
     {% if enable_mail %}
-           Wir haben
-            <mark>{{n}} Helfer</mark>
-            gefunden, die zu deiner Suche passen.
+           {% blocktrans %}Wir haben <mark>{{n}} Helfer*innen</mark> gefunden, die zu deiner Suche passen.{% endblocktrans %}
             <button class="btn btn-dark" onclick="sendall()">
-                Email an alle {{n}} Helfer senden &raquo;
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% else %}
             <button class="btn btn-dark" onclick="alertMaxMails()">
-                Email an alle {{n}} Helfer senden &raquo;
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% endif %}
         </p>
             </div>
         <div class="card-body">
-            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmt Helfer auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
             <div class="table-responsive">
                 {% render_table table %}
             </div>
             <p class="text-right">
             {% if enable_mail %}
             <button class="btn btn-dark" onclick="send()">
-                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% else %}
             <button class="btn btn-dark" onclick="alertMaxMails()">
-                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% endif %}
             </p>
@@ -173,7 +171,7 @@
 <hr>
 <script>
     var alertMaxMails = function () {
-        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer aus, indem du weitere Filter auswählst.');
+        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');
     };
 
     var $table = $('#table');
@@ -201,7 +199,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert({% blocktrans %}"Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!"{% endblocktrans %})
+            alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
         }
     };
 
@@ -213,7 +211,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert({% blocktrans %}"Leider gibt es keine Helfenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden."{% endblocktrans %})
+            alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Helfer*innen zu finden.{% endblocktrans %}")
         }
     };
 
