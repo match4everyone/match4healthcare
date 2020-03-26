@@ -51,17 +51,7 @@ def successful_mail(request):
     return render(request,'emails_sent.html')
 
 
-def send_mail_student(request):
-    if request.method == 'POST':
-        form = EmailForm(request.POST)
-        if form.is_valid():
-            notify_student(form.cleaned_data['student_id'], form.cleaned_data['contact_adress'])
 
-            return HttpResponseRedirect('successful_mail')
-
-    else:
-        form = EmailForm()
-    return render(request, 'mail.html', {'form': form})
 
 
 @login_required
@@ -110,13 +100,23 @@ def send_mail_student_id_list(request, id_list):
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
     for m in emails:
-        send_mail(m.subject,
-                  m.message,
-                  NOREPLY_MAIL,
-                  [m.student.user.email]
-                  )
-        m.was_sent = True
-        m.save()
+
+        if m.subject and m.message and m.student.user.email:
+
+            try:
+                send_mail(m.subject,
+                          m.message,
+                          'noreply@medisvs.spahr.uberspace.de',
+                          [m.student.user.email]
+                          )
+                # todo: muss noch asynchron werden ...celery?
+            except BadHeaderError:
+                # Do not show error message to malicous actor
+                # Do not send the email
+                None
+
+            m.was_sent = True
+            m.save()
 
 
 def notify_student(student_id, contact):

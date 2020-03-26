@@ -21,7 +21,8 @@ class HospitalFormO(ModelForm):
             'plz': _('Postleitzahl'),
             'countrycode': _('Land'),
             'firmenname': _('Name der Institution'),
-            'sonstige_infos': _('Wichtige Infos über Euch und den potentiellen Einsatzbereich')
+            'appears_in_map': _('Sichtbar und kontaktierbar für Helfende sein'),
+            'sonstige_infos': _('Wichtige Infos über Sie und den potentiellen Einsatzbereich')
         }
 
     def __init__(self, *args, **kwargs):
@@ -33,7 +34,7 @@ class HospitalFormO(ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner')),
+                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
@@ -66,7 +67,13 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
+        self.helper.add_input(Submit('submit', _('Daten Aktualisieren'), css_class='btn blue text-white btn-md'))
+        self.helper.layout = Layout(
+                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('telefon')),
+                Row(Column('plz'), Column('countrycode')),
+                'sonstige_infos'
+        )
 
     def clean_email(self):
         email = self.cleaned_data['email']

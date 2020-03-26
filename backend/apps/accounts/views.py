@@ -25,7 +25,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import BadHeaderError, send_mail
 
 from django.utils.translation import gettext as _
@@ -33,6 +32,7 @@ from django.template import loader
 
 from django.http import HttpResponse
 from django.db import transaction
+from apps.accounts.utils import send_password_set_email
 
 
 def student_signup(request):
@@ -44,7 +44,11 @@ def student_signup(request):
         # check whether it's valid:
         if form.is_valid():
             user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
-            send_password_set_email(form.cleaned_data['email'], request.META['HTTP_HOST'])
+            send_password_set_email(
+                email=form.cleaned_data['email'],
+                host=request.META['HTTP_HOST'],
+                subject_template="registration/password_reset_email_subject.txt"
+            )
             return HttpResponseRedirect("/iamstudent/thanks")
 
     # if a GET (or any other method) we'll create a blank form
@@ -53,11 +57,6 @@ def student_signup(request):
 
     return render(request, 'student_signup.html', {'form': form})
 
-
-def send_password_set_email(email, host, template='registration/password_reset_email_.html'):
-    form = PasswordResetForm({'email': email})
-    if form.is_valid():
-        form.save(email_template_name=template, domain_override=host)
 
 @transaction.atomic
 def register_student_in_db(request, mail):
@@ -121,7 +120,7 @@ def login_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect('profile_student')
+        return HttpResponseRedirect('/mapview')
 
     elif user.is_hospital:
         return HttpResponseRedirect('profile_hospital')
@@ -130,7 +129,7 @@ def login_redirect(request):
         return HttpResponseRedirect('approve_hospitals')
 
     else:
-        #todo: throw 404
+        #TODO: throw 404
         HttpResponse('Something wrong in database')
 
 

@@ -16,7 +16,6 @@ urlpatterns = [
         success_url=reverse_lazy('login_redirect')
       ) , name='password_reset_confirm_'),
     path('login/',auth_views.LoginView.as_view(template_name='registration/login.html'),name='login'),
-
     path('', include('django.contrib.auth.urls')),
     path('login_redirect', views.login_redirect, name='login_redirect'),
     path('delete_me', views.delete_me, name='delete_me'),

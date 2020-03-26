@@ -1,28 +1,3 @@
-# [Helping Health](https://helping-health.from-de.com/) - #WirVsVirus Hackathon
-
-Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,
-wir wollen euch über [diese Plattform](https://helping-health.from-de.com/) die Möglichkeit bieten, bei der Bewältigung der Coronakrise in Deutschland zu helfen. Unser Ziel ist es, den Krankenhäusern, Arztpraxen und Gesundheitsämtern in Deutschland einen Pool an Fachkräften bereitzustellen, die bereit sind, in Notsituationen auszuhelfen und wichtige Aufgaben zu übernehmen. Dabei wollen wir Menschen die helfen wollen ihren Erfahrungen und Fähigkeiten entsprechend einem Krankenhaus, einer Arztpraxis oder einem Gesundheitsamt zuweisen.
-
-## An wen richtet sich Helping Health?
-
-### An Menschen die helfen wollen
-
-Du hast Erfahrung um in dieser Notsituation medinizisch helfen zu können? Du studierst medizin, hast bereits in der Pflege gearbeitet, bist Rettungssanitäter oder hast andere relevante Fähigkeiten? Dann kannst du dich hier bei [Helping Health](https://helping-health.from-de.com/iamstudent/student_registration) registrieren um kontaktiert zu werden, wenn deine Unterstützun gebraucht wird.
-
-![Screenshot 1](backend/match4healthcare/static/img/screenshot1.jpg)
-
-
-### An Gesundheitseinrichtungen die Unterstützung brauchen
-
-Du arbeitest in einem Krankenhaus oder einer Praxis und brauchst Unterstützung um den Ansturm der nCOV-19 Patienten zu bewältigen? Du suchst gezielt Fachkräfte, welche dich bei deiner Arbeit im Gesundheitswesen unterstützen können? Einen Überblick
-über bereits angemeldete Fachkräfte findest du hier bei [Helping Health](https://helping-health.from-de.com/mapview/)
-
-![Screenshot 2](backend/match4healthcare/static/img/screenshot2.jpg)
-
-![Screenshot 3](backend/match4healthcare/static/img/screenshot3.jpg)
-
-___
-
 # Technische Dokumentation
 
 ## Docker
@@ -56,6 +31,9 @@ After changes to the Docker configuration, you have to restart and build the con
 
 - load test data:
 `python3 manage.py loaddata fixture.json`
+
+- create superuser (to access staff page)
+`python3 manage.py createsuperuser`
 
 ## Translation
 - Add translatable strings in python with `_("Welcome to my site.")` and import `from django.utils.translation import gettext as _` ([Documentation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#internationalization-in-python-code))

@@ -10,7 +10,6 @@ from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.accounts.models import User
-from crispy_forms.bootstrap import InlineRadios
 
 import logging
 
@@ -26,8 +25,6 @@ form_labels = {
     'countrycode': _('Land'),
     'email': _('Email'),
 
-    'semester': _('Semester'),
-    'immatrikuliert': _('Ich bin aktuell immatrikuliert'),
     'availability_start': _('Ich bin verfügbar ab'),
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
@@ -35,7 +32,7 @@ form_labels = {
     # Form Labels for qualifications
     'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login">Pflegereserve</a>)</em>'),
     'ausbildung_typ_pflege_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_physio': _('Physiotherapeut_in'),
+    'ausbildung_typ_physio': _('Physiotherapieauszubildende_r'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Entbindungshelfer_in'),
     'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
@@ -55,7 +52,7 @@ form_labels = {
     'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mta': _('Medizinisch-technische_r Assistent_in'),
     'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_notfallsani': _('Notfallsanitäter_in/Rettungssanitäter_in'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter_in/Rettungsassistent_in'),
     'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_sani': _('Rettungssanitäter_in/Rettungshelfer_in'),
     'ausbildung_typ_zahni': _('Zahnmedizinstudent_in'),
@@ -67,15 +64,16 @@ form_labels = {
     'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
 
     'sonstige_qualifikationen': _('Weitere Qualifikationen'),
-    'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
+    'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
     'einwilligung_datenweitergabe': _(
         'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
-    'wunsch_ort_arzt': _('Arztpraxis/Ordination'),
-    'wunsch_ort_gesundheitsamt': _('Gesundheitsamt'),
-    'wunsch_ort_krankenhaus': _('Krankeneinrichtungen'),
+    'wunsch_ort_arzt': _('Arztpraxis/Ordination/MVZ'),
+    'wunsch_ort_gesundheitsamt': _('Gesundheitsamt und sonstige Einrichtungen'),
+    'wunsch_ort_krankenhaus': _('Klinikum/Spital'),
     'wunsch_ort_pflege': _('Pflegeeinrichtungen'),
     'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
     'wunsch_ort_labor': _('Labor'),
+    'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
 fields_for_button_group = [
 'ausbildung_typ_pflege_abschnitt',
@@ -182,7 +180,7 @@ class StudentForm(forms.ModelForm):
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden'
+                    , css_class='hidden ausbildung-addon'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ],
@@ -195,9 +193,8 @@ class StudentForm(forms.ModelForm):
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),
-            HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
-            HTML("</p>")
+            HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
         )
 
         logging.debug(self.helper.layout)
@@ -234,8 +231,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             Row(
                 Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                Column('semester', css_class='form-group col-md-4 mb-0'),
-                Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
+                #Column('semester', css_class='form-group col-md-4 mb-0'),
+                #Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -248,10 +245,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
             # TODO: alle neuen felder hier auch hinzufügen!!!!!
-            HTML('<p class="text-center">'),
-            Submit('submit', _('Eintrag updaten')),
-            HTML("</p>")
-        )
+                        Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
+                  )
 
     def clean_email(self):
         email = self.cleaned_data['email']
