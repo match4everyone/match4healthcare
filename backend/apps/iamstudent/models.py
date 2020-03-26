@@ -15,16 +15,24 @@ def validate_semester(value):
 
 def validate_checkbox(value):
     if value != True:
-        raise ValidationError(_("You have to accept this"), code='invalid')
+        raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
     else:
         return value
 
 #class Bezahlung(models.IntegerChoices):
-UNENTGELTLICH = 1
-BEZAHLUNG = 4
+EGAL = 0
+# todo: im form ändern zu radio
+BEZAHLUNG = 1
+UNENTGELTLICH = 2
 BEZAHLUNG_CHOICES = (
     (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
     (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+)
+
+BEZAHLUNG_CHOICES_Filter = (
+
+    (BEZAHLUNG, _('ja')),
+    (UNENTGELTLICH, _('nein')),
 )
 
 
@@ -99,7 +107,7 @@ class Student(models.Model):
 
     plz = models.CharField(max_length=5, null=True)
     umkreis = models.IntegerField(choices=UMKREIS_CHOICES, null=True, blank=False)
-    availability_start = models.DateField(null=True)
+    availability_start = models.DateField(null=True,default=datetime.now)
 
     braucht_bezahlung = models.IntegerField(choices=BEZAHLUNG_CHOICES,
                                             default=UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
@@ -110,6 +118,7 @@ class Student(models.Model):
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
+    unterkunft_gewuenscht = models.BooleanField(default=False)
 
     # Metadata
     class Meta:
@@ -145,30 +154,13 @@ class PersistenStudentFilterModel(models.Model):
 
 
 """Add stufff to model"""
-wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
+wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor', 'apotheke','ueberall']
 wunschorte_prefix = 'wunsch_ort'
 for w in wunschorte:
     Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
 
-KEINE_ANGABE = 0
-#class Arzttyp(models.IntegerChoices):
-ANAESTHESIE = 1
-CHIRURGIE = 2
-INNERE = 3
-INTENSIV = 4
-NOTAUFNAHME = 5
-ANDERE = 6
-ARZT_CHOICES = (
-    (ANAESTHESIE, _('Anästhesie')),
-    (CHIRURGIE, _('Chirurgie')),
-    (INNERE, _('Innere Medizin')),
-    (INTENSIV, _('Intensivstation')),
-    (NOTAUFNAHME, _('Notaufnahme')),
-    (KEINE_ANGABE, _('Sonstige'))
-)
-
-
 #class MedstudAbschnitt(models.IntegerChoices):
+KEINE_ANGABE = 0
 VORKLINIK = 1
 KLINIK = 2
 PJ = 3
@@ -185,6 +177,7 @@ MEDSTUD_CHOICES = (
 
 
 #class ZahnstudAbschnitt(models.IntegerChoices):
+KEINE_ANGABE = 0
 VORKLINIK = 1
 KLINIK = 2
 ABGESCHLOSSEN = 3
@@ -197,6 +190,7 @@ ZAHNSTUD_CHOICES = (
 
 
 #class MFAAbschnitt(models.IntegerChoices):
+KEINE_ANGABE = 0
 JAHR_1 = 1
 JAHR_2 = 2
 JAHR_3 = 3
@@ -211,7 +205,7 @@ MFA_CHOICES = (
 
 
 #class NOTFALLSANIAbschnitt(models.IntegerChoices):
-
+KEINE_ANGABE = 0
 JAHR_1 = 1
 JAHR_2 = 2
 BERUFSTAETIG = 4
@@ -221,38 +215,45 @@ NOTFALLSANI_CHOICES = (
     (JAHR_2, _('2. Jahr')),
     (BERUFSTAETIG, _('Berufstätig'))
 )
+KEINE_ANGABE = 0
+ERFAHR = 1
+AUSBID_ABGESCHLOSSEN = 2
+BETREU_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (ERFAHR, _('Lediglich Erfahrungen')),
+    (AUSBID_ABGESCHLOSSEN, _('Abgeschlossene Ausbildung'))
+)
 
 
 AUSBILDUNGS_TYPEN = {
     'MEDSTUD':
         {
-            'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
-            'empty': None,
-            'famulaturen_anaesthesie': models.BooleanField(default=False),
-            'famulaturen_chirurgie': models.BooleanField(default=False),
-            'famulaturen_innere': models.BooleanField(default=False),
-            'famulaturen_intensiv': models.BooleanField(default=False),
-            'famulaturen_notaufnahme': models.BooleanField(default=False),
-            'empty': None,
-            'empty': None,
-            'anerkennung_noetig': models.BooleanField(default=False)
+            'abschnitt': (models.IntegerField, {'choices':MEDSTUD_CHOICES, 'default':KEINE_ANGABE,'null':True}),
+
+            'famulaturen_anaesthesie': (models.BooleanField,{'default':False}),
+            'famulaturen_chirurgie': (models.BooleanField,{'default':False}),
+            'famulaturen_innere': (models.BooleanField,{'default':False}),
+            'famulaturen_intensiv': (models.BooleanField,{'default':False}),
+            'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
+            'empty_3': None,
+            'anerkennung_noetig':(models.BooleanField,{'default':False})
         },
     'MFA':
         {
-            'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0,null=True),
+            'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
         },
     'MTLA':
         {
-            'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0,null=True),
+            'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
         },
     'MTA': {
-        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
     },
     'NOTFALLSANI': {
-        'abschnitt': models.IntegerField(choices=NOTFALLSANI_CHOICES, default=0,null=True),
+        'abschnitt': (models.IntegerField, {'choices':NOTFALLSANI_CHOICES, 'default':0,'null':True}),
     },
     'PFLEGE' :{
-        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
+        'abschnitt':(models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
     },
     'SANI': {
 
@@ -264,14 +265,13 @@ AUSBILDUNGS_TYPEN = {
 
     },
     'ZAHNI': {
-        'abschnitt': models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True)
+        'abschnitt': (models.IntegerField, {'choices':ZAHNSTUD_CHOICES, 'default':0,'null':True}),
     },
     'PHYSIO':{
-        'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
     },
     'KINDERBETREUNG': {
-        'ausgebildet': models.BooleanField(default=False),
-        'vorerfahrung': models.BooleanField(default=False),
+        'ausgebildet_abschnitt': (models.IntegerField, {'choices':BETREU_CHOICES, 'default':0,'null':True}),
     }
 }
 
@@ -286,18 +286,19 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
     for key, field in felder.items():
-        if key == 'empty':
+        if 'empty' in key:
             continue
         a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
         AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
-        Student.add_to_class(a_typ_kind, field)
+        Student.add_to_class(a_typ_kind, field[0](**field[1]))
         # todo: switch type
-        if 'abschnitt' in a_typ_kind:
-            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+        if 'abschnitt' == key:
+            PersistenStudentFilterModel.add_to_class('%s_lt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
+            PersistenStudentFilterModel.add_to_class('%s_gt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
         elif 'famulatu' in a_typ_kind or 'noetig' in a_typ_kind:
             pass
         else:
-            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+            PersistenStudentFilterModel.add_to_class(a_typ_kind, field[0](**field[1]))
 
 # Generate Fields for translation
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
