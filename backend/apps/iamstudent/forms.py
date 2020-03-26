@@ -63,7 +63,7 @@ form_labels = {
     'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
     'ausbildung_typ_sonstige': _('Sonstige'),
     'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
-    'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die Datenschutzbedingungen.'),
+    'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
     'einwilligung_datenweitergabe': _(
         'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
     'wunsch_ort_arzt': _('Arztpraxis/Ordination/MVZ'),
