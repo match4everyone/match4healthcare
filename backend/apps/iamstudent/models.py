@@ -118,7 +118,7 @@ class Student(models.Model):
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
-    unterkunft_gewuenscht = models.BooleanField(default=False, validators=[validate_checkbox])
+    unterkunft_gewuenscht = models.BooleanField(default=False)
 
     # Metadata
     class Meta:
