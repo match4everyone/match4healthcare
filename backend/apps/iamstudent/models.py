@@ -30,7 +30,6 @@ BEZAHLUNG_CHOICES = (
 )
 
 BEZAHLUNG_CHOICES_Filter = (
-    (EGAL, _('wissen wir noch nicht')),
     (UNENTGELTLICH, _('nein')),
     (BEZAHLUNG, _('ja')),
 )
