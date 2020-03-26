@@ -188,7 +188,7 @@ def edit_hospital_profile(request):
         form = HospitalFormEditProfile(instance=hospital, prefix='infos')
         #form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
-    return render(request, 'hospital_edit.html', {'form': form, 'emailform': form_mail})
+    return render(request, 'hospital_edit.html', {'form': form})
 
 @login_required
 @staff_member_required
