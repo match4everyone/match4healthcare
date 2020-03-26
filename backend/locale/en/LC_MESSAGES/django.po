@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-26 14:40+0100\n"
-"PO-Revision-Date: 2020-03-26 14:40+0100\n"
+"POT-Creation-Date: 2020-03-26 14:44+0100\n"
+"PO-Revision-Date: 2020-03-26 14:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -156,11 +156,17 @@ msgstr "You currently need help in your facility?"
 msgid "Wir verbinden Helfende und Hilfesuchende zu einem match4healthcare!"
 msgstr "We connect supporters  and people seeking help to a match4healthcare!"
 
-#: .\apps\accounts\templates\hospital_signup.html:45
-msgid "Vergeben Sie ein Passwort für die Anmeldung"
-msgstr "Provide a password for your account"
+#: .\apps\accounts\templates\hospital_signup.html:39
+msgid ""
+"Bitte geben Sie hier die allgemeinen Angaben zu Ihrer Institution an. Nach "
+"Klick auf \"Registrieren\" erhalten Sie eine E-Mail mit einem "
+"Bestätigungslink. Nach Klick darauf gelangen Sie in die Datenbank. Dort "
+"können nach den von Ihnen gewünschten Kriterien (Ausbildungsstand etc.) "
+"Helfende suchen, filtern und diesen auf unserer Plattform direkt eine E-Mail "
+"verfassen. Der Emailversand erfolgt dann nach einer Validierung durch uns."
+msgstr ""
 
-#: .\apps\accounts\templates\hospital_signup.html:48
+#: .\apps\accounts\templates\hospital_signup.html:52
 msgid "Jetzt registrieren"
 msgstr "Register Now"
 
@@ -335,11 +341,16 @@ msgstr ""
 "are an undefeatable team!"
 
 #: .\apps\accounts\templates\registration\password_set_email_.html:8
+msgid "Wir hoffen sehr, dass wir dir bald zu einem Platz verhelfen können."
+msgstr "We very much hope that we can help you find a place soon."
+
+#: .\apps\accounts\templates\registration\password_set_email_.html:11
 msgid ""
-"Bitte validiere deine Registrierung indem du auf den folgenden Link klickst:"
+"Bitte validiere jetzt deine Registrierung, indem du auf den folgenden Link "
+"klickst:"
 msgstr "Please confirm your registration by clicking on the following link:"
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:14
+#: .\apps\accounts\templates\registration\password_set_email_.html:20
 msgid ""
 "\n"
 "<p>Hier einige wichtige Informationen zum allgemeinen Ablauf für dich:</p>\n"
@@ -351,28 +362,87 @@ msgid ""
 "medizinischen Fakultäten eingetragen hast, denk daran, dass du Bescheid "
 "gibst, falls du über unsere Plattform einen Match erhältst und keine "
 "weiteren Kapazitäten mehr hast. Genauso andersherum, falls du über diese "
-"Wege helfen kannst, entferne deinen Eintrag bei uns. Wir wollen, dass für "
-"niemanden Verwirrung und doppelter Aufwand entsteht.</li>\n"
+"lokalen Wege helfen kannst, entferne deinen Eintrag bei uns. Wir wollen, "
+"dass für niemanden Verwirrung und doppelter Aufwand entsteht, sondern einzig "
+"und allein, dass du einen Ort zum Helfen findest, egal über welchen Weg.</"
+"li>\n"
 "  <li>Wir informieren die Institutionen, dass Sie sich um einen "
 "Arbeitsvertrag sowie hygienische Standards und eine Einarbeitung kümmern "
 "sollten. Bitte achte darauf, dass du dich versichern lässt. Für weiteres "
-"siehe die Tipps und Infos zu Vertrag, Vergütung und Recht im Anhang.</li>\n"
+"haben wir eine umfangreiche Sammlung an Tipps und Infos zu Vertrag, "
+"Vergütung und Recht zusammengestellt: <a href=\"https://match4healthcare.de/"
+"legal-questions/\">https://match4healthcare.de/legal-questions/</a></li>\n"
 "  <li>Sollte eine Institution Falschangaben gemacht haben oder sich nicht an "
 "die Grundbedingungen zu Ausrüstung/Versicherung halten, dann bitte "
 "informiere uns bitte über die u.g. E-Mail Adresse.</li>\n"
 "  <li>Wenn du Fragen zu lokalen Gegebenheiten oder Studienbedingungen hast, "
 "melde dich bei deiner lokalen Fachschaft Medizin oder lokalen Ärztekammer. "
-"Wir übernehmen das Matching, aber können dir keine Fragen zu den genauen "
-"Bedingungen deines Einsatzes vor Ort beantworten, und für etwaige Probleme "
-"keine Haftung übernehmen.</li>\n"
+"Wir stellen dir hier nur Infos zusammen, aber können dir keine Fragen zu den "
+"genauen Bedingungen deines Einsatzes vor Ort beantworten, und für etwaige "
+"Probleme keine Haftung übernehmen.</li>\n"
 "  <li>Wenn du aufgrund deines Gesundheitszustands unsicher bist, ob du "
-"helfen darfst, hilft dir diese App weiter: https://covapp.charite.de/</li>\n"
+"helfen darfst, hilft dir diese App weiter: <a href=\"https://covapp.charite."
+"de/\">https://covapp.charite.de/</a></li>\n"
 "</ul>\n"
 "<p>In jedem Fall ein großes Dankeschön für deine Unterstützung des "
 "Gesundheitswesens in der aktuellen Lage. Wir hoffen, mit dieser Plattform "
-"einen kleinen Beitrag zum Wohle der Gesellschaft geleistet zu haben.\n"
+"einen kleinen Beitrag zum Wohle der Gesellschaft geleistet zu haben.<br>\n"
 "Wenn du Ideen und Anregungen zur Weiterentwicklung der Plattform hast oder "
-"weitere Fragen hast wende dich gerne an info@match4healthcare.de</p>\n"
+"weitere Fragen hast wende dich gerne an <a href=\"mailto:"
+"info@match4healthcare.de\">info@match4healthcare.de</a><br>\n"
+"Dein match4healthcare Team\n"
+"</p>\n"
+msgstr ""
+
+#: .\apps\accounts\templates\registration\password_set_email_hospital.html:6
+msgid "Sehr geehrte Einrichtung,"
+msgstr "Dear facilitiy,"
+
+#: .\apps\accounts\templates\registration\password_set_email_hospital.html:7
+msgid "Vielen Dank für Ihren Eintrag auf match4healthcare!"
+msgstr "Thank you very much for your entry on match4healthcare!"
+
+#: .\apps\accounts\templates\registration\password_set_email_hospital.html:8
+msgid ""
+"Bitte bestätigen Sie jetzt Ihre Registrierung, indem Sie auf den folgenden "
+"Link klicken:"
+msgstr "Please confirm your registration by clicking on the following link:"
+
+#: .\apps\accounts\templates\registration\password_set_email_hospital.html:14
+msgid ""
+"\n"
+"<p>Wir hoffen sehr, dass Sie schnell und direkt die Hilfe finden, die Sie "
+"suchen. Hier haben wir Ihnen einige wichtige Informationen zusammengetragen. "
+"Dies soll Ihnen eine Hilfe sein, jedoch gewährleisten wir keinen Anspruch "
+"auf Vollständigkeit:</p>\n"
+"<ul>\n"
+"  <li>Nachdem Ihre Registrierung abgeschlossen ist, gelangen Sie nun auf der "
+"Plattform in die Datenbank. Dort können nach den von Ihnen gewünschten "
+"Kriterien (Ausbildungsstand etc.) Helfende suchen, filtern und diesen auf "
+"unserer Plattform direkt eine E-Mail verfassen. Der Emailversand erfolgt "
+"dann nach einer Validierung durch uns.</li>\n"
+"  <li>Wenn Sie Helfende nicht mehr benötigen, bitte geben Sie diesen "
+"Bescheid, damit diese Ihren Status bei uns anpassen können und für andere "
+"Einrichtungen zur Verfügung stehen. </li>\n"
+"  <li>Wir haben die Studierenden über Ihre Arbeitsrechte und "
+"Ausbildungsvertrag informiert. Bitte sorgen Sie sich um Rechtssicherheit und "
+"Versicherungsschutz der Helfenden. Ebenfalls muss geeignete Schutzausrüstung "
+"zur Verfügung gestellt und hygienische Standards eingehalten werden.</li>\n"
+"  <li>Bitte überprüfen Sie vor Ort die Kompetenzen und ggf. erforderlichen "
+"formalen Qualifikationen der Helfenden. Besprechen Sie welche Befugnisse die "
+"Helfenden bei Ihnen haben und welche nicht. Sie sind für ihren Einsatz "
+"verantwortlich.</li>\n"
+"  <li>Manche unserer Helfenden würden gerne an einem ferneren Einsatzort "
+"helfen, jedoch benötigen Sie dafür eine Unterkunft. Falls Sie diese "
+"unkompliziert anbieten können, so würden sich unsere Studierenden über die "
+"Unterstützung diesbezüglich sehr freuen. </li>\n"
+"</ul>\n"
+"<p>In jedem Fall ein großes Dankeschön für das große Engagement Ihrer "
+"Einrichtung in der aktuellen Lage. Wir hoffen, mit dieser Plattform einen "
+"kleinen Beitrag für die aktuelle Gesundheitsversorgung geleistet zu haben.\n"
+"Für Anregungen zu unserer Plattform und bei weiteren Fragen kontaktieren Sie "
+"uns gerne unter info@match4healthcare.de.</p>\n"
+"<p>Ihr Team von match4healthcare</p>\n"
 msgstr ""
 
 #: .\apps\accounts\templates\student_edit.html:6
@@ -422,37 +492,6 @@ msgstr ""
 "practitioners and health authorities in your area if they are looking for "
 "support. For this purpose, we ask you to provide the following information "
 "so that we can connect you with the appropriate requests."
-
-#: .\apps\accounts\views.py:77
-msgid "Willkommen bei match4healthcare"
-msgstr "Welcome to match4healthcare"
-
-#: .\apps\accounts\views.py:79
-#, python-format
-msgid ""
-"Hallo %s,\n"
-"\n"
-"du willst helfen und hast dich gerade bei match4healthcare registriert, "
-"danke!\n"
-"\n"
-"Wenn du deine Daten ändern möchtest, nutze folgende Credentials:\n"
-"username: %s\n"
-"passwort: %s\n"
-"\n"
-"Vielen Dank und beste Grüße,\n"
-"Dein match4healthcare Team"
-msgstr ""
-"Hello %s,\n"
-"\n"
-"you want to help and have just registered on match4healthcare, thank you!\n"
-"\n"
-"If you'd like to change your profile data , please use the following "
-"credentials:\n"
-"User: %s\n"
-"Password: %s\n"
-"\n"
-"Thank you and kind Regards,\n"
-"Your match4healthcare Team"
 
 #: .\apps\accounts\views.py:165 .\apps\accounts\views.py:182
 msgid "Deine Daten wurden erfolgreich geändert!"
@@ -691,40 +730,40 @@ msgstr "Professional training"
 
 #: .\apps\iamstudent\forms.py:210
 msgid ""
-"Die Vermittlung erfolgt unentgeltlich. Mir ist bewusst, dass die "
-"Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich "
-"und die entsprechende Institution betrifft. Insbesondere Art und Umfang der "
-"Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die "
-"entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen."
+"Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
+"dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution "
+"allein mich und die entsprechende Institution betrifft. Insbesondere Art und "
+"Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur "
+"mich und die entsprechende Institution. Eine Haftung des Vermittlers ist "
+"ausgeschlossen."
 msgstr ""
-"The matching is free of charge. I am aware that the relationship with the "
-"facilities concerns only me and the respective facility. In particular, the "
-"type and scope of work, any remuneration and comparable matters concern only "
-"myself and the institution concerned. Any liability of the match4healthcare "
-"is strictly excluded."
+"The service is provided free of charge. I am aware that the relationship "
+"with the facilities concerns only me and the respective facility. In "
+"particular, the type and scope of work, any remuneration and comparable "
+"matters concern only myself and the institution concerned. Any liability of "
+"the match4healthcare service is strictly excluded."
 
 #: .\apps\iamstudent\forms.py:211
 msgid "Registriere mich"
 msgstr "Register me"
 
-#: .\apps\iamstudent\forms.py:219 .\apps\iamstudent\forms.py:268
-#: .\apps\ineedstudent\forms.py:47 .\apps\ineedstudent\forms.py:82
+#: .\apps\iamstudent\forms.py:219 .\apps\ineedstudent\forms.py:76
 msgid "Diese Email ist bereits vergeben"
 msgstr "This e-Mail has already been used"
 
-#: .\apps\iamstudent\forms.py:262 .\apps\ineedstudent\forms.py:71
+#: .\apps\iamstudent\forms.py:262 .\apps\ineedstudent\forms.py:64
 msgid "Daten aktualisieren"
 msgstr "Update data"
 
-#: .\apps\iamstudent\forms.py:276
+#: .\apps\iamstudent\forms.py:271
 msgid "Betreff"
 msgstr "Subject"
 
-#: .\apps\iamstudent\forms.py:277
+#: .\apps\iamstudent\forms.py:272
 msgid "Nachrichtentext"
 msgstr "Message"
 
-#: .\apps\iamstudent\forms.py:279
+#: .\apps\iamstudent\forms.py:274
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr "Your posting should be here, edit the text."
 
@@ -931,14 +970,13 @@ msgstr ""
 msgid "Vielen Dank"
 msgstr "Thank you"
 
-#: .\apps\iamstudent\templates\thanks.html:57
+#: .\apps\iamstudent\templates\thanks.html:56
 msgid ""
 "<h2 class=\"font-weight-light\">Willkommen bei match4healthcare,</h2>\n"
-"    <p>vielen Dank, dass du dich engagieren möchtest. Um deine Registrierung "
-"zu vervollständigen, haben wir dir eine Mail mit einem <b style=\"font-"
-"weight:500;\">Bestätigungslink</b> an deine angegebene Mailadresse "
-"geschickt. Bitte schau in deine Mails, um dich vollständig bei uns zu "
-"registrieren und von einem Krankenhaus kontaktiert zu werden.</p>\n"
+"    <p>Um deine Registrierung zu vervollständigen, haben wir dir eine Mail "
+"mit einem <b style=\"font-weight:500;\">Bestätigungslink</b> an deine "
+"angegebene Mailadresse geschickt. Bitte schau in deine Mails, um dich "
+"vollständig bei uns zu registrieren:</p>\n"
 "    <p>Dein Team von</p>\n"
 "    "
 msgstr ""
@@ -988,11 +1026,11 @@ msgid "Wichtige Infos über Sie und den potentiellen Einsatzbereich"
 msgstr ""
 "Important information about you and your potential field of application"
 
-#: .\apps\ineedstudent\forms.py:64
+#: .\apps\ineedstudent\forms.py:57
 msgid "Schicke Mails"
 msgstr "Send Mails"
 
-#: .\apps\ineedstudent\forms.py:65
+#: .\apps\ineedstudent\forms.py:58
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
@@ -1250,6 +1288,43 @@ msgstr "A joint project of"
 #: .\templates\home.html:152
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
+
+#: .\templates\legal-questions.html:6
+msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
+msgstr ""
+
+#~ msgid "Vergeben Sie ein Passwort für die Anmeldung"
+#~ msgstr "Provide a password for your account"
+
+#~ msgid "Willkommen bei match4healthcare"
+#~ msgstr "Welcome to match4healthcare"
+
+#, python-format
+#~ msgid ""
+#~ "Hallo %s,\n"
+#~ "\n"
+#~ "du willst helfen und hast dich gerade bei match4healthcare registriert, "
+#~ "danke!\n"
+#~ "\n"
+#~ "Wenn du deine Daten ändern möchtest, nutze folgende Credentials:\n"
+#~ "username: %s\n"
+#~ "passwort: %s\n"
+#~ "\n"
+#~ "Vielen Dank und beste Grüße,\n"
+#~ "Dein match4healthcare Team"
+#~ msgstr ""
+#~ "Hello %s,\n"
+#~ "\n"
+#~ "you want to help and have just registered on match4healthcare, thank "
+#~ "you!\n"
+#~ "\n"
+#~ "If you'd like to change your profile data , please use the following "
+#~ "credentials:\n"
+#~ "User: %s\n"
+#~ "Password: %s\n"
+#~ "\n"
+#~ "Thank you and kind Regards,\n"
+#~ "Your match4healthcare Team"
 
 #~ msgid "Einsatz"
 #~ msgstr "Deployment"
