@@ -353,7 +353,7 @@ class StudentFormEditProfile(StudentForm):
             HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_(
                 'Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
-            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
+            Submit('submit', _('Profil Aktualisieren'), css_class='btn blue text-white btn-md'),
         )
 
 
