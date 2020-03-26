@@ -1,5 +1,6 @@
 """
 route /accounts/add_data aufrufen um user zu generieren
+muss in urls.py auskommentiert werden
 """
 
 mail = lambda x: '%s@email.com' % x

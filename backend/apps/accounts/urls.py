@@ -6,7 +6,8 @@ from . import views
 from . import generate_users
 
 urlpatterns = [
-    path('add_data',generate_users.populate_db),
+    # uncomment for data generation
+    #path('add_data',generate_users.populate_db),
     path('logout/',auth_views.LogoutView.as_view(template_name='registration/logout.html'),name='logout'),
     path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done_.html'),name='password_change_done'),
     path('password_change',auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form_.html'),name='password_change_form'),
