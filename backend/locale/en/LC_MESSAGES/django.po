@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-26 16:02+0100\n"
-"PO-Revision-Date: 2020-03-26 16:01+0100\n"
+"POT-Creation-Date: 2020-03-26 16:34+0100\n"
+"PO-Revision-Date: 2020-03-26 16:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -156,7 +156,7 @@ msgstr "You currently need help in your facility?"
 msgid "Wir verbinden Helfende und Hilfesuchende zu einem match4healthcare!"
 msgstr "We connect supporters  and people seeking help to a match4healthcare!"
 
-#: .\apps\accounts\templates\hospital_signup.html:39
+#: .\apps\accounts\templates\hospital_signup.html:38
 msgid ""
 "Bitte geben Sie hier die allgemeinen Angaben zu Ihrer Institution an. Nach "
 "Klick auf \"Registrieren\" erhalten Sie eine E-Mail mit einem "
@@ -172,7 +172,7 @@ msgstr ""
 "and send them an e-mail directly on our platform. The email will be sent out "
 "after validation by us."
 
-#: .\apps\accounts\templates\hospital_signup.html:52
+#: .\apps\accounts\templates\hospital_signup.html:50
 msgid "Jetzt registrieren"
 msgstr "Register Now"
 
@@ -185,7 +185,7 @@ msgid "Anmelden"
 msgstr "Login"
 
 #: .\apps\accounts\templates\registration\login.html:57
-#: .\apps\accounts\templates\registration\password_reset_form_.html:22
+#: .\apps\accounts\templates\registration\password_reset_form_.html:49
 msgid "Passwort vergessen?"
 msgstr "Lost password?"
 
@@ -260,15 +260,15 @@ msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen "
 msgstr " Your password was changed. You can login now "
 
 #: .\apps\accounts\templates\registration\password_reset_confirm_.html:6
-#: .\apps\accounts\templates\registration\password_reset_confirm_.html:23
+#: .\apps\accounts\templates\registration\password_reset_confirm_.html:51
 msgid "Neues Passwort"
 msgstr "New"
 
-#: .\apps\accounts\templates\registration\password_reset_confirm_.html:36
+#: .\apps\accounts\templates\registration\password_reset_confirm_.html:64
 msgid "Passwort Setzen"
 msgstr "Set password"
 
-#: .\apps\accounts\templates\registration\password_reset_confirm_.html:43
+#: .\apps\accounts\templates\registration\password_reset_confirm_.html:71
 msgid ""
 " Der Link zum setzen des Passworts ist nicht gültig. Eventuell wurde er "
 "bereits benutzt. "
@@ -326,45 +326,47 @@ msgstr " Confirm e-Mail"
 msgid "Passwort Vergessen?"
 msgstr "Lost password?"
 
-#: .\apps\accounts\templates\registration\password_reset_form_.html:23
+#: .\apps\accounts\templates\registration\password_reset_form_.html:50
 msgid "Gib deine Email-Addresse an und du erhältst ein neues Passwort"
 msgstr "Enter your e-Mail and we will send you a new password"
 
-#: .\apps\accounts\templates\registration\password_reset_form_.html:30
+#: .\apps\accounts\templates\registration\password_reset_form_.html:57
 msgid "Passwort zurücksetzen "
 msgstr "Password reset "
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:6
-msgid "Lieber Helfende_r,"
+#: .\apps\accounts\templates\registration\password_set_email_.html:446
+msgid "Lieber Helfende*r,"
 msgstr "Dear supporter,"
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:7
+#: .\apps\accounts\templates\registration\password_set_email_.html:448
 msgid ""
-"Vielen Dank für deine Anmeldung auf match4healthcare! Gemeinsam sind wir ein "
+"Vielen Dank für deine Anmeldung auf match4healthcare. Gemeinsam sind wir ein "
 "unschlagbares Team!"
 msgstr ""
 "Thank you very much for your registration on match4healthcare! Together we "
 "are an undefeatable team!"
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:8
+#: .\apps\accounts\templates\registration\password_set_email_.html:449
 msgid "Wir hoffen sehr, dass wir dir bald zu einem Platz verhelfen können."
 msgstr "We very much hope that we can help you find a place soon."
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:11
+#: .\apps\accounts\templates\registration\password_set_email_.html:451
 msgid ""
 "Bitte validiere jetzt deine Registrierung, indem du auf den folgenden Link "
 "klickst:"
 msgstr "Please confirm your registration by clicking on the following link:"
 
-#: .\apps\accounts\templates\registration\password_set_email_.html:20
+#: .\apps\accounts\templates\registration\password_set_email_.html:458
 msgid ""
 "\n"
-"<p>Hier einige wichtige Informationen zum allgemeinen Ablauf für dich:</p>\n"
+"<span style=\"font-size:18px; font-weight: 500;\"><span style=\"color:"
+"#0d2333\">Hier einige wichtige Informationen zum allgemeinen Ablauf für dich:"
+"</span></span>\n"
 "<ul>\n"
 "  <li>Im Falle eines Matches werden Gesundheitsinstitutionen dich "
 "kontaktieren und sich über Einzelheiten mit dir abstimmen. Die "
 "Kontaktaufnahme erfolgt außerhalb unserer Plattform.</li>\n"
-"  <li>Wenn du dich bereits in einer andere Liste, z.b. der Unikliniken oder "
+"  <li>Wenn du dich bereits in einer andere Liste, z.B. der Unikliniken oder "
 "medizinischen Fakultäten eingetragen hast, denk daran, dass du Bescheid "
 "gibst, falls du über unsere Plattform einen Match erhältst und keine "
 "weiteren Kapazitäten mehr hast. Genauso andersherum, falls du über diese "
@@ -390,14 +392,7 @@ msgid ""
 "helfen darfst, hilft dir diese App weiter: <a href=\"https://covapp.charite."
 "de/\">https://covapp.charite.de/</a></li>\n"
 "</ul>\n"
-"<p>In jedem Fall ein großes Dankeschön für deine Unterstützung des "
-"Gesundheitswesens in der aktuellen Lage. Wir hoffen, mit dieser Plattform "
-"einen kleinen Beitrag zum Wohle der Gesellschaft geleistet zu haben.<br>\n"
-"Wenn du Ideen und Anregungen zur Weiterentwicklung der Plattform hast oder "
-"weitere Fragen hast wende dich gerne an <a href=\"mailto:"
-"info@match4healthcare.de\">info@match4healthcare.de</a><br>\n"
-"Dein match4healthcare Team\n"
-"</p>\n"
+"\n"
 msgstr ""
 
 #: .\apps\accounts\templates\registration\password_set_email_hospital.html:6
@@ -508,8 +503,6 @@ msgid "Kann eine Vergütung angeboten werden?"
 msgstr ""
 
 #: .\apps\iamstudent\filters.py:67
-#, fuzzy
-#| msgid "Ab wann sollen die Helfer*innen verfügbar sein?"
 msgid "Die Helfenden sollten verfügbar sein ab "
 msgstr "When should the supporters be available?"
 
@@ -517,11 +510,11 @@ msgstr "When should the supporters be available?"
 msgid "Kann eine Unterkunft angeboten werden?"
 msgstr ""
 
-#: .\apps\iamstudent\filters.py:70 .\apps\iamstudent\models.py:35
+#: .\apps\iamstudent\filters.py:70 .\apps\iamstudent\models.py:34
 msgid "ja"
 msgstr ""
 
-#: .\apps\iamstudent\filters.py:71 .\apps\iamstudent\models.py:34
+#: .\apps\iamstudent\filters.py:71 .\apps\iamstudent\models.py:35
 msgid "nein"
 msgstr ""
 
@@ -712,10 +705,8 @@ msgid "Labor"
 msgstr "Laboratory"
 
 #: .\apps\iamstudent\forms.py:78
-#, fuzzy
-#| msgid "Ich brauche Unterstützung"
 msgid "Ich brauche eine Unterkunft"
-msgstr "I need support"
+msgstr "I need accomodation"
 
 #: .\apps\iamstudent\forms.py:79
 msgid ""
@@ -735,11 +726,11 @@ msgstr "Time availability, up to"
 
 #: .\apps\iamstudent\forms.py:95
 msgid "mindestens"
-msgstr ""
+msgstr "min"
 
 #: .\apps\iamstudent\forms.py:96
 msgid "maximal"
-msgstr ""
+msgstr "max"
 
 #: .\apps\iamstudent\forms.py:140
 msgid ""
@@ -754,23 +745,23 @@ msgstr "Please select your country"
 msgid "bevorzugter Einsatzort als Postleitzahl"
 msgstr "postal code of preferred location"
 
-#: .\apps\iamstudent\forms.py:157 .\apps\iamstudent\forms.py:259
+#: .\apps\iamstudent\forms.py:157 .\apps\iamstudent\forms.py:267
 msgid "Persönliche Informationen"
 msgstr "Personal information"
 
-#: .\apps\iamstudent\forms.py:169 .\apps\iamstudent\forms.py:271
+#: .\apps\iamstudent\forms.py:169 .\apps\iamstudent\forms.py:280
 msgid "Über deinen Einsatz"
 msgstr "About your deployment"
 
-#: .\apps\iamstudent\forms.py:181 .\apps\iamstudent\forms.py:283
+#: .\apps\iamstudent\forms.py:181 .\apps\iamstudent\forms.py:292
 msgid "Wunscheinsatzort"
 msgstr "Desired location"
 
-#: .\apps\iamstudent\forms.py:205 .\apps\iamstudent\forms.py:308
+#: .\apps\iamstudent\forms.py:205 .\apps\iamstudent\forms.py:317
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: .\apps\iamstudent\forms.py:232
+#: .\apps\iamstudent\forms.py:241
 msgid ""
 "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
 "dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die "
@@ -785,23 +776,15 @@ msgstr ""
 "matters concern only myself and the institution concerned. Any liability of "
 "the match4healthcare service is strictly excluded."
 
-#: .\apps\iamstudent\forms.py:233 .\apps\iamstudent\forms.py:337
+#: .\apps\iamstudent\forms.py:242
 msgid "Registriere mich"
 msgstr "Register me"
 
-#: .\apps\iamstudent\forms.py:241 .\apps\ineedstudent\forms.py:76
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:76
 msgid "Diese Email ist bereits vergeben"
 msgstr "This e-Mail has already been used"
 
-#: .\apps\iamstudent\forms.py:336
-#, fuzzy
-#| msgid ""
-#| "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist "
-#| "bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein "
-#| "mich und die entsprechende Institution betrifft. Insbesondere Art und "
-#| "Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen "
-#| "nur mich und die entsprechende Institution. Eine Haftung von "
-#| "match4healthcare ist ausgeschlossen."
+#: .\apps\iamstudent\forms.py:355
 msgid ""
 "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
 "dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution "
@@ -816,15 +799,19 @@ msgstr ""
 "matters concern only myself and the institution concerned. Any liability of "
 "the match4healthcare service is strictly excluded."
 
-#: .\apps\iamstudent\forms.py:347
+#: .\apps\iamstudent\forms.py:356
+msgid "Profil Aktualisieren"
+msgstr "Update data"
+
+#: .\apps\iamstudent\forms.py:366
 msgid "Betreff"
 msgstr "Subject"
 
-#: .\apps\iamstudent\forms.py:348
+#: .\apps\iamstudent\forms.py:367
 msgid "Nachrichtentext"
 msgstr "Message"
 
-#: .\apps\iamstudent\forms.py:350
+#: .\apps\iamstudent\forms.py:369
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr "Your posting should be here, edit the text."
 
@@ -839,10 +826,6 @@ msgstr "You have to accept this."
 #: .\apps\iamstudent\models.py:28
 msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
 msgstr "I am happy to be compensated, but I also help out even without"
-
-#: .\apps\iamstudent\models.py:33
-msgid "wissen wir noch nicht"
-msgstr ""
 
 #: .\apps\iamstudent\models.py:40
 msgid "egal"
@@ -1009,16 +992,11 @@ msgstr "We found <mark>%(n)s supporters</mark> matching your search."
 
 #: .\apps\iamstudent\templates\student_list_view.html:141
 #: .\apps\iamstudent\templates\student_list_view.html:145
-#, fuzzy, python-format
-#| msgid "Email an %(n)s Helfer*innen schicken"
+#, python-format
 msgid "Email an alle %(n)s Helfer*innen senden"
 msgstr "Send e-mail to %(n)s supporters"
 
 #: .\apps\iamstudent\templates\student_list_view.html:151
-#, fuzzy
-#| msgid ""
-#| "Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren "
-#| "möchtest."
 msgid ""
 "Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du "
 "kontaktieren möchtest."
@@ -1338,8 +1316,13 @@ msgid "Gemeinsam unser Gesundheitssystem stärken, mit einem"
 msgstr "Strenghten our healthcare systems with a"
 
 #: .\templates\home.html:135
+#, fuzzy
+#| msgid ""
+#| "Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach "
+#| "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
+#| "Monaten im Gesundheitswesen noch viel präsenter denn je."
 msgid ""
-"Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach "
+"Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum Fach "
 "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
 "Monaten im Gesundheitswesen noch viel präsenter denn je."
 msgstr ""
