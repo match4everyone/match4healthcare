@@ -80,6 +80,7 @@ form_labels = {
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
 fields_for_button_group = [
+    'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
 'ausbildung_typ_pflege_abschnitt',
                            'ausbildung_typ_physio_abschnitt',
                            'ausbildung_typ_medstud_abschnitt',
