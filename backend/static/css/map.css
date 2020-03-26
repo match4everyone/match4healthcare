@@ -98,7 +98,7 @@ path.leaflet-interactive  {
 	
 	stroke: #ed0a71;
 	fill: #ed0a71;
-	stroke-width:10px;
+	/* stroke-width:5px; */
 }
 
 .leaflet-container a { color: #ed0a71 }

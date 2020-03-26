@@ -27,17 +27,20 @@
     {{ message }}
   </div>
 {% endfor %}
+<div style="height:40px"></div>
+<div class="container" style="margin-bottom:30px;">
+	
     <p>
         Profil:
-        <a role="button" class="btn btn-primary" href="logout">{% blocktrans %}Abmelden{% endblocktrans %}</a>
-        <a role="button" class="btn btn-primary" href="/accounts/password_change">{% blocktrans %}Kennwort ändern{% endblocktrans %}</a>
+        <a role="button" class="btn blue text-white btn-md" href="logout">{% blocktrans %}Abmelden{% endblocktrans %}</a>
+        <a role="button" class="btn blue text-white btn-md" href="/accounts/password_change">{% blocktrans %}Kennwort ändern{% endblocktrans %}</a>
         <!-- In case the staff should be able to delete themselves:
         <a role="button" class="btn btn-secondary" href="delete_me">delete my profile</a>
         -->
     </p>
     <p></p>
-    <hr>
-    <p>
+
+    <p style="margin-top:30px;">
     {% blocktrans %}
     <h1>Liebes Staff-Mitglied,</h1></p>
     <p>Hier kannst du Krankenhäuser, die sich angemeldet haben,
@@ -49,8 +52,7 @@
     </p>
     {% endblocktrans %}
 
-    <hr>
-    <div class="card border-info">
+    <div class="card border-info" style="margin-top:30px;">
         <div class="card-header">
             {% blocktrans %}Diese Krankenhäuser warten auf deine Genehmigung{% endblocktrans %}
         </div>
@@ -70,5 +72,5 @@
     </div>
 
 </div>
-<hr>
+
 {% endblock %}

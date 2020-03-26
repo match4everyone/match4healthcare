@@ -239,3 +239,11 @@ def validate_email(request):
         request.user.validated_email = True
         request.user.save()
     return HttpResponseRedirect("/mapview")
+
+from django.contrib.auth.views import LoginView
+
+from .forms import CustomAuthenticationForm
+
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
