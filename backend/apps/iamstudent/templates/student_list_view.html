@@ -69,7 +69,15 @@
 {% block content %}
 <hr>
 <div class="container">
-
+    <p>Hier könnt ihr die bereits registrierten Helfer durchsuchen und sie kontaktieren.</p>
+    <p>
+        Ihr braucht examinierte Pflegekräfte?<br>
+        Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
+        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon <mark>berufstätig</mark> sein muss.
+        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf <mark>ja</mark>.
+        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und ihnen eine
+        <mark>Email senden</mark>
+    </p>
     <form method="get">
         <div class="card">
             <div class="card-header">
@@ -117,44 +125,51 @@
             </div>
             <div class="card-body">
 
-                {% crispy filter_availability.form filter_availability.helper %}
+                {% crispy filter_availability.form filter_availability.helper %}<hr>
+<p class="text-right">
+            <input type="submit" class="btn btn-primary" value="Filter Aktualisieren">
+        </p>
 
             </div>
 
         </div>
-    <br>
-    <p class="text-center">
-        <input type="submit" class="btn btn-primary" value="Filter Aktualisieren">
-        </p>
-    </form>
+        <br>
 
-    <hr>
-    <div class="card">
+
+    </form>
+        <div class="card border-danger">
         <div class="card-header">
-            Wir haben
+                <p class="text-center">
+    {% if enable_mail %}
+           Wir haben
             <mark>{{n}} Helfer</mark>
             gefunden, die zu deiner Suche passen.
-        </div>
-        <div class="card-body">
-            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
-            <div class="table-responsive">
-            {% render_table table %}
-            </div>
-            {% if enable_mail %}
-            <button class="btn blue text-white btn-lg" onclick="sendall()">
-                Email an {{n}} Helfer schicken &raquo;
+            <button class="btn btn-dark" onclick="sendall()">
+                Email an alle {{n}} Helfer senden &raquo;
             </button>
-            <button class="btn blue text-white btn-lg" onclick="send()">
+            {% else %}
+            <button class="btn btn-dark" onclick="alertMaxMails()">
+                Email an alle {{n}} Helfer senden &raquo;
+            </button>
+            {% endif %}
+        </p>
+            </div>
+        <div class="card-body">
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmt Helfer auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
+            <div class="table-responsive">
+                {% render_table table %}
+            </div>
+            <p class="text-right">
+            {% if enable_mail %}
+            <button class="btn btn-dark" onclick="send()">
                 Email an AUSGEWÄHLTE Studierende schicken &raquo;
             </button>
             {% else %}
-            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                Email an {{n}} Helfer schicken &raquo;
-            </button>
-            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
+            <button class="btn btn-dark" onclick="alertMaxMails()">
                 Email an AUSGEWÄHLTE Studierende schicken &raquo;
             </button>
             {% endif %}
+            </p>
 
         </div>
 

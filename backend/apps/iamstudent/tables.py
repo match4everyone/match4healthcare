@@ -14,7 +14,7 @@ class StudentTable(tables.Table):
         model = Student
         template_name = "django_tables2/bootstrap4.html"
         exclude = ['uuid', 'registration_date', 'id']
-        fields = ['name_first','zeitliche_verfuegbarkeit','braucht_bezahlung']
+        fields = ['name_first','sonstige_qualifikationen','unterkunft_gewuenscht','zeitliche_verfuegbarkeit','braucht_bezahlung']
         attrs = {
             'data-toggle': "table",
             'data-search': "false",

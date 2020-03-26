@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import format_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
@@ -90,6 +91,14 @@ fields_for_button_group = [
                            'ausbildung_typ_notfallsani_abschnitt',
                            'ausbildung_typ_zahni_abschnitt'
 ]
+
+mindest = _('mindestens')
+maxim = _('maximal')
+for field in fields_for_button_group:
+    if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+        f = str(field)
+        form_labels[f + '_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
 
 
 def button_group(field):
