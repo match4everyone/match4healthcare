@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% blocktrans %}Helfende in der Nähe von {{ort}} ({{plz}}){% endblocktrans %}
 {% endblock %}
 
 {% block header %}
@@ -16,23 +16,18 @@
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
-            console.log(selectedFilterValue);
             let buttonXStatus = false;
             if (selectedFilterValue === "true") {
                 buttonXStatus = true;
             }
-            console.log(buttonXStatus);
 
             this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
         },
         setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
-            console.log('huhu')
-            console.log(section.classList)
             if (setVisibility) {
                 section.classList.remove('hidden')
-                console.log(section.classList)
             } else {
                 section.classList.add('hidden');
                 section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
@@ -89,8 +84,8 @@
                         <div class="form-group">
                             <p> Land: </p>
                             <select name="countrycode" class="form-control" id="countrycode">
-                                <option value="DE">Deutschland</option>
-                                <option value="AT">Österreich</option>
+                                <option {% if countrycode == 'DE' %}selected="selected"{% endif %} value="DE">Deutschland</option>
+                                <option {% if countrycode == 'AT' %}selected="selected"{% endif %} value="AT">Österreich</option>
                             </select>
                         </div>
                     </div>
@@ -200,13 +195,13 @@
 
     var send = function () {
         var li = [];
-        $('tr.selected').each(function () {
+        $('tbody tr.selected').each(function () {
             li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("Bitte wählen wie mindestens einen Studierenden zum Kontaktieren aus!")
+            alert({% blocktrans %}"Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!"{% endblocktrans %})
         }
     };
 
@@ -218,7 +213,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("Leider gibt es keine Studierenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden.")
+            alert({% blocktrans %}"Leider gibt es keine Helfenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden."{% endblocktrans %})
         }
     };
 

@@ -156,9 +156,6 @@ def student_list_view(request, countrycode, plz, distance):
 
     enable_mail_send = (f.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
-    # todo edit helper
-
-
     context = {
         'plz': plz,
         'countrycode': countrycode,
@@ -172,7 +169,6 @@ def student_list_view(request, countrycode, plz, distance):
         'enable_mail': enable_mail_send,
         'max': MAX_EMAIL_BATCH_PER_HOSPITAL
     }
-
 
     return render(request, 'student_list_view.html', context)
 
