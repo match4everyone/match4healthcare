@@ -123,7 +123,7 @@ window.addEventListener('load', function() {
        fillOpcity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. <a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>Detailansicht</a>')
+   .bindPopup('In {{ location.ort }}, {{ location.countrycode }} (PLZ {{location.plz }}) gibt es {{ location.count }} Studierende die helfen möchten. {% if user.is_authenticated and user.is_student %}{% else %}<a href=/ineedstudent/students/{{ location.countrycode }}/{{ location.plz }}/0>{% blocktrans %}Detailansicht für Kliniken{% endblocktrans %}</a>{% endif %}')
    .addTo(mymap);
 </script>
 {% endfor %}
