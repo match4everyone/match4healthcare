@@ -1,25 +1,36 @@
 import django_filters as filters
-from .models import Student, BEZAHLUNG_CHOICES, MEDSTUD_CHOICES, AUSBILDUNGS_TYPEN_COLUMNS, ARZT_CHOICES
+from .models import Student, BEZAHLUNG_CHOICES, MEDSTUD_CHOICES, AUSBILDUNGS_TYPEN_COLUMNS
 import django.forms as forms
 
 class StudentJobRequirementsFilter(filters.FilterSet):
 
-    ausbildung_typ_arzt_typ = filters.MultipleChoiceFilter('ausbildung_typ_arzt_typ',choices=ARZT_CHOICES,widget=forms.CheckboxSelectMultiple)
+    ausbildung_typ_medstud_abschnitt_gt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt',lookup_expr='gte')
+    ausbildung_typ_medstud_abschnitt_lt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt', lookup_expr='lte')
 
+    ausbildung_typ_mfa_abschnitt_gt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mfa_abschnitt_lt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_medstud_abschnitt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mfa_abschnitt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mta_abschnitt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mtal_abschnitt = filters.NumberFilter('ausbildung_typ_mtal_abschnitt',lookup_expr='gte')
-    ausbildung_typ_notfallsani_abschnitt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='gte')
-    ausbildung_typ_physio_abschnitt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='gte')
-    ausbildung_typ_pflege_abschnitt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='gte')
-    ausbildung_typ_zahni_abschnitt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mta_abschnitt_gt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mta_abschnitt_lt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_mtal_abschnitt_gt = filters.NumberFilter('ausbildung_typ_mtal_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mtal_abschnitt_lt = filters.NumberFilter('ausbildung_typ_mtal_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_notfallsani_abschnitt_gt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='gte')
+    ausbildung_typ_notfallsani_abschnitt_lt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_physio_abschnitt_gt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='gte')
+    ausbildung_typ_physio_abschnitt_lt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_pflege_abschnitt_gt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='gte')
+    ausbildung_typ_pflege_abschnitt_lt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_zahni_abschnitt_gt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='gte')
+    ausbildung_typ_zahni_abschnitt_lt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='lte')
 
     class Meta:
         model = Student
         fields = AUSBILDUNGS_TYPEN_COLUMNS.copy()
-        fields.append('ausbildung_typ_arzt_typ')
 
         for f in [
             'ausbildung_typ_medstud_famulaturen_anaesthesie',

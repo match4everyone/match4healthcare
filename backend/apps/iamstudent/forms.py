@@ -100,6 +100,18 @@ def button_group(field):
     return field
 
 
+# im so sorry for this... code..
+def button_group_filter(field):
+    if 'empty' in field:
+        return Column()
+    if field in fields_for_button_group:
+        if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+            return Field(ButtonGroup(field + '_gt'),
+            ButtonGroup(field + '_lt'))
+        else:
+            return ButtonGroup(field)
+    return field
+
 def ButtonGroup(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
                         template='input_buttongroup-any_indicator.html')
@@ -298,7 +310,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
         self.helper.form_action = 'submit_survey'
         self.helper.form_style = 'inline'
-        for k in AUSBILDUNGS_DETAIL_COLUMNS:
+        for k in self.fields.keys():
             self.fields[k].required = False
 
         for k in AUSBILDUNGS_TYPEN.keys():
@@ -316,7 +328,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                 Div(
                     HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
-                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                        Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
@@ -326,6 +338,5 @@ class PersistenStudentFilterForm(forms.ModelForm):
             ]
         )
         self.helper.form_tag = False
-        #self.helper.add_input(Submit('submit', _('Aktualisieren')))
 
 
