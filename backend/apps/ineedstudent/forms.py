@@ -41,13 +41,6 @@ class HospitalFormO(ModelForm):
                 'sonstige_infos'
         )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
-
-
 
 
 class HospitalForm(HospitalFormO):
@@ -76,11 +69,16 @@ class HospitalFormEditProfile(HospitalFormO):
                 'sonstige_infos'
         )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
+
+def check_unique_email(value):
+    print("Checking unique email")
+    if User.objects.filter(email=value).exists():
+        raise ValidationError(_("Diese Email ist bereits vergeben"))
+    return value
+
 
 class HospitalFormInfoSignUp(HospitalFormO):
+    email = forms.EmailField(validators=[check_unique_email])
+
+class HospitalFormInfoCreate(HospitalFormO):
     email = forms.EmailField()

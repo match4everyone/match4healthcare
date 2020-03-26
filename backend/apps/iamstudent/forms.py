@@ -262,11 +262,6 @@ class StudentFormEditProfile(StudentForm):
                         Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
                   )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
 
 
 class EmailToSendForm(forms.ModelForm):
@@ -327,5 +322,3 @@ class PersistenStudentFilterForm(forms.ModelForm):
         )
         self.helper.form_tag = False
         #self.helper.add_input(Submit('submit', _('Aktualisieren')))
-
-
