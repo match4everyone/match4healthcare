@@ -76,12 +76,12 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item {% if "profile" in request.path %}active{% endif %}">
-                        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Mein
+                        <a class="nav-link" href="/accounts/profile_redirect">{% blocktrans %}Mein
                             Profil{% endblocktrans %}</a>
                     </li>
                     {% else %}
                     <li class="nav-item {% if "login" in request.path %}active{% endif %}">
-                        <a class="nav-link" href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
+                        <a class="nav-link" href="/accounts/profile_redirect">{% blocktrans %}Login{% endblocktrans %}</a>
                     </li>
                     {% endif %}
 
@@ -103,7 +103,7 @@
                     target="_blank">#WirVsVirus Hackathons</a>. <a
                     href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a>
                 {% blocktrans %}und{% endblocktrans %} <a
-                    href="/impressum">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
+                    href="/dataprotection">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
         </div>
 
     </footer>

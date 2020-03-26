@@ -115,6 +115,24 @@ def register_hospital_in_db(request, m):
 
 from django.contrib import messages
 
+
+@login_required
+def profile_redirect(request):
+    user = request.user
+
+    if user.is_student:
+        return HttpResponseRedirect('profile_student')
+
+    elif user.is_hospital:
+        return HttpResponseRedirect('profile_hospital')
+
+    elif user.is_staff:
+        return HttpResponseRedirect('approve_hospitals')
+
+    else:
+        #TODO: throw 404
+        HttpResponse('Something wrong in database')
+
 @login_required
 def login_redirect(request):
     user = request.user

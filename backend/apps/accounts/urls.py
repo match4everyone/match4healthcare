@@ -21,6 +21,7 @@ urlpatterns = [
       ) , name='password_reset_confirm_'),
     path('login/',auth_views.LoginView.as_view(template_name='registration/login.html'),name='login'),
     path('', include('django.contrib.auth.urls')),
+    path('profile_redirect', views.profile_redirect, name='profile_redirect'),
     path('login_redirect', views.login_redirect, name='login_redirect'),
     path('delete_me', views.delete_me, name='delete_me'),
     path('signup_student', views.student_signup, name='student_signup'),
