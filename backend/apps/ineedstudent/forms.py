@@ -40,11 +40,6 @@ class HospitalFormO(ModelForm):
                 'sonstige_infos'
         )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
 
 
 
