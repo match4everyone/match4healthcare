@@ -229,13 +229,12 @@ AUSBILDUNGS_TYPEN = {
     'MEDSTUD':
         {
             'abschnitt': (models.IntegerField, {'choices':MEDSTUD_CHOICES, 'default':KEINE_ANGABE,'null':True}),
-            'empty_1': None,
+
             'famulaturen_anaesthesie': (models.BooleanField,{'default':False}),
             'famulaturen_chirurgie': (models.BooleanField,{'default':False}),
             'famulaturen_innere': (models.BooleanField,{'default':False}),
             'famulaturen_intensiv': (models.BooleanField,{'default':False}),
             'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
-            'empty_2': None,
             'empty_3': None,
             'anerkennung_noetig':(models.BooleanField,{'default':False})
         },

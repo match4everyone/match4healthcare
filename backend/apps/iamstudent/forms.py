@@ -210,12 +210,21 @@ class StudentForm(forms.ModelForm):
             ),
             *[
                 Div(
-                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                    ,
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group', css_id=f.replace('_', '-'))
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                            ausbildungstyp.lower(), f.lower())
+                    ])
+                    ,
                     Row(*[
                         Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
-                        for f in felder.keys()
-                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())
+                    ])
+                    ,css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
                     , css_class='hidden ausbildung-addon'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
@@ -254,7 +263,6 @@ class EmailForm(forms.Form):
 class StudentFormEditProfile(StudentForm):
     def __init__(self, *args, **kwargs):
         super(StudentFormEditProfile, self).__init__(*args, **kwargs)
-
         self.helper.layout = Layout(
             HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
@@ -263,6 +271,7 @@ class StudentFormEditProfile(StudentForm):
                 css_class='form-row'
             ),
             Row(
+                Column('email', css_class='form-group col-md-6 mb-0'),
                 Column('phone_number', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
@@ -313,12 +322,22 @@ class StudentFormEditProfile(StudentForm):
             ),
             *[
                 Div(
-                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                    ,
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group', css_id=f.replace('_', '-'))
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                            ausbildungstyp.lower(), f.lower())
+                    ])
+                    ,
                     Row(*[
                         Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
-                        for f in felder.keys()
-                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                        ausbildungstyp.lower(), f.lower())
+                    ])
+                    , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
                     , css_class='hidden ausbildung-addon'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
