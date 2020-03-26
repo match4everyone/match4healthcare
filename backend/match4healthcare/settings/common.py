@@ -70,17 +70,29 @@ LOGIN_REDIRECT_URL = '/accounts/login_redirect'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-NOREPLY_MAIL = 'noreply@medisvs.spahr.uberspace.de'
+NOREPLY_MAIL = 'noreply@match4healthcare.de'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
 MAX_EMAIL_BATCH_PER_HOSPITAL = 200
 
-EMAIL_HOST = 'spahr.uberspace.de'
+# EMAIL_HOST = 'spahr.uberspace.de'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
+# EMAIL_HOST_PASSWORD = 'jonathan'
+# EMAIL_USE_TLS = False
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+# Normal SMTP
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
-EMAIL_HOST_PASSWORD = 'jonathan'
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = True
+
+# Using the API
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend" #
 """
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
