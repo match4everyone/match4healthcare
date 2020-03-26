@@ -100,8 +100,8 @@ def ButtonGroup(field):
 
 def ButtonGroupBool(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
-                        template='input_buttongroup-any_indicator.html')
-                        #template='input_buttongroup-egalmuss_indicator.html')
+                        #template='input_buttongroup-any_indicator.html')
+                        template='input_buttongroup-egalmuss_indicator.html')
 
 
 class StudentForm(forms.ModelForm):
@@ -269,9 +269,9 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
     class Meta:
         model = PersistenStudentFilterModel
-        initial = {
-            'ausbildung_typ_mfa': 'unkown'
-        }
+        #initial = {
+        #    'ausbildung_typ_mfa': 'unkown'
+        #}
         labels = form_labels
         exclude = ['hospital']
 
@@ -306,7 +306,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden'
+                    , css_class='hidden ausbildung-addon'
                 )
                 for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
             ]

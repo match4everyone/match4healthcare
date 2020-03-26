@@ -16,18 +16,23 @@
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
-            let buttonStatus = false;
+            console.log(selectedFilterValue);
+            let buttonXStatus = false;
             if (selectedFilterValue === "true") {
-                buttonStatus = true;
+                buttonXStatus = true;
             }
+            console.log(buttonXStatus);
 
-            this.setQualificationSectionVisibility(qualificationId, buttonStatus)
+            this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
         },
         setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
+            console.log('huhu')
+            console.log(section.classList)
             if (setVisibility) {
                 section.classList.remove('hidden')
+                console.log(section.classList)
             } else {
                 section.classList.add('hidden');
                 section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
@@ -49,7 +54,7 @@
             })
 
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
-            signUpHelper.handleQualificationInput({srcElement: element});
+            // signUpHelper.handleQualificationInput({srcElement: element});
         })
 
     });
