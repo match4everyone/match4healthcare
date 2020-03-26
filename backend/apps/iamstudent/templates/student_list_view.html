@@ -65,37 +65,38 @@
 {% block content %}
 <hr>
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
-        </div>
-        <form method="get">
-        <div class="card-body">
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <p> Land: </p>
-                        <select name="countrycode" class="form-control" id="countrycode">
-                            <option value="DE">Deutschland</option>
-                            <option value="AT">Österreich</option>
-                        </select>
+
+    <form method="get">
+        <div class="card">
+            <div class="card-header">
+                An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Land: </p>
+                            <select name="countrycode" class="form-control" id="countrycode">
+                                <option value="DE">Deutschland</option>
+                                <option value="AT">Österreich</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <p> Postleitzahl: </p>
-                        <input name="plz" id="plz" value="{{ plz }}" class="form-control">
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Postleitzahl: </p>
+                            <input name="plz" id="plz" value="{{ plz }}" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <p> Und im Umkreis von (km): </p>
-                        <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Und im Umkreis von (km): </p>
+                            <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header">
                 Was für eine Ausbildung sollen die Helfer haben?
@@ -119,6 +120,7 @@
         </div>
         <input type="submit"/>
     </form>
+
     <hr>
     <div class="card">
         <div class="card-header">
@@ -127,47 +129,69 @@
             gefunden, die zu deiner Suche passen.
         </div>
         <div class="card-body">
-            {# Für Table view behalten x render_table table x #}
-            <p>
-                <button class="btn blue text-white btn-lg" onclick="sendall()">
-                    Email an {{n}} Helfer schicken &raquo;
-                </button>
-                {% comment %}
-                Für Table View behalten
-                <button class="btn blue text-white btn-lg" onclick="send()">
-                    Email an AUSGEWÄHLTE Studierende schicken &raquo;
-                </button>
-                {% endcomment %}
-            </p>
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
+            <div class="table-responsive">
+            {% render_table table %}
+            </div>
+            {% if enable_mail %}
+            <button class="btn blue text-white btn-lg" onclick="sendall()">
+                Email an {{n}} Helfer schicken &raquo;
+            </button>
+            <button class="btn blue text-white btn-lg" onclick="send()">
+                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+            </button>
+            {% else %}
+            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
+                Email an {{n}} Helfer schicken &raquo;
+            </button>
+            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
+                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+            </button>
+            {% endif %}
+
         </div>
 
     </div>
 </div>
 <hr>
 <script>
+    var alertMaxMails = function () {
+        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer aus, indem du weitere Filter auswählst.');
+    };
+
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+    })
+
+    var trBoldBlue = $("table");
+
+    $(trBoldBlue).on("click", "tr", function () {
+        $(this).toggleClass("selected");
+        $(this).toggleClass("table-primary");
+
+    });
 
     var send = function () {
         var li = [];
-        $('.table-selector').each(function () {
-            if ($(this).val()) {
-                li.push($(this).attr("id"));
-            }
-
-
+        $('tr.selected').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("Bitte wählen Sie mindestens einen Studierenden zum Kontaktieren aus!")
+            alert("Bitte wählen wie mindestens einen Studierenden zum Kontaktieren aus!")
         }
     };
 
     var sendall = function () {
         var li = [];
-        $('.table-selector').each(function () {
-
-            li.push($(this).attr("id"));
-
+        $('tbody tr').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
