@@ -18,7 +18,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
     class Meta:
         model = Student
-        fields = AUSBILDUNGS_TYPEN_COLUMNS
+        fields = AUSBILDUNGS_TYPEN_COLUMNS.copy()
         fields.append('ausbildung_typ_arzt_typ')
 
         for f in [
