@@ -16,23 +16,18 @@
             let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
             let qualificationId = containingDiv.id.split("-").slice(-1)
             let selectedFilterValue = sourceElement.querySelector("input").value
-            console.log(selectedFilterValue);
             let buttonXStatus = false;
             if (selectedFilterValue === "true") {
                 buttonXStatus = true;
             }
-            console.log(buttonXStatus);
 
             this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
         },
         setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
             if (!section) return;
-            console.log('huhu')
-            console.log(section.classList)
             if (setVisibility) {
                 section.classList.remove('hidden')
-                console.log(section.classList)
             } else {
                 section.classList.add('hidden');
                 section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {

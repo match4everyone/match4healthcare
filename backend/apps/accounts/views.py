@@ -230,3 +230,8 @@ def delete_me(request):
     logout(request)
     user.delete()
     return render(request,'deleted_user.html')
+
+@login_required
+def delete_me_ask(request):
+    user = request.user
+    return render(request,'deleted_user_ask.html')
