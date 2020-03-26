@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import format_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
@@ -74,7 +75,8 @@ form_labels = {
     'wunsch_ort_pflege': _('Pflegeeinrichtungen'),
     'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
     'wunsch_ort_labor': _('Labor'),
-    'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/" target="_blank">Apothekenhelfen</a>)</em>'),
+    'unterkunft_gewuenscht': _('Ich brauche eine Unterkunft'),
+    'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/">Apothekenhelfen</a>)</em>'),
     'wunsch_ort_ueberall': _('Keiner, ich helfe dort, wo ich kann'),
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
@@ -90,6 +92,14 @@ fields_for_button_group = [
                            'ausbildung_typ_zahni_abschnitt'
 ]
 
+mindest = _('mindestens')
+maxim = _('maximal')
+for field in fields_for_button_group:
+    if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+        f = str(field)
+        form_labels[f + '_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
+
 
 def button_group(field):
     if 'empty' in field:
@@ -98,6 +108,18 @@ def button_group(field):
         return ButtonGroup(field)
     return field
 
+
+# im so sorry for this... code..
+def button_group_filter(field):
+    if 'empty' in field:
+        return Column()
+    if field in fields_for_button_group:
+        if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+            return Field(ButtonGroup(field + '_gt'),
+            ButtonGroup(field + '_lt'))
+        else:
+            return ButtonGroup(field)
+    return field
 
 def ButtonGroup(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
@@ -293,7 +315,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
         self.helper.form_action = 'submit_survey'
         self.helper.form_style = 'inline'
-        for k in AUSBILDUNGS_DETAIL_COLUMNS:
+        for k in self.fields.keys():
             self.fields[k].required = False
 
         for k in AUSBILDUNGS_TYPEN.keys():
@@ -311,7 +333,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                 Div(
                     HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
-                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                        Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
@@ -321,4 +343,3 @@ class PersistenStudentFilterForm(forms.ModelForm):
             ]
         )
         self.helper.form_tag = False
-        #self.helper.add_input(Submit('submit', _('Aktualisieren')))
