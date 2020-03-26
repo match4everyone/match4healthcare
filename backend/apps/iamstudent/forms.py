@@ -184,10 +184,8 @@ class StudentForm(forms.ModelForm):
             HTML("</p>"),
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
-            HTML("</p>"),
-            HTML('<p class="text-center">'),
-            Submit('submit', 'Registriere mich', css_class='btn blue text-white btn-md'),
-            HTML("</p>")
+            HTML("</p>"),            
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),          
         )
 
         logging.debug(self.helper.layout)
@@ -238,10 +236,8 @@ class StudentFormEditProfile(StudentForm):
             ),
             HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
             # TODO: alle neuen felder hier auch hinzufügen!!!!!
-            HTML('<p class="text-center">'),
-            Submit('submit', _('Eintrag updaten')),
-            HTML("</p>")
-        )
+                        Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
+                  )
 
     def clean_email(self):
         email = self.cleaned_data['email']
