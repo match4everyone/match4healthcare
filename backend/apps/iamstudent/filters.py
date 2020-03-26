@@ -47,11 +47,22 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         ]:
             fields.append(f)
 
+class NamedEmptyFilterSet(filters.FilterSet):
+
+    def __init__(self, *args, **kwargs):
+      super(NamedEmptyFilterSet, self).__init__(*args, **kwargs)
+
+      for name, field in self.filters.items():
+        if isinstance(field, filters.ChoiceFilter):
+              field.extra['choices'] =[(k,v) for k,v in list(field.extra['choices']) if k != '']
+
+
+
 
 class StudentAvailabilityFilter(filters.FilterSet):
-    braucht_bezahlung = filters.MultipleChoiceFilter(field_name='braucht_bezahlung',lookup_expr='gte',choices=BEZAHLUNG_CHOICES_Filter,label=_('Kann eine Vergütung angeboten werden?'),widget=forms.RadioSelect)
+    braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung',lookup_expr='gte',choices=BEZAHLUNG_CHOICES_Filter,label=_('Kann eine Vergütung angeboten werden?'),widget=forms.RadioSelect)
     availability_start = filters.DateFilter(field_name='availability_start',lookup_expr='lte',label=_('Die Helfenden sollten verfügbar sein ab '))
-    unterkunft_gewuenscht = filters.MultipleChoiceFilter(field_name='unterkunft_gewuenscht',label=_('Kann eine Unterkunft angeboten werden?'),choices=[('unkown',_('wissen wir nicht')),('true',_('ja')),('false',_('nein'))],widget=forms.RadioSelect)
+    unterkunft_gewuenscht = filters.ChoiceFilter(field_name='unterkunft_gewuenscht',label=_('Kann eine Unterkunft angeboten werden?'),choices=[('unkown',_('wissen wir nicht')),('true',_('ja')),('false',_('nein'))],widget=forms.RadioSelect)
 
     class Meta:
         model = Student
