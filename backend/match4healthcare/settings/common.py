@@ -122,8 +122,8 @@ USE_TZ = True
 # Translations
 # Provide a lists of languages which your site supports.
 LANGUAGES = (
-    ('en', _('English')),
-    ('de', _('German')),
+    ('en', _('Englisch')),
+    ('de', _('Deutsch')),
 )
 # Set the default language for your site.
 LANGUAGE_CODE = 'de'
