@@ -47,6 +47,7 @@
             element.addEventListener("click", (event) => {
                 signUpHelper.handleQualificationInput(event)
             })
+            // click does not listen for changes that already occured.
 
         })
 
@@ -63,7 +64,15 @@
 {% block content %}
 <hr>
 <div class="container">
-
+    <h3>Breits registrierte Helfer durchsuchen und kontaktieren.</h3>
+    <p>
+        Ihr braucht zum Beispiel examinierte Pflegekräfte?<br>
+        Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
+        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon <mark>berufstätig</mark> sein muss.
+        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf <mark>ja</mark>.
+        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und ihnen eine
+        <mark>Email senden</mark>
+    </p>
     <form method="get">
         <div class="card">
             <div class="card-header">
@@ -97,7 +106,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                {% blocktrans %}Was für eine Ausbildung sollen die Helfer*innen haben?{% endblocktrans %}
+                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}
             </div>
             <div class="card-body">
 
@@ -107,43 +116,53 @@
         </div>
         <div class="card">
             <div class="card-header">
-                {% blocktrans %}Ab wann sollen die Helfer*innen verfügbar sein?{% endblocktrans %}
+                {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}
             </div>
             <div class="card-body">
 
-                {{ filter_availability.form.as_p }}
+                {% crispy filter_availability.form filter_availability.helper %}<hr>
+<p class="text-right">
+            <input type="submit" class="btn btn-primary" value="Filter Aktualisieren">
+        </p>
 
             </div>
 
         </div>
-        <input type="submit"/>
+        <br>
+
+
     </form>
-
-    <hr>
-    <div class="card">
+        <div class="card border-danger">
         <div class="card-header">
-            <h4>{% blocktrans %}Wir haben <mark>{{n}} Helfer*innen</mark> gefunden, die zu deiner Suche passen.{% endblocktrans %}</h4>
-        </div>
-        <div class="card-body">
-            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
-            <div class="table-responsive">
-            {% render_table table %}
-            </div>
-            {% if enable_mail %}
-            <button class="btn blue text-white btn-lg" onclick="sendall()">
-                {% blocktrans %}Email an {{n}} Helfer*innen schicken{% endblocktrans %} &raquo;
-            </button>
-            <button class="btn blue text-white btn-lg" onclick="send()">
-                {% blocktrans %}Email an <mark>ausgewählte</mark>> Helfer*innen schicken{% endblocktrans %} &raquo;
+                <p class="text-center">
+    {% if enable_mail %}
+           {% blocktrans %}Wir haben <mark>{{n}} Helfer*innen</mark> gefunden, die zu deiner Suche passen.{% endblocktrans %}
+            <button class="btn btn-dark" onclick="sendall()">
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% else %}
-            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                {% blocktrans %}Email an {{n}} Helfer*innen schicken{% endblocktrans %} &raquo;
-            </button>
-            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
-                {% blocktrans %}Email an <mark>ausgewählte</mark>> Helfer*innen schicken{% endblocktrans %} &raquo;
+            <button class="btn btn-dark" onclick="alertMaxMails()">
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% endif %}
+        </p>
+            </div>
+        <div class="card-body">
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
+            <div class="table-responsive">
+                {% render_table table %}
+            </div>
+            <p class="text-right">
+            {% if enable_mail %}
+            <button class="btn btn-dark" onclick="send()">
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+            </button>
+            {% else %}
+            <button class="btn btn-dark" onclick="alertMaxMails()">
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+            </button>
+            {% endif %}
+            </p>
 
         </div>
 

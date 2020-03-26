@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import format_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout,Field, Row, Column, Div, HTML
 from crispy_forms.bootstrap import InlineRadios
@@ -74,7 +75,8 @@ form_labels = {
     'wunsch_ort_pflege': _('Pflegeeinrichtungen'),
     'wunsch_ort_rettungsdienst': _('Rettungsdienst'),
     'wunsch_ort_labor': _('Labor'),
-    'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/" target="_blank">Apothekenhelfen</a>)</em>'),
+    'unterkunft_gewuenscht': _('Ich brauche eine Unterkunft'),
+    'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/">Apothekenhelfen</a>)</em>'),
     'wunsch_ort_ueberall': _('Keiner, ich helfe dort, wo ich kann'),
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
@@ -90,6 +92,14 @@ fields_for_button_group = [
                            'ausbildung_typ_zahni_abschnitt'
 ]
 
+mindest = _('mindestens')
+maxim = _('maximal')
+for field in fields_for_button_group:
+    if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+        f = str(field)
+        form_labels[f + '_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
+
 
 def button_group(field):
     if 'empty' in field:
@@ -98,6 +108,18 @@ def button_group(field):
         return ButtonGroup(field)
     return field
 
+
+# im so sorry for this... code..
+def button_group_filter(field):
+    if 'empty' in field:
+        return Column()
+    if field in fields_for_button_group:
+        if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
+            return Field(ButtonGroup(field + '_gt'),
+            ButtonGroup(field + '_lt'))
+        else:
+            return ButtonGroup(field)
+    return field
 
 def ButtonGroup(field):
     return RadioButtons(field, option_label_class="btn btn-sm btn-light",
@@ -232,35 +254,89 @@ class EmailForm(forms.Form):
 class StudentFormEditProfile(StudentForm):
     def __init__(self, *args, **kwargs):
         super(StudentFormEditProfile, self).__init__(*args, **kwargs)
+
         self.helper.layout = Layout(
+            HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
                 Column('name_first', css_class='form-group col-md-6 mb-0'),
                 Column('name_last', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
-                Column('plz', css_class='form-group col-md-6 mb-0'),
-                Column('countrycode', css_class='form-group col-md-6 mb-0'),
+                Column('phone_number', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(
+                _("Über deinen Einsatz"))),
+            Row(
+                Column('plz', css_class='form-group col-md-4 mb-0'),
+                Column('countrycode', css_class='form-group col-md-4 mb-0'),
+                Column('umkreis', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(
                 Column('availability_start', css_class='form-group col-md-6 mb-0'),
-                #Column('semester', css_class='form-group col-md-4 mb-0'),
-                #Column('immatrikuliert', css_class='form-group col-md-2 mb-0'),
                 css_class='form-row'
             ),
+
+            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
-                Column('phone_number', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_krankenhaus', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_pflege', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_rettungsdienst', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_labor', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_apotheke', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_ueberall', css_class='form-group col-md-6 mb-0'),
+
                 css_class='form-row'
             ),
             Row(
                 Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
+            ), Row(
+                Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ), Row(
+                Column('unterkunft_gewuenscht', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
             ),
-            HTML("<h2>{}</h2>".format(_("Berufsausbildung"))),
-            # TODO: alle neuen felder hier auch hinzufügen!!!!!
-                        Submit('submit', _('Daten aktualisieren',), css_class='btn blue text-white btn-md'),
-                  )
+            Div(
+                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(
+                    _("Berufsausbildung"))),
+                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                      AUSBILDUNGS_TYPEN.keys()]),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            *[
+                Div(
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                        for f in felder.keys()
+                    ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                    , css_class='hidden ausbildung-addon'
+                )
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
+            ],
+            'sonstige_qualifikationen'
+            ,
+            HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
+            HTML('<p class="text-left">'),
+            'datenschutz_zugestimmt',
+            HTML("</p>"),
+            HTML('<p class="text-left">'),
+            'einwilligung_datenweitergabe',
+            HTML("</p>"),
+            HTML('<div class="registration_disclaimer">{}</div>'.format(_(
+                'Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
+        )
+
 
 
 
@@ -293,7 +369,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
 
         self.helper.form_action = 'submit_survey'
         self.helper.form_style = 'inline'
-        for k in AUSBILDUNGS_DETAIL_COLUMNS:
+        for k in self.fields.keys():
             self.fields[k].required = False
 
         for k in AUSBILDUNGS_TYPEN.keys():
@@ -311,7 +387,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
                 Div(
                     HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
                     Row(*[
-                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                        Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
                         for f in felder.keys()
                     ]), css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
@@ -321,4 +397,3 @@ class PersistenStudentFilterForm(forms.ModelForm):
             ]
         )
         self.helper.form_tag = False
-        #self.helper.add_input(Submit('submit', _('Aktualisieren')))
