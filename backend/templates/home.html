@@ -5,6 +5,8 @@
 Home
 {% endblock %}
 
+{% block header %}
+   
 <meta name="description" content="Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je.">
 
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -31,9 +33,6 @@ Home
 <meta name="twitter:description" content="Der Glaube daran Mitmenschen in Not helfen können, die Liebe zum Fach Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je.">
 <meta name="twitter:title" content="match4healthcare - Wir vernetzen Helfende mit Hilfesuchenden.">
 <meta name="twitter:image" content="{{ protocol }}://{{ domain }}{% static 'img/facebook-share.jpg' %}">
-
-
-{% block content %}
 
 <style>
 	body {
@@ -103,7 +102,9 @@ Home
 		
 		
 </style>
+ {% endblock %}
 
+{% block content %}
 <main role="main">
   <div class="home-title">
     <div class="container">
