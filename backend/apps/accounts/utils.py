@@ -32,4 +32,4 @@ def send_password_set_email(email, host, subject_template, template='registratio
         )
         logger.debug("Sent!")
     else:
-        logger.warn("Email to " + str(emaiL) + " not sent because form is invalid")
+        logger.warn("Email to " + str(email) + " not sent because form is invalid")
