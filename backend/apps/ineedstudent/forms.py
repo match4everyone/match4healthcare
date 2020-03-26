@@ -70,7 +70,7 @@ class HospitalFormEditProfile(HospitalFormO):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
