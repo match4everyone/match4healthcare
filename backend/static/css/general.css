@@ -197,6 +197,7 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 }
 
 .form-group label { margin-bottom: 0.2rem;}
+.form-group {margin-bottom: .5rem;}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) { 
 	
@@ -234,12 +235,14 @@ Student Form
   max-height:500px;
   transition: max-height 600ms 0ms, opacity 600ms 0ms;
   overflow: hidden;
+	margin-top:5px;
 }
 
 
 .ausbildung-addon.hidden {
   opacity: 0;
   max-height: 0px;
+	margin-top:0px;
 }
 
 
@@ -249,3 +252,33 @@ Student Form
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.form-heading {
+font-weight: 600 !important;
+font-size: 1.4rem;
+margin-bottom: 15px; }
+textarea.form-control {font-weight:300;}
+
+.invalid-feedback { margin-bottom: .5rem; color: #ed0a71; }
+
+.custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid { border-color: #ed0a71; }
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(0, 9, 67, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 20, 146, 0.4);
+  outline: 0 none;
+}
