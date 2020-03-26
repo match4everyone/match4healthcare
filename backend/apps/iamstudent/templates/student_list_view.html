@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script type="text/javascript">
+
+    var signUpHelper = {
+        handleQualificationInput: function handleQualificationInput(event) {
+            let sourceElement = event.srcElement;
+            let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
+            let qualificationId = containingDiv.id.split("-").slice(-1)
+            let selectedFilterValue = sourceElement.querySelector("input").value
+            console.log(selectedFilterValue);
+            let buttonXStatus = false;
+            if (selectedFilterValue === "true") {
+                buttonXStatus = true;
+            }
+            console.log(buttonXStatus);
+
+            this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
+        },
+        setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
+            let section = document.getElementById(`div-ausbildung-${id}`)
+            if (!section) return;
+            console.log('huhu')
+            console.log(section.classList)
+            if (setVisibility) {
+                section.classList.remove('hidden')
+                console.log(section.classList)
+            } else {
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+                    checkbox.checked = false
+                })
+                section.querySelectorAll("input[type='text'], select").forEach((textbox) => {
+                    textbox.value = ''
+                })
+            }
+
+        },
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
+        qualifikationSelectors.forEach(element => {
+            element.addEventListener("click", (event) => {
+                signUpHelper.handleQualificationInput(event)
+            })
+
+        })
+
+    });
+
+</script>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+<hr>
+<div class="container">
+
+    <form method="get">
+        <div class="card">
+            <div class="card-header">
+                An welchem Ort und in Welchem Abstand sucht Ihr Helfer?
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Land: </p>
+                            <select name="countrycode" class="form-control" id="countrycode">
+                                <option value="DE">Deutschland</option>
+                                <option value="AT">Österreich</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Postleitzahl: </p>
+                            <input name="plz" id="plz" value="{{ plz }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Und im Umkreis von (km): </p>
+                            <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Was für eine Ausbildung sollen die Helfer haben?
+            </div>
+            <div class="card-body">
+
+                {% crispy filter_jobrequireform filter_jobrequireform.helper %}
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Ab wann sollen die Helfer verfügbar sein?
+            </div>
+            <div class="card-body">
+
+                {{ filter_availability.form.as_p }}
+
+            </div>
+
+        </div>
+        <input type="submit"/>
+    </form>
+
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            Wir haben
+            <mark>{{n}} Helfer</mark>
+            gefunden, die zu deiner Suche passen.
+        </div>
+        <div class="card-body">
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um Helfer auszuwählen, die du kontaktieren möchtest.{% endblocktrans %}</p>
+            <div class="table-responsive">
+            {% render_table table %}
+            </div>
+            {% if enable_mail %}
+            <button class="btn blue text-white btn-lg" onclick="sendall()">
+                Email an {{n}} Helfer schicken &raquo;
+            </button>
+            <button class="btn blue text-white btn-lg" onclick="send()">
+                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+            </button>
+            {% else %}
+            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
+                Email an {{n}} Helfer schicken &raquo;
+            </button>
+            <button class="btn blue text-white btn-lg" onclick="alertMaxMails()">
+                Email an AUSGEWÄHLTE Studierende schicken &raquo;
+            </button>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>
+<hr>
+<script>
+    var alertMaxMails = function () {
+        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer aus, indem du weitere Filter auswählst.');
+    };
+
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+    })
+
+    var trBoldBlue = $("table");
+
+    $(trBoldBlue).on("click", "tr", function () {
+        $(this).toggleClass("selected");
+        $(this).toggleClass("table-primary");
+
+    });
+
+    var send = function () {
+        var li = [];
+        $('tr.selected').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("Bitte wählen wie mindestens einen Studierenden zum Kontaktieren aus!")
+        }
+    };
+
+    var sendall = function () {
+        var li = [];
+        $('tbody tr').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("Leider gibt es keine Studierenden, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Studis zu finden.")
+        }
+    };
+
+    var getrequest = function () {
+        //console.log($('#plz').attr("value"));
+        window.location = "/ineedstudent/students/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#id_availability_start").attr("type", "date");
+    });
+</script>
+{% endblock %}

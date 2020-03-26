@@ -19,45 +19,55 @@ def validate_checkbox(value):
     else:
         return value
 
+#class Bezahlung(models.IntegerChoices):
+UNENTGELTLICH = 1
+BEZAHLUNG = 4
+BEZAHLUNG_CHOICES = (
+    (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
+    (BEZAHLUNG, _('Ich benötige eine Vergütung')),
+)
+
+
+CHECKBOX_CHOICES = [
+            ('unknown', _('egal')),
+            ('true', _('muss')),
+            #('false', _('darf nicht')),
+        ]
+
+
+#class Verfuegbarkeiten(models.IntegerChoices):
+TEN = 1
+TWENTY = 2
+THIRTY = 3
+FOURTY = 4
+VERFUEGBARKEIT_CHOICES = (
+    (TEN, _('10h pro Woche')),
+    (TWENTY, _('20h pro Woche')),
+    (THIRTY, _('30h pro Woche')),
+    (FOURTY, _('40h pro Woche')),
+)
+
+class Ampel(models.IntegerChoices):
+    ROT = 1
+    GELB = 2
+    GRUEN = 3
+
+#class Umkreise(models.IntegerChoices):
+LESSTEN = 1
+LESSTWENTY = 2
+LESSFOURTY = 3
+MOREFOURTY = 4
+UMKREIS_CHOICES = (
+    (LESSTEN, _('<10 km')),
+    (LESSTWENTY, _('<20 km')),
+    (LESSFOURTY, _('<40 km')),
+        (MOREFOURTY, _('>40 km')),
+)
+
+
 
 class Student(models.Model):
 
-    #class Bezahlung(models.IntegerChoices):
-    UNENTGELTLICH = 1
-    BEZAHLUNG = 4
-    BEZAHLUNG_CHOICES = (
-        (UNENTGELTLICH, _('Ich freue mich über eine Vergütung, helfe aber auch ohne')),
-        (BEZAHLUNG, _('Ich benötige eine Vergütung')),
-    )
-
-    #class Verfuegbarkeiten(models.IntegerChoices):
-    TEN = 1
-    TWENTY = 2
-    THIRTY = 3
-    FOURTY = 4
-    VERFUEGBARKEIT_CHOICES = (
-        (TEN, _('10h pro Woche')),
-        (TWENTY, _('20h pro Woche')),
-        (THIRTY, _('30h pro Woche')),
-        (FOURTY, _('40h pro Woche')),
-    )
-
-    class Ampel(models.IntegerChoices):
-        ROT = 1
-        GELB = 2
-        GRUEN = 3
-
-    #class Umkreise(models.IntegerChoices):
-    LESSTEN = 1
-    LESSTWENTY = 2
-    LESSFOURTY = 3
-    MOREFOURTY = 4
-    UMKREIS_CHOICES = (
-        (LESSTEN, _('<10 km')),
-        (LESSTWENTY, _('<20 km')),
-        (LESSFOURTY, _('<40 km')),
-        (MOREFOURTY, _('>40 km')),
-    )
 
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -89,7 +99,7 @@ class Student(models.Model):
 
     plz = models.CharField(max_length=5, null=True)
     umkreis = models.IntegerField(choices=UMKREIS_CHOICES, null=True, blank=False)
-    availability_start = models.DateField(null=True)
+    availability_start = models.DateField(null=True,default=datetime.now)
 
     braucht_bezahlung = models.IntegerField(choices=BEZAHLUNG_CHOICES,
                                             default=UNENTGELTLICH)  # RADIO BUTTONS IM FORM!
@@ -98,6 +108,9 @@ class Student(models.Model):
 
     datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
+
+    sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
+    unterkunft_gewuenscht = models.BooleanField(default=False, validators=[validate_checkbox])
 
     # Metadata
     class Meta:
@@ -112,9 +125,28 @@ class Student(models.Model):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
+class PersistenStudentFilterModel(models.Model):
+
+    """
+    Persistent Filtering for the Student List
+    """
+
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
+
+    ausbildung_typ_medstud_famulaturen_anaesthesie = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_chirurgie =models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_innere = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_intensiv = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+    ausbildung_typ_medstud_famulaturen_notaufnahme = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+
+    ausbildung_typ_medstud_anerkennung_noetig = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
+
+
+
 
 """Add stufff to model"""
-wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor']
+wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor', 'apotheke','ueberall']
 wunschorte_prefix = 'wunsch_ort'
 for w in wunschorte:
     Student.add_to_class('%s_%s' % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False))
@@ -141,21 +173,27 @@ ARZT_CHOICES = (
 VORKLINIK = 1
 KLINIK = 2
 PJ = 3
+ASSIST = 4
+FACH = 5
 MEDSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
     (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
     (PJ, _('Praktisches Jahr')),
+    (ASSIST, _('Assistenzarzt')),
+    (FACH,_('Facharzt'))
 )
 
 
 #class ZahnstudAbschnitt(models.IntegerChoices):
 VORKLINIK = 1
 KLINIK = 2
+ABGESCHLOSSEN = 3
 ZAHNSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
     (VORKLINIK, _('Vorklinischer Teil')),
     (KLINIK, _('Klinischer Teil')),
+    (ABGESCHLOSSEN, _('Abgeschlossen'))
 )
 
 
@@ -184,24 +222,27 @@ NOTFALLSANI_CHOICES = (
     (JAHR_2, _('2. Jahr')),
     (BERUFSTAETIG, _('Berufstätig'))
 )
+ERFAHR = 1
+AUSBID_ABGESCHLOSSEN = 2
+BETREU_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (ERFAHR, _('Lediglich Erfahrungen')),
+    (AUSBID_ABGESCHLOSSEN, _('Abgeschlossene Ausbildung'))
+)
 
 
 AUSBILDUNGS_TYPEN = {
-    'ARZT':
-        {
-            'typ': models.IntegerField(choices=ARZT_CHOICES, default=0,null=True),
-            'empty': None,
-            'sonstige': models.CharField(max_length=50, blank=True, default='anderer Bereich')
-        },
     'MEDSTUD':
         {
             'abschnitt': models.IntegerField(choices=MEDSTUD_CHOICES, null=True, default=0),
             'empty': None,
-            'farmulaturen_anaesthesie': models.BooleanField(default=False),
+            'famulaturen_anaesthesie': models.BooleanField(default=False),
             'famulaturen_chirurgie': models.BooleanField(default=False),
             'famulaturen_innere': models.BooleanField(default=False),
             'famulaturen_intensiv': models.BooleanField(default=False),
             'famulaturen_notaufnahme': models.BooleanField(default=False),
+            'empty': None,
+            'empty': None,
             'anerkennung_noetig': models.BooleanField(default=False)
         },
     'MFA':
@@ -237,26 +278,42 @@ AUSBILDUNGS_TYPEN = {
         'abschnitt': models.IntegerField(choices=MFA_CHOICES, default=0, null=True),
     },
     'KINDERBETREUNG': {
-        'ausgebildet': models.BooleanField(default=False),
-        'vorerfahrung': models.BooleanField(default=False),
-    },
-    'SONSTIGE': {
-        'eintragen': models.CharField(max_length=200, blank=True, default='keine')
-    },
+        'ausgebildet_abschnitt': models.IntegerField(choices=BETREU_CHOICES,default=0,null=True)
+    }
 }
 
 AUSBILDUNGS_IDS = dict(zip(AUSBILDUNGS_TYPEN.keys(), range(len(AUSBILDUNGS_TYPEN))))
 
-columns = []
+AUSBILDUNGS_DETAIL_COLUMNS = []
 for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
-    columns.append('ausbildung_typ_%s' % ausbildungs_typ.lower())
-    Student.add_to_class('ausbildung_typ_%s' % ausbildungs_typ.lower(), models.BooleanField(default=False))
+
+    # types
+    a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
+    Student.add_to_class(a_typ, models.BooleanField(default=False))
+    PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
+
     for key, field in felder.items():
         if key == 'empty':
             continue
-        columns.append('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()))
-        Student.add_to_class('ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower()), field)
-print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
+        a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
+        AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
+        Student.add_to_class(a_typ_kind, field)
+        # todo: switch type
+        if 'abschnitt' in a_typ_kind:
+            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+        elif 'famulatu' in a_typ_kind or 'noetig' in a_typ_kind:
+            pass
+        else:
+            PersistenStudentFilterModel.add_to_class(a_typ_kind, field)
+
+# Generate Fields for translation
+# print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
+
+AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
+
+
+
+
 
 """End"""
 

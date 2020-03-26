@@ -57,6 +57,45 @@ def list_by_plz(request, countrycode, plz, distance):
 
     return HttpResponse(template.render(context, request))
 
+@login_required
+@hospital_required
+def student_list_view(request, countrycode, plz, distance):
+    print('start')
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+
+    lat, lon, ort = plzs[countrycode][plz]
+
+    # TODO Consult with others how this should behave!
+    if distance==0:
+        qs = Student.objects.filter(plz=plz, countrycode=countrycode)
+    else:
+        close_plzs = get_plzs_close_to(countrycode, plz, distance)
+        qs = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
+
+    table = StudentTable(qs)
+
+    context = {
+        'plz': plz,
+        'countrycode': countrycode,
+        'ort': ort,
+        'distance': distance,
+        'table': table
+    }
+
+    return render(request, 'student_list_view.html', context)
+
+
+class StudentTable(tables.Table):
+    info = TemplateColumn(template_name='info_button.html')
+    checkbox = TemplateColumn(template_name='checkbox_studenttable.html')
+
+    class Meta:
+        model = Student
+        template_name = "django_tables2/bootstrap4.html"
+        exclude = ['uuid','registration_date','id']
+        fields = ['user']
 
 def hospital_registration(request):
     if request.method == 'POST':
