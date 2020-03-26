@@ -26,7 +26,7 @@ def index(request):
 def prepare_students(ttl_hash=None):
     # Source: https://stackoverflow.com/questions/31771286/python-in-memory-cache-with-time-to-live
     del ttl_hash  # to emphasize we don't use it and to shut pylint up
-    students = Student.objects.all()
+    students = Student.objects.filter(user__validated_email=True)
     locations_and_number = {}
     i=0
     for student in students:
