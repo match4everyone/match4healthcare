@@ -1,10 +1,12 @@
 services:
   - docker
 
-before_install:
- - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml build
- - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d
+before_script:
+ - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build
  - ./deploy.sh
 
 script:
  - docker exec backend python3 manage.py test
+
+after_script:
+ - docker-compose down
