@@ -53,7 +53,7 @@ EMAIL_USE_TLS = True
 
 
 # =============== CELARY CONFIGURATION ===============
-USE_ASYNC = False
+USE_ASYNC = True
 
 if USE_ASYNC:
     # Celery asynchronous mails
