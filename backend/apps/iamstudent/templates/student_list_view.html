@@ -8,6 +8,9 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style type="text/css">
+	.card { margin-bottom: 30px; }
+</style>
 <script type="text/javascript">
 
     var signUpHelper = {
@@ -62,23 +65,27 @@
 
 
 {% block content %}
-<hr>
+
 <div class="container">
-    <h3>Breits registrierte Helfer durchsuchen und kontaktieren.</h3>
-    <p>
-        Ihr braucht zum Beispiel examinierte Pflegekräfte?<br>
-        Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
+	<div style="height:40px"></div>
+	<h1 class="font-weight-light match4hc-title">  {% blocktrans %}Breits registrierte Helfer durchsuchen und kontaktieren.{% endblocktrans %}  </h1>
+	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie brauchen zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
+	
+  
+    
+      <p>  Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
         In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon <mark>berufstätig</mark> sein muss.
         Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf <mark>ja</mark>.
         Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und ihnen eine
-        <mark>Email senden</mark>
-    </p>
+		  <mark>Email senden</mark></p>
+  
     <form method="get">
-        <div class="card">
+        <div class="card" style="margin-top:30px;">
             <div class="card-header">
                 {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}
             </div>
             <div class="card-body">
+				
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
@@ -101,47 +108,45 @@
                             <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}
-            </div>
-            <div class="card-body">
+				</div>
+			</div>
+          <div class="card-body" style="padding-top:0px;">
+      <p class="font-weight-bold">
+                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}</p>
+          
+           
 
                 {% crispy filter_jobrequireform filter_jobrequireform.helper %}
 
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}
-            </div>
-            <div class="card-body">
+         
+     
+             
+              <p class="font-weight-bold" style="margin-top:20px;">  {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}</p>
+					
 
-                {% crispy filter_availability.form filter_availability.helper %}<hr>
-<p class="text-right">
-            <input type="submit" class="btn btn-primary" value="Filter Aktualisieren">
+                {% crispy filter_availability.form filter_availability.helper %}
+<p>
+            <input type="submit" class="btn blue text-white btn-md" value="Filter Aktualisieren">
         </p>
 
             </div>
 
+        
+            
         </div>
-        <br>
-
+      
 
     </form>
         <div class="card border-danger">
         <div class="card-header">
-                <p class="text-center">
+                <p>
     {% if enable_mail %}
-           {% blocktrans %}Wir haben <mark>{{n}} Helfer*innen</mark> gefunden, die zu deiner Suche passen.{% endblocktrans %}
-            <button class="btn btn-dark" onclick="sendall()">
+           {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans %}
+            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="sendall()">
                 {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% else %}
-            <button class="btn btn-dark" onclick="alertMaxMails()">
+            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="alertMaxMails()">
                 {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
             </button>
             {% endif %}
@@ -154,11 +159,11 @@
             </div>
             <p class="text-right">
             {% if enable_mail %}
-            <button class="btn btn-dark" onclick="send()">
+            <button class="btn blue text-white btn-md" onclick="send()">
                 {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% else %}
-            <button class="btn btn-dark" onclick="alertMaxMails()">
+            <button class="btn blue text-white btn-md" onclick="alertMaxMails()">
                 {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
             </button>
             {% endif %}
