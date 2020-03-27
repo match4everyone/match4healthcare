@@ -22,7 +22,7 @@ class HospitalFormO(ModelForm):
             'countrycode': _('Land'),
             'firmenname': _('Name der Institution'),
             'appears_in_map': _('Sichtbar und kontaktierbar für Helfende sein'),
-            'sonstige_infos': _('Wichtige Infos über Euch und den potentiellen Einsatzbereich')
+            'sonstige_infos': _('Wichtige Infos über Sie und den potentiellen Einsatzbereich')
         }
 
     def __init__(self, *args, **kwargs):
@@ -34,18 +34,12 @@ class HospitalFormO(ModelForm):
         self.helper.form_action = 'submit_survey'
 
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')),
+  Row(Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
         )
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
-
 
 
 
@@ -53,7 +47,7 @@ class HospitalForm(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalForm, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', 'Registriere Mich'))
+        self.helper.add_input(Submit('submit', 'Jetzt registrieren',onclick="this.form.submit(); this.disabled=true; this.value='Sending…';"))
 
 class HospitalFormExtra(HospitalFormO):
 
@@ -67,19 +61,24 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', _('Profil Aktualisieren')))
+        self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner'), Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
                 'sonstige_infos'
         )
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
-        return email
+
+def check_unique_email(value):
+    print("Checking unique email")
+    if User.objects.filter(email=value).exists():
+        raise ValidationError(_("Diese Email ist bereits vergeben"))
+    return value
+
 
 class HospitalFormInfoSignUp(HospitalFormO):
+    email = forms.EmailField(validators=[check_unique_email])
+
+class HospitalFormInfoCreate(HospitalFormO):
     email = forms.EmailField()

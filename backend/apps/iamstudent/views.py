@@ -2,17 +2,25 @@ from django.shortcuts import render
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.core.mail import BadHeaderError, send_mail
+from django.conf import settings
 from django.core.mail import BadHeaderError, send_mass_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from apps.mapview.utils import plzs, get_plzs_close_to
+from .tables import StudentTable
+from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm
+from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
 from .models import Student, EmailToSend
+from apps.accounts.models import User
 from match4healthcare.settings.common import NOREPLY_MAIL
 
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
+
+from match4healthcare.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
@@ -104,6 +112,20 @@ def send_mails_for(hospital):
                 # ToDo define global noreply address in Django settings
                 mail_queue.append((m.subject, m.message, 'noreply@medisvs.spahr.uberspace.de', [m.student.user.email]))
 
+            try:
+                send_mail(m.subject,
+                          m.message,
+                          settings.NOREPLY_MAIL,
+                          [m.student.user.email]
+                          )
+                # todo: muss noch asynchron werden ...celery?
+            except BadHeaderError:
+                # Do not show error message to malicous actor
+                # Do not send the email
+                None
+
+            m.was_sent = True
+            m.save()
             m.was_sent = True
             m.save()
     try:
@@ -114,3 +136,62 @@ def send_mails_for(hospital):
         # Do not send the email
         # ToDo add error log, sequence should be escaped earlier, this could should not be reached
         pass
+
+
+def notify_student(student_id, contact):
+    student = Student.objects.get(id=student_id)
+    send_mail(subject=_('subject :)'),
+              message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
+              from_email=settings.NOREPLY_MAIL,
+              recipient_list=[student.email])
+
+@login_required
+@hospital_required
+def student_list_view(request, countrycode, plz, distance):
+    countrycode = request.GET.get('countrycode', countrycode)
+    plz = request.GET.get('plz', plz)
+    distance = int(request.GET.get('distance', distance))
+
+    if countrycode not in plzs or plz not in plzs[countrycode]:
+        # TODO: niceren error werfen
+        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
+
+    lat, lon, ort = plzs[countrycode][plz]
+
+    qs = Student.objects.filter(user__validated_email=True)
+
+    # TODO Consult with others how this should behave!
+    if distance==0:
+        qs_place = qs.filter(plz=plz, countrycode=countrycode)
+    else:
+        close_plzs = get_plzs_close_to(countrycode, plz, distance)
+        qs_place = qs.filter(plz__in=close_plzs, countrycode=countrycode)
+
+
+    filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs_place)
+    qs = filter_availability.qs
+    f  =StudentJobRequirementsFilter(request.GET, queryset=qs)
+    table = StudentTable(f.qs)
+
+    filter_jobrequireform = PersistenStudentFilterForm(request.GET)
+
+    enable_mail_send = (f.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
+
+    context = {
+        'plz': plz,
+        'countrycode': countrycode,
+        'ort': ort,
+        'distance': distance,
+        'table': table,
+        'filter_jobrequireform' : filter_jobrequireform,
+        'filter_availability' : filter_availability,
+        'filter_origin': f,
+        'n': f.qs.count(),
+        'enable_mail': enable_mail_send,
+        'max': MAX_EMAIL_BATCH_PER_HOSPITAL
+    }
+
+    return render(request, 'student_list_view.html', context)
+
+
+

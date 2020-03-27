@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Helfende in der Nähe von {{ort}} ({{plz}}){% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style type="text/css">
+	.card { margin-bottom: 30px; }
+</style>
+<script type="text/javascript">
+
+    var signUpHelper = {
+        handleQualificationInput: function handleQualificationInput(event) {
+            let sourceElement = event.srcElement;
+            let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
+            let qualificationId = containingDiv.id.split("-").slice(-1)
+            let selectedFilterValue = sourceElement.querySelector("input").value
+            let buttonXStatus = false;
+            if (selectedFilterValue === "true") {
+                buttonXStatus = true;
+            }
+
+            this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
+        },
+        setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
+            let section = document.getElementById(`div-ausbildung-${id}`)
+            if (!section) return;
+            if (setVisibility) {
+                section.classList.remove('hidden')
+            } else {
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+                    checkbox.checked = false
+                })
+                section.querySelectorAll("input[type='text'], select").forEach((textbox) => {
+                    textbox.value = ''
+                })
+            }
+
+        },
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
+        qualifikationSelectors.forEach(element => {
+            element.addEventListener("click", (event) => {
+                signUpHelper.handleQualificationInput(event)
+            })
+            // click does not listen for changes that already occured.
+
+        })
+
+    });
+
+</script>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+
+<div class="container">
+	<div style="height:40px"></div>
+	<h1 class="font-weight-light match4hc-title">  {% blocktrans %}Breits registrierte Helfer durchsuchen und kontaktieren.{% endblocktrans %}  </h1>
+	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie brauchen zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
+	
+  
+    
+      <p>  Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
+        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon <mark>berufstätig</mark> sein muss.
+        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf <mark>ja</mark>.
+        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und ihnen eine
+		  <mark>Email senden</mark></p>
+  
+    <form method="get">
+        <div class="card" style="margin-top:30px;">
+            <div class="card-header">
+                {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}
+            </div>
+            <div class="card-body">
+				
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Land: </p>
+                            <select name="countrycode" class="form-control" id="countrycode">
+                                <option {% if countrycode == 'DE' %}selected="selected"{% endif %} value="DE">Deutschland</option>
+                                <option {% if countrycode == 'AT' %}selected="selected"{% endif %} value="AT">Österreich</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Postleitzahl: </p>
+                            <input name="plz" id="plz" value="{{ plz }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <p> Und im Umkreis von (km): </p>
+                            <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
+                        </div>
+                    </div>
+				</div>
+			</div>
+          <div class="card-body" style="padding-top:0px;">
+      <p class="font-weight-bold">
+                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}</p>
+          
+           
+
+                {% crispy filter_jobrequireform filter_jobrequireform.helper %}
+
+         
+     
+             
+              <p class="font-weight-bold" style="margin-top:20px;">  {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}</p>
+					
+
+                {% crispy filter_availability.form filter_availability.helper %}
+<p>
+            <input type="submit" class="btn blue text-white btn-md" value="Filter Aktualisieren">
+        </p>
+
+            </div>
+
+        
+            
+        </div>
+      
+
+    </form>
+        <div class="card border-danger">
+        <div class="card-header">
+                <p>
+    {% if enable_mail %}
+           {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans %}
+            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="sendall()">
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
+            </button>
+            {% else %}
+            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="alertMaxMails()">
+                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
+            </button>
+            {% endif %}
+        </p>
+            </div>
+        <div class="card-body">
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
+            <div class="table-responsive">
+                {% render_table table %}
+            </div>
+            <p class="text-right">
+            {% if enable_mail %}
+            <button class="btn blue text-white btn-md" onclick="send()">
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+            </button>
+            {% else %}
+            <button class="btn blue text-white btn-md" onclick="alertMaxMails()">
+                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+            </button>
+            {% endif %}
+            </p>
+
+        </div>
+
+    </div>
+</div>
+<hr>
+<script>
+    var alertMaxMails = function () {
+        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');
+    };
+
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+    })
+
+    var trBoldBlue = $("table");
+
+    $(trBoldBlue).on("click", "tr", function () {
+        $(this).toggleClass("selected");
+        $(this).toggleClass("table-primary");
+
+    });
+
+    var send = function () {
+        var li = [];
+        $('tbody tr.selected').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
+        }
+    };
+
+    var sendall = function () {
+        var li = [];
+        $('tbody tr').each(function () {
+            li.push($(this)[0].getAttribute("data-id"))
+        });
+        if (li.length > 0) {
+            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+        } else {
+            alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Helfer*innen zu finden.{% endblocktrans %}")
+        }
+    };
+
+    var getrequest = function () {
+        //console.log($('#plz').attr("value"));
+        window.location = "/ineedstudent/students/" + $('#countrycode').val() + "/" + $('#plz').val() + "/" + Math.max(0, $('#umkreis').val());
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#id_availability_start").attr("type", "date");
+    });
+</script>
+{% endblock %}

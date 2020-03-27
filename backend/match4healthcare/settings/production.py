@@ -58,7 +58,20 @@ LOGGING = {
     },
 }
 
-# Celery asynchronous mails
+# =============== MAIL RELAY SERVER CONFIGURATION ===============
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+# Normal SMTP
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Using the API
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+# =============== Celery asynchronous mails ===============
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 CELERY_EMAIL_TASK_CONFIG = {

@@ -6,6 +6,8 @@ import logging
 logger = logging.getLogger(__name__)
 from django.contrib.auth.forms import PasswordResetForm
 
+from django.conf import settings
+
 def generate_random_username(length=16, chars=ascii_lowercase+digits, split=4, delimiter='-'):
 
     username = ''.join([choice(chars) for i in range(length)])
@@ -28,8 +30,9 @@ def send_password_set_email(email, host, subject_template, template='registratio
         form.save(
             subject_template_name=subject_template,
             html_email_template_name=template,
-            domain_override=host
+            domain_override=host,
+            from_email=settings.NOREPLY_MAIL,
         )
         logger.debug("Sent!")
     else:
-        logger.warn("Email to " + str(emaiL) + " not sent because form is invalid")
+        logger.warn("Email to " + str(email) + " not sent because form is invalid")

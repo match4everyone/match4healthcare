@@ -9,22 +9,58 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style type="text/css">
+    .bg-container {
+        background-image: url({% static 'img/login-bg.jpg' %});
+        background-position: center;
+        background-size: cover;
+    }
+	@media only screen and (max-width: 767px) {
+	.bg-container {background-position: left;}
+	}
+	
+</style>
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        $(window).on("resize", function() {
+
+            var height = $(window).height();
+            var navHeight = $('.navbar').outerHeight();
+            var footerHeight = $('.footer').innerHeight();
+
+            var newHeight = height - navHeight - footerHeight;
+
+            $(".login-form").height(newHeight);
+
+        }).trigger("resize");
+
+    });
+</script>
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-<br>
-<br>
-<div class="container">
-    {% blocktrans %}<h2>Willkommen bei match4healthcare,</h2>
-    <p>vielen Dank, dass du dich engagieren möchtest. Um deine Registrierung zu vervollständigen, haben wir dir eine Mail mit einem Bestätigungslink an deine angegebene Mailadresse geschickt. Bitte schau in deine Mails, um dich vollständig bei uns zu registrieren und von einem Krankenhaus kontaktiert zu werden.</p>
+<div class="bg-container">
+<div class="container login-form">
+	 <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12">
+    <div class="card login-card text-center align-items-center">
+
+
+	<svg class="bi bi-check-circle" style="color:#ed0a71; font-size:5rem; margin-bottom: 15px;" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z" clip-rule="evenodd"/>
+</svg>
+
+    {% blocktrans %}<h2 class="font-weight-light">Willkommen bei match4healthcare,</h2>
+    <p>Um deine Registrierung zu vervollständigen, haben wir dir eine Mail mit einem <b style="font-weight:500;">Bestätigungslink</b> an deine angegebene Mailadresse geschickt. Bitte schau in deine Mails, um dich vollständig bei uns zu registrieren. <br><br><b>Aktuell kann es zu Verzögerungen beim Eingang der E-Mail kommen. Wir bitten um Geduld und dein Verständnis.</b></p>
     <p>Dein Team von</p>
-    <p>match4healthcare</p>
     {% endblocktrans %}
+		<img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline">
 </div>
-<br>
-<br>
+
+	</div>
+	</div></div>
 
 {% endblock %}

@@ -26,3 +26,9 @@ def dataprotection(request):
     template = loader.get_template('dataprotection.html')
 
     return HttpResponse(template.render(context, request))
+
+def legal_questions(request):
+    context = {}
+    template = loader.get_template('legal-questions.html')
+
+    return HttpResponse(template.render(context, request))
