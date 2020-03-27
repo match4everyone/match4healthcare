@@ -3,9 +3,9 @@ services:
 
 before_script:
  - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build
- - ./deploy.sh
 
 script:
+ - ./deploy.sh
  - docker exec backend python3 manage.py test
 
 after_script:
