@@ -20,7 +20,6 @@ for countrycode in ["DE", "AT"]:
     df = pgeocode.Nominatim(countrycode)._data_frame.dropna()[["postal_code", "longitude", "latitude", "place_name"]].values
     for plz, lon, lat, ort in df:
         if plz not in plzs[countrycode]:
-            print(plz, lon, lat, ort)
             plzs[countrycode][plz] = (lon, lat, ort)
 
 def haversine(lon1, lat1, lon2, lat2):
