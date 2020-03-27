@@ -75,12 +75,12 @@ EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 CELERY_EMAIL_TASK_CONFIG = {
-    'rate_limit': '50/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
+    'rate_limit': '300/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
     'name': 'djcelery_email_send',
     'ignore_result': False,
 }
 
-# ##### CELARY CONFIGURATION ############################
+# ===============CELARY CONFIGURATION ===============
 CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@rabbit:5672'
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
