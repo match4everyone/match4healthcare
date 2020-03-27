@@ -7,7 +7,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
-from apps.mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import get_plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 
@@ -135,11 +135,11 @@ def student_list_view(request, countrycode, plz, distance):
     plz = request.GET.get('plz', plz)
     distance = int(request.GET.get('distance', distance))
 
-    if countrycode not in plzs or plz not in plzs[countrycode]:
+    if countrycode not in get_plzs() or plz not in get_plzs()[countrycode]:
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
+    lat, lon, ort = get_plzs()[countrycode][plz]
 
     qs = Student.objects.filter(user__validated_email=True)
 

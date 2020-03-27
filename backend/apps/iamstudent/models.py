@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
-from apps.mapview.utils import plzs
+from apps.mapview.utils import get_plzs
 from django.utils.translation import gettext as _
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
@@ -129,7 +129,7 @@ class Student(models.Model):
         return self.user.email
 
     def clean(self):
-        if self.plz not in plzs[self.countrycode]:
+        if self.plz not in get_plzs()[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
 class PersistenStudentFilterModel(models.Model):

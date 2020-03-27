@@ -4,7 +4,7 @@ from datetime import datetime
 
 from apps.accounts.models import User
 from django.core.exceptions import ValidationError
-from apps.mapview.utils import plzs
+from apps.mapview.utils import get_plzs
 from django.utils.translation import gettext as _
 
 
@@ -49,5 +49,5 @@ class Hospital(models.Model):
         return self.uuid
 
     def clean(self):
-        if self.plz not in plzs[self.countrycode]:
+        if self.plz not in get_plzs()[self.countrycode]:
             raise ValidationError(_(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode))

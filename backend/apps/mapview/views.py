@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from apps.mapview.utils import plzs
+from apps.mapview.utils import get_plzs
 from apps.iamstudent.models import Student
 
 from functools import lru_cache
@@ -37,7 +37,7 @@ def prepare_students(ttl_hash=None):
         if key in locations_and_number:
             locations_and_number[cc + "_" + plz]["count"] += 1
         else:
-            lat, lon, ort = plzs[cc][plz]
+            lat, lon, ort = get_plzs()[cc][plz]
             locations_and_number[key] = {
                 "countrycode": cc,
                 "plz": plz,

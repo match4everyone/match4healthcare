@@ -4,7 +4,7 @@ import uuid, json
 import random
 from random import randint
 from datetime import datetime, timedelta
-#from mapview.utils import plzs
+#from mapview.utils import get_plzs
 import csv
 plzs = {}
 with open("mapview/PLZ.tab", encoding='utf-8') as tsvfile:

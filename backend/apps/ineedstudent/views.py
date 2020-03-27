@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 
-from apps.mapview.utils import plzs
+from apps.mapview.utils import get_plzs
 from apps.iamstudent.models import Student, StudentFilter
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.forms import HospitalForm
@@ -11,7 +11,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from apps.mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import get_plzs, get_plzs_close_to
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
@@ -34,11 +34,11 @@ from django.views.decorators.gzip import gzip_page
 def list_by_plz(request, countrycode, plz, distance):
     template = loader.get_template('list_by_plz.html')
 
-    if countrycode not in plzs or plz not in plzs[countrycode]:
+    if countrycode not in get_plzs() or plz not in get_plzs()[countrycode]:
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
+    lat, lon, ort = get_plzs()[countrycode][plz]
 
     # TODO Consult with others how this should behave!
     if distance==0:
@@ -61,11 +61,11 @@ def list_by_plz(request, countrycode, plz, distance):
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
     print('start')
-    if countrycode not in plzs or plz not in plzs[countrycode]:
+    if countrycode not in get_plzs() or plz not in get_plzs()[countrycode]:
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
+    lat, lon, ort = get_plzs()[countrycode][plz]
 
     # TODO Consult with others how this should behave!
     if distance==0:
@@ -138,7 +138,7 @@ def prepare_hospitals(ttl_hash=None):
             locations_and_number[key]["count"] += 1
             locations_and_number[key]["uuid"] = None
         else:
-            lat, lon, ort = plzs[cc][plz]
+            lat, lon, ort = get_plzs()[cc][plz]
             locations_and_number[key] = {
                 "uuid": hospital.uuid,
                 "countrycode": cc,
@@ -153,11 +153,11 @@ def prepare_hospitals(ttl_hash=None):
 
 def hospital_list(request, countrycode, plz):
 
-    if countrycode not in plzs or plz not in plzs[countrycode]:
+    if countrycode not in get_plzs() or plz not in get_plzs()[countrycode]:
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
+    lat, lon, ort = get_plzs()[countrycode][plz]
 
     table = HospitalTable(Hospital.objects.filter(plz=plz))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
