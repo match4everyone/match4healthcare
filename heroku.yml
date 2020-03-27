@@ -8,10 +8,9 @@ build:
     web: backend/Dockerfile
   config:
     DJANGO_SETTINGS_MODULE: match4healthcare.settings.production
-    command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
     
 run:
-  web: 
+  web: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
 release:
   image: web
