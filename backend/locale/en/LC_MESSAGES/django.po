@@ -153,8 +153,8 @@ msgid "Sie brauchen in Ihrer Institution aktuell Hilfe?"
 msgstr "You currently need help in your facility?"
 
 #: .\apps\accounts\templates\hospital_signup.html:35
-msgid "Wir verbinden Helfende und Hilfesuchende zu einem match4healthcare!"
-msgstr "We connect supporters  and people seeking help to a match4healthcare!"
+msgid "Wir verbinden Helfende und Hilfesuchende zu einem curaSWISS!"
+msgstr "We connect supporters  and people seeking help to a curaSWISS!"
 
 #: .\apps\accounts\templates\hospital_signup.html:38
 msgid ""
@@ -298,13 +298,13 @@ msgstr ""
 #: .\apps\accounts\templates\registration\password_reset_email_.html:3
 msgid ""
 "\n"
-"Sie erhalten diese Mail um ein neues Passwort bei match4healthcare zu "
+"Sie erhalten diese Mail um ein neues Passwort bei curaSWISS zu "
 "setzen.\n"
 "\n"
 "Bitte clicken sie auf den folgenden Link um ein Passwort zu wählen:\n"
 msgstr ""
 "\n"
-"You are receiving this mail to reset your password in match4healthcare.\n"
+"You are receiving this mail to reset your password in curaSWISS.\n"
 "\n"
 "Please open the following link to reset your password:\n"
 
@@ -312,11 +312,11 @@ msgstr ""
 msgid ""
 "\n"
 "Vielen Dank,\n"
-"ihr match4healthcare Team\n"
+"ihr curaSWISS Team\n"
 msgstr ""
 "\n"
 "Thank you,\n"
-"Kind Regards from the match4healthcare Team\n"
+"Kind Regards from the curaSWISS Team\n"
 
 #: .\apps\accounts\templates\registration\password_reset_email_subject.txt:2
 msgid " Email Bestätigen"
@@ -340,10 +340,10 @@ msgstr "Dear supporter,"
 
 #: .\apps\accounts\templates\registration\password_set_email_.html:448
 msgid ""
-"Vielen Dank für deine Anmeldung auf match4healthcare. Gemeinsam sind wir ein "
+"Vielen Dank für deine Anmeldung auf curaSWISS. Gemeinsam sind wir ein "
 "unschlagbares Team!"
 msgstr ""
-"Thank you very much for your registration on match4healthcare! Together we "
+"Thank you very much for your registration on curaSWISS! Together we "
 "are an undefeatable team!"
 
 #: .\apps\accounts\templates\registration\password_set_email_.html:449
@@ -378,8 +378,8 @@ msgid ""
 "Arbeitsvertrag sowie hygienische Standards und eine Einarbeitung kümmern "
 "sollten. Bitte achte darauf, dass du dich versichern lässt. Für weiteres "
 "haben wir eine umfangreiche Sammlung an Tipps und Infos zu Vertrag, "
-"Vergütung und Recht zusammengestellt: <a href=\"https://match4healthcare.de/"
-"legal-questions/\">https://match4healthcare.de/legal-questions/</a></li>\n"
+"Vergütung und Recht zusammengestellt: <a href=\"https://curaSWISS.de/"
+"legal-questions/\">https://curaSWISS.de/legal-questions/</a></li>\n"
 "  <li>Sollte eine Institution Falschangaben gemacht haben oder sich nicht an "
 "die Grundbedingungen zu Ausrüstung/Versicherung halten, dann bitte "
 "informiere uns bitte über die u.g. E-Mail Adresse.</li>\n"
@@ -400,8 +400,8 @@ msgid "Sehr geehrte Einrichtung,"
 msgstr "Dear facilitiy,"
 
 #: .\apps\accounts\templates\registration\password_set_email_hospital.html:7
-msgid "Vielen Dank für Ihren Eintrag auf match4healthcare!"
-msgstr "Thank you very much for your entry on match4healthcare!"
+msgid "Vielen Dank für Ihren Eintrag auf curaSWISS!"
+msgstr "Thank you very much for your entry on curaSWISS!"
 
 #: .\apps\accounts\templates\registration\password_set_email_hospital.html:8
 msgid ""
@@ -442,8 +442,8 @@ msgid ""
 "Einrichtung in der aktuellen Lage. Wir hoffen, mit dieser Plattform einen "
 "kleinen Beitrag für die aktuelle Gesundheitsversorgung geleistet zu haben.\n"
 "Für Anregungen zu unserer Plattform und bei weiteren Fragen kontaktieren Sie "
-"uns gerne unter info@match4healthcare.de.</p>\n"
-"<p>Ihr Team von match4healthcare</p>\n"
+"uns gerne unter info@curaSWISS.de.</p>\n"
+"<p>Ihr Team von curaSWISS</p>\n"
 msgstr ""
 
 #: .\apps\accounts\templates\student_edit.html:6
@@ -479,8 +479,8 @@ msgid "Du sitzt zuhause und kannst in der aktuellen Situation helfen?"
 msgstr "You are sitting at home and are able to help in the current situation?"
 
 #: .\apps\accounts\templates\student_signup.html:71
-msgid "Wir verbinden Helfende und Hilfesuchenden zu einem match4healthcare!"
-msgstr "We connect supporters  and people seeking help to a match4healthcare!"
+msgid "Wir verbinden Helfende und Hilfesuchenden zu einem curaSWISS!"
+msgstr "We connect supporters  and people seeking help to a curaSWISS!"
 
 #: .\apps\accounts\templates\student_signup.html:75
 msgid ""
@@ -767,14 +767,14 @@ msgid ""
 "dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die "
 "entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, "
 "eine etwaige Vergütung und vergleichbares betreffen nur mich und die "
-"entsprechende Institution. Eine Haftung von match4healthcare ist "
+"entsprechende Institution. Eine Haftung von curaSWISS ist "
 "ausgeschlossen."
 msgstr ""
 "The service is provided free of charge. I am aware that the relationship "
 "with the facilities concerns only me and the respective facility. In "
 "particular, the type and scope of work, any remuneration and comparable "
 "matters concern only myself and the institution concerned. Any liability of "
-"the match4healthcare service is strictly excluded."
+"the curaSWISS service is strictly excluded."
 
 #: .\apps\iamstudent\forms.py:242
 msgid "Registriere mich"
@@ -797,7 +797,7 @@ msgstr ""
 "with the facilities concerns only me and the respective facility. In "
 "particular, the type and scope of work, any remuneration and comparable "
 "matters concern only myself and the institution concerned. Any liability of "
-"the match4healthcare service is strictly excluded."
+"the curaSWISS service is strictly excluded."
 
 #: .\apps\iamstudent\forms.py:356
 msgid "Profil Aktualisieren"
@@ -1028,7 +1028,7 @@ msgstr "Thank you"
 
 #: .\apps\iamstudent\templates\thanks.html:56
 msgid ""
-"<h2 class=\"font-weight-light\">Willkommen bei match4healthcare,</h2>\n"
+"<h2 class=\"font-weight-light\">Willkommen bei curaSWISS,</h2>\n"
 "    <p>Um deine Registrierung zu vervollständigen, haben wir dir eine Mail "
 "mit einem <b style=\"font-weight:500;\">Bestätigungslink</b> an deine "
 "angegebene Mailadresse geschickt. Bitte schau in deine Mails, um dich "
@@ -1036,7 +1036,7 @@ msgid ""
 "    <p>Dein Team von</p>\n"
 "    "
 msgstr ""
-"<h2 class=\"font-weight-light\">Welcome to match4healthcare,</h2>\n"
+"<h2 class=\"font-weight-light\">Welcome to curaSWISS,</h2>\n"
 "    <p>thank you very much for wanting to get involved. To complete your "
 "registration, we have sent you a mail with a <b style=\"font-weight:500;"
 "\">confirmation link</b> to your given mail address. Please check your mails "
@@ -1161,14 +1161,14 @@ msgstr "Detail view"
 
 #: .\apps\ineedstudent\templates\thanks_hospital.html:30
 msgid ""
-"<h2 class=\"font-weight-light\">Willkommen bei match4healthcare,</h2>\n"
+"<h2 class=\"font-weight-light\">Willkommen bei curaSWISS,</h2>\n"
 "    <p>vielen Dank, dass Sie sich auf unserer Plattform registriert haben. "
 "Auf der nachfolgenden Seite haben Sie sich Möglichkeit, sich einen Überblick "
 "über die verfügbaren Helfer zu verschaffen.</p>\n"
 "    <p>Dein Team von</p>\n"
 "    "
 msgstr ""
-"<h2 class=\"font-weight-light\">Welcome to match4healthcare,</h2>\n"
+"<h2 class=\"font-weight-light\">Welcome to curaSWISS,</h2>\n"
 "    <p>thank you very much for registering on our platform. On the following "
 "page you have the possibility to get an overview of the available helpers.</"
 "p>.\n"
@@ -1197,11 +1197,11 @@ msgstr "Supporters, that want to help."
 msgid "Detailansicht für Kliniken"
 msgstr "Detail view"
 
-#: .\match4healthcare\settings\common.py:125
+#: .\curaSWISS\settings\common.py:125
 msgid "English"
 msgstr "English"
 
-#: .\match4healthcare\settings\common.py:126
+#: .\curaSWISS\settings\common.py:126
 msgid "Deutsch"
 msgstr "Deutsch"
 
@@ -1212,8 +1212,8 @@ msgstr "About us"
 #: .\templates\about.html:12
 msgid ""
 "Wir sind das Team von\n"
-"            match4healthcare!"
-msgstr "We are the team of match4healthcare!"
+"            curaSWISS!"
+msgstr "We are the team of curaSWISS!"
 
 #: .\templates\about.html:15
 msgid ""
@@ -1345,11 +1345,11 @@ msgstr ""
 
 #: .\templates\home.html:137
 msgid ""
-"Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
+"Die Plattform \"curaSWISS\" bietet die ideale Schnittstelle zur "
 "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
 "allem zu Zeiten wie jetzt die ideale Problemlösung."
 msgstr ""
-"\"match4healthcare\" is the ideal tool for quick and efficient networkingof "
+"\"curaSWISS\" is the ideal tool for quick and efficient networkingof "
 "supporters and facilities and especially now the state-of-the-art solution."
 
 #: .\templates\home.html:149
@@ -1379,14 +1379,14 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Vergeben Sie ein Passwort für die Anmeldung"
 #~ msgstr "Provide a password for your account"
 
-#~ msgid "Willkommen bei match4healthcare"
-#~ msgstr "Welcome to match4healthcare"
+#~ msgid "Willkommen bei curaSWISS"
+#~ msgstr "Welcome to curaSWISS"
 
 #, python-format
 #~ msgid ""
 #~ "Hallo %s,\n"
 #~ "\n"
-#~ "du willst helfen und hast dich gerade bei match4healthcare registriert, "
+#~ "du willst helfen und hast dich gerade bei curaSWISS registriert, "
 #~ "danke!\n"
 #~ "\n"
 #~ "Wenn du deine Daten ändern möchtest, nutze folgende Credentials:\n"
@@ -1394,11 +1394,11 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ "passwort: %s\n"
 #~ "\n"
 #~ "Vielen Dank und beste Grüße,\n"
-#~ "Dein match4healthcare Team"
+#~ "Dein curaSWISS Team"
 #~ msgstr ""
 #~ "Hello %s,\n"
 #~ "\n"
-#~ "you want to help and have just registered on match4healthcare, thank "
+#~ "you want to help and have just registered on curaSWISS, thank "
 #~ "you!\n"
 #~ "\n"
 #~ "If you'd like to change your profile data , please use the following "
@@ -1407,7 +1407,7 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ "Password: %s\n"
 #~ "\n"
 #~ "Thank you and kind Regards,\n"
-#~ "Your match4healthcare Team"
+#~ "Your curaSWISS Team"
 
 #~ msgid "Einsatz"
 #~ msgstr "Deployment"

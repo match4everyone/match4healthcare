@@ -1,4 +1,4 @@
-from match4healthcare.settings.common import *
+from curaSWISS.settings.common import *
 from os.path import abspath, basename, dirname, join, normpath
 
 

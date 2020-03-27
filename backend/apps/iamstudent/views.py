@@ -14,12 +14,12 @@ from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
 from .models import Student, EmailToSend
 from apps.accounts.models import User
-from match4healthcare.settings.common import NOREPLY_MAIL
+from curaSWISS.settings.common import NOREPLY_MAIL
 
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
 
-from match4healthcare.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
+from curaSWISS.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required

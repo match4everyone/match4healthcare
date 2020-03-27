@@ -1,5 +1,5 @@
 import multiprocessing, os
-from match4healthcare.settings.common import BASE_DIR
+from curaSWISS.settings.common import BASE_DIR
 
 bind = "backend:8000"
 workers = multiprocessing.cpu_count() * 2 + 1

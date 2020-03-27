@@ -4,7 +4,7 @@ services:
 
   backend:
     volumes:
-      - './backend:/match4healthcare-backend'
+      - './backend:/curaSWISS-backend'
     ports:
       - '80:8000'
     networks:
@@ -13,8 +13,8 @@ services:
       - backend.prod.env
       - database.prod.env
     environment:
-     - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
-    command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
+     - DJANGO_SETTINGS_MODULE=curaSWISS.settings.production
+    command: gunicorn -c /curaSWISS-backend/gunicorn.conf.py curaSWISS.wsgi
 
   database:
     image: postgres
