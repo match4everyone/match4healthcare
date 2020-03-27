@@ -24,7 +24,7 @@ DATABASES = {
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
 SENDGRID_SECRET_FILE = normpath(join(BASE_DIR, 'run', 'SENDGRID.key'))
-SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
+#SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
 
 # Normal SMTP
 EMAIL_HOST = 'smtp.sendgrid.net'

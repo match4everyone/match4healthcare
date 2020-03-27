@@ -13,6 +13,7 @@ from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
 from .models import Student, EmailToSend
+from apps.accounts.models import User
 from match4healthcare.settings.common import NOREPLY_MAIL
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -140,12 +141,14 @@ def student_list_view(request, countrycode, plz, distance):
 
     lat, lon, ort = plzs[countrycode][plz]
 
+    qs = Student.objects.filter(user__validated_email=True)
+
     # TODO Consult with others how this should behave!
     if distance==0:
-        qs_place = Student.objects.filter(plz=plz, countrycode=countrycode)
+        qs_place = qs.filter(plz=plz, countrycode=countrycode)
     else:
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        qs_place = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
+        qs_place = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
 
     filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs_place)
