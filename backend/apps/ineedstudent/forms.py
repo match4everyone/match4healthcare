@@ -47,7 +47,7 @@ class HospitalForm(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalForm, self).__init__(*args, **kwargs)
-        self.helper.add_input(Submit('submit', 'Jetzt registrieren'))
+        self.helper.add_input(Submit('submit', 'Jetzt registrieren',onclick="this.form.submit(); this.disabled=true; this.value='Sending…';"))
 
 class HospitalFormExtra(HospitalFormO):
 
