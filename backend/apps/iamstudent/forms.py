@@ -156,7 +156,8 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
+            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort(e)"))),
+            HTML("<p>{}</p>".format(_('Mehrfachauswahl möglich'))),
             Row(
                 Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
                 Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
@@ -180,7 +181,7 @@ class StudentForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Div(
-                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Berufsausbildung"))),
+                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Berufsausbildung(en)"))),
                 HTML("<p>{}</p>".format(_('Mehrfachauswahl möglich (bspw. bei Vorausbildung vor dem Studium)'))),
                 Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
