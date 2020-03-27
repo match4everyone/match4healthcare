@@ -58,6 +58,7 @@ def student_signup(request):
     return render(request, 'student_signup.html', {'form': form})
 
 
+
 @transaction.atomic
 def register_student_in_db(request, mail):
     # todo send mail with link to pwd

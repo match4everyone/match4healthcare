@@ -23,6 +23,21 @@ DATABASES = {
 }
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
+
+# ++ Uberspace
+# EMAIL_HOST = 'spahr.uberspace.de'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
+# EMAIL_HOST_PASSWORD = 'jonathan'
+# EMAIL_USE_TLS = False
+
+# ++ Filebased
+"""
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+"""
+
+# ++ Sendgrid
 SENDGRID_SECRET_FILE = normpath(join(BASE_DIR, 'run', 'SENDGRID.key'))
 SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
 
@@ -35,3 +50,23 @@ EMAIL_USE_TLS = True
 
 # Using the API
 # EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+
+# =============== CELARY CONFIGURATION ===============
+USE_ASYNC = True
+
+if USE_ASYNC:
+    # Celery asynchronous mails
+    EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
+    CELERY_EMAIL_TASK_CONFIG = {
+        'rate_limit': '50/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
+        'name': 'djcelery_email_send',
+        'ignore_result': False,
+    }
+
+    CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@localhost:5672'
+    CELERY_TASK_SERIALIZER = 'pickle'
+    CELERY_RESULT_SERIALIZER = 'pickle'
+    CELERY_RESULT_BACKEND = "amqp"
+    CELERY_ACCEPT_CONTENT =['pickle', 'json', 'msgpack', 'yaml']

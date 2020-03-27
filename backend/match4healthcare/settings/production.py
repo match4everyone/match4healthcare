@@ -11,8 +11,8 @@ DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.de',
-                 'match4healthcare.eu', 'match4healthcare.org', 'medis-vs-covid19.de']
+ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.eu',
+                 'medis-vs-covid19.de']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -70,3 +70,19 @@ EMAIL_USE_TLS = True
 
 # Using the API
 # EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+# =============== Celery asynchronous mails ===============
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
+CELERY_EMAIL_TASK_CONFIG = {
+    'rate_limit': '300/m',  # CELERY_EMAIL_CHUNK_SIZE (default: 10)
+    'name': 'djcelery_email_send',
+    'ignore_result': False,
+}
+
+# ===============CELARY CONFIGURATION ===============
+CELERY_BROKER_URL = f'amqp://{os.environ.get("RABBITMQ_DEFAULT_USER", "admin")}:{os.environ.get("RABBITMQ_DEFAULT_PASS", "mypass")}@rabbit:5672'
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_RESULT_SERIALIZER = 'pickle'
+CELERY_RESULT_BACKEND = "amqp"
+CELERY_ACCEPT_CONTENT =['pickle', 'json', 'msgpack', 'yaml']

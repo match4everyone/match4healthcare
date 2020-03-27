@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
+from django.core.mail import BadHeaderError, send_mass_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -101,24 +102,25 @@ def send_mail_student_id_list(request, id_list):
 
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+    mail_queue = []
+    forbidden_chars = ['\n', '\r']
+
     for m in emails:
-
         if m.subject and m.message and m.student.user.email:
+            # Check for Email Header Injection
+            if not (any(x in m.subject for x in forbidden_chars) or any(x in m.student.user.email for x in forbidden_chars)):
+                mail_queue.append((m.subject, m.message, settings.NOREPLY_MAIL, [m.student.user.email]))
+                m.was_sent = True
+                m.save()
 
-            try:
-                send_mail(m.subject,
-                          m.message,
-                          settings.NOREPLY_MAIL,
-                          [m.student.user.email]
-                          )
-                # todo: muss noch asynchron werden ...celery?
-            except BadHeaderError:
-                # Do not show error message to malicous actor
-                # Do not send the email
-                None
-
-            m.was_sent = True
-            m.save()
+    try:
+        # Async mail delivery / connection to SMTP server handled by Celery
+        send_mass_mail(mail_queue)
+    except BadHeaderError:
+        # Do not show error message to malicous actor
+        # Do not send the email
+        # ToDo add error log, sequence should be escaped earlier, this could should not be reached
+        pass
 
 
 def notify_student(student_id, contact):

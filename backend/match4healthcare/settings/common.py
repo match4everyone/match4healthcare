@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.iamstudent',
     'apps.ineedstudent',
     'apps.accounts',
+    'djcelery_email',   # Asynchronous mail scheduler over celery
 ]
 
 MIDDLEWARE = [
