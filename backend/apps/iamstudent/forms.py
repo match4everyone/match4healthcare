@@ -117,7 +117,7 @@ class StudentForm(forms.ModelForm):
         help_texts = {
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
-            'plz': _('bevorzugter Einsatzort als Postleitzahl'),
+            'plz': _('bevorzugter Einsatzort (bei mehreren bitte mehrere Accounts erstellen)'),
            # 'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
         }
 
@@ -181,6 +181,7 @@ class StudentForm(forms.ModelForm):
             ),
             Div(
                 HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(_("Berufsausbildung"))),
+                HTML("<p>{}</p>".format(_('Mehrfachauswahl möglich (bspw. bei Vorausbildung vor dem Studium)'))),
                 Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
