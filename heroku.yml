@@ -12,7 +12,7 @@ build:
 run:
   web: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
-#release:
-#  image: web
-#  command:
-#    - python manage.py collectstatic --noinput
+release:
+  image: web
+  command:
+    - python3 manage.py collectstatic --noinput
