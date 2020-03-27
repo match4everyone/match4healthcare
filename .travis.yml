@@ -3,7 +3,7 @@ services:
 
 before_install:
  - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml build
- - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml start
+ - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d
  - ./deploy.sh
 
 script:
