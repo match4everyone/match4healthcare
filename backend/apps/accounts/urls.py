@@ -33,4 +33,5 @@ urlpatterns = [
     path('profile_hospital', views.edit_hospital_profile, name='edit_hospital_profile'),
     path('approve_hospitals', views.approve_hospitals, name='approve_hospitals'),
     path('change_hospital_approval/<str:uuid>/', views.change_hospital_approval, name='change_hospital_approval')
+    # pseudo change
 ]
