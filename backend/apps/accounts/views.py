@@ -1,10 +1,13 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 
 from django.conf import settings
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
@@ -228,6 +231,18 @@ def validate_email(request):
         request.user.validated_email = True
         request.user.save()
     return HttpResponseRedirect("/mapview")
+
+class UserCountView(APIView):
+    """
+    A view that returns the count of active users.
+
+    Source: https://stackoverflow.com/questions/25151586/django-rest-framework-retrieving-object-count-from-a-model
+    """
+
+    def get(self, request, format=None):
+        user_count = User.objects.count()
+        content = {'user_count': user_count}
+        return JsonResponse(content)
 
 from django.contrib.auth.views import LoginView
 
