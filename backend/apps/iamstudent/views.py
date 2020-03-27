@@ -110,7 +110,7 @@ def send_mails_for(hospital):
             # Check for Email Header Injection
             if not (any(x in m.subject for x in forbidden_chars) and any(x in m.student.user.email for x in forbidden_chars)):
                 # ToDo define global noreply address in Django settings
-                mail_queue.append((m.subject, m.message, 'noreply@medisvs.spahr.uberspace.de', [m.student.user.email]))
+                mail_queue.append((m.subject, m.message, settings.NOREPLY_MAIL, [m.student.user.email]))
 
             try:
                 send_mail(m.subject,
@@ -126,8 +126,7 @@ def send_mails_for(hospital):
 
             m.was_sent = True
             m.save()
-            m.was_sent = True
-            m.save()
+
     try:
         # Async mail delivery / connection to SMTP server handled by Celery
         send_mass_mail(mail_queue)
