@@ -118,7 +118,7 @@ EOF
 
 cat > "${TOOLS}/webhooks/github/cp-db-from-deploy-to-predeploy.sh" <<EOF
 #!/bin/bash -e
-echo "Now we would copy prod DB to predeploy instance
+echo "Now we would copy prod DB to predeploy instance"
 EOF
 
 chmod +x "${TOOLS}/webhooks/github/"*.sh
