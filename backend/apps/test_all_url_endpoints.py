@@ -60,6 +60,15 @@ class UrlEndpointTestCase(TestCase):
 
         # TODO Remove /ineedstudent/hospital_registration
 
+    def test_count_url(self):
+        generate_random_student()
+        response = self.client.get('/accounts/count', {})
+        assert response.status_code == 200
+        self.assertJSONEqual(
+            str(response.content, encoding='utf8'),
+            {'user_count': '1'}
+        )
+
     def test_student(self):
         student_email, student_password = generate_random_student()
         assert self.client.post('/accounts/logout/', {}).status_code == 200
