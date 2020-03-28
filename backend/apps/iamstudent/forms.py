@@ -53,7 +53,7 @@ form_labels = {
     'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mta': _('Medizinisch-technische/r Assistent*in'),
     'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in/Rettungsassistent*in'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in / Rettungsassistent*in'),
     'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_sani': _('Rettungssanitäter*in/Rettungshelfer*in'),
     'ausbildung_typ_zahni': _('Zahnmedizinstudent*in'),
@@ -436,7 +436,7 @@ class PersistenStudentFilterForm(forms.ModelForm):
             # rest
             *[
                 Div(
-                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    HTML("<p style='font-weight: 500;'>{}</p>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
 
                     Row(*[
                         Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
