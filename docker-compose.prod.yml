@@ -10,11 +10,12 @@ services:
       - '80:8000'
     networks:
       - network
-    env_file:
-      - backend.prod.env
-      - database.prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
+     - SECRET_KEY
+     - POSTGRES_DB
+     - POSTGRES_USER
+     - POSTGRES_PASSWORD
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
   database:
