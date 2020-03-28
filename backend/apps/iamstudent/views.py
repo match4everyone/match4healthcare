@@ -14,7 +14,6 @@ from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
 from .models import Student, EmailToSend
 from apps.accounts.models import User
-from match4healthcare.settings.common import NOREPLY_MAIL
 
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
