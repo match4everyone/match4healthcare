@@ -5,3 +5,7 @@
 # Except for this .gitignore
 !.gitignore
 
+# Except for the static folder
+!static/.gitkeep
+# Except for the media folder
+!media/.gitkeep
