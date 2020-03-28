@@ -3,6 +3,7 @@ version: '3.7'
 services:
 
   backend:
+    container_name: ${BRANCH}-backend
     volumes:
       - './backend:/match4healthcare-backend'
     ports:
@@ -17,6 +18,7 @@ services:
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
   database:
+    container_name: ${BRANCH}-database
     image: postgres
     volumes:
      - ./database/data:/var/lib/postgresql/data
