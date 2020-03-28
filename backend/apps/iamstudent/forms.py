@@ -269,7 +269,8 @@ class StudentForm(forms.ModelForm):
             'einwilligung_datenweitergabe',
             HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen.'))),
-            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md',
+                   onclick="this.form.submit(); this.disabled=true; this.value='Sending…';"),
         ))
 
         logging.debug(self.helper.layout)
