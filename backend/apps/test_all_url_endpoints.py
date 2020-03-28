@@ -73,7 +73,7 @@ class UrlEndpointTestCase(TestCase):
         assert response.status_code == 200
         self.assertJSONEqual(
             str(response.content, encoding='utf8'),
-            {'user_count': '1'}
+            {'user_count': 1}
         )
 
     def test_student(self):
