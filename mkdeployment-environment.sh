@@ -25,7 +25,7 @@ echo -n "(Re)creating empty directories"
 mkdir -p "${GOROOT}" "${GOPATH}" "${GOCACHE}" && echo -e $OK || { echo -e "$ERROR"; exit 1; }
 
 echo -n "Downloading and installing golang"
-curl https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz |tar -xzC "${GOROOT}" && echo -e $OK || { echo -e "$ERROR"; exit 1; }
+curl -q https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz |tar -xzC "${GOROOT}" && echo -e $OK || { echo -e "$ERROR"; exit 1; }
 
 echo -e "\n\nInstalling webhook"
 go get github.com/adnanh/webhook && echo -e "Installation\t$OK" || { echo -e "Installation\t$ERROR"; exit 1; }
