@@ -80,12 +80,8 @@ Registrierung - Studierende
 <div class="container">
      <div class="row" style="margin-top:30px; margin-bottom:55px;">
                 <div class="col-lg-10 col-sm-12 col-12">
-					
-            <form action="signup_student" method="post">
-                {% csrf_token %}
-                {{form_mail}}
+
                 {% crispy form form.helper %}
-            </form>
        
 		 </div>
 	</div>
