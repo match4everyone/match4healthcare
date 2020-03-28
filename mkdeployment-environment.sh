@@ -27,10 +27,9 @@ mkdir -p "${GOROOT}" "${GOPATH}" "${GOCACHE}" && echo -e $OK || { echo -e "$ERRO
 echo -n "Downloading and installing golang"
 curl -s https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz |tar -xzC "${GOROOT}" && echo -e $OK || { echo -e "$ERROR"; exit 1; }
 
-echo -e "\n\nInstalling webhook"
-go get github.com/adnanh/webhook && echo -e "Installation\t$OK" || { echo -e "Installation\t$ERROR"; exit 1; }
+go get github.com/adnanh/webhook && echo -e "Webhook-Installation\t$OK" || { echo -e "Webhook-Installation\t$ERROR"; exit 1; }
 git clone -q -b "${PREDEPLOY_BRANCH}" --depth 1 "${REPO}" "${SERVERHOME}-predeploy" && echo -e "Git Clone ${PREDEPLOY_BRANCH} -> ${SERVERHOME}-predeploy\t$OK" || { echo -e "Git Clone\t$ERROR"; exit 1; }
-git clone -q -b "${DEPLOY_BRANCH}"    --depth 1 "${REPO}" "${SERVERHOME}-deploy"    && echo -e "Git Clone ${DEPLOY_BRANCH}    -> ${SERVERHOME}-deploy   \t$OK" || { echo -e "Git Clone\t$ERROR"; exit 1; }
+git clone -q -b "${DEPLOY_BRANCH}"    --depth 1 "${REPO}" "${SERVERHOME}-deploy"    && echo -e "Git Clone ${DEPLOY_BRANCH}    -> ${SERVERHOME}-deploy \t\t$OK" || { echo -e "Git Clone\t$ERROR"; exit 1; }
 
 echo "Creating Config files and folders"
 ln -s "${GOPATH}/bin/webhook" "${TOOLS}"
