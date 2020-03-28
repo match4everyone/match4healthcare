@@ -8,7 +8,6 @@ django-extensions>=1.7.1
 django-tables2
 djangorestframework>=3.4.4
 djangorestframework-filters
-pgeocode>=0.2.1
 gunicorn
 whitenoise
 whitenoise[brotli]
