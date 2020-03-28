@@ -96,12 +96,10 @@ elif [ "\$BRANCH" == "$DEPLOY_BRANCH" ]; then
     export BACKEND_PORT=8020
     echo "Switch working dir to ${SERVERHOME}-deploy"
     cd "${SERVERHOME}-deploy"
-else    
+else
     echo "Branch not relevant for this system, abort deployment"
     exit 0
 fi
-
-source "${ENV_FILE}"
 
 git fetch --all
 git checkout --force "origin/\${BRANCH}"
