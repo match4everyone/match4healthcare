@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "POSTGRES_DB=${POSTGRES_DB}" > database.prod.env
 echo "POSTGRES_USER=${POSTGRES_USER}" >> database.prod.env
