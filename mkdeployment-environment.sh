@@ -98,10 +98,10 @@ elif [ "\$BRANCH" == "$DEPLOY_BRANCH" ]; then
     cd "${SERVERHOME}-deploy"
 else    
     echo "Branch not relevant for this system, abort deployment"
+    exit 0
 fi
 
 source "${ENV_FILE}"
-env
 
 git fetch --all
 git checkout --force "origin/\${BRANCH}"
