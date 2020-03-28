@@ -36,12 +36,13 @@ function test() {
 
 
 function check_website_up() {
-	if [[ ! $(curl -o /dev/null --silent --head --write-out '%{http_code}\n' localhost:8000) -eq 200 ]]; then 
+	if [[ ! $(curl -s -o /dev/null -w "%{http_code}\n" localhost:8000) -eq 200 ]]; then 
 		return 1
 	fi
 }
 
 function check_error_log_empty() {
+	curl --silent --output /dev/null localhost:8000
 	if [  -s backend/run/match4healthcare.log ]; then
 		return 1
 	fi
@@ -51,7 +52,7 @@ test "Website reachable" "check_website_up"
 test "Error log empty" "check_error_log_empty"
 
 # If everything went well we exit with zero, else one
-if [[ $failed -eq "True" ]]; then
+if [[ $failed = "True" ]]; then
 	exit 1
 else 
 	exit 0
