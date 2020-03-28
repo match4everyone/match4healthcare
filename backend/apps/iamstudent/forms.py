@@ -46,7 +46,7 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
     'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+        '<b>Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mtla': _('Medizinisch-technische/r Laboratoriumsassistent*in'),
