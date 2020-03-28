@@ -61,12 +61,16 @@ from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
 from apps.accounts.models import User
 from django.http import HttpResponse
 
+from django.contrib.auth.decorators import login_required
+from .decorator import student_required, hospital_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def delete_fakes():
     User.objects.filter(email__contains='email').delete()
 
-
+@login_required
+@staff_member_required
 def populate_db(request):
     delete_fakes()
     n_student = 2000
