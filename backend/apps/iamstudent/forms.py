@@ -302,7 +302,6 @@ class StudentFormEditProfile(StudentForm):
                 css_class='form-row'
             ),
             Row(
-                Column('email', css_class='form-group col-md-6 mb-0'),
                 Column('phone_number', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
