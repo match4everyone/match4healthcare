@@ -71,6 +71,11 @@ if use_sendgrid_api:
     # Using the API
     EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
+    # Disable all tracking options
+    SENDGRID_TRACK_EMAIL_OPENS = False
+    SENDGRID_TRACK_CLICKS_HTML = False
+    SENDGRID_TRACK_CLICKS_PLAIN = False
+
 else:
     # Normal SMTP
     EMAIL_HOST = 'smtp.sendgrid.net'
