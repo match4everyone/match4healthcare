@@ -13,9 +13,6 @@ services:
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
      - SECRET_KEY
-     - POSTGRES_DB
-     - POSTGRES_USER
-     - POSTGRES_PASSWORD
     user: ${CURRENT_UID}
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
@@ -23,17 +20,20 @@ services:
     container_name: ${BRANCH}-database
     image: postgres
     volumes:
-     - ./database/data:/var/lib/postgresql/data
+     - ./database/data:/database
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
-    env_file:
-     - database.prod.env
+    environment: 
+     - PGDATA=/database
+     - POSTGRES_DB
+     - POSTGRES_USER
+     - POSTGRES_PASSWORD    
     expose:
      -  5432
     networks:
      - network
-    user: ${CURRENT_UID}     
+    user: ${CURRENT_UID}
     command: postgres -c config_file=/etc/postgresql.conf
 
 networks:
