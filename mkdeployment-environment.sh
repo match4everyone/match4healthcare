@@ -106,13 +106,14 @@ git checkout --force "origin/\${BRANCH}"
 
 cp "${TOOLS}/webhooks/github/\${BRANCH}.env" "./prod.env"
 export CURRENT_UID=$(id -u):$(id -g)
+export CURRENT_USER=$(id -un)
 echo "User for Docker container: ${CURRENT_UID}"
 docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build -d
 
 docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" "\${BRANCH}-backend" django-admin makemessages
 docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" "\${BRANCH}-backend" django-admin compilemessages
-docker exec "\${BRANCH}-backend" python3 manage.py migrate
 docker exec "\${BRANCH}-backend" python3 manage.py collectstatic --no-input
+docker exec "\${BRANCH}-backend" python3 manage.py migrate
 EOF
 
 cat > "${TOOLS}/webhooks/github/cp-db-from-deploy-to-predeploy.sh" <<EOF

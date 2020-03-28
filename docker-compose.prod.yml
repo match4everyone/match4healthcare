@@ -24,9 +24,11 @@ services:
      - ./database/data:/database
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
+     - /etc/passwd:/etc/passwd:ro
     restart: always
     environment: 
       - PGDATA=/database/
+      - POSTGRES_USER=${CURRENT_USER:-postgres}
     env_file:
       - prod.env
     expose:
