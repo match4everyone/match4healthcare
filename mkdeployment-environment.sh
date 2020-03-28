@@ -86,7 +86,7 @@ export BRANCH="\${1##*/}"
 export ENV_FILE="${TOOLS}/webhooks/github/\${BRANCH}.env"
 
 if [ "\$BRANCH" == "$PREDEPLOY_BRANCH" ]; then
-    echo "Predeploy Branch - Call Mirror Database script
+    echo "Predeploy Branch - Call Mirror Database script"
     "${TOOLS}/webhooks/github/cp-db-from-deploy-to-predeploy.sh"
     echo "Set backend port to 8020"
     export BACKEND_PORT=8020
