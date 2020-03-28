@@ -53,7 +53,7 @@ form_labels = {
     'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mta': _('Medizinisch-technische/r Assistent*in'),
     'ausbildung_typ_mta_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in/Rettungsassistent*in'),
+    'ausbildung_typ_notfallsani': _('Notfallsanitäter*in / Rettungsassistent*in'),
     'ausbildung_typ_notfallsani_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_sani': _('Rettungssanitäter*in/Rettungshelfer*in'),
     'ausbildung_typ_zahni': _('Zahnmedizinstudent*in'),
@@ -207,28 +207,58 @@ class StudentForm(forms.ModelForm):
                              css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
-            ),
-            *[
-                Div(
-                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
-                    ,
-                    Row(*[
-                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
-                               css_class='form-group', css_id=f.replace('_', '-'))
-                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+            ))
+
+        for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items():
+            if len(felder) != 0:
+                if ausbildungstyp != 'MEDSTUD':
+                    self.helper.layout.extend( [
+                        Div(
+                            HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                            ,
+                            Row(*[
+                                Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                       css_class='form-group', css_id=f.replace('_', '-'))
+                                for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                                    ausbildungstyp.lower(), f.lower())
+                            ])
+                            ,
+                            *[
+                                Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                       css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                                for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())
+                            ]
+                            ,css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                            , css_class='hidden ausbildung-addon'
+                        )])
+                else:
+                    self.helper.layout.extend([
+                    Div(
+                        HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,
+                        Row(*[
+                            Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ]),
+                        HTML('<p>'),
+                        HTML(_("Gib hier bitte deine Vorerfahrungen oder Fachrichtung in den folgenden Feldern an:")),
+                        HTML('</p>')
+                        ,
+                        *[
+                            Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if
+                            'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
                             ausbildungstyp.lower(), f.lower())
-                    ])
-                    ,
-                    *[
-                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
-                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
-                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())
-                    ]
-                    ,css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden ausbildung-addon'
-                )
-                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ],
+                        ]
+                        , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        , css_class='hidden ausbildung-addon'
+                    )])
+
+
+        self.helper.layout.extend((
             'sonstige_qualifikationen'
             ,
             HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
@@ -402,10 +432,12 @@ class PersistenStudentFilterForm(forms.ModelForm):
                       AUSBILDUNGS_TYPEN.keys()]),
                 css_id='div-berufsausbildung-dropdown',
             ),
-            # todo einblenden der anderen felder
+            # medstud
+
+            # rest
             *[
                 Div(
-                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
+                    HTML("<p style='font-weight: 500;'>{}</p>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
 
                     Row(*[
                         Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
