@@ -14,9 +14,24 @@ export GOPATH="${TOOLS}/go-build"
 export GOCACHE="${TOOLS}/go-cache"
 export PATH="${PATH}:${GOROOT}/go/bin:${TOOLS}/bin"
 
+OLDPWD=$(pwd)
+
+echo -n "Stopping old containers\t\t"
+if [ -d "${SERVERHOME}-predeploy" ]; then
+cd "${SERVERHOME}-predeploy"
+docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml stop
+docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml rm
+fi
+if [ -d "${SERVERHOME}-deploy" ]; then
+cd "${SERVERHOME}-deploy"
+docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml stop
+docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml rm
+fi
+
+cd ${OLDPWD}
 echo -n "Deleting old directories: \"${TOOLS}\" \"${SERVERHOME}-deploy\" \"${SERVERHOME}-predeploy\""
 
-rm -rf "${TOOLS}"                \
+sudo -- rm -rf "${TOOLS}"                \
        "${SERVERHOME}-deploy"    \
        "${SERVERHOME}-predeploy" \
         && echo -e $OK || { echo -e "$ERROR"; exit 1; }
@@ -92,8 +107,8 @@ if [ "\$BRANCH" == "$PREDEPLOY_BRANCH" ]; then
     echo "Switch working dir to ${SERVERHOME}-predeploy"
     cd "${SERVERHOME}-predeploy"
 elif [ "\$BRANCH" == "$DEPLOY_BRANCH" ]; then
-    echo "Deploy Branch Set backend port to 8020"
-    export BACKEND_PORT=8020
+    echo "Deploy Branch Set backend port to 8040"
+    export BACKEND_PORT=8040
     echo "Switch working dir to ${SERVERHOME}-deploy"
     cd "${SERVERHOME}-deploy"
 else
