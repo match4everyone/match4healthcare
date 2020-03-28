@@ -2,7 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.views.generic import CreateView
-
+from django_tables2 import MultiTableMixin
+from django.views.generic.base import TemplateView
 
 from django.conf import settings
 from .forms import StudentSignUpForm, HospitalSignUpForm
@@ -194,9 +195,13 @@ def edit_hospital_profile(request):
 @staff_member_required
 def approve_hospitals(request):
     table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
-    table_approved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_approved.prefix = 'approved'
+    table_approved.paginate(page=request.GET.get(table_approved.prefix + "page", 1), per_page=5)
+
     table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
-    table_unapproved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_unapproved.prefix = 'unapproved'
+    table_unapproved.paginate(page=request.GET.get(table_unapproved.prefix + "page", 1), per_page=5)
+
     return render(request, 'approve_hospitals.html', {'table_approved': table_approved, 'table_unapproved': table_unapproved})
 
 @login_required
