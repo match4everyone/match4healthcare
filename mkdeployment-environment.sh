@@ -121,7 +121,7 @@ cat > "${TOOLS}/webhooks/github/cp-db-from-deploy-to-predeploy.sh" <<EOF
 echo "Now we would copy prod DB to predeploy instance
 EOF
 
-chmod +x "${TOOLS}/webhooks/github/*.sh"
+chmod +x "${TOOLS}/webhooks/github/"*.sh
 echo -ne "Finished preparations\n\nStarting webhookd using the following command:\n\n\t"
 echo -e "${TOOLS}/webhook -hooks ${TOOLS}/webhooks/hooks.json -ip 0.0.0.0 -verbose"
 echo -e "Please remember to set GitHub secret to ${GITHUB_SECRET}"
