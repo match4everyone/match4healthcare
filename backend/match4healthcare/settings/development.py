@@ -23,15 +23,55 @@ DATABASES = {
 }
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
-SENDGRID_SECRET_FILE = normpath(join(BASE_DIR, 'run', 'SENDGRID.key'))
-#SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
+# Don't use our domain, prevent bad reputation
+NOREPLY_MAIL = 'match4healthcare-DEVELOPMENT<noreply@example.de>'
 
-# Normal SMTP
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# Possible values are 'file', 'external', 'sendgrid'
+# For storing mails local in files files, sending external (uberspace) or sending over sendgrid (production like)
+mail_relay_option = 'sendgrid'
 
-# Using the API
-# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+# +++ Store files locally
+if mail_relay_option == 'file':
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+# +++ Use local debug server
+elif mail_relay_option == 'external':
+    EMAIL_HOST = 'spahr.uberspace.de'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'noreply@medisvs.spahr.uberspace.de'
+    EMAIL_HOST_PASSWORD = 'jonathan'
+    EMAIL_USE_TLS = False
+
+# +++ Use sendgrid
+elif mail_relay_option == 'sendgrid':
+    # Use API instead of SMTP server
+    use_sendgrid_api = True
+
+    # Retrieve sendgrid api key
+    SENDGRID_SECRET_FILE = normpath(join(BASE_DIR, 'run', 'SENDGRID.key'))
+    SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
+
+    if use_sendgrid_api:
+        # Using the API
+        EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+        # Disable sendbox mode to send actual emails
+        SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+        # Disable all tracking options
+        SENDGRID_TRACK_EMAIL_OPENS = False
+        SENDGRID_TRACK_CLICKS_HTML = False
+        SENDGRID_TRACK_CLICKS_PLAIN = False
+
+    else:
+        # Normal SMTP
+        EMAIL_HOST = 'smtp.sendgrid.net'
+        EMAIL_HOST_USER = 'apikey'
+        EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
+
+else:
+    # ToDo add logger message instead?
+    print("No email option selected")
+    exit(1)
