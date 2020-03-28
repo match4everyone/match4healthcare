@@ -82,7 +82,7 @@ cat > "${TOOLS}/webhooks/github/deploy.sh" <<EOF
 # Extract Branch from argument ref ("refs/heads/branch-name")
 export BRANCH="\${1##*/}"
 export ENV_FILE="${TOOLS}/webhooks/github/\${BRANCH}.env"
-export CURRENT_UID=$(id -u):$(id -g)
+
 
 if [ "\$BRANCH" == "$PREDEPLOY_BRANCH" ]; then
     echo "Predeploy Branch - Call Mirror Database script"
@@ -105,6 +105,8 @@ git fetch --all
 git checkout --force "origin/\${BRANCH}"
 
 cp "${TOOLS}/webhooks/github/\${BRANCH}.env" "./prod.env"
+export CURRENT_UID=$(id -u):$(id -g)
+echo "User for Docker container: ${CURRENT_UID}"
 docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build -d
 
 docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" "\${BRANCH}-backend" django-admin makemessages
