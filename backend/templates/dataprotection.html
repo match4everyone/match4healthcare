@@ -6,7 +6,7 @@
 Datenschutzerklärung
 {% endblock %}
 
-{% block content %}
+{% block header %}
 <script type="text/javascript">
     function decode(a) {
         return a.replace(/[a-zA-Z]/g, function (c) {
@@ -15,7 +15,9 @@ Datenschutzerklärung
         })
     };
 </script>
+{% endblock %}
 
+{% block content %}
 <div class="container">
     <div style="height:40px"></div>
     <div class="impressum">
