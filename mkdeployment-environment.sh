@@ -70,7 +70,6 @@ SECRET_KEY=$(tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50)
 POSTGRES_DB=${1}
 POSTGRES_USER=m4hc
 POSTGRES_PASSWORD=$( tr -dc 'a-z0-9!_=+)' < /dev/urandom | head -c10 )
-CURRENT_UID=$(id -u):$(id -g)
 EOF
 }
 
@@ -83,6 +82,7 @@ cat > "${TOOLS}/webhooks/github/deploy.sh" <<EOF
 # Extract Branch from argument ref ("refs/heads/branch-name")
 export BRANCH="\${1##*/}"
 export ENV_FILE="${TOOLS}/webhooks/github/\${BRANCH}.env"
+export CURRENT_UID=$(id -u):$(id -g)
 
 if [ "\$BRANCH" == "$PREDEPLOY_BRANCH" ]; then
     echo "Predeploy Branch - Call Mirror Database script"
