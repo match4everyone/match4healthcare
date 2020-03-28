@@ -25,7 +25,7 @@ form_labels = {
 
     'plz': _('Postleitzahl'),
     'countrycode': _('Land'),
-    'email': _('Email'),
+    'email': _('E-Mail'),
     'availability_start': _('Ich bin verfügbar ab'),
 
     'braucht_bezahlung': _('Ich benötige eine Vergütung'),
@@ -137,7 +137,7 @@ class StudentForm(forms.ModelForm):
         exclude = ['uuid', 'registration_date', 'user']
         labels = form_labels
         help_texts = {
-            'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
+            'email': _('Über diese E-Mail-Adresse dürfen dich medizinische Einrichtungen kontaktieren'),
             'countrycode': _('Bitte wähle ein Land aus'),
             'plz': _('bevorzugter Einsatzort als Postleitzahl'),
            # 'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')

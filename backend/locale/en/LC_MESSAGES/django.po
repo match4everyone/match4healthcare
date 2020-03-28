@@ -163,7 +163,7 @@ msgid ""
 "Bestätigungslink. Nach Klick darauf gelangen Sie in die Datenbank. Dort "
 "können nach den von Ihnen gewünschten Kriterien (Ausbildungsstand etc.) "
 "Helfende suchen, filtern und diesen auf unserer Plattform direkt eine E-Mail "
-"verfassen. Der Emailversand erfolgt dann nach einer Validierung durch uns."
+"verfassen. Der Versand der E-Mails erfolgt dann nach einer Validierung durch uns."
 msgstr ""
 "Please enter here general information about your institution. After clicking "
 "on \"Register\" you will receive an e-mail with a confirmation link. After "
@@ -281,15 +281,15 @@ msgstr "Set password"
 
 #: .\apps\accounts\templates\registration\password_reset_done_.html:20
 msgid ""
-"Wir haben Ihnen eine EMail gesendet mit einem Link um ihr Kennwort "
-"zurückzusetzen, wenn ein Account mit dieser EMail-Adresse existiert."
+"Wir haben Ihnen eine E-Mail gesendet mit einem Link um ihr Kennwort "
+"zurückzusetzen, wenn ein Account mit dieser E-Mail-Adresse existiert."
 msgstr ""
 "We’ve emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 
 #: .\apps\accounts\templates\registration\password_reset_done_.html:21
 msgid ""
-"Wenn Sie kein EMail erhalten, überprüfen Sie bitte die eingegebene Adresse "
+"Wenn Sie keine E-Mail erhalten, überprüfen Sie bitte die eingegebene Adresse "
 "und Ihren Spam-Ordner."
 msgstr ""
 "If you don't receive an e-Mail from us, please double-check the entered e-"
@@ -319,7 +319,7 @@ msgstr ""
 "Kind Regards from the match4healthcare Team\n"
 
 #: .\apps\accounts\templates\registration\password_reset_email_subject.txt:2
-msgid " Email Bestätigen"
+msgid " E-Mail Bestätigen"
 msgstr " Confirm e-Mail"
 
 #: .\apps\accounts\templates\registration\password_reset_form_.html:6
@@ -327,8 +327,8 @@ msgid "Passwort Vergessen?"
 msgstr "Lost password?"
 
 #: .\apps\accounts\templates\registration\password_reset_form_.html:50
-msgid "Gib deine Email-Addresse an und du erhältst ein neues Passwort"
-msgstr "Enter your e-Mail and we will send you a new password"
+msgid "Bitte gib hier deine E-Mail-Addresse an und du erhältst einen Link an die angegebene E-Mail Adresse, um ein neues Passwort zu erstellen."
+msgstr "Enter your email and we will send you a new password"
 
 #: .\apps\accounts\templates\registration\password_reset_form_.html:57
 msgid "Passwort zurücksetzen "
@@ -420,7 +420,7 @@ msgid ""
 "  <li>Nachdem Ihre Registrierung abgeschlossen ist, gelangen Sie nun auf der "
 "Plattform in die Datenbank. Dort können nach den von Ihnen gewünschten "
 "Kriterien (Ausbildungsstand etc.) Helfende suchen, filtern und diesen auf "
-"unserer Plattform direkt eine E-Mail verfassen. Der Emailversand erfolgt "
+"unserer Plattform direkt eine E-Mail verfassen. Der Versand der E-Mails erfolgt "
 "dann nach einer Validierung durch uns.</li>\n"
 "  <li>Wenn Sie Helfende nicht mehr benötigen, bitte geben Sie diesen "
 "Bescheid, damit diese Ihren Status bei uns anpassen können und für andere "
@@ -543,8 +543,8 @@ msgid "Land"
 msgstr "Country"
 
 #: .\apps\iamstudent\forms.py:28
-msgid "Email"
-msgstr "Email"
+msgid "E-Mail"
+msgstr "E-Mail"
 
 #: .\apps\iamstudent\forms.py:29
 msgid "Ich bin verfügbar ab"
@@ -734,7 +734,7 @@ msgstr "max"
 
 #: .\apps\iamstudent\forms.py:140
 msgid ""
-"Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
+"Über diese E-Mail-Adresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
 #: .\apps\iamstudent\forms.py:141
@@ -781,8 +781,8 @@ msgid "Registriere mich"
 msgstr "Register me"
 
 #: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:76
-msgid "Diese Email ist bereits vergeben"
-msgstr "This e-Mail has already been used"
+msgid "Diese E-Mail ist bereits vergeben"
+msgstr "This email has already been used"
 
 #: .\apps\iamstudent\forms.py:355
 msgid ""
@@ -961,8 +961,8 @@ msgstr "Send"
 
 #: .\apps\iamstudent\templates\send_mail_hospital.html:35
 #, python-format
-msgid "Du möchtest eine Email an <mark>%(n)s Helfer*innen</mark> schicken."
-msgstr "You are about to send an e-Mail to <mark>%(n)s supporters</mark>."
+msgid "Du möchtest eine E-Mail an <mark>%(n)s Helfer*innen</mark> schicken."
+msgstr "You are about to send an email to <mark>%(n)s supporters</mark>."
 
 #: .\apps\iamstudent\templates\student_list_view.html:6
 #, python-format
@@ -993,8 +993,8 @@ msgstr "We found <mark>%(n)s supporters</mark> matching your search."
 #: .\apps\iamstudent\templates\student_list_view.html:141
 #: .\apps\iamstudent\templates\student_list_view.html:145
 #, python-format
-msgid "Email an alle %(n)s Helfer*innen senden"
-msgstr "Send e-mail to %(n)s supporters"
+msgid "E-Mail an alle %(n)s Helfer*innen senden"
+msgstr "Send email to %(n)s supporters"
 
 #: .\apps\iamstudent\templates\student_list_view.html:151
 msgid ""
@@ -1005,9 +1005,9 @@ msgstr "Click on the table rows to select helpers you want to contact."
 #: .\apps\iamstudent\templates\student_list_view.html:158
 #: .\apps\iamstudent\templates\student_list_view.html:162
 #, fuzzy
-#| msgid "Email an %(n)s Helfer*innen schicken"
-msgid "Email an AUSGEWÄHLTE Helfer*innen schicken"
-msgstr "Send e-mail to %(n)s supporters"
+#| msgid "E-Mail an %(n)s Helfer*innen schicken"
+msgid "E-Mail an AUSGEWÄHLTE Helfer*innen schicken"
+msgstr "Send email to %(n)s supporters"
 
 #: .\apps\iamstudent\templates\student_list_view.html:202
 msgid "Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!"
@@ -1373,8 +1373,8 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Was für eine Ausbildung sollen die Helfer*innen haben?"
 #~ msgstr "What kind of training should the supporters have?"
 
-#~ msgid "Email an <mark>ausgewählte</mark>> Helfer*innen schicken"
-#~ msgstr "You are about to send an e-Mail to <mark>%(n)s supporters</mark>"
+#~ msgid "E-Mail an <mark>ausgewählte</mark>> Helfer*innen schicken"
+#~ msgstr "You are about to send an email to <mark>%(n)s supporters</mark>"
 
 #~ msgid "Vergeben Sie ein Passwort für die Anmeldung"
 #~ msgstr "Provide a password for your account"
@@ -1446,8 +1446,8 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Passort vergessen?"
 #~ msgstr "Reset password"
 
-#~ msgid "Deine Email wurde erfolgreich geändert!"
-#~ msgstr "Your e-Mail address has been updated!"
+#~ msgid "Deine E-Mail wurde erfolgreich geändert!"
+#~ msgstr "Your email address has been updated!"
 
 #~ msgid "Semester"
 #~ msgstr "Study Semester"
