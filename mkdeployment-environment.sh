@@ -5,7 +5,7 @@ SERVERHOME="$(pwd)/m4h-server"
 PREDEPLOY_BRANCH="malte-test-predeploy"
 DEPLOY_BRANCH="production"
 REPO="git@github.com:match4healthcare/match4healthcare.git"
-GITHUB_SECRET="$(tr -dc 'a-z0-9!A-Z(-_=+)' < /dev/urandom | head -c50)"
+GITHUB_SECRET="$(tr -dc 'a-z0-9A-Z' < /dev/urandom | head -c 250)"
 
 OK="\t\e[32mOK\e[0m"
 ERROR="\t\e[31mERROR\e[0m"
