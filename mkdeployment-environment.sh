@@ -66,10 +66,10 @@ EOF
 function generate_env_file(){
 ENV_FILE="${TOOLS}/webhooks/github/${1}.env"
 cat > "${ENV_FILE}" <<EOF
-SECRET_KEY="$(tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50)"
-POSTGRES_DB="${1}"
-POSTGRES_USER="m4hc"
-POSTGRES_PASSWORD="$( tr -dc 'a-z0-9!_=+)' < /dev/urandom | head -c10 )"
+SECRET_KEY=$(tr -dc 'a-z0-9!@#$%^&*(-_=+)' < /dev/urandom | head -c50)
+POSTGRES_DB=${1}
+POSTGRES_USER=m4hc
+POSTGRES_PASSWORD=$( tr -dc 'a-z0-9!_=+)' < /dev/urandom | head -c10 )
 CURRENT_UID=$(id -u):$(id -g)
 EOF
 }

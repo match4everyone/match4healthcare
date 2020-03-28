@@ -14,7 +14,7 @@ services:
       - prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
-     - SECRET_KEY
+     - SECRET_KEY=${SECRET_KEY:?Django Secret Key Env not set}
     user: ${CURRENT_UID:-0}
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
@@ -27,7 +27,7 @@ services:
      - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
     env_file:
-      - prod.env  
+      - prod.env
     expose:
      -  5432
     networks:
