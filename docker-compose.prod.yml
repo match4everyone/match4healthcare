@@ -25,6 +25,8 @@ services:
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
+    environment: 
+      - PGDATA="/database"
     env_file:
       - prod.env
     expose:
