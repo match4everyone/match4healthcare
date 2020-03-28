@@ -1,4 +1,5 @@
 #!/bin/bash -e
+DIRECTORY=$(cd `dirname $0` && pwd )
 TOOLS="$(pwd)/tools"
 GOROOT="${TOOLS}/go-dist"
 SERVERHOME="$(pwd)/m4h-server"
@@ -14,8 +15,6 @@ export GOPATH="${TOOLS}/go-build"
 export GOCACHE="${TOOLS}/go-cache"
 export PATH="${PATH}:${GOROOT}/go/bin:${TOOLS}/bin"
 
-OLDPWD=$(pwd)
-
 echo -n "Stopping old containers\t\t"
 if [ -d "${SERVERHOME}-predeploy" ]; then
 cd "${SERVERHOME}-predeploy"
@@ -28,7 +27,7 @@ docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml stop
 docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml rm
 fi
 
-cd ${OLDPWD}
+cd "${DIRECTORY}"
 echo -n "Deleting old directories: \"${TOOLS}\" \"${SERVERHOME}-deploy\" \"${SERVERHOME}-predeploy\""
 
 sudo -- rm -rf "${TOOLS}"                \
