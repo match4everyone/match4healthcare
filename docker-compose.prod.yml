@@ -15,7 +15,7 @@ services:
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
      - SECRET_KEY
-    user: ${CURRENT_UID:0}
+    user: ${CURRENT_UID:-0}
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
   database:
@@ -32,7 +32,7 @@ services:
      -  5432
     networks:
      - network
-    user: ${CURRENT_UID:0}
+    user: ${CURRENT_UID:-0}
     command: postgres -c config_file=/etc/postgresql.conf
 
 networks:
