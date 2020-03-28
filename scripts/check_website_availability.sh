@@ -22,10 +22,16 @@ end=$'\e[0m'
 # Return variable
 failed=False
 
+# Site
+URL=localhost:8000
+
+# Log file location
+ERR_LOG_PATH=backend/run/match4healthcare.log
+
 # Execute command and print status
 function test() {
 	printf "${1}:\t"
-	eval "$2" &> /dev/null
+	eval "$2"
 	if [[ $? -eq 0 ]]; then
 		printf "${grn}Pass\n${end}"
 	else
@@ -36,14 +42,31 @@ function test() {
 
 
 function check_website_up() {
-	if [[ ! $(curl -s -o /dev/null -w "%{http_code}\n" localhost:8000) -eq 200 ]]; then 
+	if [[ ! $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
 		return 1
 	fi
 }
 
 function check_error_log_empty() {
+	# Check if log file exists
+	for i in $(seq 1 10); do 
+		if [ -f "$ERR_LOG_PATH" ]; then
+    		break
+		else
+			if [[ i -eq 10 ]]; then
+				printf "Log file not found\t"
+				return 1
+			fi
+		fi
+		sleep 1
+	done
+
 	curl --silent --output /dev/null localhost:8000
-	if [  -s backend/run/match4healthcare.log ]; then
+	sleep 5
+	if [  -s "$ERR_LOG_PATH" ]; then
+		printf "\n"
+		cat "$ERR_LOG_PATH"
+		printf "\n"
 		return 1
 	fi
 }
