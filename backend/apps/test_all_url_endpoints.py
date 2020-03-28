@@ -302,7 +302,6 @@ class UrlEndpointTestCase(TestCase):
         assert self.client.get('/mapview/', {}).status_code == 200
         #TODO Test Detailansicht for a hospital!
 
-        #TODO this doesnt work right now w/ backend error
         response = self.client.get('/accounts/profile_redirect', follow=True)
         assert response.status_code == 200
         assert "approve_hospitals" in response.redirect_chain[0][0]
