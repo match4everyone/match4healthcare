@@ -7,7 +7,7 @@ services:
     volumes:
       - './backend:/match4healthcare-backend'
     ports:
-      - '${BACKEND_PORT:80}:8000'
+      - '${BACKEND_PORT:-80}:8000'
     networks:
       - network
     env_file:
