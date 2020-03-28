@@ -13,11 +13,11 @@ def validate_semester(value):
     else:
         return value
 
+
 def validate_checkbox(value):
-    if value != True:
-        raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
-    else:
-        return value
+    pass
+    # TODO: Remove in a manner that does not brake migrations!
+
 
 #class Bezahlung(models.IntegerChoices):
 EGAL = 0
