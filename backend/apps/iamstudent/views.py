@@ -18,7 +18,7 @@ from apps.accounts.models import User
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
 
-from match4healthcare.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
+from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
@@ -157,7 +157,7 @@ def student_list_view(request, countrycode, plz, distance):
 
     filter_jobrequireform = PersistenStudentFilterForm(request.GET)
 
-    enable_mail_send = (f.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
+    enable_mail_send = (f.qs.count() <= settings.MAX_EMAIL_BATCH_PER_HOSPITAL)
 
     context = {
         'plz': plz,
@@ -170,7 +170,7 @@ def student_list_view(request, countrycode, plz, distance):
         'filter_origin': f,
         'n': f.qs.count(),
         'enable_mail': enable_mail_send,
-        'max': MAX_EMAIL_BATCH_PER_HOSPITAL
+        'max': settings.MAX_EMAIL_BATCH_PER_HOSPITAL
     }
 
     return render(request, 'student_list_view.html', context)
