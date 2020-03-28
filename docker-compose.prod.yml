@@ -10,9 +10,8 @@ services:
       - '${BACKEND_PORT:80}:8000'
     networks:
       - network
-      env_file:
-        - prod.env
-        - database.prod.env      
+    env_file:
+      - prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
      - SECRET_KEY
