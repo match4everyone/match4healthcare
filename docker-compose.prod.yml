@@ -16,6 +16,7 @@ services:
      - POSTGRES_DB
      - POSTGRES_USER
      - POSTGRES_PASSWORD
+    user: ${CURRENT_UID}
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
 
   database:
@@ -32,6 +33,7 @@ services:
      -  5432
     networks:
      - network
+    user: ${CURRENT_UID}     
     command: postgres -c config_file=/etc/postgresql.conf
 
 networks:
