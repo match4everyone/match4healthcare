@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}
+Logout - Studierende
+{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<script type="text/javascript">
+    function decode(a) {
+        return a.replace(/[a-zA-Z]/g, function (c) {
+            return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13)
+                ? c : c - 26);
+        })
+    };
+</script>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style type="text/css">
+    .bg-container {
+        background-image: url({% static 'img/login-bg.jpg' %});
+        background-position: center;
+        background-size: cover;
+    }
+	@media only screen and (max-width: 767px) {
+	.bg-container {background-position: left; background-image:none; background-color:#bdcbcc;}
+	}
+
+</style>
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        $(window).on("resize", function() {
+
+            var height = $(window).height();
+            var navHeight = $('.navbar').outerHeight();
+            var footerHeight = $('.footer').innerHeight();
+
+            var newHeight = height - navHeight - footerHeight;
+
+            $(".login-form").height(newHeight);
+
+        }).trigger("resize");
+
+    });
+</script>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="bg-container">
+  <div class="container login-form">
+	 <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12">
+    <div class="card login-card text-center align-items-center">
+      <h2 class="font-weight-light"> {% blocktrans %}Ein Fehler ist aufgetreten{% endblocktrans %}</h2>
+      <p>{% blocktrans %}Wenn der Fehler weiterhin auftritt, melde dich per email bei {% endblocktrans %} <script type="text/javascript">document.write(decode("fhccbeg@zngpu4urnygupner.qr"))</script></p>
+      <img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline">
+      <a href="/"><button type="submit" class="btn blue text-white btn-md" style="margin-top:35px;">{% blocktrans %}Zurück zur Startseite{% endblocktrans %}</button></a>
+    </div>
+	 </div>
+  </div>
+</div>
+
+{% endblock %}
