@@ -11,7 +11,7 @@ from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm, PersistenStudentFilterForm
+from .forms import StudentForm, EmailToSendForm, EmailForm, stolen_helper
 from .models import Student, EmailToSend
 from apps.accounts.models import User
 
@@ -22,6 +22,8 @@ from match4healthcare.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
+
+from crispy_forms.helper import FormHelper
 
 
 def get_student(request):
@@ -138,41 +140,44 @@ def student_list_view(request, countrycode, plz, distance):
         # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
 
-    lat, lon, ort = plzs[countrycode][plz]
-
     qs = Student.objects.filter(user__validated_email=True)
 
-    # TODO Consult with others how this should behave!
+    lat, lon, ort = plzs[countrycode][plz]
     if distance==0:
-        qs_place = qs.filter(plz=plz, countrycode=countrycode)
+        qs = qs.filter(plz=plz, countrycode=countrycode)
     else:
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        qs_place = qs.filter(plz__in=close_plzs, countrycode=countrycode)
+        qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
 
-    filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs_place)
+    filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs)
     qs = filter_availability.qs
-    f  =StudentJobRequirementsFilter(request.GET, queryset=qs)
-    table = StudentTable(f.qs)
 
-    filter_jobrequireform = PersistenStudentFilterForm(request.GET)
+    filter_jobrequirements = StudentJobRequirementsFilter(request.GET, queryset=qs)
+    qs = filter_jobrequirements.qs
 
-    enable_mail_send = (f.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
+    table = StudentTable(qs)
+
+    enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
+
+    # sepecial display options for the job availability logic
+    x = stolen_helper()
+    DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request.GET, display_version=True)
     context = {
         'plz': plz,
         'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
         'table': table,
-        'filter_jobrequireform' : filter_jobrequireform,
-        'filter_availability' : filter_availability,
-        'filter_origin': f,
-        'n': f.qs.count(),
+        'filter_availability': filter_availability,
+        'filter_origin': DISPLAY_filter_jobrequirements,
+        'stolen_helper': x,
+        'n': qs.count(),
         'enable_mail': enable_mail_send,
         'max': MAX_EMAIL_BATCH_PER_HOSPITAL
     }
-
+    a = 1
     return render(request, 'student_list_view.html', context)
 
 
