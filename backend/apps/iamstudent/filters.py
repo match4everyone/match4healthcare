@@ -92,18 +92,6 @@ class StudentJobRequirementsFilter(filters.FilterSet):
                     self.form.fields[a_field].label = form_labels[a_field]
 
 
-class NamedEmptyFilterSet(filters.FilterSet):
-
-    def __init__(self, *args, **kwargs):
-      super(NamedEmptyFilterSet, self).__init__(*args, **kwargs)
-
-      for name, field in self.filters.items():
-        if isinstance(field, filters.ChoiceFilter):
-              field.extra['choices'] =[(k,v) for k,v in list(field.extra['choices']) if k != '']
-
-
-
-
 class StudentAvailabilityFilter(filters.FilterSet):
     braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung', lookup_expr='gte',
                                              choices=BEZAHLUNG_CHOICES_Filter,
