@@ -15,28 +15,35 @@
 
 {% block content %}
 <hr>
-<div class="container">
-
-    <p>
-
-    </p>
-</div>
-<div class="container">
-    <div class="card border-primary">
-        <div class="card-header">
-            <h4>{% blocktrans %}Anzeige versenden{% endblocktrans %}</h4>
-        </div>
-        <div class="card-body">
-            <form action="/iamstudent/send_mail_student/{{ids}}" method="post">
-                {% csrf_token %}
-                {{ form | crispy }}
-                <p>
-       <button type="submit" class="btn btn-success">Sende Mails</button>
-                    {% blocktrans %}Du möchtest eine Email an <mark>{{n}} Helfer*innen</mark> schicken.{% endblocktrans %}
-    </p>
-                </form>
-        </div>
+    <div class="container">
+        <p>
+        </p>
     </div>
-    <hr>
-</div>
+
+    <div class="container">
+        <div class="card border-primary">
+            <div class="card-header">
+                <h4>{% blocktrans %}Anzeige versenden{% endblocktrans %}</h4>
+            </div>
+            <div class="card-body">
+                <form action="/iamstudent/send_mail_student/{{ids}}" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <p>
+                        <button type="submit" class="btn btn-success">Sende Mails</button>
+                        {% blocktrans %}Du möchtest eine Email an <mark>{{n}} Helfer*innen</mark> schicken.{% endblocktrans %}
+                    </p>
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <script>
+        function disableButton() {
+            const btn = document.getElementById('send-mails-button');
+            btn.disabled = true;
+            btn.innerHTML = 'Lädt...'
+        }
+    </script>
 {% endblock %}
