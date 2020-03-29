@@ -281,7 +281,7 @@ class StudentForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise ValidationError(mark_safe(_('Diese E-mail ist bereits vergeben und eine Bestätigungsmail wurde versandt. <b><a target="_blank" href="/accounts/resend_validation_email/'+ email + '">Clicke hier, um die Bestätigungsmail erneut zu versenden</a></b>')))
+            raise ValidationError(mark_safe(_('Diese E-mail ist bereits vergeben und eine Bestätigungsmail wurde versandt. <b><a target="_blank" href="/accounts/resend_validation_email/'+ email + '">Klicke hier, um die Bestätigungsmail erneut zu versenden</a></b>')))
         return email
 
     def clean_datenschutz_zugestimmt(self):
