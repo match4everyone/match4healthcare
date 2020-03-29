@@ -22,7 +22,7 @@ services:
   database:
     image: postgres
     volumes:
-     - postgres-data:/var/lib/postgresql/data
+     - ./database/data:/var/lib/postgresql/data
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
@@ -37,5 +37,5 @@ services:
 networks:
  network:
 
-volumes:
-  postgres-data:
+#volumes:
+#  postgres-data:
