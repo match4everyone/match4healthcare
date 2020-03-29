@@ -183,15 +183,16 @@ def edit_hospital_profile(request):
     hospital = request.user.hospital
 
     if request.method == 'POST':
-        form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
-        messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+        form = HospitalFormEditProfile(request.POST, instance=hospital, prefix='infos')
 
         if form.is_valid():
             form.save()
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+        else:
+            messages.info(request, _('Deine Daten wurden nicht erfolgreich geändert!'), extra_tags='alert-warning')
 
     else:
         form = HospitalFormEditProfile(instance=hospital, prefix='infos')
-        #form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
     return render(request, 'hospital_edit.html', {'form': form})
 
