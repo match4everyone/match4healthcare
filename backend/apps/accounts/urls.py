@@ -20,6 +20,7 @@ urlpatterns = [
         post_reset_login=True,
         success_url='/accounts/validate_email'
       ) , name='password_reset_confirm_'),
+    path('resend_validation_email/<email>', views.resend_validation_email,name='resend_validation_email'),
     path('login/', views.CustomLoginView.as_view(template_name='registration/login.html'),name='login'),
     path('', include('django.contrib.auth.urls')),
     path('validate_email', views.validate_email, name='validate_email'),

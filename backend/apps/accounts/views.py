@@ -162,9 +162,9 @@ def edit_student_profile(request):
 
     if request.method == 'POST':
         form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
-        messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
 
         if form.is_valid():
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form.save()
 
     else:
@@ -179,9 +179,9 @@ def edit_hospital_profile(request):
 
     if request.method == 'POST':
         form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
-        messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
 
         if form.is_valid():
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form.save()
 
     else:
@@ -221,13 +221,25 @@ def delete_me_ask(request):
     user = request.user
     return render(request,'deleted_user_ask.html')
 
-
 @login_required
 def validate_email(request):
     if not request.user.validated_email:
         request.user.validated_email = True
         request.user.save()
     return HttpResponseRedirect("/mapview")
+
+
+def resend_validation_email(request, email):
+    if request.user.is_anonymous:
+        if not User.objects.get(username=email).validated_email:
+            send_password_set_email(
+                email=email,
+                host=request.META['HTTP_HOST'],
+                template="registration/password_set_email_.html",
+                subject_template="registration/password_reset_email_subject.txt"
+            )
+            return HttpResponseRedirect("/accounts/password_reset/done")
+    return HttpResponseRedirect("/")
 
 from django.contrib.auth.views import LoginView
 
