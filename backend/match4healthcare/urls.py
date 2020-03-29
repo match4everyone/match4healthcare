@@ -21,6 +21,11 @@ from match4healthcare import views
 from match4healthcare.settings import common as settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
+from django.conf.urls import (
+    handler404, handler500
+)
+handler404 = views.handler404
+handler500 = views.handler500
 
 urlpatterns = [
     path('mapview/', include('apps.mapview.urls')),
@@ -28,6 +33,8 @@ urlpatterns = [
     path('ineedstudent/', include('apps.ineedstudent.urls')),
     path('accounts/', include('apps.accounts.urls')),
     path('admin/', admin.site.urls),
+    path('404/', views.handler404),
+    path('500/', views.handler500),
     path('', views.home),
     path('about/', views.about),
     path('impressum/', views.impressum),
