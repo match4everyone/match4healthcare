@@ -1,21 +1,12 @@
 import csv
 from os.path import dirname, abspath, join
 from math import radians, sin, cos, asin, sqrt
-
-plzs = {}
+import json
 
 current_location = dirname(abspath(__file__))
 
-for countrycode in ["DE", "AT"]:
-    with open(join(current_location, f'files/{countrycode}.csv'), encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        plzs[countrycode] = {}
-        for row in reader:
-            try:
-                plzs[str(countrycode)][row["plz"]] = (float(row["lon"]), float(row["lat"]), row["ort"])
-            except:
-                pass
-                # print("Warning: count not make PLZ entry for", row)
+with open(join(current_location, "files/plzs_merged.json")) as f:
+    plzs = json.loads(f.read())
 
 
 def haversine(lon1, lat1, lon2, lat2):

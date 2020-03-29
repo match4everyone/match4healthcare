@@ -19,7 +19,7 @@
 
              {% for choice in field.field.choices %}
                 <label class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
-                    <input type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden >
+                    <input autocomplete="off" type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden >
                     {{choice.1}}
             </label>
             {% endfor %}

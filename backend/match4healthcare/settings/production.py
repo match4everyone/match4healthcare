@@ -11,8 +11,8 @@ DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.eu',
-                 'medis-vs-covid19.de']
+ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.de',
+                 'match4healthcare.eu', 'match4healthcare.org', 'medis-vs-covid19.de', 'localhost']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -57,3 +57,16 @@ LOGGING = {
         },
     },
 }
+
+# =============== MAIL RELAY SERVER CONFIGURATION ===============
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+# Normal SMTP
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# Using the API
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
