@@ -437,7 +437,9 @@ def get_form_helper_filter():
                     )])
             else:
                 helper.layout.extend([
-                    Div(Row(*[
+                    Div(HTML('<hr><h5>Zusätzliche Filter zu {}</h5>'.format(
+                            _(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,Row(*[
                         Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group', css_id=f.replace('_', '-'))
                         for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
