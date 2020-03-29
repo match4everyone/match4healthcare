@@ -28,65 +28,6 @@ from apps.accounts.utils import send_password_set_email
 from django.views.decorators.gzip import gzip_page
 
 
-# Create your views here.
-@login_required
-@hospital_required
-def list_by_plz(request, countrycode, plz, distance):
-    template = loader.get_template('list_by_plz.html')
-
-    if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
-
-    lat, lon, ort = plzs[countrycode][plz]
-
-    # TODO Consult with others how this should behave!
-    if distance==0:
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz=plz, countrycode=countrycode))
-    else:
-        close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        f = StudentFilter(request.GET, queryset=Student.objects.filter(plz__in=close_plzs, countrycode=countrycode))
-
-    context = {
-        'plz': plz,
-        'countrycode': countrycode,
-        'ort': ort,
-        'distance': distance,
-        'filter': f
-    }
-
-    return HttpResponse(template.render(context, request))
-
-@login_required
-@hospital_required
-def student_list_view(request, countrycode, plz, distance):
-    print('start')
-    if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen
-        return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
-
-    lat, lon, ort = plzs[countrycode][plz]
-
-    # TODO Consult with others how this should behave!
-    if distance==0:
-        qs = Student.objects.filter(plz=plz, countrycode=countrycode)
-    else:
-        close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        qs = Student.objects.filter(plz__in=close_plzs, countrycode=countrycode)
-
-    table = StudentTable(qs)
-
-    context = {
-        'plz': plz,
-        'countrycode': countrycode,
-        'ort': ort,
-        'distance': distance,
-        'table': table
-    }
-
-    return render(request, 'student_list_view.html', context)
-
-
 class StudentTable(tables.Table):
     info = TemplateColumn(template_name='info_button.html')
     checkbox = TemplateColumn(template_name='checkbox_studenttable.html')
@@ -96,24 +37,6 @@ class StudentTable(tables.Table):
         template_name = "django_tables2/bootstrap4.html"
         exclude = ['uuid','registration_date','id']
         fields = ['user']
-
-def hospital_registration(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = HospitalForm(request.POST)
-
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            # redirect to a new URL:
-            return render(request, 'thanks_hospital.html')
-
-        # if a GET (or any other method) we'll create a blank form
-    else:
-        form = HospitalForm()
-
-    return render(request, 'hospital.html', {'form': form})
-
 
 
 # Should be safe against BREACH attack because we don't have user input in reponse body
@@ -150,7 +73,7 @@ def prepare_hospitals(ttl_hash=None):
             }
     return locations_and_number
 
-
+@login_required
 def hospital_list(request, countrycode, plz):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
@@ -189,7 +112,7 @@ class ApprovalHospitalTable(HospitalTable):
         fields = ['firmenname','ansprechpartner','user','telefon','plz','user__validated_email']
         exclude = ['uuid','registration_date','id']
 
-
+@login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
     return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
