@@ -289,3 +289,26 @@ class EmailToSend(models.Model):
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+
+class StudentListFilterModel(models.Model):
+
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+
+
+from .filters import StudentJobRequirementsFilter
+jrf = StudentJobRequirementsFilter()
+import django.forms as forms
+import django_filters.fields as filter_fields
+for f_name, filter in jrf.base_filters.items():
+
+    if type(filter.field) == forms.NullBooleanField:
+        StudentListFilterModel.add_to_class(f_name, models.NullBooleanField(default=None,null=True))
+    elif type(filter.field) == forms.DecimalField:
+        StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
+    elif type(filter.field) == filter_fields.ChoiceField:
+        StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0,choices=filter.field.choices))
+    else:
+        raise ValueError("I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name))

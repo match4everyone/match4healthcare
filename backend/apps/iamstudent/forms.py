@@ -97,8 +97,8 @@ maxim = _('maximal')
 for field in fields_for_button_group:
     if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
         f = str(field)
-        form_labels[f + '__lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
-        form_labels[f + '__gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
+        form_labels[f + '_x_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_x_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
 
 
 def button_group(field):
@@ -115,8 +115,8 @@ def button_group_filter(field):
         return Column()
     if field in fields_for_button_group:
         if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
-            return Field(Row(Column(ButtonGroup(field + '__gt'))),
-            Row(Column(ButtonGroup(field + '__lt'))))
+            return Field(Row(Column(ButtonGroup(field + '_x_gt'))),
+            Row(Column(ButtonGroup(field + '_x_lt'))))
         else:
             return ButtonGroup(field)
     return field

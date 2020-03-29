@@ -9,29 +9,29 @@ from crispy_forms.bootstrap import InlineRadios
 
 class StudentJobRequirementsFilter(filters.FilterSet):
 
-    ausbildung_typ_medstud_abschnitt__gt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt',lookup_expr='gte')
-    ausbildung_typ_medstud_abschnitt__lt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt', lookup_expr='lte')
+    ausbildung_typ_medstud_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt',lookup_expr='gte')
+    ausbildung_typ_medstud_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_medstud_abschnitt', lookup_expr='lte')
 
-    ausbildung_typ_mfa_abschnitt__gt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mfa_abschnitt__lt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='lte')
+    ausbildung_typ_mfa_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mfa_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_mfa_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_mta_abschnitt__gt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mta_abschnitt__lt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='lte')
+    ausbildung_typ_mta_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mta_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_mtla_abschnitt__gt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='gte')
-    ausbildung_typ_mtla_abschnitt__lt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='lte')
+    ausbildung_typ_mtla_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='gte')
+    ausbildung_typ_mtla_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_notfallsani_abschnitt__gt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='gte')
-    ausbildung_typ_notfallsani_abschnitt__lt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='lte')
+    ausbildung_typ_notfallsani_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='gte')
+    ausbildung_typ_notfallsani_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_notfallsani_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_physio_abschnitt__gt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='gte')
-    ausbildung_typ_physio_abschnitt__lt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='lte')
+    ausbildung_typ_physio_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='gte')
+    ausbildung_typ_physio_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_pflege_abschnitt__gt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='gte')
-    ausbildung_typ_pflege_abschnitt__lt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='lte')
+    ausbildung_typ_pflege_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='gte')
+    ausbildung_typ_pflege_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='lte')
 
-    ausbildung_typ_zahni_abschnitt__gt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='gte')
-    ausbildung_typ_zahni_abschnitt__lt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='lte')
+    ausbildung_typ_zahni_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='gte')
+    ausbildung_typ_zahni_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='lte')
 
 
     class Meta:
@@ -74,10 +74,10 @@ class StudentJobRequirementsFilter(filters.FilterSet):
                 if type(approved) is forms.NullBooleanField:
                     self.form.fields[a_field] = forms.MultipleChoiceField(choices=THREE_CHOICES, required=False,widget=forms.CheckboxSelectMultiple)
                 if type(approved) is forms.DecimalField:
-                   basename = a_field.split('__')[0]
+                   basename = a_field.split('_x_')[0]
                    CHOICES = self.Meta.model._meta._forward_fields_map[basename].choices
                    from copy import deepcopy
-                   if a_field.split('__')[1] == 'gt':
+                   if a_field.split('_x_')[1] == 'gt':
                         CHOICES_GT = list(deepcopy(CHOICES))
                         CHOICES_GT[0] = ('',_('Egal'))
                         self.form.fields[a_field] = forms.TypedChoiceField(choices=CHOICES_GT, required=False)
