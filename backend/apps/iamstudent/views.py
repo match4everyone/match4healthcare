@@ -218,13 +218,21 @@ def student_list_view(request, countrycode, plz, distance):
         filter_model = StudentListFilterModel.objects.get(uuid=uuid)
 
         # update filter
-        # todo: reset defaults
         uuid_filter = str(filter_model.uuid)
         student_attr = clean_request_for_saving(request)
         qs = StudentListFilterModel.objects.filter(uuid=uuid_filter)
         qs.update(**student_attr)
+        from django.db.models.fields import NOT_PROVIDED
         for r in qs:
             r.save()
+
+        # reset all fields that have not been set to default
+        filter_model = StudentListFilterModel.objects.get(uuid=uuid)
+        for f in filter_model._meta.fields:
+            if not f.name in ['uuid','hospital','location','registration_date'] and not f.name in student_attr:
+                if f.default != NOT_PROVIDED:
+                    setattr(filter_model, f.name, f.get_default())
+        filter_model.save()
 
         #update location
         uuid_loc = str(filter_model.location.uuid)
