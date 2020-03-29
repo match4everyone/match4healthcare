@@ -47,9 +47,10 @@ def get_student(request):
 def thx(request):
     return render(request, 'thanks.html')
 
-
+@login_required
+@hospital_required
 def successful_mail(request):
-    return render(request,'emails_sent.html')
+    return render(request,'emails_sent.html',{'not_registered': not request.user.hospital.is_approved})
 
 
 def leftover_emails_for_today(request):
