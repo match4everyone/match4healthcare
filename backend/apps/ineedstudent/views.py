@@ -19,7 +19,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
 from django.contrib.admin.views.decorators import staff_member_required
-
+from apps.ineedstudent.forms import HospitalFormZustimmung
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
 import time
@@ -91,6 +91,24 @@ def hospital_list(request, countrycode, plz):
         'table': table}
 
     return render(request, "list_hospitals_by_plz.html", context)
+
+
+@login_required
+@hospital_required
+def zustimmung(request):
+    user = request.user
+    h = Hospital.objects.get(user=user)
+    if request.method == 'POST':
+        form_info = HospitalFormZustimmung(request.POST, instance=h)
+
+        if form_info.is_valid():
+            h.save()
+            return HttpResponseRedirect("/accounts/login_redirect")
+
+    else:
+        form_info = HospitalFormZustimmung()
+    return render(request, 'zustimmung.html', {'form_info': form_info })
+
 
 
 class HospitalTable(tables.Table):
