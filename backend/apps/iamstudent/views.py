@@ -130,9 +130,9 @@ def notify_student(student_id, contact):
               recipient_list=[student.email])
 
 def clean_request_for_saving(request):
-    student_attr = dict(request.GET.copy())
+    student_attr = dict(request)
     for i in ['plz', 'distance', 'countrycode', 'uuid', 'saveFilter', 'filterName']:
-        if i in request.GET.keys():
+        if i in request.keys():
             student_attr.pop(i)
 
     for i in list(student_attr.keys()):
@@ -148,9 +148,24 @@ def clean_request_for_saving(request):
             student_attr[i] = False
     return student_attr
 
+def clean_request(request):
+    keys = list(request.GET.keys())
+    request_filtered = request.GET.copy()
+    for k in keys:
+        if k.startswith('ausbildung_typ_') and k.count('_') > 2:
+            # this is a subfield with the selection notenabled this should not be in the filter
+            # possibly also solvable by javascript (do not send these hidden boxes at all))
+            if not '_'.join(k.split('_')[:3]) in request.GET:
+                request_filtered.pop(k)
+    return request_filtered
+
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
+    # todo filter request for unallowed filters (like vorklinik, when medstud not clicked)
+    print(request)
+    request_filtered = clean_request(request)
+
     # only show validated students
     qs = Student.objects.filter(user__validated_email=True)
 
@@ -169,7 +184,7 @@ def student_list_view(request, countrycode, plz, distance):
     qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
     # filter by job requirements
-    filter_jobrequirements = StudentJobRequirementsFilter(request.GET, queryset=qs)
+    filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, queryset=qs)
     qs = filter_jobrequirements.qs
 
     # displayed table
@@ -179,7 +194,7 @@ def student_list_view(request, countrycode, plz, distance):
     enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
     # special display to enable the fancy java script stuff and logic
-    DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request.GET, display_version=True)
+    DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, display_version=True)
 
     context = {
         'plz': plz,
@@ -200,9 +215,9 @@ def student_list_view(request, countrycode, plz, distance):
     filter_name = request.GET.get('filterName','')
 
     from .models import StudentListFilterModel, LocationFilterModel
-    if save_filter == 'true' and filter_name != '': #todo is valid
+    if save_filter == 'true' and filter_name != '':
 
-        student_attr = clean_request_for_saving(request)
+        student_attr = clean_request_for_saving(request_filtered)
         loc = LocationFilterModel(plz=plz, distance=distance, countrycode=countrycode)
         loc.save()
         filter_model = StudentListFilterModel(**student_attr,name=filter_name,hospital=request.user.hospital)
@@ -219,7 +234,7 @@ def student_list_view(request, countrycode, plz, distance):
 
         # update filter
         uuid_filter = str(filter_model.uuid)
-        student_attr = clean_request_for_saving(request)
+        student_attr = clean_request_for_saving(request_filtered)
         qs = StudentListFilterModel.objects.filter(uuid=uuid_filter)
         qs.update(**student_attr)
         from django.db.models.fields import NOT_PROVIDED
@@ -234,7 +249,7 @@ def student_list_view(request, countrycode, plz, distance):
                     setattr(filter_model, f.name, f.get_default())
         filter_model.save()
 
-        #update location
+        # update location
         uuid_loc = str(filter_model.location.uuid)
         qs = LocationFilterModel.objects.filter(uuid=uuid_loc)
         qs.update(plz=plz, distance=distance, countrycode=countrycode)
@@ -247,11 +262,6 @@ def student_list_view(request, countrycode, plz, distance):
     else:
         # user does not want to save filter
         context['filter_is_being_saved'] = False
-
-
-
-
-
 
     return render(request, 'student_list_view.html', context)
 
