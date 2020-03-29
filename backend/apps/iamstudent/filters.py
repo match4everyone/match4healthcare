@@ -67,7 +67,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
             ('true', 'notwendig')]
 
         if display_version:
-
+            # todo: can we use filter overwrites?
             for a_field in self.form.fields.keys():
                 approved = self.form.fields[a_field]
 
@@ -90,8 +90,6 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
-
-
 
 
 class NamedEmptyFilterSet(filters.FilterSet):

@@ -277,29 +277,6 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
 AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
 
 
-
-
-
-"""End"""
-
-import django_filters
-from django import forms
-from django.db import models
-
-
-class StudentFilter(django_filters.FilterSet):
-    class Meta:
-        model = Student
-        fields = {}
-        filter_overrides = {
-            models.BooleanField: {
-                'filter_class': django_filters.BooleanFilter,
-                'extra': lambda f: {
-                    'widget': forms.CheckboxInput,
-                },
-            },
-        }
-
 class EmailToSend(models.Model):
 
     subject = models.CharField(max_length=200,default='')
