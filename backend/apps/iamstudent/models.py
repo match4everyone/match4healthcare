@@ -70,6 +70,10 @@ UMKREIS_CHOICES = (
     (LESSFOURTY, _('<40 km')),
         (MOREFOURTY, _('>40 km')),
 )
+COUNTRY_CODE_CHOICES = [
+    ("DE", 'Deutschland'),
+    ("AT", 'Österreich'),
+]
 
 
 
@@ -79,10 +83,7 @@ class Student(models.Model):
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-    COUNTRY_CODE_CHOICES = [
-        ("DE", 'Deutschland'),
-        ("AT", 'Österreich'),
-    ]
+
     countrycode = models.CharField(
         max_length=2,
         choices=COUNTRY_CODE_CHOICES,
@@ -290,13 +291,21 @@ class EmailToSend(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
+
+
+class LocationFilterModel(models.Model):
+
+    plz = models.CharField(max_length=5, null=True)
+    distance = models.IntegerField(default=0)
+    countrycode = models.CharField(max_length=2,choices=COUNTRY_CODE_CHOICES,default="DE",)
+
 class StudentListFilterModel(models.Model):
 
     hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+    location = LocationFilterModel
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
-
 
 from .filters import StudentJobRequirementsFilter
 jrf = StudentJobRequirementsFilter()
