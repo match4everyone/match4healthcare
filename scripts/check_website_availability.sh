@@ -44,6 +44,7 @@ function test() {
 function check_website_up() {
 	# Check if log file exists
 	for i in $(seq 1 10); do 
+		# GET request to website and get http code fromkk server https://superuser.com/a/442395
 		if [[  $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
     		break
 		else

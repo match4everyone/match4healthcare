@@ -12,7 +12,7 @@ from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
-from .models import Student, EmailToSend
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -213,7 +213,6 @@ def student_list_view(request, countrycode, plz, distance):
     save_filter = request.GET.get('saveFilter', 'false')
     filter_name = request.GET.get('filterName','')
 
-    from .models import StudentListFilterModel, LocationFilterModel
     if save_filter == 'true' and filter_name != '':
 
         student_attr = clean_request_for_saving(request_filtered)
