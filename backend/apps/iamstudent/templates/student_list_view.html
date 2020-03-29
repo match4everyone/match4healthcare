@@ -69,17 +69,15 @@
     <div style="height:40px"></div>
     <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Breits registrierte Helfer durchsuchen und
         kontaktieren.{% endblocktrans %} </h1>
-    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie brauchen zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
-    <p> Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben
-        <mark>muss</mark>
-        , indem ihr auf das Feld klickt.
-        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon
+    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Brauchen Sie zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
+    <p> Dann müssen Sie unter "Ausbildungen" auswählen, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>,
+        indem Sie auf das Feld klicken.
+        In dem geöffneten Feld können Sie nun auswählen, dass die Pflegekraft schon
         <mark>berufstätig</mark>
         sein muss.
-        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf
-        <mark>ja</mark>
-        .
-        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und
+        Sie können außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf
+        <mark>ja</mark>.
+        Nun einfach auf den "Filter Aktualisieren" klicken und Sie können euch die Kandidaten in der Tabelle ansehen und
         ihnen eine
         <mark>Email senden</mark>
     </p>
@@ -90,7 +88,7 @@
                 {% blocktrans %}Helfer finden{% endblocktrans %}
             </div>
             <div class="card-body">
-                <h5> {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}</h5>
+                <h5> {% blocktrans %}An welchem Ort und in welchem Abstand suchen Sie Helfer*innen?{% endblocktrans %}</h5>
 
                 <div class="form-row">
                     <div class="col">
@@ -187,7 +185,7 @@
 
 <script>
     var alertMaxMails = function () {
-        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');
+        alert('Zu viele Emails auf einmal. Wählen Sie bitte maximal {{ max }} Helfer*innen aus, indem Sie weitere Filter auswählen.');
     };
 
     var $table = $('#table');
@@ -215,7 +213,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
+            alert("{% blocktrans %}Bitte wählen Sie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
         }
     };
 
@@ -227,7 +225,7 @@
         if (li.length > 0) {
             window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
         } else {
-            alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu deinem Filter passen. Bitte gibt weniger Kriterien an um passende Helfer*innen zu finden.{% endblocktrans %}")
+            alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu Ihrem Filter passen. Bitte wählen Sie weniger Kriterien aus um passende Helfer*innen zu finden.{% endblocktrans %}")
         }
     };
 
