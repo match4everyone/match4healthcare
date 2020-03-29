@@ -71,8 +71,8 @@ UMKREIS_CHOICES = (
         (MOREFOURTY, _('>40 km')),
 )
 COUNTRY_CODE_CHOICES = [
-    ("DE", 'Deutschland'),
-    ("AT", 'Österreich'),
+    ("DE", _('Deutschland')),
+    ("AT", _('Österreich')),
 ]
 
 
