@@ -1,6 +1,7 @@
 from django.urls import path, include
+from . import views
 
 
 urlpatterns = [
-    path('access_statistics', views.access_statistics, name='access_statistics'),
+    path('view', views.access_statistics, name='access_statistics'),
 ]
