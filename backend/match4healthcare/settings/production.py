@@ -12,7 +12,7 @@ DEBUG = False
 SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['matchmedisvsvirus.dynalias.org', 'helping-health.from-de.com', 'match4healthcare.de',
-                 'match4healthcare.eu', 'match4healthcare.org', 'medis-vs-covid19.de']
+                 'match4healthcare.eu', 'match4healthcare.org', 'medis-vs-covid19.de', 'localhost']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -59,14 +59,27 @@ LOGGING = {
 }
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
+# ToDo add environment variable based detection whether we are on prod or staging
+NOREPLY_MAIL = 'match4healthcare<noreply@match4healthcare.de>'
+
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-# Normal SMTP
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# Use API instead of SMTP server
+use_sendgrid_api = True
 
-# Using the API
-# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+if use_sendgrid_api:
+    # Using the API
+    EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+    # Disable all tracking options
+    SENDGRID_TRACK_EMAIL_OPENS = False
+    SENDGRID_TRACK_CLICKS_HTML = False
+    SENDGRID_TRACK_CLICKS_PLAIN = False
+
+else:
+    # Normal SMTP
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_HOST_USER = 'apikey'
+    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
