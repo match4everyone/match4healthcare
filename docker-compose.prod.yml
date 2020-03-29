@@ -15,11 +15,14 @@ services:
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
+    depends_on:
+      - database
+
 
   database:
     image: postgres
     volumes:
-     - ./database/data:/var/lib/postgresql/data
+     - postgres-data:/var/lib/postgresql/data
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
     restart: always
@@ -33,3 +36,6 @@ services:
 
 networks:
  network:
+
+volumes:
+  postgres-data:

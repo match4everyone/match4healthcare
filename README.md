@@ -19,7 +19,20 @@ Migrations have to be executed with `docker exec backend python3 /matchedmedisvi
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
-## local
+### Production
+
+To run a container in production and in a new environment execute the `setup.sh` script which builds the containers, runs all configurations and then starts the web service.
+
+If you want to deploy manually follow these steps closly:
+
+1. Build the containers
+2. Make messages
+3. Compile messages
+4. Collect static
+5. Migrate
+6. Restart containers (important, whitenoise does not reload static files after it has started)
+
+## Local
 - create migration after model change:
 `python3 manage.py makemigrations`
 
