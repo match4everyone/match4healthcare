@@ -175,7 +175,7 @@ def edit_student_profile(request):
     else:
         form = StudentFormEditProfile(instance=student, prefix='infos')
 
-    return render(request, 'student_edit.html', {'form': form})
+    return render(request, 'student_edit.html', {'form': form, 'is_activated': student.is_activated})
 
 @login_required
 @hospital_required
@@ -267,3 +267,29 @@ from .forms import CustomAuthenticationForm
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
+
+from django.contrib import messages
+
+
+@login_required
+@student_required
+def change_activation_ask(request):
+    return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
+
+
+
+
+@login_required
+@student_required
+def change_activation(request):
+    s = request.user.student
+    status = s.is_activated
+    s.is_activated = not s.is_activated
+    s.save()
+    if status:
+        messages.add_message(request, messages.INFO, _(
+            'Du hast dein Profil erfolreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
+    else:
+        messages.add_message(request, messages.INFO,_(
+            'Du hast dein Profil erfolreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
+    return HttpResponseRedirect('profile_student')

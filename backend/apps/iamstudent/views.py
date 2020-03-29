@@ -166,7 +166,7 @@ def student_list_view(request, countrycode, plz, distance):
     request_filtered = clean_request(request)
 
     # only show validated students
-    qs = Student.objects.filter(user__validated_email=True)
+    qs = Student.objects.filter(user__validated_email=True,is_activated=True)
 
     # filter by location
     countrycode = request.GET.get('countrycode', countrycode)
