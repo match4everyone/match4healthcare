@@ -167,8 +167,8 @@ ASSIST = 4
 FACH = 5
 MEDSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
-    (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
-    (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
+    (VORKLINIK, _('Vorklinischer Teil')),
+    (KLINIK, _('Klinischer Teil')),
     (PJ, _('Praktisches Jahr')),
     (ASSIST, _('Assistenzarzt')),
     (FACH,_('Facharzt'))
