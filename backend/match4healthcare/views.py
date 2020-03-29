@@ -32,3 +32,11 @@ def legal_questions(request):
     template = loader.get_template('legal-questions.html')
 
     return HttpResponse(template.render(context, request))
+
+def handler404(request, exception=None):
+    template = loader.get_template('404.html')
+    return HttpResponse(template.render({}, request), status=404)
+
+def handler500(request):
+    template = loader.get_template('500.html')
+    return HttpResponse(template.render({}, request), status=500)

@@ -13,11 +13,11 @@ def validate_semester(value):
     else:
         return value
 
+
 def validate_checkbox(value):
-    if value != True:
-        raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
-    else:
-        return value
+    pass
+    # TODO: Remove in a manner that does not brake migrations!
+
 
 #class Bezahlung(models.IntegerChoices):
 EGAL = 0
@@ -149,8 +149,8 @@ ASSIST = 4
 FACH = 5
 MEDSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
-    (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
-    (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
+    (VORKLINIK, _('Vorklinischer Teil')),
+    (KLINIK, _('Klinischer Teil')),
     (PJ, _('Praktisches Jahr')),
     (ASSIST, _('Assistenzarzt')),
     (FACH,_('Facharzt'))

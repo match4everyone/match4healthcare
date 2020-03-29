@@ -46,7 +46,7 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
     'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+        '<b>Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mtla': _('Medizinisch-technische/r Laboratoriumsassistent*in'),
@@ -81,15 +81,15 @@ form_labels = {
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
 fields_for_button_group = [
-    'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
-'ausbildung_typ_pflege_abschnitt',
-                           'ausbildung_typ_physio_abschnitt',
-                           'ausbildung_typ_medstud_abschnitt',
-                           'ausbildung_typ_mfa_abschnitt',
-                           'ausbildung_typ_mtla_abschnitt',
-                           'ausbildung_typ_mta_abschnitt',
-                           'ausbildung_typ_notfallsani_abschnitt',
-                           'ausbildung_typ_zahni_abschnitt'
+                            'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
+                            'ausbildung_typ_pflege_abschnitt',
+                            'ausbildung_typ_physio_abschnitt',
+                            'ausbildung_typ_medstud_abschnitt',
+                            'ausbildung_typ_mfa_abschnitt',
+                            'ausbildung_typ_mtla_abschnitt',
+                            'ausbildung_typ_mta_abschnitt',
+                            'ausbildung_typ_notfallsani_abschnitt',
+                            'ausbildung_typ_zahni_abschnitt'
 ]
 
 mindest = _('mindestens')
@@ -151,7 +151,10 @@ class StudentForm(forms.ModelForm):
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
+        self.helper.form_action = 'signup_student'
+        self.helper.attrs = {
+            'onsubmit':'disableButton()'
+        }
 
         self.helper.layout = Layout(
   HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
@@ -269,8 +272,8 @@ class StudentForm(forms.ModelForm):
             'einwilligung_datenweitergabe',
             HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen.'))),
-            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md',
-                   onclick="this.form.submit(); this.disabled=true; this.value='Sending…';"),
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
+            HTML("<script>function disableButton() {var btn = document.getElementById('submit-id-submit'); btn.disabled = true;btn.value = 'Sending...'}</script>")
         ))
 
         logging.debug(self.helper.layout)
@@ -281,6 +284,15 @@ class StudentForm(forms.ModelForm):
             raise ValidationError(_("Diese Email ist bereits vergeben"))
         return email
 
+    def clean_datenschutz_zugestimmt(self):
+        if not self.cleaned_data['datenschutz_zugestimmt']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
+
+    def clean_einwilligung_datenweitergabe(self):
+        if not self.cleaned_data['einwilligung_datenweitergabe']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
 
 class StudentFormAndMail(StudentForm):
     email = forms.EmailField()
