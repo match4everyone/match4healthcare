@@ -298,6 +298,7 @@ class LocationFilterModel(models.Model):
     plz = models.CharField(max_length=5, null=True)
     distance = models.IntegerField(default=0)
     countrycode = models.CharField(max_length=2,choices=COUNTRY_CODE_CHOICES,default="DE",)
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
 
 class StudentListFilterModel(models.Model):
 

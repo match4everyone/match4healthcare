@@ -129,6 +129,25 @@ def notify_student(student_id, contact):
               from_email=settings.NOREPLY_MAIL,
               recipient_list=[student.email])
 
+def clean_request_for_saving(request):
+    student_attr = dict(request.GET.copy())
+    for i in ['plz', 'distance', 'countrycode', 'uuid', 'saveFilter', 'filterName']:
+        if i in request.GET.keys():
+            student_attr.pop(i)
+
+    for i in list(student_attr.keys()):
+
+        if type(student_attr[i]) == list:
+            student_attr[i] = student_attr[i][0]
+
+        if student_attr[i] == '':
+            student_attr.pop(i)
+        elif student_attr[i] == 'true':
+            student_attr[i] = True
+        elif student_attr[i] == 'false':
+            student_attr[i] = False
+    return student_attr
+
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
@@ -183,41 +202,37 @@ def student_list_view(request, countrycode, plz, distance):
     from .models import StudentListFilterModel, LocationFilterModel
     if save_filter == 'true' and filter_name != '': #todo is valid
 
-        context['filter_is_being_saved'] =True
-
-        # filter has not been saved yet
-        loc = LocationFilterModel(plz=plz,distance=distance,countrycode=countrycode)
-        student_attr =  dict(request.GET.copy())
-        for i in ['plz','distance','countrycode','uuid','saveFilter','filterName']:
-            if i in request.GET.keys():
-                student_attr.pop(i)
-
-        for i in list(student_attr.keys()):
-
-            if type(student_attr[i]) == list:
-                student_attr[i] = student_attr[i][0]
-
-            if student_attr[i] == '':
-                student_attr.pop(i)
-            elif student_attr[i] == 'true':
-                student_attr[i] = True
-            elif student_attr[i] == 'false':
-                student_attr[i] = False
-            else:
-                print(student_attr[i])
-        print(type(student_attr['ausbildung_typ_mtla']))
-        print(student_attr)
-
+        student_attr = clean_request_for_saving(request)
+        loc = LocationFilterModel(plz=plz, distance=distance, countrycode=countrycode)
+        loc.save()
         filter_model = StudentListFilterModel(**student_attr,name=filter_name,hospital=request.user.hospital)
+        filter_model.location = loc
         filter_model.save()
-        #, location = loc
+
         context['uuid'] = filter_model.uuid
         context['filter_name'] = filter_model.name
+        context['filter_is_being_saved'] = True
 
     elif uuid != '':
         # update saved filter
         filter_model = StudentListFilterModel.objects.get(uuid=uuid)
-        # todo somehow update attributes
+
+        # update filter
+        # todo: reset defaults
+        uuid_filter = str(filter_model.uuid)
+        student_attr = clean_request_for_saving(request)
+        qs = StudentListFilterModel.objects.filter(uuid=uuid_filter)
+        qs.update(**student_attr)
+        for r in qs:
+            qs.save()
+
+        #update location
+        uuid_loc = str(filter_model.location.uuid)
+        qs = LocationFilterModel.objects.filter(uuid=uuid_loc)
+        qs.update(plz=plz, distance=distance, countrycode=countrycode)
+        for r in qs:
+            qs.save()
+
         context['filter_name'] = filter_model.name
         context['uuid'] = filter_model.uuid
         context['filter_is_being_saved'] = True
