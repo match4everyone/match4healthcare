@@ -224,14 +224,14 @@ def student_list_view(request, countrycode, plz, distance):
         qs = StudentListFilterModel.objects.filter(uuid=uuid_filter)
         qs.update(**student_attr)
         for r in qs:
-            qs.save()
+            r.save()
 
         #update location
         uuid_loc = str(filter_model.location.uuid)
         qs = LocationFilterModel.objects.filter(uuid=uuid_loc)
         qs.update(plz=plz, distance=distance, countrycode=countrycode)
         for r in qs:
-            qs.save()
+            r.save()
 
         context['filter_name'] = filter_model.name
         context['uuid'] = filter_model.uuid
