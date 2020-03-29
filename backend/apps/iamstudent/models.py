@@ -132,25 +132,6 @@ class Student(models.Model):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
 
-class PersistenStudentFilterModel(models.Model):
-
-    """
-    Persistent Filtering for the Student List
-    """
-
-    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
-
-
-    ausbildung_typ_medstud_famulaturen_anaesthesie = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_chirurgie =models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_innere = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_intensiv = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_notaufnahme = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-
-    ausbildung_typ_medstud_anerkennung_noetig = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-
-
-
 
 """Add stufff to model"""
 wunschorte = ['arzt', 'gesundheitsamt', 'krankenhaus', 'pflege', 'rettungsdienst', 'labor', 'apotheke','ueberall']
@@ -282,7 +263,6 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     # types
     a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
     Student.add_to_class(a_typ, models.BooleanField(default=False))
-    PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
     for key, field in felder.items():
         if 'empty' in key:
@@ -290,14 +270,6 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
         a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
         AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
         Student.add_to_class(a_typ_kind, field[0](**field[1]))
-        # todo: switch type
-        if 'abschnitt' == key:
-            PersistenStudentFilterModel.add_to_class('%s_lt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
-            PersistenStudentFilterModel.add_to_class('%s_gt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
-        elif 'famulatu' in a_typ_kind or 'noetig' in a_typ_kind:
-            pass
-        else:
-            PersistenStudentFilterModel.add_to_class(a_typ_kind, field[0](**field[1]))
 
 # Generate Fields for translation
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
