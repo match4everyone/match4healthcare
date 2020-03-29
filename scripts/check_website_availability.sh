@@ -42,10 +42,19 @@ function test() {
 
 
 function check_website_up() {
-	if [[ ! $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
-		printf "Website error code: $(curl -s -o /dev/null -w "%{http_code}\n" $URL)"
-		return 1
-	fi
+	# Check if log file exists
+	for i in $(seq 1 10); do 
+		if [[  $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
+    		break
+		else
+			if [[ i -eq 10 ]]; then
+				printf "Website error code: $(curl -s -o /dev/null -w "%{http_code}\n" $URL)"
+				return 1
+			fi
+		fi
+		sleep 1
+	done
+
 }
 
 function check_error_log_empty() {
