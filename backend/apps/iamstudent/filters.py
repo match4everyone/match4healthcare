@@ -79,12 +79,12 @@ class StudentJobRequirementsFilter(filters.FilterSet):
                    from copy import deepcopy
                    if a_field.split('__')[1] == 'gt':
                         CHOICES_GT = list(deepcopy(CHOICES))
-                        CHOICES_GT[0] = (0,_('Egal'))
+                        CHOICES_GT[0] = ('',_('Egal'))
                         self.form.fields[a_field] = forms.TypedChoiceField(choices=CHOICES_GT, required=False)
                         self.form.fields[a_field].initial = 0
                    else:
                        CHOICES_LT = list(deepcopy(CHOICES))
-                       CHOICES_LT[0] = (10, _('Egal'))
+                       CHOICES_LT[0] = ('', _('Egal'))
                        self.form.fields[a_field] = forms.TypedChoiceField(choices=CHOICES_LT, required=False)
                        self.form.fields[a_field].initial = 10
 
