@@ -91,7 +91,6 @@ class StudentJobRequirementsFilter(filters.FilterSet):
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
 
-filters.NumericRangeFilter
 
 
 
