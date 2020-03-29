@@ -61,43 +61,44 @@ from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
 from apps.accounts.models import User
 from django.http import HttpResponse
 
-
+from django.conf import settings
 
 def delete_fakes():
     User.objects.filter(email__contains='email').delete()
 
-
 def populate_db(request):
-    delete_fakes()
-    n_student = 2000
-    n_hospital = 200
-    plzs = np.random.choice(big_city_plzs, size=n_student)
-    months = np.random.choice(np.arange(1,12),size=n_student)
-    days = np.random.choice(np.arange(2,15),size=n_student)
-    year = 2020
+    if settings.DEBUG:
+        delete_fakes()
+        n_student = 2000
+        n_hospital = 200
+        plzs = np.random.choice(big_city_plzs, size=n_student)
+        months = np.random.choice(np.arange(1,12),size=n_student)
+        days = np.random.choice(np.arange(2,15),size=n_student)
+        year = 2020
 
-    for i in range(n_student):
-        idx = i
-        m = mail(i)
-        kwd = dict(zip(AUSBILDUNGS_TYPEN_COLUMNS,np.random.choice([True,False],size=len(AUSBILDUNGS_TYPEN_COLUMNS))))
+        for i in range(n_student):
+            idx = i
+            m = mail(i)
+            kwd = dict(zip(AUSBILDUNGS_TYPEN_COLUMNS,np.random.choice([True,False],size=len(AUSBILDUNGS_TYPEN_COLUMNS))))
 
-        pwd = User.objects.make_random_password()
-        u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
-        s = Student.objects.create(user=u,
-                                   plz=plzs[i],
-                                   availability_start='{}-{:02d}-{:02d}'.format(year,months[i],days[i]),
-                                   **kwd
-                                   )
-    plzs = np.random.choice(big_city_plzs, size=n_student)
-    for i in range(n_hospital):
-        m = mail(i+n_student)
-        pwd = User.objects.make_random_password()
-        u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
-        s = Hospital.objects.create(user=u,
-                                   plz=plzs[i],
-                                   ansprechpartner='XY',
-                                    sonstige_infos='yeaah'
-                                   )
+            pwd = User.objects.make_random_password()
+            u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
+            s = Student.objects.create(user=u,
+                                       plz=plzs[i],
+                                       availability_start='{}-{:02d}-{:02d}'.format(year,months[i],days[i]),
+                                       **kwd
+                                       )
+        plzs = np.random.choice(big_city_plzs, size=n_student)
+        for i in range(n_hospital):
+            m = mail(i+n_student)
+            pwd = User.objects.make_random_password()
+            u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
+            s = Hospital.objects.create(user=u,
+                                       plz=plzs[i],
+                                       ansprechpartner='XY',
+                                        sonstige_infos='yeaah'
+                                       )
 
 
-    return HttpResponse('Done. %s entries.' % User.objects.all().count())
+        return HttpResponse('Done. %s entries.' % User.objects.all().count())
+    return HttpResponse('Access forbidden: Not in debug mode.')

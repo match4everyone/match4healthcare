@@ -67,6 +67,15 @@ class UrlEndpointTestCase(TestCase):
         assert self.client.get('/accounts/password_reset/', {}).status_code == 200
         assert self.client.get('/accounts/login/', {}).status_code == 200
 
+    def test_count_url(self):
+        generate_random_student()
+        response = self.client.get('/accounts/count', {})
+        assert response.status_code == 200
+        self.assertJSONEqual(
+            str(response.content, encoding='utf8'),
+            {'user_count': 1}
+        )
+
     def test_student(self):
         student_email, student_password, _ = generate_random_student()
         assert self.client.post('/accounts/logout/', {}).status_code == 200

@@ -1,17 +1,22 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.views.generic import CreateView
-
+from django_tables2 import MultiTableMixin
+from django.views.generic.base import TemplateView
 
 from django.conf import settings
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
-
+from django.contrib import messages
+from django.utils.text import format_lazy
 from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
 from apps.iamstudent.models import Student
@@ -194,9 +199,13 @@ def edit_hospital_profile(request):
 @staff_member_required
 def approve_hospitals(request):
     table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
-    table_approved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_approved.prefix = 'approved'
+    table_approved.paginate(page=request.GET.get(table_approved.prefix + "page", 1), per_page=5)
+
     table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
-    table_unapproved.paginate(page=request.GET.get("page", 1), per_page=5)
+    table_unapproved.prefix = 'unapproved'
+    table_unapproved.paginate(page=request.GET.get(table_unapproved.prefix + "page", 1), per_page=5)
+
     return render(request, 'approve_hospitals.html', {'table_approved': table_approved, 'table_unapproved': table_unapproved})
 
 @login_required
@@ -207,6 +216,16 @@ def change_hospital_approval(request,uuid):
     h.save()
     if h.is_approved:
         send_mails_for(h)
+    return HttpResponseRedirect('/accounts/approve_hospitals')
+
+@login_required
+@staff_member_required
+def delete_hospital(request,uuid):
+    h = Hospital.objects.get(uuid=uuid)
+    name = h.user
+    h.delete()
+    text = format_lazy(_("Du hast die Instiution mit user '{name}' gelöscht."), name=name)
+    messages.add_message(request, messages.INFO,text)
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
 @login_required
@@ -228,6 +247,18 @@ def validate_email(request):
         request.user.validated_email = True
         request.user.save()
     return HttpResponseRedirect("/mapview")
+
+class UserCountView(APIView):
+    """
+    A view that returns the count of active users.
+
+    Source: https://stackoverflow.com/questions/25151586/django-rest-framework-retrieving-object-count-from-a-model
+    """
+
+    def get(self, request, format=None):
+        user_count = User.objects.count()
+        content = {'user_count': user_count}
+        return JsonResponse(content)
 
 from django.contrib.auth.views import LoginView
 
