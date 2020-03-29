@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse
 
 from apps.mapview.utils import plzs
-from apps.iamstudent.models import Student, StudentFilter
+from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.forms import HospitalForm
 
