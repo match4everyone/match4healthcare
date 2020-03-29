@@ -9,22 +9,20 @@
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 <style type="text/css">
-	.card { margin-bottom: 30px; }
+    .card {
+        margin-bottom: 30px;
+    }
 </style>
 <script type="text/javascript">
 
     var signUpHelper = {
         handleQualificationInput: function handleQualificationInput(event) {
             let sourceElement = event.srcElement;
-            let containingDiv = sourceElement.closest("div.ausbildung-checkbox")
-            let qualificationId = containingDiv.id.split("-").slice(-1)
-            let selectedFilterValue = sourceElement.querySelector("input").value
-            let buttonXStatus = false;
-            if (selectedFilterValue === "true") {
-                buttonXStatus = true;
-            }
+            let qualificationSelected = event.srcElement.checked;
 
-            this.setQualificationSectionVisibility(qualificationId, buttonXStatus)
+            // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
+            let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
+            this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
         },
         setQualificationSectionVisibility: function setQualificationSectionVisibility(id, setVisibility) {
             let section = document.getElementById(`div-ausbildung-${id}`)
@@ -45,13 +43,14 @@
     }
 
     document.addEventListener("DOMContentLoaded", function (event) {
-        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox label.btn")
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
         qualifikationSelectors.forEach(element => {
-            element.addEventListener("click", (event) => {
+            element.addEventListener("input", (event) => {
                 signUpHelper.handleQualificationInput(event)
             })
-            // click does not listen for changes that already occured.
 
+            // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
+            signUpHelper.handleQualificationInput({srcElement: element});
         })
 
     });
@@ -67,25 +66,32 @@
 {% block content %}
 
 <div class="container">
-	<div style="height:40px"></div>
-	<h1 class="font-weight-light match4hc-title">  {% blocktrans %}Breits registrierte Helfer durchsuchen und kontaktieren.{% endblocktrans %}  </h1>
-	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie brauchen zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
-	
-  
-    
-      <p>  Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>, indem ihr auf das Feld klickt.
-        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon <mark>berufstätig</mark> sein muss.
-        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf <mark>ja</mark>.
-        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und ihnen eine
-		  <mark>Email senden</mark></p>
-  
+    <div style="height:40px"></div>
+    <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Breits registrierte Helfer durchsuchen und
+        kontaktieren.{% endblocktrans %} </h1>
+    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie brauchen zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
+    <p> Dann wählt unter "Ausbildungen" aus, dass ein Helfer eine Pflegeausbildung haben
+        <mark>muss</mark>
+        , indem ihr auf das Feld klickt.
+        In dem geöffneten Feld könnt ihr nun auswählen, dass die Pflegekraft schon
+        <mark>berufstätig</mark>
+        sein muss.
+        Ihr könnt außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf
+        <mark>ja</mark>
+        .
+        Nun einfach auf den "Filter Aktualisieren" klicken und ihr könnt euch die Kandidaten in der Tabelle ansehen und
+        ihnen eine
+        <mark>Email senden</mark>
+    </p>
+
     <form method="get">
         <div class="card" style="margin-top:30px;">
             <div class="card-header">
-                {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}
+                {% blocktrans %}Helfer finden{% endblocktrans %}
             </div>
             <div class="card-body">
-				
+                <h5> {% blocktrans %}An welchem Ort und in Welchem Abstand sucht Ihr Helfer*innen?{% endblocktrans %}</h5>
+
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
@@ -108,72 +114,77 @@
                             <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
                         </div>
                     </div>
-				</div>
-			</div>
-          <div class="card-body" style="padding-top:0px;">
-      <p class="font-weight-bold">
-                {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen müssen Sie einzelne Anfragen stellen.{% endblocktrans %}</p>
-          
-           
+                </div>
+                <hr>
+                <h5>
+                    {% blocktrans %}Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende Stellen
+                    müssen Sie einzelne Anfragen stellen.{% endblocktrans %}</h5>
+                {% crispy filter.form filter.form_helper %}
 
-                {% crispy filter_jobrequireform filter_jobrequireform.helper %}
+                <hr>
+                <p>
+                    <input type="submit" class="btn blue text-white btn-md" value="Filter Aktualisieren">
+                </p>
+                <!--{% if filter_is_being_saved %}
+                <p>
+                    {% blocktrans %}Speichere den Filter als:{% endblocktrans %} <mark>{{filter_name}}</mark>.
+                     <input type="hidden" name="uuid" value="{{uuid}}">
+                </p>
 
-         
-     
-             
-              <p class="font-weight-bold" style="margin-top:20px;">  {% blocktrans %}Welche Infos über die zu vergebende Stelle sind schon bekannt?{% endblocktrans %}</p>
-					
-
-                {% crispy filter_availability.form filter_availability.helper %}
-<p>
-            <input type="submit" class="btn blue text-white btn-md" value="Filter Aktualisieren">
-        </p>
+                {% else %}
+                <p>
+                    <input type="checkbox" name="saveFilter" value="true">{% blocktrans %}Filter Speichern als:{% endblocktrans %}
+                    <input type="text" name="filterName">
+                </p>
+                {% endif %}
+								-->
 
             </div>
 
-        
-            
+
         </div>
-      
+
 
     </form>
-        <div class="card border-danger">
+    <div class="card border-danger">
         <div class="card-header">
-                <p>
-    {% if enable_mail %}
-           {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans %}
-            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="sendall()">
-                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
-            </button>
-            {% else %}
-            <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="alertMaxMails()">
-                {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
-            </button>
-            {% endif %}
-        </p>
-            </div>
+            <p>
+                {% if enable_mail %}
+                {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans%}
+                <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="sendall()">
+                    {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
+                </button>
+                {% else %}
+                <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;"
+                        onclick="alertMaxMails()">
+                    {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
+                </button>
+                {% endif %}
+            </p>
+        </div>
         <div class="card-body">
-            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du kontaktieren möchtest.{%  endblocktrans %}</p>
+            <p>{% blocktrans %}Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du kontaktieren
+                möchtest.{% endblocktrans %}</p>
             <div class="table-responsive">
                 {% render_table table %}
             </div>
             <p class="text-right">
-            {% if enable_mail %}
-            <button class="btn blue text-white btn-md" onclick="send()">
-                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
-            </button>
-            {% else %}
-            <button class="btn blue text-white btn-md" onclick="alertMaxMails()">
-                {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
-            </button>
-            {% endif %}
+                {% if enable_mail %}
+                <button class="btn blue text-white btn-md" onclick="send()">
+                    {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+                </button>
+                {% else %}
+                <button class="btn blue text-white btn-md" onclick="alertMaxMails()">
+                    {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
+                </button>
+                {% endif %}
             </p>
 
         </div>
 
     </div>
 </div>
-<hr>
+
 <script>
     var alertMaxMails = function () {
         alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');

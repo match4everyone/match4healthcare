@@ -1,6 +1,6 @@
 # from django.forms import *
 from django import forms
-from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLUMNS,AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS, PersistenStudentFilterModel
+from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLUMNS,AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -97,8 +97,8 @@ maxim = _('maximal')
 for field in fields_for_button_group:
     if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
         f = str(field)
-        form_labels[f + '_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
-        form_labels[f + '_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
+        form_labels[f + '_x_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_x_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
 
 
 def button_group(field):
@@ -115,8 +115,8 @@ def button_group_filter(field):
         return Column()
     if field in fields_for_button_group:
         if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
-            return Field(Row(Column(ButtonGroup(field + '_gt'))),
-            Row(Column(ButtonGroup(field + '_lt'))))
+            return Field(Row(Column(ButtonGroup(field + '_x_gt'))),
+            Row(Column(ButtonGroup(field + '_x_lt'))))
         else:
             return ButtonGroup(field)
     return field
@@ -398,9 +398,6 @@ class StudentFormEditProfile(StudentForm):
             Submit('submit', _('Profil Aktualisieren'), css_class='btn blue text-white btn-md'),
         )
 
-
-
-
 class EmailToSendForm(forms.ModelForm):
     class Meta:
         model = EmailToSend
@@ -411,65 +408,84 @@ class EmailToSendForm(forms.ModelForm):
             'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
         }
 
-class PersistenStudentFilterForm(forms.ModelForm):
+def get_form_helper_filter():
+    helper = FormHelper()
+    helper.form_id = 'id-exampleForm'
+    helper.form_class = 'blueForms'
+    helper.form_method = 'get'
 
-    class Meta:
-        model = PersistenStudentFilterModel
-        #initial = {
-        #    'ausbildung_typ_mfa': 'unkown'
-        #}
-        labels = form_labels
-        exclude = ['hospital']
+    helper.form_action = 'submit_survey'
+    helper.form_style = 'inline'
+    helper.layout = Layout(
+        Div(Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                         css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                  AUSBILDUNGS_TYPEN.keys()]),
+            css_id='div-berufsausbildung-dropdown',
+            ))
 
-    def __init__(self, *args, **kwargs):
-        super(PersistenStudentFilterForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'blueForms'
-        self.helper.form_method = 'get'
-
-        self.helper.form_action = 'submit_survey'
-        self.helper.form_style = 'inline'
-        for k in self.fields.keys():
-            self.fields[k].required = False
-
-        for k in AUSBILDUNGS_TYPEN.keys():
-            self.fields['ausbildung_typ_%s' % k.lower()].required = False
-
-        self.helper.layout = Layout(
-            Div(
-                Row(*[Column(ButtonGroupBool('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
-                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
-                      AUSBILDUNGS_TYPEN.keys()]),
-                css_id='div-berufsausbildung-dropdown',
-            ),
-            # medstud
-
-            # rest
-            *[
-                Div(
-                    HTML("<p style='font-weight: 500;'>{}</p>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
-
-                    Row(*[
+    for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items():
+        if len(felder) != 0:
+            if ausbildungstyp != 'MEDSTUD':
+                helper.layout.extend([
+                    Div(
+                        HTML('<hr><h5>Zusätzliche Filter zu {}</h5>'.format(
+                            _(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,
+                        Row(*[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ])
+                        ,
+                        *[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ]
+                        , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        , css_class='hidden ausbildung-addon'
+                    )])
+            else:
+                helper.layout.extend([
+                    Div(HTML('<hr><h5>Zusätzliche Filter zu {}</h5>'.format(
+                            _(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,Row(*[
                         Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group', css_id=f.replace('_', '-'))
                         for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
                             ausbildungstyp.lower(), f.lower())
-                    ])
-                    ,
-                    Row(*[
-                        Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
-                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
-                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
-                            ausbildungstyp.lower(), f.lower())
-                    ])
-                    , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden ausbildung-addon'
-                )
-                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ]
+                    ]),
+                        HTML('<p>'),
+                        HTML(_("In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?")),
+                        HTML('</p>')
+                        ,
+                        *[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if
+                            'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ]
+                        , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        , css_class='hidden ausbildung-addon'
+                        )])
+
+    helper.form_tag = False
+    helper.layout.extend([
+        HTML('<hr><h5>'),
+        HTML(_(' Welche Infos über die zu vergebende Stelle sind schon bekannt?')),
+        HTML('</h5>'),
+        'availability_start',
+        Row(Column(InlineRadios('braucht_bezahlung')),
+            Column(InlineRadios('unterkunft_gewuenscht')))])
+    return helper
 
 
+from .models import StudentListFilterModel
+class StudentListFilterModelForm(forms.ModelForm):
 
-        )
-        self.helper.form_tag = False
+    class Meta:
+        model = StudentListFilterModel
+        exclude = []
