@@ -125,6 +125,19 @@
                 <p>
                     <input type="submit" class="btn blue text-white btn-md" value="Filter Aktualisieren">
                 </p>
+                {% if filter_is_being_saved %}
+                <p>
+                    We are saving the filter for later as <mark>{{filter_name}}</mark>.
+                     <input type="hidden" name="filterUUID" value="{{uuid}}">
+                </p>
+
+                {% else %}
+                <p>
+                    <input type="checkbox" name="saveFilter" value="true"> Save filter for later as
+                    <input type="text" name="filterName">
+                </p>
+                {% endif %}
+
 
             </div>
 

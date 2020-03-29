@@ -174,6 +174,38 @@ def student_list_view(request, countrycode, plz, distance):
         'max': MAX_EMAIL_BATCH_PER_HOSPITAL
     }
 
+    # saving logic
+
+    uuid = request.GET.get('uuid', '')
+    save_filter = request.GET.get('saveFilter', 'false')
+    filter_name = request.GET.get('filterName','')
+
+    from .models import StudentListFilterModel, LocationFilterModel
+    if save_filter == 'true' and filter_name != '': #todo is valid
+
+        context['filter_is_being_saved'] =True
+
+        # filter has not been saved yet
+        #loc = LocationFilterModel.objects.create(plz=plz,distance=distance,countrycode=countrycode)
+        #filter_model = StudentListFilterModel.objects.create(request.GET,location=loc,name=filter_name)
+        context['uuid'] = '123'#filter_model.uuid
+        context['filter_name'] = 'huhu' # filter_model.name
+
+    elif uuid != '':
+        # update saved filter
+        #filter_model = StudentListFilterModel.objects.get(uuid=uuid)
+        # somehow update attributes
+        context['filter_name'] = 'huhu'  # filter_model.name
+        context['filter_is_being_saved'] =True
+    else:
+        # user does not want to save filter
+        context['filter_is_being_saved'] = False
+
+
+
+
+
+
     return render(request, 'student_list_view.html', context)
 
 

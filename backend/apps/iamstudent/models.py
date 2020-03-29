@@ -306,6 +306,7 @@ class StudentListFilterModel(models.Model):
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    name = models.CharField(max_length=100)
 
 from .filters import StudentJobRequirementsFilter
 jrf = StudentJobRequirementsFilter()
