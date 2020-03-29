@@ -11,7 +11,30 @@
 <style type="text/css">
 .footer { z-index: 2; } 
 	
-	.user-container {position: absolute; top:8px; right:8px; color:#000943; z-index:99999; background:#ffffffcc;padding:10px 15px; font-weight:700; border-radius:5px;}
+	.user-container {
+		position: absolute; 
+		top:8px; 
+		right:8px; 
+		color:#000943; 
+		z-index:99999; 
+		padding:10px 15px; 
+		font-weight:700; 
+		border-radius:5px; 
+		background-color: rgba(255, 255, 255, 0.9);	}
+	
+		@supports (-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px)) {
+
+		.user-container { 
+			-webkit-backdrop-filter: blur(4px);
+  		 	backdrop-filter: blur(4px);
+			background-color: rgba(255, 255, 255, 0.6);
+			}
+}
+
+
+	
+	
+	
 	
 	a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {color: #000943 !important;}
 .mapbox-wordmark {
