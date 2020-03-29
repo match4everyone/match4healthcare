@@ -186,17 +186,41 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] =True
 
         # filter has not been saved yet
-        #loc = LocationFilterModel.objects.create(plz=plz,distance=distance,countrycode=countrycode)
-        #filter_model = StudentListFilterModel.objects.create(request.GET,location=loc,name=filter_name)
-        context['uuid'] = '123'#filter_model.uuid
-        context['filter_name'] = 'huhu' # filter_model.name
+        loc = LocationFilterModel(plz=plz,distance=distance,countrycode=countrycode)
+        student_attr =  dict(request.GET.copy())
+        for i in ['plz','distance','countrycode','uuid','saveFilter','filterName']:
+            if i in request.GET.keys():
+                student_attr.pop(i)
+
+        for i in list(student_attr.keys()):
+
+            if type(student_attr[i]) == list:
+                student_attr[i] = student_attr[i][0]
+
+            if student_attr[i] == '':
+                student_attr.pop(i)
+            elif student_attr[i] == 'true':
+                student_attr[i] = True
+            elif student_attr[i] == 'false':
+                student_attr[i] = False
+            else:
+                print(student_attr[i])
+        print(type(student_attr['ausbildung_typ_mtla']))
+        print(student_attr)
+
+        filter_model = StudentListFilterModel(**student_attr,name=filter_name,hospital=request.user.hospital)
+        filter_model.save()
+        #, location = loc
+        context['uuid'] = filter_model.uuid
+        context['filter_name'] = filter_model.name
 
     elif uuid != '':
         # update saved filter
-        #filter_model = StudentListFilterModel.objects.get(uuid=uuid)
-        # somehow update attributes
-        context['filter_name'] = 'huhu'  # filter_model.name
-        context['filter_is_being_saved'] =True
+        filter_model = StudentListFilterModel.objects.get(uuid=uuid)
+        # todo somehow update attributes
+        context['filter_name'] = filter_model.name
+        context['uuid'] = filter_model.uuid
+        context['filter_is_being_saved'] = True
     else:
         # user does not want to save filter
         context['filter_is_being_saved'] = False

@@ -467,3 +467,11 @@ def get_form_helper_filter():
         Row(Column(InlineRadios('braucht_bezahlung')),
             Column(InlineRadios('unterkunft_gewuenscht')))])
     return helper
+
+
+from .models import StudentListFilterModel
+class StudentListFilterModelForm(forms.ModelForm):
+
+    class Meta:
+        model = StudentListFilterModel
+        exclude = []
