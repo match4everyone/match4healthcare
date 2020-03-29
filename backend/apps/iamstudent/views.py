@@ -162,8 +162,7 @@ def clean_request(request):
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
-    # todo filter request for unallowed filters (like vorklinik, when medstud not clicked)
-    print(request)
+    # remove parameters fro mthe get request that should not be taken into account
     request_filtered = clean_request(request)
 
     # only show validated students
