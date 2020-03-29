@@ -81,15 +81,15 @@ form_labels = {
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
 }
 fields_for_button_group = [
-    'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
-'ausbildung_typ_pflege_abschnitt',
-                           'ausbildung_typ_physio_abschnitt',
-                           'ausbildung_typ_medstud_abschnitt',
-                           'ausbildung_typ_mfa_abschnitt',
-                           'ausbildung_typ_mtla_abschnitt',
-                           'ausbildung_typ_mta_abschnitt',
-                           'ausbildung_typ_notfallsani_abschnitt',
-                           'ausbildung_typ_zahni_abschnitt'
+                            'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
+                            'ausbildung_typ_pflege_abschnitt',
+                            'ausbildung_typ_physio_abschnitt',
+                            'ausbildung_typ_medstud_abschnitt',
+                            'ausbildung_typ_mfa_abschnitt',
+                            'ausbildung_typ_mtla_abschnitt',
+                            'ausbildung_typ_mta_abschnitt',
+                            'ausbildung_typ_notfallsani_abschnitt',
+                            'ausbildung_typ_zahni_abschnitt'
 ]
 
 mindest = _('mindestens')
@@ -284,6 +284,15 @@ class StudentForm(forms.ModelForm):
             raise ValidationError(_("Diese Email ist bereits vergeben"))
         return email
 
+    def clean_datenschutz_zugestimmt(self):
+        if not self.cleaned_data['datenschutz_zugestimmt']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
+
+    def clean_einwilligung_datenweitergabe(self):
+        if not self.cleaned_data['einwilligung_datenweitergabe']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
 
 class StudentFormAndMail(StudentForm):
     email = forms.EmailField()
