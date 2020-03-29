@@ -132,39 +132,35 @@ def notify_student(student_id, contact):
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
+    # only show validated students
+    qs = Student.objects.filter(user__validated_email=True)
+
+    # filter by location
     countrycode = request.GET.get('countrycode', countrycode)
     plz = request.GET.get('plz', plz)
     distance = int(request.GET.get('distance', distance))
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen
         return HttpResponse("Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode)
-
-    qs = Student.objects.filter(user__validated_email=True)
-
     lat, lon, ort = plzs[countrycode][plz]
     if distance==0:
         close_plzs=[plz]
     else:
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
-
-
-    #filter_dict = request.GET.copy()
-    #filter_dict.pop('')
-
     qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
+    # filter by job requirements
     filter_jobrequirements = StudentJobRequirementsFilter(request.GET, queryset=qs)
     qs = filter_jobrequirements.qs
 
-
+    # displayed table
     table = StudentTable(qs)
 
+    # disable huge amounts of email sends
     enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
-    # sepecial display options for the job availability logic
+    # special display to enable the fancy java script stuff and logic
     DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request.GET, display_version=True)
-    x = DISPLAY_filter_jobrequirements.form_helper
 
     context = {
         'plz': plz,
@@ -172,13 +168,12 @@ def student_list_view(request, countrycode, plz, distance):
         'ort': ort,
         'distance': distance,
         'table': table,
-        'filter_origin': DISPLAY_filter_jobrequirements,
-        'stolen_helper': x,
+        'filter': DISPLAY_filter_jobrequirements,
         'n': qs.count(),
         'enable_mail': enable_mail_send,
         'max': MAX_EMAIL_BATCH_PER_HOSPITAL
     }
-    a = 1
+
     return render(request, 'student_list_view.html', context)
 
 
