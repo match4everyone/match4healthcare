@@ -444,7 +444,7 @@ def get_form_helper_filter():
                             ausbildungstyp.lower(), f.lower())
                     ]),
                         HTML('<p>'),
-                        HTML(_("Gib hier bitte deine Vorerfahrungen oder Fachrichtung in den folgenden Feldern an:")),
+                        HTML(_("In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?")),
                         HTML('</p>')
                         ,
                         *[

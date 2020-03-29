@@ -144,10 +144,15 @@ def student_list_view(request, countrycode, plz, distance):
 
     lat, lon, ort = plzs[countrycode][plz]
     if distance==0:
-        qs = qs.filter(plz=plz, countrycode=countrycode)
+        close_plzs=[plz]
     else:
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
-        qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
+
+
+    #filter_dict = request.GET.copy()
+    #filter_dict.pop('')
+
+    qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
     filter_jobrequirements = StudentJobRequirementsFilter(request.GET, queryset=qs)
     qs = filter_jobrequirements.qs
@@ -158,9 +163,9 @@ def student_list_view(request, countrycode, plz, distance):
     enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
     # sepecial display options for the job availability logic
-
     DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request.GET, display_version=True)
     x = DISPLAY_filter_jobrequirements.form_helper
+
     context = {
         'plz': plz,
         'countrycode': countrycode,
