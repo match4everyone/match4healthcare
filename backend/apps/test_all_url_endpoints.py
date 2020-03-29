@@ -23,7 +23,7 @@ def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=
     s.save()
     return m, pwd, s.uuid
 
-def generate_random_hospital(countrycode="DE", plz="14482", i=0):
+def generate_random_hospital(countrycode="DE", plz="14482", i=0, datenschutz_zugestimmt=True):
     m = str(i) + "hospital@email.de"
     pwd = User.objects.make_random_password()
     u = User.objects.create(username=m, email=m, is_hospital=True)
@@ -32,8 +32,8 @@ def generate_random_hospital(countrycode="DE", plz="14482", i=0):
                                countrycode=countrycode,
                                plz=plz,
                                ansprechpartner='XY',
-                                sonstige_infos='yeaah'
-                                )
+                               datenschutz_zugestimmt=datenschutz_zugestimmt
+    )
     u.save()
     s.save()
     return m, pwd, s.uuid
@@ -280,6 +280,22 @@ class UrlEndpointTestCase(TestCase):
         assert "login" in response.redirect_chain[0][0]
         assert response.status_code == 200
 
+        hospital_email, hospital_password, uuid = generate_random_hospital(datenschutz_zugestimmt=False, i=9999)
+        response = self.client.post('/accounts/login/', {
+            "username": hospital_email,
+            "password": hospital_password,
+        }, follow=True)
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == False
+        assert "zustimmung" in response.redirect_chain[1][0]
+        assert auth.get_user(self.client).username == hospital_email
+
+        response = self.client.post('/ineedstudent/zustimmung', {
+            "datenschutz_zugestimmt": True,
+            "einwilligung_datenweitergabe": True,
+        }, follow=True)
+        assert response.status_code == 200
+        assert "login_redirect" in response.redirect_chain[0][0]
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == True
 
     def test_admin(self):
         staff_email, staff_password = generate_staff_user()

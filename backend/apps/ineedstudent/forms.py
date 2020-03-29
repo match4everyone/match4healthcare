@@ -13,16 +13,14 @@ class HospitalFormO(ModelForm):
         model = Hospital
         exclude = ['uuid', 'registration_date','user']
 
-        help_texts = {
-            'sonstige_infos': _('Einsatzbereiche? Anforderungen? ... und nette Worte :)')
-        }
-
         labels = {
             'plz': _('Postleitzahl'),
             'countrycode': _('Land'),
-            'firmenname': _('Name der Institution'),
+            'firmenname': _('Offizieller und Name der Institution'),
+            'ansprechpartner': _('Name der Kontaktperson'),
             'appears_in_map': _('Sichtbar und kontaktierbar für Helfende sein'),
-            'sonstige_infos': _('Wichtige Infos über Sie und den potentiellen Einsatzbereich')
+            'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
+            'einwilligung_datenweitergabe': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -35,13 +33,26 @@ class HospitalFormO(ModelForm):
 
         self.helper.layout = Layout(
                 Row(Column('firmenname') , Column('ansprechpartner')),
-  Row(Column('appears_in_map')),
+                Row(Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
-                'sonstige_infos'
+                HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
+                HTML('<p class="text-left">'),
+                'datenschutz_zugestimmt',
+                HTML("</p>"),
+                HTML('<p class="text-left">'),
+                'einwilligung_datenweitergabe',
         )
 
+    def clean_datenschutz_zugestimmt(self):
+        if not self.cleaned_data['datenschutz_zugestimmt']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
 
+    def clean_einwilligung_datenweitergabe(self):
+        if not self.cleaned_data['einwilligung_datenweitergabe']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
 
 class HospitalForm(HospitalFormO):
 
@@ -66,19 +77,48 @@ class HospitalFormEditProfile(HospitalFormO):
                 Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
-                'sonstige_infos'
         )
+
+class HospitalFormZustimmung(ModelForm):
+        class Meta:
+            model = Hospital
+            fields = ["datenschutz_zugestimmt", "einwilligung_datenweitergabe"]
+            #exclude = ["uuid","registration_date", "user", "appears_in_map", "countrycode", "plz", "ansprechpartner"]
+
+            labels = {
+                'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
+                'einwilligung_datenweitergabe': _('Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
+            }
+
+        def __init__(self, *args, **kwargs):
+            super(HospitalFormZustimmung, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
+            self.helper.layout = Layout(
+                HTML('<p class="text-left">'),
+                'datenschutz_zugestimmt',
+                HTML("</p>"),
+                HTML('<p class="text-left">'),
+                'einwilligung_datenweitergabe',
+            )
+
+        def clean_datenschutz_zugestimmt(self):
+            if not self.cleaned_data['datenschutz_zugestimmt']:
+                raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+            return True
+
+        def clean_einwilligung_datenweitergabe(self):
+            if not self.cleaned_data['einwilligung_datenweitergabe']:
+                raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+            return True
+
 
 
 def check_unique_email(value):
-    print("Checking unique email")
     if User.objects.filter(email=value).exists():
         raise ValidationError(_("Diese Email ist bereits vergeben"))
     return value
 
 
 class HospitalFormInfoSignUp(HospitalFormO):
-    email = forms.EmailField(validators=[check_unique_email])
-
-class HospitalFormInfoCreate(HospitalFormO):
-    email = forms.EmailField()
+    email = forms.EmailField(validators=[check_unique_email], label=_('Offizielle E-Mail-Adresse der Kontaktperson'))

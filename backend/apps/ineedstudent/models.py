@@ -27,8 +27,6 @@ class Hospital(models.Model):
     )
 
     ## Kontaktdaten
-    #email = models.EmailField(unique=True)
-    sonstige_infos = models.TextField(default='')
     ansprechpartner = models.CharField(max_length=100,default='')
     telefon = models.CharField(max_length=100,default='')
     firmenname = models.CharField(max_length=100,default='')
@@ -38,6 +36,9 @@ class Hospital(models.Model):
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
     appears_in_map = models.BooleanField(default=True)
+
+    datenschutz_zugestimmt = models.BooleanField(default=False)
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
 
     # Metadata
     class Meta:

@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
+from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -117,7 +117,7 @@ def register_hospital_in_db(request, m):
     user.save()
 
     hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormInfoCreate(request.POST, instance=hospital)
+    hospital = HospitalFormInfoSignup(request.POST, instance=hospital)
     print("Saving Hospital")
     hospital.save()
     return user, hospital
@@ -150,6 +150,10 @@ def login_redirect(request):
         return HttpResponseRedirect('/mapview')
 
     elif user.is_hospital:
+
+        h = Hospital.objects.get(user=user)
+        if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
+            return HttpResponseRedirect('/ineedstudent/zustimmung')
         return HttpResponseRedirect('profile_hospital')
 
     elif user.is_staff:
