@@ -310,5 +310,7 @@ for f_name, filter in jrf.base_filters.items():
         StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
     elif type(filter.field) == filter_fields.ChoiceField:
         StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0,choices=filter.field.choices))
+    elif type(filter.field) == forms.DateField:
+        print('todo: deatefield')
     else:
         raise ValueError("I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name))

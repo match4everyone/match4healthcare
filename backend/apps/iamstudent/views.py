@@ -9,9 +9,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
-from .filters import StudentJobRequirementsFilter, StudentAvailabilityFilter
+from .filters import StudentJobRequirementsFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm, stolen_helper
+from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend
 from apps.accounts.models import User
 
@@ -149,10 +149,6 @@ def student_list_view(request, countrycode, plz, distance):
         close_plzs = get_plzs_close_to(countrycode, plz, distance)
         qs = qs.filter(plz__in=close_plzs, countrycode=countrycode)
 
-
-    filter_availability = StudentAvailabilityFilter(request.GET,queryset=qs)
-    qs = filter_availability.qs
-
     filter_jobrequirements = StudentJobRequirementsFilter(request.GET, queryset=qs)
     qs = filter_jobrequirements.qs
 
@@ -162,15 +158,15 @@ def student_list_view(request, countrycode, plz, distance):
     enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
 
     # sepecial display options for the job availability logic
-    x = stolen_helper()
+
     DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request.GET, display_version=True)
+    x = DISPLAY_filter_jobrequirements.form_helper
     context = {
         'plz': plz,
         'countrycode': countrycode,
         'ort': ort,
         'distance': distance,
         'table': table,
-        'filter_availability': filter_availability,
         'filter_origin': DISPLAY_filter_jobrequirements,
         'stolen_helper': x,
         'n': qs.count(),

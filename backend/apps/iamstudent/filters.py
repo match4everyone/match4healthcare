@@ -33,6 +33,18 @@ class StudentJobRequirementsFilter(filters.FilterSet):
     ausbildung_typ_zahni_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='gte')
     ausbildung_typ_zahni_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_zahni_abschnitt',lookup_expr='lte')
 
+    braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung', lookup_expr='gte',
+                                             choices=BEZAHLUNG_CHOICES_Filter,
+                                             label=_('Kann eine Vergütung angeboten werden?'), widget=forms.RadioSelect)
+    availability_start = filters.DateFilter(field_name='availability_start', lookup_expr='lte',
+                                            label=_('Die Helfenden sollten verfügbar sein ab '))
+    unterkunft_gewuenscht = filters.ChoiceFilter(field_name='unterkunft_gewuenscht',
+                                                 label=_('Kann eine Unterkunft angeboten werden?'),
+                                                 choices=[(True, _('ja')),
+                                                          (False, _('nein'))], widget=forms.RadioSelect)
+
+    unterkunft_gewuenscht.field.empty_label = _('wissen wir nicht')
+    braucht_bezahlung.field.empty_label = _('wissen wir nicht')
 
     class Meta:
         model = Student
@@ -91,35 +103,11 @@ class StudentJobRequirementsFilter(filters.FilterSet):
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
 
+            # todo: form hlper
+            from .forms import get_form_helper_filter
+            self.form_helper = get_form_helper_filter()
 
-class StudentAvailabilityFilter(filters.FilterSet):
-    braucht_bezahlung = filters.ChoiceFilter(field_name='braucht_bezahlung', lookup_expr='gte',
-                                             choices=BEZAHLUNG_CHOICES_Filter,
-                                             label=_('Kann eine Vergütung angeboten werden?'), widget=forms.RadioSelect)
-    availability_start = filters.DateFilter(field_name='availability_start', lookup_expr='lte',
-                                            label=_('Die Helfenden sollten verfügbar sein ab '))
-    unterkunft_gewuenscht = filters.ChoiceFilter(field_name='unterkunft_gewuenscht',
-                                                 label=_('Kann eine Unterkunft angeboten werden?'),
-                                                 choices=[(True, _('ja')),
-                                                          (False, _('nein'))], widget=forms.RadioSelect)
 
-    unterkunft_gewuenscht.field.empty_label = _('wissen wir nicht')
-    braucht_bezahlung.field.empty_label = _('wissen wir nicht')
 
-    class Meta:
-        model = Student
-        fields = {}
-
-    def __init__(self,*args, **kwargs):
-        super(StudentAvailabilityFilter, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            'availability_start',
-            Row(Column(InlineRadios('braucht_bezahlung')),
-            Column(InlineRadios('unterkunft_gewuenscht')))
-        )
-        self.helper.form_tag = False
-        self.helper.form_style = 'inline'
 
 
