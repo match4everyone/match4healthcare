@@ -27,11 +27,11 @@
             <h4>{% blocktrans %}Anzeige versenden{% endblocktrans %}</h4>
         </div>
         <div class="card-body">
-            <form action="/iamstudent/send_mail_student/{{ids}}" method="post">
+            <form action="/iamstudent/send_mail_student/{{ids}}" method="post" onsubmit="disableButton()">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <p>
-       <button type="submit" class="btn btn-success">Sende Mails</button>
+       <button type="submit" class="btn btn-success" id="btSubmitForm">Sende Mails</button>
                     {% blocktrans %}Du möchtest eine Email an <mark>{{n}} Helfer*innen</mark> schicken.{% endblocktrans %}
     </p>
                 </form>
@@ -40,3 +40,4 @@
     <hr>
 </div>
 {% endblock %}
+<script>function disableButton() {var btn = document.getElementById('btSubmitForm'); btn.disabled = true;btn.innerText = 'Sending...'}</script>

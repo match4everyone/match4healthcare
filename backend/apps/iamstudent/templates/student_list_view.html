@@ -156,9 +156,9 @@
                  {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} </button>
                 <div class="alert alert-warning" role="alert">{% blocktrans %} Du hast mehr Helfer ausgewählt, als du heute noch E-Mails senden darfst ({{ max }} Stück).
             <br>Du kannst deine Suche durch den Filter stärker eingrenzen oder in der Liste gezielt Helfer auswählen,
-            <br><br>Wenn du doch einen guten Grund hast, mehr E-Mails zu verschicken, dann schicke uns eine
+            <br><br>Wenn du doch einen guten Grund hast, mehr E-Mails zu verschicken, dann
                 <a href="mailto:support@match4healthcare.de?subject=[E-Mail%20Tagesrate%20erhoehen]%20Fuer%20{{email}}">
-                    E-Mail
+                    benachrichtige uns
                 </a> und wir setzen deine Rate hoch.{% endblocktrans %}
                 </div>
                 {% endif %}
@@ -184,8 +184,8 @@
 
 <script>
     var alertMaxMails = function () {
-        alert('Zu viele Emails auf einmal. Wähle maximal {{ max }} Helfer*innen aus, indem du weitere Filter auswählst.');
-    };
+        alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
+ };
 
     var $table = $('#table');
     $(function () {
@@ -213,7 +213,7 @@
             if(li.length <= x[0].value){
                 window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
             }
-            alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Melde dich beim Support falls du mehr senden möchtest.{% endblocktrans %}")
+            alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
 
         } else {
             alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")

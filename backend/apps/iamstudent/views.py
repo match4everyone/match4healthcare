@@ -53,7 +53,7 @@ def successful_mail(request):
 
 
 def leftover_emails_for_today(request):
-    return request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count()
+    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count())
 
 
 @login_required
