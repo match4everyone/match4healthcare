@@ -140,11 +140,7 @@
 								-->
 
             </div>
-
-
         </div>
-
-
     </form>
     <div class="card border-danger">
         <div class="card-header">
@@ -155,10 +151,16 @@
                     {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
                 </button>
                 {% else %}
-                <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;"
+             <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;"
                         onclick="alertMaxMails()">
-                    {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
-                </button>
+                 {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} </button>
+                <div class="alert alert-warning" role="alert">{% blocktrans %} Du hast mehr Helfer ausgewählt, als du heute noch E-Mails senden darfst ({{ max }} Stück).
+            <br>Du kannst deine Suche durch den Filter stärker eingrenzen oder in der Liste gezielt Helfer auswählen,
+            <br><br>Wenn du doch einen guten Grund hast, mehr E-Mails zu verschicken, dann schicke uns eine
+                <a href="mailto:support@match4healthcare.de?subject=[E-Mail%20Tagesrate%20erhoehen]%20Fuer%20{{email}}">
+                    E-Mail
+                </a> und wir setzen deine Rate hoch.{% endblocktrans %}
+                </div>
                 {% endif %}
             </p>
         </div>
@@ -169,15 +171,10 @@
                 {% render_table table %}
             </div>
             <p class="text-right">
-                {% if enable_mail %}
-                <button class="btn blue text-white btn-md" onclick="send()">
+
+                <button class="btn blue text-white btn-md" value="{{max}}" onclick="send($(this))">
                     {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
                 </button>
-                {% else %}
-                <button class="btn blue text-white btn-md" onclick="alertMaxMails()">
-                    {% blocktrans %}Email an AUSGEWÄHLTE Helfer*innen schicken{% endblocktrans %} &raquo;
-                </button>
-                {% endif %}
             </p>
 
         </div>
@@ -207,13 +204,17 @@
 
     });
 
-    var send = function () {
+    var send = function (x) {
         var li = [];
         $('tbody tr.selected').each(function () {
             li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
-            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+            if(li.length <= x[0].value){
+                window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+            }
+            alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Melde dich beim Support falls du mehr senden möchtest.{% endblocktrans %}")
+
         } else {
             alert("{% blocktrans %}Bitte wählen wie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
         }

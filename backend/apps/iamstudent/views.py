@@ -18,8 +18,6 @@ from apps.accounts.models import User
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
 
-from match4healthcare.settings.common import MAX_EMAIL_BATCH_PER_HOSPITAL
-
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
 
@@ -54,7 +52,8 @@ def successful_mail(request):
     return render(request,'emails_sent.html')
 
 
-
+def leftover_emails_for_today(request):
+    return request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count()
 
 
 @login_required
@@ -62,15 +61,18 @@ def successful_mail(request):
 def send_mail_student_id_list(request, id_list):
     id_list = id_list.split('_')
 
+    max_emails = leftover_emails_for_today(request)
+    if max_emails < len(id_list):
+        pass
+        # do something
+
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = EmailToSendForm(request.POST)
 
         if form.is_valid():
-            # todo check header injections!!!!
+
             hospital_message = form.cleaned_data['message']
-
-
 
             subject = form.cleaned_data['subject']
             for student_id in id_list:
@@ -190,7 +192,8 @@ def student_list_view(request, countrycode, plz, distance):
     table = StudentTable(qs)
 
     # disable huge amounts of email sends
-    enable_mail_send = (filter_jobrequirements.qs.count() <= MAX_EMAIL_BATCH_PER_HOSPITAL)
+    max_mails = leftover_emails_for_today(request)
+    enable_mail_send = (filter_jobrequirements.qs.count() <= max_mails)
 
     # special display to enable the fancy java script stuff and logic
     DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, display_version=True)
@@ -204,7 +207,8 @@ def student_list_view(request, countrycode, plz, distance):
         'filter': DISPLAY_filter_jobrequirements,
         'n': qs.count(),
         'enable_mail': enable_mail_send,
-        'max': MAX_EMAIL_BATCH_PER_HOSPITAL
+        'max': max_mails,
+        'email': request.user.email
     }
 
     # saving logic
