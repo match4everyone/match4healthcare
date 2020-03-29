@@ -57,4 +57,4 @@ If you want to deploy manually follow these steps closly:
 
 ## Production
 Set `SECRET_KEY` in `backend.prod.env` for django and `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` for postgres on your host machine.
-Start the system with `docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build`.
+Start the system with `docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build` and run `./deploy.sh`.
