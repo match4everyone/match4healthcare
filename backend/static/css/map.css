@@ -1,5 +1,5 @@
 #mapid {
-  min-height: 500px;
+  min-height: 480px;
 }
 @media only screen and (max-width: 767px) {
   .map-dropdown, .map-input {
@@ -32,16 +32,16 @@
 }
 head {
   Background-color: #7dd1c5;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 }
 .mt-2 {
   background-color: black;
   color: white;
   text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 }
 h2 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   text-align: center;
 }
 /*form {
