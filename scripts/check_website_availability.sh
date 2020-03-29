@@ -43,6 +43,7 @@ function test() {
 
 function check_website_up() {
 	if [[ ! $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
+		printf "Website error code: $(curl -s -o /dev/null -w "%{http_code}\n" $URL)"
 		return 1
 	fi
 }
