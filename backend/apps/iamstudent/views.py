@@ -76,7 +76,7 @@ def send_mail_student_id_list(request, id_list):
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
-                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich.\n\nDein Match4MedisTeam\n\n%s' % (
+                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich. Falls du keine Nachrichten mehr erhalten möchtest deaktiviere dein Konto hier: https://match4healthcare.de/accounts/change_activation\n\nDein Match4Healthcare Team\n\n%s' % (
                     student.name_first,
                     student.name_last,
                     request.user.hospital.firmenname,
