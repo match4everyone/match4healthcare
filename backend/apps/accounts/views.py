@@ -11,7 +11,8 @@ from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProf
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
-
+from django.contrib import messages
+from django.utils.text import format_lazy
 from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm
 from apps.iamstudent.models import Student
@@ -207,6 +208,16 @@ def change_hospital_approval(request,uuid):
     h.save()
     if h.is_approved:
         send_mails_for(h)
+    return HttpResponseRedirect('/accounts/approve_hospitals')
+
+@login_required
+@staff_member_required
+def delete_hospital(request,uuid):
+    h = Hospital.objects.get(uuid=uuid)
+    name = h.user
+    h.delete()
+    text = format_lazy(_("Du hast die Instiution mit user '{name}' gelöscht."), name=name)
+    messages.add_message(request, messages.INFO,text)
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
 @login_required
