@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse
 
 from apps.mapview.utils import plzs
-from apps.iamstudent.models import Student, StudentFilter
+from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.forms import HospitalForm
 
@@ -105,10 +105,11 @@ class HospitalTable(tables.Table):
 class ApprovalHospitalTable(HospitalTable):
     info = TemplateColumn(template_name='info_button.html')
     status = TemplateColumn(template_name='approval_button.html')
+    delete = TemplateColumn(template_name='delete_button.html')
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','user','telefon','plz']
+        fields = ['firmenname','ansprechpartner','user','telefon','plz','user__validated_email']
         exclude = ['uuid','registration_date','id']
 
 @login_required

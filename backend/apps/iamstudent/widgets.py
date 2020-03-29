@@ -36,13 +36,16 @@ class RadioSelect (BootstrapWidget, forms.RadioSelect):
     css_classes = ['form-check-input']
     use_fieldset = True
 
+#class Mycheck(forms.CheckboxSelectMultiple):
+#    template_name =
+
 
 class MyRadioSelect(forms.NullBooleanSelect):
     input_type = 'radio'
     template_name = 'django/forms/widgets/radio.html'
     option_template_name = 'django/forms/widgets/radio_option.html'
 
-class NullBooleanRadioSelect (RadioSelect):
+class NullBooleanRadioSelect(RadioSelect):
     """ A ``RadioSelect`` widget for ``NullBooleanField`` """
 
     def __init__(self, attrs=None, unknown_label=None):
