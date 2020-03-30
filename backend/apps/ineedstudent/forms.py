@@ -94,7 +94,7 @@ class EmailToHospitalForm(forms.ModelForm):
                   'message': _('Nachrichtentext')}
 
         help_texts = {
-            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
+            'message': _('Gibt hier deine Antwort auf das Angebot ein. Wer bist du? Welche Fähigkeiten bringst du für diese Stelle mit?')
         }
 
     def __init__(self, *args, **kwargs):
