@@ -120,6 +120,7 @@ class Student(models.Model):
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
     unterkunft_gewuenscht = models.BooleanField(default=False)
+    is_activated = models.BooleanField(default=True)
 
     # Metadata
     class Meta:

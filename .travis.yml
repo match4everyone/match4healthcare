@@ -2,10 +2,10 @@ services:
   - docker
 
 before_script:
- - bash scripts/write_envs_to_file.sh
- - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build
- - ./scripts/wait_for_backend.sh
+ - ./scripts/write_envs_to_file.sh
  - ./deploy.sh
+ - ./scripts/wait_for_backend.sh
+
 
 script:
  - bash scripts/check_website_availability.sh
