@@ -11,7 +11,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from apps.mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import plzs, get_plzs_close_to, haversine
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
@@ -133,4 +133,16 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
+
+    lat1, lon1, ort1 = plzs[h.countrycode][h.plz]
+    context = {
+        'hospital': h,
+        'uuid': h.uuid,
+        'ort': ort1,
+    }
+    if request.user.is_student:
+        s = Student.objects.get(user=request.user)
+        lat2, lon2, context["student_ort"] = plzs[s.countrycode][s.plz]
+        context["distance"] = int(haversine(lon1, lat1, lon2, lat2))
+        context["plz_student"] = s.plz
+    return render(request, 'hospital_view.html', context)

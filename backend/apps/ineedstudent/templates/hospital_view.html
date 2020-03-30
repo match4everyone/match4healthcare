@@ -19,7 +19,8 @@
     <div class="card border-primary">
         <div class="card-header">
             <h2>{{hospital.firmenname}} </h2>
-                <div class="font-weight-light">in  {{hospital.plz}}</div>
+            <div class="font-weight-light">In {{ort}} ({{hospital.plz}}), {{ hospital.countrycode }}</div>
+            {% if distance %}<div class="font-weight-light">{{distance}}km von dir ({{student_plz}} {{ student_ort }})</div>{% endif %}
 
         </div>
         <ul class="list-group list-group-flush">
@@ -31,7 +32,7 @@
                 <br> {% blocktrans %}Telefon:{% endblocktrans %} {{hospital.telefon}}
                 <br> {% blocktrans %}Mail:{% endblocktrans %} {{mail}}</li>
                 {% else %}
-                <p>{% blocktrans %}Bitte <a target="_blank" href="/accounts/signup_student">Registriere dich als Helfende_r</a> um die Kontaktdaten von {{hospital.firmenname}} zu sehen.{% endblocktrans%}</p>
+                <p>{% blocktrans %}Bitte <a target="_blank" href="/accounts/signup_student">Registriere dich als Helfende_r</a> um {% endblocktrans %}{{hospital.firmenname}}{% blocktrans %} kontaktieren zu können.{% endblocktrans%}</p>
                 {% endif %}
       </ul>
     </div>

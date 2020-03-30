@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile
+from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormInfoCreate, HospitalFormEditProfile
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -100,8 +100,7 @@ def hospital_signup(request):
             #return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
 
     else:
-        form_info = HospitalFormInfoSignUp(
-            initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
+        form_info = HospitalFormInfoSignUp()
         #form_user = HospitalSignUpForm()
     form_info.helper.form_tag = False
     return render(request, 'hospital_signup.html', {'form_info': form_info })
@@ -109,7 +108,6 @@ def hospital_signup(request):
 
 @transaction.atomic
 def register_hospital_in_db(request, m):
-
     pwd = User.objects.make_random_password()
     user = User.objects.create(username=m, is_hospital=True, email=m)
     user.set_password(pwd)
@@ -117,7 +115,8 @@ def register_hospital_in_db(request, m):
     user.save()
 
     hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormInfoSignup(request.POST, instance=hospital)
+    hospital = HospitalFormInfoCreate(request.POST, instance=hospital)
+    print(hospital.is_valid())
     print("Saving Hospital")
     hospital.save()
     return user, hospital
