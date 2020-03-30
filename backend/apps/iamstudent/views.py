@@ -49,12 +49,14 @@ def get_student(request):
 def thx(request):
     return render(request, 'thanks.html')
 
-
+@login_required
+@hospital_required
 def successful_mail(request):
-    return render(request,'emails_sent.html')
+    return render(request,'emails_sent.html',{'not_registered': not request.user.hospital.is_approved})
 
 
-
+def leftover_emails_for_today(request):
+    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count())
 
 
 @login_required
@@ -62,12 +64,17 @@ def successful_mail(request):
 def send_mail_student_id_list(request, id_list):
     id_list = id_list.split('_')
 
+    max_emails = leftover_emails_for_today(request)
+    if max_emails < len(id_list):
+        pass
+        # do something
+
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = EmailToSendForm(request.POST)
 
         if form.is_valid():
-            # todo check header injections!!!!
+
             hospital_message = form.cleaned_data['message']
 
 
@@ -76,7 +83,7 @@ def send_mail_student_id_list(request, id_list):
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
-                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich.\n\nDein Match4MedisTeam\n\n%s' % (
+                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich. Falls du keine Nachrichten mehr erhalten möchtest deaktiviere dein Konto hier: https://match4healthcare.de/accounts/change_activation\n\nDein Match4Healthcare Team\n\n%s' % (
                     student.name_first,
                     student.name_last,
                     request.user.hospital.firmenname,
@@ -166,7 +173,7 @@ def student_list_view(request, countrycode, plz, distance):
     request_filtered = clean_request(request)
 
     # only show validated students
-    qs = Student.objects.filter(user__validated_email=True)
+    qs = Student.objects.filter(user__validated_email=True,is_activated=True)
 
     # filter by location
     countrycode = request.GET.get('countrycode', countrycode)
@@ -190,7 +197,8 @@ def student_list_view(request, countrycode, plz, distance):
     table = StudentTable(qs)
 
     # disable huge amounts of email sends
-    enable_mail_send = (filter_jobrequirements.qs.count() <= settings.MAX_EMAIL_BATCH_PER_HOSPITAL)
+    max_mails = leftover_emails_for_today(request)
+    enable_mail_send = (filter_jobrequirements.qs.count() <= max_mails)
 
     # special display to enable the fancy java script stuff and logic
     DISPLAY_filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, display_version=True)
@@ -204,7 +212,8 @@ def student_list_view(request, countrycode, plz, distance):
         'filter': DISPLAY_filter_jobrequirements,
         'n': qs.count(),
         'enable_mail': enable_mail_send,
-        'max': settings.MAX_EMAIL_BATCH_PER_HOSPITAL
+        'max': max_mails,
+        'email': request.user.email
     }
 
     # saving logic
