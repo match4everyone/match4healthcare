@@ -123,15 +123,15 @@ def hospital_view(request,uuid):
         email_form = EmailToHospitalForm(request.POST)
 
         if email_form.is_valid():
-            start_text = _("Hallo %s,\n\n%s von %s auf Ihre Anzeige gemeldet. "
+            start_text = _("Hallo %s,\n\nSie haben von %s (%s) eine Antowrt auf Ihre Anzeige bekommen. "
                            "Falls Sie keine Anfragen mehr bekommen möchten, deaktivieren Sie Ihre "
-                           "Anzeige im Profil online." % (h.ansprechpartner, s.name_first, request.user.email))
+                           "Anzeige im Profil online.\n\n" % (h.ansprechpartner, s.name_first, request.user.email))
             message = start_text + email_form.cleaned_data['message']
             EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
 
 
             email = EmailMessage(
-                subject=email_form.cleaned_data['subject'],
+                subject='[match4healthcare]' + email_form.cleaned_data['subject'],
                 body=message,
                 from_email=settings.NOREPLY_MAIL,
                 to=[h.user.email]
@@ -140,7 +140,7 @@ def hospital_view(request,uuid):
 
             return render(request,'hospital_contacted.html')
 
-    email_form = EmailToHospitalForm(initial={'subject': _('[Match4Medis] Neues Hilfsangebot'),
+    email_form = EmailToHospitalForm(initial={'subject': _('Neues Hilfsangebot'),
                                               'message': _('')})
     return render(request, 'hospital_view.html', {'hospital': h,
                                                   'mail': h.user.username,
