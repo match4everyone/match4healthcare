@@ -11,7 +11,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from apps.mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import plzs, get_plzs_close_to, haversine
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
@@ -24,7 +24,7 @@ from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
 import time
 from apps.accounts.utils import send_password_set_email
-
+from apps.ineedstudent.forms import HospitalFormZustimmung
 from django.views.decorators.gzip import gzip_page
 
 
@@ -51,7 +51,7 @@ def hospital_overview(request):
 
 @lru_cache(maxsize=1)
 def prepare_hospitals(ttl_hash=None):
-    hospitals = Hospital.objects.filter(appears_in_map=True)
+    hospitals = Hospital.objects.filter(user__validated_email=True, is_approved=True, appears_in_map=True)
     locations_and_number = {}
     for hospital in hospitals:
         cc = hospital.countrycode
@@ -82,7 +82,7 @@ def hospital_list(request, countrycode, plz):
 
     lat, lon, ort = plzs[countrycode][plz]
 
-    table = HospitalTable(Hospital.objects.filter(plz=plz))
+    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
         'countrycode': countrycode,
@@ -92,6 +92,21 @@ def hospital_list(request, countrycode, plz):
 
     return render(request, "list_hospitals_by_plz.html", context)
 
+@login_required
+@hospital_required
+def zustimmung(request):
+    user = request.user
+    h = Hospital.objects.get(user=user)
+    if request.method == 'POST':
+        form_info = HospitalFormZustimmung(request.POST, instance=h)
+
+        if form_info.is_valid():
+            h.save()
+            return HttpResponseRedirect("/accounts/login_redirect")
+
+    else:
+        form_info = HospitalFormZustimmung()
+    return render(request, 'zustimmung.html', {'form_info': form_info })
 
 class HospitalTable(tables.Table):
     info = TemplateColumn(template_name='info_button.html')
@@ -115,4 +130,16 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
+
+    lat1, lon1, ort1 = plzs[h.countrycode][h.plz]
+    context = {
+        'hospital': h,
+        'uuid': h.uuid,
+        'ort': ort1,
+    }
+    if request.user.is_student:
+        s = Student.objects.get(user=request.user)
+        lat2, lon2, context["student_ort"] = plzs[s.countrycode][s.plz]
+        context["distance"] = int(haversine(lon1, lat1, lon2, lat2))
+        context["plz_student"] = s.plz
+    return render(request, 'hospital_view.html', context)

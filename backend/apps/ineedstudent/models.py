@@ -39,8 +39,10 @@ class Hospital(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
-    appears_in_map = models.BooleanField(default=True)
+    appears_in_map = models.BooleanField(default=False)
 
+    datenschutz_zugestimmt = models.BooleanField(default=False)
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
     # Metadata
     class Meta:
         ordering = ['registration_date']
