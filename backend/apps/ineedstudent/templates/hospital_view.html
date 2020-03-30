@@ -19,19 +19,30 @@
     <div class="card border-primary">
         <div class="card-header">
             <h2>{{hospital.firmenname}} </h2>
-                <div class="font-weight-light">in  {{hospital.plz}}</div>
+            <div class="font-weight-light">in {{ort}} ({{hospital.plz}})</div>
+            {% if student_ort %}<div class="font-weight-light">{{ distance }}km von dir ({{plz_student}}, {{student_ort}})</div>{% endif %}
 
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{hospital.sonstige_infos}}</li>
             <li class="list-group-item text-muted">
-                <h4>{% blocktrans %}Kontakt:{% endblocktrans %}</h4>
+                <h5>{% blocktrans %}Gesuch kontaktieren{% endblocktrans %}</h5>
                 {% if user.is_authenticated and user.is_student %}
-                {% blocktrans %}Meldet euch bei: {% endblocktrans %} {{hospital.ansprechpartner}}
-                <br> {% blocktrans %}Telefon:{% endblocktrans %} {{hospital.telefon}}
-                <br> {% blocktrans %}Mail:{% endblocktrans %} {{mail}}</li>
+                    {% if user.validated_email %}
+
+                    {% crispy email_form email_form.helper%}
+
+                    {% else %}
+
+                    <p>{% blocktrans %}Du hast deine Mail Adresse noch nicht validiert, bitte erledige das!{% endblocktrans %}</p>
+
+
+                    {% endif %}
                 {% else %}
+
                 <p>{% blocktrans %}Bitte <a target="_blank" href="/accounts/signup_student">Registriere dich als Helfende_r</a> um die Kontaktdaten von {{hospital.firmenname}} zu sehen.{% endblocktrans%}</p>
+
+
                 {% endif %}
       </ul>
     </div>
