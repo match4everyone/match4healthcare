@@ -80,7 +80,7 @@ form_labels = {
     'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/">Apothekenhelfen</a>)</em>'),
     'wunsch_ort_ueberall': _('Keiner, ich helfe dort, wo ich kann'),
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
-    'agb': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. '
+    'einwilligung_agb': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. '
              'Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. '
              'Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
 }
@@ -276,7 +276,7 @@ class StudentForm(forms.ModelForm):
             'einwilligung_datenweitergabe',
             HTML("</p>"),
             HTML('<p class="text-left">'),
-            'agb',
+            'einwilligung_agb',
             HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen.'))),
             Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
@@ -301,8 +301,8 @@ class StudentForm(forms.ModelForm):
             raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
         return True
 
-    def clean_agb(self):
-        if not self.cleaned_data['agb']:
+    def clean_einwilligung_agb(self):
+        if not self.cleaned_data['einwilligung_agb']:
             raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
         return True
 
