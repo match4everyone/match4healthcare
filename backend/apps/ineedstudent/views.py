@@ -137,22 +137,26 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    
+
     if request.POST and request.user.is_student and request.user.validated_email:
         s = request.user.student
 
         email_form = EmailToHospitalForm(request.POST)
 
         if email_form.is_valid():
-            start_text = _("Hallo %s,\n\nSie haben von %s (%s) eine Antowrt auf Ihre Anzeige bekommen. "
+            start_text = _("Hallo %s,\n\nSie haben über unsere Plattform match4healthcare von %s (%s) eine Antwort auf Ihre Anzeige bekommen.\n"
                            "Falls Sie keine Anfragen mehr bekommen möchten, deaktivieren Sie Ihre "
                            "Anzeige im Profil online.\n\n" % (h.ansprechpartner, s.name_first, request.user.email))
-            message = start_text + email_form.cleaned_data['message']
+            message = start_text + \
+                "===============================================\n\n" + \
+                email_form.cleaned_data['message'] + \
+                "\n\n===============================================\n\n" + \
+                "Mit freundlichen Grüßen,\nIhr match4healthcare Team"
             EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
 
 
             email = EmailMessage(
-                subject='[match4healthcare]' + email_form.cleaned_data['subject'],
+                subject='[match4healthcare] ' + email_form.cleaned_data['subject'],
                 body=message,
                 from_email=settings.NOREPLY_MAIL,
                 to=[h.user.email]
@@ -160,23 +164,27 @@ def hospital_view(request,uuid):
             email.send()
 
             return render(request,'hospital_contacted.html')
-          
-    lat1, lon1, ort1 = plzs[h.countrycode][h.plz]
-    
-    if request.user.is_student:
-        s = Student.objects.get(user=request.user)
-        lat2, lon2, context["student_ort"] = plzs[s.countrycode][s.plz]
-        context["distance"] = int(haversine(lon1, lat1, lon2, lat2))
-        context["plz_student"] = s.plz
 
-    email_form = EmailToHospitalForm(initial={'subject': _('Neues Hilfsangebot'),
-                                              'message': _('')})
+    lat1, lon1, ort1 = plzs[h.countrycode][h.plz]
+
     context = {
         'hospital': h,
         'uuid': h.uuid,
         'ort': ort1,
         'hospital': h,
         'mail': h.user.username,
-        'email_form': email_form
     }
+
+    if request.user.is_student:
+        s = Student.objects.get(user=request.user)
+        lat2, lon2, context["student_ort"] = plzs[s.countrycode][s.plz]
+        context["distance"] = int(haversine(lon1, lat1, lon2, lat2))
+        context["plz_student"] = s.plz
+
+
+    email_form = EmailToHospitalForm(initial={'subject': _('Neues Hilfsangebot'),
+                                              'message': _('')})
+
+    context['email_form'] = email_form
+
     return render(request, 'hospital_view.html', context)

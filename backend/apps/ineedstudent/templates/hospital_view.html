@@ -19,7 +19,8 @@
     <div class="card border-primary">
         <div class="card-header">
             <h2>{{hospital.firmenname}} </h2>
-                <div class="font-weight-light">in  {{hospital.plz}}</div>
+            <div class="font-weight-light">in {{ort}} ({{hospital.plz}})</div>
+            {% if student_ort %}<div class="font-weight-light">{{ distance }}km von dir ({{plz_student}}, {{student_ort}})</div>{% endif %}
 
         </div>
         <ul class="list-group list-group-flush">
