@@ -11,14 +11,14 @@ from apps.accounts.models import User
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user']
+        exclude = ['uuid', 'registration_date','user', 'sonstige_infos']
 
         labels = {
             'plz': _('Postleitzahl'),
             'countrycode': _('Land'),
             'firmenname': _('Offizieller und Name der Institution'),
             'ansprechpartner': _('Name der Kontaktperson'),
-            'appears_in_map': _('Sichtbar und kontaktierbar für Helfende sein'),
+            'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
             'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
             'einwilligung_datenweitergabe': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
         }
@@ -70,6 +70,19 @@ class HospitalFormExtra(HospitalFormO):
 
 class HospitalFormEditProfile(HospitalFormO):
 
+    class Meta:
+        model = Hospital
+        exclude = ['uuid', 'registration_date','user','datenschutz_zugestimmt', 'einwilligung_datenweitergabe']
+
+        labels = {
+            'plz': _('Postleitzahl'),
+            'countrycode': _('Land'),
+            'sonstige_infos': _('Text Ihrer Suchanzeige. Wird nur öffentlich gezeigt wenn Sie auf der Karte sichtbar sind und kontaktbierbar sein möchten. Hier können Sie genau beschreiben, für welche Rollen Sie Unterstützung brauchen, welche Qualifikationen dafür notwendig sind, und unter welchen Bedingungen (z.B. Bezahlung) gesucht wird.'),
+            'firmenname': _('Offizieller und Name der Institution'),
+            'ansprechpartner': _('Name der Kontaktperson'),
+            'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
+        }
+
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
@@ -77,6 +90,8 @@ class HospitalFormEditProfile(HospitalFormO):
                 Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
+                HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
+                'sonstige_infos'
         )
 
 class HospitalFormZustimmung(ModelForm):
@@ -112,13 +127,14 @@ class HospitalFormZustimmung(ModelForm):
                 raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
             return True
 
-
-
 def check_unique_email(value):
     if User.objects.filter(email=value).exists():
         raise ValidationError(_("Diese Email ist bereits vergeben"))
     return value
 
-
 class HospitalFormInfoSignUp(HospitalFormO):
     email = forms.EmailField(validators=[check_unique_email], label=_('Offizielle E-Mail-Adresse der Kontaktperson'))
+
+class HospitalFormInfoCreate(HospitalFormO):
+    # Used internally to bypass duplicate email validation
+    email = forms.EmailField()

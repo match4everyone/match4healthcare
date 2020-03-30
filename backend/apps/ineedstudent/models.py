@@ -27,11 +27,11 @@ class Hospital(models.Model):
     )
 
     ## Kontaktdaten
+    sonstige_infos = models.TextField(default='')
     ansprechpartner = models.CharField(max_length=100,default='')
     telefon = models.CharField(max_length=100,default='')
     firmenname = models.CharField(max_length=100,default='')
     plz = models.CharField(max_length=5, null=True)
-
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)

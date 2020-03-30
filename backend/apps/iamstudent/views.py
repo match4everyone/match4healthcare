@@ -263,6 +263,3 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
-
-
-
