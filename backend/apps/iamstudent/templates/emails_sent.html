@@ -16,7 +16,13 @@ Helfende wurden Kontaktiert
 <hr>
 <div class="container">
     <hr>
-<p>{% blocktrans %} Die Helfer*innen wurden kontaktiert. {% endblocktrans %}</p>
+    <p>{% if not_registered %}
+    {% blocktrans %} Wir speichern deine E-Mails und senden sie sobald wir dich als Krankenhaus validiert sind {%  endblocktrans %}
+    {% else %}
+    {% blocktrans %} Die Helfer*innen wurden kontaktiert. {% endblocktrans %}
+    {% endif %}
+<a href="/ineedstudents/hospital_map"> {% blocktrans %}Finde weitere Helfer*innen {% endblocktrans %}</a>
+</p>
 <hr>
 </div>
 
