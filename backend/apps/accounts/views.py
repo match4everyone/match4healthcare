@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django_tables2 import MultiTableMixin
 from django.views.generic.base import TemplateView
+from django.contrib.auth.views import LoginView
+from django.contrib import messages
 
 from django.conf import settings
 from rest_framework.renderers import JSONRenderer
@@ -18,7 +20,7 @@ from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
 from django.contrib import messages
 from django.utils.text import format_lazy
 from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import StudentEmailForm, HospitalEmailForm
+from .forms import StudentEmailForm, HospitalEmailForm, CustomAuthenticationForm
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
 
@@ -175,7 +177,7 @@ def edit_student_profile(request):
     else:
         form = StudentFormEditProfile(instance=student, prefix='infos')
 
-    return render(request, 'student_edit.html', {'form': form})
+    return render(request, 'student_edit.html', {'form': form, 'is_activated': student.is_activated})
 
 @login_required
 @hospital_required
@@ -188,10 +190,12 @@ def edit_hospital_profile(request):
         if form.is_valid():
             messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form.save()
+            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+        else:
+            messages.info(request, _('Deine Daten wurden nicht erfolgreich geändert!'), extra_tags='alert-warning')
 
     else:
         form = HospitalFormEditProfile(instance=hospital, prefix='infos')
-        #form_mail = HospitalEmailForm(instance=request.user,prefix='account')
 
     return render(request, 'hospital_edit.html', {'form': form})
 
@@ -272,10 +276,28 @@ class UserCountView(APIView):
         content = {'user_count': user_count}
         return JsonResponse(content)
 
-from django.contrib.auth.views import LoginView
-
-from .forms import CustomAuthenticationForm
-
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
+
+
+@login_required
+@student_required
+def change_activation_ask(request):
+    return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
+
+
+@login_required
+@student_required
+def change_activation(request):
+    s = request.user.student
+    status = s.is_activated
+    s.is_activated = not s.is_activated
+    s.save()
+    if status:
+        messages.add_message(request, messages.INFO, _(
+            'Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
+    else:
+        messages.add_message(request, messages.INFO,_(
+            'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
+    return HttpResponseRedirect('profile_student')

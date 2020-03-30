@@ -1,0 +1,6 @@
+ 
+
+# Ignore database files
+data/*
+# Ignore backups
+backups/
