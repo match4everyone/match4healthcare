@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from apps.mapview.utils import plzs
 from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
-from apps.ineedstudent.forms import HospitalForm
+from apps.ineedstudent.forms import HospitalForm, EmailToHospitalForm
+from django.utils.translation import gettext_lazy as _
 
 from django.shortcuts import render
 
@@ -115,4 +116,34 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    return render(request, 'hospital_view.html', {'hospital': h, 'mail': h.user.username})
+    if request.POST and request.user.is_student:
+        s = request.user.student
+        email_form = EmailToHospitalForm(request.POST)
+
+        if email_form.is_valid():
+            start_text = _("Hallo %s,\n\n%s von %s auf Ihre Anzeige gemeldet. "
+                           "Falls Sie keine Anfragen mehr bekommen möchten, deaktivieren Sie Ihre "
+                           "Anzeige im Profil online." % (h.ansprechpartner, s.name_first, request.user.email))
+            message = start_text + email_form.cleaned_data['message']
+            from django.core.mail import EmailMessage
+            from django.conf import settings
+            from apps.iamstudent.models import EmailToHospital
+            EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
+
+
+            email = EmailMessage(
+                subject=email_form.cleaned_data['subject'],
+                body=message,
+                from_email=settings.NOREPLY_MAIL,
+                to=[h.user.email]
+            )
+            email.send()
+
+
+            return HttpResponse('yey')
+
+    email_form = EmailToHospitalForm(initial={'subject': _('[Match4Medis] Neues Hilfsangebot'),
+                                              'message': _('')})
+    return render(request, 'hospital_view.html', {'hospital': h,
+                                                  'mail': h.user.username,
+                                                  'email_form': email_form})

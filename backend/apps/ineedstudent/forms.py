@@ -82,3 +82,24 @@ class HospitalFormInfoSignUp(HospitalFormO):
 
 class HospitalFormInfoCreate(HospitalFormO):
     email = forms.EmailField()
+
+from apps.iamstudent.models import EmailToHospital
+
+class EmailToHospitalForm(forms.ModelForm):
+
+    class Meta:
+        model = EmailToHospital
+        fields = ['subject', 'message']
+        labels = {'subject': _('Betreff'),
+                  'message': _('Nachrichtentext')}
+
+        help_texts = {
+            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(EmailToHospitalForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', _('Hilfsangebot abschicken'), css_class='btn blue text-white btn-md'))
+
