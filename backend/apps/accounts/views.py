@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django_tables2 import MultiTableMixin
 from django.views.generic.base import TemplateView
+from django.contrib.auth.views import LoginView
+from django.contrib import messages
 
 from django.conf import settings
 from rest_framework.renderers import JSONRenderer
@@ -18,7 +20,7 @@ from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
 from django.contrib import messages
 from django.utils.text import format_lazy
 from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import StudentEmailForm, HospitalEmailForm
+from .forms import StudentEmailForm, HospitalEmailForm, CustomAuthenticationForm
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
 
@@ -261,23 +263,15 @@ class UserCountView(APIView):
         content = {'user_count': user_count}
         return JsonResponse(content)
 
-from django.contrib.auth.views import LoginView
-
-from .forms import CustomAuthenticationForm
-
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
-
-from django.contrib import messages
 
 
 @login_required
 @student_required
 def change_activation_ask(request):
     return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
-
-
 
 
 @login_required
@@ -289,8 +283,8 @@ def change_activation(request):
     s.save()
     if status:
         messages.add_message(request, messages.INFO, _(
-            'Du hast dein Profil erfolreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
+            'Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
     else:
         messages.add_message(request, messages.INFO,_(
-            'Du hast dein Profil erfolreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
+            'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
     return HttpResponseRedirect('profile_student')
