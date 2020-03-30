@@ -4,7 +4,7 @@ from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLU
 from django.db import models
 from django.core.exceptions import ValidationError
 
-
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import format_lazy
 from crispy_forms.helper import FormHelper
@@ -281,7 +281,7 @@ class StudentForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
+            raise ValidationError(mark_safe(_('Diese E-mail ist bereits vergeben und eine Bestätigungsmail wurde versandt. <b><a target="_blank" href="/accounts/resend_validation_email/'+ email + '">Klicke hier, um die Bestätigungsmail erneut zu versenden</a></b>')))
         return email
 
     def clean_datenschutz_zugestimmt(self):
