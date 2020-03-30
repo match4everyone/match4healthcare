@@ -11,7 +11,7 @@ from apps.accounts.models import User
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user']
+        exclude = ['uuid', 'registration_date','user','max_mails_per_day']
 
         help_texts = {
             'sonstige_infos': _('Einsatzbereiche? Anforderungen? ... und nette Worte :)')
