@@ -12,11 +12,11 @@ from datetime import datetime
 from match4healthcare.settings.common import RUN_DIR
 
 logged_data_names = ['time', 'status_line', 'status', 'request_time']
-threshold_to_filter = 10
+threshold_to_filter = 50
 
-#@login_required
-#@staff_member_required
-def access_statistics(request):
+@login_required
+@staff_member_required
+def use_statistics(request):
     requests = parse_file()
     df = pd.DataFrame(requests)
     df.columns = logged_data_names
