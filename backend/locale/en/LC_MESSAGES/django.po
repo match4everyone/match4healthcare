@@ -1383,7 +1383,7 @@ msgid "No"
 msgstr "No"
 
 #: apps/ineedstudent/forms.py:19 apps/ineedstudent/forms.py:81
-msgid "Offizieller und Name der Institution"
+msgid "Offizieller Name Ihrer Institution"
 msgstr "Official name of your institution"
 
 #: apps/ineedstudent/forms.py:20 apps/ineedstudent/forms.py:82
