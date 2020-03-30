@@ -138,7 +138,7 @@ def hospital_view(request,uuid):
             )
             email.send()
 
-            return HttpResponseRedirect('/')
+            return render(request,'hospital_contacted.html')
 
     email_form = EmailToHospitalForm(initial={'subject': _('[Match4Medis] Neues Hilfsangebot'),
                                               'message': _('')})
