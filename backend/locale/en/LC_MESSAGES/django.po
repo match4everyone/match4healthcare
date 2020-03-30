@@ -26,8 +26,6 @@ msgstr "Manage Supporters (Admin)"
 #: .\apps\accounts\templates\approve_hospitals.html:23
 #: .\apps\accounts\templates\hospital_edit.html:48
 msgid "Abmelden"#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:19
-msgid "Offizieller und Name der Institution"
-msgstr "Official name of your institution"
 
 #: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:20
 msgid "Name der Kontaktperson"
@@ -796,7 +794,7 @@ msgid "Registriere mich"
 msgstr "Register me"
 
 #: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:76
-msgid "Diese Email ist bereits vergeben"
+msgid "Diese E-Mail ist bereits vergeben"
 msgstr "This e-Mail has already been used"
 
 #: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:19

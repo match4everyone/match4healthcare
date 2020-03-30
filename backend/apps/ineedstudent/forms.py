@@ -72,7 +72,7 @@ class HospitalFormEditProfile(HospitalFormO):
 
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user','datenschutz_zugestimmt', 'einwilligung_datenweitergabe']
+        exclude = ['uuid', 'registration_date','user','datenschutz_zugestimmt', 'einwilligung_datenweitergabe', 'max_mails_per_day']
 
         labels = {
             'plz': _('Postleitzahl'),

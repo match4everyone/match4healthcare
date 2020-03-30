@@ -11,7 +11,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.template import loader
-from apps.mapview.utils import plzs, get_plzs_close_to
+from apps.mapview.utils import plzs, get_plzs_close_to, haversine
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
