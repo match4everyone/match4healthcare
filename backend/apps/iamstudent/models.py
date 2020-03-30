@@ -116,6 +116,7 @@ class Student(models.Model):
 
     datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
+    einwilligung_agb = models.BooleanField(default=False, validators=[validate_checkbox])
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
     unterkunft_gewuenscht = models.BooleanField(default=False)
