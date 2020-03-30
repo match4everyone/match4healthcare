@@ -72,7 +72,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
-MAX_EMAIL_BATCH_PER_HOSPITAL = 200
+MAX_EMAILS_PER_HOSPITAL_PER_DAY = 200
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
