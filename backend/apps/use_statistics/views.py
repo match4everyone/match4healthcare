@@ -14,9 +14,22 @@ from match4healthcare.settings.common import RUN_DIR
 logged_data_names = ['time', 'status_line', 'status', 'request_time']
 threshold_to_filter = 50
 
+from functools import lru_cache
+import time
+from apps.mapview.views import get_ttl_hash
+
 @login_required
 @staff_member_required
 def use_statistics(request):
+    data = process_file(ttl_hash=get_ttl_hash(60))
+
+    table_access_count = AccessCountTable(data)
+    return render(request, 'view.html',
+                  {'table_access_count': table_access_count})
+
+
+@lru_cache(maxsize=1)
+def process_file(ttl_hash):
     requests = parse_file()
     df = pd.DataFrame(requests)
     df.columns = logged_data_names
@@ -24,11 +37,11 @@ def use_statistics(request):
     # TODO: Check if columns are present in dataframe
     df['status'] = df['status'].astype(float)
     df['status_line'] = df['status_line'].astype(str)
-    #df['time'] = df['time'].astype(datetime)
+    # df['time'] = df['time'].astype(datetime)
 
     df_names = df
     # TODO: Can we add the index to the groupby which would make any further processing like sorting easier?
-    #df['status_line'] = df.index
+    # df['status_line'] = df.index
     groupby = df.groupby('status_line')
     groupby_keys = groupby.groups.keys()
 
@@ -42,9 +55,7 @@ def use_statistics(request):
         if counts > threshold_to_filter:
             data.append({'status_line': status_line, 'counts': counts})
 
-    table_access_count = AccessCountTable(data)
-    return render(request, 'view.html',
-                  {'table_access_count': table_access_count})
+    return data
 
 
 def parse_file(logfile_name='gunicorn-access.log', ):
