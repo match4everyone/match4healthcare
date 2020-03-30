@@ -12,11 +12,13 @@ from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
-from .models import Student, EmailToSend
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
 from apps.ineedstudent.models import Hospital
+
+from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
@@ -74,6 +76,8 @@ def send_mail_student_id_list(request, id_list):
         if form.is_valid():
 
             hospital_message = form.cleaned_data['message']
+
+
 
             subject = form.cleaned_data['subject']
             for student_id in id_list:
@@ -218,7 +222,6 @@ def student_list_view(request, countrycode, plz, distance):
     save_filter = request.GET.get('saveFilter', 'false')
     filter_name = request.GET.get('filterName','')
 
-    from .models import StudentListFilterModel, LocationFilterModel
     if save_filter == 'true' and filter_name != '':
 
         student_attr = clean_request_for_saving(request_filtered)
