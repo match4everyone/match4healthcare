@@ -25,7 +25,22 @@ msgstr "Manage Supporters (Admin)"
 
 #: .\apps\accounts\templates\approve_hospitals.html:23
 #: .\apps\accounts\templates\hospital_edit.html:48
-msgid "Abmelden"
+msgid "Abmelden"#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:19
+msgid "Offizieller und Name der Institution"
+msgstr "Official name of your institution"
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:20
+msgid "Name der Kontaktperson"
+msgstr "Full name of the person to contact"
+
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:23
+msgid "Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür."
+msgstr "By submitting your data you are submitting your policy information and the institutions registered with us. All registrations have been properly validated by us and carried out to ensure they are correct. Consider changing a mistake and referring your data to a third party, so that we have no associated rights."
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:124
+msgid "Offizielle E-Mail-Adresse der Kontaktperson"
+msgstr "Official email address of the contact person"
 msgstr "Logout"
 
 #: .\apps\accounts\templates\approve_hospitals.html:24
@@ -783,6 +798,23 @@ msgstr "Register me"
 #: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:76
 msgid "Diese Email ist bereits vergeben"
 msgstr "This e-Mail has already been used"
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:19
+msgid "Offizieller und Name der Institution"
+msgstr "Official name of your institution"
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:20
+msgid "Name der Kontaktperson"
+msgstr "Full name of the person to contact"
+
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:23
+msgid "Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür."
+msgstr "By submitting your data you are submitting your policy information and the institutions registered with us. All registrations have been properly validated by us and carried out to ensure they are correct. Consider changing a mistake and referring your data to a third party, so that we have no associated rights."
+
+#: .\apps\iamstudent\forms.py:250 .\apps\ineedstudent\forms.py:124
+msgid "Offizielle E-Mail-Adresse der Kontaktperson"
+msgstr "Official email address of the contact person"
 
 #: .\apps\iamstudent\forms.py:355
 msgid ""
