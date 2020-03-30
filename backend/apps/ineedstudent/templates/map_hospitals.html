@@ -73,7 +73,7 @@
        fillOpacity: 0.7,
        radius: 500 + 100 * {{ location.count }}
    })
-   .bindPopup('{% blocktrans %}In {{ location.ort }} {{ location.countrycode }}(PLZ {{location.plz }}) gibt es {{ location.count|localize }} Orte, an welchen Hilfe gebraucht wird. {% endblocktrans %}' +
+   .bindPopup('In {{ location.ort }} {{ location.countrycode }}(PLZ {{location.plz }}){% blocktrans %} gibt es {% endblocktrans %}{{ location.count|localize }}{% blocktrans %} Orte, an welchen Hilfe gebraucht wird. {% endblocktrans %}' +
    {% if location.count > 1 %}'<a href=/ineedstudent/hospitals/{{location.countrycode}}/{{ location.plz }}>{% blocktrans %}Detailansicht{% endblocktrans %}</a>'
    {% else %}'<a href=/ineedstudent/hospital_view/{{location.uuid}}>{% blocktrans %}Detailansicht{% endblocktrans %}</a>'
    {% endif %}

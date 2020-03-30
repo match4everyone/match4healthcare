@@ -73,7 +73,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
-MAX_EMAIL_BATCH_PER_HOSPITAL = 200
+MAX_EMAILS_PER_HOSPITAL_PER_DAY = 200
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -129,11 +129,11 @@ RUN_DIR = os.path.join(BASE_DIR, 'run')
 PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname( __file__ )))
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'run', 'media')
 
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'run', 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),

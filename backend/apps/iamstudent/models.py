@@ -13,11 +13,11 @@ def validate_semester(value):
     else:
         return value
 
+
 def validate_checkbox(value):
-    if value != True:
-        raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
-    else:
-        return value
+    pass
+    # TODO: Remove in a manner that does not brake migrations!
+
 
 #class Bezahlung(models.IntegerChoices):
 EGAL = 0
@@ -70,6 +70,10 @@ UMKREIS_CHOICES = (
     (LESSFOURTY, _('<40 km')),
         (MOREFOURTY, _('>40 km')),
 )
+COUNTRY_CODE_CHOICES = [
+    ("DE", _('Deutschland')),
+    ("AT", _('Österreich')),
+]
 
 
 
@@ -79,10 +83,7 @@ class Student(models.Model):
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-    COUNTRY_CODE_CHOICES = [
-        ("DE", 'Deutschland'),
-        ("AT", 'Österreich'),
-    ]
+
     countrycode = models.CharField(
         max_length=2,
         choices=COUNTRY_CODE_CHOICES,
@@ -115,9 +116,11 @@ class Student(models.Model):
 
     datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
     einwilligung_datenweitergabe = models.BooleanField(default=False, validators=[validate_checkbox])
+    einwilligung_agb = models.BooleanField(default=False, validators=[validate_checkbox])
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default='keine')
     unterkunft_gewuenscht = models.BooleanField(default=False)
+    is_activated = models.BooleanField(default=True)
 
     # Metadata
     class Meta:
@@ -131,25 +134,6 @@ class Student(models.Model):
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
             raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
-
-class PersistenStudentFilterModel(models.Model):
-
-    """
-    Persistent Filtering for the Student List
-    """
-
-    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
-
-
-    ausbildung_typ_medstud_famulaturen_anaesthesie = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_chirurgie =models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_innere = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_intensiv = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-    ausbildung_typ_medstud_famulaturen_notaufnahme = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-
-    ausbildung_typ_medstud_anerkennung_noetig = models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown')
-
-
 
 
 """Add stufff to model"""
@@ -167,8 +151,8 @@ ASSIST = 4
 FACH = 5
 MEDSTUD_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
-    (VORKLINIK, _('Vorklinischer Teil (1.-5. Semester)')),
-    (KLINIK, _('Klinischer Teil (6.-10. Semester)')),
+    (VORKLINIK, _('Vorklinischer Teil')),
+    (KLINIK, _('Klinischer Teil')),
     (PJ, _('Praktisches Jahr')),
     (ASSIST, _('Assistenzarzt')),
     (FACH,_('Facharzt'))
@@ -282,7 +266,6 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
     # types
     a_typ = 'ausbildung_typ_%s' % ausbildungs_typ.lower()
     Student.add_to_class(a_typ, models.BooleanField(default=False))
-    PersistenStudentFilterModel.add_to_class(a_typ, models.CharField(max_length=10,choices=CHECKBOX_CHOICES,default='unknown'))
 
     for key, field in felder.items():
         if 'empty' in key:
@@ -290,44 +273,13 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
         a_typ_kind = 'ausbildung_typ_%s_%s' % (ausbildungs_typ.lower(), key.lower())
         AUSBILDUNGS_DETAIL_COLUMNS.append(a_typ_kind)
         Student.add_to_class(a_typ_kind, field[0](**field[1]))
-        # todo: switch type
-        if 'abschnitt' == key:
-            PersistenStudentFilterModel.add_to_class('%s_lt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
-            PersistenStudentFilterModel.add_to_class('%s_gt' % a_typ_kind ,field[0](**field[1]))#models.IntegerField(choices=ZAHNSTUD_CHOICES, default=0, null=True) )
-        elif 'famulatu' in a_typ_kind or 'noetig' in a_typ_kind:
-            pass
-        else:
-            PersistenStudentFilterModel.add_to_class(a_typ_kind, field[0](**field[1]))
 
 # Generate Fields for translation
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
 
 AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
 
-
-
-
-
-"""End"""
-
-import django_filters
-from django import forms
-from django.db import models
-
-
-class StudentFilter(django_filters.FilterSet):
-    class Meta:
-        model = Student
-        fields = {}
-        filter_overrides = {
-            models.BooleanField: {
-                'filter_class': django_filters.BooleanFilter,
-                'extra': lambda f: {
-                    'widget': forms.CheckboxInput,
-                },
-            },
-        }
-
+# emails that hospitals send to students
 class EmailToSend(models.Model):
 
     subject = models.CharField(max_length=200,default='')
@@ -340,3 +292,51 @@ class EmailToSend(models.Model):
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+
+# emails that students send to hospitals
+class EmailToHospital(models.Model):
+
+    subject = models.CharField(max_length=200,default='')
+    message = models.TextField(default='')
+
+    student = models.ForeignKey(Student,on_delete=models.CASCADE)
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+
+
+
+
+class LocationFilterModel(models.Model):
+
+    plz = models.CharField(max_length=5, null=True)
+    distance = models.IntegerField(default=0)
+    countrycode = models.CharField(max_length=2,choices=COUNTRY_CODE_CHOICES,default="DE",)
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+
+class StudentListFilterModel(models.Model):
+
+    hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
+    location = LocationFilterModel
+
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    name = models.CharField(max_length=100)
+
+from .filters import StudentJobRequirementsFilter
+jrf = StudentJobRequirementsFilter()
+import django.forms as forms
+import django_filters.fields as filter_fields
+for f_name, filter in jrf.base_filters.items():
+
+    if type(filter.field) == forms.NullBooleanField:
+        StudentListFilterModel.add_to_class(f_name, models.NullBooleanField(default=None,null=True))
+    elif type(filter.field) == forms.DecimalField:
+        StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
+    elif type(filter.field) == filter_fields.ChoiceField:
+        StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0,choices=filter.field.choices))
+    elif type(filter.field) == forms.DateField:
+        StudentListFilterModel.add_to_class(f_name,  models.DateField(null=True,default=datetime.now))
+    else:
+        raise ValueError("I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name))

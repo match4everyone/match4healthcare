@@ -80,7 +80,7 @@ coverage.xml
 .pytest_cache/
 
 # Translations
-#*.mo
+*.mo
 
 # Scrapy stuff:
 .scrapy
@@ -196,3 +196,9 @@ sketch
 docker-compose.yml
 
 # End of https://www.gitignore.io/api/react,django,python
+
+# pycharm settings
+.idea/
+
+# Ignore all config files
+*.env

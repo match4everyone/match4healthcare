@@ -15,6 +15,9 @@ services:
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
+    depends_on:
+      - database
+
 
   database:
     image: postgres
@@ -22,6 +25,7 @@ services:
      - ./database/data:/var/lib/postgresql/data
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
      - ./database/postgresql.conf:/etc/postgresql.conf
+     - ./database/backups:/backups/
     restart: always
     env_file:
      - database.prod.env
@@ -33,3 +37,6 @@ services:
 
 networks:
  network:
+
+#volumes:
+#  postgres-data:

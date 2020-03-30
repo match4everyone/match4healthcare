@@ -1,10 +1,10 @@
 # from django.forms import *
 from django import forms
-from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLUMNS,AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS, PersistenStudentFilterModel
+from apps.iamstudent.models import Student, EmailToSend, AUSBILDUNGS_DETAIL_COLUMNS,AUSBILDUNGS_TYPEN, AUSBILDUNGS_TYPEN_COLUMNS, AUSBILDUNGS_IDS
 from django.db import models
 from django.core.exceptions import ValidationError
 
-
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import format_lazy
 from crispy_forms.helper import FormHelper
@@ -46,7 +46,7 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
     'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+        '<b>Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mtla': _('Medizinisch-technische/r Laboratoriumsassistent*in'),
@@ -68,7 +68,8 @@ form_labels = {
     'sonstige_qualifikationen': _('Weitere Qualifikationen'),
     'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
     'einwilligung_datenweitergabe': _(
-        'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
+        'Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. '
+        'Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden.'),
     'wunsch_ort_arzt': _('Arztpraxis/Ordination/MVZ'),
     'wunsch_ort_gesundheitsamt': _('Gesundheitsamt und sonstige Einrichtungen'),
     'wunsch_ort_krankenhaus': _('Klinikum/Spital'),
@@ -79,17 +80,20 @@ form_labels = {
     'wunsch_ort_apotheke': _('Apotheke <em>(melde Dich auch bei <a href="http://apothekenhelfen.bphd.de/">Apothekenhelfen</a>)</em>'),
     'wunsch_ort_ueberall': _('Keiner, ich helfe dort, wo ich kann'),
     'zeitliche_verfuegbarkeit': _('Zeitliche Verfügbarkeit, bis zu'),
+    'einwilligung_agb': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. '
+             'Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. '
+             'Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
 }
 fields_for_button_group = [
-    'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
-'ausbildung_typ_pflege_abschnitt',
-                           'ausbildung_typ_physio_abschnitt',
-                           'ausbildung_typ_medstud_abschnitt',
-                           'ausbildung_typ_mfa_abschnitt',
-                           'ausbildung_typ_mtla_abschnitt',
-                           'ausbildung_typ_mta_abschnitt',
-                           'ausbildung_typ_notfallsani_abschnitt',
-                           'ausbildung_typ_zahni_abschnitt'
+                            'ausbildung_typ_kinderbetreung_ausgebildet_abschnitt',
+                            'ausbildung_typ_pflege_abschnitt',
+                            'ausbildung_typ_physio_abschnitt',
+                            'ausbildung_typ_medstud_abschnitt',
+                            'ausbildung_typ_mfa_abschnitt',
+                            'ausbildung_typ_mtla_abschnitt',
+                            'ausbildung_typ_mta_abschnitt',
+                            'ausbildung_typ_notfallsani_abschnitt',
+                            'ausbildung_typ_zahni_abschnitt'
 ]
 
 mindest = _('mindestens')
@@ -97,8 +101,8 @@ maxim = _('maximal')
 for field in fields_for_button_group:
     if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
         f = str(field)
-        form_labels[f + '_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
-        form_labels[f + '_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
+        form_labels[f + '_x_lt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=maxim)
+        form_labels[f + '_x_gt'] = format_lazy('{f} {extra}', f=form_labels[f],extra=mindest)
 
 
 def button_group(field):
@@ -115,8 +119,8 @@ def button_group_filter(field):
         return Column()
     if field in fields_for_button_group:
         if field.split('_')[-1] == 'abschnitt' and not 'ausgebildet' in field:
-            return Field(Row(Column(ButtonGroup(field + '_gt'))),
-            Row(Column(ButtonGroup(field + '_lt'))))
+            return Field(Row(Column(ButtonGroup(field + '_x_gt'))),
+            Row(Column(ButtonGroup(field + '_x_lt'))))
         else:
             return ButtonGroup(field)
     return field
@@ -134,7 +138,7 @@ def ButtonGroupBool(field):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        exclude = ['uuid', 'registration_date', 'user']
+        exclude = ['uuid', 'registration_date', 'user', 'is_activated']
         labels = form_labels
         help_texts = {
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
@@ -151,7 +155,10 @@ class StudentForm(forms.ModelForm):
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
+        self.helper.form_action = 'signup_student'
+        self.helper.attrs = {
+            'onsubmit':'disableButton()'
+        }
 
         self.helper.layout = Layout(
   HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
@@ -268,9 +275,12 @@ class StudentForm(forms.ModelForm):
             HTML('<p class="text-left">'),
             'einwilligung_datenweitergabe',
             HTML("</p>"),
+            HTML('<p class="text-left">'),
+            'einwilligung_agb',
+            HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_('Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen.'))),
-            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md',
-                   onclick="this.form.submit(); this.disabled=true; this.value='Sending…';"),
+            Submit('submit', _('Registriere mich'), css_class='btn blue text-white btn-md'),
+            HTML("<script>function disableButton() {var btn = document.getElementById('submit-id-submit'); btn.disabled = true;btn.value = 'Sending...'}</script>")
         ))
 
         logging.debug(self.helper.layout)
@@ -278,9 +288,23 @@ class StudentForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise ValidationError(_("Diese Email ist bereits vergeben"))
+            raise ValidationError(mark_safe(_('Diese E-mail ist bereits vergeben und eine Bestätigungsmail wurde versandt. <b><a target="_blank" href="/accounts/resend_validation_email/'+ email + '">Klicke hier, um die Bestätigungsmail erneut zu versenden</a></b>')))
         return email
 
+    def clean_datenschutz_zugestimmt(self):
+        if not self.cleaned_data['datenschutz_zugestimmt']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
+
+    def clean_einwilligung_datenweitergabe(self):
+        if not self.cleaned_data['einwilligung_datenweitergabe']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
+
+    def clean_einwilligung_agb(self):
+        if not self.cleaned_data['einwilligung_agb']:
+            raise ValidationError(_("Zustimmung erforderlich."), code='invalid')
+        return True
 
 class StudentFormAndMail(StudentForm):
     email = forms.EmailField()
@@ -386,9 +410,6 @@ class StudentFormEditProfile(StudentForm):
             Submit('submit', _('Profil Aktualisieren'), css_class='btn blue text-white btn-md'),
         )
 
-
-
-
 class EmailToSendForm(forms.ModelForm):
     class Meta:
         model = EmailToSend
@@ -399,65 +420,84 @@ class EmailToSendForm(forms.ModelForm):
             'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
         }
 
-class PersistenStudentFilterForm(forms.ModelForm):
+def get_form_helper_filter():
+    helper = FormHelper()
+    helper.form_id = 'id-exampleForm'
+    helper.form_class = 'blueForms'
+    helper.form_method = 'get'
 
-    class Meta:
-        model = PersistenStudentFilterModel
-        #initial = {
-        #    'ausbildung_typ_mfa': 'unkown'
-        #}
-        labels = form_labels
-        exclude = ['hospital']
+    helper.form_action = 'submit_survey'
+    helper.form_style = 'inline'
+    helper.layout = Layout(
+        Div(Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                         css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                  AUSBILDUNGS_TYPEN.keys()]),
+            css_id='div-berufsausbildung-dropdown',
+            ))
 
-    def __init__(self, *args, **kwargs):
-        super(PersistenStudentFilterForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'blueForms'
-        self.helper.form_method = 'get'
-
-        self.helper.form_action = 'submit_survey'
-        self.helper.form_style = 'inline'
-        for k in self.fields.keys():
-            self.fields[k].required = False
-
-        for k in AUSBILDUNGS_TYPEN.keys():
-            self.fields['ausbildung_typ_%s' % k.lower()].required = False
-
-        self.helper.layout = Layout(
-            Div(
-                Row(*[Column(ButtonGroupBool('ausbildung_typ_%s' % k.lower()), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
-                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
-                      AUSBILDUNGS_TYPEN.keys()]),
-                css_id='div-berufsausbildung-dropdown',
-            ),
-            # medstud
-
-            # rest
-            *[
-                Div(
-                    HTML("<p style='font-weight: 500;'>{}</p>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()]))),
-
-                    Row(*[
+    for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items():
+        if len(felder) != 0:
+            if ausbildungstyp != 'MEDSTUD':
+                helper.layout.extend([
+                    Div(
+                        HTML('<hr><h5>Zusätzliche Filter zu {}</h5>'.format(
+                            _(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,
+                        Row(*[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ])
+                        ,
+                        *[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ]
+                        , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        , css_class='hidden ausbildung-addon'
+                    )])
+            else:
+                helper.layout.extend([
+                    Div(HTML('<hr><h5>Zusätzliche Filter zu {}</h5>'.format(
+                            _(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                        ,Row(*[
                         Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
                                css_class='form-group', css_id=f.replace('_', '-'))
                         for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
                             ausbildungstyp.lower(), f.lower())
-                    ])
-                    ,
-                    Row(*[
-                        Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
-                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
-                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
-                            ausbildungstyp.lower(), f.lower())
-                    ])
-                    , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
-                    , css_class='hidden ausbildung-addon'
-                )
-                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
-            ]
+                    ]),
+                        HTML('<p>'),
+                        HTML(_("In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?")),
+                        HTML('</p>')
+                        ,
+                        *[
+                            Column(button_group_filter('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                                   css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                            for f in felder.keys() if
+                            'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                                ausbildungstyp.lower(), f.lower())
+                        ]
+                        , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                        , css_class='hidden ausbildung-addon'
+                        )])
+
+    helper.form_tag = False
+    helper.layout.extend([
+        HTML('<hr><h5>'),
+        HTML(_(' Welche Infos über die zu vergebende Stelle sind schon bekannt?')),
+        HTML('</h5>'),
+        'availability_start',
+        Row(Column(InlineRadios('braucht_bezahlung')),
+            Column(InlineRadios('unterkunft_gewuenscht')))])
+    return helper
 
 
+from .models import StudentListFilterModel
+class StudentListFilterModelForm(forms.ModelForm):
 
-        )
-        self.helper.form_tag = False
+    class Meta:
+        model = StudentListFilterModel
+        exclude = []
