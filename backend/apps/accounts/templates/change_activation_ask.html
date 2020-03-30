@@ -45,16 +45,12 @@
  <div class="col-lg-6 col-md-10 col-sm-12 col-12" >
   <div class="card login-card text-center align-items-center">
       {% if is_activated %}
-      <h4>{% blocktrans %}
-          Bist du sicher, dass du deinen Account vorerst deaktivieren möchtest?{% endblocktrans %}</h4>
-          <p>{% blocktrans %}Dann kannst du nicht mehr von Hilfesuchenden kontaktiert werden.
-          Du kannst die Deaktivierung aber jederzeit rückgängig machen. {% endblocktrans %}</p>
+      <h4>{% blocktrans %}Bist du sicher, dass du deinen Account vorerst deaktivieren möchtest?{% endblocktrans %}</h4>
+          <p>{% blocktrans %}Dann kannst du nicht mehr von Hilfesuchenden kontaktiert werden. Du kannst die Deaktivierung aber jederzeit rückgängig machen. {% endblocktrans %}</p>
       <a href="change_activation_confirm"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Ja, Account deaktivieren.{% endblocktrans %}</button></a>
     {% else %}
-       <h4>{% blocktrans %}
-          Bist du sicher, dass Du Deinen Account vorerst wieder aktivieren möchtest?{% endblocktrans %}</h4>
-         <p>{% blocktrans %} Dann kannst du wieder von Hilfesuchenden kontaktiert werden.
-          Du kannst die Aktivierung aber jederzeit rückgängig machen. {% endblocktrans %}</p>
+       <h4>{% blocktrans %}Bist du sicher, dass Du Deinen Account vorerst wieder aktivieren möchtest?{% endblocktrans %}</h4>
+         <p>{% blocktrans %} Dann kannst du wieder von Hilfesuchenden kontaktiert werden. Du kannst die Aktivierung aber jederzeit rückgängig machen. {% endblocktrans %}</p>
       <a href="change_activation_confirm"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Ja, Account aktivieren.{% endblocktrans %}</button></a>
       {% endif %}
       <a href="/"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Nein, zurück zur Homepage{% endblocktrans %}</button></a>
