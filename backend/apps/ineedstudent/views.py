@@ -23,8 +23,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
-import time
-from apps.accounts.utils import send_password_set_email
+from django.core.mail import EmailMessage
+from django.conf import settings
+from apps.iamstudent.models import EmailToHospital
 
 from django.views.decorators.gzip import gzip_page
 
@@ -116,8 +117,9 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
-    if request.POST and request.user.is_student:
+    if request.POST and request.user.is_student and request.user.validated_email:
         s = request.user.student
+
         email_form = EmailToHospitalForm(request.POST)
 
         if email_form.is_valid():
@@ -125,9 +127,6 @@ def hospital_view(request,uuid):
                            "Falls Sie keine Anfragen mehr bekommen möchten, deaktivieren Sie Ihre "
                            "Anzeige im Profil online." % (h.ansprechpartner, s.name_first, request.user.email))
             message = start_text + email_form.cleaned_data['message']
-            from django.core.mail import EmailMessage
-            from django.conf import settings
-            from apps.iamstudent.models import EmailToHospital
             EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
 
 
