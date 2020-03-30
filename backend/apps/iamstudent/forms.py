@@ -138,7 +138,7 @@ def ButtonGroupBool(field):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        exclude = ['uuid', 'registration_date', 'user']
+        exclude = ['uuid', 'registration_date', 'user', 'is_activated']
         labels = form_labels
         help_texts = {
             'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
