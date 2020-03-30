@@ -15,6 +15,9 @@ services:
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
+    depends_on:
+      - database
+
 
   database:
     image: postgres
@@ -34,3 +37,6 @@ services:
 
 networks:
  network:
+
+#volumes:
+#  postgres-data:
