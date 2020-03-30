@@ -32,6 +32,9 @@ urlpatterns = [
     path('change_hospital_approval/<str:uuid>/', views.change_hospital_approval, name='change_hospital_approval'),
     path('delete_hospital/<str:uuid>/', views.delete_hospital, name='delete_hospitall'),
     path('count', views.UserCountView.as_view(), name='count'),
+    path('change_activation',views.change_activation_ask,name='activate_student_ask'),
+    path('change_activation_confirm',views.change_activation,name='activate_student')
+
 ]
 
 if settings.DEBUG:

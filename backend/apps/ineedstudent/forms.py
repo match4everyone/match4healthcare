@@ -11,7 +11,7 @@ from apps.accounts.models import User
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user', 'sonstige_infos']
+        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day']
 
         labels = {
             'plz': _('Postleitzahl'),
