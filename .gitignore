@@ -199,3 +199,6 @@ docker-compose.yml
 
 # pycharm settings
 .idea/
+
+# Ignore all config files
+*.env

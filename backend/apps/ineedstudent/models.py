@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from apps.mapview.utils import plzs
 from django.utils.translation import gettext as _
 
+from django.conf import settings
 
 # Create your models here.
 """A typical class defining a model, derived from the Model class."""
@@ -26,8 +27,9 @@ class Hospital(models.Model):
         default="DE",
     )
 
+    max_mails_per_day = models.IntegerField(default=settings.MAX_EMAILS_PER_HOSPITAL_PER_DAY)
+
     ## Kontaktdaten
-    #email = models.EmailField(unique=True)
     sonstige_infos = models.TextField(default='')
     ansprechpartner = models.CharField(max_length=100,default='')
     telefon = models.CharField(max_length=100,default='')
@@ -37,8 +39,10 @@ class Hospital(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
-    appears_in_map = models.BooleanField(default=True)
+    appears_in_map = models.BooleanField(default=False)
 
+    datenschutz_zugestimmt = models.BooleanField(default=False)
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
     # Metadata
     class Meta:
         ordering = ['registration_date']

@@ -83,14 +83,29 @@ var signUpHelper = {
                 {% blocktrans %}Account Details{% endblocktrans %}
             </div>
             <div class="card-body">
+                {% if is_activated %} {% else %}{% blocktrans %}<mark>Vorsicht!</mark> Dein Profil ist deaktiviert, aktuell kannst du nicht kontaktiert werden.{% endblocktrans %} <br> {% endif %}
                 
                     <a role="button" class="btn blue text-white btn-md" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
                     <a role="button" class="btn blue text-white btn-md" href="password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
-                    <a role="button" class="btn btn-info" href="delete_me_ask">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
+                <a role="button" class="btn btn-info" href="change_activation">{% if is_activated %} {% blocktrans %}Profil deaktivieren{% endblocktrans %} {% else %}{% blocktrans %}Profil aktivieren{% endblocktrans %} {% endif %}</a>
+                <a role="button" class="btn btn-info" href="delete_me_ask">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
                 
             </div>
         </div>
-
+        <div class="card" style="margin-bottom:35px;">
+            <div class="card-header">
+                {% blocktrans %}Nützliche Hinweise{% endblocktrans %}
+            </div>
+            <div class="card-body">
+            {% blocktrans %}
+                Wir haben <a href="match4healthcare.de/legal-issues/">rechtliche Hinweise und Tipps</a> zu deinem Einsatz nach bestem Wissen und Gewissen zusammen gefasst. Darunter sind hinweise für Arbeitszeitenregelung und Versicherungsschutz zusammengefasst. Wir erheben jedoch keinen Anspruch auf vollständigkeit dieser Sammlung an Tipps!
+                <br><br>
+                Zusätzlich wollen wir euch bestmöglich auf den Einsatz und den Kontakt mit COVID-19 Patienten vorbereiten.  Hierfür stellen wir euch eine <a href="https://www.amboss.com/de/wissen/COVID-19">Zusammenfassung der Symptome und Therapiemöglichkeiten</a> zur Verfügung.
+                <br><br>
+                Zur Vorbereitung auf euren Einsatz hat ein weiteres Team des #WirVsVirus Hackathon eine <a href="https://helferhaende.it-servicehost.de/">interaktive E-Learning Plattform</a> entwickelt.
+            {% endblocktrans %}
+            </div>
+        </div>
         <div class="card">
             <div class="card-header">
                 {% blocktrans %}Informationen über dich{% endblocktrans %}
