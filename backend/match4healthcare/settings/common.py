@@ -13,8 +13,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from django.utils.translation import ugettext_lazy as _
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...) 
+# or better: 
+# add paths here and import: from django.conf import settings and use settings.XXX_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+RUN_DIR = os.path.join(BASE_DIR, 'run')
 
 
 # Application definition
@@ -126,11 +129,11 @@ LOCALE_PATHS = (
 PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname( __file__ )))
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'run', 'media')
+MEDIA_ROOT = os.path.join(RUN_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'run', 'static')
+STATIC_ROOT = os.path.join(RUN_DIR, 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),

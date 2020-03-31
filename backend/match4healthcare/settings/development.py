@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'run', 'db.sqlite3'),
+        'NAME': os.path.join(RUN_DIR, 'db.sqlite3'),
     }
 }
 
@@ -49,7 +49,7 @@ elif mail_relay_option == 'sendgrid':
     use_sendgrid_api = True
 
     # Retrieve sendgrid api key
-    SENDGRID_SECRET_FILE = normpath(join(BASE_DIR, 'run', 'SENDGRID.key'))
+    SENDGRID_SECRET_FILE = normpath(join(RUN_DIR, 'SENDGRID.key'))
     SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
 
     if use_sendgrid_api:
