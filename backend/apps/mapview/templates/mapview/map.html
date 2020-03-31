@@ -138,23 +138,14 @@ $(window).on("resize", function () {
     preferCanvas: true,
   }).addTo(mymap);
 
-window.addEventListener('load', function() {
-  $(window).on("resize", function () {
 
-  		var height = $(window).height();
-  		var navHeight = $('.navbar').outerHeight();
-  		var searchHeight = $('.search-map').innerHeight();
-  		var footerHeight = $('.footer').innerHeight();
-  	  var newHeight = height - navHeight - {% if user.is_authenticated and user.is_hospital %} searchHeight -{% endif %} footerHeight;
-  		$("#mapid").height(newHeight);mymap.invalidateSize();
-}).trigger("resize");});
-</script>
+</script> 
 {% localize off %}
   {% for location in locations %}
 <script type="text/javascript">
    var circle = L.circle([ {{ location.lon }}, {{ location.lat }} ], {
        color: 'blue',
-       weight: 2 + 0.5 * {{ location.count }},
+       weight: 2 + 0.25 * {{ location.count }},
        fillColor: 'blue',
        fillOpacity: .2,
        radius: 500 + 100 * {{ location.count }}
