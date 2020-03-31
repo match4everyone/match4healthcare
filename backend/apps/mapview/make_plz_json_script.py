@@ -8,7 +8,6 @@ import csv
 plzs = {}
 
 current_location = dirname(abspath(__file__))
-aton
 from os.path import join
 
 for countrycode in ["DE", "AT"]:
@@ -18,7 +17,8 @@ for countrycode in ["DE", "AT"]:
         for row in reader:
             for plz in row["plz"].split(","):
                 try:
-                    plzs[str(countrycode)][plz] = (float(row["lon"]), float(row["lat"]), row["ort"])
+                    if plz not in plzs[countrycode]:
+                        plzs[countrycode][plz] = (float(row["lon"]), float(row["lat"]), row["ort"])
                 except Exception as e:
                     print("Warning: count not make PLZ entry for", row)
     df = pgeocode.Nominatim(countrycode)._data_frame.dropna()[["postal_code", "longitude", "latitude", "place_name"]].values
@@ -26,6 +26,8 @@ for countrycode in ["DE", "AT"]:
         if plz not in plzs[countrycode]:
             plzs[countrycode][plz] = (lon, lat, ort)
 
+
+
 with open(join(current_location, "files/plzs_merged.json"), "w") as f:
     f.write(json.dumps(plzs))
-""" 
+"""
