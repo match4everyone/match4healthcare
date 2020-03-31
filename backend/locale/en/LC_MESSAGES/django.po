@@ -392,7 +392,7 @@ msgid "Passwort zurücksetzen "
 msgstr "Password reset "
 
 #: apps/accounts/templates/registration/password_set_email_.html:445
-msgid "Lieber Helfende*r,"
+msgid "Liebe/r Helfende*r,"
 msgstr "Dear supporter,"
 
 #: apps/accounts/templates/registration/password_set_email_.html:447
@@ -1383,7 +1383,7 @@ msgid "No"
 msgstr "No"
 
 #: apps/ineedstudent/forms.py:19 apps/ineedstudent/forms.py:81
-msgid "Offizieller und Name der Institution"
+msgid "Offizieller Name Ihrer Institution"
 msgstr "Official name of your institution"
 
 #: apps/ineedstudent/forms.py:20 apps/ineedstudent/forms.py:82
