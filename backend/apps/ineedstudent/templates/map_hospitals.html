@@ -74,9 +74,9 @@ $(window).on("resize", function () {
 }	
 		).trigger("resize");	
 	
-		$.getJSON( "http://localhost:8000/accounts/count", function( data ) {
+		$.getJSON( "/accounts/count", function( data ) {
 			var paragraph = document.getElementById("user_count");
-			paragraph.textContent += data.user_count;		
+			paragraph.textContent += data.facility_count;		
 		})
 	
 });	
