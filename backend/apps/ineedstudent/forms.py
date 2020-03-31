@@ -16,7 +16,7 @@ class HospitalFormO(ModelForm):
         labels = {
             'plz': _('Postleitzahl'),
             'countrycode': _('Land'),
-            'firmenname': _('Offizieller und Name der Institution'),
+            'firmenname': _('Offizieller Name Ihrer Institution'),
             'ansprechpartner': _('Name der Kontaktperson'),
             'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
             'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
@@ -78,7 +78,7 @@ class HospitalFormEditProfile(HospitalFormO):
             'plz': _('Postleitzahl'),
             'countrycode': _('Land'),
             'sonstige_infos': _('Text Ihrer Suchanzeige. Wird nur öffentlich gezeigt wenn Sie auf der Karte sichtbar sind und kontaktbierbar sein möchten. Hier können Sie genau beschreiben, für welche Rollen Sie Unterstützung brauchen, welche Qualifikationen dafür notwendig sind, und unter welchen Bedingungen (z.B. Bezahlung) gesucht wird.'),
-            'firmenname': _('Offizieller und Name der Institution'),
+            'firmenname': _('Offizieller Name Ihrer Institution'),
             'ansprechpartner': _('Name der Kontaktperson'),
             'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
         }
