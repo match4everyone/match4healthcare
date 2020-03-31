@@ -101,7 +101,7 @@ def send_mail_student_id_list(request, id_list):
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
-        form = EmailToSendForm(initial={'subject': '[Match4Medis] Ein Ort braucht Deine Hilfe',
+        form = EmailToSendForm(initial={'subject': '[match4healthcare] Ein Ort braucht Deine Hilfe',
                                         'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.user.email)})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
@@ -271,6 +271,3 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
-
-
-
