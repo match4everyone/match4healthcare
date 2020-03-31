@@ -316,6 +316,18 @@ class EmailForm(forms.Form):
 
 
 class StudentFormEditProfile(StudentForm):
+
+    class Meta:
+        model = Student
+        exclude = ['uuid', 'registration_date', 'user', 'is_activated', 'einwilligung_agb', 'einwilligung_datenweitergabe', 'datenschutz_zugestimmt']
+        labels = form_labels
+        help_texts = {
+            'email': _('Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren'),
+            'countrycode': _('Bitte wähle ein Land aus'),
+            'plz': _('bevorzugter Einsatzort als Postleitzahl'),
+           # 'wunsch_ort_gesundheitsamt': _('Hotline, Teststation etc.')
+        }
+
     def __init__(self, *args, **kwargs):
         super(StudentFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.layout = Layout(
@@ -398,13 +410,6 @@ class StudentFormEditProfile(StudentForm):
             ],
             'sonstige_qualifikationen'
             ,
-            HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-            HTML('<p class="text-left">'),
-            'datenschutz_zugestimmt',
-            HTML("</p>"),
-            HTML('<p class="text-left">'),
-            'einwilligung_datenweitergabe',
-            HTML("</p>"),
             HTML('<div class="registration_disclaimer">{}</div>'.format(_(
                 'Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
             Submit('submit', _('Profil Aktualisieren'), css_class='btn blue text-white btn-md'),
