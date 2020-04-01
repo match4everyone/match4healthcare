@@ -31,6 +31,7 @@ urlpatterns = [
     path('iamstudent/', include('apps.iamstudent.urls')),
     path('ineedstudent/', include('apps.ineedstudent.urls')),
     path('accounts/', include('apps.accounts.urls')),
+    path('use_statistics/', include('apps.use_statistics.urls')),
     path('admin/', admin.site.urls),
     path('404/', views.handler404),
     path('500/', views.handler500),
