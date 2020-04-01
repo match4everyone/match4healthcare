@@ -93,6 +93,7 @@ class HospitalFormEditProfile(HospitalFormO):
                 HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
                 'sonstige_infos'
         )
+        self.fields["sonstige_infos"].required = False
 
 class HospitalFormZustimmung(ModelForm):
         class Meta:
@@ -158,4 +159,3 @@ class EmailToHospitalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Hilfsangebot abschicken'), css_class='btn blue text-white btn-md'))
-
