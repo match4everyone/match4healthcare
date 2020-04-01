@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.iamstudent',
     'apps.ineedstudent',
     'apps.accounts',
+    'apps.use_statistics',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,8 @@ LANGUAGE_CODE = 'de'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+RUN_DIR = os.path.join(BASE_DIR, 'run')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
