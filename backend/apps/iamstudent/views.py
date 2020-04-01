@@ -101,7 +101,7 @@ def send_mail_student_id_list(request, id_list):
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
-        form = EmailToSendForm(initial={'subject': '[Match4Medis] Ein Ort braucht Deine Hilfe',
+        form = EmailToSendForm(initial={'subject': '[match4healthcare] Ein Ort braucht Deine Hilfe',
                                         'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.user.email)})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
@@ -193,9 +193,14 @@ def student_list_view(request, countrycode, plz, distance):
     filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, queryset=qs)
     qs = filter_jobrequirements.qs
 
+    # TODO: WIP This is probably really inefficient
+    #qs_mails = EmailToSend.objects.filter(
+    #    hospital__user__email=request.user.email,
+    #    student__user__email__in=qs.values_list("user__email"))
     # displayed table
-    table = StudentTable(qs)
+    #print(qs.union(qs_mails))
 
+    table = StudentTable(qs)
     # disable huge amounts of email sends
     max_mails = leftover_emails_for_today(request)
     enable_mail_send = (filter_jobrequirements.qs.count() <= max_mails)
@@ -271,6 +276,3 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
-
-
-
