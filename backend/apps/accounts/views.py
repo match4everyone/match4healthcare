@@ -293,6 +293,9 @@ def change_activation_ask(request):
     return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
 
 
+
+
+
 @login_required
 @student_required
 def change_activation(request):
@@ -307,3 +310,14 @@ def change_activation(request):
         messages.add_message(request, messages.INFO,_(
             'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
     return HttpResponseRedirect('profile_student')
+
+from apps.ineedstudent.forms import PostingForm
+
+@login_required
+@hospital_required
+def hospital_dashboard(request):
+    anzeige_form = PostingForm()
+    context = {
+        'anzeige_form': anzeige_form
+    }
+    return render(request, 'hospital_dashboard.html', context)

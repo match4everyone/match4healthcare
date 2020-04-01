@@ -159,3 +159,19 @@ class EmailToHospitalForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Hilfsangebot abschicken'), css_class='btn blue text-white btn-md'))
 
+class PostingForm(forms.ModelForm):
+
+    class Meta:
+        model = Hospital
+        labels = {
+            'appears_in_map': _('Anzeige solll angezeigt werden'),
+            'sonstige_infos': _('Anzeigetext'),
+        }
+        fields = ['appears_in_map', 'sonstige_infos']
+
+    def __init__(self, *args, **kwargs):
+        super(PostingForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
+
