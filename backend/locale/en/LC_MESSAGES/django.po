@@ -747,7 +747,7 @@ msgid ""
 "Pflege <em>(melde Dich auch bei <a href=\"https://pflegereserve.de/#/login\" "
 "target=\"_blank\">Pflegereserve</a>)</em>"
 msgstr ""
-"Care giving <em>(also register on <a href=\"https://pflegereserve.de/#/login"
+"Nursing <em>(also register on <a href=\"https://pflegereserve.de/#/login"
 "\" target=\"_blank\">Pflegereserve</a>)</em>"
 
 #: apps/iamstudent/forms.py:35 apps/iamstudent/forms.py:37
@@ -884,7 +884,7 @@ msgstr "Hospital"
 
 #: apps/iamstudent/forms.py:76
 msgid "Pflegeeinrichtungen"
-msgstr "Care facilities"
+msgstr "Nursing facilities"
 
 #: apps/iamstudent/forms.py:77
 msgid "Rettungsdienst"
@@ -955,7 +955,7 @@ msgstr "Personal information"
 
 #: apps/iamstudent/forms.py:176 apps/iamstudent/forms.py:346
 msgid "Über deinen Einsatz"
-msgstr "About your deployment"
+msgstr "Information about your support"
 
 #: apps/iamstudent/forms.py:188 apps/iamstudent/forms.py:358
 msgid "Wunscheinsatzort"
