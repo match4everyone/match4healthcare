@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Row, Column
 from apps.accounts.models import User
+from django.templatetags.static import static
 
 class HospitalFormO(ModelForm):
     class Meta:
@@ -174,4 +175,9 @@ class PostingForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
+        self.helper.layout = Layout(
+            HTML('<script type="text/javascript" src="{}"></script>'.format(static('js/PostingForm.js'))),
+            'appears_in_map',
+            'sonstige_infos'
+        )
 
