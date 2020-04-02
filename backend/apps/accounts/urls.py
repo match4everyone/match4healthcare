@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from . import views
+from .resend_validated_email import resend_validation
 
 from . import generate_users
 
@@ -34,7 +35,8 @@ urlpatterns = [
     path('delete_hospital/<str:uuid>/', views.delete_hospital, name='delete_hospitall'),
     path('count', views.UserCountView.as_view(), name='count'),
     path('change_activation',views.change_activation_ask,name='activate_student_ask'),
-    path('change_activation_confirm',views.change_activation,name='activate_student')
+    path('change_activation_confirm',views.change_activation,name='activate_student'),
+    path('resend_validation',resend_validation,name='resend_validation'),
 
 ]
 
