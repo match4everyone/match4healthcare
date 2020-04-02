@@ -193,14 +193,9 @@ def student_list_view(request, countrycode, plz, distance):
     filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, queryset=qs)
     qs = filter_jobrequirements.qs
 
-    # TODO: WIP This is probably really inefficient
-    #qs_mails = EmailToSend.objects.filter(
-    #    hospital__user__email=request.user.email,
-    #    student__user__email__in=qs.values_list("user__email"))
     # displayed table
-    #print(qs.union(qs_mails))
+    table = StudentTable(qs,hospital=request.user.hospital)
 
-    table = StudentTable(qs)
     # disable huge amounts of email sends
     max_mails = leftover_emails_for_today(request)
     enable_mail_send = (filter_jobrequirements.qs.count() <= max_mails)

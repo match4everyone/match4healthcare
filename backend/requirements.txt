@@ -12,3 +12,4 @@ gunicorn
 whitenoise
 whitenoise[brotli]
 numpy
+pandas
