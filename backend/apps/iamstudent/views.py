@@ -11,7 +11,7 @@ from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm
+from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
 from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
 from apps.accounts.models import User
 
@@ -283,3 +283,19 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
+
+@login_required
+def view_student(request, uuid):
+    if request.user.is_student:
+        return HttpResponseRedirect("/accounts/profile_student")
+    s = Student.objects.get(uuid=uuid)
+    print("asdf", s.emailtosend_set)
+
+
+    form = StudentFormView(instance=s, prefix='infos')
+    context = {
+        "form": form
+    }
+
+
+    return render(request, 'view_student.html', context)
