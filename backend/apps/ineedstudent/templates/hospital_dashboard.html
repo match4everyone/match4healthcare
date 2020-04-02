@@ -13,6 +13,7 @@ Profil - Institution
 {% endblock %}
 
 {% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
 
 {% block content %}
 
@@ -55,9 +56,10 @@ Profil - Institution
     <br>
     <div class="card">
         <div class="card-header">
-            {% blocktrans %}Gesendete Mails{% endblocktrans %}
+            {% blocktrans %}Bereits kontaktierte Helfer*innen{% endblocktrans %}
         </div>
         <div class="card-body">
+            {% render_table kontaktiert_table %}
         </div>
     </div>
     <br>

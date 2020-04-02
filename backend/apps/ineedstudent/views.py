@@ -188,3 +188,25 @@ def hospital_view(request,uuid):
     context['email_form'] = email_form
 
     return render(request, 'hospital_view.html', context)
+
+from .forms import PostingForm
+from .tables import ContactedTable
+from django.db import models
+
+
+
+@login_required
+@hospital_required
+def hospital_dashboard(request):
+    anzeige_form = PostingForm()
+    values = ['student','registration_date','message','subject']
+
+    qs = request.user.hospital.emailtosend_set.all().values(*values,is_activated=models.F('student__is_activated' ))
+
+    kontaktiert_table = ContactedTable(qs)
+
+    context = {
+        'anzeige_form': anzeige_form,
+        'kontaktiert_table' : kontaktiert_table
+    }
+    return render(request, 'hospital_dashboard.html', context)

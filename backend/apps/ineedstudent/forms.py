@@ -174,6 +174,11 @@ class PostingForm(forms.ModelForm):
         super(PostingForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            HTML('<script'),
+            'appears_in_map',
+            'sonstige_infos'
+        )
         self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
             HTML('<script type="text/javascript" src="{}"></script>'.format(static('js/PostingForm.js'))),

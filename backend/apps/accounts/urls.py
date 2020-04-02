@@ -35,8 +35,6 @@ urlpatterns = [
     path('count', views.UserCountView.as_view(), name='count'),
     path('change_activation',views.change_activation_ask,name='activate_student_ask'),
     path('change_activation_confirm',views.change_activation,name='activate_student'),
-    path('hospital_dashboard',views.hospital_dashboard,name='hospital_dashboard'),
-
 ]
 
 if settings.DEBUG:
