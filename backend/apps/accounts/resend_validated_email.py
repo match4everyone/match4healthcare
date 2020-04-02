@@ -16,8 +16,10 @@ import time
 @login_required
 @staff_member_required
 def resend_validation(request):
-
-    logger.debug("Start Process of resending!")
+    really_send = 'reallySend' in  request.GET
+    logger.warn("Start Process of resending!")
+    if not really_send:
+        logger.warn("TESTMODE NOT REALLY SENDING MAILS")
     timeout = 30  # seconds
     every_mail = 100
 
@@ -28,26 +30,28 @@ def resend_validation(request):
 
     for i, user in enumerate(qs):
 
-        if i % every_mail:
-            logger.debug('Waiting %s seconds' % timeout)
+        if i > 1 and i % every_mail == 0:
+            logger.warn('Waiting %s seconds' % timeout)
             time.sleep(timeout)
 
         if user.is_student:
-            send_password_set_email(
-                email=user.email,
-                host=request.META['HTTP_HOST'],
-                template="registration/password_set_email_.html",
-                subject_template="registration/password_reset_email_subject.txt"
-            )
-            logger.debug('Resend validation to :' + user.email)
+            if really_send:
+                send_password_set_email(
+                    email=user.email,
+                    host=request.META['HTTP_HOST'],
+                    template="registration/password_set_email_.html",
+                    subject_template="registration/password_reset_email_subject.txt"
+                )
+            logger.warn('Resend validation to :' + user.email)
 
         if user.is_hospital:
-            send_password_set_email(
-                email=user.email,
-                host=request.META['HTTP_HOST'],
-                template="registration/password_set_email_hospital.html",
-                subject_template="registration/password_reset_email_subject.txt"
-            )
-            logger.debug('Resend validation to :' + user.email)
-    logger.debug('ended process of resending')
+            if really_send:
+                send_password_set_email(
+                    email=user.email,
+                    host=request.META['HTTP_HOST'],
+                    template="registration/password_set_email_hospital.html",
+                    subject_template="registration/password_reset_email_subject.txt"
+                )
+            logger.warn('Resend validation to :' + user.email)
+    logger.warn('ended process of resending')
     return HttpResponse('okaayy, done :*')
