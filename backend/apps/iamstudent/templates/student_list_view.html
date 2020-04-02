@@ -210,8 +210,9 @@
         if (li.length > 0) {
             if(li.length <= x[0].value){
                 window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+            } else {
+              alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
             }
-            alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
 
         } else {
             alert("{% blocktrans %}Bitte wählen Sie mindestens einen Helfenden zum Kontaktieren aus!{% endblocktrans %}")
