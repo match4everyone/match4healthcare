@@ -61,23 +61,24 @@ def prepare_hospitals(ttl_hash=None):
     hospitals = Hospital.objects.filter(user__validated_email=True, is_approved=True, appears_in_map=True)
     locations_and_number = {}
     for hospital in hospitals:
-        cc = hospital.countrycode
-        plz = hospital.plz
-        key = cc + "_" + plz
-        if key in locations_and_number:
-            locations_and_number[key]["count"] += 1
-            locations_and_number[key]["uuid"] = None
-        else:
-            lat, lon, ort = plzs[cc][plz]
-            locations_and_number[key] = {
-                "uuid": hospital.uuid,
-                "countrycode": cc,
-                "plz": plz,
-                "count": 1,
-                "lat": lat,
-                "lon": lon,
-                "ort": ort
-            }
+        if len(hospital.sonstige_infos) != 0:
+            cc = hospital.countrycode
+            plz = hospital.plz
+            key = cc + "_" + plz
+            if key in locations_and_number:
+                locations_and_number[key]["count"] += 1
+                locations_and_number[key]["uuid"] = None
+            else:
+                lat, lon, ort = plzs[cc][plz]
+                locations_and_number[key] = {
+                    "uuid": hospital.uuid,
+                    "countrycode": cc,
+                    "plz": plz,
+                    "count": 1,
+                    "lat": lat,
+                    "lon": lon,
+                    "ort": ort
+                }
     return locations_and_number
 
 @login_required
