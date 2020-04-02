@@ -44,7 +44,7 @@ LOGGING = {
         'applogfile': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'run', 'match4healthcare.log'),
+            'filename': os.path.join(RUN_DIR, 'match4healthcare.log'),
             'maxBytes': 1024 * 1024 * 15,  # 15MB
             'backupCount': 10,
         },

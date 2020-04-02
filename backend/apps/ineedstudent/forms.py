@@ -97,6 +97,7 @@ class HospitalFormEditProfile(HospitalFormO):
                 #'sonstige_infos'
         )
 
+
 class HospitalFormZustimmung(ModelForm):
         class Meta:
             model = Hospital

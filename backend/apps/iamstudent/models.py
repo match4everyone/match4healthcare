@@ -279,6 +279,15 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
 
 AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
 
+
+class EmailGroup(models.Model):
+    subject = models.CharField(max_length=200, default='')
+    message = models.TextField(default='')
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+
+
 # emails that hospitals send to students
 class EmailToSend(models.Model):
 
@@ -292,6 +301,8 @@ class EmailToSend(models.Model):
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+
+    email_group = models.ForeignKey(EmailGroup, on_delete=models.CASCADE, null=True, blank=True)
 
 # emails that students send to hospitals
 class EmailToHospital(models.Model):

@@ -12,7 +12,7 @@ from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
-from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel, EmailGroup
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -77,9 +77,12 @@ def send_mail_student_id_list(request, id_list):
 
             hospital_message = form.cleaned_data['message']
 
-
-
             subject = form.cleaned_data['subject']
+
+            email_group = EmailGroup.objects.create(subject=subject,
+                                                    message=hospital_message,
+                                                    hospital=request.user.hospital)
+
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
@@ -94,10 +97,13 @@ def send_mail_student_id_list(request, id_list):
                     student=student,
                     hospital=request.user.hospital,
                     message=message,
-                    subject=subject)
+                    subject=subject,
+                    email_group=email_group)
                 mail.save()
+
             if request.user.hospital.is_approved:
                 send_mails_for(request.user.hospital)
+
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
@@ -193,14 +199,9 @@ def student_list_view(request, countrycode, plz, distance):
     filter_jobrequirements = StudentJobRequirementsFilter(request_filtered, queryset=qs)
     qs = filter_jobrequirements.qs
 
-    # TODO: WIP This is probably really inefficient
-    #qs_mails = EmailToSend.objects.filter(
-    #    hospital__user__email=request.user.email,
-    #    student__user__email__in=qs.values_list("user__email"))
     # displayed table
-    #print(qs.union(qs_mails))
+    table = StudentTable(qs,hospital=request.user.hospital)
 
-    table = StudentTable(qs)
     # disable huge amounts of email sends
     max_mails = leftover_emails_for_today(request)
     enable_mail_send = (filter_jobrequirements.qs.count() <= max_mails)

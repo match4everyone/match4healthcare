@@ -16,7 +16,7 @@ var signUpHelper = {
         handleQualificationInput : function handleQualificationInput(event) {
             let sourceElement = event.srcElement;
             let qualificationSelected = event.srcElement.checked;
-            
+
             // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
             let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
             this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
@@ -31,7 +31,7 @@ var signUpHelper = {
                 section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
                 section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
             }
-            
+
         },
     }
 
@@ -43,7 +43,7 @@ var signUpHelper = {
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
             signUpHelper.handleQualificationInput({ srcElement: element });
         })
-            
+
     });
 
 </script>
@@ -84,12 +84,12 @@ var signUpHelper = {
             </div>
             <div class="card-body">
                 {% if is_activated %} {% else %}{% blocktrans %}<mark>Vorsicht!</mark> Dein Profil ist deaktiviert, aktuell kannst du nicht kontaktiert werden.{% endblocktrans %} <br> {% endif %}
-                
+
                     <a role="button" class="btn blue text-white btn-md" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
                     <a role="button" class="btn blue text-white btn-md" href="password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
                 <a role="button" class="btn btn-info" href="change_activation">{% if is_activated %} {% blocktrans %}Profil deaktivieren{% endblocktrans %} {% else %}{% blocktrans %}Profil aktivieren{% endblocktrans %} {% endif %}</a>
                 <a role="button" class="btn btn-info" href="delete_me_ask">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
-                
+
             </div>
         </div>
         <div class="card" style="margin-bottom:35px;">
@@ -98,7 +98,7 @@ var signUpHelper = {
             </div>
             <div class="card-body">
             {% blocktrans %}
-                Wir haben <a href="/legal-issues">rechtliche Hinweise und Tipps</a> zu deinem Einsatz nach bestem Wissen und Gewissen zusammen gefasst. Darunter sind hinweise für Arbeitszeitenregelung und Versicherungsschutz zusammengefasst. Wir erheben jedoch keinen Anspruch auf vollständigkeit dieser Sammlung an Tipps!
+                Wir haben <a href="/legal-questions">rechtliche Hinweise und Tipps</a> zu deinem Einsatz nach bestem Wissen und Gewissen zusammen gefasst. Darunter sind hinweise für Arbeitszeitenregelung und Versicherungsschutz zusammengefasst. Wir erheben jedoch keinen Anspruch auf vollständigkeit dieser Sammlung an Tipps!
                 <br><br>
                 Zusätzlich wollen wir euch bestmöglich auf den Einsatz und den Kontakt mit COVID-19 Patienten vorbereiten.  Hierfür stellen wir euch eine <a href="https://www.amboss.com/de/wissen/COVID-19">Zusammenfassung der Symptome und Therapiemöglichkeiten</a> zur Verfügung.
                 <br><br>
