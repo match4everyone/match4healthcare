@@ -36,23 +36,29 @@ Profil - Institution
     {% endif %}
 
 	<h1 class="font-weight-light match4hc-title">{% blocktrans %}Helfer*innen Finden{% endblocktrans %}</h1>
-    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Gezielt und breit aufgebaut blibla{% endblocktrans %}</h2>
+    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Gezielt und schnell{% endblocktrans %}</h2>
 
     <br>
 
         <div class="card" style="margin-bottom:35px;">
             <div class="card-body">
-                <mark>Ein Erklärungstext</mark>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {% blocktrans %}
+                Willkommen bei match4healthcare! <br>
+                Wir hoffen Sie hier schnellstmöglich mit Helfenden vernetzen zu können.
+                Um in Kontakt mit Helfenden zu treten haben Sie zwei Optionen. <br>
+                Sie können einerseits über den Knopf <mark>„Registrierte Helfende kontaktieren“</mark>, bereits registrierte Helfende entsprechend Ihrer Anforderungen (z.B. Ausbildung oder zeitliche Verfügbarkeit) aussuchen und selbst direkt per E-Mail über unsere Plattform kontaktieren. <br>
+                Andererseits haben Sie die Option, über einen Klick auf <mark>„Einen Anzeige erstellen/ändern“</mark> eine allgemeine Anzeige zu verfassen, welche dann von Helfenden eingesehen werden kann. Jede(r) registrierte(r) Helfende kann Ihnen anhand der Anzeige eine E-Mail schreiben.
+            {% endblocktrans %}
             </div>
         </div>
     <div class="row">
         <div class="col">
             {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
-            <a type="button" href="{{filter_student_url}}" class="btn btn-dark btn-block btn-lg">Registrierte Studierende kontaktieren</a>
+            <a type="button" href="{{filter_student_url}}" class="btn btn-outline-dark btn-block btn-lg">Registrierte Helfende kontaktieren</a>
         </div>
         <div class="col">
             {% url 'change_posting' as anzeige_url %}
-            <a type="button" href="{{anzeige_url}}" class="btn btn-dark btn-block btn-lg">Eine Anzeige schalten/abändern</a>
+            <a type="button" href="{{anzeige_url}}" class="btn btn-outline-dark btn-block btn-lg">Einen Anzeige erstellen/ändern</a>
         </div>
     </div>
 </div>
