@@ -109,6 +109,18 @@ def send_mail_student_id_list(request, id_list):
 
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+
+    # inform the hospital about sent emails
+    emails_n = emails.count()
+    text = emails[0].message.split('===============================================')[1]
+    send_mail(_('[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert'),
+              ('Hallo %s,\n\n' % hospital.ansprechpartner) +
+              ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'
+               '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n' % emails_n) +
+              text,
+              settings.NOREPLY_MAIL,
+              [hospital.user.email])
+
     for m in emails:
 
         if m.subject and m.message and m.student.user.email:
