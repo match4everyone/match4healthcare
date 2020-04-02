@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script type="text/javascript">
+
+    var signUpHelper = {
+        handleQualificationInput : function handleQualificationInput(event) {
+            let sourceElement = event.srcElement;
+            let qualificationSelected = event.srcElement.checked;
+
+            // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
+            let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
+            this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
+        },
+        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
+            let section = document.getElementById(`div-ausbildung-${id}`)
+            if (!section) return;
+            if (setVisibility) {
+                section.classList.remove('hidden')
+            } else {
+                section.classList.add('hidden');
+                section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
+                section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
+            }
+
+        },
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
+        qualifikationSelectors.forEach(element => {
+            element.addEventListener("input", (event) => { signUpHelper.handleQualificationInput(event) })
+
+            // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
+            signUpHelper.handleQualificationInput({ srcElement: element });
+        })
+
+    });
+</script>
+{% endblock %}
+
+{% block title %}
+{% blocktrans %}Detailansicht Helfende*r {{ uuid }}{% endblocktrans %}
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h2>{% blocktrans %}Detailansicht Helfende*r{% endblocktrans %}</h2>
+            <form action="view_student" method="post">
+                {% csrf_token %}
+                {% crispy form form.helper %}
+            </form>
+        </div>
+        {{ student_form }}
+    </div>
+</div>
+<hr>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $("#id_availability_start").attr("type", "date");
+    $('.btn-group').attr('data-toggle','');
+    //$('.btn-group input').attr('disabled','disabled');
+    /*
+    $(".btn-group").each(function(){
+      console.log(jQuery._data( $(this), "events" ));
+      console.log($(this))
+      $(this).unbind();
+    })*/
+});
+
+</script>
+{% endblock %}

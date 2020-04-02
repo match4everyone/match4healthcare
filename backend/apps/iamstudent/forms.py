@@ -46,7 +46,7 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
     'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        '<b>Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
+        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_ota': _('Operationstechnische/r Assistent*in'),
@@ -424,6 +424,103 @@ class StudentFormEditProfile(StudentForm):
                 'Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung des Vermittlers ist ausgeschlossen.'))),
             Submit('submit', _('Profil Aktualisieren'), css_class='btn blue text-white btn-md'),
         )
+
+class StudentFormView(StudentForm):
+
+    class Meta:
+        model = Student
+        exclude = ['name_first', 'name_last', 'registration_date', 'user', 'is_activated', 'einwilligung_agb', 'einwilligung_datenweitergabe', 'datenschutz_zugestimmt']
+        labels = form_labels
+        labels["uuid"] = _("Eindeutige Kennziffer dieses Helfenden")
+        labels["braucht_bezahlung"] = _("Benötigte Vergütung")
+        labels["availability_start"] = _("Verfügbar Ab")
+        labels["unterkunft_gewuenscht"] = _("Unterkunft Benötigt")
+        labels['ausbildung_typ_pflege'] = _('Pflege')
+        labels['wunsch_ort_apotheke'] = _('Apotheke')
+
+
+    def __init__(self, *args, **kwargs):
+        super(StudentFormView, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].disabled = True
+
+        self.fields["uuid"].disabled = False
+        self.fields["uuid"].widget.attrs["readonly"] = True
+        self._hide_dropdown = "-webkit-appearance:none;-moz-appearance:none;text-indent:1px;text-overflow:'';"
+
+        del self.fields["phone_number"]
+        self.helper.layout = Layout(
+            HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(
+                _("Allgemein"))),
+            Row(
+                Column('uuid', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('plz', css_class='form-group col-md-4 mb-0'),
+                Column('countrycode', css_class='form-group col-md-4 mb-0', style=self._hide_dropdown),
+                #Column('umkreis', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('availability_start', css_class='form-group col-md-6 mb-0'),
+                Column('zeitliche_verfuegbarkeit', css_class='form-group col-md-6 mb-0', style=self._hide_dropdown),
+                css_class='form-row'
+            ),
+            Row(
+                Column('braucht_bezahlung', css_class='form-group col-md-6 mb-0', style=self._hide_dropdown),
+                Column('unterkunft_gewuenscht', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            Div(
+                HTML("<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(
+                    _("Berufsausbildung"))),
+                Row(*[Column('ausbildung_typ_%s' % k.lower(), css_class='ausbildung-checkbox form-group col-md-6 mb-0',
+                             css_id='ausbildung-checkbox-%s' % AUSBILDUNGS_IDS[k]) for k in
+                      AUSBILDUNGS_TYPEN.keys()]),
+                css_id='div-berufsausbildung-dropdown',
+            ),
+            *[
+                Div(
+                    HTML("<h4>{}</h4>".format(_(form_labels['ausbildung_typ_%s' % ausbildungstyp.lower()])))
+                    ,
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group', css_id=f.replace('_', '-'))
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' == 'ausbildung_typ_%s_%s' % (
+                            ausbildungstyp.lower(), f.lower())
+                    ])
+                    ,
+                    Row(*[
+                        Column(button_group('ausbildung_typ_%s_%s' % (ausbildungstyp.lower(), f.lower())),
+                               css_class='form-group col-md-6 mb-0', css_id=f.replace('_', '-'))
+                        for f in felder.keys() if 'ausbildung_typ_medstud_abschnitt' != 'ausbildung_typ_%s_%s' % (
+                        ausbildungstyp.lower(), f.lower())
+                    ])
+                    , css_id='div-ausbildung-%s' % AUSBILDUNGS_IDS[ausbildungstyp]
+                    , css_class='hidden ausbildung-addon'
+                )
+                for ausbildungstyp, felder in AUSBILDUNGS_TYPEN.items() if len(felder) != 0
+            ],
+            'sonstige_qualifikationen'
+            ,
+            HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
+            Row(
+                Column('wunsch_ort_arzt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_gesundheitsamt', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_krankenhaus', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_pflege', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_rettungsdienst', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_labor', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_apotheke', css_class='form-group col-md-6 mb-0'),
+                Column('wunsch_ort_ueberall', css_class='form-group col-md-6 mb-0'),
+
+                css_class='form-row'
+            ),
+        )
+
+
 
 class EmailToSendForm(forms.ModelForm):
     class Meta:
