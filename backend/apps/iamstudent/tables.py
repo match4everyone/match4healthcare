@@ -11,16 +11,18 @@ class StudentTable(tables.Table):
         'class': "bs-checkbox",
         'id': lambda record: 'display-table-%s' % record.user_id}}
 
-    def __init__(self, *args, date_verbose_name="", **kwargs):
+    def __init__(self, *args, **kwargs):
         for c, n in self.Meta.verbose_name.items():
             self.base_columns[c].verbose_name = n
+        self.hospital = kwargs['hospital']
+        del kwargs['hospital']
         super().__init__(*args, **kwargs)
 
     class Meta:
         model = Student
         template_name = "django_tables2/bootstrap4.html"
         exclude = ['uuid', 'registration_date', 'id']
-        fields = ['emailtosend_set__count','plz','sonstige_qualifikationen','zeitliche_verfuegbarkeit','unterkunft_gewuenscht','braucht_bezahlung']
+        fields = ['emailtosend_set','plz','sonstige_qualifikationen','zeitliche_verfuegbarkeit','unterkunft_gewuenscht','braucht_bezahlung']
         attrs = {
             'data-toggle': "table",
             'data-search': "false",
@@ -35,7 +37,7 @@ class StudentTable(tables.Table):
         }
         verbose_name = {
             'plz': _('Postleitzahl'),
-            'emailtosend_set__count': _('Kontaktiert'),
+            'emailtosend_set': _('Kontaktiert'),
             'sonstige_qualifikationen': _('Sonst. Qualifikationen'),
             'unterkunft_gewuenscht' : _('Braucht Unterkunft'),
             'zeitliche_verfuegbarkeit': _('Verfügbarkeit'),
@@ -46,8 +48,10 @@ class StudentTable(tables.Table):
     def render_name_first(self, record):
         return format_html("%s %s." % (record.name_first, record.name_last[0:1]))
 
-    def render_emailtosend_set__count(self,value):
+
+    def render_emailtosend_set(self,record):
         # check if it had been contacted before
+        value = record.emailtosend_set.filter(hospital=self.hospital).count()
         if value > 0:
             return '✔'
         else:

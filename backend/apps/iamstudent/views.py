@@ -194,7 +194,7 @@ def student_list_view(request, countrycode, plz, distance):
     qs = filter_jobrequirements.qs
 
     # displayed table
-    table = StudentTable(qs)
+    table = StudentTable(qs,hospital=request.user.hospital)
 
     # disable huge amounts of email sends
     max_mails = leftover_emails_for_today(request)
