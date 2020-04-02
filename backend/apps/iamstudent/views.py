@@ -81,7 +81,7 @@ def send_mail_student_id_list(request, id_list):
 
             email_group = EmailGroup.objects.create(subject=subject,
                                                     message=hospital_message,
-                                                    sender=request.user.hospital)
+                                                    hospital=request.user.hospital)
 
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
