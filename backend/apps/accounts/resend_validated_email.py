@@ -22,9 +22,11 @@ def resend_validation(request):
     every_mail = 100
 
     startup_time = datetime.datetime(year=2020, month=4, day=2, hour=3, minute=33)
+    end_time = datetime.datetime(year=2020, month=4, day=2, hour=19, minute=1)
 
     qs = User.objects.filter(validated_email=False,
-                             date_joined__gt=startup_time)
+                             date_joined__gt=startup_time,
+                             date_joined__lt=end_time)
 
     for i, user in enumerate(qs):
 
