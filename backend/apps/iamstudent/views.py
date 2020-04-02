@@ -141,13 +141,6 @@ def send_mails_for(hospital):
             m.save()
 
 
-def notify_student(student_id, contact):
-    student = Student.objects.get(id=student_id)
-    send_mail(subject=_('subject :)'),
-              message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
-              from_email=settings.NOREPLY_MAIL,
-              recipient_list=[student.email])
-
 def clean_request_for_saving(request):
     student_attr = dict(request)
     for i in ['plz', 'distance', 'countrycode', 'uuid', 'saveFilter', 'filterName']:
