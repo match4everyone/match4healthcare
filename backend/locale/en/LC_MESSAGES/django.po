@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: apps/ineedstudent/views.py:186
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 23:25+0000\n"
+"POT-Creation-Date: 2020-04-02 23:46+0000\n"
 "PO-Revision-Date: 2020-04-03 01:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1240,20 +1241,16 @@ msgid "Berufstätig"
 msgstr "Working"
 
 #: apps/iamstudent/models.py:195 apps/iamstudent/models.py:208
-#, fuzzy
-#| msgid "Abgeschlossene Ausbildung"
 msgid "In Ausbildung"
-msgstr "Experience Level"
+msgstr "In Training"
 
 #: apps/iamstudent/models.py:207
 msgid "Studium"
 msgstr ""
 
 #: apps/iamstudent/tables.py:41
-#, fuzzy
-#| msgid "Kontakt:"
 msgid "Kontaktiert"
-msgstr "Kontakt:"
+msgstr "Contacted"
 
 #: apps/iamstudent/tables.py:42
 msgid "Sonst. Qualifikationen"
@@ -1478,6 +1475,7 @@ msgstr ""
 "    "
 
 #: apps/iamstudent/templates/view_student.html:46
+#, python-format
 msgid "Detailansicht Helfende*r %(uuid)s"
 msgstr "Detail view for Volunteer %(uuid)s"
 
@@ -1489,15 +1487,6 @@ msgstr "Detail view for Volunteer"
 msgid ""
 "[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert"
 msgstr "[match4healthcare] You have just contacted potential volunteers."
-
-#: apps/iamstudent/views.py:146
-msgid "subject :)"
-msgstr "Betreff"
-
-#: apps/iamstudent/views.py:147
-#, python-format
-msgid "I want to hire you person of gender %s!, Contact me here: %s"
-msgstr ""
 
 #: apps/iamstudent/widgets.py:54
 msgid "Unknown"
@@ -1575,20 +1564,16 @@ msgid ""
 msgstr ""
 
 #: apps/ineedstudent/templates/hospital_contacted.html:33
-#, fuzzy
-#| msgid "Zurück zur Startseite"
 msgid "Zurück zur Karte"
-msgstr "Back to the home page"
+msgstr "Back to map"
 
 #: apps/ineedstudent/templates/hospital_view.html:29
-#, fuzzy
-#| msgid "Helfende Kontaktieren"
 msgid "Gesuch kontaktieren"
-msgstr "Contact Supporters"
+msgstr "Contact Hospital"
 
 #: apps/ineedstudent/templates/hospital_view.html:37
 msgid "Du hast deine Mail Adresse noch nicht validiert, bitte erledige das!"
-msgstr ""
+msgstr "You have not yet validated your mail address, please do so!"
 
 #: apps/ineedstudent/templates/hospital_view.html:43
 #, python-format
@@ -1889,6 +1874,9 @@ msgstr "Supported by"
 #: templates/legal-questions.html:6
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "subject :)"
+#~ msgstr "Betreff"
 
 #~ msgid "Meldet euch bei: "
 #~ msgstr "Contact: "
