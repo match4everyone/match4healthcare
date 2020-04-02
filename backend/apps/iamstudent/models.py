@@ -186,6 +186,30 @@ MFA_CHOICES = (
     (BERUFSTAETIG, _('Berufstätig')),
 )
 
+#class Ergotherapieauszubildende*r(models.IntegerChoices):
+KEINE_ANGABE = 0
+IN_AUSBILDUNG = 1
+BERUFSTAETIG = 2
+ERGOTHERAPIE_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (IN_AUSBILDUNG, _('In Ausbildung')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
+#class Psychologie/Psychotherapeut(models.IntegerChoices):
+KEINE_ANGABE = 0
+STUDIUM = 1
+IN_AUSBILDUNG = 2
+BERUFSTAETIG = 3
+PSYCHO_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (STUDIUM, _('Studium')),
+    (IN_AUSBILDUNG, _('In Ausbildung')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
 
 #class NOTFALLSANIAbschnitt(models.IntegerChoices):
 KEINE_ANGABE = 0
@@ -232,11 +256,23 @@ AUSBILDUNGS_TYPEN = {
     'MTA': {
         'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
     },
+    'OTA': {
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
+    'ATA': {
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
     'NOTFALLSANI': {
         'abschnitt': (models.IntegerField, {'choices':NOTFALLSANI_CHOICES, 'default':0,'null':True}),
     },
     'PFLEGE' :{
         'abschnitt':(models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
+    'ERGOTHERAPIE' :{
+        'abschnitt':(models.IntegerField, {'choices':ERGOTHERAPIE_CHOICES, 'default':0,'null':True}),
+    },
+    'PSYCHO' :{
+        'abschnitt':(models.IntegerField, {'choices':PSYCHO_CHOICES, 'default':0,'null':True}),
     },
     'SANI': {
 
