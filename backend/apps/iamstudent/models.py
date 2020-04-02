@@ -200,10 +200,12 @@ ERGOTHERAPIE_CHOICES = (
 #class Psychologie/Psychotherapeut(models.IntegerChoices):
 KEINE_ANGABE = 0
 STUDIUM = 1
-BERUFSTAETIG = 2
+IN_AUSBILDUNG = 2
+BERUFSTAETIG = 3
 PSYCHO_CHOICES = (
     (KEINE_ANGABE, _('Keine Angabe')),
-    (STUDIUM, _('Im Studium')),
+    (STUDIUM, _('Studium')),
+    (IN_AUSBILDUNG, _('In Ausbildung')),
     (BERUFSTAETIG, _('Berufstätig')),
 )
 

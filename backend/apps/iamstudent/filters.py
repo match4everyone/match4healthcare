@@ -18,6 +18,12 @@ class StudentJobRequirementsFilter(filters.FilterSet):
     ausbildung_typ_mta_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='gte')
     ausbildung_typ_mta_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_mta_abschnitt',lookup_expr='lte')
 
+    ausbildung_typ_ota_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_ota_abschnitt',lookup_expr='gte')
+    ausbildung_typ_ota_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_ota_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_ata_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_ata_abschnitt',lookup_expr='gte')
+    ausbildung_typ_ata_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_ata_abschnitt',lookup_expr='lte')
+
     ausbildung_typ_mtla_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='gte')
     ausbildung_typ_mtla_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_mtla_abschnitt',lookup_expr='lte')
 
@@ -26,6 +32,12 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
     ausbildung_typ_physio_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='gte')
     ausbildung_typ_physio_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_physio_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_ergotherapie_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_ergotherapie_abschnitt',lookup_expr='gte')
+    ausbildung_typ_ergotherapie_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_ergotherapie_abschnitt',lookup_expr='lte')
+
+    ausbildung_typ_psycho_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_psycho_abschnitt',lookup_expr='gte')
+    ausbildung_typ_psycho_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_psycho_abschnitt',lookup_expr='lte')
 
     ausbildung_typ_pflege_abschnitt_x_gt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='gte')
     ausbildung_typ_pflege_abschnitt_x_lt = filters.NumberFilter('ausbildung_typ_pflege_abschnitt',lookup_expr='lte')
@@ -104,8 +116,3 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
             from .forms import get_form_helper_filter
             self.form_helper = get_form_helper_filter()
-
-
-
-
-
