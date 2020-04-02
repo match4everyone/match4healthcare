@@ -12,7 +12,7 @@ from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
-from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel, EmailGroup
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -77,9 +77,12 @@ def send_mail_student_id_list(request, id_list):
 
             hospital_message = form.cleaned_data['message']
 
-
-
             subject = form.cleaned_data['subject']
+
+            email_group = EmailGroup.objects.create(subject=subject,
+                                                    message=hospital_message,
+                                                    sender=request.user.hospital)
+
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
@@ -94,10 +97,13 @@ def send_mail_student_id_list(request, id_list):
                     student=student,
                     hospital=request.user.hospital,
                     message=message,
-                    subject=subject)
+                    subject=subject,
+                    email_group=email_group)
                 mail.save()
+
             if request.user.hospital.is_approved:
                 send_mails_for(request.user.hospital)
+
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
