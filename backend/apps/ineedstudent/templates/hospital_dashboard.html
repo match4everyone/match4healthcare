@@ -55,42 +55,6 @@ Profil - Institution
             <a type="button" href="{{anzeige_url}}" class="btn btn-dark btn-block btn-lg">Eine Anzeige schalten/abändern</a>
         </div>
     </div>
-    {% if already_contacted %}
-    <br>
-    <div class="card">
-        <div class="card-header">
-            {% blocktrans %}Bereits kontaktierte Helfer*innen{% endblocktrans %}
-        </div>
-        <div class="card-body">
-            {% render_table kontaktiert_table %}
-        </div>
-    </div>
-    <br>
-    {% endif %}
-    {% if has_posting %}
-    <div class="card">
-        <div class="card-header">
-            {% blocktrans %}Deine Anzeige ist aktuell für alle Helfer*innen sichtbar{% endblocktrans %}
-        </div>
-        <div class="card-body">
-            <div class="card-body">
-                <p>{{posting_text}}</p>
-                {% url 'change_posting' as anzeige_url %}
-            <div class="text-right"><a type="button" href="{{anzeige_url}}" class="btn btn-dark btn-sm">Ändern</a></div>
-            </div>
-        </div>
-    </div>
-    <br>
-    {% endif %}
-    <!--
-    <div class="card">
-        <div class="card-header">
-            {% blocktrans %}Letzte Suchanfragen{% endblocktrans %}
-        </div>
-        <div class="card-body">
-        </div>
-    </div>
-    -->
 </div>
 <br>
     {% endblock %}
