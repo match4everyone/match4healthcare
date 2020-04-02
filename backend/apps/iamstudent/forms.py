@@ -421,7 +421,7 @@ class StudentFormView(StudentForm):
         model = Student
         exclude = ['name_first', 'name_last', 'registration_date', 'user', 'is_activated', 'einwilligung_agb', 'einwilligung_datenweitergabe', 'datenschutz_zugestimmt']
         labels = form_labels
-        labels["uuid"] = "ID"
+        labels["uuid"] = _("Eindeutige Kennziffer dieses Helfenden")
         labels["braucht_bezahlung"] = _("Benötigte Vergütung")
         labels["availability_start"] = _("Verfügbar Ab")
         labels["unterkunft_gewuenscht"] = _("Unterkunft Benötigt")
