@@ -172,6 +172,7 @@ class PostingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PostingForm, self).__init__(*args, **kwargs)
+        self.fields['sonstige_infos'].required  = False
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
