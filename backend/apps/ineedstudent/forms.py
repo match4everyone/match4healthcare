@@ -12,7 +12,7 @@ from django.templatetags.static import static
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day']
+        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day','appears_in_map']
 
         labels = {
             'plz': _('Postleitzahl'),
@@ -86,13 +86,15 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
+        self.fields['sonstige_infos'].required = False
+        self.fields['appears_in_map'].required = False
         self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
+                Row(Column('firmenname') , Column('ansprechpartner')), #Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
-                HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-                'sonstige_infos'
+                #HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
+                #'sonstige_infos'
         )
 
 class HospitalFormZustimmung(ModelForm):

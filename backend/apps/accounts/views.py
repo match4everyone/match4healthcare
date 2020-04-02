@@ -196,7 +196,6 @@ def edit_hospital_profile(request):
         if form.is_valid():
             messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
             form.save()
-            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
         else:
             messages.info(request, _('Deine Daten wurden nicht erfolgreich geändert!'), extra_tags='alert-warning')
 
