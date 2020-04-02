@@ -32,6 +32,7 @@ def send_password_set_email(email, host, subject_template, template='registratio
             html_email_template_name=template,
             domain_override=host,
             from_email=settings.NOREPLY_MAIL,
+            use_https=True,
         )
         logger.debug("Sent!")
     else:
