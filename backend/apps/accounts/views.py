@@ -158,7 +158,7 @@ def login_redirect(request):
         h = Hospital.objects.get(user=user)
         if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
             return HttpResponseRedirect('/ineedstudent/zustimmung')
-        return HttpResponseRedirect('profile_hospital')
+        return HttpResponseRedirect('/ineedstudent/hospital_dashboard')
 
     elif user.is_staff:
         return HttpResponseRedirect('approve_hospitals')
@@ -290,6 +290,9 @@ class CustomLoginView(LoginView):
 @student_required
 def change_activation_ask(request):
     return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
+
+
+
 
 
 @login_required

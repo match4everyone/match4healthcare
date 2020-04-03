@@ -26,6 +26,7 @@ from apps.mapview.views import get_ttl_hash
 from django.core.mail import EmailMessage
 from django.conf import settings
 from apps.iamstudent.models import EmailToHospital
+from django.contrib import messages
 
 
 import time
@@ -189,3 +190,43 @@ def hospital_view(request,uuid):
     context['email_form'] = email_form
 
     return render(request, 'hospital_view.html', context)
+
+from .forms import PostingForm
+from .tables import ContactedTable
+from django.db import models
+
+@login_required
+@hospital_required
+def change_posting(request):
+    if request.method == 'POST':
+        anzeige_form = PostingForm(request.POST,instance=request.user.hospital)
+
+        if anzeige_form.is_valid():
+            anzeige_form.save()
+            messages.add_message(request, messages.INFO,_('Deine Anzeige wurde erfolgreich aktualisiert.'))
+
+    else:
+        anzeige_form = PostingForm(instance=request.user.hospital)
+
+    context = {
+        'anzeige_form': anzeige_form
+    }
+    return render(request, 'change_posting.html', context)
+
+
+@login_required
+@hospital_required
+def hospital_dashboard(request):
+
+    # tabelle kontaktierter Studis
+    values = ['student','registration_date','message','subject']
+    qs = request.user.hospital.emailtosend_set.all().values(*values,is_activated=models.F('student__is_activated' ))
+    kontaktiert_table = ContactedTable(qs)
+
+    context = {
+        'already_contacted': len(qs) > 0,
+        'has_posting': request.user.hospital.appears_in_map,
+        'posting_text': request.user.hospital.sonstige_infos,
+        'kontaktiert_table' : kontaktiert_table
+    }
+    return render(request, 'hospital_dashboard.html', context)
