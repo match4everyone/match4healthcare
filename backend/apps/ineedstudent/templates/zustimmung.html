@@ -27,16 +27,18 @@
                 <h2 class="font-weight-light match4hc-title">{% blocktrans %}Bitte stimmen Sie den aktualisierten
                     Bedingungen zu{% endblocktrans %}</h2>
             </div>
-            <form method="post" action="zustimmung" onsubmit="disableButton()">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-                {% crispy form_info form_info.helper %}
-            </form>
-            <script>function disableButton() {
-                var btn = document.getElementById('btSubmitForm');
-                btn.disabled = true;
-                btn.innerText = 'Sending...'
-            }</script>
+            <div class="card-body">
+                <form method="post" action="zustimmung" onsubmit="disableButton()">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {% crispy form_info form_info.helper %}
+                </form>
+                <script>function disableButton() {
+                    var btn = document.getElementById('btSubmitForm');
+                    btn.disabled = true;
+                    btn.innerText = 'Sending...'
+                }</script>
+            </div>
         </div>
     </div>
 
