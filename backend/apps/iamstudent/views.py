@@ -13,6 +13,9 @@ from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel, EmailGroup
+from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
+
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -115,6 +118,19 @@ def send_mail_student_id_list(request, id_list):
 
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+    if len(emails)== 0:
+        return None
+    # inform the hospital about sent emails
+    emails_n = emails.count()
+    text = emails[0].message.split('===============================================')[1]
+    send_mail(_('[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert'),
+              ('Hallo %s,\n\n' % hospital.ansprechpartner) +
+              ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'
+               '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n' % emails_n) +
+              text,
+              settings.NOREPLY_MAIL,
+              [hospital.user.email])
+
     for m in emails:
 
         if m.subject and m.message and m.student.user.email:
@@ -277,3 +293,14 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
+
+@login_required
+def view_student(request, uuid):
+    if request.user.is_student:
+        return HttpResponseRedirect("/accounts/profile_student")
+    s = Student.objects.get(uuid=uuid)
+    form = StudentFormView(instance=s, prefix='infos')
+    context = {
+        "form": form
+    }
+    return render(request, 'view_student.html', context)
