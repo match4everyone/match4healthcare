@@ -4,7 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django")
 
 from .models import User
 
