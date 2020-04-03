@@ -41,5 +41,7 @@ urlpatterns = i18n_patterns(
     path('impressum/', views.impressum),
     path('dataprotection/', views.dataprotection),
     path('legal-questions/', views.legal_questions),
-    path('i18n/', include('django.conf.urls.i18n')),
 )
+urlpatterns += [
+    path('i18n/', include('django.conf.urls.i18n')),
+]

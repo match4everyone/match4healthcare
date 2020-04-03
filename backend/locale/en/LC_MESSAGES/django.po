@@ -1686,7 +1686,7 @@ msgstr "You have not yet validated your mail address, please do so!"
 #: apps/ineedstudent/templates/hospital_view.html:43
 #, python-format
 msgid ""
-"Bitte <a target=\"_blank\" href=\"/de/accounts/signup_student\">Registriere "
+"Bitte <a target=\"_blank\" href=\"/de  /accounts/signup_student\">Registriere "
 "dich als Helfende_r</a> um die Kontaktdaten von %(hospital.firmenname)s zu "
 "sehen."
 msgstr ""
