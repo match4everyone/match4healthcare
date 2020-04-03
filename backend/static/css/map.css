@@ -94,12 +94,7 @@ body {
   background-color: #cfdce3;
 }
 
-path.leaflet-interactive  {
-	
-	stroke: #ed0a71;
-	fill: #ed0a71;
-	/* stroke-width:5px; */
-}
+
 
 .leaflet-container a { color: #ed0a71 }
 .leaflet-container a:hover { color: #8c0442;;  }
