@@ -31,11 +31,6 @@ def resend_validation(request):
                              date_joined__lt=end_time)
 
     for i, user in enumerate(qs):
-
-        if i > 1 and i % every_mail == 0:
-            logger.warn('Waiting %s seconds' % timeout)
-            time.sleep(timeout)
-
         if user.is_student:
             if really_send:
                 send_password_set_email(
@@ -44,7 +39,7 @@ def resend_validation(request):
                     template="registration/password_set_email_.html",
                     subject_template="registration/password_reset_email_subject.txt"
                 )
-            logger.warn('Resend validation to :' + user.email)
+            logger.error('Resend validation to :' + user.email)
 
         if user.is_hospital:
             if really_send:
@@ -54,6 +49,6 @@ def resend_validation(request):
                     template="registration/password_set_email_hospital.html",
                     subject_template="registration/password_reset_email_subject.txt"
                 )
-            logger.warn('Resend validation to :' + user.email)
+            logger.error('Resend validation to :' + user.email)
     logger.warn('ended process of resending')
     return HttpResponse('okaayy, done :*')
