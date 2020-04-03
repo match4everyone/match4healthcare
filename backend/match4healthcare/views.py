@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 def home(request):
@@ -40,3 +40,11 @@ def handler404(request, exception=None):
 def handler500(request):
     template = loader.get_template('500.html')
     return HttpResponse(template.render({}, request), status=500)
+
+def switch_language(request):
+    if request.method == "POST":
+        language = request.POST["language"]
+        next_url = request.POST["next"]
+        next_url = "/" + language + next_url[3:]
+        return HttpResponseRedirect(next_url)
+    return HttpResponseRedirect("/")
