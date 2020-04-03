@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: apps/ineedstudent/tables.py:9 apps/ineedstudent/views.py:188
+#: apps/ineedstudent/tables.py:9 apps/ineedstudent/views.py:187
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 02:15+0000\n"
-"PO-Revision-Date: 2020-04-03 02:08+0200\n"
+"POT-Creation-Date: 2020-04-03 01:54+0000\n"
+"PO-Revision-Date: 2020-04-02 00:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -182,23 +182,23 @@ msgstr ""
 msgid " Sie sind bereits angemeldet. Hier geht es zum "
 msgstr " You are currently logged in. "
 
-#: apps/accounts/templates/hospital_signup.html:29
+#: apps/accounts/templates/hospital_signup.html:28
 #: apps/accounts/templates/student_signup.html:62
 msgid " Schon registriert? Hier geht es zum "
 msgstr " Already registered? "
 
-#: apps/accounts/templates/hospital_signup.html:30
+#: apps/accounts/templates/hospital_signup.html:29
 #: apps/accounts/templates/registration/login.html:37 templates/base.html:72
 msgid "Login"
 msgstr "Login"
 
-#: apps/accounts/templates/hospital_signup.html:36
-msgid ""
-"Sie brauchen in Ihrer Institution aktuell Hilfe?\n"
-"        "
-msgstr ""
-"You currently need help in your facility?\n"
-"        "
+#: apps/accounts/templates/hospital_signup.html:34
+msgid "Sie brauchen in Ihrer Institution aktuell Hilfe?"
+msgstr "You currently need help in your facility?"
+
+#: apps/accounts/templates/hospital_signup.html:35
+msgid "Wir verbinden Helfende und Hilfesuchende zu einem match4healthcare!"
+msgstr "We connect supporters  and people seeking help to a match4healthcare!"
 
 #: apps/accounts/templates/hospital_signup.html:38
 msgid ""
@@ -712,31 +712,31 @@ msgstr ""
 "You have successfully activated your profile, you can now be contacted again "
 "by people seeking help."
 
-#: apps/iamstudent/filters.py:50
+#: apps/iamstudent/filters.py:38
 msgid "Kann eine Vergütung angeboten werden?"
 msgstr "Can compensation be offered?"
 
-#: apps/iamstudent/filters.py:52
+#: apps/iamstudent/filters.py:40
 msgid "Die Helfenden sollten verfügbar sein ab "
 msgstr "When should the supporters be available?"
 
-#: apps/iamstudent/filters.py:54
+#: apps/iamstudent/filters.py:42
 msgid "Kann eine Unterkunft angeboten werden?"
 msgstr "Can accommodation be offered?"
 
-#: apps/iamstudent/filters.py:55 apps/iamstudent/models.py:33
+#: apps/iamstudent/filters.py:43 apps/iamstudent/models.py:33
 msgid "ja"
 msgstr "yes"
 
-#: apps/iamstudent/filters.py:56 apps/iamstudent/models.py:34
+#: apps/iamstudent/filters.py:44 apps/iamstudent/models.py:34
 msgid "nein"
 msgstr "no"
 
-#: apps/iamstudent/filters.py:58 apps/iamstudent/filters.py:59
+#: apps/iamstudent/filters.py:46 apps/iamstudent/filters.py:47
 msgid "wissen wir nicht"
 msgstr "we do not know"
 
-#: apps/iamstudent/filters.py:105 apps/iamstudent/filters.py:110
+#: apps/iamstudent/filters.py:93 apps/iamstudent/filters.py:98
 msgid "Egal"
 msgstr "Irrelevant"
 
@@ -757,13 +757,12 @@ msgid "Telefonnummer"
 msgstr "Phone Number"
 
 #: apps/iamstudent/forms.py:26 apps/iamstudent/tables.py:40
-#: apps/iamstudent/templates/student_list_view.html:111
 #: apps/ineedstudent/forms.py:18 apps/ineedstudent/forms.py:78
 msgid "Postleitzahl"
 msgstr "Postal code"
 
 #: apps/iamstudent/forms.py:27 apps/ineedstudent/forms.py:19
-#: apps/ineedstudent/forms.py:79
+#: apps/ineedstudent/forms.py:80
 msgid "Land"
 msgstr "Country"
 
@@ -790,9 +789,7 @@ msgstr ""
 #: apps/iamstudent/forms.py:35 apps/iamstudent/forms.py:37
 #: apps/iamstudent/forms.py:42 apps/iamstudent/forms.py:51
 #: apps/iamstudent/forms.py:53 apps/iamstudent/forms.py:55
-#: apps/iamstudent/forms.py:57 apps/iamstudent/forms.py:59
-#: apps/iamstudent/forms.py:61 apps/iamstudent/forms.py:63
-#: apps/iamstudent/forms.py:65 apps/iamstudent/forms.py:68
+#: apps/iamstudent/forms.py:57 apps/iamstudent/forms.py:60
 msgid "Ausbildungsabschnitt"
 msgstr "Experience level"
 
@@ -866,55 +863,55 @@ msgstr ""
 msgid "Medizinisch-technische/r Laboratoriumsassistent*in"
 msgstr "Medical Laboratory Scientist"
 
-#: apps/iamstudent/forms.py:62
+#: apps/iamstudent/forms.py:54
 msgid "Medizinisch-technische/r Assistent*in"
 msgstr "Medical technical assistant"
 
-#: apps/iamstudent/forms.py:64
+#: apps/iamstudent/forms.py:56
 msgid "Notfallsanitäter*in / Rettungsassistent*in"
 msgstr "Notfallsanitäter*in/Rettungsassistent*in (Paramedic, EMT)"
 
-#: apps/iamstudent/forms.py:66
+#: apps/iamstudent/forms.py:58
 msgid "Rettungssanitäter*in/Rettungshelfer*in"
 msgstr "Rettungssanitäter*in/Rettungshelfer*in (Paramedic, EMT)"
 
-#: apps/iamstudent/forms.py:67
+#: apps/iamstudent/forms.py:59
 msgid "Zahnmedizinstudent*in"
 msgstr "Dental medicine student"
 
-#: apps/iamstudent/forms.py:69
+#: apps/iamstudent/forms.py:61
 msgid "Kinderbetreuer*in"
 msgstr "Child Carer"
 
-#: apps/iamstudent/forms.py:70 apps/iamstudent/models.py:231
+#: apps/iamstudent/forms.py:62 apps/iamstudent/models.py:207
 msgid "Abgeschlossene Ausbildung"
 msgstr "Experience Level"
 
-#: apps/iamstudent/forms.py:71 apps/iamstudent/models.py:230
+#: apps/iamstudent/forms.py:63 apps/iamstudent/models.py:206
 msgid "Lediglich Erfahrungen"
 msgstr "Only experiences"
 
-#: apps/iamstudent/forms.py:72
+#: apps/iamstudent/forms.py:64
 msgid "Sonstige"
 msgstr "Others"
 
-#: apps/iamstudent/forms.py:73
+#: apps/iamstudent/forms.py:65
 msgid "Bitte die Qualifikationen hier eintragen"
 msgstr "Please enter qualiciations here"
 
-#: apps/iamstudent/forms.py:74
+#: apps/iamstudent/forms.py:68
 msgid "Weitere Qualifikationen"
 msgstr "Other Qualifications"
 
-#: apps/iamstudent/forms.py:75 apps/ineedstudent/forms.py:23
-#: apps/ineedstudent/forms.py:107
+#: apps/iamstudent/forms.py:69 apps/ineedstudent/forms.py:23
+#: apps/ineedstudent/forms.py:108
 msgid ""
 "Hiermit akzeptiere ich die <a href=\"/dataprotection/"
 "\">Datenschutzbedingungen</a>."
 msgstr ""
 "I accept the <a href=\"/dataprotection/\">data protection agreement</a>."
 
-#: apps/iamstudent/forms.py:77 apps/ineedstudent/forms.py:108
+#: apps/iamstudent/forms.py:71 apps/ineedstudent/forms.py:109
 msgid ""
 "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution "
 "meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner "
@@ -924,35 +921,35 @@ msgstr ""
 "can provide the institution with evidence of my educational background. I "
 "consent to my contact details being passed on to the institutions."
 
-#: apps/iamstudent/forms.py:79
+#: apps/iamstudent/forms.py:73
 msgid "Arztpraxis/Ordination/MVZ"
 msgstr "Medical practice"
 
-#: apps/iamstudent/forms.py:80
+#: apps/iamstudent/forms.py:74
 msgid "Gesundheitsamt und sonstige Einrichtungen"
 msgstr "Public health department and other institutions"
 
-#: apps/iamstudent/forms.py:81
+#: apps/iamstudent/forms.py:75
 msgid "Klinikum/Spital"
 msgstr "Hospital"
 
-#: apps/iamstudent/forms.py:82
+#: apps/iamstudent/forms.py:76
 msgid "Pflegeeinrichtungen"
 msgstr "Nursing facilities"
 
-#: apps/iamstudent/forms.py:83
+#: apps/iamstudent/forms.py:77
 msgid "Rettungsdienst"
 msgstr "Emergency services"
 
-#: apps/iamstudent/forms.py:84
+#: apps/iamstudent/forms.py:78
 msgid "Labor"
 msgstr "Laboratory"
 
-#: apps/iamstudent/forms.py:85
+#: apps/iamstudent/forms.py:79
 msgid "Ich brauche eine Unterkunft"
 msgstr "I need accomodation"
 
-#: apps/iamstudent/forms.py:86
+#: apps/iamstudent/forms.py:80
 msgid ""
 "Apotheke <em>(melde Dich auch bei <a href=\"http://apothekenhelfen.bphd.de/"
 "\">Apothekenhelfen</a>)</em>"
@@ -960,15 +957,15 @@ msgstr ""
 "Pharmacy <em>(also contact <a href=\"http://apothekenhelfen.bphd.de/"
 "\">Apothekenhelfen</a>)</em>"
 
-#: apps/iamstudent/forms.py:87
+#: apps/iamstudent/forms.py:81
 msgid "Keiner, ich helfe dort, wo ich kann"
 msgstr "None, I help where I can"
 
-#: apps/iamstudent/forms.py:88
+#: apps/iamstudent/forms.py:82
 msgid "Zeitliche Verfügbarkeit, bis zu"
 msgstr "Time availability, up to"
 
-#: apps/iamstudent/forms.py:89 apps/ineedstudent/forms.py:24
+#: apps/iamstudent/forms.py:83 apps/ineedstudent/forms.py:24
 msgid ""
 "Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen "
 "Informationen an die bei uns registrierten Institutionen. Alle "
@@ -982,46 +979,44 @@ msgstr ""
 "changing a mistake and referring your data to a third party, so that we have "
 "no associated rights."
 
-#: apps/iamstudent/forms.py:109
+#: apps/iamstudent/forms.py:99
 msgid "mindestens"
 msgstr "min"
 
-#: apps/iamstudent/forms.py:110
+#: apps/iamstudent/forms.py:100
 msgid "maximal"
 msgstr "max"
 
-#: apps/iamstudent/forms.py:154 apps/iamstudent/forms.py:335
+#: apps/iamstudent/forms.py:144 apps/iamstudent/forms.py:325
 msgid ""
 "Über diese Emailadresse dürfen dich medizinische Einrichtungen kontaktieren"
 msgstr "Medical institutions may contact you via this email address"
 
-#: apps/iamstudent/forms.py:155 apps/iamstudent/forms.py:336
+#: apps/iamstudent/forms.py:145 apps/iamstudent/forms.py:326
 msgid "Bitte wähle ein Land aus"
 msgstr "Please select your country"
 
-#: apps/iamstudent/forms.py:156 apps/iamstudent/forms.py:337
+#: apps/iamstudent/forms.py:146 apps/iamstudent/forms.py:327
 msgid "bevorzugter Einsatzort als Postleitzahl"
 msgstr "postal code of preferred location"
 
-#: apps/iamstudent/forms.py:174 apps/iamstudent/forms.py:344
+#: apps/iamstudent/forms.py:164 apps/iamstudent/forms.py:334
 msgid "Persönliche Informationen"
 msgstr "Personal information"
 
-#: apps/iamstudent/forms.py:186 apps/iamstudent/forms.py:356
+#: apps/iamstudent/forms.py:176 apps/iamstudent/forms.py:346
 msgid "Über deinen Einsatz"
 msgstr "Information about your support"
 
-#: apps/iamstudent/forms.py:198 apps/iamstudent/forms.py:368
-#: apps/iamstudent/forms.py:508
+#: apps/iamstudent/forms.py:188 apps/iamstudent/forms.py:358
 msgid "Wunscheinsatzort"
 msgstr "Desired location"
 
-#: apps/iamstudent/forms.py:222 apps/iamstudent/forms.py:393
-#: apps/iamstudent/forms.py:478
+#: apps/iamstudent/forms.py:212 apps/iamstudent/forms.py:383
 msgid "Berufsausbildung"
 msgstr "Professional training"
 
-#: apps/iamstudent/forms.py:263
+#: apps/iamstudent/forms.py:253
 msgid ""
 "Gib hier bitte deine Vorerfahrungen oder Fachrichtung in den folgenden "
 "Feldern an:"
@@ -1029,7 +1024,7 @@ msgstr ""
 "Please enter your previous experience or field of study in the following "
 "fields:"
 
-#: apps/iamstudent/forms.py:291
+#: apps/iamstudent/forms.py:281
 msgid ""
 "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
 "dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die "
@@ -1044,11 +1039,11 @@ msgstr ""
 "matters concern only myself and the institution concerned. Any liability of "
 "the match4healthcare service is strictly excluded."
 
-#: apps/iamstudent/forms.py:292
+#: apps/iamstudent/forms.py:282
 msgid "Registriere mich"
 msgstr "Register me"
 
-#: apps/iamstudent/forms.py:301
+#: apps/iamstudent/forms.py:291
 msgid ""
 "Diese E-mail ist bereits vergeben und eine Bestätigungsmail wurde versandt. "
 "<b><a target=\"_blank\" href=\"/accounts/resend_validation_email/"
@@ -1056,14 +1051,14 @@ msgstr ""
 "This e-mail is already assigned and a confirmation e-mail has been sent. "
 "<b><a target=“_blank” href=“/accounts/resend_validation_email/"
 
-#: apps/iamstudent/forms.py:306 apps/iamstudent/forms.py:311
-#: apps/iamstudent/forms.py:316 apps/ineedstudent/forms.py:49
-#: apps/ineedstudent/forms.py:54 apps/ineedstudent/forms.py:125
-#: apps/ineedstudent/forms.py:130
+#: apps/iamstudent/forms.py:296 apps/iamstudent/forms.py:301
+#: apps/iamstudent/forms.py:306 apps/ineedstudent/forms.py:50
+#: apps/ineedstudent/forms.py:55 apps/ineedstudent/forms.py:126
+#: apps/ineedstudent/forms.py:131
 msgid "Zustimmung erforderlich."
 msgstr "You have to accept this."
 
-#: apps/iamstudent/forms.py:424
+#: apps/iamstudent/forms.py:414
 msgid ""
 "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, "
 "dass die Ausgestaltung des Verhältnisses zur zu vermittelnden Institution "
@@ -1078,7 +1073,7 @@ msgstr ""
 "matters concern only myself and the institution concerned. Any liability of "
 "the match4healthcare service is strictly excluded."
 
-#: apps/iamstudent/forms.py:425
+#: apps/iamstudent/forms.py:415
 msgid "Profil Aktualisieren"
 msgstr "Update data"
 
@@ -1114,19 +1109,19 @@ msgstr "General"
 msgid "Betreff"
 msgstr "Subject"
 
-#: apps/iamstudent/forms.py:530 apps/ineedstudent/forms.py:153
+#: apps/iamstudent/forms.py:423 apps/ineedstudent/forms.py:154
 msgid "Nachrichtentext"
 msgstr "Message"
 
-#: apps/iamstudent/forms.py:532
+#: apps/iamstudent/forms.py:425
 msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 msgstr "Your posting should be here, edit the text."
 
-#: apps/iamstudent/forms.py:585
+#: apps/iamstudent/forms.py:478
 msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
 msgstr "In which of the following areas is prior experience necessary?"
 
-#: apps/iamstudent/forms.py:602
+#: apps/iamstudent/forms.py:495
 msgid " Welche Infos über die zu vergebende Stelle sind schon bekannt?"
 msgstr " What information about the vacant position is already known?"
 
@@ -1179,13 +1174,13 @@ msgid ">40 km"
 msgstr ">40 km"
 
 #: apps/iamstudent/models.py:74
-#: apps/ineedstudent/templates/map_hospitals.html:81
+#: apps/ineedstudent/templates/map_hospitals.html:105
 #: apps/mapview/templates/mapview/map.html:114
 msgid "Deutschland"
 msgstr "Germany"
 
 #: apps/iamstudent/models.py:75
-#: apps/ineedstudent/templates/map_hospitals.html:82
+#: apps/ineedstudent/templates/map_hospitals.html:106
 #: apps/mapview/templates/mapview/map.html:115
 msgid "Österreich"
 msgstr "Austria"
@@ -1195,9 +1190,8 @@ msgid " ist keine Postleitzahl in "
 msgstr " is not a valid ZIP code in "
 
 #: apps/iamstudent/models.py:153 apps/iamstudent/models.py:168
-#: apps/iamstudent/models.py:182 apps/iamstudent/models.py:194
-#: apps/iamstudent/models.py:206 apps/iamstudent/models.py:220
-#: apps/iamstudent/models.py:229
+#: apps/iamstudent/models.py:182 apps/iamstudent/models.py:196
+#: apps/iamstudent/models.py:205
 msgid "Keine Angabe"
 msgstr "Not specified"
 
@@ -1226,11 +1220,11 @@ msgstr "Consultant"
 msgid "Abgeschlossen"
 msgstr "Completed"
 
-#: apps/iamstudent/models.py:183 apps/iamstudent/models.py:221
+#: apps/iamstudent/models.py:183 apps/iamstudent/models.py:197
 msgid "1. Jahr"
 msgstr "1st year"
 
-#: apps/iamstudent/models.py:184 apps/iamstudent/models.py:222
+#: apps/iamstudent/models.py:184 apps/iamstudent/models.py:198
 msgid "2. Jahr"
 msgstr "2nd year"
 
@@ -1366,27 +1360,27 @@ msgstr ""
 "positions\n"
 " you have to make individual requests."
 
-#: apps/iamstudent/templates/student_list_view.html:134
+#: apps/iamstudent/templates/student_list_view.html:128
 msgid "Speichere den Filter als:"
 msgstr "Save the filter as:"
 
-#: apps/iamstudent/templates/student_list_view.html:140
+#: apps/iamstudent/templates/student_list_view.html:134
 msgid "Filter Speichern als:"
 msgstr "Save filter as:"
 
-#: apps/iamstudent/templates/student_list_view.html:153
+#: apps/iamstudent/templates/student_list_view.html:147
 #, python-format
 msgid ""
 "Wir haben <b>%(n)s Helfer*innen</b> gefunden, die zu Ihrer Suche passen."
 msgstr "We found <mark>%(n)s supporters</mark> matching your search."
 
-#: apps/iamstudent/templates/student_list_view.html:155
-#: apps/iamstudent/templates/student_list_view.html:160
+#: apps/iamstudent/templates/student_list_view.html:149
+#: apps/iamstudent/templates/student_list_view.html:154
 #, python-format
 msgid "Email an alle %(n)s Helfer*innen senden"
 msgstr "Send e-mail to %(n)s supporters"
 
-#: apps/iamstudent/templates/student_list_view.html:162
+#: apps/iamstudent/templates/student_list_view.html:155
 #, python-format
 msgid ""
 " Du hast mehr Helfer ausgewählt, als du heute\n"
@@ -1411,18 +1405,18 @@ msgstr ""
 "                    inform us\n"
 "                </a> and we’ll raise your limit."
 
-#: apps/iamstudent/templates/student_list_view.html:175
+#: apps/iamstudent/templates/student_list_view.html:166
 msgid ""
 "Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du "
 "kontaktieren\n"
 "                möchtest."
 msgstr "Click on the table rows to select helpers you want to contact."
 
-#: apps/iamstudent/templates/student_list_view.html:183
+#: apps/iamstudent/templates/student_list_view.html:174
 msgid "Email an AUSGEWÄHLTE Helfer*innen schicken"
 msgstr "Send e-mail to SELECTED supporters"
 
-#: apps/iamstudent/templates/student_list_view.html:194
+#: apps/iamstudent/templates/student_list_view.html:185
 msgid ""
 "Die Anzahl E-Mails, die Sie heute senden dürfen, ist erreicht. Grenze Sie "
 "bitte Ihre Suche ein. Melde Sie sich bei support@match4healthcare.de falls "
@@ -1432,7 +1426,7 @@ msgstr ""
 "limit your search. Contact support@match4healthcare.de if you would like to "
 "send more."
 
-#: apps/iamstudent/templates/student_list_view.html:223
+#: apps/iamstudent/templates/student_list_view.html:214
 msgid ""
 "Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche "
 "ein. Melde dich bei support@match4healthcare.de falls du mehr senden "
@@ -1441,11 +1435,11 @@ msgstr ""
 "The e-mails you are allowed to send today are used up. Narrow your search. "
 "Contact support@match4healthcare.de if you want to send more."
 
-#: apps/iamstudent/templates/student_list_view.html:227
+#: apps/iamstudent/templates/student_list_view.html:218
 msgid "Bitte wählen Sie mindestens einen Helfenden zum Kontaktieren aus!"
 msgstr "Please select at least one volunteer!"
 
-#: apps/iamstudent/templates/student_list_view.html:239
+#: apps/iamstudent/templates/student_list_view.html:230
 msgid ""
 "Leider gibt es keine Helfer*innen, die zu Ihrem Filter passen. Bitte wählen "
 "Sie weniger Kriterien aus um passende Helfer*innen zu finden."
@@ -1507,27 +1501,27 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-#: apps/ineedstudent/forms.py:20 apps/ineedstudent/forms.py:81
+#: apps/ineedstudent/forms.py:20 apps/ineedstudent/forms.py:82
 msgid "Offizieller Name Ihrer Institution"
 msgstr "Official name of your institution"
 
-#: apps/ineedstudent/forms.py:21 apps/ineedstudent/forms.py:82
+#: apps/ineedstudent/forms.py:21 apps/ineedstudent/forms.py:83
 msgid "Name der Kontaktperson"
 msgstr "Full name of the person to contact"
 
-#: apps/ineedstudent/forms.py:22 apps/ineedstudent/forms.py:83
+#: apps/ineedstudent/forms.py:22 apps/ineedstudent/forms.py:84
 msgid "Auf der Karte sichtbar und kontaktierbar für Helfende sein"
 msgstr "Visible and contactable for helpers"
 
-#: apps/ineedstudent/forms.py:68
+#: apps/ineedstudent/forms.py:69
 msgid "Schicke Mails"
 msgstr "Send Mails"
 
-#: apps/ineedstudent/forms.py:69
+#: apps/ineedstudent/forms.py:70
 msgid "Schicke Mails + Erstelle Anzeige"
 msgstr "Send Mails and advertise requirement"
 
-#: apps/ineedstudent/forms.py:80
+#: apps/ineedstudent/forms.py:81
 msgid ""
 "Text Ihrer Suchanzeige. Wird nur öffentlich gezeigt wenn Sie auf der Karte "
 "sichtbar sind und kontaktbierbar sein möchten. Hier können Sie genau "
@@ -1540,19 +1534,19 @@ msgstr ""
 "you need support, which qualifications are required and under which "
 "conditions (e.g. payment) the search is being made."
 
-#: apps/ineedstudent/forms.py:90 apps/ineedstudent/forms.py:114
+#: apps/ineedstudent/forms.py:91 apps/ineedstudent/forms.py:115
 msgid "Daten aktualisieren"
 msgstr "Update data"
 
-#: apps/ineedstudent/forms.py:135
+#: apps/ineedstudent/forms.py:136
 msgid "Diese Email ist bereits vergeben"
 msgstr "This e-Mail has already been used"
 
-#: apps/ineedstudent/forms.py:139
+#: apps/ineedstudent/forms.py:140
 msgid "Offizielle E-Mail-Adresse der Kontaktperson"
 msgstr "Official email address of the contact person"
 
-#: apps/ineedstudent/forms.py:156
+#: apps/ineedstudent/forms.py:157
 msgid ""
 "Gib hier deine Antwort auf das Angebot ein. Wer bist du? Welche Fähigkeiten "
 "bringst du für diese Stelle mit?"
@@ -1560,19 +1554,19 @@ msgstr ""
 "Enter your answer to the offer here. Who are you? What skills do you bring "
 "to the job?"
 
-#: apps/ineedstudent/forms.py:163
+#: apps/ineedstudent/forms.py:164
 msgid "Hilfsangebot abschicken"
 msgstr "Submit offer of help"
 
-#: apps/ineedstudent/forms.py:170
+#: apps/ineedstudent/forms.py:171
 msgid "Anzeige solll angezeigt werden"
 msgstr ""
 
-#: apps/ineedstudent/forms.py:171
+#: apps/ineedstudent/forms.py:172
 msgid "Anzeigetext"
 msgstr ""
 
-#: apps/ineedstudent/forms.py:185
+#: apps/ineedstudent/forms.py:186
 #, fuzzy
 #| msgid "Daten aktualisieren"
 msgid "Anzeige aktualisieren"
@@ -1629,6 +1623,10 @@ msgid ""
 "freuen, wenn daraus etwas wird.\n"
 "    "
 msgstr ""
+"\n"
+"        Thanks for answering the call for help. <br>We’d like to see this "
+"turn into something.\n"
+"    "
 
 #: apps/ineedstudent/templates/hospital_contacted.html:33
 msgid "Zurück zur Karte"
@@ -1700,21 +1698,21 @@ msgstr "Help is needed in %(ort)s (%(plz)s):"
 msgid "Karte der Hilfesuchenden"
 msgstr "Facility Map"
 
-#: apps/ineedstudent/templates/map_hospitals.html:85
-#: apps/mapview/templates/mapview/map.html:118
+#: apps/ineedstudent/templates/map_hospitals.html:36
+#: apps/mapview/templates/mapview/map.html:113
 msgid "Direktsuche"
 msgstr "Direct search"
 
-#: apps/ineedstudent/templates/map_hospitals.html:125
+#: apps/ineedstudent/templates/map_hospitals.html:76
 msgid " gibt es "
 msgstr " are "
 
-#: apps/ineedstudent/templates/map_hospitals.html:125
+#: apps/ineedstudent/templates/map_hospitals.html:76
 msgid " Orte, an welchen Hilfe gebraucht wird. "
 msgstr " Places where help is needed. "
 
-#: apps/ineedstudent/templates/map_hospitals.html:126
-#: apps/ineedstudent/templates/map_hospitals.html:127
+#: apps/ineedstudent/templates/map_hospitals.html:77
+#: apps/ineedstudent/templates/map_hospitals.html:78
 msgid "Detailansicht"
 msgstr "Detail view"
 
@@ -1756,7 +1754,7 @@ msgstr "We have updated our privacy policy"
 msgid "Bitte stimmen Sie den aktualisierten Bedingungen zu"
 msgstr "Please agree to the updated conditions"
 
-#: apps/ineedstudent/views.py:149
+#: apps/ineedstudent/views.py:148
 #, python-format
 msgid ""
 "Hallo %s,\n"
@@ -1767,14 +1765,19 @@ msgid ""
 "Anzeige im Profil online.\n"
 "\n"
 msgstr ""
+"Hallo %s,\n"
+"\n"
+"You have received a response to your advertisement via our match4healthcare "
+"platform from %s (%s).\n"
+"If you no longer wish to receive requests, please deactivate your ad in your "
+"profile online.\n"
+"\n"
 
-#: apps/ineedstudent/views.py:187
+#: apps/ineedstudent/views.py:186
 msgid "Neues Hilfsangebot"
 msgstr ""
 
-#: apps/ineedstudent/views.py:206
-#, fuzzy
-#| msgid "Deine e-mail wurde erfolgreich aktualisiert."
+#: apps/ineedstudent/views.py:205
 msgid "Deine Anzeige wurde erfolgreich aktualisiert."
 msgstr "Your e-Mail address has been updated!"
 
@@ -1782,19 +1785,19 @@ msgstr "Your e-Mail address has been updated!"
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
 
-#: apps/mapview/templates/mapview/map.html:167
+#: apps/mapview/templates/mapview/map.html:162
 msgid "gibt es"
 msgstr "are"
 
-#: apps/mapview/templates/mapview/map.html:167
+#: apps/mapview/templates/mapview/map.html:162
 msgid "Studierende, die helfen möchten."
 msgstr "Supporters, that want to help."
 
-#: apps/mapview/templates/mapview/map.html:167
+#: apps/mapview/templates/mapview/map.html:162
 msgid "Studierenden, der*die helfen möchte."
 msgstr "Supporters, that want to help."
 
-#: apps/mapview/templates/mapview/map.html:167
+#: apps/mapview/templates/mapview/map.html:162
 msgid "Detailansicht für Kliniken"
 msgstr "Detail view for hospitals"
 
@@ -1837,7 +1840,7 @@ msgstr "About us"
 #: templates/about.html:12
 msgid ""
 "Wir sind das Team von\n"
-"            match4healthcare!"
+"        match4healthcare!"
 msgstr ""
 "We are the team of\n"
 "           match4healthcare!"
@@ -1845,14 +1848,15 @@ msgstr ""
 #: templates/about.html:15
 msgid ""
 "Durch die bundesweit erfolgreich und bekannt gewordenen Initiative\n"
-"            „Medizinstudierende vs. COVID19“ (<a href=\"https://www.medis-vs-"
-"covid19.de\" target=\"_blank\">medis-vs-covid19.de</a>), die "
-"Bundesvertretung der\n"
-"            Medizinstudierenden in Deutschland e.V. (bvmd) und unserem Tech-"
-"Team haben wir im Rahmen des Hackathon der\n"
-"            Bundesregierung (#wirvsvirus) eine Plattform für die Vernetzung "
-"von Hilfesuchenden und Hilfebietenden\n"
-"            erstellt. Wir stellen uns vor:"
+"        „Medizinstudierende vs. COVID19“ (<a href=\"https://www.medis-vs-"
+"covid19.de\"\n"
+"            target=\"_blank\">medis-vs-covid19.de</a>), die Bundesvertretung "
+"der\n"
+"        Medizinstudierenden in Deutschland e.V. (bvmd) und unserem Tech-Team "
+"haben wir im Rahmen des Hackathon der\n"
+"        Bundesregierung (#wirvsvirus) eine Plattform für die Vernetzung von "
+"Hilfesuchenden und Hilfebietenden\n"
+"        erstellt. Wir stellen uns vor:"
 msgstr ""
 "Through the nationwide successful and well-known initiative\n"
 "            \"Medical Students vs. COVID19\" (\n"
@@ -1863,6 +1867,18 @@ msgstr ""
 "            Federal government (#wirvsvirus) to create a platform for the "
 "networking of people seeking and offering help. Allow us to  introduce "
 "ourselves:"
+
+#: templates/about.html:140
+msgid "Entwickelt von Open Source Team"
+msgstr "Developed by open source team"
+
+#: templates/about.html:142
+msgid "im Rahmen des Hackathon der Bundesregierung (#wirvsvirus)"
+msgstr "as part of the Hackathon of the Bundesregierung (#wirvsvirus)"
+
+#: templates/about.html:208
+msgid "Erster Prototyp entwickelt von"
+msgstr "First prototype developed by"
 
 #: templates/base.html:55
 msgid ""
@@ -1881,8 +1897,6 @@ msgstr ""
 "            help"
 
 #: templates/base.html:61
-#, fuzzy
-#| msgid "Direktsuche"
 msgid "Gesuche"
 msgstr "Direct search"
 
@@ -1892,11 +1906,11 @@ msgstr "Direct search"
 msgid "Helfer*innen finden"
 msgstr "Find volunteers"
 
-#: templates/base.html:67
+#: templates/base.html:64
 msgid "Helferkarte"
 msgstr "Map of volunteers"
 
-#: templates/base.html:69
+#: templates/base.html:66
 msgid ""
 "Mein\n"
 "          Profil"
@@ -1904,19 +1918,19 @@ msgstr ""
 "My\n"
 "            profile"
 
-#: templates/base.html:112
+#: templates/base.html:83
 msgid "Ein Projekt im Rahmen des"
 msgstr "A submission of"
 
-#: templates/base.html:114
+#: templates/base.html:85
 msgid "Impressum"
 msgstr "Imprint"
 
-#: templates/base.html:114
+#: templates/base.html:85
 msgid "und"
 msgstr "and"
 
-#: templates/base.html:115
+#: templates/base.html:86
 msgid "Datenschutz"
 msgstr "Data protection"
 
@@ -1993,10 +2007,15 @@ msgstr ""
 "supporters and facilities and especially now the state-of-the-art solution."
 
 #: templates/home.html:151
+#, python-format
+msgid "100%% ehrenamtlich und uneigennützig von Studierenden entwickelt"
+msgstr ""
+
+#: templates/home.html:154
 msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
-#: templates/home.html:154
+#: templates/home.html:157
 msgid "Mit Unterstützung von"
 msgstr "Supported by"
 
