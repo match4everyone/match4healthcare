@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: apps/ineedstudent/views.py:186
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 23:46+0000\n"
-"PO-Revision-Date: 2020-04-03 01:32+0200\n"
+"POT-Creation-Date: 2020-04-03 00:05+0000\n"
+"PO-Revision-Date: 2020-04-03 02:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -755,6 +754,7 @@ msgid "Telefonnummer"
 msgstr "Phone Number"
 
 #: apps/iamstudent/forms.py:26 apps/iamstudent/tables.py:40
+#: apps/iamstudent/templates/student_list_view.html:111
 #: apps/ineedstudent/forms.py:17 apps/ineedstudent/forms.py:78
 msgid "Postleitzahl"
 msgstr "Postal code"
@@ -1081,7 +1081,7 @@ msgstr "Update data"
 
 #: apps/iamstudent/forms.py:434
 msgid "Eindeutige Kennziffer dieses Helfenden"
-msgstr ""
+msgstr "Unique identification number of this volunteer"
 
 #: apps/iamstudent/forms.py:435
 msgid "Benötigte Vergütung"
@@ -1246,7 +1246,7 @@ msgstr "In Training"
 
 #: apps/iamstudent/models.py:207
 msgid "Studium"
-msgstr ""
+msgstr "Studies"
 
 #: apps/iamstudent/tables.py:41
 msgid "Kontaktiert"
@@ -1349,7 +1349,11 @@ msgstr "Find volunteers"
 msgid "An welchem Ort und in welchem Abstand suchen Sie Helfer*innen?"
 msgstr "At which place and in which distance are you looking for supporters?"
 
-#: apps/iamstudent/templates/student_list_view.html:120
+#: apps/iamstudent/templates/student_list_view.html:117
+msgid "Und im Umkreis von (km)"
+msgstr "And within a radius of (km)"
+
+#: apps/iamstudent/templates/student_list_view.html:124
 msgid ""
 "Welche Ausbildung(en) muss ein Helfer alles haben? Für mehrere zu besetzende "
 "Stellen\n"
@@ -1359,27 +1363,27 @@ msgstr ""
 "positions\n"
 " you have to make individual requests."
 
-#: apps/iamstudent/templates/student_list_view.html:130
+#: apps/iamstudent/templates/student_list_view.html:134
 msgid "Speichere den Filter als:"
 msgstr "Save the filter as:"
 
-#: apps/iamstudent/templates/student_list_view.html:136
+#: apps/iamstudent/templates/student_list_view.html:140
 msgid "Filter Speichern als:"
 msgstr "Save filter as:"
 
-#: apps/iamstudent/templates/student_list_view.html:149
+#: apps/iamstudent/templates/student_list_view.html:153
 #, python-format
 msgid ""
 "Wir haben <b>%(n)s Helfer*innen</b> gefunden, die zu Ihrer Suche passen."
 msgstr "We found <mark>%(n)s supporters</mark> matching your search."
 
-#: apps/iamstudent/templates/student_list_view.html:151
-#: apps/iamstudent/templates/student_list_view.html:156
+#: apps/iamstudent/templates/student_list_view.html:155
+#: apps/iamstudent/templates/student_list_view.html:160
 #, python-format
 msgid "Email an alle %(n)s Helfer*innen senden"
 msgstr "Send e-mail to %(n)s supporters"
 
-#: apps/iamstudent/templates/student_list_view.html:158
+#: apps/iamstudent/templates/student_list_view.html:162
 #, python-format
 msgid ""
 " Du hast mehr Helfer ausgewählt, als du heute\n"
@@ -1404,18 +1408,18 @@ msgstr ""
 "                    inform us\n"
 "                </a> and we’ll raise your limit."
 
-#: apps/iamstudent/templates/student_list_view.html:171
+#: apps/iamstudent/templates/student_list_view.html:175
 msgid ""
 "Klicke auf die Tabellenzeilen, um bestimmte Helfer*innen auszuwählen, die du "
 "kontaktieren\n"
 "                möchtest."
 msgstr "Click on the table rows to select helpers you want to contact."
 
-#: apps/iamstudent/templates/student_list_view.html:179
+#: apps/iamstudent/templates/student_list_view.html:183
 msgid "Email an AUSGEWÄHLTE Helfer*innen schicken"
 msgstr "Send e-mail to SELECTED supporters"
 
-#: apps/iamstudent/templates/student_list_view.html:190
+#: apps/iamstudent/templates/student_list_view.html:194
 msgid ""
 "Die Anzahl E-Mails, die Sie heute senden dürfen, ist erreicht. Grenze Sie "
 "bitte Ihre Suche ein. Melde Sie sich bei support@match4healthcare.de falls "
@@ -1425,7 +1429,7 @@ msgstr ""
 "limit your search. Contact support@match4healthcare.de if you would like to "
 "send more."
 
-#: apps/iamstudent/templates/student_list_view.html:219
+#: apps/iamstudent/templates/student_list_view.html:223
 msgid ""
 "Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche "
 "ein. Melde dich bei support@match4healthcare.de falls du mehr senden "
@@ -1434,11 +1438,11 @@ msgstr ""
 "The e-mails you are allowed to send today are used up. Narrow your search. "
 "Contact support@match4healthcare.de if you want to send more."
 
-#: apps/iamstudent/templates/student_list_view.html:223
+#: apps/iamstudent/templates/student_list_view.html:227
 msgid "Bitte wählen Sie mindestens einen Helfenden zum Kontaktieren aus!"
 msgstr "Please select at least one volunteer!"
 
-#: apps/iamstudent/templates/student_list_view.html:235
+#: apps/iamstudent/templates/student_list_view.html:239
 msgid ""
 "Leider gibt es keine Helfer*innen, die zu Ihrem Filter passen. Bitte wählen "
 "Sie weniger Kriterien aus um passende Helfer*innen zu finden."
@@ -1483,7 +1487,7 @@ msgstr "Detail view for Volunteer %(uuid)s"
 msgid "Detailansicht Helfende*r"
 msgstr "Detail view for Volunteer"
 
-#: apps/iamstudent/views.py:116
+#: apps/iamstudent/views.py:125
 msgid ""
 "[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert"
 msgstr "[match4healthcare] You have just contacted potential volunteers."
@@ -1550,6 +1554,8 @@ msgid ""
 "Gib hier deine Antwort auf das Angebot ein. Wer bist du? Welche Fähigkeiten "
 "bringst du für diese Stelle mit?"
 msgstr ""
+"Enter your answer to the offer here. Who are you? What skills do you bring "
+"to the job?"
 
 #: apps/ineedstudent/forms.py:161
 msgid "Hilfsangebot abschicken"
