@@ -12,7 +12,10 @@ from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
 from .forms import StudentForm, EmailToSendForm, EmailForm
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel, EmailGroup
+from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
 from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
+
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -77,9 +80,12 @@ def send_mail_student_id_list(request, id_list):
 
             hospital_message = form.cleaned_data['message']
 
-
-
             subject = form.cleaned_data['subject']
+
+            email_group = EmailGroup.objects.create(subject=subject,
+                                                    message=hospital_message,
+                                                    hospital=request.user.hospital)
+
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
@@ -94,10 +100,13 @@ def send_mail_student_id_list(request, id_list):
                     student=student,
                     hospital=request.user.hospital,
                     message=message,
-                    subject=subject)
+                    subject=subject,
+                    email_group=email_group)
                 mail.save()
+
             if request.user.hospital.is_approved:
                 send_mails_for(request.user.hospital)
+
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
@@ -109,6 +118,19 @@ def send_mail_student_id_list(request, id_list):
 
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+    if len(emails)== 0:
+        return None
+    # inform the hospital about sent emails
+    emails_n = emails.count()
+    text = emails[0].message.split('===============================================')[1]
+    send_mail(_('[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert'),
+              ('Hallo %s,\n\n' % hospital.ansprechpartner) +
+              ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'
+               '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n' % emails_n) +
+              text,
+              settings.NOREPLY_MAIL,
+              [hospital.user.email])
+
     for m in emails:
 
         if m.subject and m.message and m.student.user.email:
@@ -128,13 +150,6 @@ def send_mails_for(hospital):
             m.was_sent = True
             m.save()
 
-
-def notify_student(student_id, contact):
-    student = Student.objects.get(id=student_id)
-    send_mail(subject=_('subject :)'),
-              message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
-              from_email=settings.NOREPLY_MAIL,
-              recipient_list=[student.email])
 
 def clean_request_for_saving(request):
     student_attr = dict(request)
@@ -271,3 +286,14 @@ def student_list_view(request, countrycode, plz, distance):
         context['filter_is_being_saved'] = False
 
     return render(request, 'student_list_view.html', context)
+
+@login_required
+def view_student(request, uuid):
+    if request.user.is_student:
+        return HttpResponseRedirect("/accounts/profile_student")
+    s = Student.objects.get(uuid=uuid)
+    form = StudentFormView(instance=s, prefix='infos')
+    context = {
+        "form": form
+    }
+    return render(request, 'view_student.html', context)

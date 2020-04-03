@@ -10,7 +10,8 @@ class StudentTable(tables.Table):
     select.attrs = {'td': {
         'class': "bs-checkbox",
         'id': lambda record: 'display-table-%s' % record.user_id}}
-
+    detail_view = tables.TemplateColumn('<a target="_blank" href="/iamstudent/view_student/{{record.uuid}}">Details</a>')
+    
     def __init__(self, *args, **kwargs):
         for c, n in self.Meta.verbose_name.items():
             self.base_columns[c].verbose_name = n

@@ -67,19 +67,21 @@
 
 <div class="container">
     <div style="height:40px"></div>
-    <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Breits registrierte Helfer durchsuchen und
-        kontaktieren.{% endblocktrans %} </h1>
-    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Brauchen Sie zum Beispiel examinierte Pflegekräfte?{% endblocktrans %}</h2>
-    <p> Dann müssen Sie unter "Ausbildungen" auswählen, dass ein Helfer eine Pflegeausbildung haben <mark>muss</mark>,
-        indem Sie auf das Feld klicken.
-        In dem geöffneten Feld können Sie nun auswählen, dass die Pflegekraft schon
-        <mark>berufstätig</mark>
-        sein muss.
-        Sie können außerdem eine Unterkunft anbieten? Super! Dann klickt weiter unten auf
-        <mark>ja</mark>.
-        Nun einfach auf den "Filter Aktualisieren" klicken und Sie können euch die Kandidaten in der Tabelle ansehen und
-        ihnen eine
-        <mark>Email senden</mark>
+    <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Hier können Sie bereits registrierte Helfende
+        durchsuchen und kontaktieren.{% endblocktrans %} </h1>
+    <h2 class="font-weight-light match4hc-title">{% blocktrans %}Sie suchen zum Beispiel nach examinierten
+        Pflegekräften?{% endblocktrans %}</h2>
+    <p> Dann wählen Sie unter "Ausbildungen" aus, dass eine Helfender eine Pflegeausbildung haben
+        <mark>muss</mark>, indem Sie auf das Feld "muss" klicken.
+        In dem geöffneten Ausbildungsfeld weiter unten können Sie nun auswählen, dass die Pflegekraft schon
+        <mark>berufstätig</mark> sein muss.
+        Falls eine Ausbildung nicht relevant für Ihre Auswahl sein sollte, so müssen Sie nichts weiter auswählen.
+        <br>
+        <br>
+        Ihre Institution kann außerdem eine Unterkunft oder eine Vergütung für Helfende anbieten? Super!
+        Um uns dies mitzuteilen, hacken Sie bitte die entsprechende Checkbox weiter unten an.
+        Nun einfach auf den "Filter aktualisieren" klicken und Sie können die passenden Kandidaten in der Tabelle
+        ansehen und ihnen eine <mark>Email senden</mark>.
     </p>
 
     <form method="get">
@@ -95,20 +97,24 @@
                         <div class="form-group">
                             <p> Land: </p>
                             <select name="countrycode" class="form-control" id="countrycode">
-                                <option {% if countrycode == 'DE' %}selected="selected"{% endif %} value="DE">Deutschland</option>
-                                <option {% if countrycode == 'AT' %}selected="selected"{% endif %} value="AT">Österreich</option>
+                                <option {% if countrycode == 'DE' %}selected="selected"{% endif %} value="DE">
+                                    Deutschland
+                                </option>
+                                <option {% if countrycode == 'AT' %}selected="selected"{% endif %} value="AT">
+                                    Österreich
+                                </option>
                             </select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <p> Postleitzahl: </p>
+                            <p> {% blocktrans %}Postleitzahl{% endblocktrans %}: </p>
                             <input name="plz" id="plz" value="{{ plz }}" class="form-control">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <p> Und im Umkreis von (km): </p>
+                            <p> {% blocktrans %}Und im Umkreis von (km){% endblocktrans %}: </p>
                             <input name="distance" id="umkreis" value="{{ distance }}" class="form-control">
                         </div>
                     </div>
@@ -144,22 +150,25 @@
         <div class="card-header">
             <p>
                 {% if enable_mail %}
-                {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans%}
+                {% blocktrans %}Wir haben <b>{{n}} Helfer*innen</b> gefunden, die zu Ihrer Suche passen.{% endblocktrans %}
                 <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;" onclick="sendall()">
                     {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} &raquo;
                 </button>
                 {% else %}
-             <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;"
+                <button class="btn blue text-white btn-md" style="display:block; margin-top:10px;"
                         onclick="alertMaxMails()">
-                 {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %} </button>
-                <div class="alert alert-warning" role="alert">{% blocktrans %} Du hast mehr Helfer ausgewählt, als du heute noch E-Mails senden darfst ({{ max }} Stück).
-            <br>Du kannst deine Suche durch den Filter stärker eingrenzen oder in der Liste gezielt Helfer auswählen,
-            <br><br>Wenn du doch einen guten Grund hast, mehr E-Mails zu verschicken, dann
+                    {% blocktrans %}Email an alle {{n}} Helfer*innen senden{% endblocktrans %}
+                </button>
+            <div class="alert alert-warning" role="alert">{% blocktrans %} Du hast mehr Helfer ausgewählt, als du heute
+                noch E-Mails senden darfst ({{ max }} Stück).
+                <br>Du kannst deine Suche durch den Filter stärker eingrenzen oder in der Liste gezielt Helfer
+                auswählen,
+                <br><br>Wenn du doch einen guten Grund hast, mehr E-Mails zu verschicken, dann
                 <a href="mailto:support@match4healthcare.de?subject=[E-Mail%20Tagesrate%20erhoehen]%20Fuer%20{{email}}">
                     benachrichtige uns
                 </a> und wir setzen deine Rate hoch.{% endblocktrans %}
-                </div>
-                {% endif %}
+            </div>
+            {% endif %}
             </p>
         </div>
         <div class="card-body">
@@ -183,7 +192,7 @@
 <script>
     var alertMaxMails = function () {
         alert("{% blocktrans %}Die Anzahl E-Mails, die Sie heute senden dürfen, ist erreicht. Grenze Sie bitte Ihre Suche ein. Melde Sie sich bei support@match4healthcare.de falls Sie noch mehr senden möchten.{% endblocktrans %}")
- };
+    };
 
     var $table = $('#table');
     $(function () {
@@ -208,10 +217,10 @@
             li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
-            if(li.length <= x[0].value){
+            if (li.length <= x[0].value) {
                 window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
             } else {
-              alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
+                alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
             }
 
         } else {

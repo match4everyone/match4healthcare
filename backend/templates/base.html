@@ -6,9 +6,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" 
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
-		crossorigin="anonymous"></script> 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
@@ -57,10 +57,12 @@
         <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home"> <a class="nav-link" href="/accounts/signup_hospital">{% blocktrans %}Ich brauche
           Hilfe{% endblocktrans %}</a> </li>
         {% endif %}
+				{% if user.is_authenticated and user.is_student %}
+        <li class="nav-item  {% if "hospital_map" in request.path %}active{% endif %} hide-home"> <a class="nav-link" href="/ineedstudent/hospital_map">{% blocktrans %}Gesuche{% endblocktrans %}</a> </li>
+        {% endif %}
         {% if user.is_authenticated and user.is_hospital %}
         {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
-        <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home"> <a class="nav-link" href="{{ filter_student_url }}">{% blocktrans %}Ich brauche
-          Hilfe{% endblocktrans %}</a> </li>
+        <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home"> <a class="nav-link" href="/ineedstudent/hospital_dashboard">{% blocktrans %}Helfer*innen finden{% endblocktrans %}</a> </li>
         {% endif %}
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}"> <a class="nav-link" href="/mapview">{% blocktrans %}Helferkarte{% endblocktrans %}</a> </li>
         {% if user.is_authenticated %}
@@ -71,8 +73,8 @@
         {% endif %}
       </ul>
       <!--</div>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" class="navbarsExampleDefault">--> 
-      
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" class="navbarsExampleDefault">-->
+
     </div>
   </div>
 </nav>
@@ -80,17 +82,43 @@
   {% endblock %} </div>
 <footer class="footer">
   <div class="container">
-    <p style="margin-bottom:5px !important;"> <a style="text-decoration: none; display: inline;" href="https://twitter.com/match4health_" target="_blank"> <img width="25" style="margin-bottom:0px; border:none; display:inline;" height="25" src="{% static 'img/twitter.svg' %}" alt="Twitter"> </a> <a style="text-decoration: none; display: inline;" href="https://www.instagram.com/match4healthcare/"  target="_blank"> <img width="25" style="margin-bottom:0px; border:none; margin-left:8px; display:inline;" height="25" src="{% static 'img/instagram.svg' %}" alt="Instagram"> </a> <a style="text-decoration: none; display: inline; margin-left:8px;" href="https://www.facebook.com/Match4Healthcare/"  target="_blank"> <img width="25" style="margin-bottom:0px; border:none; display:inline;" height="25" src="{% static 'img/facebook.svg' %}" alt="Facebook"> </a> <a style="text-decoration: none; display: inline; margin-left:8px;" href="https://www.youtube.com/watch?v=zZwdMESJav0&feature=emb_title"  target="_blank"> <img width="25" style="margin-bottom:0px; border:none; display:inline;" height="25" src="{% static 'img/youtube.svg' %}" alt="Youtube"> </a></p>
+    <p style="margin-bottom:5px !important;">
+      <a style="text-decoration: none; display: inline;"
+                                                href="https://twitter.com/match4health_" target="_blank"> <img
+            width="25" style="margin-bottom:0px; border:none; display:inline;" height="25"
+            src="{% static 'img/twitter.svg' %}" alt="Twitter"> </a>
+      <a style="text-decoration: none; display: inline;" href="https://www.instagram.com/match4healthcare/"
+         target="_blank"> <img width="25" style="margin-bottom:0px; border:none; margin-left:8px; display:inline;"
+                               height="25" src="{% static 'img/instagram.svg' %}" alt="Instagram"> </a>
+      <a style="text-decoration: none; display: inline; margin-left:8px;"
+         href="https://www.facebook.com/Match4Healthcare/" target="_blank"> <img width="25"
+                                                                                 style="margin-bottom:0px; border:none; display:inline;"
+                                                                                 height="25"
+                                                                                 src="{% static 'img/facebook.svg' %}"
+                                                                                 alt="Facebook"> </a>
+      <a style="text-decoration: none; display: inline; margin-left:8px;"
+         href="https://www.youtube.com/watch?v=zZwdMESJav0&feature=emb_title" target="_blank"> <img width="25"
+                                                                                                    style="margin-bottom:0px; border:none; display:inline;"
+                                                                                                    height="25"
+                                                                                                    src="{% static 'img/youtube.svg' %}"
+                                                                                                    alt="Youtube"> </a>
+      <a style="text-decoration: none; display: inline; margin-left:8px;"
+         href="https://github.com/match4everyone/match4healthcare" target="_blank"> <img width="25"
+                                                                                                    style="margin-bottom:0px; border:none; display:inline;"
+                                                                                                    height="25"
+                                                                                                    src="{% static 'img/GitHub-Mark-Light-32px.png' %}"
+                                                                                                    alt="Youtube"> </a>
+    </p>
     <p>{% blocktrans %}Ein Projekt im Rahmen des{% endblocktrans %} <a href="https://wirvsvirushackathon.org/"
                     target="_blank">#WirVsVirus Hackathons</a>. <a
                     href="/impressum">{% blocktrans %}Impressum{% endblocktrans %}</a> {% blocktrans %}und{% endblocktrans %} <a
                     href="/dataprotection">{% blocktrans %}Datenschutz{% endblocktrans %}</a>.</p>
   </div>
 </footer>
-<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">')</script>   
+<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">')</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script> 
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"
         integrity="sha384-VoPFvGr9GxhDT3n8vqqZ46twP5lgex+raTCfICQy73NLhN7ZqSfCtfSn4mLA2EFA"
         crossorigin="anonymous"></script>
