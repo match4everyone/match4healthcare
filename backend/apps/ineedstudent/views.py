@@ -26,6 +26,7 @@ from apps.mapview.views import get_ttl_hash
 from django.core.mail import EmailMessage
 from django.conf import settings
 from apps.iamstudent.models import EmailToHospital
+from django.contrib import messages
 
 
 import time
@@ -61,23 +62,24 @@ def prepare_hospitals(ttl_hash=None):
     hospitals = Hospital.objects.filter(user__validated_email=True, is_approved=True, appears_in_map=True)
     locations_and_number = {}
     for hospital in hospitals:
-        cc = hospital.countrycode
-        plz = hospital.plz
-        key = cc + "_" + plz
-        if key in locations_and_number:
-            locations_and_number[key]["count"] += 1
-            locations_and_number[key]["uuid"] = None
-        else:
-            lat, lon, ort = plzs[cc][plz]
-            locations_and_number[key] = {
-                "uuid": hospital.uuid,
-                "countrycode": cc,
-                "plz": plz,
-                "count": 1,
-                "lat": lat,
-                "lon": lon,
-                "ort": ort
-            }
+        if len(hospital.sonstige_infos) != 0:
+            cc = hospital.countrycode
+            plz = hospital.plz
+            key = cc + "_" + plz
+            if key in locations_and_number:
+                locations_and_number[key]["count"] += 1
+                locations_and_number[key]["uuid"] = None
+            else:
+                lat, lon, ort = plzs[cc][plz]
+                locations_and_number[key] = {
+                    "uuid": hospital.uuid,
+                    "countrycode": cc,
+                    "plz": plz,
+                    "count": 1,
+                    "lat": lat,
+                    "lon": lon,
+                    "ort": ort
+                }
     return locations_and_number
 
 @login_required
@@ -89,7 +91,7 @@ def hospital_list(request, countrycode, plz):
 
     lat, lon, ort = plzs[countrycode][plz]
 
-    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz))
+    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz, appears_in_map=True))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
         'countrycode': countrycode,
@@ -121,7 +123,7 @@ class HospitalTable(tables.Table):
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','telefon','plz']
+        fields = ['firmenname','ansprechpartner']
         exclude = ['uuid','registration_date','id']
 
 class ApprovalHospitalTable(HospitalTable):
@@ -188,3 +190,43 @@ def hospital_view(request,uuid):
     context['email_form'] = email_form
 
     return render(request, 'hospital_view.html', context)
+
+from .forms import PostingForm
+from .tables import ContactedTable
+from django.db import models
+
+@login_required
+@hospital_required
+def change_posting(request):
+    if request.method == 'POST':
+        anzeige_form = PostingForm(request.POST,instance=request.user.hospital)
+
+        if anzeige_form.is_valid():
+            anzeige_form.save()
+            messages.add_message(request, messages.INFO,_('Deine Anzeige wurde erfolgreich aktualisiert.'))
+
+    else:
+        anzeige_form = PostingForm(instance=request.user.hospital)
+
+    context = {
+        'anzeige_form': anzeige_form
+    }
+    return render(request, 'change_posting.html', context)
+
+
+@login_required
+@hospital_required
+def hospital_dashboard(request):
+
+    # tabelle kontaktierter Studis
+    values = ['student','registration_date','message','subject']
+    qs = request.user.hospital.emailtosend_set.all().values(*values,is_activated=models.F('student__is_activated' ))
+    kontaktiert_table = ContactedTable(qs)
+
+    context = {
+        'already_contacted': len(qs) > 0,
+        'has_posting': request.user.hospital.appears_in_map,
+        'posting_text': request.user.hospital.sonstige_infos,
+        'kontaktiert_table' : kontaktiert_table
+    }
+    return render(request, 'hospital_dashboard.html', context)

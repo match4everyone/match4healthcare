@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}
+Profil - Institution
+{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+
+
+<div class="container">
+    <br>
+    <br>
+    {% if messages %}
+
+
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+	<h1 class="font-weight-light match4hc-title">{% blocktrans %}Einsatz erstellen/ändern{% endblocktrans %}</h1>
+
+    <br>
+
+        <div class="card" style="margin-bottom:35px;">
+            <div class="card-body">
+             {% blocktrans %}Als Gesundheitseinrichtung können Sie hier beschreiben, wer Sie sind, was Sie machen und welche Hilfe Sie benötigen. Diese Informationen werden die Helfenden sehen, wenn Sie auf Ihre Anzeige über die Suche gelangen.
+                <br><br>
+                Bitte geben Sie wenn möglich an, welche fachlichen Anforderungen Sie an die Helfenden haben, wieviele Stunden Sie die Helfenden pro Woche benötigen und ob Sie eine Vergütung anbieten können.
+                <br><br>Diese Anzeige können Sie jederzeit wieder bearbeiten und deaktivieren, wenn Sie auf diese Seite zurückkehren.
+            {% endblocktrans %}
+            </div>
+        </div>
+    <div class="card">
+        <div class="card-header">
+            {% blocktrans %}Aktuelle Anzeige{% endblocktrans %}
+        </div>
+        <div class="card-body">
+            <div class="card-body">
+                <form action="change_posting" method="post">
+                    {% crispy anzeige_form anzeige_form.helper %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+    {% endblock %}
