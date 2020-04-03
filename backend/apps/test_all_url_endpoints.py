@@ -309,6 +309,38 @@ class UrlEndpointTestCase(TestCase):
         assert "login_redirect" in response.redirect_chain[0][0]
         assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == True
 
+    def test_sudent_individual_view(self):
+        staff_email, staff_password = generate_staff_user()
+        hospital_email, hospital_password, hospital_uuid = generate_random_hospital()
+        student_email, student_password, student_uuid = generate_random_student()
+
+        response = self.client.post('/accounts/login/', {
+            "username": student_email,
+            "password": student_password,
+        }, follow=True)
+        response = self.client.get('/iamstudent/view_student/' + str(student_uuid), follow=True)
+        assert response.status_code == 200
+        assert "/accounts/profile_student" in response.redirect_chain[0][0]
+
+        # TOOD: test which emails can be seen here!
+        response = self.client.post('/accounts/login/', {
+            "username": staff_email,
+            "password": staff_password,
+        }, follow=True)
+        response = self.client.get('/iamstudent/view_student/' + str(student_uuid))
+        assert response.status_code == 200
+
+        # TOOD: test which emails can be seen here!
+        response = self.client.post('/accounts/login/', {
+            "username": hospital_email,
+            "password": hospital_password,
+        }, follow=True)
+        response = self.client.get('/iamstudent/view_student/' + str(student_uuid))
+        assert response.status_code == 200
+
+
+
+
     def test_admin(self):
         staff_email, staff_password = generate_staff_user()
 

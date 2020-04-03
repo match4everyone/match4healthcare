@@ -7,11 +7,12 @@ from django.utils.translation import gettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Row, Column
 from apps.accounts.models import User
+from django.templatetags.static import static
 
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day']
+        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day','appears_in_map']
 
         labels = {
             'plz': _('Postleitzahl'),
@@ -33,7 +34,6 @@ class HospitalFormO(ModelForm):
 
         self.helper.layout = Layout(
                 Row(Column('firmenname') , Column('ansprechpartner')),
-                Row(Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
                 HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
@@ -85,15 +85,17 @@ class HospitalFormEditProfile(HospitalFormO):
 
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
+        self.fields['sonstige_infos'].required = False
+        #self.fields['appears_in_map'].required = False
         self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
-                Row(Column('firmenname') , Column('ansprechpartner')), Row(Column('appears_in_map')),
+
+                Row(Column('firmenname') , Column('ansprechpartner')), #Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
-                HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-                'sonstige_infos'
+
         )
-        self.fields["sonstige_infos"].required = False
+
 
 class HospitalFormZustimmung(ModelForm):
         class Meta:
@@ -159,3 +161,30 @@ class EmailToHospitalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Hilfsangebot abschicken'), css_class='btn blue text-white btn-md'))
+
+class PostingForm(forms.ModelForm):
+
+    class Meta:
+        model = Hospital
+        labels = {
+            'appears_in_map': _('Anzeige solll angezeigt werden'),
+            'sonstige_infos': _('Anzeigetext'),
+        }
+        fields = ['appears_in_map', 'sonstige_infos']
+
+    def __init__(self, *args, **kwargs):
+        super(PostingForm, self).__init__(*args, **kwargs)
+        self.fields['sonstige_infos'].required  = False
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            HTML('<script'),
+            'appears_in_map',
+            'sonstige_infos'
+        )
+        self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
+        self.helper.layout = Layout(
+            HTML('<script type="text/javascript" src="{}"></script>'.format(static('js/PostingForm.js'))),
+            'appears_in_map',
+            'sonstige_infos'
+        )
