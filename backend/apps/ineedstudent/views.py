@@ -90,7 +90,7 @@ def hospital_list(request, countrycode, plz):
 
     lat, lon, ort = plzs[countrycode][plz]
 
-    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz))
+    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz, appears_in_map=True))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
         'countrycode': countrycode,
