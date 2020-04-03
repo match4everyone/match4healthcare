@@ -34,7 +34,6 @@ class HospitalFormO(ModelForm):
 
         self.helper.layout = Layout(
                 Row(Column('firmenname') , Column('ansprechpartner')),
-                Row(Column('appears_in_map')),
                 Row(Column('telefon'), Column('email')),
                 Row(Column('plz'), Column('countrycode')),
                 HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
@@ -189,4 +188,3 @@ class PostingForm(forms.ModelForm):
             'appears_in_map',
             'sonstige_infos'
         )
-
