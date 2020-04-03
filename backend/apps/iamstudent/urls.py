@@ -9,4 +9,5 @@ urlpatterns = [
     path('successful_mail', views.successful_mail, name='success'),
     #path('students_testing/<countrycode>/<plz>/<int:distance>', views.student_list_view, name='student_list_view'),
     path('send_mail_student/<id_list>', views.send_mail_student_id_list, name='send_mail_student_id_list'),
+    path('view_student/<uuid>', views.view_student, name='view_student'),
 ]
