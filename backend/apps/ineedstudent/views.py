@@ -62,23 +62,24 @@ def prepare_hospitals(ttl_hash=None):
     hospitals = Hospital.objects.filter(user__validated_email=True, is_approved=True, appears_in_map=True)
     locations_and_number = {}
     for hospital in hospitals:
-        cc = hospital.countrycode
-        plz = hospital.plz
-        key = cc + "_" + plz
-        if key in locations_and_number:
-            locations_and_number[key]["count"] += 1
-            locations_and_number[key]["uuid"] = None
-        else:
-            lat, lon, ort = plzs[cc][plz]
-            locations_and_number[key] = {
-                "uuid": hospital.uuid,
-                "countrycode": cc,
-                "plz": plz,
-                "count": 1,
-                "lat": lat,
-                "lon": lon,
-                "ort": ort
-            }
+        if len(hospital.sonstige_infos) != 0:
+            cc = hospital.countrycode
+            plz = hospital.plz
+            key = cc + "_" + plz
+            if key in locations_and_number:
+                locations_and_number[key]["count"] += 1
+                locations_and_number[key]["uuid"] = None
+            else:
+                lat, lon, ort = plzs[cc][plz]
+                locations_and_number[key] = {
+                    "uuid": hospital.uuid,
+                    "countrycode": cc,
+                    "plz": plz,
+                    "count": 1,
+                    "lat": lat,
+                    "lon": lon,
+                    "ort": ort
+                }
     return locations_and_number
 
 @login_required
@@ -90,7 +91,7 @@ def hospital_list(request, countrycode, plz):
 
     lat, lon, ort = plzs[countrycode][plz]
 
-    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz))
+    table = HospitalTable(Hospital.objects.filter(user__validated_email=True, is_approved=True, plz=plz, appears_in_map=True))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     context = {
         'countrycode': countrycode,
@@ -122,7 +123,7 @@ class HospitalTable(tables.Table):
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','telefon','plz']
+        fields = ['firmenname','ansprechpartner']
         exclude = ['uuid','registration_date','id']
 
 class ApprovalHospitalTable(HospitalTable):

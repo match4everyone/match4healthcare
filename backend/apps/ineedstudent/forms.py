@@ -89,11 +89,11 @@ class HospitalFormEditProfile(HospitalFormO):
         #self.fields['appears_in_map'].required = False
         self.helper.add_input(Submit('submit', _('Daten aktualisieren'), css_class='btn blue text-white btn-md'))
         self.helper.layout = Layout(
+
                 Row(Column('firmenname') , Column('ansprechpartner')), #Row(Column('appears_in_map')),
                 Row(Column('telefon')),
                 Row(Column('plz'), Column('countrycode')),
-                #HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-                #'sonstige_infos'
+
         )
 
 
