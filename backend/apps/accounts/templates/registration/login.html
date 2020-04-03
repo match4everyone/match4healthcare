@@ -9,7 +9,7 @@
 	@media only screen and (max-width: 767px) {
 	.bg-container {background-image:none; background-color: #dfe3e4;}
 	}
-	
+
 </style>
 <script type="text/javascript">
     window.addEventListener('load', function() {
@@ -56,16 +56,16 @@
                 <hr style="margin-top:25px;">
                 <p style="margin-bottom:0px; font-weight:300; color:#000943;">{% blocktrans %}Passwort vergessen?{% endblocktrans %}
                 </p>
-                <a href="/accounts/password_reset">
+                <a href="/{{ LANGUAGE_CODE }}/accounts/password_reset">
                     <p style="font-size:.9rem;">{% blocktrans %}Passwort zurücksetzen{% endblocktrans %}</p>
                 </a>
 
                 <p style="margin-bottom:0px; font-weight:300; color: #000943;">{% blocktrans %}Noch kein Account?{% endblocktrans %}
                 </p>
-                <a href="/accounts/signup_student">
+                <a href="/{{ LANGUAGE_CODE }}/accounts/signup_student">
                     <p style="margin-bottom: 0px; font-size:.9rem;">{% blocktrans %}Ich bin Helfende/r{% endblocktrans %}</p>
                 </a>
-                <a href="/accounts/signup_hospital">
+                <a href="/{{ LANGUAGE_CODE }}/accounts/signup_hospital">
                     <p style="font-size:.9rem;">{% blocktrans %}Wir sind eine Institution{% endblocktrans %}</p>
                 </a>
 

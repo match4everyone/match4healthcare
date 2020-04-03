@@ -17,7 +17,7 @@
 	@media only screen and (max-width: 767px) {
 .bg-container {background-image:none; background-color: #dfe3e4;}
 	}
-	
+
 </style>
 <script type="text/javascript">
     window.addEventListener('load', function() {
@@ -53,7 +53,7 @@
          <p>{% blocktrans %} Dann kannst du wieder von Hilfesuchenden kontaktiert werden. Du kannst die Aktivierung aber jederzeit rückgängig machen. {% endblocktrans %}</p>
       <a href="change_activation_confirm"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Ja, Account aktivieren.{% endblocktrans %}</button></a>
       {% endif %}
-      <a href="/"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Nein, zurück zur Homepage{% endblocktrans %}</button></a>
+      <a href="/{{ LANGUAGE_CODE }}/"><button class="btn blue text-white btn-md" style="margin-top:10px;">{% blocktrans %}Nein, zurück zur Homepage{% endblocktrans %}</button></a>
     </div>
 	</div>
   </div>

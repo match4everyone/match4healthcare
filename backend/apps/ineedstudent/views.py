@@ -111,7 +111,7 @@ def zustimmung(request):
 
         if form_info.is_valid():
             h.save()
-            return HttpResponseRedirect("/accounts/login_redirect")
+            return HttpResponseRedirect(request.LANGUAGE_CODE + "/accounts/login_redirect")
 
     else:
         form_info = HospitalFormZustimmung()

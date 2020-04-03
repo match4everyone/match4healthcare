@@ -267,7 +267,7 @@ def resend_validation_email(request, email):
                 subject_template="registration/password_reset_email_subject.txt"
             )
             return HttpResponseRedirect("/accounts/password_reset/done")
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/accounts/password_reset/done")
 
 class UserCountView(APIView):
     """

@@ -27,7 +27,7 @@ Registrierung - Institution
 
     {% else %}
     {% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
-    <a href="/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>.
+    <a href="/{{ LANGUAGE_CODE }}/accounts/login_redirect">{% blocktrans %}Login{% endblocktrans %}</a>.
     <hr>
     <br>
     {% endif %}

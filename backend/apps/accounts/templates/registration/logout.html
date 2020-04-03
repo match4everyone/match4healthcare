@@ -19,7 +19,7 @@ Logout - Studierende
 	@media only screen and (max-width: 767px) {
 .bg-container {background-image:none; background-color: #dfe3e4;}
 	}
-	
+
 </style>
 <script type="text/javascript">
     window.addEventListener('load', function() {
@@ -60,7 +60,7 @@ Logout - Studierende
     {% endblocktrans %}
 		<img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline">
 
-		<a href="/accounts/login_redirect"><button type="submit" class="btn blue text-white btn-md" style="margin-top:35px;">{% blocktrans %} Neu anmelden{% endblocktrans %}</button></a>
+		<a href="/{{ LANGUAGE_CODE }}/accounts/login_redirect"><button type="submit" class="btn blue text-white btn-md" style="margin-top:35px;">{% blocktrans %} Neu anmelden{% endblocktrans %}</button></a>
 </div>
 
 	</div>

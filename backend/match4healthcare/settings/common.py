@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...) 
-# or better: 
+from django.urls import reverse_lazy
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# or better:
 # add paths here and import: from django.conf import settings and use settings.XXX_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RUN_DIR = os.path.join(BASE_DIR, 'run')
@@ -43,13 +43,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'match4healthcare.urls'
@@ -70,8 +71,8 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/accounts/login_redirect'
-
+LOGIN_REDIRECT_URL = reverse_lazy('login_redirect')
+LOGIN_URL = reverse_lazy('login')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'

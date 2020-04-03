@@ -156,7 +156,7 @@ $(window).on("resize", function () {
  <script type="text/javascript">
     var gototable = function() {
       if ($('#search').val()) {
-        window.location = "/ineedstudent/hospitals/" + $('#countrycode').val() + "/" + $('#search').val();
+        window.location = "/{{ LANGUAGE_CODE }}/ineedstudent/hospitals/" + $('#countrycode').val() + "/" + $('#search').val();
       }
     }
     $("#search").keyup(function(event) {

@@ -39,7 +39,7 @@ def get_student(request):
         if form.is_valid():
             form.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('thanks')
+            return HttpResponseRedirect(request.LANGUAGE_CODE + 'thanks')
 
 
     # if a GET (or any other method) we'll create a blank form
@@ -107,7 +107,7 @@ def send_mail_student_id_list(request, id_list):
             if request.user.hospital.is_approved:
                 send_mails_for(request.user.hospital)
 
-            return HttpResponseRedirect('/iamstudent/successful_mail')
+            return HttpResponseRedirect(request.LANGUAGE_CODE + '/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
         form = EmailToSendForm(initial={'subject': '[match4healthcare] Ein Ort braucht Deine Hilfe',
@@ -290,7 +290,7 @@ def student_list_view(request, countrycode, plz, distance):
 @login_required
 def view_student(request, uuid):
     if request.user.is_student:
-        return HttpResponseRedirect("/accounts/profile_student")
+        return HttpResponseRedirect(request.LANGUAGE_CODE + "/accounts/profile_student")
     s = Student.objects.get(uuid=uuid)
     form = StudentFormView(instance=s, prefix='infos')
     context = {

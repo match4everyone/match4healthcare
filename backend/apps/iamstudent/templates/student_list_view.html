@@ -218,7 +218,7 @@
         });
         if (li.length > 0) {
             if (li.length <= x[0].value) {
-                window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+                window.location = ("/{{ LANGUAGE_CODE }}/iamstudent/send_mail_student/" + li.join("_"));
             } else {
                 alert("{% blocktrans %}Die E-Mails, die du heute senden darfst sind verbraucht. Grenze deine Suche ein. Melde dich bei support@match4healthcare.de falls du mehr senden möchtest.{% endblocktrans %}")
             }
@@ -234,7 +234,7 @@
             li.push($(this)[0].getAttribute("data-id"))
         });
         if (li.length > 0) {
-            window.location = ("/iamstudent/send_mail_student/" + li.join("_"));
+            window.location = ("/{{ LANGUAGE_CODE }}/iamstudent/send_mail_student/" + li.join("_"));
         } else {
             alert("{% blocktrans %}Leider gibt es keine Helfer*innen, die zu Ihrem Filter passen. Bitte wählen Sie weniger Kriterien aus um passende Helfer*innen zu finden.{% endblocktrans %}")
         }

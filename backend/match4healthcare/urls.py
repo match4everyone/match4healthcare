@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -26,7 +27,7 @@ from django.conf.urls import (
 handler404 = views.handler404
 handler500 = views.handler500
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('mapview/', include('apps.mapview.urls')),
     path('iamstudent/', include('apps.iamstudent.urls')),
     path('ineedstudent/', include('apps.ineedstudent.urls')),
@@ -40,4 +41,5 @@ urlpatterns = [
     path('impressum/', views.impressum),
     path('dataprotection/', views.dataprotection),
     path('legal-questions/', views.legal_questions),
-    ]
+    path('i18n/', include('django.conf.urls.i18n')),
+)
