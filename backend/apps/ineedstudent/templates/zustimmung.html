@@ -3,12 +3,12 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans %}Datenschutzerklärung Zustimmen{% endblocktrans %}
+    {% blocktrans %}Datenschutzerklärung Zustimmen{% endblocktrans %}
 {% endblock %}
 
 
 {% block header %}
-<link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
 
 {% endblock %}
 
@@ -16,22 +16,28 @@
 
 {% block content %}
 
-<div class="container">
-  <br>
-  <br>
+    <div class="container">
+        <br>
+        <br>
 
-  <div class="card" style="margin-bottom:35px;">
-    <div class="card-header">
-      <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Wir haben unsere Datenschutzerklärung Aktualisiert{% endblocktrans %} </h1>
-      <h2 class="font-weight-light match4hc-title">{% blocktrans %}Bitte stimmen Sie den aktualisierten Bedingungen zu{% endblocktrans %}</h2>
+        <div class="card" style="margin-bottom:35px;">
+            <div class="card-header">
+                <h1 class="font-weight-light match4hc-title"> {% blocktrans %}Wir haben unsere Datenschutzerklärung
+                    Aktualisiert{% endblocktrans %} </h1>
+                <h2 class="font-weight-light match4hc-title">{% blocktrans %}Bitte stimmen Sie den aktualisierten
+                    Bedingungen zu{% endblocktrans %}</h2>
+            </div>
+            <form method="post" action="zustimmung" onsubmit="disableButton()">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {% crispy form_info form_info.helper %}
+            </form>
+            <script>function disableButton() {
+                var btn = document.getElementById('btSubmitForm');
+                btn.disabled = true;
+                btn.innerText = 'Sending...'
+            }</script>
+        </div>
     </div>
-    <form method="post" action="zustimmung" onsubmit="disableButton()">
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}">
-      {% crispy form_info form_info.helper %}
-    </form>
-    <script>function disableButton() {var btn = document.getElementById('btSubmitForm'); btn.disabled = true;btn.innerText = 'Sending...'}</script>
-  </div>
-</div>
 
 {% endblock %}
