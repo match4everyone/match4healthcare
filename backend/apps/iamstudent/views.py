@@ -7,6 +7,8 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from django.utils.text import format_lazy
+
 from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
@@ -89,18 +91,23 @@ def send_mail_student_id_list(request, id_list):
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
-                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich. Falls du keine Nachrichten mehr erhalten möchtest deaktiviere dein Konto hier: https://match4healthcare.de/accounts/change_activation\n\nDein Match4Healthcare Team\n\n%s' % (
-                    student.name_first,
-                    student.name_last,
-                    request.user.hospital.firmenname,
-                    hospital_message
-                )
+                new_message = format_lazy(_('Hallo {first_name} {last_name},\n\n '
+                                            'wir haben folgende Nachricht von {firmenname} für dich. '
+                                            'Falls du keine Nachrichten mehr erhalten möchtest, deaktiviere dein '
+                                            'Konto bitte hier: https://match4healthcare.de/accounts/change_activation'
+                                            '\n\nDein Match4Healthcare Team'
+                                            '\n----------------------------\n'
+                                            '{hospital_message}'),
+                                          first_name=student.name_first,
+                                          last_name=student.name_last,
+                                          firmenname=request.user.hospital.firmenname,
+                                          hospital_message=hospital_message)
 
                 mail = EmailToSend.objects.create(
                     student=student,
                     hospital=request.user.hospital,
-                    message=message,
-                    subject=subject,
+                    message=new_message,
+                    subject='[match4healthcare] ' + subject,
                     email_group=email_group)
                 mail.save()
 
@@ -110,8 +117,13 @@ def send_mail_student_id_list(request, id_list):
             return HttpResponseRedirect(request.LANGUAGE_CODE + '/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
-        form = EmailToSendForm(initial={'subject': '[match4healthcare] Ein Ort braucht Deine Hilfe',
-                                        'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.user.email)})
+        message = format_lazy(_('Liebe(r) Helfende(r),\n\n'
+                                'Wir sind... \n'
+                                'Wir suchen...\n\n'
+                                'Meldet euch baldmöglichst!\n\nBeste Grüße,\n{ansprechpartner}\n\nTel: {telefon}\nEmail: {email}')
+                              ,ansprechpartner=hospital.ansprechpartner, telefon=hospital.telefon, email=hospital.user.email)
+        form = EmailToSendForm(initial={'subject': _('Ein Ort braucht Deine Hilfe'),
+                                        'message': message})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
 
@@ -123,7 +135,7 @@ def send_mails_for(hospital):
     # inform the hospital about sent emails
     emails_n = emails.count()
     text = emails[0].message.split('===============================================')[1]
-    send_mail(_('[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert'),
+    send_mail(_('[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert'),
               ('Hallo %s,\n\n' % hospital.ansprechpartner) +
               ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'
                '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n' % emails_n) +
