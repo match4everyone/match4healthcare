@@ -529,7 +529,6 @@ class EmailToSendForm(forms.ModelForm):
         labels = {'subject': _('Betreff'),
                   'message': _('Nachrichtentext')}
         help_texts = {
-            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
         }
 
 def get_form_helper_filter():
