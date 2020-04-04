@@ -86,6 +86,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         super(StudentJobRequirementsFilter, self).__init__(*args, **kwargs)
         from .forms import form_labels
         self.Meta.labels = form_labels
+        self.Meta.labels['unterkunft_gewuenscht'] = _('Unterkunft kann angeboten werden')
 
         THREE_CHOICES = [
             ('true', 'notwendig')]
