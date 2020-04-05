@@ -18,7 +18,7 @@
             {% include 'bootstrap4/layout/field_errors_block.html' %}
 
              {% for choice in field.field.choices %}
-                <button class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
+                <button type="button" class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
                     <input type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden >
                     {% if choice.1 == "Gelb"%}{% blocktrans %}Angefangen{% endblocktrans %}{% endif %}{% if choice.1 == "Rot"%} {% blocktrans %}Nie{% endblocktrans %} {% endif %}{% if choice.1 == "Gruen"%} {% blocktrans %}Abgeschlossen{% endblocktrans %} {% endif %}
                 </button>
