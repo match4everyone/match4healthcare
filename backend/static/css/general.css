@@ -185,9 +185,9 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 
 @media only screen and (max-width: 575px) {
 
-.form-group > div { display:block; }
-	
-	.form-group label { margin-bottom: .1rem;}
+  .form-group > div { display:block; }
+
+  .form-group label { margin-bottom: .1rem;}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -207,6 +207,14 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 	 .navbar-light .navbar-nav .nav-link { font-size: .98rem; padding-left: .7rem; padding-right: .7rem; } 
 	
 	
+}
+
+/* Make qualification selecter stacked on smaller screens to see all options */
+@media only screen and (max-width: 760px) {
+  .ausbildung-addon .btn-group {
+    display:flex;
+    flex-direction: column;
+  } 
 }
 
 .login-card {
@@ -232,7 +240,7 @@ Student Form
 */
 
 .ausbildung-addon {
-  max-height:500px;
+  max-height:700px;
   transition: max-height 600ms 0ms, opacity 600ms 0ms;
   overflow: hidden;
 	margin-top:5px;

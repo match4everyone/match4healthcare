@@ -1,5 +1,6 @@
 # VS Code
 .vscode
+.venv
 
 # Production environment variables
 .env
