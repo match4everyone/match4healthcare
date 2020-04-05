@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: .\apps\ineedstudent\tables.py:9 .\apps\ineedstudent\views.py:188
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 13:25+0200\n"
+"POT-Creation-Date: 2020-04-06 01:03+0200\n"
 "PO-Revision-Date: 2020-04-05 13:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1504,7 +1505,7 @@ msgstr "Detail view for Volunteer %(uuid)s"
 msgid "Detailansicht Helfende*r"
 msgstr "Detail view for Volunteer"
 
-#: .\apps\iamstudent\views.py:94
+#: .\apps\iamstudent\views.py:97
 #, python-brace-format
 msgid ""
 "Hallo {first_name} {last_name},\n"
@@ -1528,7 +1529,7 @@ msgstr ""
 "----------------------------\n"
 "{hospital_message}"
 
-#: .\apps\iamstudent\views.py:120
+#: .\apps\iamstudent\views.py:123
 #, python-brace-format
 msgid ""
 "Liebe(r) Helfende(r),\n"
@@ -1557,11 +1558,11 @@ msgstr ""
 "Phone: {telefon}\n"
 "Email: {email}"
 
-#: .\apps\iamstudent\views.py:125
+#: .\apps\iamstudent\views.py:128
 msgid "Ein Ort braucht Deine Hilfe"
 msgstr "Somebody needs your help"
 
-#: .\apps\iamstudent\views.py:138
+#: .\apps\iamstudent\views.py:141
 msgid ""
 "[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert"
 msgstr "[match4healthcare] You have just contacted potential volunteers"
@@ -1840,11 +1841,15 @@ msgid "Datenschutzerklärung Zustimmen"
 msgstr "Agree to privacy policy"
 
 #: .\apps\ineedstudent\templates\zustimmung.html:25
-msgid "Wir haben unsere Datenschutzerklärung aktualisiert"
+msgid ""
+"Wir haben unsere Datenschutzerklärung\n"
+"                    aktualisiert"
 msgstr "We have updated our privacy policy"
 
-#: .\apps\ineedstudent\templates\zustimmung.html:26
-msgid "Bitte stimmen Sie den aktualisierten Bedingungen zu"
+#: .\apps\ineedstudent\templates\zustimmung.html:27
+msgid ""
+"Bitte stimmen Sie den aktualisierten\n"
+"                    Bedingungen zu"
 msgstr "Please agree to the updated conditions"
 
 #: .\apps\ineedstudent\views.py:149
