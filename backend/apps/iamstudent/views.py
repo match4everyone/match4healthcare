@@ -29,7 +29,7 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
 
 from crispy_forms.helper import FormHelper
-
+import datetime
 
 def get_student(request):
     # if this is a POST request we need to process the form data
@@ -57,11 +57,14 @@ def thx(request):
 @login_required
 @hospital_required
 def successful_mail(request):
+
     return render(request,'emails_sent.html',{'not_registered': not request.user.hospital.is_approved})
 
 
 def leftover_emails_for_today(request):
-    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count())
+    date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital,
+                                                                                      registration_date__gte=date_from ).count())
 
 
 @login_required

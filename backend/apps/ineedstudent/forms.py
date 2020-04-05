@@ -21,7 +21,7 @@ class HospitalFormO(ModelForm):
             'ansprechpartner': _('Name der Kontaktperson'),
             'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
             'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
-            'einwilligung_datenweitergabe': _('Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
+            'einwilligung_datenweitergabe': _('Ich akzeptiere, dass alle Registrierungen von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert werden. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -167,7 +167,7 @@ class PostingForm(forms.ModelForm):
     class Meta:
         model = Hospital
         labels = {
-            'appears_in_map': _('Anzeige solll angezeigt werden'),
+            'appears_in_map': _('Anzeige soll angezeigt werden'),
             'sonstige_infos': _('Anzeigetext'),
         }
         fields = ['appears_in_map', 'sonstige_infos']
