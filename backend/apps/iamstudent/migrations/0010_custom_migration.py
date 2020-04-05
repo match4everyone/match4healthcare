@@ -32,6 +32,10 @@ def update_emails(apps, schema_editor):
 class Migration(migrations.Migration):
     atomic = False
 
+    dependencies = [
+        ('iamstudent', '0009_merge_20200402_2309'),
+    ]
+
     operations = [
         migrations.RunPython(update_emails),
     ]
