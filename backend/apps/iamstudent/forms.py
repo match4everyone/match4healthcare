@@ -44,9 +44,9 @@ form_labels = {
     'ausbildung_typ_medstud_famulaturen_chirurgie': _('Chirurgie'),
     'ausbildung_typ_medstud_famulaturen_innere': _('Innere'),
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
-    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
+    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notfallmedizin'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+        '<b>Nur Studierende: Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_ota': _('Operationstechnische/r Assistent*in'),
