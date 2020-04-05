@@ -5,7 +5,7 @@ from datetime import datetime
 from apps.accounts.models import User
 from django.core.exceptions import ValidationError
 from apps.mapview.utils import plzs
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from django.conf import settings
 
