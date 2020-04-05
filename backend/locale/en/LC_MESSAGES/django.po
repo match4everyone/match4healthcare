@@ -837,7 +837,7 @@ msgstr "Emergency admissions"
 msgid ""
 "<b>Nur Studierende: Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
 "Famulatur) ist wichtig</b>"
-msgstr "<b>Only students: Recognition as an internship or other study requirement is important<b>"
+msgstr "<b>Only students: Recognition as an internship or other study requirement is important</b>"
 
 #: apps/iamstudent/forms.py:50
 msgid "Medizinische/r Fachangestellte*r"
