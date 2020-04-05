@@ -240,7 +240,7 @@ Student Form
 */
 
 .ausbildung-addon {
-  max-height:500px;
+  max-height:700px;
   transition: max-height 600ms 0ms, opacity 600ms 0ms;
   overflow: hidden;
 	margin-top:5px;
