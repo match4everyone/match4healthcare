@@ -42,23 +42,31 @@ Profil - Institution
 
         <div class="card" style="margin-bottom:35px;">
             <div class="card-body">
-                {% blocktrans %}
-                Willkommen bei match4healthcare! <br>
-                Wir hoffen Sie hier schnellstmöglich mit Helfenden vernetzen zu können.
-                Um in Kontakt mit Helfenden zu treten haben Sie zwei Optionen. <br>
-                Sie können einerseits über den Knopf <mark>„Registrierte Helfende kontaktieren“</mark>, bereits registrierte Helfende entsprechend Ihrer Anforderungen (z.B. Ausbildung oder zeitliche Verfügbarkeit) aussuchen und selbst direkt per E-Mail über unsere Plattform kontaktieren. <br>
-                Andererseits haben Sie die Option, über einen Klick auf <mark>„Einen Anzeige erstellen/ändern“</mark> eine allgemeine Anzeige zu verfassen, welche dann von Helfenden eingesehen werden kann. Jede(r) registrierte(r) Helfende kann Ihnen anhand der Anzeige eine E-Mail schreiben.
-            {% endblocktrans %}
+                <p>{% blocktrans %}Willkommen bei match4healthcare!{% endblocktrans %}</p>
+                <p>
+                    {% blocktrans %}Wir hoffen Sie schnellstmöglich mit Helfenden vernetzen zu können. Um in Kontakt mit Helfenden zu treten, haben Sie zwei Optionen. Sie können auch beide Optionen kombinieren.{% endblocktrans %}
+                </p>
+                <ol>
+                    <li>
+                        {% blocktrans %}Über den Klick auf<mark>„Registrierte Helfer*innen kontaktieren“</mark>, die bereits über 10000 registrierten Helfenden entsprechend Ihrer konkreten Anforderungen (z.B. Ausbildung oder zeitliche Verfügbarkeit) aussuchen und selbst direkt per E-Mail über unsere Plattform kontaktieren.{% endblocktrans %}
+                    </li>
+                    <li>
+                        {% blocktrans %}Über den Klick auf <mark>„Eine Anzeige erstellen/ändern“</mark> eine allgemeine Anzeige zu verfassen, welche dann von Helfer*innen über die Einrichtungskarte eingesehen werden kann. Jede*r registrierte*r Helfer*in kann Ihnen anhand dieser Anzeige eine E-Mail schreiben. {% endblocktrans %}
+                    </li>
+                </ol>
+                <p>
+                    {% blocktrans %}Mit Option 1 suchen Sie somit aktiv passende Helfer*innen aus, mit Option 2 suchen sich Helfende aktiv auf Basis Ihres Textes Ihre Einrichtung aus.{% endblocktrans %}
+                </p>
             </div>
         </div>
-    <div class="row">
+    <div class="row" style="margin-bottom:100px; margin-top:45px;">
         <div class="col">
             {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
-            <a type="button" href="{{filter_student_url}}" class="btn btn-outline-dark btn-block btn-lg">Registrierte Helfende kontaktieren</a>
+            <a type="button" href="{{filter_student_url}}" class="btn btn-outline-dark btn-block btn-lg">Registrierte Helfer*innen kontaktieren</a>
         </div>
         <div class="col">
             {% url 'change_posting' as anzeige_url %}
-            <a type="button" href="{{anzeige_url}}" class="btn btn-outline-dark btn-block btn-lg">Einen Anzeige erstellen/ändern</a>
+            <a type="button" href="{{anzeige_url}}" class="btn btn-outline-dark btn-block btn-lg">Eine Anzeige erstellen/ändern</a>
         </div>
     </div>
 </div>

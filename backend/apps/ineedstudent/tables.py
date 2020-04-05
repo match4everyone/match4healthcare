@@ -13,5 +13,7 @@ class ContactedTable(tables.Table):
 
     def render_is_activated(self, value):
         if value:
-            return format_html(_('<div class="text-center">ja</div>'))
-        return format_html(_('<div class="text-center">nein</div>'))
+            text = _('ja')
+        else:
+            text = _('nein')        
+        return format_html('<div class="text-center">{}</div>'.format(text))
