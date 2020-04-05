@@ -526,7 +526,7 @@ msgstr ""
 
 #: .\apps\accounts\templates\registration\password_set_email_hospital.html:445
 msgid "Sehr geehrte Einrichtung!"
-msgstr "Dear facilitiy,"
+msgstr "Dear facility,"
 
 #: .\apps\accounts\templates\registration\password_set_email_hospital.html:447
 msgid "Vielen Dank für Ihren Eintrag auf match4healthcare!"
