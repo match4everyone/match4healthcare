@@ -242,6 +242,7 @@ AUSBILDUNGS_TYPEN = {
             'famulaturen_innere': (models.BooleanField,{'default':False}),
             'famulaturen_intensiv': (models.BooleanField,{'default':False}),
             'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
+            'famulaturen_allgemeinmedizin': (models.BooleanField,{'default':False}),
             'empty_3': None,
             'anerkennung_noetig':(models.BooleanField,{'default':False})
         },

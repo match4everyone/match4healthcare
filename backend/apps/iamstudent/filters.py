@@ -66,6 +66,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
         for f in [
             'ausbildung_typ_medstud_famulaturen_anaesthesie',
+            'ausbildung_typ_medstud_famulaturen_allgemeinmedizin',
             'ausbildung_typ_medstud_famulaturen_chirurgie',
             'ausbildung_typ_medstud_famulaturen_innere',
             'ausbildung_typ_medstud_famulaturen_intensiv',

@@ -851,6 +851,9 @@ msgstr ""
 msgid "Anästhesietechnische/r Assistent*in"
 msgstr ""
 
+msgid "Allgemeinmedizin"
+msgstr "General practice"
+
 #: apps/iamstudent/forms.py:56
 msgid "Ergotherapeut*in"
 msgstr ""

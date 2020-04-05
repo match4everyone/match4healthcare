@@ -41,6 +41,7 @@ form_labels = {
     'ausbildung_typ_medstud': _('Medizinstudent*in / Arzt / Ärztin'),
     'ausbildung_typ_medstud_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_medstud_famulaturen_anaesthesie': _('Anästhesie'),
+    'ausbildung_typ_medstud_famulaturen_allgemeinmedizin': _('Allgemeinmedizin'),
     'ausbildung_typ_medstud_famulaturen_chirurgie': _('Chirurgie'),
     'ausbildung_typ_medstud_famulaturen_innere': _('Innere'),
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
