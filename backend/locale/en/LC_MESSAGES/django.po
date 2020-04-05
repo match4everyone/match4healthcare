@@ -835,9 +835,9 @@ msgstr "Emergency admissions"
 
 #: apps/iamstudent/forms.py:49
 msgid ""
-"Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
-"Famulatur) ist wichtig"
-msgstr "Recognition as an internship or other study requirements is important"
+"<b>Nur Studierende: Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
+"Famulatur) ist wichtig</b>"
+msgstr "<b>Only students: Recognition as an internship or other study requirement is important<b>"
 
 #: apps/iamstudent/forms.py:50
 msgid "Medizinische/r Fachangestellte*r"
@@ -1730,6 +1730,9 @@ msgstr ""
 #: apps/ineedstudent/templates/hospital_view.html:29
 msgid "Gesuch kontaktieren"
 msgstr "Contact hospital"
+
+msgid "Notfallmedizin"
+msgstr "Emergency Medicine"
 
 #: apps/ineedstudent/templates/hospital_view.html:37
 msgid "Du hast deine Mail Adresse noch nicht validiert, bitte erledige das!"
