@@ -134,7 +134,7 @@ def send_mails_for(hospital):
         return None
     # inform the hospital about sent emails
     emails_n = emails.count()
-    text = emails[0].message.split('===============================================')[1]
+    text = emails[0].message.text
     send_mail(_('[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert'),
               ('Hallo %s,\n\n' % hospital.ansprechpartner) +
               ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'

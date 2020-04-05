@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from django.template import loader
 
 def home(request):
+    from apps.iamstudent.models import EmailToSend, EmailToHospital
+    for email in EmailToSend.objects.all():
+        msg = email.message
+        print()
+
     context = {}
     template = loader.get_template('home.html')
 
