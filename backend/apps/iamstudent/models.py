@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from apps.mapview.utils import plzs
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
 
@@ -242,6 +242,7 @@ AUSBILDUNGS_TYPEN = {
             'famulaturen_innere': (models.BooleanField,{'default':False}),
             'famulaturen_intensiv': (models.BooleanField,{'default':False}),
             'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
+            'famulaturen_allgemeinmedizin': (models.BooleanField,{'default':False}),
             'empty_3': None,
             'anerkennung_noetig':(models.BooleanField,{'default':False})
         },

@@ -18,10 +18,10 @@
             {% include 'bootstrap4/layout/field_errors_block.html' %}
 
              {% for choice in field.field.choices %}
-                <label class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
+                <button type="button" class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
                     <input autocomplete="off" type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden >
                     {{choice.1}}
-            </label>
+                </button>
             {% endfor %}
 
             {% include 'bootstrap4/layout/help_text.html' %}

@@ -66,6 +66,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
         for f in [
             'ausbildung_typ_medstud_famulaturen_anaesthesie',
+            'ausbildung_typ_medstud_famulaturen_allgemeinmedizin',
             'ausbildung_typ_medstud_famulaturen_chirurgie',
             'ausbildung_typ_medstud_famulaturen_innere',
             'ausbildung_typ_medstud_famulaturen_intensiv',
@@ -86,6 +87,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         super(StudentJobRequirementsFilter, self).__init__(*args, **kwargs)
         from .forms import form_labels
         self.Meta.labels = form_labels
+        self.Meta.labels['unterkunft_gewuenscht'] = _('Kann eine Unterkunft angeboten werden?')
 
         THREE_CHOICES = [
             ('true', 'notwendig')]
