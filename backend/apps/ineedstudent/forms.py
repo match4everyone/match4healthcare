@@ -21,7 +21,7 @@ class HospitalFormO(ModelForm):
             'ansprechpartner': _('Name der Kontaktperson'),
             'appears_in_map': _('Auf der Karte sichtbar und kontaktierbar für Helfende sein'),
             'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
-            'einwilligung_datenweitergabe': _('Ich akzeptiere, dass alle Registrierungenvon uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert werden. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
+            'einwilligung_datenweitergabe': _('Ich akzeptiere, dass alle Registrierungen von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert werden. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür.'),
         }
 
     def __init__(self, *args, **kwargs):
