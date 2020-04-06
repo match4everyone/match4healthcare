@@ -148,7 +148,7 @@ def send_mails_for(hospital):
                       ('Hallo %s,\n\n' % hospital.ansprechpartner) +
                       ('Sie haben potentielle Helfer*innen mit der folgenden Nachricht kontaktiert. '
                        'Diese Mails wurden gerade abgesendet.'
-                       '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n') +
+                       '\n\nLiebe Grüße,\nIhr match4healthcare Team\n\n=============\n\n') +
                       text,
                       settings.NOREPLY_MAIL,
                       [hospital.user.email])
