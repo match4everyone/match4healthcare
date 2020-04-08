@@ -39,15 +39,14 @@ mapViewPage = {
         let navHeight = $('.navbar').outerHeight()
         let searchHeight = $('.search-map').innerHeight()
         let footerHeight = $('.footer').innerHeight()
-        let isNavbarActive = document.getElementById('hospital_navbar') !== null
-        let newHeight = height - navHeight - ( isNavbarActive ? searchHeight : 0 ) - footerHeight
+        let isSearchBarActive = document.getElementById('hospital_navbar') !== null
+        let newHeight = height - navHeight - ( isSearchBarActive ? searchHeight : 0 ) - footerHeight
         $(document.getElementById(mapViewPage.options.mapViewContainerId)).height(newHeight)
         mapViewPage.mapObject.invalidateSize()
     },
 
     registerEventHandlers : function registerEventHandlers(document, window) {
         $(window).on("resize", (event) => { this.onResizeWindow() }).trigger("resize")
-
     },
 
     loadMapMarkers : async function loadMapMarkers() {
