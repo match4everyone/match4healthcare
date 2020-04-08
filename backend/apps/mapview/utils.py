@@ -27,3 +27,11 @@ def get_plzs_close_to(countrycode, plz, distance_in_km):
             close.append(other_plz)
 
     return close
+
+def get_plz_data(countrycode, plz):
+    lat, lon, ort = plzs[countrycode][plz]
+    return {
+        'latitude': lat,
+        'longitude': lon,
+        'city': ort
+    }

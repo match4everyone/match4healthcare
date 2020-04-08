@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from apps.mapview.utils import plzs
+from apps.mapview.utils import plzs,get_plz_data
 from apps.iamstudent.models import Student
+from apps.ineedstudent.models import Hospital
 
 from functools import lru_cache
 import time
 
 from django.views.decorators.gzip import gzip_page
-
 
 # Should be safe against BREACH attack because we don't have user input in reponse body
 @gzip_page
@@ -49,6 +49,39 @@ def prepare_students(ttl_hash=None):
             }
             i+=1
     return locations_and_number
+
+def facilitiesJSON(request):
+    hospitals = Hospital.objects.filter(user__validated_email=True)
+    facilities = group_by_zip_code(hospitals)
+    return JsonResponse(facilities)
+
+def supportersJSON(request):
+    students = Student.objects.filter(user__validated_email=True)
+    supporters = group_by_zip_code(students)
+    return JsonResponse(supporters)
+
+def group_by_zip_code(entities):
+    countrycode_plz_details = {}
+
+    for entity in entities:
+        countrycode = entity.countrycode
+        plz = entity.plz
+        
+
+        if not countrycode in countrycode_plz_details:
+            countrycode_plz_details[countrycode] = {}
+        
+        country = countrycode_plz_details[countrycode]
+        if not plz in country:
+            country[plz] = {
+                "countrycode": countrycode,
+                "plz": plz,
+                "count": 0,
+                **get_plz_data(countrycode, plz)
+            }
+        
+        country[plz]['count'] += 1
+    return countrycode_plz_details
 
 
 def get_ttl_hash(seconds=300):
