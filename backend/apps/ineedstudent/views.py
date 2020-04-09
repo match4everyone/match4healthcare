@@ -154,7 +154,7 @@ def hospital_view(request,uuid):
                 email_form.cleaned_data['message'] + \
                 "\n\n===============================================\n\n" + \
                 "Mit freundlichen Grüßen,\nIhr match4healthcare Team"
-            EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
+            EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['subject'])
 
 
             email = EmailMessage(
