@@ -3,11 +3,6 @@ from django.http import HttpResponse
 from django.template import loader
 
 def home(request):
-    from apps.accounts.models import User
-    users = User.objects.all()
-    for user in users:
-        print(user, user.registration_date, user.email_validation_date)
-
     context = {}
     template = loader.get_template('home.html')
 

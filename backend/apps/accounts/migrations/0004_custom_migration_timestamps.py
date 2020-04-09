@@ -6,8 +6,6 @@ logger = logging.getLogger("django")
 def update_emails(apps, schema_editor):
     User = apps.get_model('accounts', 'User')
 
-
-
     for user in User.objects.all():
         if user.email_validation_date:
             logger.warn("user has validation_date")
