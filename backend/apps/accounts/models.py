@@ -5,7 +5,9 @@ import uuid
 import numpy as np
 
 ADD_APPROVALS = 1
-# todo
+
+
+# todo move to settings
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
@@ -25,6 +27,7 @@ VALIDATION_CHOICES = (
     (ALL, 'validated and not validated'),
 )
 
+
 class NewsletterState:
     SENT = 0
     BEING_EDITED = 1
@@ -41,9 +44,10 @@ class Newsletter(models.Model):
     send_date = models.DateTimeField(default=None, blank=True, null=True)
 
     letter_authored_by = models.ManyToManyField(to=User, related_name='letter_authored_by')
-    letter_approved_by = models.ManyToManyField(to='User', related_name='letter_approved_by', through='LetterApprovedBy')
-    sent_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name='sent_by')
-    frozen_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='frozen_by')
+    letter_approved_by = models.ManyToManyField(to='User', related_name='letter_approved_by',
+                                                through='LetterApprovedBy')
+    sent_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='sent_by')
+    frozen_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='frozen_by')
 
     subject = models.CharField(max_length=200, default='')
     message = models.TextField(default='', max_length=10000)
@@ -55,9 +59,7 @@ class Newsletter(models.Model):
 
     validation_requirement = models.IntegerField(choices=VALIDATION_CHOICES, default=ONLY_VALIDATED, blank=False)
 
-
     def sending_state(self):
-        print(self.letter_approved_by)
         if self.was_sent:
             return NewsletterState.SENT
         else:
@@ -68,12 +70,34 @@ class Newsletter(models.Model):
             else:
                 return NewsletterState.READY_TO_SEND
 
+    def unfreeze(self):
+        self.frozen_by = None
+        self.frozen_date = None
+        LetterApprovedBy.objects.filter(newsletter=self).delete()
+
+    def approve_from(self, user):
+        self.letter_approved_by.add(user)
+
+    def send(self):
+        self.send_date = datetime.now()
+        self.was_sent = True
+
+    def freeze(self, user):
+        self.frozen_by = user
+        self.frozen_date = datetime.now()
+
+    def edit_meta_data(self, user):
+        self.letter_authored_by.add(user)
+        self.last_edited_date = datetime.now()
+
+
 def random_number():
-    return np.random.randint(0,1000)
+    return np.random.randint(0, 100000)
+
 
 class LetterApprovedBy(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    newsletter = models.ForeignKey(Newsletter,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    newsletter = models.ForeignKey(Newsletter, on_delete=models.CASCADE)
     approval_code = models.IntegerField(default=random_number)
     did_see_email = models.BooleanField(default=False)
 

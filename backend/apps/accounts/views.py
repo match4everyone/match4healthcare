@@ -40,7 +40,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.db import transaction
 from apps.accounts.utils import send_password_set_email
-from .models import Newsletter
+from .models import Newsletter, LetterApprovedBy
 from .forms import NewsletterForm, NewsletterFormView
 
 
@@ -341,16 +341,14 @@ def switch_newsletter(nl, user, post=None, get=None):
 
             if form.is_valid():
                 form.save()
-                nl.letter_authored_by.add(user)
-                nl.last_edited_date = datetime.now()
+                nl.edit_meta_data(user)
                 nl.save()
                 return switch_newsletter(nl, user, post=None, get=None)
 
         elif get is not None:
             # wants to freeze the form for review
             if 'freezeNewsletter' in get:
-                nl.frozen_by = user
-                nl.frozen_date = datetime.now()
+                nl.freeze(user)
                 nl.save()
                 return switch_newsletter(nl, user, post=None, get=None)
             else:
@@ -362,14 +360,12 @@ def switch_newsletter(nl, user, post=None, get=None):
     elif nl_state == NewsletterState.UNDER_APPROVAL:
         if get is not None:
             if 'unFreezeNewsletter' in get:
-                nl.frozen_by = None
-                nl.frozen_date = None
-                nl.letter_approved_by.clear()
+                nl.unfreeze()
                 nl.save()
                 return switch_newsletter(nl, user, post=None, get=None)
             elif 'approveNewsletter' in get:
                 # todo check that author cannot approve
-                nl.letter_approved_by.add(user)
+                nl.approve_from(user)
                 nl.save()
                 switch_newsletter(nl, user, post=None, get=None)
 
@@ -378,10 +374,13 @@ def switch_newsletter(nl, user, post=None, get=None):
     elif nl_state == NewsletterState.READY_TO_SEND:
         if get is not None:
             if 'sendNewsletter' in get:
-                nl.send_date = datetime.now()
-                nl.was_sent = True
+                nl.send()
                 nl.save()
                 switch_newsletter(nl, user)
+            if 'unFreezeNewsletter' in get:
+                nl.unfreeze()
+                nl.save()
+                return switch_newsletter(nl, user, post=None, get=None)
 
         form = NewsletterFormView(instance=nl)
 
@@ -434,3 +433,19 @@ def new_newsletter(request):
 def newsletter_list(request):
     # button for create new newsletter
     pass
+
+@login_required
+@staff_member_required
+def did_see_newsletter(request, uuid, token):
+
+    nl = Newsletter.objects.get(uuid=uuid)
+    try:
+        approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
+        if approval.approval_code == int(token):
+            approval.did_see_email = True
+            approval.save()
+        else:
+            return HttpResponse('Wrong code')
+    except:
+        return HttpResponse('Not registered')
+    return HttpResponseRedirect('/accounts/view_newsletter/' + str(uuid))
