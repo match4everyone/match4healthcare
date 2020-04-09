@@ -28,7 +28,7 @@ NOREPLY_MAIL = 'match4healthcare-DEVELOPMENT<noreply@example.de>'
 
 # Possible values are 'file', 'external', 'sendgrid'
 # For storing mails local in files files, sending external (uberspace) or sending over sendgrid (production like)
-mail_relay_option = 'sendgrid'
+mail_relay_option = 'file'
 
 # +++ Store files locally
 if mail_relay_option == 'file':
