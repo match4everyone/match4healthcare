@@ -27,8 +27,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from apps.iamstudent.models import EmailToHospital
 from django.contrib import messages
-
-
+from datetime import datetime
 import time
 from apps.accounts.utils import send_password_set_email
 from apps.ineedstudent.forms import HospitalFormZustimmung
@@ -133,8 +132,8 @@ class ApprovalHospitalTable(HospitalTable):
     class Meta:
         model = Hospital
         template_name = "django_tables2/bootstrap4.html"
-        fields = ['firmenname','ansprechpartner','user','telefon','plz','user__validated_email']
-        exclude = ['uuid','registration_date','id']
+        fields = ['firmenname','ansprechpartner','user','telefon','plz','user__validated_email', 'approval_date', 'approved_by']
+        exclude = ['uuid','id', 'registration_date']
 
 @login_required
 def hospital_view(request,uuid):
@@ -154,7 +153,7 @@ def hospital_view(request,uuid):
                 email_form.cleaned_data['message'] + \
                 "\n\n===============================================\n\n" + \
                 "Mit freundlichen Grüßen,\nIhr match4healthcare Team"
-            EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['message'])
+            emailtohospital = EmailToHospital.objects.create(student=s,hospital=h,message=email_form.cleaned_data['message'],subject=email_form.cleaned_data['subject'])
 
 
             email = EmailMessage(
@@ -164,6 +163,7 @@ def hospital_view(request,uuid):
                 to=[h.user.email]
             )
             email.send()
+            emailtohospital.send_date = datetime.now()
 
             return render(request,'hospital_contacted.html')
 

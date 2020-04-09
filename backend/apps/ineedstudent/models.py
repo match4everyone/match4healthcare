@@ -30,7 +30,7 @@ class Hospital(models.Model):
     max_mails_per_day = models.IntegerField(default=settings.MAX_EMAILS_PER_HOSPITAL_PER_DAY)
 
     ## Kontaktdaten
-    sonstige_infos = models.TextField(default='')
+    sonstige_infos = models.TextField(default='', max_length=10000)
     ansprechpartner = models.CharField(max_length=100,default='')
     telefon = models.CharField(max_length=100,default='')
     firmenname = models.CharField(max_length=100,default='')
@@ -39,6 +39,8 @@ class Hospital(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
+    approval_date = models.DateTimeField(null=True)
+    approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="approved_by")
     appears_in_map = models.BooleanField(default=False)
 
     datenschutz_zugestimmt = models.BooleanField(default=False)
