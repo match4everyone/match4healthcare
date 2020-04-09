@@ -3,7 +3,7 @@ from random import choice
 from string import ascii_lowercase, digits
 from .models import User
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django")
 from django.contrib.auth.forms import PasswordResetForm
 
 from django.conf import settings

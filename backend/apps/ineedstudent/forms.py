@@ -12,7 +12,7 @@ from django.templatetags.static import static
 class HospitalFormO(ModelForm):
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day','appears_in_map']
+        exclude = ['uuid', 'registration_date','user', 'sonstige_infos', 'max_mails_per_day','appears_in_map', 'approval_date', 'approved_by']
 
         labels = {
             'plz': _('Postleitzahl'),
@@ -72,7 +72,7 @@ class HospitalFormEditProfile(HospitalFormO):
 
     class Meta:
         model = Hospital
-        exclude = ['uuid', 'registration_date','user','datenschutz_zugestimmt', 'einwilligung_datenweitergabe', 'max_mails_per_day']
+        exclude = ['uuid', 'registration_date','user','datenschutz_zugestimmt', 'einwilligung_datenweitergabe', 'max_mails_per_day', 'approval_date', 'approved_by']
 
         labels = {
             'plz': _('Postleitzahl'),
@@ -101,7 +101,6 @@ class HospitalFormZustimmung(ModelForm):
         class Meta:
             model = Hospital
             fields = ["datenschutz_zugestimmt", "einwilligung_datenweitergabe"]
-            #exclude = ["uuid","registration_date", "user", "appears_in_map", "countrycode", "plz", "ansprechpartner"]
 
             labels = {
                 'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
@@ -178,13 +177,8 @@ class PostingForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
-            HTML('<script'),
-            'appears_in_map',
-            'sonstige_infos'
-        )
-        self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
-        self.helper.layout = Layout(
             HTML('<script type="text/javascript" src="{}"></script>'.format(static('js/PostingForm.js'))),
             'appears_in_map',
             'sonstige_infos'
         )
+        self.helper.add_input(Submit('submit', _('Anzeige aktualisieren'), css_class='btn blue text-white btn-md'))
