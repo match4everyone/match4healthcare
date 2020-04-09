@@ -265,7 +265,7 @@ def validate_email(request):
         request.user.validated_email = True
         request.user.email_validation_date = datetime.now()
         request.user.save()
-    return HttpResponseRedirect("/mapview")
+    return HttpResponseRedirect("login_redirect")
 
 
 def resend_validation_email(request, email):
