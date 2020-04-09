@@ -11,4 +11,3 @@ services:
       - './backend:/match4healthcare-backend'
     ports:
       - '8000:8000'
-

@@ -15,5 +15,5 @@ class ContactedTable(tables.Table):
         if value:
             text = _('ja')
         else:
-            text = _('nein')        
+            text = _('nein')
         return format_html('<div class="text-center">{}</div>'.format(text))

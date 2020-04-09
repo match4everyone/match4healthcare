@@ -43,7 +43,7 @@ After changes to the Docker configuration, you have to restart and build the con
 - Edit translations in `backend/locale/en/LC_MESSAGES/django.po`
 
 ## Production
-Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django 
+Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 
 To run a container in production and in a new environment execute the `setup.sh` script which builds the containers, runs all configurations and starts the web service.

@@ -13,7 +13,7 @@ Registrierung - Studierende
         handleQualificationInput : function handleQualificationInput(event) {
             let sourceElement = event.srcElement;
             let qualificationSelected = event.srcElement.checked;
-            
+
             // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
             let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
             this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
@@ -28,7 +28,7 @@ Registrierung - Studierende
                 section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
                 section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
             }
-            
+
         },
     }
 
@@ -40,7 +40,7 @@ Registrierung - Studierende
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
             signUpHelper.handleQualificationInput({ srcElement: element });
         })
-            
+
     });
 
 </script>
@@ -54,26 +54,26 @@ Registrierung - Studierende
 <div class="container">
   	<div style="height:40px"></div>
     {% if user.is_authenticated %}
-	
+
 	{% blocktrans %} Sie sind bereits angemeldet. Hier geht es zum {% endblocktrans %} <a  href="logout">Logout</a>.
 	<hr><br>
-	
+
 	{% else %}
 	{% blocktrans %} Schon registriert? Hier geht es zum {% endblocktrans %}
-	
-	
+
+
         <a  href="/accounts/login_redirect">Login</a>.
     <hr><br>
 	{% endif %}
-	
+
 
     <h1 class="font-weight-light match4hc-title">  {% blocktrans %}Du sitzt zuhause und kannst in der aktuellen Situation helfen?{% endblocktrans %}  </h1>
 	<h2 class="font-weight-light match4hc-title">{% blocktrans %}Wir verbinden Helfende und Hilfesuchenden zu einem match4healthcare!{% endblocktrans %}</h2>
-	
-	
-    
+
+
+
     <p>{% blocktrans %}Dieses Projekt hat zum Ziel, euch in eurer Umgebung mit Krankenhäusern, Hausärzten und Gesundheitsämtern in Verbindung zu bringen, sollten diese nach Unterstützung suchen. Hierfür bitten wir dich, die folgenden Daten anzugeben, damit wir dich mit den entsprechenden Gesuchen verbinden können.{% endblocktrans %} </p>
-   
+
 </div>
 
 
@@ -82,7 +82,7 @@ Registrierung - Studierende
                 <div class="col-lg-10 col-sm-12 col-12">
 
                 {% crispy form form.helper %}
-       
+
 		 </div>
 	</div>
 </div>
