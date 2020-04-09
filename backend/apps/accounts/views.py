@@ -28,7 +28,7 @@ from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-
+from datetime import datetime
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
@@ -158,7 +158,7 @@ def login_redirect(request):
         h = Hospital.objects.get(user=user)
         if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
             return HttpResponseRedirect('/ineedstudent/zustimmung')
-        return HttpResponseRedirect('profile_hospital')
+        return HttpResponseRedirect('/ineedstudent/hospital_dashboard')
 
     elif user.is_staff:
         return HttpResponseRedirect('approve_hospitals')
@@ -221,10 +221,20 @@ def approve_hospitals(request):
 @staff_member_required
 def change_hospital_approval(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
-    h.is_approved = not h.is_approved
+
+    if not h.is_approved:
+        h.is_approved = True
+        h.approval_date = datetime.now()
+        h.approved_by = request.user
+    else:
+        h.is_approved = False
+        h.approval_date = None
+        h.approved_by = None
     h.save()
+
     if h.is_approved:
         send_mails_for(h)
+
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
 @login_required
@@ -233,7 +243,7 @@ def delete_hospital(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
     name = h.user
     h.delete()
-    text = format_lazy(_("Du hast die Instiution mit user '{name}' gelöscht."), name=name)
+    text = format_lazy(_("Du hast die Institution mit user '{name}' gelöscht."), name=name)
     messages.add_message(request, messages.INFO,text)
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
@@ -253,8 +263,9 @@ def delete_me_ask(request):
 def validate_email(request):
     if not request.user.validated_email:
         request.user.validated_email = True
+        request.user.email_validation_date = datetime.now()
         request.user.save()
-    return HttpResponseRedirect("/mapview")
+    return HttpResponseRedirect("login_redirect")
 
 
 def resend_validation_email(request, email):
@@ -277,8 +288,12 @@ class UserCountView(APIView):
     """
 
     def get(self, request, format=None):
-        user_count = User.objects.count()
-        content = {'user_count': user_count}
+        supporter_count = User.objects.filter( is_student__exact = True, validated_email__exact = True ).count()
+        facility_count =  User.objects.filter( is_hospital__exact = True, validated_email__exact = True ).count()
+        content = {
+            'user_count': supporter_count,
+            'facility_count': facility_count
+        }
         return JsonResponse(content)
 
 
@@ -290,6 +305,9 @@ class CustomLoginView(LoginView):
 @student_required
 def change_activation_ask(request):
     return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
+
+
+
 
 
 @login_required

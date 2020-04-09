@@ -33,7 +33,7 @@ form_labels = {
     # Form Labels for qualifications
     'ausbildung_typ_pflege': _('Pflege <em>(melde Dich auch bei <a href="https://pflegereserve.de/#/login" target="_blank">Pflegereserve</a>)</em>'),
     'ausbildung_typ_pflege_abschnitt': _('Ausbildungsabschnitt'),
-    'ausbildung_typ_physio': _('Physiotherapieauszubildende*r'),
+    'ausbildung_typ_physio': _('Physiotherapeut*in'),
     'ausbildung_typ_physio_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_hebamme': _('Entbindungshelfer*in'),
     'ausbildung_typ_fsj': _('FSJ im Gesundheitswesen'),
@@ -41,14 +41,23 @@ form_labels = {
     'ausbildung_typ_medstud': _('Medizinstudent*in / Arzt / Ärztin'),
     'ausbildung_typ_medstud_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_medstud_famulaturen_anaesthesie': _('Anästhesie'),
+    'ausbildung_typ_medstud_famulaturen_allgemeinmedizin': _('Allgemeinmedizin'),
     'ausbildung_typ_medstud_famulaturen_chirurgie': _('Chirurgie'),
     'ausbildung_typ_medstud_famulaturen_innere': _('Innere'),
     'ausbildung_typ_medstud_famulaturen_intensiv': _('Intensivmedizin'),
-    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notaufnahme'),
+    'ausbildung_typ_medstud_famulaturen_notaufnahme': _('Notfallmedizin'),
     'ausbildung_typ_medstud_anerkennung_noetig': _(
-        'Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig'),
+        '<b>Nur Studierende: Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig</b>'),
     'ausbildung_typ_mfa': _('Medizinische/r Fachangestellte*r'),
     'ausbildung_typ_mfa_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_ota': _('Operationstechnische/r Assistent*in'),
+    'ausbildung_typ_ota_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_ata': _('Anästhesietechnische/r Assistent*in'),
+    'ausbildung_typ_ata_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_ergotherapie': _('Ergotherapeut*in'),
+    'ausbildung_typ_ergotherapie_abschnitt': _('Ausbildungsabschnitt'),
+    'ausbildung_typ_psycho': _('Psychotherapeut*in'),
+    'ausbildung_typ_psycho_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mtla': _('Medizinisch-technische/r Laboratoriumsassistent*in'),
     'ausbildung_typ_mtla_abschnitt': _('Ausbildungsabschnitt'),
     'ausbildung_typ_mta': _('Medizinisch-technische/r Assistent*in'),
@@ -63,8 +72,6 @@ form_labels = {
     'ausbildung_typ_kinderbetreung_vorerfahrung': _('Lediglich Erfahrungen'),
     'ausbildung_typ_sonstige': _('Sonstige'),
     'ausbildung_typ_sonstige_eintragen': _('Bitte die Qualifikationen hier eintragen'),
-
-
     'sonstige_qualifikationen': _('Weitere Qualifikationen'),
     'datenschutz_zugestimmt': _('Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'),
     'einwilligung_datenweitergabe': _(
@@ -92,8 +99,12 @@ fields_for_button_group = [
                             'ausbildung_typ_mfa_abschnitt',
                             'ausbildung_typ_mtla_abschnitt',
                             'ausbildung_typ_mta_abschnitt',
+                            'ausbildung_typ_ota_abschnitt',
+                            'ausbildung_typ_ata_abschnitt',
                             'ausbildung_typ_notfallsani_abschnitt',
-                            'ausbildung_typ_zahni_abschnitt'
+                            'ausbildung_typ_zahni_abschnitt',
+                            'ausbildung_typ_psycho_abschnitt',
+                            'ausbildung_typ_ergotherapie_abschnitt',
 ]
 
 mindest = _('mindestens')
@@ -519,7 +530,6 @@ class EmailToSendForm(forms.ModelForm):
         labels = {'subject': _('Betreff'),
                   'message': _('Nachrichtentext')}
         help_texts = {
-            'message': _('Hier soll Eure Stellenanzeige stehen, editiert den Text.')
         }
 
 def get_form_helper_filter():

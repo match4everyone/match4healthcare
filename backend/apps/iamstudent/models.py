@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from apps.mapview.utils import plzs
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
 
@@ -133,7 +133,7 @@ class Student(models.Model):
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
-            raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
+            raise ValidationError(str(self.plz) + str(_(" ist keine Postleitzahl in ")) + self.countrycode)
 
 
 """Add stufff to model"""
@@ -186,6 +186,30 @@ MFA_CHOICES = (
     (BERUFSTAETIG, _('Berufstätig')),
 )
 
+#class Ergotherapieauszubildende*r(models.IntegerChoices):
+KEINE_ANGABE = 0
+IN_AUSBILDUNG = 1
+BERUFSTAETIG = 2
+ERGOTHERAPIE_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (IN_AUSBILDUNG, _('In Ausbildung')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
+#class Psychologie/Psychotherapeut(models.IntegerChoices):
+KEINE_ANGABE = 0
+STUDIUM = 1
+IN_AUSBILDUNG = 2
+BERUFSTAETIG = 3
+PSYCHO_CHOICES = (
+    (KEINE_ANGABE, _('Keine Angabe')),
+    (STUDIUM, _('Studium')),
+    (IN_AUSBILDUNG, _('In Ausbildung')),
+    (BERUFSTAETIG, _('Berufstätig')),
+)
+
+
 
 #class NOTFALLSANIAbschnitt(models.IntegerChoices):
 KEINE_ANGABE = 0
@@ -218,6 +242,7 @@ AUSBILDUNGS_TYPEN = {
             'famulaturen_innere': (models.BooleanField,{'default':False}),
             'famulaturen_intensiv': (models.BooleanField,{'default':False}),
             'famulaturen_notaufnahme': (models.BooleanField,{'default':False}),
+            'famulaturen_allgemeinmedizin': (models.BooleanField,{'default':False}),
             'empty_3': None,
             'anerkennung_noetig':(models.BooleanField,{'default':False})
         },
@@ -232,11 +257,23 @@ AUSBILDUNGS_TYPEN = {
     'MTA': {
         'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
     },
+    'OTA': {
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
+    'ATA': {
+        'abschnitt': (models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
     'NOTFALLSANI': {
         'abschnitt': (models.IntegerField, {'choices':NOTFALLSANI_CHOICES, 'default':0,'null':True}),
     },
     'PFLEGE' :{
         'abschnitt':(models.IntegerField, {'choices':MFA_CHOICES, 'default':0,'null':True}),
+    },
+    'ERGOTHERAPIE' :{
+        'abschnitt':(models.IntegerField, {'choices':ERGOTHERAPIE_CHOICES, 'default':0,'null':True}),
+    },
+    'PSYCHO' :{
+        'abschnitt':(models.IntegerField, {'choices':PSYCHO_CHOICES, 'default':0,'null':True}),
     },
     'SANI': {
 
@@ -279,11 +316,20 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
 
 AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN]
 
+
+class EmailGroup(models.Model):
+    subject = models.CharField(max_length=200, default='')
+    message = models.TextField(default='', max_length=10000)
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+
+
 # emails that hospitals send to students
 class EmailToSend(models.Model):
 
     subject = models.CharField(max_length=200,default='')
-    message = models.TextField(default='')
+    message = models.TextField(default='', max_length=10000)
     was_sent = models.BooleanField(default=False)
 
 
@@ -293,17 +339,23 @@ class EmailToSend(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
+    send_date = models.DateTimeField(null=True)
+
+
+    email_group = models.ForeignKey(EmailGroup, on_delete=models.CASCADE, null=True, blank=True)
+
 # emails that students send to hospitals
 class EmailToHospital(models.Model):
 
     subject = models.CharField(max_length=200,default='')
-    message = models.TextField(default='')
+    message = models.TextField(default='', max_length=10000)
 
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    send_date = models.DateTimeField(null=True)
 
 
 

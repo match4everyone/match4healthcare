@@ -7,12 +7,17 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from django.utils.text import format_lazy
+
 from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
+from .forms import StudentForm, EmailToSendForm, EmailForm
+from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel, EmailGroup
 from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
 from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
+
 from apps.accounts.models import User
 
 from apps.ineedstudent.forms import HospitalFormExtra
@@ -24,7 +29,10 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import student_required, hospital_required
 
 from crispy_forms.helper import FormHelper
+import datetime
 
+import logging
+logger = logging.getLogger("django")
 
 def get_student(request):
     # if this is a POST request we need to process the form data
@@ -52,11 +60,14 @@ def thx(request):
 @login_required
 @hospital_required
 def successful_mail(request):
+
     return render(request,'emails_sent.html',{'not_registered': not request.user.hospital.is_approved})
 
 
 def leftover_emails_for_today(request):
-    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital, ).count())
+    date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+    return max(0,request.user.hospital.max_mails_per_day - EmailToSend.objects.filter(hospital=request.user.hospital,
+                                                                                      registration_date__gte=date_from ).count())
 
 
 @login_required
@@ -77,54 +88,75 @@ def send_mail_student_id_list(request, id_list):
 
             hospital_message = form.cleaned_data['message']
 
-
-
             subject = form.cleaned_data['subject']
+
+            email_group = EmailGroup.objects.create(subject=subject,
+                                                    message=hospital_message,
+                                                    hospital=request.user.hospital)
+
             for student_id in id_list:
                 student = Student.objects.get(user_id=student_id)
 
-                message = 'Hallo %s %s,\n\n wir haben folgende Nachricht von %s für dich. Falls du keine Nachrichten mehr erhalten möchtest deaktiviere dein Konto hier: https://match4healthcare.de/accounts/change_activation\n\nDein Match4Healthcare Team\n\n%s' % (
-                    student.name_first,
-                    student.name_last,
-                    request.user.hospital.firmenname,
-                    hospital_message
-                )
+                new_message = format_lazy(_('Hallo {first_name} {last_name},\n\n '
+                                            'wir haben folgende Nachricht von {firmenname} für dich. '
+                                            'Falls du keine Nachrichten mehr erhalten möchtest, deaktiviere dein '
+                                            'Konto bitte hier: https://match4healthcare.de/accounts/change_activation'
+                                            '\n\nDein Match4Healthcare Team'
+                                            '\n----------------------------\n'
+                                            '{hospital_message}'),
+                                          first_name=student.name_first,
+                                          last_name=student.name_last,
+                                          firmenname=request.user.hospital.firmenname,
+                                          hospital_message=hospital_message)
 
                 mail = EmailToSend.objects.create(
                     student=student,
                     hospital=request.user.hospital,
-                    message=message,
-                    subject=subject)
+                    message=new_message,
+                    subject='[match4healthcare] ' + subject,
+                    email_group=email_group)
                 mail.save()
+
             if request.user.hospital.is_approved:
                 send_mails_for(request.user.hospital)
+
             return HttpResponseRedirect('/iamstudent/successful_mail')
     else:
         hospital = request.user.hospital
-        form = EmailToSendForm(initial={'subject': '[match4healthcare] Ein Ort braucht Deine Hilfe',
-                                        'message': 'Liebe Helfer,\n\nWir sind... \nWir suchen...\n\nMeldet euch baldmöglichst!\n\nBeste Grüße,\n%s\n\nTel: %s\nEmail: %s'%(hospital.ansprechpartner,hospital.telefon,hospital.user.email)})
+        message = format_lazy(_('Liebe(r) Helfende(r),\n\n'
+                                'Wir sind... \n'
+                                'Wir suchen...\n\n'
+                                'Meldet euch baldmöglichst!\n\nBeste Grüße,\n{ansprechpartner}\n\nTel: {telefon}\nEmail: {email}')
+                              ,ansprechpartner=hospital.ansprechpartner, telefon=hospital.telefon, email=hospital.user.email)
+        form = EmailToSendForm(initial={'subject': _('Ein Ort braucht Deine Hilfe'),
+                                        'message': message})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
 
 
 def send_mails_for(hospital):
     emails = EmailToSend.objects.filter(hospital=hospital, was_sent=False)
+    if len(emails) == 0:
+        return None
 
-    # inform the hospital about sent emails
-    emails_n = emails.count()
-    text = emails[0].message.split('===============================================')[1]
-    send_mail(_('[match4healthcare] Sie haben gerade potentialle Helfer*innen kontaktiert'),
-              ('Hallo %s,\n\n' % hospital.ansprechpartner) +
-              ('Sie haben %s potentielle Helfer*innen mit der folgenden Nachricht kontaktiert.'
-               '\n\nLiebe Grüeße,\nIhr match4healthcare Team\n\n=============\n\n' % emails_n) +
-              text,
-              settings.NOREPLY_MAIL,
-              [hospital.user.email])
+    # inform the hospital about sent emails via
+    sent_emailgroups = []
 
     for m in emails:
 
-        if m.subject and m.message and m.student.user.email:
+        if not m.email_group_id in sent_emailgroups:
+            sent_emailgroups.append(m.email_group_id)
+            text = m.email_group.message
+            send_mail(_('[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert'),
+                      ('Hallo %s,\n\n' % hospital.ansprechpartner) +
+                      ('Sie haben potentielle Helfer*innen mit der folgenden Nachricht kontaktiert. '
+                       'Diese Mails wurden gerade abgesendet.'
+                       '\n\nLiebe Grüße,\nIhr match4healthcare Team\n\n=============\n\n') +
+                      text,
+                      settings.NOREPLY_MAIL,
+                      [hospital.user.email])
 
+        if m.subject and m.message and m.student.user.email:
             try:
                 send_mail(m.subject,
                           m.message,
@@ -132,21 +164,16 @@ def send_mails_for(hospital):
                           [m.student.user.email]
                           )
                 # todo: muss noch asynchron werden ...celery?
+                m.send_date = datetime.datetime.now()
+                m.was_sent = True
+                m.save()
+
             except BadHeaderError:
                 # Do not show error message to malicous actor
                 # Do not send the email
-                None
-
-            m.was_sent = True
-            m.save()
+                logger.warn("Email with email_group_id " + str(m.email_group_id) + " to Students from Hospital " + str(hospital.user.email) + " could not be sent due to a BadHeaderError")
 
 
-def notify_student(student_id, contact):
-    student = Student.objects.get(id=student_id)
-    send_mail(subject=_('subject :)'),
-              message=_('I want to hire you person of gender %s!, Contact me here: %s') % (student.gender, contact),
-              from_email=settings.NOREPLY_MAIL,
-              recipient_list=[student.email])
 
 def clean_request_for_saving(request):
     student_attr = dict(request)
@@ -289,13 +316,8 @@ def view_student(request, uuid):
     if request.user.is_student:
         return HttpResponseRedirect("/accounts/profile_student")
     s = Student.objects.get(uuid=uuid)
-    print("asdf", s.emailtosend_set)
-
-
     form = StudentFormView(instance=s, prefix='infos')
     context = {
         "form": form
     }
-
-
     return render(request, 'view_student.html', context)

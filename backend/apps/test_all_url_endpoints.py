@@ -23,19 +23,19 @@ def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=
     s.save()
     return m, pwd, s.uuid
 
-def generate_random_hospital(countrycode="DE", plz="14482", i=0, datenschutz_zugestimmt=True):
+def generate_random_hospital(countrycode="DE", plz="14482", i=0, datenschutz_zugestimmt=True, validated_email=False):
     m = str(i) + "hospital@email.de"
     pwd = User.objects.make_random_password()
-    u = User.objects.create(username=m, email=m, is_hospital=True)
+    u = User.objects.create(username=m, email=m, is_hospital=True, validated_email=validated_email)
     u.set_password(pwd)
     s = Hospital.objects.create(user=u,
                                countrycode=countrycode,
                                plz=plz,
                                ansprechpartner='XY',
                                sonstige_infos='yeaah',
-                               datenschutz_zugestimmt=datenschutz_zugestimmt,
+                               datenschutz_zugestimmt=datenschutz_zugestimmt,                            
                                einwilligung_datenweitergabe=True,
-                                )
+                            )
     u.save()
     s.save()
     return m, pwd, s.uuid
@@ -70,13 +70,23 @@ class UrlEndpointTestCase(TestCase):
         assert self.client.get('/accounts/login/', {}).status_code == 200
 
     def test_count_url(self):
-        generate_random_student()
+        generate_random_student(validated_email=True)
         response = self.client.get('/accounts/count', {})
         assert response.status_code == 200
         self.assertJSONEqual(
             str(response.content, encoding='utf8'),
-            {'user_count': 1}
+            {'facility_count': 0, 'user_count': 1}
         )
+
+        generate_random_hospital(validated_email=True)
+        response = self.client.get('/accounts/count', {})
+        assert response.status_code == 200
+        self.assertJSONEqual(
+            str(response.content, encoding='utf8'),
+            {'facility_count': 1, 'user_count': 1}
+        )
+
+
 
     def test_student(self):
         student_email, student_password, _ = generate_random_student()
