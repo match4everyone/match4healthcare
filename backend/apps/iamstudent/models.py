@@ -133,7 +133,7 @@ class Student(models.Model):
 
     def clean(self):
         if self.plz not in plzs[self.countrycode]:
-            raise ValidationError(str(self.plz) + _(" ist keine Postleitzahl in ") + self.countrycode)
+            raise ValidationError(str(self.plz) + str(_(" ist keine Postleitzahl in ")) + self.countrycode)
 
 
 """Add stufff to model"""
@@ -319,7 +319,7 @@ AUSBILDUNGS_TYPEN_COLUMNS = ['ausbildung_typ_%s' % ausbildungs_typ.lower() for a
 
 class EmailGroup(models.Model):
     subject = models.CharField(max_length=200, default='')
-    message = models.TextField(default='')
+    message = models.TextField(default='', max_length=10000)
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
@@ -329,7 +329,7 @@ class EmailGroup(models.Model):
 class EmailToSend(models.Model):
 
     subject = models.CharField(max_length=200,default='')
-    message = models.TextField(default='')
+    message = models.TextField(default='', max_length=10000)
     was_sent = models.BooleanField(default=False)
 
 
@@ -339,19 +339,23 @@ class EmailToSend(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
+    send_date = models.DateTimeField(null=True)
+
+
     email_group = models.ForeignKey(EmailGroup, on_delete=models.CASCADE, null=True, blank=True)
 
 # emails that students send to hospitals
 class EmailToHospital(models.Model):
 
     subject = models.CharField(max_length=200,default='')
-    message = models.TextField(default='')
+    message = models.TextField(default='', max_length=10000)
 
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospital,on_delete=models.CASCADE)
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    send_date = models.DateTimeField(null=True)
 
 
 
