@@ -164,6 +164,7 @@ def hospital_view(request,uuid):
             )
             email.send()
             emailtohospital.send_date = datetime.now()
+            emailtohospital.save()
 
             return render(request,'hospital_contacted.html')
 
