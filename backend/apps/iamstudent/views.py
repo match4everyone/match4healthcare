@@ -77,9 +77,22 @@ def send_mail_student_id_list(request, id_list):
         pass
         # do something
 
+    hospital = request.user.hospital
+    message = format_lazy(_('Liebe(r) Helfende(r),\n\n'
+                            'Wir sind... \n'
+                            'Wir suchen...\n\n'
+                            'Meldet euch baldmöglichst!\n\nBeste Grüße,\n{ansprechpartner}\n\nTel: {telefon}\nEmail: {email}')
+                            ,ansprechpartner=hospital.ansprechpartner, telefon=hospital.telefon, email=hospital.user.email)
+
+    initial = {
+        'subject': _('Ein Ort braucht Deine Hilfe'),
+        'message': message
+    }
+    form = EmailToSendForm(initial=initial)
+
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = EmailToSendForm(request.POST)
+        form = EmailToSendForm(request.POST, initial=initial)
 
         if form.is_valid():
 
@@ -118,15 +131,6 @@ def send_mail_student_id_list(request, id_list):
                 send_mails_for(request.user.hospital)
 
             return HttpResponseRedirect('/iamstudent/successful_mail')
-    else:
-        hospital = request.user.hospital
-        message = format_lazy(_('Liebe(r) Helfende(r),\n\n'
-                                'Wir sind... \n'
-                                'Wir suchen...\n\n'
-                                'Meldet euch baldmöglichst!\n\nBeste Grüße,\n{ansprechpartner}\n\nTel: {telefon}\nEmail: {email}')
-                              ,ansprechpartner=hospital.ansprechpartner, telefon=hospital.telefon, email=hospital.user.email)
-        form = EmailToSendForm(initial={'subject': _('Ein Ort braucht Deine Hilfe'),
-                                        'message': message})
 
     return render(request, 'send_mail_hospital.html', {'form': form, 'ids': '_'.join(id_list), 'n': len(id_list)})
 
