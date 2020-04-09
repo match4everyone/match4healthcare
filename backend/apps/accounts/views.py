@@ -40,6 +40,8 @@ from django.template import loader
 from django.http import HttpResponse
 from django.db import transaction
 from apps.accounts.utils import send_password_set_email
+from .models import Newsletter
+from .forms import NewsletterForm, NewsletterFormView
 
 
 def student_signup(request):
@@ -324,3 +326,111 @@ def change_activation(request):
         messages.add_message(request, messages.INFO,_(
             'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
     return HttpResponseRedirect('profile_student')
+
+
+from .models import NewsletterState
+
+
+def switch_newsletter(nl, user, post=None, get=None):
+    nl_state = nl.sending_state()
+
+    if nl_state == NewsletterState.BEING_EDITED:
+        # an edit was made
+        if post is not None:
+            form = NewsletterForm(post, instance=nl)
+
+            if form.is_valid():
+                form.save()
+                nl.letter_authored_by.add(user)
+                nl.last_edited_date = datetime.now()
+                nl.save()
+                return switch_newsletter(nl, user, post=None, get=None)
+
+        elif get is not None:
+            # wants to freeze the form for review
+            if 'freezeNewsletter' in get:
+                nl.frozen_by = user
+                nl.frozen_date = datetime.now()
+                nl.save()
+                return switch_newsletter(nl, user, post=None, get=None)
+            else:
+                # the form is a virgin
+                form = NewsletterForm(instance=nl)
+        else:
+            form = NewsletterForm(instance=nl)
+
+    elif nl_state == NewsletterState.UNDER_APPROVAL:
+        if get is not None:
+            if 'unFreezeNewsletter' in get:
+                nl.frozen_by = None
+                nl.frozen_date = None
+                nl.letter_approved_by.clear()
+                nl.save()
+                return switch_newsletter(nl, user, post=None, get=None)
+            elif 'approveNewsletter' in get:
+                # todo check that author cannot approve
+                nl.letter_approved_by.add(user)
+                nl.save()
+                switch_newsletter(nl, user, post=None, get=None)
+
+        form = NewsletterFormView(instance=nl)
+
+    elif nl_state == NewsletterState.READY_TO_SEND:
+        if get is not None:
+            if 'sendNewsletter' in get:
+                nl.send_date = datetime.now()
+                nl.was_sent = True
+                nl.save()
+                switch_newsletter(nl, user)
+
+        form = NewsletterFormView(instance=nl)
+
+    elif nl_state == NewsletterState.SENT:
+        form = NewsletterFormView(instance=nl)
+    else:
+        from django.http import Http404
+        raise Http404
+
+    return form, nl
+
+
+@login_required
+@staff_member_required
+def view_newsletter(request, uuid):
+    # 404 if not there?
+    nl = Newsletter.objects.get(uuid=uuid)
+
+    post = request.POST if request.method == 'POST' else None
+    get = request.GET if request.method == 'GET' else None
+
+    form, nl = switch_newsletter(nl, request.user, post=post, get=get)
+
+    # special view if person was the freezer
+
+    context = {
+        'form': form,
+        'uuid': uuid,
+        'newsletter_state': nl.sending_state(),
+        'state_enum': NewsletterState
+               }
+    # todo's
+    # testsend
+    # hinweis was darf gesendet werden
+    # nicht gleichzeitig editieren ;)
+    return render(request, 'newsletter_edit.html', context)
+
+
+@login_required
+@staff_member_required
+def new_newsletter(request):
+    newsletter = Newsletter.objects.create()
+    newsletter.letter_authored_by.add(request.user)
+    newsletter.save()
+    return HttpResponseRedirect('view_newsletter/' + str(newsletter.uuid))
+
+
+@login_required
+@staff_member_required
+def newsletter_list(request):
+    # button for create new newsletter
+    pass

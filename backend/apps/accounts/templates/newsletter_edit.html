@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+{% blocktrans %}Helfende Kontaktieren{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr>
+<div class="container">
+
+    <p>
+
+    </p>
+</div>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h4>
+            {% if newsletter_state == state_enum.BEING_EDITED %}
+                {% blocktrans %}Diesen Newsletter editieren{% endblocktrans %}
+            {% elif newsletter_state == state_enum.SENT %}
+                {% blocktrans %}Dieser Newsletter wurde bereits versendet{% endblocktrans %}
+            {% elif newsletter_state == state_enum.UNDER_APPROVAL %}
+                {% blocktrans %}Dieser Newsletter wartet darauf approved zu werden{% endblocktrans %}
+            {% elif newsletter_state == state_enum.READY_TO_SEND %}
+                {% blocktrans %}Dieser Newsletter wurde bereits von genug Leuten approved. Du darfst ihn absenden.{% endblocktrans %}
+            {% endif %}
+            </h4>
+        </div>
+        <div class="card-body">
+            <form action="/accounts/view_newsletter/{{uuid}}" method="post" onsubmit="disableButton()">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <p>
+                    <button type="submit" name="edit" class="btn btn-success" id="btSubmitForm">
+                        {% blocktrans %}Save edits{% endblocktrans %}
+                    </button>
+                </p>
+            </form>
+            <p>
+                <a href="/accounts/view_newsletter/{{uuid}}?unFreezeNewsletter" class="btn btn-dark">Start editing again </a>
+                <a href="/accounts/view_newsletter/{{uuid}}?freezeNewsletter" class="btn btn-dark">Freeze</a>
+                <a href="/accounts/view_newsletter/{{uuid}}?approveNewsletter" class="btn btn-dark">Approve</a>
+                <a href="/accounts/view_newsletter/{{uuid}}?sendNewsletter" class="btn btn-dark">Send</a>
+
+            </p>
+        </div>
+    </div>
+    <hr>
+</div>
+<script>function disableButton() {
+    var btn = document.getElementById('btSubmitForm');
+    btn.disabled = true;
+    btn.innerText = 'Sending...'
+}</script>
+{% endblock %}
