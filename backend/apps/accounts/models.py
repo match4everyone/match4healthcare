@@ -25,7 +25,10 @@ VALIDATION_CHOICES = (
 
 class Newsletter(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    last_edited_date = models.DateTimeField(default=None, blank=True, null=True)
+    send_date = models.DateTimeField(default=None, blank=True, null=True)
 
     authored_by = models.ManyToManyField(to=User, related_name='authored_by')
     approved_by = models.ManyToManyField(to=User, related_name='approved_by')
