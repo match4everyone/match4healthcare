@@ -24,7 +24,7 @@ def resend_validation(request):
     every_mail = 100
 
     startup_time = datetime.datetime(year=2020, month=4, day=8, hour=7, minute=51)
-    end_time = datetime.datetime(year=2020, month=4, day=2, hour=23, minute=31)
+    end_time = datetime.datetime(year=2020, month=4, day=8, hour=23, minute=31)
 
     qs = User.objects.filter(validated_email=False,
                              date_joined__gt=startup_time,
