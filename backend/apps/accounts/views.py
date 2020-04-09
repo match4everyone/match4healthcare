@@ -222,16 +222,19 @@ def approve_hospitals(request):
 def change_hospital_approval(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
 
-    h.is_approved = not h.is_approved
-    if h.is_approved:
+    if not h.is_approved:
+        h.is_approved = True
         h.approval_date = datetime.now()
         h.approved_by = request.user
     else:
+        h.is_approved = False
         h.approval_date = None
         h.approved_by = None
     h.save()
+
     if h.is_approved:
         send_mails_for(h)
+
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
 @login_required
