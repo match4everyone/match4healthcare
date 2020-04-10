@@ -13,7 +13,7 @@ NewsletterStateIcons = {
 
 
 class NewsletterTable(tables.Table):
-    sending_state = tables.Column(empty_values=(), verbose_name=_('Status'))
+    sending_state = tables.Column(empty_values=(), verbose_name=_('Status'),attrs={'th':{'style':"width: 16.66%"}})
 
     class Meta:
         model = Newsletter
@@ -25,9 +25,9 @@ class NewsletterTable(tables.Table):
             'data-search': "false",
             'data-filter-control': "true",
             'data-show-export': "false",
-            'data-click-to-select': "true",
+            'data-click-to-select': "false",
             'data-toolbar': "#toolbar",
-            'class': "table table-sm"
+            'class': "table"
         }
 
     def render_uuid(self, value):

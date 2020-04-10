@@ -49,7 +49,7 @@ class Newsletter(models.Model):
     frozen_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='frozen_by')
 
     subject = models.CharField(max_length=200, default='')
-    message = models.TextField(default='', max_length=10000)
+    message = models.TextField(default='', max_length=1000000)
 
     was_sent = models.BooleanField(default=False)
 
