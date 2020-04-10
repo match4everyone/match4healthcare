@@ -399,10 +399,6 @@ def switch_newsletter(nl, user, request, post=None, get=None):
 
     return form, nl
 
-def send_test_newsletter(nl, user):
-    # todo
-    print('send')
-
 def send_approval_newsletter(nl, user, approval):
     # todo
     print('did_see_newsletter/%s/%s' % (nl.uuid,approval.approval_code))
@@ -414,8 +410,9 @@ def view_newsletter(request, uuid):
     nl = Newsletter.objects.get(uuid=uuid)
 
     if request.method == 'GET' and 'email' in request.GET:
-        send_test_newsletter(nl,request.user)
-        messages.add_message(request, messages.INFO,_('Eine Test Email wurde versendet.'))
+        email = request.GET.get('email')
+        nl.send_testmail_to(email)
+        messages.add_message(request, messages.INFO,_('Eine Test Email wurde an %s versendet.' % email))
 
     post = request.POST if request.method == 'POST' else None
     get = request.GET if request.method == 'GET' else None
@@ -454,7 +451,7 @@ from .tables import NewsletterTable
 @staff_member_required
 def list_newsletter(request):
     context = {
-        'table' : NewsletterTable(Newsletter.objects.all())
+        'table' : NewsletterTable(Newsletter.objects.all().order_by('-registration_date'))
     }
     return render(request,'newsletter_list.html',context)
 

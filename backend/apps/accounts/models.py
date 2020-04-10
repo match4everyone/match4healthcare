@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime
+from django.core.mail import EmailMessage
+from django.conf import settings
+
 import uuid
 import numpy as np
 
@@ -90,6 +93,18 @@ class Newsletter(models.Model):
         self.letter_authored_by.add(user)
         self.last_edited_date = datetime.now()
 
+    def send_testmail_to(self, email_receipient):
+        email = EmailMessage(
+            subject=self._subject(),
+            body=self.message,
+            from_email=settings.NOREPLY_MAIL,
+            to=[email_receipient]
+        )
+        email.content_subtype = "html"
+        email.send()
+
+    def _subject(self):
+        return '[match4healthcare] ' + str(self.subject)
 
 def random_number():
     return np.random.randint(0, 100000)
