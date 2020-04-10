@@ -337,7 +337,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
     if nl_state == NewsletterState.BEING_EDITED:
         # an edit was made
         if post is not None:
-            form = NewsletterForm(post, instance=nl)
+            form = NewsletterForm(post, uuid=nl.uuid,instance=nl)
 
             if form.is_valid():
                 form.save()
@@ -355,9 +355,9 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 return switch_newsletter(nl, user, request,post=None, get=None)
             else:
                 # the form is a virgin
-                form = NewsletterForm(instance=nl)
+                form = NewsletterForm(uuid=nl.uuid,instance=nl)
         else:
-            form = NewsletterForm(instance=nl)
+            form = NewsletterForm(uuid=nl.uuid,instance=nl)
 
     elif nl_state == NewsletterState.UNDER_APPROVAL:
         if get is not None:

@@ -22,9 +22,9 @@ ONLY_NOT_VALIDATED = 1
 ALL = 2
 
 VALIDATION_CHOICES = (
-    (ONLY_VALIDATED, 'only validated'),
-    (ONLY_NOT_VALIDATED, 'only not validated'),
-    (ALL, 'validated and not validated'),
+    (ONLY_VALIDATED, 'validierte'),
+    (ONLY_NOT_VALIDATED, 'nicht validierte'),
+    (ALL, 'varlidierte und nicht validierte'),
 )
 
 
