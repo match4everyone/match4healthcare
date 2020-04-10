@@ -16,12 +16,31 @@
 {% block content %}
 <hr>
 <div class="container">
+    {% if messages %}
+
+
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
 
     <p>
 
     </p>
 </div>
 <div class="container">
+    <div class="card border-primary">
+        <div class="card-body">
+        <p>Denk daran, rechtliche Fragen!</p>
+        </div>
+    </div>
+    <br>
     <div class="card border-primary">
         <div class="card-header">
             <h4>
@@ -47,10 +66,50 @@
                 </p>
             </form>
             <p>
-                <a href="/accounts/view_newsletter/{{uuid}}?unFreezeNewsletter" class="btn btn-dark">Start editing again </a>
+                {% if newsletter_state == state_enum.BEING_EDITED %}
                 <a href="/accounts/view_newsletter/{{uuid}}?freezeNewsletter" class="btn btn-dark">Freeze</a>
+                {% elif newsletter_state == state_enum.UNDER_APPROVAL %}
+                <a href="/accounts/view_newsletter/{{uuid}}?unFreezeNewsletter" class="btn btn-dark">Start editing
+                    again </a>
                 <a href="/accounts/view_newsletter/{{uuid}}?approveNewsletter" class="btn btn-dark">Approve</a>
+                {% elif newsletter_state == state_enum.READY_TO_SEND %}
+                <a href="/accounts/view_newsletter/{{uuid}}?unFreezeNewsletter" class="btn btn-dark">Start editing
+                    again </a>
                 <a href="/accounts/view_newsletter/{{uuid}}?sendNewsletter" class="btn btn-dark">Send</a>
+                {% endif %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Send Testmail
+                </button>
+
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                To which address?
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/accounts/view_newsletter/{{uuid}}" method="get" onsubmit="disableButton()">
+                            <div class="modal-body">
+
+                                {% csrf_token %}
+                                {{ mail_form | crispy }}
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send Testmail</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             </p>
         </div>

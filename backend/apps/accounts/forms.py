@@ -82,3 +82,6 @@ class NewsletterFormView(NewsletterForm):
         super(NewsletterForm, self).__init__(*args, **kwargs)
         for f in self.fields:
             self.fields[f].disabled = True
+
+class TestMailForm(forms.Form):
+    email = forms.EmailField()

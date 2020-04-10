@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}In {{ort}} ({{plz}}) wird Hilfe gebraucht:{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+<hr>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            {% blocktrans %}Newsletters{% endblocktrans %}
+            <a href="/accounts/new_newsletter" class="btn btn-dark">Neuen Newsletter erstellen</a>
+        </div>
+        <div class="card-body">
+            {% render_table table %}
+        </div>
+    </div>
+
+</div>
+<hr>
+{% endblock %}
