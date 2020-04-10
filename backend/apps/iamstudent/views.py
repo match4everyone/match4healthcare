@@ -31,6 +31,9 @@ from apps.accounts.decorator import student_required, hospital_required
 from crispy_forms.helper import FormHelper
 import datetime
 
+import logging
+logger = logging.getLogger("django")
+
 def get_student(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -165,13 +168,15 @@ def send_mails_for(hospital):
                           [m.student.user.email]
                           )
                 # todo: muss noch asynchron werden ...celery?
+                m.send_date = datetime.datetime.now()
+                m.was_sent = True
+                m.save()
+
             except BadHeaderError:
                 # Do not show error message to malicous actor
                 # Do not send the email
-                None
+                logger.warn("Email with email_group_id " + str(m.email_group_id) + " to Students from Hospital " + str(hospital.user.email) + " could not be sent due to a BadHeaderError")
 
-            m.was_sent = True
-            m.save()
 
 
 def clean_request_for_saving(request):

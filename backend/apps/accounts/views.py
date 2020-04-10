@@ -28,7 +28,7 @@ from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-
+from datetime import datetime
 
 from .utils import generate_random_username
 from django.contrib.auth.base_user import BaseUserManager
@@ -221,10 +221,20 @@ def approve_hospitals(request):
 @staff_member_required
 def change_hospital_approval(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
-    h.is_approved = not h.is_approved
+
+    if not h.is_approved:
+        h.is_approved = True
+        h.approval_date = datetime.now()
+        h.approved_by = request.user
+    else:
+        h.is_approved = False
+        h.approval_date = None
+        h.approved_by = None
     h.save()
+
     if h.is_approved:
         send_mails_for(h)
+
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
 @login_required
@@ -233,7 +243,7 @@ def delete_hospital(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
     name = h.user
     h.delete()
-    text = format_lazy(_("Du hast die Instiution mit user '{name}' gelöscht."), name=name)
+    text = format_lazy(_("Du hast die Institution mit user '{name}' gelöscht."), name=name)
     messages.add_message(request, messages.INFO,text)
     return HttpResponseRedirect('/accounts/approve_hospitals')
 
@@ -253,8 +263,9 @@ def delete_me_ask(request):
 def validate_email(request):
     if not request.user.validated_email:
         request.user.validated_email = True
+        request.user.email_validation_date = datetime.now()
         request.user.save()
-    return HttpResponseRedirect("/mapview")
+    return HttpResponseRedirect("login_redirect")
 
 
 def resend_validation_email(request, email):
