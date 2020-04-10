@@ -38,34 +38,34 @@ msgid "Nachricht"
 msgstr "Message"
 
 msgid "Davon nur an ... Benutzer"
-msgstr ""
+msgstr "but only to ... users"
 
 msgid "<h5>Adressaten</h5>"
-msgstr ""
+msgstr "<h5>Receipients</h5>"
 
 msgid "Dieser Newsletter geht an"
-msgstr ""
+msgstr "This will be send to"
 
 msgid "Betreff"
 msgstr "Subject"
 
 msgid "Änderungen Speichern"
-msgstr ""
+msgstr "Save changes"
 
 msgid "validierte"
-msgstr ""
+msgstr "validated"
 
 msgid "nicht validierte"
-msgstr ""
+msgstr "not validated"
 
 msgid "varlidierte und nicht validierte"
-msgstr ""
+msgstr "validated and not validated"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Ansehen"
-msgstr ""
+msgstr "Inspect"
 
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
@@ -260,8 +260,10 @@ msgstr "Register now"
 msgid "Newsletter bearbeiten"
 msgstr ""
 
-#, fuzzy
-#| msgid "Nützliche Hinweise"
+
+msgid "Nützliche Hinweise"
+msgstr "Useful tips"
+
 msgid "Wichtige Hinweise"
 msgstr "Useful tips"
 
@@ -548,7 +550,7 @@ msgid "Liebe*r Helfer*in,"
 msgstr "Dear supporter,"
 
 msgid ""
-"vielen Dank für deine Registrierung. Auf dieser Seite kannst du ein Passwort "
+"vielen Dank für deine Registrierung. Auf geht  Seite kannst du ein Passwort "
 "für deinen Account erstellen und dich damit einloggen."
 msgstr ""
 "thank you for your registration. On this page you can create a password for "
