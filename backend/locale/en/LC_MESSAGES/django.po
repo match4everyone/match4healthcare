@@ -22,18 +22,13 @@ msgstr ""
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#, fuzzy
-#| msgid "Institution"
+
 msgid "Institutionen"
-msgstr "Institution"
+msgstr "Institutions"
 
-#, fuzzy
-#| msgid "Helfer*in"
 msgid "Helfer*innen"
-msgstr "Supporter"
+msgstr "Supporters"
 
-#, fuzzy
-#| msgid "Nachrichtentext"
 msgid "Nachricht"
 msgstr "Message"
 
@@ -76,10 +71,8 @@ msgstr "Logout"
 msgid "Kennwort ändern"
 msgstr "Change password"
 
-#, fuzzy
-#| msgid "Jetzt registrieren"
 msgid "Newsletter editieren"
-msgstr "Register now"
+msgstr "Edit newsletter"
 
 msgid ""
 "\n"
