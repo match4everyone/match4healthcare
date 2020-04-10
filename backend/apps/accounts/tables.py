@@ -51,4 +51,4 @@ class NewsletterTable(tables.Table):
         return format_html(icon + ' ' + text)
 
     def render_letterapprovedby(self, value):
-        return format_html('<a href="/accounts/view_newsletter/%s">Ansehen</a>' % value)
+        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _('Ansehen')))

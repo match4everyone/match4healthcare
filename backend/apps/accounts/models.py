@@ -6,7 +6,7 @@ from django.conf import settings
 
 import uuid
 import numpy as np
-
+from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
@@ -21,9 +21,9 @@ ONLY_NOT_VALIDATED = 1
 ALL = 2
 
 VALIDATION_CHOICES = (
-    (ONLY_VALIDATED, 'validierte'),
-    (ONLY_NOT_VALIDATED, 'nicht validierte'),
-    (ALL, 'varlidierte und nicht validierte'),
+    (ONLY_VALIDATED, _('validierte')),
+    (ONLY_NOT_VALIDATED, _('nicht validierte')),
+    (ALL, _('varlidierte und nicht validierte')),
 )
 
 

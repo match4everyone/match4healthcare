@@ -307,10 +307,7 @@ class CustomLoginView(LoginView):
 @login_required
 @student_required
 def change_activation_ask(request):
-    return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
-
-
-
+    return render(request, 'change_activation_ask.html', {'is_activated': request.user.student.is_activated})
 
 
 @login_required
@@ -324,9 +321,10 @@ def change_activation(request):
         messages.add_message(request, messages.INFO, _(
             'Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
     else:
-        messages.add_message(request, messages.INFO,_(
+        messages.add_message(request, messages.INFO, _(
             'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
     return HttpResponseRedirect('profile_student')
+
 
 def switch_newsletter(nl, user, request, post=None, get=None):
     nl_state = nl.sending_state()
@@ -371,7 +369,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 messages.add_message(request, messages.WARNING,
                                      format_lazy(_(
                                          'Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir gesendeten Mail ({mail}) anklicken.'),
-                                                 mail=user.email))
+                                         mail=user.email))
                 approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
                 nl.send_approval_mail(approval, host=request.META['HTTP_HOST'])
                 switch_newsletter(nl, user, request, post=None, get=None)

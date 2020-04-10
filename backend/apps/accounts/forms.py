@@ -97,12 +97,12 @@ class BaseNewsletterForm(forms.ModelForm):
         self.helper.form_class = 'form-inline'
 
         self.helper.layout = Layout(
-            Row(Column(HTML('<h5>Adressaten</h5>')), Column(Row(HTML('Dieser Newsletter geht an')),
+            Row(Column(HTML(_('<h5>Adressaten</h5>'))), Column(Row(HTML(_('Dieser Newsletter geht an'))),
                                                             Row('send_to_students'),
                                                             Row('send_to_hospitals')),
                 Column('user_validation_required')),
             HTML('<hr>'),
-            PrependedText('subject', '[match4healthcare]', placeholder="Betreff"),
+            PrependedText('subject', '[match4healthcare]', placeholder=_("Betreff")),
             'message')
 
 
@@ -117,7 +117,7 @@ class NewsletterEditForm(BaseNewsletterForm):
         self.helper.attrs = {
             'onsubmit': 'disableButton()'
         }
-        self.helper.add_input(Submit('submit', 'Änderungen Speichern', css_class='btn-success'))
+        self.helper.add_input(Submit('submit', _('Änderungen Speichern'), css_class='btn-success'))
 
 
 class NewsletterViewForm(BaseNewsletterForm):
