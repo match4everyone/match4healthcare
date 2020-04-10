@@ -79,35 +79,36 @@ class CustomAuthenticationForm(AuthenticationForm):
 class BaseNewsletterForm(forms.ModelForm):
     class Meta:
         model = Newsletter
-        fields = ['subject', 'message', 'send_to_hospitals', 'send_to_students', 'validation_requirement']
+        fields = ['subject', 'message', 'send_to_hospitals', 'send_to_students', 'user_validation_required']
         labels = {
             'send_to_hospitals': _('Institutionen'),
             'send_to_students': _('Helfer*innen'),
             'message': _('Nachricht'),
-            'validation_requirement': _('Davon nur an ... Benutzer')
+            'user_validation_required': _('Davon nur an ... Benutzer')
         }
 
     def __init__(self, *args, **kwargs):
         super(BaseNewsletterForm, self).__init__(*args, **kwargs)
         for f in self.fields:
-            if f in ['message','subject']:
+            if f in ['message', 'subject']:
                 self.fields[f].label = False
         self.helper = FormHelper()
         self.helper.form_style = 'inline'
         self.helper.form_class = 'form-inline'
 
         self.helper.layout = Layout(
-                                    Row(Column(HTML('<h5>Adressaten</h5>')),Column(Row(HTML('Dieser Newsletter geht an')),
-                                        Row('send_to_students'),
-                                        Row('send_to_hospitals')),
-                                        Column('validation_requirement')),
-                                    HTML('<hr>'),
-                                    PrependedText('subject', '[match4healthcare]', placeholder="Betreff"),
-                                    'message')
+            Row(Column(HTML('<h5>Adressaten</h5>')), Column(Row(HTML('Dieser Newsletter geht an')),
+                                                            Row('send_to_students'),
+                                                            Row('send_to_hospitals')),
+                Column('user_validation_required')),
+            HTML('<hr>'),
+            PrependedText('subject', '[match4healthcare]', placeholder="Betreff"),
+            'message')
 
-class NewsletterForm(BaseNewsletterForm):
-    def __init__(self, *args,uuid=None, **kwargs):
-        super(NewsletterForm, self).__init__(*args, **kwargs)
+
+class NewsletterEditForm(BaseNewsletterForm):
+    def __init__(self, *args, uuid=None, **kwargs):
+        super(NewsletterEditForm, self).__init__(*args, **kwargs)
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
@@ -116,16 +117,17 @@ class NewsletterForm(BaseNewsletterForm):
         self.helper.attrs = {
             'onsubmit': 'disableButton()'
         }
-        self.helper.add_input(Submit('submit', 'Änderungen Speichern',css_class='btn-success'))
+        self.helper.add_input(Submit('submit', 'Änderungen Speichern', css_class='btn-success'))
 
 
-class NewsletterFormView(BaseNewsletterForm):
+class NewsletterViewForm(BaseNewsletterForm):
     def __init__(self, *args, **kwargs):
-        super(NewsletterFormView, self).__init__(*args, **kwargs)
+        super(NewsletterViewForm, self).__init__(*args, **kwargs)
         for f in self.fields:
             self.fields[f].disabled = True
             self.fields[f].required = False
         self.helper.form_tag = False
+
 
 class TestMailForm(forms.Form):
     email = forms.EmailField()

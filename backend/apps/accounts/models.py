@@ -56,7 +56,7 @@ class Newsletter(models.Model):
     send_to_hospitals = models.BooleanField(default=False)
     send_to_students = models.BooleanField(default=False)
 
-    validation_requirement = models.IntegerField(choices=VALIDATION_CHOICES, default=ONLY_VALIDATED, blank=False)
+    user_validation_required = models.IntegerField(choices=VALIDATION_CHOICES, default=ONLY_VALIDATED, blank=False)
 
     def sending_state(self):
         if self.was_sent:
@@ -77,7 +77,7 @@ class Newsletter(models.Model):
     def approve_from(self, user):
         self.letter_approved_by.add(user)
 
-    def send(self,user):
+    def send(self, user):
         self.send_date = datetime.now()
         self.was_sent = True
         self.sent_by = user
@@ -104,8 +104,8 @@ class Newsletter(models.Model):
         return LetterApprovedBy.objects.filter(newsletter=self, user=user, did_see_email=True).count() == 1
 
     def required_approvals(self):
-        return settings.NEWSLETTER_REQUIRED_APPROVERS - LetterApprovedBy.objects.filter(newsletter=self, did_see_email=True).count()
-
+        return settings.NEWSLETTER_REQUIRED_APPROVERS - LetterApprovedBy.objects.filter(newsletter=self,
+                                                                                        did_see_email=True).count()
 
     def send_approval_mail(self, approval, host):
         body = '<h3>Link zum Approven ganz unten</h3><hr>'
