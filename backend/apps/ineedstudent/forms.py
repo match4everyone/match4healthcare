@@ -4,6 +4,7 @@ from django.db import models
 from django import forms
 
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Row, Column
 from apps.accounts.models import User
@@ -160,6 +161,13 @@ class EmailToHospitalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Hilfsangebot abschicken'), css_class='btn blue text-white btn-md'))
+
+    def clean_message(self):
+        message = self.cleaned_data["message"]
+        initial_message = self.initial["message"]
+        if ''.join(str(message).split()) == ''.join(str(initial_message).split()):
+            raise ValidationError(_('Bitte personalisiere diesen Text'), code='invalid')
+        return message
 
 class PostingForm(forms.ModelForm):
 
