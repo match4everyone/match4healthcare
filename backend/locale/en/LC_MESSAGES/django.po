@@ -258,8 +258,7 @@ msgid "Jetzt registrieren"
 msgstr "Register now"
 
 msgid "Newsletter bearbeiten"
-msgstr ""
-
+msgstr "Edit Newsletter"
 
 msgid "Nützliche Hinweise"
 msgstr "Useful tips"
@@ -807,9 +806,6 @@ msgstr "Deactivate profile"
 
 msgid "Profil aktivieren"
 msgstr "Activate profile"
-
-msgid "Nützliche Hinweise"
-msgstr "Useful tips"
 
 msgid ""
 "Wir haben <a href=\"/legal-questions\">rechtliche Hinweise und Tipps</a> zu "
