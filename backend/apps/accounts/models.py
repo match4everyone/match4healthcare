@@ -7,10 +7,6 @@ from django.conf import settings
 import uuid
 import numpy as np
 
-ADD_APPROVALS = 1
-
-
-# todo move to settings
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
@@ -32,10 +28,10 @@ VALIDATION_CHOICES = (
 
 
 class NewsletterState:
-    SENT = 0
     BEING_EDITED = 1
     UNDER_APPROVAL = 2
     READY_TO_SEND = 3
+    SENT = 4
 
 
 class Newsletter(models.Model):
@@ -68,7 +64,7 @@ class Newsletter(models.Model):
         else:
             if self.frozen_by is None:
                 return NewsletterState.BEING_EDITED
-            elif LetterApprovedBy.objects.filter(newsletter=self, did_see_email=True).count() < ADD_APPROVALS:
+            elif self.required_approvals() > 0:
                 return NewsletterState.UNDER_APPROVAL
             else:
                 return NewsletterState.READY_TO_SEND
@@ -81,9 +77,10 @@ class Newsletter(models.Model):
     def approve_from(self, user):
         self.letter_approved_by.add(user)
 
-    def send(self):
+    def send(self,user):
         self.send_date = datetime.now()
         self.was_sent = True
+        self.sent_by = user
 
     def freeze(self, user):
         self.frozen_by = user
@@ -103,8 +100,34 @@ class Newsletter(models.Model):
         email.content_subtype = "html"
         email.send()
 
+    def has_been_approved_by(self, user):
+        return LetterApprovedBy.objects.filter(newsletter=self, user=user, did_see_email=True).count() == 1
+
+    def required_approvals(self):
+        return settings.NEWSLETTER_REQUIRED_APPROVERS - LetterApprovedBy.objects.filter(newsletter=self, did_see_email=True).count()
+
+
+    def send_approval_mail(self, approval, host):
+        body = '<h3>Link zum Approven ganz unten</h3><hr>'
+        body += self.message
+        body += '<hr><a href="https://%s/accounts/view_newsletter/%s"> Ich habe Probleme gefunden und will den ' \
+                'Newsletter bearbeiten.</a><br>' \
+                % (host, self.uuid)
+        body += '<a href="https://%s">Ich bestätige, dass diese E-Mail als Newsletter' \
+                ' abgeschickt werden darf.</a>' \
+                % approval.verify_url(host)
+        email = EmailMessage(
+            subject=self._subject(),
+            body=body,
+            from_email=settings.NOREPLY_MAIL,
+            to=[approval.user.email]
+        )
+        email.content_subtype = "html"
+        email.send()
+
     def _subject(self):
         return '[match4healthcare] ' + str(self.subject)
+
 
 def random_number():
     return np.random.randint(0, 100000)
@@ -118,3 +141,6 @@ class LetterApprovedBy(models.Model):
 
     class Meta:
         unique_together = ('user', 'newsletter',)
+
+    def verify_url(self, host):
+        return '%s/accounts/did_see_newsletter/%s/%s' % (host, self.newsletter.uuid, self.approval_code)

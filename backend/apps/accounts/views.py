@@ -372,6 +372,8 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 nl.save()
                 messages.add_message(request, messages.WARNING,
                                      format_lazy(_('Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir gesendeten Mail ({mail}) anklicken.'),mail=user.email))
+                approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
+                nl.send_approval_mail(approval,host=request.META['HTTP_HOST'])
                 switch_newsletter(nl, user, request,post=None, get=None)
 
         form = NewsletterFormView(instance=nl)
@@ -379,7 +381,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
     elif nl_state == NewsletterState.READY_TO_SEND:
         if get is not None:
             if 'sendNewsletter' in get:
-                nl.send()
+                nl.send(user)
                 nl.save()
                 messages.add_message(request, messages.INFO, _('Der Newsletter wurde versendet.'))
                 switch_newsletter(nl, user,request)
@@ -398,10 +400,6 @@ def switch_newsletter(nl, user, request, post=None, get=None):
         raise Http404
 
     return form, nl
-
-def send_approval_newsletter(nl, user, approval):
-    # todo
-    print('did_see_newsletter/%s/%s' % (nl.uuid,approval.approval_code))
 
 @login_required
 @staff_member_required
@@ -426,14 +424,15 @@ def view_newsletter(request, uuid):
         'uuid': uuid,
         'newsletter_state': nl.sending_state(),
         'state_enum': NewsletterState,
-        'mail_form': TestMailForm()
-               }
+        'mail_form': TestMailForm(),
+        'already_approved_by_this_user' : nl.has_been_approved_by(request.user),
+        'required_approvals': nl.required_approvals(),
+        'nl':nl,
+        'approvers' : ', '.join([a.user.username for a in nl.letterapprovedby_set.all()])
+    }
     # todo's
-    # testsend einer email
     # beim approven email sende
 
-    # hinweis was darf gesendet werden
-    # nicht gleichzeitig editieren ;)
     return render(request, 'newsletter_edit.html', context)
 
 
