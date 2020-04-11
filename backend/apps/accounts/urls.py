@@ -2,7 +2,8 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from . import views
-
+#TODO Remove
+from . import resend_emailtosend
 from . import generate_users
 
 urlpatterns = [
@@ -36,6 +37,9 @@ urlpatterns = [
     path('change_activation',views.change_activation_ask,name='activate_student_ask'),
     path('change_activation_confirm',views.change_activation,name='activate_student'),
     path('i18n/', include('django.conf.urls.i18n')),
+
+    # TODO REMOVE
+    path('resend_emailtosend/', resend_emailtosend.resend_emailtosend, name='resend_emailtosend')
 ]
 
 if settings.DEBUG:
