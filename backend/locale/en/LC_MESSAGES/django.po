@@ -42,8 +42,6 @@ msgstr "<h5>Receipients</h5>"
 msgid "Dieser Newsletter geht an"
 msgstr "This will be send to"
 
-msgid "Betreff"
-msgstr "Subject"
 
 msgid "Änderungen Speichern"
 msgstr "Save changes"
