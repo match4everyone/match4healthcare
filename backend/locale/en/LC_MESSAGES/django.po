@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: apps/ineedstudent/tables.py:9 apps/ineedstudent/views.py:188
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -1218,6 +1219,9 @@ msgstr "Pharmacy"
 
 msgid "Allgemein"
 msgstr "General"
+
+msgid "Betreff"
+msgstr "Subject"
 
 msgid "Nachrichtentext"
 msgstr "Message"
