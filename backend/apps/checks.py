@@ -91,7 +91,7 @@ def check_send_mails(app_configs=None, **kwargs):
             Warning(
                 "No SENDGRID API key.",
                 hint=(
-                    "That's okay if you are using another email backend. "
+                    "That's okay because you are using another email backend. "
                     "If you do want to use the Sendgrid email backend, set the 'mail_relay_option' to sendgrid in 'development.py'"),
                 id='env.E001',
             )
