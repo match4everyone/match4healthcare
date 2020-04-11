@@ -8,6 +8,7 @@ import uuid
 import numpy as np
 from django.utils.translation import gettext_lazy as _
 
+
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_hospital = models.BooleanField(default=False)
@@ -19,11 +20,13 @@ class User(AbstractUser):
 ONLY_VALIDATED = 0
 ONLY_NOT_VALIDATED = 1
 ALL = 2
+VALIDATED_AND_APPROVED = 3
 
 VALIDATION_CHOICES = (
     (ONLY_VALIDATED, _('validierte')),
     (ONLY_NOT_VALIDATED, _('nicht validierte')),
     (ALL, _('varlidierte und nicht validierte')),
+    (VALIDATED_AND_APPROVED, _('validiert und von uns approved')),
 )
 
 
@@ -78,6 +81,7 @@ class Newsletter(models.Model):
         self.letter_approved_by.add(user)
 
     def send(self, user):
+        self.send_newsletter_out()
         self.send_date = datetime.now()
         self.was_sent = True
         self.sent_by = user
@@ -127,6 +131,54 @@ class Newsletter(models.Model):
 
     def _subject(self):
         return '[match4healthcare] ' + str(self.subject)
+
+    def send_newsletter_out(self):
+        if self.sending_state() != NewsletterState.READY_TO_SEND:
+            raise ValueError('The newsletter is not ready to send, so you cannot send out an email.')
+
+
+        hospital_filter = {'is_hospital': True}
+        student_filter = {'is_student': True}
+
+        if self.user_validation_required == ONLY_VALIDATED:
+            hospital_filter['validated_email'] = True
+            student_filter['validated_email'] = True
+        elif self.user_validation_required == VALIDATED_AND_APPROVED:
+            hospital_filter['validated_email'] = True
+            hospital_filter['hospital__is_approved'] = True
+            student_filter['validated_email'] = True
+        elif self.user_validation_required == ONLY_NOT_VALIDATED:
+            hospital_filter['validated_email'] = False
+            student_filter['validated_email'] = False
+        elif ALL:
+            pass
+
+        if self.send_to_hospitals:
+            recipient_hospitals_qs = User.objects.filter(**hospital_filter).values_list('email', flat=True)
+            self._send_mail(recipient_hospitals_qs, recipient_hospitals_qs.count())
+
+        if self.send_to_students:
+            recipient_student_qs = User.objects.filter(**student_filter).values_list('email', flat=True)
+            self._send_mail(recipient_student_qs, recipient_student_qs.count())
+
+    def _send_mail(self, recipients, n):
+
+        chunksize = 4900  # max allowed by sendgrid: 5k (but they have weird extra limitations, so be sure)
+        for i in range((n // chunksize)+1):
+            pos = i * chunksize
+            self._send_mass_mail(recipients[pos:min(pos+chunksize, n)])
+
+    def _send_mass_mail(self, recipients):
+
+        email = EmailMessage(
+            subject=self._subject(),
+            body=self.message,
+            from_email=settings.NOREPLY_MAIL,
+            bcc=list(recipients),
+            to=['news@match4healthcare.de']
+        )
+        email.content_subtype = "html"
+        email.send()
 
 
 def random_number():
