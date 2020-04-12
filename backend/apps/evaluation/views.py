@@ -1,3 +1,7 @@
+from django import forms
 from django.shortcuts import render
+from . import models
 
-# Create your views here.
+
+class StudentEvaluationForm(forms.ModelForm):
+    model = models.StudentEvaluation
