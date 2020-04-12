@@ -16,7 +16,7 @@ from apps.accounts.models import User
 import logging
 
 form_labels = {
-    'uuid': _('Writer'),
+    'uuid': _('Writerekp'),
     'registration_date': _('Writer'),
 
     'name_first': _('Vorname'),
@@ -531,6 +531,13 @@ class EmailToSendForm(forms.ModelForm):
                   'message': _('Nachrichtentext')}
         help_texts = {
         }
+
+    def clean_message(self):
+        message = self.cleaned_data["message"]
+        initial_message = self.initial["message"]
+        if ''.join(str(message).split()) == ''.join(str(initial_message).split()):
+            raise ValidationError(_('Bitte personalisiere diesen Text'), code='invalid')
+        return message
 
 def get_form_helper_filter():
     helper = FormHelper()
