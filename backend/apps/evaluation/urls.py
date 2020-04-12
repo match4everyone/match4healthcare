@@ -6,5 +6,5 @@ urlpatterns = [
     # path for Student-Evaluations
     path('student/', views.StudentEvaluationForm.as_view()),
     # path for Institution-Evaluations
-    path('institution/', views.InstitutionEvaluationForm.as_view()),
+    # path('institution/', views.InstitutionEvaluationForm.as_view()),
 ]
