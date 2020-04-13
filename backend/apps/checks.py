@@ -1,4 +1,3 @@
-from django.apps import apps as camelot_apps
 from django.core.checks import register, Error, Warning
 from django.core.checks import Tags as DjangoTags
 from django.conf import settings
@@ -6,7 +5,7 @@ import http.client
 import json
 
 
-def sendgrid_sandbox_mail_works():
+def does_sendgrid_sandbox_mail_work():
     conn = http.client.HTTPSConnection("api.sendgrid.com")
 
     payload = {"personalizations": [
@@ -76,7 +75,7 @@ def check_send_mails(app_configs=None, **kwargs):
                 )
             )
         else:
-            if not sendgrid_sandbox_mail_works():
+            if not does_sendgrid_sandbox_mail_work():
                 errors.append(
                     Error(
                         "You want to use Sendgrid, but sending a mail in sandbox mode fails.",
