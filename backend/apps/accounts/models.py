@@ -7,6 +7,7 @@ class User(AbstractUser):
 
     is_student = models.BooleanField(default=False)
     is_hospital = models.BooleanField(default=False)
+    has_evaluated = models.BooleanField(default=False)
     validated_email = models.BooleanField(default=False)
     email_validation_date = models.DateTimeField(blank=True, null=True)
     REQUIRED_FIELDS = ['email']
