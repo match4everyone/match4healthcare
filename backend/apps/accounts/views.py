@@ -49,7 +49,7 @@ def student_signup(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        logger.info('Signup request for {}'.format(form.cleaned_data['email']), extra={ 'post': request.POST} )
+        logger.info('Signup request for {}'.format(form.cleaned_data['email']), extra={ 'request': request } )
         form = StudentFormAndMail(request.POST)
 
         # check whether it's valid:
@@ -86,7 +86,7 @@ def register_student_in_db(request, mail):
 
 def hospital_signup(request):
     if request.method == 'POST':
-        logger.info('Hospital registration for {}'.format(form.cleaned_data['email']), extra={ 'post': request.POST } )
+        logger.info('Hospital registration for {}'.format(form.cleaned_data['email']), extra={ 'request': request } )
         form_info = HospitalFormInfoSignUp(request.POST)
 
         if form_info.is_valid():
@@ -150,7 +150,7 @@ def profile_redirect(request):
 
     else:
         #TODO: throw 404
-        logger.warning('User {} is unknown type, profile redirect not possible'.format(user.id), extra={ 'user': request.user } )
+        logger.warning('User {} is unknown type, profile redirect not possible'.format(user.id), extra={ 'request': request } )
         HttpResponse('Something wrong in database')
 
 @login_required
@@ -171,7 +171,7 @@ def login_redirect(request):
 
     else:
         #TODO: throw 404
-        logger.warning('User {} is unknown type, login redirect not possible'.format(user.id), extra={ 'user': request.user } )
+        logger.warning('User {} is unknown type, login redirect not possible'.format(user.id), extra={ 'request': request } )
         HttpResponse('Something wrong in database')
 
 
@@ -181,7 +181,7 @@ def edit_student_profile(request):
     student = request.user.student
 
     if request.method == 'POST':
-        logger.info('Update Student Profile {}'.format(request.user.id),extra={ 'student': student, 'post': request.POST })
+        logger.info('Update Student Profile {}'.format(request.user.id),extra={ 'student': student, 'request': request })
         form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
 
         if form.is_valid():
@@ -199,7 +199,7 @@ def edit_hospital_profile(request):
     hospital = request.user.hospital
 
     if request.method == 'POST':
-        logger.info('Update Hospital Profile {}'.format(request.user.id),extra={ 'hospital': hospital, 'post': request.POST })
+        logger.info('Update Hospital Profile {}'.format(request.user.id),extra={ 'hospital': hospital, 'request': request })
         form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
 
         if form.is_valid():
@@ -319,7 +319,7 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
     def post(self, request, *args, **kwargs):
-        logger.info('Login Attempt ({})'.format(request.POST['username']), extra={'request': request})
+        logger.info('Login Attempt ({})'.format(request.POST['username']))
         return super().post(request,*args,**kwargs)
 
     def form_valid(self, form):
