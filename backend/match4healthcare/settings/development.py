@@ -28,7 +28,7 @@ NOREPLY_MAIL = 'match4healthcare-DEVELOPMENT<noreply@example.de>'
 
 # Possible values are 'file', 'external', 'sendgrid'
 # For storing mails local in files files, sending external (uberspace) or sending over sendgrid (production like)
-mail_relay_option = 'file'
+mail_relay_option = 'sendgrid'
 
 # +++ Store files locally
 if mail_relay_option == 'file':
@@ -49,8 +49,8 @@ elif mail_relay_option == 'sendgrid':
     use_sendgrid_api = True
 
     # Retrieve sendgrid api key
-    SENDGRID_SECRET_FILE = normpath(join(RUN_DIR, 'SENDGRID.key'))
-    SENDGRID_API_KEY = open(SENDGRID_SECRET_FILE).read().strip()
+    NOREPLY_MAIL = 'match4healthcare<noreply@testing.match4healthcare.de>'
+    SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
     if use_sendgrid_api:
         # Using the API
