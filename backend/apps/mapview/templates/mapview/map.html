@@ -8,15 +8,15 @@
 {% endblock %}
 
 {% block header %}
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
+<link rel="stylesheet" href="{% static 'js/leaflet-1.6.0/leaflet.css' %}" />
+<link rel="stylesheet" href="{% static 'js/leaflet.markercluster-1.4.1/MarkerCluster.css' %}" />
+<link rel="stylesheet" href="{% static 'js/leaflet.markercluster-1.4.1/MarkerCluster.Default.css' %}" />
 <link rel="stylesheet" href="{% static 'css/map.css' %}">
 
 <!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
+<script src="{% static 'js/leaflet-1.6.0/leaflet.js' %}" ></script>
+<script src="{% static 'js/leaflet.markercluster-1.4.1/leaflet.markercluster.js' %}" ></script>
+<script src="{% static 'js/Leaflet.FeatureGroup.SubGroup-1.0.2/leaflet.featuregroup.subgroup.js' %}" ></script>
 
 <script type="text/javascript">
 
@@ -29,6 +29,10 @@
     mapboxToken       : 'pk.eyJ1Ijoiam9zYXVkZXIiLCJhIjoiY2s4MWNxa2QzMDNkejNrcDVhbzV6MDMxYSJ9.O4sLC7VSSgy4S7EKjNoG1g',
     createPopupTextStudent  :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Helfer*innen.\n<a href="${url}" target="_blank">Detailansicht für Kliniken</a>{% endblocktrans %}`,
     createPopupTextHospital :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Orte an denen Hilfe gebraucht wird.\n<a href="${url}" target="_blank">Detailansicht</a>{% endblocktrans %}`,
+    facilityIcon: L.icon({
+      iconUrl: "{% static 'img/map/facility-marker.svg' %}",
+      iconSize: [40, 40],
+    }),
   }
 
 </script>
@@ -54,24 +58,7 @@
 
 
 <div id="mapContainer" style="z-index:1;">
-
-<div class="user-container">
-  <h4 style="margin-bottom:0px; display:inline; font-size:18px;">
-    <svg class="bi bi-people-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
-    </svg>
-  </h4>
-  <p id="user_count" style="margin-bottom:0px; display:inline;"></p> Helfende<br/>
-  <h4 style="margin-bottom:0px; display:inline; font-size:18px;">
-    <svg class="bi bi-people-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
-    </svg>
-  </h4>
-  <p id="facility_count" style="margin-bottom:0px; display:inline;"></p> Einrichtungen
-</div>
-
 	 <a href="http://mapbox.com/about/maps" class="mapbox-wordmark" target="_blank">Mapbox</a>
-
 </div>
 
 <script type="text/javascript">
