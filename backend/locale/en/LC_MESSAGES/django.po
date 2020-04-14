@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: apps/ineedstudent/tables.py:9 apps/ineedstudent/views.py:188
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-09 15:39+0000\n"
-"PO-Revision-Date: 2020-04-05 13:31+0200\n"
+"POT-Creation-Date: 2020-04-14 17:57+0000\n"
+"PO-Revision-Date: 2020-04-14 20:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -708,13 +707,13 @@ msgstr "Your profile has been updated!"
 msgid "Deine Daten wurden nicht erfolgreich geändert!"
 msgstr "Your profile has not been updated successfully!"
 
-#: apps/accounts/views.py:243
+#: apps/accounts/views.py:246
 #, fuzzy, python-brace-format
 #| msgid "Du hast die Instiution mit user '{name}' gelöscht."
 msgid "Du hast die Institution mit user '{name}' gelöscht."
 msgstr "You deleted the facility with user ‘{name}’."
 
-#: apps/accounts/views.py:319
+#: apps/accounts/views.py:322
 msgid ""
 "Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen "
 "mehr von Hilfesuchenden bekommen."
@@ -722,7 +721,7 @@ msgstr ""
 "You have successfully deactivated your profile, you can no longer receive "
 "requests from people seeking help."
 
-#: apps/accounts/views.py:322
+#: apps/accounts/views.py:325
 msgid ""
 "Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von "
 "Hilfesuchenden kontaktiert werden."
@@ -860,7 +859,7 @@ msgstr "Intensive care"
 
 #: apps/iamstudent/forms.py:48
 msgid "Notfallmedizin"
-msgstr ""
+msgstr "emergency medicine"
 
 #: apps/iamstudent/forms.py:50
 #, fuzzy
@@ -1882,11 +1881,11 @@ msgstr ""
 "profile online.\n"
 "\n"
 
-#: apps/ineedstudent/views.py:187
+#: apps/ineedstudent/views.py:188
 msgid "Neues Hilfsangebot"
 msgstr "Message from a potential supporter"
 
-#: apps/ineedstudent/views.py:206
+#: apps/ineedstudent/views.py:207
 msgid "Deine Anzeige wurde erfolgreich aktualisiert."
 msgstr "Your posting has been updated."
 
@@ -2122,17 +2121,24 @@ msgstr ""
 "100%% voluntarily and unselfishly developed by students as an open source "
 "project"
 
-#: templates/home.html:154
+#: templates/home.html:158
 msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
-#: templates/home.html:157
-msgid "Mit Unterstützung von"
-msgstr "Supported by"
+#: templates/home.html:166
+msgid "Unsere Kooperations&shy;partner"
+msgstr "Our cooperation partners"
+
+#: templates/home.html:193
+msgid "Empfohlen von"
+msgstr "Recommended by"
 
 #: templates/legal-questions.html:6
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "Mit Unterstützung von"
+#~ msgstr "Supported by"
 
 #~ msgid "Notaufnahme"
 #~ msgstr "Emergency admissions"
