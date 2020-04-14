@@ -32,8 +32,8 @@ mail_relay_option = 'sendgrid'
 
 # +++ Store files locally
 if mail_relay_option == 'file':
-    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-    EMAIL_FILE_PATH = path.join(BASE_DIR, 'sent_emails')
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")
 
 # +++ Use local debug server
 elif mail_relay_option == 'external':
