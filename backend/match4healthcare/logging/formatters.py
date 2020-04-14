@@ -1,5 +1,6 @@
 from enum import Enum
 from datetime import datetime
+from django.views.debug import SafeExceptionReporterFilter
 import json_log_formatter
 import logging
 
@@ -33,14 +34,21 @@ class DjangoRequestJSONFormatter(json_log_formatter.JSONFormatter):
         if 'timestamp' not in extra:
             extra['timestamp'] = datetime.utcnow()
         if hasattr(record,'request'):
+            request = record.request
             # Overwrite request information in extra, avoid circular references by copying only selected items
             extra['request'] = {} 
-            if hasattr(record.request,'user'):
-                extra['user'] = str(record.request.user)
+            if hasattr(request,'user'):
+                extra['user'] = request.user.get_username()
             
-            request_attributes = ['method','GET','POST','path',]
-            for attr in request_attributes:
-                extra['request'][attr] = getattr(record.request,attr,'N/A')
+            extra['request']['path'] = getattr(request,'path','n/a')
+            extra['request']['method'] = getattr(request,'method','n/a')
+            
+            if extra['request']['method'] == 'GET' and hasattr(request,'GET'):
+                extra['request']['get'] = request.GET
+
+            if extra['request']['method'] == 'POST' and hasattr(request,'POST'):
+                filter = SafeExceptionReporterFilter()
+                extra['request']['post'] = filter.get_post_parameters(record.request)
 
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)

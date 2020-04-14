@@ -318,6 +318,17 @@ class UserCountView(APIView):
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
+    def post(self, request, *args, **kwargs):
+        logger.info('Login Attempt ({})'.format(request.POST['username']), extra={'request': request})
+        return super().post(request,*args,**kwargs)
+
+    def form_valid(self, form):
+        logger.info('Login succesful ({})'.format(form.cleaned_data['username']))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        logger.warning('Login failure ({})'.format(form.cleaned_data['username']))
+        return super().form_invalid(form)
 
 @login_required
 @student_required
