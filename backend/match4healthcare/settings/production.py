@@ -61,7 +61,6 @@ LOGGING = {
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
 # ToDo add environment variable based detection whether we are on prod or staging
 NOREPLY_MAIL = 'match4healthcare<noreply@match4healthcare.de>'
-
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
 # Use API instead of SMTP server
