@@ -56,3 +56,9 @@ If you want to deploy manually follow these steps closly:
 4. Collect static
 5. Migrate
 6. Restart the backend container (important, whitenoise does not reload static files after it has started)
+
+## Testing
+
+For executing the tests use `python3 manage.py test`. 
+
+In case you add more required environment variables for productions, please check for their existance in `backend/apps/checks.py`.
