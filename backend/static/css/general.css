@@ -290,3 +290,24 @@ input[type="color"]:focus,
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 20, 146, 0.4);
   outline: 0 none;
 }
+
+
+.dropdown-menu { 
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius:0px !important;
+	border: 0px !important;
+	
+}
+.dropdown-toggle:hover > svg {stroke: #ed0a71 !important;}
+.dropdown-toggle, .dropdown-item { cursor: pointer; }
+.dropdown-item { color: #000943; }
+.dropdown-item:active, .dropdown-item:hover { background-color: none !important; background: none !important; color: #ed0a71; }
+
+	@supports (-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px)) {
+
+		.dropdown-menu {
+			-webkit-backdrop-filter: blur(4px);
+  		 	backdrop-filter: blur(4px);
+			background-color: rgba(255, 255, 255, 0.6);
+			}
+}

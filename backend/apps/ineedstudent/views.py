@@ -138,11 +138,17 @@ class ApprovalHospitalTable(HospitalTable):
 @login_required
 def hospital_view(request,uuid):
     h = Hospital.objects.filter(uuid=uuid)[0]
+    initial = {
+        'subject': _('Neues Hilfsangebot'),
+        'message': _('Hallo, ich habe ihr Gesuche auf der Plattform match4healthcare gesehen und bin für die Stelle qualifiziert.\nIch bin...\nIch möchte helfen in dem...')
+    }
+
+    email_form = EmailToHospitalForm(initial=initial)
 
     if request.POST and request.user.is_student and request.user.validated_email:
         s = request.user.student
 
-        email_form = EmailToHospitalForm(request.POST)
+        email_form = EmailToHospitalForm(request.POST, initial=initial)
 
         if email_form.is_valid():
             start_text = _("Hallo %s,\n\nSie haben über unsere Plattform match4healthcare von %s (%s) eine Antwort auf Ihre Anzeige bekommen.\n"
@@ -184,9 +190,6 @@ def hospital_view(request,uuid):
         context["distance"] = int(haversine(lon1, lat1, lon2, lat2))
         context["plz_student"] = s.plz
 
-
-    email_form = EmailToHospitalForm(initial={'subject': _('Neues Hilfsangebot'),
-                                              'message': _('')})
 
     context['email_form'] = email_form
 
