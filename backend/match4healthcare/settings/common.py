@@ -170,7 +170,7 @@ LOGGING = {
         'json': { # Made for Django Requests and General logging, will create parseable error logs
             'class': 'match4healthcare.logging.formatters.DjangoRequestJSONFormatter'
         },
-        'oneLineExceptionFormatter': { # Made for Console Outpu, will output one line per message
+        'text': { 
             'class': 'match4healthcare.logging.formatters.OneLineExceptionFormatter',
             'format': '%(asctime)s: %(name)-12s %(levelname)-8s |%(message)s|',
         },
@@ -184,7 +184,7 @@ LOGGING = {
         },
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'oneLineExceptionFormatter',
+            'formatter': 'text',
         },
         'errorlogfile': {
             'class': 'logging.handlers.RotatingFileHandler',
