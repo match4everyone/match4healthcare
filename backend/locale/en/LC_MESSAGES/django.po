@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: .\apps\ineedstudent\tables.py:9 .\apps\ineedstudent\views.py:188
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-09 20:39+0000\n"
+"POT-Creation-Date: 2020-04-14 18:11+0000\n"
 "PO-Revision-Date: 2020-04-09 22:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -639,6 +638,11 @@ msgstr "we do not know"
 msgid "Egal"
 msgstr "Irrelevant"
 
+#, fuzzy
+#| msgid "Writer"
+msgid "Writerekp"
+msgstr "Writer"
+
 msgid "Writer"
 msgstr "Writer"
 
@@ -936,6 +940,9 @@ msgstr "Subject"
 msgid "Nachrichtentext"
 msgstr "Message"
 
+msgid "Bitte personalisiere diesen Text"
+msgstr ""
+
 msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
 msgstr "In which of the following areas is prior experience necessary?"
 
@@ -1224,29 +1231,6 @@ msgstr "Detail view for Volunteer"
 
 #, python-brace-format
 msgid ""
-"Hallo {first_name} {last_name},\n"
-"\n"
-" wir haben folgende Nachricht von {firmenname} für dich. Falls du keine "
-"Nachrichten mehr erhalten möchtest, deaktiviere dein Konto bitte hier: "
-"https://match4healthcare.de/accounts/change_activation\n"
-"\n"
-"Dein Match4Healthcare Team\n"
-"----------------------------\n"
-"{hospital_message}"
-msgstr ""
-"Hello {first_name} {last_name},\n"
-"\n"
-"we have a message from {firmenname} for you. In case you do not want to "
-"receive any further messages, please deactivate your account here: https://"
-"match4healthcare.de/accounts/change_activation\n"
-"\n"
-"Best,\n"
-"Your Match4Healthcare Team\n"
-"----------------------------\n"
-"{hospital_message}"
-
-#, python-brace-format
-msgid ""
 "Liebe(r) Helfende(r),\n"
 "\n"
 "Wir sind... \n"
@@ -1275,6 +1259,29 @@ msgstr ""
 
 msgid "Ein Ort braucht Deine Hilfe"
 msgstr "Somebody needs your help"
+
+#, python-brace-format
+msgid ""
+"Hallo {first_name} {last_name},\n"
+"\n"
+" wir haben folgende Nachricht von {firmenname} für dich. Falls du keine "
+"Nachrichten mehr erhalten möchtest, deaktiviere dein Konto bitte hier: "
+"https://match4healthcare.de/accounts/change_activation\n"
+"\n"
+"Dein Match4Healthcare Team\n"
+"----------------------------\n"
+"{hospital_message}"
+msgstr ""
+"Hello {first_name} {last_name},\n"
+"\n"
+"we have a message from {firmenname} for you. In case you do not want to "
+"receive any further messages, please deactivate your account here: https://"
+"match4healthcare.de/accounts/change_activation\n"
+"\n"
+"Best,\n"
+"Your Match4Healthcare Team\n"
+"----------------------------\n"
+"{hospital_message}"
 
 msgid ""
 "[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert"
@@ -1515,6 +1522,16 @@ msgid ""
 "                    Bedingungen zu"
 msgstr "Please agree to the updated conditions"
 
+msgid "Neues Hilfsangebot"
+msgstr "Message from a potential supporter"
+
+msgid ""
+"Hallo, ich habe ihr Gesuche auf der Plattform match4healthcare gesehen und "
+"bin für die Stelle qualifiziert.\n"
+"Ich bin...\n"
+"Ich möchte helfen in dem..."
+msgstr ""
+
 #, python-format
 msgid ""
 "Hallo %s,\n"
@@ -1532,9 +1549,6 @@ msgstr ""
 "If you no longer wish to receive requests, please deactivate your ad in your "
 "profile online.\n"
 "\n"
-
-msgid "Neues Hilfsangebot"
-msgstr "Message from a potential supporter"
 
 msgid "Deine Anzeige wurde erfolgreich aktualisiert."
 msgstr "Your posting has been updated."
@@ -1731,11 +1745,17 @@ msgstr ""
 msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
-msgid "Mit Unterstützung von"
-msgstr "Supported by"
+msgid "Unsere Kooperations&shy;partner"
+msgstr ""
+
+msgid "Empfohlen von"
+msgstr ""
 
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "Mit Unterstützung von"
+#~ msgstr "Supported by"
 
 #~ msgid "Notaufnahme"
 #~ msgstr "Emergency admissions"
