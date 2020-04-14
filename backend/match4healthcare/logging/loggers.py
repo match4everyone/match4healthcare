@@ -1,6 +1,7 @@
 import requests
 import json
 import logging
+logger = logging.getLogger(__name__)
 
 def SlackMessageHandlerFactory( webhook_url ):
   return SlackMessageHandler(webhook_url)
@@ -19,6 +20,13 @@ class SlackMessageHandler(logging.Handler):
 
   # replacing default django emit (https://github.com/django/django/blob/master/django/utils/log.py)
   def emit(self, record: logging.LogRecord, *args, **kwargs):
+
+    # Check if a logging url was set
+    if self.webhook_url == None or self.webhook_url == '':
+      return
+
+    if getattr(record,'logHandlerException',None) == self.__class__:
+      return # This error was caused in this handler, no sense in trying again
 
     req = getattr(record,'request',None)
     request_fields = []
@@ -48,7 +56,7 @@ class SlackMessageHandler(logging.Handler):
       ]
     }
 
-
-
-    if not self.webhook_url == None:
+    try:
       requests.post(self.webhook_url, data=json.dumps(message))
+    except requests.exceptions.RequestException as e:  # Catch all request related exceptions
+      logger.exception("Exception while trying to send a log message to Slack",exc_info=e,extra={ 'logHandlerException': self.__class__ })
