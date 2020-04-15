@@ -160,7 +160,7 @@ div.boxed {
 .navbar-light .navbar-nav .nav-link:hover { color: #ed0a71; } 
 
 .footer {
-  background: #000943;
+  background: rgb(0, 9, 67);
   padding: 15px 0;
   text-align: center;
   font-size: .9rem;
