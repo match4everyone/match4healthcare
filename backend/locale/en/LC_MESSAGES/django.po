@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 16:51+0200\n"
+"POT-Creation-Date: 2020-04-15 18:59+0200\n"
 "PO-Revision-Date: 2020-04-15 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1654,6 +1654,9 @@ msgstr ""
 
 msgid "Helfer*innen finden"
 msgstr "Find volunteers"
+
+msgid "Einrichtungen finden"
+msgstr "Lookup Facilities"
 
 msgid "Karte"
 msgstr "Map"

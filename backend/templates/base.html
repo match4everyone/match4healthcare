@@ -60,7 +60,11 @@
         {% url 'list_by_plz' user.hospital.countrycode user.hospital.plz 10 as filter_student_url %}
         <li class="nav-item  {% if "signup_hospital" in request.path %}active{% endif %} hide-home"> <a class="nav-link" href="/ineedstudent/hospital_dashboard">{% blocktrans %}Helfer*innen finden{% endblocktrans %}</a> </li>
         {% endif %}
+        {% if user.is_authenticated and user.is_student %}
+        <li class="nav-item {% if "mapview" in request.path %}active{% endif %}"> <a class="nav-link" href="/mapview">{% blocktrans %}Einrichtungen finden{% endblocktrans %}</a> </li>
+        {% else %}
         <li class="nav-item {% if "mapview" in request.path %}active{% endif %}"> <a class="nav-link" href="/mapview">{% blocktrans %}Karte{% endblocktrans %}</a> </li>
+        {% endif %}
         {% if user.is_authenticated %}
         <li class="nav-item {% if "profile" in request.path %}active{% endif %}"> <a class="nav-link" href="/accounts/profile_redirect">{% blocktrans %}Mein
           Profil{% endblocktrans %}</a> </li>
