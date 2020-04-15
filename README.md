@@ -45,6 +45,7 @@ After changes to the Docker configuration, you have to restart and build the con
 ## Production
 Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django 
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
+Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
 
 To run a container in production and in a new environment execute the `setup.sh` script which builds the containers, runs all configurations and starts the web service.
 
@@ -56,3 +57,32 @@ If you want to deploy manually follow these steps closly:
 4. Collect static
 5. Migrate
 6. Restart the backend container (important, whitenoise does not reload static files after it has started)
+
+## Testing
+
+For executing the tests use `python3 manage.py test`. 
+
+In case you add more required environment variables for productions, please check for their existance in `backend/apps/checks.py`.
+
+## Logging
+
+Logging should always use the following pattern if possible:
+
+```
+import logging
+logger = logging.getLogger(__name__)
+logger.info('message',extra={ 'request': request })
+```
+
+If the request is not logged as an extra parameter, the log entry will **NOT** be messaged to slack!
+
+Adding the request as extra parameter will automatically extract logged on user information as well as POST variables and take care of removing sensitive information from
+the logs, respecting the @method_decorator(sensitive_post_parameters()). For example in user sign in, this will prevent logging of passwords.
+
+**Warning:** Special care must be taken to avoid errors from circular references. The extra parameters are written to the log file and serialized as JSON. Circular references will cause
+logging failure. One example would be adding the student to the extra dict:
+
+Student has an attribute for the user, user has an attribute for the student, ... 
+
+These circular references will prevent the log entry from being written. 
+Including request is always safe, because the logging formatter contains dedicated code for request logging.

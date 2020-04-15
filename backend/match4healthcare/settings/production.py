@@ -1,9 +1,6 @@
 from match4healthcare.settings.common import *
 from django.utils.log import DEFAULT_LOGGING
-
 import logging
-
-logger = logging.getLogger('django')
 
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
@@ -32,36 +29,9 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'applogfile': {
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(RUN_DIR, 'match4healthcare.log'),
-            'maxBytes': 1024 * 1024 * 15,  # 15MB
-            'backupCount': 10,
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['applogfile'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
-
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
 # ToDo add environment variable based detection whether we are on prod or staging
 NOREPLY_MAIL = 'match4healthcare<noreply@match4healthcare.de>'
-
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
 # Use API instead of SMTP server
