@@ -1,3 +1,5 @@
+
+
 mapViewPage = {
     options: {
         mapViewContainerId: '',
@@ -10,10 +12,52 @@ mapViewPage = {
         isHospital: true,
         createPopupTextStudent  :  (countrycode,city, plz, count, url) => '',
         createPopupTextHospital :  (countrycode,city, plz, count, url) => '',
+        createFacilitiesCountText: (count) => '',
+        createSupportersCountText: (count) => '',
         facilityIcon: new L.Icon.Default(),
     },
 
     mapObject: null,
+    
+    createFacilityIcon: function createFacilityIcon(count) {
+        return L.divIcon({
+            className: 'leaflet-marker-icon marker-cluster marker-cluster-single leaflet-zoom-animated leaflet-interactive facilityMarker',
+            html: `<div><span>${count}</span></div>`,
+            iconSize: [40, 40],
+            popupAnchor: [-10,-10],
+        })
+    },
+
+    createSupporterIcon: function createSupporterIcon(count) {
+        return L.divIcon({
+            className: 'leaflet-marker-icon marker-cluster marker-cluster-single leaflet-zoom-animated leaflet-interactive supporterMarker',
+            html: `<div><span>${count}</span></div>`,
+            iconSize: [40, 40],
+        })
+    },
+
+    cssClassedIconCreateFunction: function cssClassedIconCreateFunction(cssClass) {
+        return (function (cluster) {
+            var childCount = cluster.getChildCount();
+            var cssClasses = ['marker-cluster']
+            var c = ' marker-cluster-'
+            if (childCount < 10) {
+                c += 'small'
+            } else if (childCount < 100) {
+                c += 'medium'
+            } else {
+                c += 'large'
+            }
+            cssClasses.push(c)
+            cssClasses.push(cssClass)
+            return new L.DivIcon({
+                 html: '<div><span>' + childCount + '</span></div>',
+                 className: cssClasses.join(' '), 
+                 iconSize: new L.Point(40, 40) 
+            })
+        })
+    },
+
 
     initializeMap: function initializeMap() {
         let mapOptions = {
@@ -37,7 +81,7 @@ mapViewPage = {
         // Enhance MarkerCluster - override getChildCount
         L.MarkerCluster.prototype.getChildCount = function (){
             const children = this.getAllChildMarkers()
-            return children.reduce((sum,marker) => (sum + marker.options.supporterCount),0)
+            return children.reduce((sum,marker) => (sum + marker.options.itemCount),0)
         }
 
     },
@@ -59,44 +103,49 @@ mapViewPage = {
 
     loadMapMarkers : async function loadMapMarkers() {
         let [ facilities, supporters ] = await Promise.all([$.get(this.options.facilitiesURL),$.get(this.options.supportersURL)])
-        
-        let facilityMarkers = L.layerGroup(this.createMapMarkers(facilities,(lat,lon,countrycode,city,plz,count) => {
-            return L.marker([lon,lat],{ icon: this.options.facilityIcon }).bindPopup(
-                this.options.createPopupTextHospital(countrycode,city, plz, count, this.options.hospitalListURL.replace("COUNTRYCODE",countrycode).replace("PLZ",plz))
-            )
+
+        var facilityClusterMarkerGroup = L.markerClusterGroup({
+            iconCreateFunction: this.cssClassedIconCreateFunction('facilityMarker'),
+        });
+        let facilityMarkers = L.featureGroup.subGroup(facilityClusterMarkerGroup, this.createMapMarkers(facilities,(lat,lon,countrycode,city,plz,count) => {
+            return L.marker([lon,lat],{ 
+                icon:  this.createFacilityIcon(count),
+                itemCount: count,
+           }).bindPopup(this.options.createPopupTextHospital(countrycode,city, plz, count, this.options.hospitalListURL.replace("COUNTRYCODE",countrycode).replace("PLZ",plz)))
         }))
 
-        var clusterMarkerGroup = L.markerClusterGroup();
-        var supporterMarkers = L.featureGroup.subGroup(clusterMarkerGroup, this.createMapMarkers(supporters,(lat,lon,countrycode,city,plz,count) => {
-            return L.circle([lon,lat], { 
-                radius: count > 30 ? ( 2000 + 50 * count ) : ( 500 + 100 * count ),
-                color: '#ed0a71', 
-                fillColor: '#ed0a71', 
-                weight: 2 + 0.25 * count, 
-                fillOpacity: .2,
-                supporterCount: count
+        var supporterClusterMarkerGroup = L.markerClusterGroup({
+            iconCreateFunction: this.cssClassedIconCreateFunction('supporterMarker'),
+        });
+        var supporterMarkers = L.featureGroup.subGroup(supporterClusterMarkerGroup, this.createMapMarkers(supporters,(lat,lon,countrycode,city,plz,count) => {
+            return L.marker([lon,lat],{
+                 icon:  this.createSupporterIcon(count),
+                 itemCount: count,
             }).bindPopup(this.options.createPopupTextStudent(countrycode,city, plz, count, this.options.supporterListURL.replace("COUNTRYCODE",countrycode).replace("PLZ",plz)))
-        }));        
+        }))
 
-        clusterMarkerGroup.addTo(this.mapObject)
+        supporterClusterMarkerGroup.addTo(this.mapObject)
         supporterMarkers.addTo(this.mapObject)
-        var count = await $.getJSON("/accounts/count")
+        facilityClusterMarkerGroup.addTo(this.mapObject)
+        facilityMarkers.addTo(this.mapObject)
+        
+        const countItems = (o) => {
+            var count = 0
+            for (countryCode in o) {
+                for (zipCode in o[countryCode]) {
+                    count += o[countryCode][zipCode].count
+                }
+            }
+            return count
+        }
 
-        const facilitiesLayerName = `<img src="/static/img/map/facility-marker.svg"> ${count.facility_count} Einrichtungen`
-        const supportersLayerName = `<img src="/static/img/map/supporter-marker.svg"> ${count.user_count} Helfer*innen`
         var overlays = {}
-        overlays[facilitiesLayerName] = facilityMarkers
-        overlays[supportersLayerName] = supporterMarkers
+        overlays[this.options.createFacilitiesCountText(countItems(facilities))] = facilityMarkers
+        overlays[this.options.createSupportersCountText(countItems(supporters))] = supporterMarkers
 
         facilityMarkers.addTo(this.mapObject)
 
         L.control.layers(null, overlays, { collapsed: false, position: 'topright' }).addTo(this.mapObject)
-    },
-
-    showUserCount: async function showUserCount() {
-        var count = await $.getJSON("/accounts/count")
-        /*document.getElementById("user_count").textContent = count.user_count
-        document.getElementById("facility_count").textContent = count.facility_count*/
     },
 
     createMapMarkers : function addMapMarkers(markers, createMarkerFunction) {
@@ -111,9 +160,6 @@ mapViewPage = {
 
         return markerArray
     }
-
-
-
 }
 $.extend(mapViewPage.options, pageOptions)
 
@@ -121,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function domReady() {
 
     mapViewPage.initializeMap()
     mapViewPage.loadMapMarkers()
-    mapViewPage.showUserCount()
     mapViewPage.registerEventHandlers(document, window)
 
 })

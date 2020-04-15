@@ -124,7 +124,8 @@ font: 30px/30px proxima-nova, Verdana, sans-serif;}
 		padding:10px 15px;
 		font-weight:700;
 		border-radius:5px;
-		background-color: rgba(255, 255, 255, 0.9);	}
+		background-color: rgba(255, 255, 255, 0.9);
+		}
 
 		@supports (-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px)) {
 
@@ -177,17 +178,69 @@ div.leaflet-control-layers-overlays {
 
 .leaflet-control-layers-overlays input[type="checkbox"] + span:before {
   content:"☐ ";
+  font-size: 18pt;
+  vertical-align: middle;
 }
 
 .leaflet-control-layers-overlays input:checked + span:before {
   content:"☑ ";
+  font-size: 18pt;
+  vertical-align: middle;
 }
 
 
-.marker-cluster-small {
-	background-color: #ed0a71;
+
+.supporterMarker.marker-cluster-small,
+.supporterMarker.marker-cluster-medium,
+.supporterMarker.marker-cluster-large {
+	background-color: rgba(237, 10, 113, 0.4);
+}
+
+.supporterMarker.marker-cluster-single div,
+.supporterMarker.marker-cluster-small div,
+.supporterMarker.marker-cluster-medium div,
+.supporterMarker.marker-cluster-large div {
+	background-color: rgba(237, 10, 113, 1);
+}
+
+
+.facilityMarker.marker-cluster-small,
+.facilityMarker.marker-cluster-medium,
+.facilityMarker.marker-cluster-large {
+	background-color: rgba(0, 9, 67, 0.4);
+}
+
+.facilityMarker.marker-cluster-single div,
+.facilityMarker.marker-cluster-small div,
+.facilityMarker.marker-cluster-medium div,
+.facilityMarker.marker-cluster-large div {
+	background-color: rgba(0, 9, 67, 1);
+}
+
+
+
+.marker-cluster-single div,
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
 	color: white;
-	}
-.marker-cluster-small div {
-	background-color: #ed0a71;
-	}
+}
+
+.supporterMarker.marker-cluster div, 
+.facilityMarker.marker-cluster div {
+  font-weight: bold;
+}
+
+.marker-cluster-single.supporterMarker, 
+.marker-cluster-single.facilityMarker {
+  background-color: transparent;
+}
+
+.marker-cluster.facilityMarker {
+  margin-left: -30px !important;
+  margin-top: -30px !important;
+}
+
+div.leaflet-control-layers-overlays label {
+  margin: 0;
+}
