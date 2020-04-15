@@ -20,7 +20,7 @@ services:
 
 
   database:
-    image: postgres:11
+    image: postgres:12
     volumes:
      - ./database/data:/var/lib/postgresql/data
      - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
