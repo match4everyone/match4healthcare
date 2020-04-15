@@ -23,6 +23,7 @@ from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFo
 from .forms import StudentEmailForm, HospitalEmailForm, CustomAuthenticationForm
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
+from .models import NewsletterState
 
 from django.contrib.auth.decorators import login_required
 from .decorator import student_required, hospital_required
@@ -40,6 +41,8 @@ from django.template import loader
 from django.http import HttpResponse
 from django.db import transaction
 from apps.accounts.utils import send_password_set_email
+from .models import Newsletter, LetterApprovedBy
+from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 
 import logging
 logger = logging.getLogger(__name__)
@@ -327,10 +330,7 @@ class CustomLoginView(LoginView):
 @login_required
 @student_required
 def change_activation_ask(request):
-    return render(request, 'change_activation_ask.html',{'is_activated': request.user.student.is_activated})
-
-
-
+    return render(request, 'change_activation_ask.html', {'is_activated': request.user.student.is_activated})
 
 
 @login_required
@@ -344,6 +344,153 @@ def change_activation(request):
         messages.add_message(request, messages.INFO, _(
             'Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
     else:
-        messages.add_message(request, messages.INFO,_(
+        messages.add_message(request, messages.INFO, _(
             'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
     return HttpResponseRedirect('profile_student')
+
+
+def switch_newsletter(nl, user, request, post=None, get=None):
+    nl_state = nl.sending_state()
+
+    if nl_state == NewsletterState.BEING_EDITED:
+        # an edit was made
+        if post is not None:
+            form = NewsletterEditForm(post, uuid=nl.uuid, instance=nl)
+
+            if form.is_valid():
+                form.save()
+                nl.edit_meta_data(user)
+                nl.save()
+                messages.add_message(request, messages.INFO, _('Bearbeitungen gespeichert.'))
+                return switch_newsletter(nl, user, request, post=None, get=None)
+
+        elif get is not None:
+            # wants to freeze the form for review
+            if 'freezeNewsletter' in get:
+                nl.freeze(user)
+                nl.save()
+                messages.add_message(request, messages.INFO, _(
+                    'Der Newsletter kann nun nicht mehr editiert werden. Andere Leute können ihn approven.'))
+                return switch_newsletter(nl, user, request, post=None, get=None)
+            else:
+                # the form is a virgin
+                form = NewsletterEditForm(uuid=nl.uuid, instance=nl)
+        else:
+            form = NewsletterEditForm(uuid=nl.uuid, instance=nl)
+
+    elif nl_state == NewsletterState.UNDER_APPROVAL:
+        if get is not None:
+            if 'unFreezeNewsletter' in get:
+                nl.unfreeze()
+                nl.save()
+                messages.add_message(request, messages.INFO, _('Der Newsletter kann wieder bearbeitet werden.'))
+                return switch_newsletter(nl, user, request, post=None, get=None)
+            elif 'approveNewsletter' in get:
+                # todo check that author cannot approve
+                nl.approve_from(user)
+                nl.save()
+                messages.add_message(request, messages.WARNING,
+                                     format_lazy(_(
+                                         'Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir gesendeten Mail ({mail}) anklicken.'),
+                                         mail=user.email))
+                approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
+                nl.send_approval_mail(approval, host=request.META['HTTP_HOST'])
+                switch_newsletter(nl, user, request, post=None, get=None)
+
+        form = NewsletterViewForm(instance=nl)
+
+    elif nl_state == NewsletterState.READY_TO_SEND:
+        if get is not None:
+            if 'sendNewsletter' in get:
+                nl.send(user)
+                nl.save()
+                messages.add_message(request, messages.INFO, _('Der Newsletter wurde versendet.'))
+                switch_newsletter(nl, user, request)
+            if 'unFreezeNewsletter' in get:
+                nl.unfreeze()
+                nl.save()
+                messages.add_message(request, messages.INFO, _('Der Newsletter kann wieder bearbeitet werden.'))
+                return switch_newsletter(nl, user, request, post=None, get=None)
+
+        form = NewsletterViewForm(instance=nl)
+
+    elif nl_state == NewsletterState.SENT:
+        form = NewsletterViewForm(instance=nl)
+    else:
+        from django.http import Http404
+        raise Http404
+
+    return form, nl
+
+
+@login_required
+@staff_member_required
+def view_newsletter(request, uuid):
+    # 404 if not there?
+    nl = Newsletter.objects.get(uuid=uuid)
+
+    if request.method == 'GET' and 'email' in request.GET:
+        email = request.GET.get('email')
+        nl.send_testmail_to(email)
+        messages.add_message(request, messages.INFO, _('Eine Test Email wurde an %s versendet.' % email))
+
+    post = request.POST if request.method == 'POST' else None
+    get = request.GET if request.method == 'GET' else None
+
+    form, nl = switch_newsletter(nl, request.user, request, post=post, get=get)
+
+    # special view if person was the freezer
+
+    context = {
+        'form': form,
+        'uuid': uuid,
+        'newsletter_state': nl.sending_state(),
+        'state_enum': NewsletterState,
+        'mail_form': TestMailForm(),
+        'already_approved_by_this_user': nl.has_been_approved_by(request.user),
+        'required_approvals': nl.required_approvals(),
+        'frozen_by': nl.frozen_by,
+        'sent_by': nl.sent_by,
+        'send_date': nl.send_date,
+        'approvers': ', '.join([a.user.username for a in nl.letterapprovedby_set.all()])
+    }
+
+    return render(request, 'newsletter_edit.html', context)
+
+
+@login_required
+@staff_member_required
+def new_newsletter(request):
+    newsletter = Newsletter.objects.create()
+    newsletter.letter_authored_by.add(request.user)
+    newsletter.save()
+    return HttpResponseRedirect('view_newsletter/' + str(newsletter.uuid))
+
+
+from .tables import NewsletterTable
+
+
+@login_required
+@staff_member_required
+def list_newsletter(request):
+    context = {
+        'table': NewsletterTable(Newsletter.objects.all().order_by('-registration_date'))
+    }
+    return render(request, 'newsletter_list.html', context)
+
+
+@login_required
+@staff_member_required
+def did_see_newsletter(request, uuid, token):
+    nl = Newsletter.objects.get(uuid=uuid)
+    try:
+        approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
+        if approval.approval_code == int(token):
+            approval.did_see_email = True
+            approval.save()
+            messages.add_message(request, messages.INFO, _('Dein Approval ist nun gültig.'))
+        else:
+            return HttpResponse('Wrong code')
+    except:
+        return HttpResponse('Not registered')
+    return HttpResponseRedirect('/accounts/view_newsletter/' + str(uuid))
