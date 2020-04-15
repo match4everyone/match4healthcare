@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: .\apps\ineedstudent\tables.py:9 .\apps\ineedstudent\views.py:188
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 01:03+0200\n"
-"PO-Revision-Date: 2020-04-05 13:31+0200\n"
+"POT-Creation-Date: 2020-04-14 18:11+0000\n"
+"PO-Revision-Date: 2020-04-09 22:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -759,7 +758,9 @@ msgstr "we do not know"
 msgid "Egal"
 msgstr "Irrelevant"
 
-#: .\apps\iamstudent\forms.py:19 .\apps\iamstudent\forms.py:20
+msgid "Writerekp"
+msgstr "Writer"
+
 msgid "Writer"
 msgstr "Writer"
 
@@ -1137,7 +1138,9 @@ msgstr "Subject"
 msgid "Nachrichtentext"
 msgstr "Message"
 
-#: .\apps\iamstudent\forms.py:584
+msgid "Bitte personalisiere diesen Text"
+msgstr ""
+
 msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
 msgstr "In which of the following areas is prior experience necessary?"
 
@@ -1508,30 +1511,6 @@ msgstr "Detail view for Volunteer"
 #: .\apps\iamstudent\views.py:97
 #, python-brace-format
 msgid ""
-"Hallo {first_name} {last_name},\n"
-"\n"
-" wir haben folgende Nachricht von {firmenname} für dich. Falls du keine "
-"Nachrichten mehr erhalten möchtest, deaktiviere dein Konto bitte hier: "
-"https://match4healthcare.de/accounts/change_activation\n"
-"\n"
-"Dein Match4Healthcare Team\n"
-"----------------------------\n"
-"{hospital_message}"
-msgstr ""
-"Hello {first_name} {last_name},\n"
-"\n"
-"we have a message from {firmenname} for you. In case you do not want to "
-"receive any further messages, please deactivate your account here: https://"
-"match4healthcare.de/accounts/change_activation\n"
-"\n"
-"Best,\n"
-"Your Match4Healthcare Team\n"
-"----------------------------\n"
-"{hospital_message}"
-
-#: .\apps\iamstudent\views.py:123
-#, python-brace-format
-msgid ""
 "Liebe(r) Helfende(r),\n"
 "\n"
 "Wir sind... \n"
@@ -1562,7 +1541,29 @@ msgstr ""
 msgid "Ein Ort braucht Deine Hilfe"
 msgstr "Somebody needs your help"
 
-#: .\apps\iamstudent\views.py:141
+#, python-brace-format
+msgid ""
+"Hallo {first_name} {last_name},\n"
+"\n"
+" wir haben folgende Nachricht von {firmenname} für dich. Falls du keine "
+"Nachrichten mehr erhalten möchtest, deaktiviere dein Konto bitte hier: "
+"https://match4healthcare.de/accounts/change_activation\n"
+"\n"
+"Dein Match4Healthcare Team\n"
+"----------------------------\n"
+"{hospital_message}"
+msgstr ""
+"Hello {first_name} {last_name},\n"
+"\n"
+"we have a message from {firmenname} for you. In case you do not want to "
+"receive any further messages, please deactivate your account here: https://"
+"match4healthcare.de/accounts/change_activation\n"
+"\n"
+"Best,\n"
+"Your Match4Healthcare Team\n"
+"----------------------------\n"
+"{hospital_message}"
+
 msgid ""
 "[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert"
 msgstr "[match4healthcare] You have just contacted potential volunteers"
@@ -1852,7 +1853,16 @@ msgid ""
 "                    Bedingungen zu"
 msgstr "Please agree to the updated conditions"
 
-#: .\apps\ineedstudent\views.py:149
+msgid "Neues Hilfsangebot"
+msgstr "Message from a potential supporter"
+
+msgid ""
+"Hallo, ich habe ihr Gesuche auf der Plattform match4healthcare gesehen und "
+"bin für die Stelle qualifiziert.\n"
+"Ich bin...\n"
+"Ich möchte helfen in dem..."
+msgstr ""
+
 #, python-format
 msgid ""
 "Hallo %s,\n"
@@ -1871,11 +1881,6 @@ msgstr ""
 "profile online.\n"
 "\n"
 
-#: .\apps\ineedstudent\views.py:187
-msgid "Neues Hilfsangebot"
-msgstr "Message from a potential supporter"
-
-#: .\apps\ineedstudent\views.py:206
 msgid "Deine Anzeige wurde erfolgreich aktualisiert."
 msgstr "Your posting has been updated."
 
@@ -2115,13 +2120,20 @@ msgstr ""
 msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
-#: .\templates\home.html:157
-msgid "Mit Unterstützung von"
-msgstr "Supported by"
+msgid "Unsere Kooperations&shy;partner"
+msgstr ""
 
-#: .\templates\legal-questions.html:6
+msgid "Empfohlen von"
+msgstr ""
+
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "Mit Unterstützung von"
+#~ msgstr "Supported by"
+
+#~ msgid "Notaufnahme"
+#~ msgstr "Emergency admissions"
 
 #, fuzzy
 #~| msgid "Kann eine Unterkunft angeboten werden?"
