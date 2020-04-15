@@ -1,7 +1,15 @@
 import requests
 import json
 import logging
+from _collections import defaultdict
 logger = logging.getLogger(__name__)
+
+emoji = defaultdict(lambda: ':clown_face:')
+emoji['WARNING'] = ':thinking_face:'
+emoji['ERROR'] = ':face_with_thermometer:'
+emoji['INFO'] = ':male-teacher:'
+emoji['CRITICAL'] = ':bomb:'
+emoji['DEBUG'] = ':female-mechanic:'
 
 def SlackMessageHandlerFactory( webhook_url ):
   return SlackMessageHandler(webhook_url)
@@ -40,7 +48,7 @@ class SlackMessageHandler(logging.Handler):
           'type': 'section',
           'text': {
             'type': 'mrkdwn',
-            'text': '*{}*:\n[{}]: {}'.format(record.levelname, record.name, record.getMessage())
+            'text': '{} *{}*:\n[{}]: {}'.format(emoji[record.levelname], record.levelname, record.name, record.getMessage())
           }
         },
         {
