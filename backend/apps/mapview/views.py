@@ -51,7 +51,7 @@ def prepare_students(ttl_hash=None):
     return locations_and_number
 
 def facilitiesJSON(request):
-    hospitals = Hospital.objects.filter(user__validated_email=True)
+    hospitals = Hospital.objects.filter(user__validated_email=True,is_approved=True, appears_in_map=True)
     facilities = group_by_zip_code(hospitals)
     return JsonResponse(facilities)
 
