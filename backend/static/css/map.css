@@ -161,3 +161,33 @@ path.leaflet-interactive  {
   background-position: 0 0;
   background-size: 65px 20px;
 }
+
+div.leaflet-control-layers-overlays {
+  font-size:12pt;
+}
+
+
+.leaflet-control-layers-overlays img {
+  height: 20pt;
+}
+
+.leaflet-control-layers-overlays input[type="checkbox"] {
+  display:none;
+}
+
+.leaflet-control-layers-overlays input[type="checkbox"] + span:before {
+  content:"☐ ";
+}
+
+.leaflet-control-layers-overlays input:checked + span:before {
+  content:"☑ ";
+}
+
+
+.marker-cluster-small {
+	background-color: #ed0a71;
+	color: white;
+	}
+.marker-cluster-small div {
+	background-color: #ed0a71;
+	}
