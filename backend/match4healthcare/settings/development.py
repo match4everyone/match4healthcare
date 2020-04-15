@@ -1,5 +1,5 @@
 from match4healthcare.settings.common import *
-from os.path import abspath, basename, dirname, join, normpath
+from os import path
 
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(RUN_DIR, 'db.sqlite3'),
+        'NAME': path.join(RUN_DIR, 'db.sqlite3'),
     }
 }
 
@@ -28,7 +28,7 @@ NOREPLY_MAIL = 'match4healthcare-DEVELOPMENT<noreply@example.de>'
 
 # Possible values are 'file', 'external', 'sendgrid'
 # For storing mails local in files files, sending external (uberspace) or sending over sendgrid (production like)
-mail_relay_option = 'file'
+mail_relay_option = 'sendgrid'
 
 # +++ Store files locally
 if mail_relay_option == 'file':
@@ -54,7 +54,7 @@ elif mail_relay_option == 'sendgrid':
 
     if use_sendgrid_api:
         # Using the API
-        EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+        EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
         # Disable sendbox mode to send actual emails
         SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
@@ -73,5 +73,5 @@ elif mail_relay_option == 'sendgrid':
 
 else:
     # ToDo add logger message instead?
-    print("No email option selected")
+    print('No email option selected')
     exit(1)

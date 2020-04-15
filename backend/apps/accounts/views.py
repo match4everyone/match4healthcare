@@ -41,11 +41,15 @@ from django.http import HttpResponse
 from django.db import transaction
 from apps.accounts.utils import send_password_set_email
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def student_signup(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
+        logger.info('Student Signup request', extra={ 'request': request } )
         form = StudentFormAndMail(request.POST)
 
         # check whether it's valid:
@@ -82,6 +86,7 @@ def register_student_in_db(request, mail):
 
 def hospital_signup(request):
     if request.method == 'POST':
+        logger.info('Hospital registration request', extra={ 'request': request } )
         form_info = HospitalFormInfoSignUp(request.POST)
 
         if form_info.is_valid():
@@ -145,6 +150,7 @@ def profile_redirect(request):
 
     else:
         #TODO: throw 404
+        logger.warning('User is unknown type, profile redirect not possible', extra={ 'request': request } )
         HttpResponse('Something wrong in database')
 
 @login_required
@@ -165,6 +171,7 @@ def login_redirect(request):
 
     else:
         #TODO: throw 404
+        logger.warning('User is unknown type, login redirect not possible', extra={ 'request': request } )
         HttpResponse('Something wrong in database')
 
 
@@ -174,6 +181,7 @@ def edit_student_profile(request):
     student = request.user.student
 
     if request.method == 'POST':
+        logger.info('Update Student Profile',extra={ 'request': request })
         form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
 
         if form.is_valid():
@@ -191,6 +199,7 @@ def edit_hospital_profile(request):
     hospital = request.user.hospital
 
     if request.method == 'POST':
+        logger.info('Update Hospital Profile',extra={ 'request': request })
         form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
 
         if form.is_valid():
@@ -220,7 +229,9 @@ def approve_hospitals(request):
 @login_required
 @staff_member_required
 def change_hospital_approval(request,uuid):
+    
     h = Hospital.objects.get(uuid=uuid)
+    logger.info("Set Hospital {} approval to {}".format(uuid,(not h.is_approved)),extra = { 'request': request })
 
     if not h.is_approved:
         h.is_approved = True
@@ -241,6 +252,7 @@ def change_hospital_approval(request,uuid):
 @staff_member_required
 def delete_hospital(request,uuid):
     h = Hospital.objects.get(uuid=uuid)
+    logger.info("Delete Hospital {} by {}".format(uuid,request.user),extra = { 'request': request })
     name = h.user
     h.delete()
     text = format_lazy(_("Du hast die Institution mit user '{name}' gelöscht."), name=name)
@@ -300,6 +312,17 @@ class UserCountView(APIView):
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
+    def post(self, request, *args, **kwargs):
+        logger.info('Login Attempt ({})'.format(request.POST['username']))
+        return super().post(request,*args,**kwargs)
+
+    def form_valid(self, form):
+        logger.info('Login succesful ({})'.format(form.cleaned_data['username']))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        logger.warning('Login failure ({})'.format(form.cleaned_data['username']))
+        return super().form_invalid(form)
 
 @login_required
 @student_required
