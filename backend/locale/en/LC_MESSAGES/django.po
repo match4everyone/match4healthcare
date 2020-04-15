@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 18:48+0000\n"
-"PO-Revision-Date: 2020-04-14 20:55+0200\n"
+"POT-Creation-Date: 2020-04-15 16:51+0200\n"
+"PO-Revision-Date: 2020-04-15 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -598,8 +598,7 @@ msgstr "Your profile has been updated!"
 msgid "Deine Daten wurden nicht erfolgreich geändert!"
 msgstr "Your profile has not been updated successfully!"
 
-#, fuzzy, python-brace-format
-#| msgid "Du hast die Instiution mit user '{name}' gelöscht."
+#, python-brace-format
 msgid "Du hast die Institution mit user '{name}' gelöscht."
 msgstr "You deleted the facility with user ‘{name}’."
 
@@ -638,10 +637,8 @@ msgstr "we do not know"
 msgid "Egal"
 msgstr "Irrelevant"
 
-#, fuzzy
-#| msgid "Writer"
 msgid "Writerekp"
-msgstr "Writer"
+msgstr "Writerekp"
 
 msgid "Writer"
 msgstr "Writer"
@@ -698,10 +695,8 @@ msgstr "Medical student / Doctor"
 msgid "Anästhesie"
 msgstr "Anaesthesiology"
 
-#, fuzzy
-#| msgid "Allgemein"
 msgid "Allgemeinmedizin"
-msgstr "General"
+msgstr "General Medicine"
 
 msgid "Chirurgie"
 msgstr "Surgery"
@@ -715,14 +710,11 @@ msgstr "Intensive care"
 msgid "Notfallmedizin"
 msgstr "Emergency medicine"
 
-#, fuzzy
-#| msgid ""
-#| "Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/"
-#| "Famulatur) ist wichtig"
 msgid ""
 "<b>Nur Studierende: Eine Anerkennung als Teil eines Studienabschnitts "
 "(Pflegepraktikum/Famulatur) ist wichtig</b>"
-msgstr "Recognition as an internship or other study requirements is important"
+msgstr ""
+"<b>Recognition as an internship or other study requirements is important</b>"
 
 msgid "Medizinische/r Fachangestellte*r"
 msgstr "Medical assistant"
@@ -1059,7 +1051,7 @@ msgid " Die Helfer*innen wurden kontaktiert. "
 msgstr " Supporters have been contacted "
 
 msgid "Finde weitere Helfer*innen "
-msgstr "Find more supporters ,"
+msgstr "Find more supporters "
 
 msgid "Angefangen"
 msgstr "Started"
@@ -1462,12 +1454,11 @@ msgstr "You have not yet validated your mail address, please do so!"
 
 #, python-format
 msgid ""
-"Bitte <a target=\"_blank\" href=\"/accounts/signup_student\">Registriere "
-"dich als Helfende_r</a> um die Kontaktdaten von %(hospital.firmenname)s zu "
-"sehen."
+"Bitte <a target=\"_blank\" href=\"%(student_signup_url)s\">Registriere dich "
+"als Helfende_r</a> um die Kontaktdaten von %(firmenname)s zu sehen."
 msgstr ""
-"Please <a target=\"_blank\" href=\"/accounts/signup_student\">register as "
-"supporter</a> to see the contact information of %(hospital.firmenname)s."
+"Please <a target=\"_blank\" href=\"%(student_signup_url)s\">register as "
+"supporter</a> to see the contact information of %(firmenname)s."
 
 #, python-format
 msgid "In %(ort)s (%(plz)s) wird Hilfe gebraucht:"
@@ -1560,17 +1551,27 @@ msgstr "Your posting has been updated."
 msgid "Karte der Hilfsbereiten"
 msgstr "Supporter Map"
 
-msgid "gibt es"
-msgstr "are"
+#, python-brace-format
+msgid ""
+"In ${city}, (PLZ ${plz}) gibt es ${count} Helfer*innen.\\n<a href=\"${url}\" "
+"target=\"_blank\">Detailansicht für Kliniken</a>"
+msgstr ""
+"There are ${count} supporters in ${city}, (zip ${plz}) \\n<a href=\"${url}\" "
+"target=\"_blank\">Detailview for facilities</a>"
 
-msgid "Studierende, die helfen möchten."
-msgstr "Supporters, that want to help."
+#, python-brace-format
+msgid ""
+"In ${city}, (PLZ ${plz}) gibt es ${count} Orte an denen Hilfe gebraucht wird."
+"\\n<a href=\"${url}\" target=\"_blank\">Detailansicht</a>"
+msgstr ""
+"There are ${count} places near ${city}, (zip ${plz}) that need your help."
+"\\n<a href=\"${url}\" target=\"_blank\">Show me Details</a>"
 
-msgid "Studierenden, der*die helfen möchte."
-msgstr "Supporters, that want to help."
+msgid "Einrichtungen"
+msgstr "Facilities"
 
-msgid "Detailansicht für Kliniken"
-msgstr "Detail view for hospitals"
+msgid "Helfende"
+msgstr "Supporters"
 
 msgid "Zugriffsstatistiken"
 msgstr "Access statistics"
@@ -1651,14 +1652,11 @@ msgstr ""
 "I need\n"
 "            help"
 
-msgid "Gesuche"
-msgstr "Direct search"
-
 msgid "Helfer*innen finden"
 msgstr "Find volunteers"
 
-msgid "Helferkarte"
-msgstr "Map of volunteers"
+msgid "Karte"
+msgstr "Map"
 
 msgid ""
 "Mein\n"
@@ -1679,8 +1677,6 @@ msgstr "and"
 msgid "Datenschutz"
 msgstr "Data protection"
 
-#, fuzzy
-#| msgid "In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden."
 msgid "In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden."
 msgstr "In times of crisis we connect supporters and those in need."
 
@@ -1690,8 +1686,6 @@ msgstr "I am a"
 msgid "Helfende/r"
 msgstr "Supporter"
 
-#, fuzzy
-#| msgid "Ich möchte eine medizinische Einrichtung unterstützen."
 msgid "Ich möchte eine medizinische Einrichtung unterstützen."
 msgstr "I'd like to support a medical facility."
 
@@ -1704,10 +1698,8 @@ msgstr "We are an"
 msgid "Institution"
 msgstr "Institution"
 
-#, fuzzy
-#| msgid "Ich habe Bedarf an Unterstützung"
 msgid "Wir haben Bedarf an Unterstützung."
-msgstr "I need support"
+msgstr "I need support."
 
 msgid "Jetzt Hilfe suchen"
 msgstr "Find Supporters Now"
@@ -1715,11 +1707,6 @@ msgstr "Find Supporters Now"
 msgid "Gemeinsam unser Gesundheitssystem stärken, mit einem"
 msgstr "Strenghten our healthcare systems with a"
 
-#, fuzzy
-#| msgid ""
-#| "Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum "
-#| "Fach Medizin und der Zusammenhalt untereinander sind in den letzten "
-#| "Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je."
 msgid ""
 "Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum Fach "
 "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
@@ -1729,13 +1716,6 @@ msgstr ""
 "medicine and the support of each other have been more present in our "
 "healthcare system than ever before."
 
-#, fuzzy
-#| msgid ""
-#| "Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und "
-#| "vor allen Dingen eine effiziente Schnittstelle, zwischen den "
-#| "medizinischen Einrichtungen und Fachkräften. Eine Schnittstelle, die es "
-#| "ermöglicht, dass Hilfebietende und Hilfesuchende schnell und "
-#| "unkompliziert miteinander vernetzt werden."
 msgid ""
 "Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und vor "
 "allen Dingen eine effiziente Schnittstelle, zwischen den medizinischen "
@@ -1748,23 +1728,15 @@ msgstr ""
 "that allows supporters and those in need to quickly and easily connect with "
 "each other."
 
-#, fuzzy
-#| msgid ""
-#| "Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
-#| "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
-#| "allem zu Zeiten wie jetzt die ideale Problemlösung."
 msgid ""
 "Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
 "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
 "allem zu Zeiten wie jetzt die ideale Problemlösung."
 msgstr ""
-"\"match4healthcare\" is the ideal tool for quick and efficient networkingof "
+"\"match4healthcare\" is the ideal tool for quick and efficient networking of "
 "supporters and facilities and especially now the state-of-the-art solution."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "100%% ehrenamtlich und uneigennützig von Studierenden als Open-Source "
-#| "Projekt entwickelt"
+#, python-format
 msgid ""
 "100%% ehrenamtlich und uneigennützig von Studierenden als Open-Source "
 "Projekt entwickelt"
@@ -1783,6 +1755,24 @@ msgstr "Recommended by"
 
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "gibt es"
+#~ msgstr "are"
+
+#~ msgid "Studierende, die helfen möchten."
+#~ msgstr "Supporters, that want to help."
+
+#~ msgid "Studierenden, der*die helfen möchte."
+#~ msgstr "Supporters, that want to help."
+
+#~ msgid "Detailansicht für Kliniken"
+#~ msgstr "Detail view for hospitals"
+
+#~ msgid "Gesuche"
+#~ msgstr "Direct search"
+
+#~ msgid "Helferkarte"
+#~ msgstr "Map of volunteers"
 
 #, fuzzy
 #~| msgid ""
@@ -2321,9 +2311,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ "situation: I am studying medicine, have worked in nursing, am a paramedic "
 #~ "or have other relevant skills. I would like to be contacted with "
 #~ "possibilities to help!"
-
-#~ msgid " Zur Karte"
-#~ msgstr " Show map"
 
 #~ msgid ""
 #~ "Ich arbeite in einem Krankenhaus oder einer Praxis und brauche "
