@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 18:11+0000\n"
-"PO-Revision-Date: 2020-04-09 22:38+0200\n"
+"POT-Creation-Date: 2020-04-14 18:48+0000\n"
+"PO-Revision-Date: 2020-04-14 20:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -852,9 +852,8 @@ msgstr "Internal Medicine"
 msgid "Intensivmedizin"
 msgstr "Intensive care"
 
-#: .\apps\iamstudent\forms.py:47
-msgid "Notaufnahme"
-msgstr "Emergency admissions"
+msgid "Notfallmedizin"
+msgstr "Emergency medicine"
 
 #: .\apps\iamstudent\forms.py:49
 msgid ""
@@ -1139,7 +1138,7 @@ msgid "Nachrichtentext"
 msgstr "Message"
 
 msgid "Bitte personalisiere diesen Text"
-msgstr ""
+msgstr "Please personalize this text"
 
 msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
 msgstr "In which of the following areas is prior experience necessary?"
@@ -1862,6 +1861,10 @@ msgid ""
 "Ich bin...\n"
 "Ich möchte helfen in dem..."
 msgstr ""
+"Hello, I have seen your advertisement on the match4healthcare platform and I "
+"am qualified for the job.\n"
+"I am…\n"
+"I want to help in…"
 
 #, python-format
 msgid ""
@@ -2035,7 +2038,8 @@ msgstr "and"
 msgid "Datenschutz"
 msgstr "Data protection"
 
-#: .\templates\home.html:95
+#, fuzzy
+#| msgid "In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden."
 msgid "In Zeiten der Krise vernetzen wir Helfende mit Hilfesuchenden."
 msgstr "In times of crisis we connect supporters and those in need."
 
@@ -2047,7 +2051,8 @@ msgstr "I am a"
 msgid "Helfende/r"
 msgstr "Supporter"
 
-#: .\templates\home.html:106
+#, fuzzy
+#| msgid "Ich möchte eine medizinische Einrichtung unterstützen."
 msgid "Ich möchte eine medizinische Einrichtung unterstützen."
 msgstr "I'd like to support a medical facility."
 
@@ -2063,9 +2068,10 @@ msgstr "We are an"
 msgid "Institution"
 msgstr "Institution"
 
-#: .\templates\home.html:120
+#, fuzzy
+#| msgid "Ich habe Bedarf an Unterstützung"
 msgid "Wir haben Bedarf an Unterstützung."
-msgstr "We need supporters."
+msgstr "I need support"
 
 #: .\templates\home.html:123
 msgid "Jetzt Hilfe suchen"
@@ -2075,7 +2081,11 @@ msgstr "Find Supporters Now"
 msgid "Gemeinsam unser Gesundheitssystem stärken, mit einem"
 msgstr "Strenghten our healthcare systems with a"
 
-#: .\templates\home.html:140
+#, fuzzy
+#| msgid ""
+#| "Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum "
+#| "Fach Medizin und der Zusammenhalt untereinander sind in den letzten "
+#| "Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je."
 msgid ""
 "Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum Fach "
 "Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und "
@@ -2085,7 +2095,13 @@ msgstr ""
 "medicine and the support of each other have been more present in our "
 "healthcare system than ever before."
 
-#: .\templates\home.html:141
+#, fuzzy
+#| msgid ""
+#| "Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und "
+#| "vor allen Dingen eine effiziente Schnittstelle, zwischen den "
+#| "medizinischen Einrichtungen und Fachkräften. Eine Schnittstelle, die es "
+#| "ermöglicht, dass Hilfebietende und Hilfesuchende schnell und "
+#| "unkompliziert miteinander vernetzt werden."
 msgid ""
 "Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und vor "
 "allen Dingen eine effiziente Schnittstelle, zwischen den medizinischen "
@@ -2098,7 +2114,11 @@ msgstr ""
 "that allows supporters and those in need to quickly and easily connect with "
 "each other."
 
-#: .\templates\home.html:142
+#, fuzzy
+#| msgid ""
+#| "Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
+#| "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
+#| "allem zu Zeiten wie jetzt die ideale Problemlösung."
 msgid ""
 "Die Plattform \"match4healthcare\" bietet die ideale Schnittstelle zur "
 "schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor "
@@ -2107,8 +2127,10 @@ msgstr ""
 "\"match4healthcare\" is the ideal tool for quick and efficient networkingof "
 "supporters and facilities and especially now the state-of-the-art solution."
 
-#: .\templates\home.html:151
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "100%% ehrenamtlich und uneigennützig von Studierenden als Open-Source "
+#| "Projekt entwickelt"
 msgid ""
 "100%% ehrenamtlich und uneigennützig von Studierenden als Open-Source "
 "Projekt entwickelt"
@@ -2121,13 +2143,47 @@ msgid "Ein gemeinsames Projekt von"
 msgstr "A joint project of"
 
 msgid "Unsere Kooperations&shy;partner"
-msgstr ""
+msgstr "Our cooperation partners"
 
 msgid "Empfohlen von"
-msgstr ""
+msgstr "Recommended by"
 
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#, fuzzy
+#~| msgid ""
+#~| "Ich will\n"
+#~| "                            helfen"
+#~ msgid ""
+#~ "Jetzt Hilfe\n"
+#~ "                                anbieten"
+#~ msgstr "I want to help"
+
+#, fuzzy
+#~| msgid "Wir haben Bedarf an Unterstützung."
+#~ msgid ""
+#~ "Wir haben Bedarf an\n"
+#~ "                            Unterstützung."
+#~ msgstr "We need supporters."
+
+#, fuzzy
+#~| msgid ""
+#~| "Ich will\n"
+#~| "                            helfen"
+#~ msgid ""
+#~ "Jetzt Hilfe\n"
+#~ "                            suchen"
+#~ msgstr "I want to help"
+
+#, fuzzy
+#~| msgid ""
+#~| "Ich will\n"
+#~| "                            helfen"
+#~ msgid ""
+#~ "Empfohlen\n"
+#~ "                        von"
+#~ msgstr "I want to help"
 
 #~ msgid "Mit Unterstützung von"
 #~ msgstr "Supported by"
@@ -2209,11 +2265,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 
 #~ msgid "Klinischer Teil (6.-10. Semester)"
 #~ msgstr "Clinical Section (6.10. semester)"
-
-#~ msgid ""
-#~ "Ich will\n"
-#~ "                            helfen"
-#~ msgstr "I want to help"
 
 #~ msgid ""
 #~ "Ich brauche\n"
@@ -2558,9 +2609,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 
 #~ msgid "e-Mail Adresse"
 #~ msgstr "e-mail address"
-
-#~ msgid "Ich habe Bedarf an Unterstützung"
-#~ msgstr "I need support"
 
 #~ msgid "Das Team"
 #~ msgstr "The team"
