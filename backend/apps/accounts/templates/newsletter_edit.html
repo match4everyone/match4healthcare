@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+{% blocktrans %}Newsletter bearbeiten{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script type="text/javascript">
+
+    function sendNewsletterClicked(event) {
+        let reallySend = confirm('Soll der Newsletter an alle ausgewählten User abgeschickt werden?')
+        if (reallySend) {
+            const button = document.getElementById('sendNewsletterButton')
+            button.classList.add("disabled")
+            button.innerText = 'Sending ...'
+        }
+        return reallySend
+    }
+
+</script>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<hr>
+<div class="container">
+    {% if messages %}
+
+
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} fade show alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+    <p>
+
+    </p>
+</div>
+<div class="container">
+    <div class="card-group">
+        <div class=" card">
+            <div class="card-body">
+                <h5>{% blocktrans %}Wichtige Hinweise{% endblocktrans %}</h5>
+                <hr>
+                 <ul>{% blocktrans %}
+                     <li>Nicht gleichzeitig bearbeiten</li>
+                  <li>Richtige Adressaten?</li>
+                  <li>Keine Werbung verschicken</li>
+                  <li>Auch Werbung in eigener Sache ist Werbung</li>
+                  <li>Dreimal lesen!</li>
+                  <li>Sendet Testmails an euch selbst</li>
+                  <li>Landet die Mail im Spam? </li>
+                     <li>Funktionieren die Links?</li>
+                     <li><mark> Wenn die E-Mail einmal weg ist, ist sie weg.</mark></li>
+                     {% endblocktrans %}
+                </ul>
+                <p>
+                    <a href="#exampleModal1" data-toggle="modal" data-target="#exampleModal1">
+                        <svg class="bi bi-question" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                        </svg>
+                        {% blocktrans %}Hilfe{% endblocktrans %}
+                    </a>
+                </p>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>
+                    Status:
+                    {% if newsletter_state == state_enum.BEING_EDITED %}
+                    {% blocktrans %}
+                    Wird bearbeitet
+                    {% endblocktrans %}
+                    {% elif newsletter_state == state_enum.SENT %}
+                    {% blocktrans %}
+                    Bereits versendet
+                    {% endblocktrans %}
+                    {% elif newsletter_state == state_enum.UNDER_APPROVAL %}
+                    {% blocktrans %}
+                    Weitere Zustimmungen erforderlich
+                    {% endblocktrans %}
+                    {% elif newsletter_state == state_enum.READY_TO_SEND %}
+                    {% blocktrans %}
+                    Bereit zum Abschicken
+                    {%endblocktrans %}
+                    {% endif %}
+                </h5>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Hilfe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          {% blocktrans %}
+         Bevor ihr den Newsletter abschicken könnt, müssen genügend andere Staff-members dem Text des Newsletters zustimmen.
+          Damit sie das tun können, müsst ihr auf "Fertigstellen" bestätigen, dass der Newsletter nicht mehr in Bearbeitung ist.
+          Dann können andere "Text zustimmen" drücken und wenn genug Leute zugestimmt haben, kann jemand den Newsletter abschicken.
+          Ändert jemand den Text wieder über "Text nochmal ändern", verfallen alle bisherigen Zustimmungen.
+          {% endblocktrans %}
+      </div>
+    </div>
+  </div>
+</div>
+                <hr>
+                <div class="row">
+                    {% if newsletter_state <= state_enum.BEING_EDITED %}
+                    <div class="col-sm-3">
+                        <a href="/accounts/view_newsletter/{{uuid}}?freezeNewsletter"
+                           class="btn btn-sm btn-dark {% if newsletter_state < state_enum.BEING_EDITED %}disabled{%endif%}">
+                            {% blocktrans %}Fertig stellen{% endblocktrans %}
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        {% blocktrans %}Der Newsletter ist fertig und soll von anderen überprüft werden.{% endblocktrans %}
+                    </div>
+                     {% else %}
+                    <div class="col-sm-3">
+                        <svg class="bi bi-check-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="col-sm-8">
+                        {% blocktrans %}Die Bearbeitung wurde von {{frozen_by}} fertig gestellt.{% endblocktrans %}
+                    </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    {% if already_approved_by_this_user and required_approvals > 0%}
+                    <div class="col-sm-3">
+                        <svg class="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="col-sm-8">
+                        {% blocktrans %}Du hast den Newsletter bereits approved.{% endblocktrans %}<br>
+                        {% blocktrans %}Es fehlen aber noch <mark>{{required_approvals}}</mark> weitere Zustimmungen
+                        von anderen Staff-Membern. {% endblocktrans %}
+                    </div>
+                    {% elif required_approvals == 0 %}
+                    <div class="col-sm-3">
+                        <svg class="bi bi-check-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="col-sm-8">
+                        {% blocktrans %}
+                         Wurde aproved von {{approvers}}
+                        {% endblocktrans %}
+                    </div>
+                    {% else %}
+                    <div class="col-sm-3">
+                        <a href="/accounts/view_newsletter/{{uuid}}?approveNewsletter"
+                           class="btn btn-sm btn-dark {% if newsletter_state < state_enum.UNDER_APPROVAL %}disabled{%endif%}">
+                            {% blocktrans %}Text Approven{% endblocktrans %}
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        {% blocktrans %}
+                        Alles in Ordnung, ich haben den Newsletter überprüft und er darf so rausgeschickt werden.
+                        {% endblocktrans %}
+                    </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="row">
+                    {% if newsletter_state <= state_enum.READY_TO_SEND %}
+                    <div class="col-sm-3">
+                    <a href="/accounts/view_newsletter/{{uuid}}?sendNewsletter"
+                       onclick="return sendNewsletterClicked()"
+                        id="sendNewsletterButton"
+                       class="btn btn-sm btn-dark {% if newsletter_state < state_enum.READY_TO_SEND %}disabled{%endif%}">
+                        {% blocktrans %}
+                        Abschicken
+                        {% endblocktrans %}
+                    </a>
+
+                </div>
+                <div class="col-sm-8">
+                    {% blocktrans %}
+                    Newsletter absenden.
+                    {% endblocktrans %}
+                </div>
+                    {% else %}
+                    <div class="col-sm-3">
+                        <svg class="bi bi-check-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                <div class="col-sm-8">
+                    {% blocktrans %}
+                    Wurde abgesendet um {{ send_date }} von {{ sent_by }}.
+                    {% endblocktrans %}
+                </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card {% if newsletter_state == state_enum.BEING_EDITED %}border-success{% else %}border-warning{%endif%}">
+        <div class="card-header">
+            <div class="row">
+            <div class="col test-left">Newsletter</div>
+            <div class="col text-right">{% if not  newsletter_state == state_enum.SENT %}
+                <!-- Button trigger modal -->
+                {% if newsletter_state == state_enum.READY_TO_SEND or newsletter_state == state_enum.UNDER_APPROVAL %}
+                <a href="/accounts/view_newsletter/{{uuid}}?unFreezeNewsletter"
+                   onclick="return confirm('{% blocktrans %}Wenn du den Newsletter jetzt wieder editieren möchtest, gehen bereits gegebene Approvals von anderen verloren.\nWillst du den Text wirklich editieren?{% endblocktrans %}')"
+                   class="btn btn-sm btn-success">
+                    {% blocktrans %}Text nochmal ändern {% endblocktrans %}
+                    <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
+                              clip-rule="evenodd"/>
+                        <path fill-rule="evenodd"
+                              d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                {% endif %}
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    {% blocktrans %}Testmail verschicken {% endblocktrans %}
+                    <svg class="bi bi-envelope" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M14 3H2a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1zM2 2a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H2z"
+                              clip-rule="evenodd"/>
+                        <path fill-rule="evenodd"
+                              d="M.071 4.243a.5.5 0 01.686-.172L8 8.417l7.243-4.346a.5.5 0 01.514.858L8 9.583.243 4.93a.5.5 0 01-.172-.686z"
+                              clip-rule="evenodd"/>
+                        <path d="M6.752 8.932l.432-.252-.504-.864-.432.252.504.864zm-6 3.5l6-3.5-.504-.864-6 3.5.504.864zm8.496-3.5l-.432-.252.504-.864.432.252-.504.864zm6 3.5l-6-3.5.504-.864 6 3.5-.504.864z"/>
+                    </svg>
+                </button>
+
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {% blocktrans %}An welche Adresse?{% endblocktrans %}
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/accounts/view_newsletter/{{uuid}}" method="get" onsubmit="disableButton()">
+                            <div class="modal-body">
+
+                                {% csrf_token %}
+                                {{ mail_form | crispy }}
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    {% blocktrans %}Schließen{% endblocktrans %}
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    {% blocktrans %}
+                                    Testmail senden
+                                    {% endblocktrans %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+</div>
+                </div>
+        </div>
+        <div class="card-body">
+            {% crispy form form.helper %}
+        </div>
+    </div>
+    <hr>
+</div>
+<script>function disableButton() {
+    var btn = document.getElementById('btSubmitForm');
+    btn.disabled = true;
+    btn.innerText = 'Sending...'
+}</script>
+{% endblock %}

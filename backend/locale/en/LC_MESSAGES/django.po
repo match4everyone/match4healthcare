@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:59+0200\n"
+"POT-Creation-Date: 2020-04-16 00:21+0200\n"
 "PO-Revision-Date: 2020-04-15 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,6 +22,48 @@ msgstr ""
 msgid "E-Mail"
 msgstr "E-Mail"
 
+msgid "Institutionen"
+msgstr "Institutions"
+
+msgid "Helfer*innen"
+msgstr "Supporters"
+
+msgid "Nachricht"
+msgstr "Message"
+
+msgid "Davon nur an ... Benutzer"
+msgstr "but only to ... users"
+
+msgid "<h5>Adressaten</h5>"
+msgstr "<h5>Receipients</h5>"
+
+msgid "Dieser Newsletter geht an"
+msgstr "This will be send to"
+
+msgid "Betreff"
+msgstr "Subject"
+
+msgid "Änderungen Speichern"
+msgstr "Save changes"
+
+msgid "validierte"
+msgstr "validated"
+
+msgid "nicht validierte"
+msgstr "not validated"
+
+msgid "varlidierte und nicht validierte"
+msgstr "validated and not validated"
+
+msgid "validiert und von uns approved"
+msgstr "validated and approved by us"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Ansehen"
+msgstr "Inspect"
+
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
 
@@ -30,6 +72,9 @@ msgstr "Logout"
 
 msgid "Kennwort ändern"
 msgstr "Change password"
+
+msgid "Newsletter editieren"
+msgstr "Edit newsletter"
 
 msgid ""
 "\n"
@@ -206,6 +251,220 @@ msgstr ""
 
 msgid "Jetzt registrieren"
 msgstr "Register now"
+
+msgid "Newsletter bearbeiten"
+msgstr "Edit Newsletter"
+
+msgid "Wichtige Hinweise"
+msgstr "Useful tips"
+
+msgid ""
+"\n"
+"                     <li>Nicht gleichzeitig bearbeiten</li>\n"
+"                  <li>Richtige Adressaten?</li>\n"
+"                  <li>Keine Werbung verschicken</li>\n"
+"                  <li>Auch Werbung in eigener Sache ist Werbung</li>\n"
+"                  <li>Dreimal lesen!</li>\n"
+"                  <li>Sendet Testmails an euch selbst</li>\n"
+"                  <li>Landet die Mail im Spam? </li>\n"
+"                     <li>Funktionieren die Links?</li>\n"
+"                     <li><mark> Wenn die E-Mail einmal weg ist, ist sie weg."
+"</mark></li>\n"
+"                     "
+msgstr ""
+"\n"
+"                     <li>Do not edit this at the same time as someone else</"
+"li>\n"
+"                  <li>Correct receipients?</li>\n"
+"                  <li>Do not send ads</li>\n"
+"                  <li>Ads for ourselves are also ads</li>\n"
+"                  <li>Read it three times!</li>\n"
+"                  <li>Send test mails to yourself</li>\n"
+"                  <li>Do they go to your spam folder? </li>\n"
+"                     <li>Do the links in it work?</li>\n"
+"                     <li><mark>You can only send the Newsletter once.</"
+"mark></li>\n"
+"                     "
+
+msgid "Hilfe"
+msgstr "Help"
+
+msgid ""
+"\n"
+"                    Wird bearbeitet\n"
+"                    "
+msgstr ""
+"\n"
+"                    Being edited\n"
+"                    "
+
+msgid ""
+"\n"
+"                    Bereits versendet\n"
+"                    "
+msgstr ""
+"\n"
+"                    Already sent\n"
+"                    "
+
+msgid ""
+"\n"
+"                    Weitere Zustimmungen erforderlich\n"
+"                    "
+msgstr ""
+"\n"
+"                    More approvals required\n"
+"                    "
+
+msgid ""
+"\n"
+"                    Bereit zum Abschicken\n"
+"                    "
+msgstr ""
+"\n"
+"                    Ready to send\n"
+"                    "
+
+msgid ""
+"\n"
+"         Bevor ihr den Newsletter abschicken könnt, müssen genügend andere "
+"Staff-members dem Text des Newsletters zustimmen.\n"
+"          Damit sie das tun können, müsst ihr auf \"Fertigstellen\" "
+"bestätigen, dass der Newsletter nicht mehr in Bearbeitung ist.\n"
+"          Dann können andere \"Text zustimmen\" drücken und wenn genug Leute "
+"zugestimmt haben, kann jemand den Newsletter abschicken.\n"
+"          Ändert jemand den Text wieder über \"Text nochmal ändern\", "
+"verfallen alle bisherigen Zustimmungen.\n"
+"          "
+msgstr ""
+"\n"
+"         Before you send off the newsletter, enough other Staff-members have "
+"to approve its text.\n"
+"          To allow them to review, press \"Editing Done\" , to show that the "
+"editing has finished.\n"
+"          Then, others can \"Approve text\" and if enough did so someone can "
+"send off the letter.\n"
+"          If then, someone wants to change the text again via \"Edit text "
+"again\", all given approvals are dismissed.\n"
+"          "
+
+msgid "Fertig stellen"
+msgstr "Editing Done"
+
+msgid "Der Newsletter ist fertig und soll von anderen überprüft werden."
+msgstr "The newsletter is done and others should review it."
+
+#, python-format
+msgid "Die Bearbeitung wurde von %(frozen_by)s fertig gestellt."
+msgstr "The edit was finished by %(frozen_by)s."
+
+msgid "Du hast den Newsletter bereits approved."
+msgstr "You already approved the newsletter."
+
+#, python-format
+msgid ""
+"Es fehlen aber noch <mark>%(required_approvals)s</mark> weitere "
+"Zustimmungen\n"
+"                        von anderen Staff-Membern. "
+msgstr ""
+"But there are missing <mark>%(required_approvals)s</mark> further approvals\n"
+"                        from other staff members. "
+
+#, python-format
+msgid ""
+"\n"
+"                         Wurde aproved von %(approvers)s\n"
+"                        "
+msgstr ""
+"\n"
+"                         Was aproved by %(approvers)s\n"
+"                        "
+
+msgid "Text Approven"
+msgstr "Approve text"
+
+msgid ""
+"\n"
+"                        Alles in Ordnung, ich haben den Newsletter überprüft "
+"und er darf so rausgeschickt werden.\n"
+"                        "
+msgstr ""
+"\n"
+"                        Everything is alright, I checked the newsletter and "
+"it can be sent out like this.\n"
+"                        "
+
+msgid ""
+"\n"
+"                        Abschicken\n"
+"                        "
+msgstr ""
+"\n"
+"                        Send\n"
+"                        "
+
+msgid ""
+"\n"
+"                    Newsletter absenden.\n"
+"                    "
+msgstr ""
+"\n"
+"                    Send newsletter to receipients.\n"
+"                    "
+
+#, python-format
+msgid ""
+"\n"
+"                    Wurde abgesendet um %(send_date)s von %(sent_by)s.\n"
+"                    "
+msgstr ""
+"\n"
+"                    Was sent at %(send_date)s by %(sent_by)s.\n"
+"                    "
+
+msgid ""
+"Wenn du den Newsletter jetzt wieder editieren möchtest, gehen bereits "
+"gegebene Approvals von anderen verloren.\\nWillst du den Text wirklich "
+"editieren?"
+msgstr ""
+"If you start editing again now, all given approvals get lost. \\n Do you "
+"want to edit the text?"
+
+msgid "Text nochmal ändern "
+msgstr "Edit text again"
+
+msgid "Testmail verschicken "
+msgstr "Send test email"
+
+msgid "An welche Adresse?"
+msgstr "To which e-mail address?"
+
+msgid "Schließen"
+msgstr "Close"
+
+msgid ""
+"\n"
+"                                    Testmail senden\n"
+"                                    "
+msgstr ""
+"\n"
+"                                    Send testmail\n"
+"                                    "
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "Newsletters"
+msgstr "Newsletters"
+
+msgid ""
+"\n"
+"                        Neuen Newsletter erstellen\n"
+"                        "
+msgstr ""
+"\n"
+"                        Create new newsletter\n"
+"                        "
 
 msgid " Registrierung - Studierende "
 msgstr " Registration - Supporter "
@@ -616,6 +875,35 @@ msgstr ""
 "You have successfully activated your profile, you can now be contacted again "
 "by people seeking help."
 
+msgid "Bearbeitungen gespeichert."
+msgstr "Edits have been saved"
+
+msgid ""
+"Der Newsletter kann nun nicht mehr editiert werden. Andere Leute können ihn "
+"approven."
+msgstr "The newsletter cannot be edited anymore. It is open for review. "
+
+msgid "Der Newsletter kann wieder bearbeitet werden."
+msgstr "The newsletter can be edited again."
+
+#, python-brace-format
+msgid ""
+"Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir "
+"gesendeten Mail ({mail}) anklicken."
+msgstr ""
+"Until now you approval is NOT VALID. You have to validate it by cklicking "
+"the link in the e-mail sent to ({mail})."
+
+msgid "Der Newsletter wurde versendet."
+msgstr "Newsletter has been sent"
+
+#, python-format
+msgid "Eine Test Email wurde an %s versendet."
+msgstr "A test email to %s has been sent."
+
+msgid "Dein Approval ist nun gültig."
+msgstr "Your approval is now valid :)"
+
 msgid "Kann eine Vergütung angeboten werden?"
 msgstr "Can compensation be offered?"
 
@@ -925,9 +1213,6 @@ msgstr "Pharmacy"
 
 msgid "Allgemein"
 msgstr "General"
-
-msgid "Betreff"
-msgstr "Subject"
 
 msgid "Nachrichtentext"
 msgstr "Message"
