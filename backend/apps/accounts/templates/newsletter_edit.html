@@ -9,11 +9,26 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script type="text/javascript">
+
+    function sendNewsletterClicked(event) {
+        let reallySend = confirm('Soll der Newsletter an alle ausgewählten User abgeschickt werden?')
+        if (reallySend) {
+            const button = document.getElementById('sendNewsletterButton')
+            button.classList.add("disabled")
+            button.innerText = 'Sending ...'
+        }
+        return reallySend
+    }
+
+</script>
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
+
+
 <hr>
 <div class="container">
     {% if messages %}
@@ -187,7 +202,8 @@
                     {% if newsletter_state <= state_enum.READY_TO_SEND %}
                     <div class="col-sm-3">
                     <a href="/accounts/view_newsletter/{{uuid}}?sendNewsletter"
-                       onclick="return confirm('Soll der Newsletter an alle ausgewählten User abgeschickt werden?')"
+                       onclick="return sendNewsletterClicked()"
+                        id="sendNewsletterButton"
                        class="btn btn-sm btn-dark {% if newsletter_state < state_enum.READY_TO_SEND %}disabled{%endif%}">
                         {% blocktrans %}
                         Abschicken
