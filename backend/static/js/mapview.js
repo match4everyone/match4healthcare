@@ -33,6 +33,13 @@ mapViewPage = {
     
         this.mapObject = L.map(this.options.mapViewContainerId,mapOptions)
         L.tileLayer(tileLayerURL, tileLayerOptions).addTo(this.mapObject);    
+
+        // Enhance MarkerCluster - override getChildCount
+        L.MarkerCluster.prototype.getChildCount = function (){
+            const children = this.getAllChildMarkers()
+            return children.reduce((sum,marker) => (sum + marker.options.supporterCount),0)
+        }
+
     },
 
     onResizeWindow: function onResizeWindow() {
@@ -66,7 +73,8 @@ mapViewPage = {
                 color: '#ed0a71', 
                 fillColor: '#ed0a71', 
                 weight: 2 + 0.25 * count, 
-                fillOpacity: .2 
+                fillOpacity: .2,
+                supporterCount: count
             }).bindPopup(this.options.createPopupTextStudent(countrycode,city, plz, count, this.options.supporterListURL.replace("COUNTRYCODE",countrycode).replace("PLZ",plz)))
         }));        
 
