@@ -3,6 +3,10 @@ from django.db import models
 from datetime import datetime
 from django.core.mail import EmailMessage
 from django.conf import settings
+from .email_utils import send_mass_mail_sendgrid
+
+import logging
+logger = logging.getLogger("django")
 
 import uuid
 import numpy as np
@@ -155,30 +159,28 @@ class Newsletter(models.Model):
 
         if self.send_to_hospitals:
             recipient_hospitals_qs = User.objects.filter(**hospital_filter).values_list('email', flat=True)
-            self._send_mail(recipient_hospitals_qs, recipient_hospitals_qs.count())
+            n_hospital = recipient_hospitals_qs.count()
+            logger.info("Starting to send out newsletter to %s hospitals..." % n_hospital)
+            self._send_mail(recipient_hospitals_qs, n_hospital)
 
         if self.send_to_students:
             recipient_student_qs = User.objects.filter(**student_filter).values_list('email', flat=True)
-            self._send_mail(recipient_student_qs, recipient_student_qs.count())
+            n_students = recipient_student_qs.count()
+            logger.info("Starting to send out newsletter to %s students..." % n_students)
+            self._send_mail(recipient_student_qs, n_students)
 
     def _send_mail(self, recipients, n):
 
-        chunksize = 4900  # max allowed by sendgrid: 5k (but they have weird extra limitations, so be sure)
+        chunksize = 950
+        # max allowed by sendgrid: 1k (but they have weird extra limitations, so be sure)
+        # https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html#-Limitations
+
         for i in range((n // chunksize)+1):
             pos = i * chunksize
-            self._send_mass_mail(recipients[pos:min(pos+chunksize, n)])
-
-    def _send_mass_mail(self, recipients):
-
-        email = EmailMessage(
-            subject=self._subject(),
-            body=self.message,
-            from_email=settings.NOREPLY_MAIL,
-            bcc=list(recipients),
-            to=['news@match4healthcare.de']
-        )
-        email.content_subtype = "html"
-        email.send()
+            send_mass_mail_sendgrid(recipient_list=recipients[pos:min(pos+chunksize, n)],
+                                    subject=self._subject(),
+                                    html_body=self.message,
+                                    from_mail=settings.NOREPLY_MAIL)
 
 
 def random_number():

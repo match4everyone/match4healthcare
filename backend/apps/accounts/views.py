@@ -449,7 +449,9 @@ def view_newsletter(request, uuid):
         'mail_form': TestMailForm(),
         'already_approved_by_this_user': nl.has_been_approved_by(request.user),
         'required_approvals': nl.required_approvals(),
-        'nl': nl,
+        'frozen_by': nl.frozen_by,
+        'sent_by': nl.sent_by,
+        'send_date': nl.send_date,
         'approvers': ', '.join([a.user.username for a in nl.letterapprovedby_set.all()])
     }
 
