@@ -11,3 +11,4 @@ djangorestframework-filters==0.11.1
 whitenoise==5.0.1
 numpy==1.18.2
 pandas==1.0.3
+sendgrid==6.2.0
