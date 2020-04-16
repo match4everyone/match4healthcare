@@ -5,6 +5,61 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.6.0-rc1]
+
+### Hinzugefügt
+- Links zu allen Supporterlogos auf der Startseite
+- added license agreement for images
+- System Checks (see Readme):
+  - Mailversand über Sendgrid API Test
+  - Umgebungsvariablen gesetzt
+  - Aufruf in Deployment-Skript 
+- Model für Newsletterversand
+- UI für Newsletterversand
+- Sendgrid Client API für Newsletterversand
+- Einstellung für Anzahl nötiger Newsletter-Genehmigungen vor Versand
+- Slack Channel Log Handler für Benachrichtigung über Fehler
+- JSON Routen für Einrichtungen und Helfer*innen zum dynamischen Nachladen in die Karte
+- Komplett neue Implementierung der Karte mit https://github.com/Leaflet/Leaflet.markercluster und ein- und ausschaltbarer Anzeige von Helfern und Einrichtungen in einer Karte
+- Logging von Anmeldeversuchen
+- Neues Logfile-Format: JSON
+- Neues Logfile-Format: Text mit Exceptions auf einer Zeile
+- Postgres Major Version im Dockerfile fixiert
+- Zeitstempel auf der Datenbank für Audit-Zwecke
+- Prüfung ob Text eingegeben wurde, bevor ein Mail versendet werden kann
+
+### Geändert
+- new design for language switcher
+- new logos and structure landing page
+- Redirect nach Login für Einrichtungen auf Profil
+- Versionen in requirements.txt eingefroren
+- requirements und requirements.prod neu sortiert
+- Übersetzungen
+- PLZs für Wiener Stadtgebiet angepasst
+- Karte im Menü einfach in Karte umbenannt (bzw. "Einrichtungen finden" für Helfer)
+- Neue Logging-Konfiguration
+- Log File Format in JSON geändert und Dateinamen geändert
+- Sendgrid Key wird nun in Dev und Prod aus dem Environment gelesen
+- Korrekte Helfer und Einrichtungsberechnung auf der Karte
+- Deploy-Skript Reihenfolge von migrate und den anderen Schritten geändert
+
+### Entfernt
+- CDN Einbindung von bootstrap, jQuery, leaflet und popper entfernt aus Datenschutzgründen
+- Überflüssige jQuery Einbindung
+- Bug: e-mail an Einrichtungen wurden nicht in DB gespeichert nach dem Senden
+- Bug: Versenden von Mails an Einrichtungen schlägt fehl, weil der Mailtext fälschlicherweise im Betreff-Feld gespeichert wird bei Längen über 200 Zeichen
+- Bug: Ungültige Postleitzahlen führen zum Abbruch bei Registrierung und Profiländerung
+- Filenames aus .po files für weniger Merge-Konflikte
+
+## [1.5.1]
+
+### Hinzugefügt
+- Links zu allen Supporterlogos auf der Startseite
+
+### Geändert
+
+### Entfernt
+
 ## [1.5] - 2020-04-06
 
 ### Hinzugefügt
