@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from os import path
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...) 
@@ -78,7 +79,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 WSGI_APPLICATION = 'match4healthcare.wsgi.application'
 
 MAX_EMAILS_PER_HOSPITAL_PER_DAY = 200
-
+NEWSLETTER_REQUIRED_APPROVERS = 2
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -151,4 +152,86 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
+}
+
+
+# Configure Logging for all environments
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },    
+    },
+    'formatters': {
+        'json': { # Made for Django Requests and General logging, will create parseable error logs
+            'class': 'match4healthcare.logging.formatters.DjangoRequestJSONFormatter'
+        },
+        'text': { 
+            'class': 'match4healthcare.logging.formatters.OneLineExceptionFormatter',
+            'format': '%(asctime)s: %(name)-12s %(levelname)-8s |%(message)s|',
+        },
+    },
+    'handlers': {
+        'mail_admin': {
+            'class': 'logging.NullHandler' # Make sure to disable Djangos default e-Mail Logger
+        },
+        'null': {
+            'class': 'logging.NullHandler', # Disable Django Default Server Logger
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'text',
+        },
+        'errorlogfile': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'json',
+            'level': 'ERROR',
+            'filename': path.join(RUN_DIR, 'match4healthcare.json.error.log'),
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+        },
+        'auditlogfile': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'json',
+            'level': 'INFO',
+            'filename': path.join(RUN_DIR, 'match4healthcare.json.audit.log'),
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+        },
+        'slack': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            '()'   : 'match4healthcare.logging.loggers.SlackMessageHandlerFactory',
+            'webhook_url': os.environ.get('SLACK_LOG_WEBHOOK', '')
+        },
+    },
+
+
+    # Now put it all together
+    'loggers': {
+        '': { # Root Logger Configuration, should catch all remaining Warnings and Errors, that were not specifically handled below
+            'level': 'WARNING',
+            'handlers': ['errorlogfile','console','slack'],
+        },
+        'apps': { # Logging Configuration for all Django apps, i.e. our software, matches any loggers under apps subdirectory using __name__
+            'level': 'INFO',
+            'handlers': ['auditlogfile'],
+            'propagate': False
+        },
+        'django.request': { # Main error logger and last line of defense for #500 Errors, will log all errors
+            'level': 'WARNING',
+            'handlers': ['errorlogfile','console','slack'], 
+            'propagate': False
+        },
+        'django.server': { # Only for development server, all of these are mirrored on django.request anyway
+            'level': 'ERROR',
+            'handlers': ['null'], 
+            'propagate': False
+        },
+    },
 }

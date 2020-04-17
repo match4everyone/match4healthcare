@@ -35,6 +35,10 @@ urlpatterns = [
     path('count', views.UserCountView.as_view(), name='count'),
     path('change_activation',views.change_activation_ask,name='activate_student_ask'),
     path('change_activation_confirm',views.change_activation,name='activate_student'),
+    path('view_newsletter/<uuid>', views.view_newsletter, name='view_newsletter'),
+    path('new_newsletter', views.new_newsletter, name='new_newsletter'),
+    path('list_newsletter', views.list_newsletter, name='list_newsletter'),
+    path('did_see_newsletter/<uuid>/<token>', views.did_see_newsletter, name='did_see_newsletter'),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 

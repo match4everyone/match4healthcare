@@ -39,8 +39,8 @@
 
                     {% endif %}
                 {% else %}
-
-                <p>{% blocktrans %}Bitte <a target="_blank" href="/accounts/signup_student">Registriere dich als Helfende_r</a> um die Kontaktdaten von {{hospital.firmenname}} zu sehen.{% endblocktrans%}</p>
+                {% url 'student_signup' as student_signup_url %}
+                <p>{% blocktrans with firmenname=hospital.firmenname %}Bitte <a target="_blank" href="{{student_signup_url}}">Registriere dich als Helfende_r</a> um die Kontaktdaten von {{firmenname}} zu sehen.{% endblocktrans %}</p>
 
 
                 {% endif %}

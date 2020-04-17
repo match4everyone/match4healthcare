@@ -11,3 +11,6 @@ djangorestframework-filters==0.11.1
 whitenoise==5.0.1
 numpy==1.18.2
 pandas==1.0.3
+requests==2.23.0
+JSON-log-formatter==0.3.0
+sendgrid==6.2.0
