@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.6.0]
+
+### Geändert
+
+- Fixed #430 Javascript problems on older iOs Devices
+
 ## [1.6.0-rc1]
 
 ### Hinzugefügt
