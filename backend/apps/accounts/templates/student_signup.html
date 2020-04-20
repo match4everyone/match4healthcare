@@ -1,56 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load render_bundle from webpack_loader %}
 
 {% block title %}
-    {% blocktrans %}Registrierung - Freiwillige{% endblocktrans %}
+{% blocktrans %}
+Registrierung - Helfer*innen
+{% endblocktrans %}
 {% endblock %}
 
 {% block header %}
-<script type="text/javascript">
-
-    var signUpHelper = {
-        handleQualificationInput : function handleQualificationInput(event) {
-            let sourceElement = event.srcElement;
-            let qualificationSelected = event.srcElement.checked;
-
-            // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
-            let qualificationId = event.srcElement.closest("div.ausbildung-checkbox").id.split("-").slice(-1)
-            this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
-        },
-        setQualificationSectionVisibility : function setQualificationSectionVisibility(id, setVisibility) {
-            let section = document.getElementById(`div-ausbildung-${id}`)
-            if (!section) return;
-            if (setVisibility) {
-                section.classList.remove('hidden')
-            } else {
-                section.classList.add('hidden');
-                section.querySelectorAll("input[type='checkbox']").forEach( (checkbox) => { checkbox.checked = false })
-                section.querySelectorAll("input[type='text'], select").forEach( (textbox) => { textbox.value = '' })
-            }
-
-        },
-    }
-
-    document.addEventListener("DOMContentLoaded", function(event) {
-        let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
-        qualifikationSelectors.forEach(element => {
-            element.addEventListener("change", (event) => { signUpHelper.handleQualificationInput(event) })
-
-            // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
-            signUpHelper.handleQualificationInput({ srcElement: element });
-        })
-
-    });
-
-</script>
+{% render_bundle 'student' %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
-
 <div class="container">
   	<div style="height:40px"></div>
     {% if user.is_authenticated %}
@@ -86,11 +52,5 @@
 		 </div>
 	</div>
 </div>
-
-<script type="text/javascript">
-$( document ).ready(function() {
-    $("#id_availability_start").attr("type", "date");
-});
-</script>
 
 {% endblock %}

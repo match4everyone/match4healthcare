@@ -26,21 +26,22 @@ RUN_DIR = os.path.join(BASE_DIR, "run")
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "django_filters",
-    "widget_tweaks",
-    "crispy_forms",
-    "django_tables2",
-    "apps.mapview",
-    "apps.iamstudent",
-    "apps.ineedstudent",
-    "apps.accounts",
-    "apps.use_statistics",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_filters',
+    'widget_tweaks',
+    'crispy_forms',
+    'django_tables2',
+    'apps.mapview',
+    'apps.iamstudent',
+    'apps.ineedstudent',
+    'apps.accounts',
+    'apps.use_statistics',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,10 @@ MEDIA_URL = "/media/"
 
 STATIC_ROOT = os.path.join(RUN_DIR, "static")
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    os.path.normpath(os.path.join(os.path.join(os.path.dirname(BASE_DIR),'frontend'),'dist')),
+)
 
 MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
 

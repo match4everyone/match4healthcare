@@ -38,6 +38,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <title>{% block title %} {% endblock %} | match4healthcare </title>
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'main' %}
 {% block header %}
     {% endblock %}
 </head>

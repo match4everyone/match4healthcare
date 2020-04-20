@@ -77,3 +77,16 @@ else:
     # TODO: add logger message instead? # noqa: T003
     print("No email option selected")
     exit(1)
+
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': False,
+        'BUNDLE_DIR_NAME': '/', # must end with slash
+        'STATS_FILE': os.path.normpath(os.path.join(os.path.join(os.path.dirname(BASE_DIR),'frontend'),'webpack-stats.json')),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        #'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+        'LOADER_CLASS': 'webpack_loader.loader.WebpackLoader',
+    }
+}
