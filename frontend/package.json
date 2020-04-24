@@ -1,0 +1,29 @@
+{
+  "name": "match4healthcare-frontend",
+  "version": "0.1.0",
+  "description": "Frontend components for match4healthcare django backend",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "build-dev": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.2",
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack": "^4.42.1",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
