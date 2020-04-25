@@ -3,7 +3,8 @@ const path = require('path')
 const BundleTracker = require('webpack-bundle-tracker')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const bundleTargetDirectory = path.resolve(__dirname, '../backend/static/bundles')
+
+// Generate entry points from all .js files in src root
 const srcDir = path.resolve(__dirname, 'src')
 const entryPoints = fs
     .readdirSync(srcDir)
@@ -15,71 +16,91 @@ const entryPoints = fs
     },{})
 
 module.exports = {
-  watchOptions: {
-    ignored: /node_modules/,
-  },
-  externals: {
-    jquery: 'jQuery',
-    django: 'django',
-  },
-  context: __dirname,
-  mode: 'production',
-  module: {
-    rules: [
-      {
-        test: /\.,?js$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-          emitWarning: true,
-          configFile: './.eslintrc.js',
-        }
-      },      
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                debug: false,
-                'targets': {
-                  'browsers': [
-                    '> 0.25%, not dead',
-                    'ios >= 11'
-                  ]
+    watchOptions: {
+        ignored: /node_modules/,
+    },
+    externals: {
+        jquery: 'jQuery',
+    },
+    context: __dirname,
+    mode: 'production',
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.,?js$/,
+                enforce: 'pre',
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+                options: {
+                    emitWarning: true,
+                    configFile: './.eslintrc.js',
                 }
-              }]
-            ]
-          }
-        }
-      }
-    ]
-  },
+            },      
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                        presets: [
+                            ['@babel/preset-env', {
+                                debug: false,
+                                useBuiltIns: 'usage',
+                                corejs: 3,
+                                targets: {
+                                    'browsers': [
+                                        '> 0.25%, not dead',
+                                        'ios >= 11'
+                                    ]
+                                }
+                            }]
+                        ]
+                    }
+                }
+            }
+        ]
+    },
     entry: entryPoints, // generated from src/*.js
-  output: {
-    filename: '[name]-[hash].js',
-    path: bundleTargetDirectory,
-    publicPath: '/static/bundles/'
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin({
-      terserOptions: {
-        keep_fnames: true
-      }
+    output: {
+        filename: '[name]-[hash].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/static/'
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                keep_fnames: true
+            }
 
-    })],
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new BundleTracker({
-      path: __dirname,
-      filename: 'webpack-stats.json',
-      logTime: true,
-      indent: '\t',
-    }),
-  ],
+        })],
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new BundleTracker({
+            path: __dirname,
+            filename: 'webpack-stats.json',
+            logTime: true,
+            indent: '\t',
+        }),
+    ],
 }
