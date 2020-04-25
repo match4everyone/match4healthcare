@@ -1,8 +1,18 @@
+const fs = require('fs')
 const path = require('path')
 const BundleTracker = require('webpack-bundle-tracker')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const bundleTargetDirectory = path.resolve(__dirname, '../backend/static/bundles')
+const srcDir = path.resolve(__dirname, 'src')
+const entryPoints = fs
+    .readdirSync(srcDir)
+    .filter((fileName) => /\.js$/.test(fileName))
+    .reduce((returnObject,fileName) => {
+        let bundleName = fileName.split('.').slice(0,-1)
+        returnObject[bundleName] = path.resolve(srcDir, fileName)
+        return returnObject
+    },{})
 
 module.exports = {
   watchOptions: {
@@ -48,10 +58,7 @@ module.exports = {
       }
     ]
   },
-  entry: {
-    main: ['./src/main.js'],
-    student: ['./src/student.js'],
-  },
+    entry: entryPoints, // generated from src/*.js
   output: {
     filename: '[name]-[hash].js',
     path: bundleTargetDirectory,
