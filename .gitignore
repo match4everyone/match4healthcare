@@ -203,3 +203,5 @@ docker-compose.yml
 
 # Ignore all config files
 *.env
+frontend/webpack-stats.json
+
