@@ -27,6 +27,9 @@ class BaseEvaluation(models.Model):
 
     contact_mail = models.EmailField(blank=True, null=True)
 
+    class Meta:
+        abstract = True
+
 
 # student-specific fields
 class StudentEvaluation(BaseEvaluation):
