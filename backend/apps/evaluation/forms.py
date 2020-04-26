@@ -1,5 +1,5 @@
 from django import forms
-from backend.apps.evaluation.models import StudentEvaluation, InstitutionEvaluation
+from apps.evaluation.models import StudentEvaluation, InstitutionEvaluation
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
@@ -29,7 +29,7 @@ class StudentEvaluationForm(forms.ModelForm):
         self.helper.form_id = 'id-exampleForm'
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'completed'
+        self.helper.form_action = 'student'
 
         self.helper.layout = Layout(
             # TODO add Layout

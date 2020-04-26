@@ -3,15 +3,41 @@
 {% load i18n %}
 
 {% block title %}
+{% blocktrans %}
 Evaluation Studis
+{% endblocktrans %}
 {% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-<form>
 
-    {{ form }}
+<div style="height:40px"></div>
+<div class="container" style="margin-bottom: 55px;">
+    <div class="row" style="margin-top:30px;">
+        <div class="col-lg-10 col-sm-12 col-12">
 
-</form>
+            <form method="post" action="" onsubmit="disableButton()">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                {% crispy form_info form_info.helper %}
+
+                <button type="submit" id="btSubmitForm" class="btn blue text-white btn-md">{% blocktrans %}Evaluation absenden!{% endblocktrans %}</button>
+            </form>
+            <script>function disableButton() {
+                var btn = document.getElementById('btSubmitForm');
+                btn.disabled = true;
+                btn.innerText = 'Sending...'
+            }</script>
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
