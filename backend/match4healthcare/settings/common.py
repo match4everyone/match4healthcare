@@ -205,7 +205,6 @@ LOGGING = {
         },
         'slack': {
             'level': 'ERROR',
-            'filters': ['require_debug_true'],
             '()'   : 'match4healthcare.logging.loggers.SlackMessageHandlerFactory',
             'webhook_url': os.environ.get('SLACK_LOG_WEBHOOK', '')
         },

@@ -324,7 +324,7 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        logger.warning('Login failure ({})'.format(form.cleaned_data['username']))
+        logger.warning('Login failure ({})'.format(getattr(form.data,'username','')))
         return super().form_invalid(form)
 
 @login_required

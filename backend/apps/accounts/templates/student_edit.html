@@ -38,7 +38,7 @@ var signUpHelper = {
     document.addEventListener("DOMContentLoaded", function(event) {
         let qualifikationSelectors = document.querySelectorAll("div.ausbildung-checkbox input")
         qualifikationSelectors.forEach(element => {
-            element.addEventListener("input", (event) => { signUpHelper.handleQualificationInput(event) })
+            element.addEventListener("change", (event) => { signUpHelper.handleQualificationInput(event) })
 
             // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
             signUpHelper.handleQualificationInput({ srcElement: element });
