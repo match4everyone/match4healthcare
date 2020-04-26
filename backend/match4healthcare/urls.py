@@ -40,4 +40,5 @@ urlpatterns = [
     path('impressum/', views.impressum),
     path('dataprotection/', views.dataprotection),
     path('legal-questions/', views.legal_questions),
+    path('terms-of-use/', views.terms_of_use),
     ]
