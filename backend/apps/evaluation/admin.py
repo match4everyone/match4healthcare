@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import StudentEvaluation
+from .models import StudentEvaluation, InstitutionEvaluation
 
-# Register your models here.
+
 admin.site.register(StudentEvaluation)
+admin.site.register(InstitutionEvaluation)
