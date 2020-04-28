@@ -3,7 +3,14 @@ from apps.evaluation.models import StudentEvaluation, InstitutionEvaluation
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, HTML, Row, Column
+from crispy_forms.layout import Layout, Submit, HTML, Row
+
+from apps.evaluation.custom_crispy import RadioButtons
+
+
+def make_button_group(field):
+    return RadioButtons(field, option_label_class="btn btn-md blue text-white",
+                        template='evaluation/input_buttongroup-any_indicator.html')
 
 
 class StudentEvaluationForm(forms.ModelForm):
@@ -23,6 +30,12 @@ class StudentEvaluationForm(forms.ModelForm):
             'communication_with_institutions': _('Wie lief für dich die Kommunikation mit den Institutionen?'),
         }
 
+        widgets = {
+            'registration_feedback': forms.Textarea(attrs={'rows': 4}),
+            'communication_with_institutions': forms.Textarea(attrs={'rows': 4}),
+            'suggested_improvements': forms.Textarea(attrs={'rows': 4}),
+        }
+
     def __init__(self, *args, **kwargs):
         super(StudentEvaluationForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -32,13 +45,12 @@ class StudentEvaluationForm(forms.ModelForm):
         self.helper.form_action = 'student'
 
         self.helper.layout = Layout(
-            # TODO add Layout
-            Row('overall_rating'),
-            Row('registration_feedback'),
-            Row('communication_with_institutions'),
-            Row('suggested_improvements'),
-            Row('likelihood_recommendation'),
-            Row('contact_mail'),
+            make_button_group('overall_rating'),
+            'registration_feedback',
+            'communication_with_institutions',
+            'suggested_improvements',
+            make_button_group('likelihood_recommendation'),
+            'contact_mail',
         )
 
     def clean_overall_rating(self):
