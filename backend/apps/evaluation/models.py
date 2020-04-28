@@ -7,7 +7,7 @@ AVERAGE = 3
 BAD = 4
 VERY_BAD = 5
 
-LIKERT_CHOICES = (
+QUALITY_CHOICES = (
     (VERY_GOOD, _('Sehr gut')),
     (GOOD, _('Gut')),
     (AVERAGE, _('Durchschnittlich')),
@@ -15,15 +15,24 @@ LIKERT_CHOICES = (
     (VERY_BAD, _('Sehr schlecht')),
 )
 
+RECOMMENDATION_CHOICES = (
+    (VERY_GOOD, _('Sehr hoch')),
+    (GOOD, _('Hoch')),
+    (AVERAGE, _('Mittel')),
+    (BAD, _('Gering')),
+    (VERY_BAD, _('Sehr gering')),
+)
+
 
 # fields common to both, institutions and students
 class BaseEvaluation(models.Model):
-    overall_rating = models.IntegerField(choices=LIKERT_CHOICES, default=3, blank=True, null=True)
+    overall_rating = models.IntegerField(choices=QUALITY_CHOICES, default=AVERAGE, blank=False, null=False)
 
     registration_feedback = models.TextField(default='', blank=True, null=True)
     suggested_improvements = models.TextField(default='', blank=True, null=True)
 
-    likelihood_recommendation = models.IntegerField(choices=LIKERT_CHOICES, default=3, blank=True, null=True)
+    likelihood_recommendation = models.IntegerField(choices=RECOMMENDATION_CHOICES, default=AVERAGE, blank=False,
+                                                    null=False)
 
     contact_mail = models.EmailField(blank=True, null=True)
 
