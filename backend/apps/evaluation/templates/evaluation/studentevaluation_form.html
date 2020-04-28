@@ -4,12 +4,19 @@
 
 {% block title %}
 {% blocktrans %}
-Evaluation Studis
+Evaluation Helfende
 {% endblocktrans %}
 {% endblock %}
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<style>
+
+    a.btn.btn-md.active{
+        background-color: #ed0a71;
+        pointer-events: none;
+    }
+</style>
 {% endblock %}
 
 {% load crispy_forms_tags %}
@@ -18,25 +25,48 @@ Evaluation Studis
 
 
 <div style="height:40px"></div>
-<div class="container" style="margin-bottom: 55px;">
-    <div class="row" style="margin-top:30px;">
-        <div class="col-lg-10 col-sm-12 col-12">
-
-            <form method="post" action="" onsubmit="disableButton()">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-
-                {% crispy form_info form_info.helper %}
-
-                <button type="submit" id="btSubmitForm" class="btn blue text-white btn-md">{% blocktrans %}Evaluation absenden!{% endblocktrans %}</button>
-            </form>
-            <script>function disableButton() {
-                var btn = document.getElementById('btSubmitForm');
-                btn.disabled = true;
-                btn.innerText = 'Sending...'
-            }</script>
-
+<div class="container">
+    <div class="container">
+        <h1 class="font-weight-light match4hc-title">{% blocktrans %}Du hast match4healthcare genutzt und möchtest uns Feedback geben?{% endblocktrans %}</h1>
+        <h2 class="font-weight-light match4hc-title">{% blocktrans %}Sag uns deine Meinung und hilf uns dabei, unser Angebot zu verbessern!{% endblocktrans %}</h2>
+        <hr>
+        <p>
+            {% blocktrans %}Ich habe auf match4healthcare.de Hilfe...{% endblocktrans %}
+        </p>
+        <div class="btn-group" style="width: 100%">
+                <a href="{% url 'student_evaluation' %}" class="active btn blue text-white btn-md">{% blocktrans %}angeboten.{% endblocktrans %}</a>
+                <a href="{% url 'institution_evaluation' %}" class="btn blue text-white btn-md">{% blocktrans %}gesucht.{% endblocktrans %}</a>
         </div>
+    </div>
+    <div class="container" style="margin-top: 30px">
+        <p>
+            {% blocktrans %}Vielen Dank für Deine Bereitschaft, dich in diesen Zeiten für die medizinische Versorgung zu engagieren und für Vertrauen, das du uns mit deiner Anmeldung entgegengebracht hast!{% endblocktrans %}
+            <br>
+            {% blocktrans %}Im Anschluss findest du ein paar Fragen, die uns dabei helfen sollen, den Vermittlungsprozess und die Nutzbarkeit der Website zu verbessern.
+            Wir freuen uns über konstruktives Feedback und – da wir die Daten von angemeldeten Nutzern nicht gemeinsam mit der Evaluation speichern – auch über deine Kontakt-Mail für Rückfragen.{% endblocktrans %}
+        </p>
+        <hr>
+    </div>
+
+    <div class="container" style="margin-top: 30px; margin-bottom: 55px;">
+    <!--    <div class="row" style="margin-top:30px;">-->
+    <!--        <div class="col-lg-10 col-sm-12 col-12">-->
+
+                <form method="post" action="" onsubmit="disableButton()">
+                    {% csrf_token %}
+
+                    {% crispy form_info form_info.helper %}
+
+                    <button type="submit" id="btSubmitForm" class="btn blue text-white btn-md">{% blocktrans %}Evaluation absenden!{% endblocktrans %}</button>
+                </form>
+                <script>function disableButton() {
+                    var btn = document.getElementById('btSubmitForm');
+                    btn.disabled = true;
+                    btn.innerText = 'Sending...'
+                }</script>
+
+    <!--        </div>-->
+    <!--    </div>-->
     </div>
 </div>
 
