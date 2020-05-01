@@ -28,4 +28,5 @@ jobs:
       run: django-admin makemessages -l en --no-location
 
     - name: Check for fuzzy translations
-      run: if [$(cat backend/locale/en/LC_MESSAGES/django.po | grep "#, fuzzy" | wc -l) -gt 0 ]; then echo "Unresolved fuzzy translations are present"; exit 1; fi
+      run: bash -c 'if [$(cat backend/locale/en/LC_MESSAGES/django.po | grep "#, fuzzy" | wc -l) -gt 0 ]; \
+                    then echo "Unresolved fuzzy translations are present"; exit 1; fi'
