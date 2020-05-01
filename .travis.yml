@@ -15,3 +15,6 @@ script:
 
 after_script:
  - docker-compose down
+
+env:
+ - POSTGRES_DB=match4healthcare POSTGRES_PASSWORD="BuZK@HPB_FDpGx3gvnnB9@eypozpC8PeesGP7PUC*DDgbbj-Zpv3kRwCkmU6FQoL" POSTGRES_USER=match4healthcare SECRET_KEY="QP=14DkrovY9qrqXmZk3sjgakmy@x#6Log7Ei"W-9K4g5W&xY)_yN3a*rsinLYP|"
