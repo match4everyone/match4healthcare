@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      continue-on-error: true
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
     - name: Install gettext
@@ -29,10 +28,12 @@ jobs:
       run: django-admin makemessages -l en --no-location
 
     - name: Check for fuzzy translations
+      continue-on-error: true
       run: bash -c 'if [ $(cat backend/locale/en/LC_MESSAGES/django.po | grep "#, fuzzy" | wc -l) -gt 0 ];
                     then echo "Unresolved fuzzy translations are present"; exit 1; fi'
 
-    - name: Check for missing translations
+    - name: Check for missing translations  
+      continue-on-error: true
       # https://stackoverflow.com/a/14799019/3342058
       run: bash -c 'if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ]; 
                     then echo "Unresolved fuzzy translations are present"; exit 1; fi'
