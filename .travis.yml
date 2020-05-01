@@ -6,7 +6,7 @@ before_script:
  - ./deploy.sh
  - ./scripts/wait_for_backend.sh
  - docker logs $(docker ps | grep backend | awk 'END {print $16}')
- - docker logs $(docker ps | grep database | awk 'END {print $12}')
+ - docker logs $(docker ps | grep database | awk 'END {print $11}')
 
 
 script:
