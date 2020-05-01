@@ -9,11 +9,12 @@ repos:
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 # use black or autopep8 to automatically format files to pep8
-#-   repo: https://github.com/psf/black
-#    rev: stable
-#    hooks:
-#    -   id: black
-#-   repo: https://gitlab.com/pycqa/flake8
-#    rev: stable
-#    hooks:
-#    -   id: flake8
+-   repo: https://github.com/psf/black
+    rev: stable
+    hooks:
+    -   id: black
+        exclude: migrations/
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+    -   id: flake8
