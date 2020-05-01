@@ -5,6 +5,8 @@ before_script:
  - ./scripts/write_envs_to_file.sh
  - ./deploy.sh
  - ./scripts/wait_for_backend.sh
+ - docker logs match4healthcare_backend_1
+ - docker logs match4healthcare_database_1
 
 
 script:
