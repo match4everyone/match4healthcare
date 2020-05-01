@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -e -o pipefail
 # First build containers, compile messages, collect static files (copy them to static_root) and migrate database
 docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build
 docker exec backend python3 manage.py migrate
