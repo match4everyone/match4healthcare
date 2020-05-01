@@ -37,7 +37,7 @@ jobs:
       id: missing_translations
       continue-on-error: true
       # https://stackoverflow.com/a/14799019/3342058
-      run: bash -c 'if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ]; 
+      run: bash -c 'if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c ? c : "0" }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ]; 
                     then echo "Unresolved fuzzy translations are present"; exit 1; fi'
 
     # Workaround because continue-on-error does not fail test
