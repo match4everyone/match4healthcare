@@ -7,6 +7,7 @@ repos:
     -   id: check-merge-conflict
     -   id: requirements-txt-fixer
     -   id: trailing-whitespace
+        exclude: ^backend/static/
 # use black or autopep8 to automatically format files to pep8
 #-   repo: https://github.com/psf/black
 #    rev: stable
