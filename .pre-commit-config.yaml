@@ -6,7 +6,6 @@ repos:
     -   id: check-case-conflict
     -   id: check-merge-conflict
     -   id: requirements-txt-fixer
-    -   id: end-of-file-fixer
     -   id: trailing-whitespace
 # use black or autopep8 to automatically format files to pep8
 #-   repo: https://github.com/psf/black
