@@ -19,6 +19,8 @@ Migrations have to be executed with `docker exec backend python3 /matchedmedisvi
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
+In order to run pre-commit checks every time, please run `pre-commit install` once in the repository.
+
 ## Local
 - create migration after model change:
 `python3 manage.py makemigrations`
