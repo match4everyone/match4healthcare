@@ -1,5 +1,5 @@
 # README
-# Technische Dokumentation
+# Technichal Documentation
 - Copy `backend.prod.env.example` and `database.prod.env.example` to `backend.prod.env` and `database.prod.env` and fill in appropriate values
 - Run `./deploy.sh` (uses Docker) and visit `http://localhost:8000/`
 
