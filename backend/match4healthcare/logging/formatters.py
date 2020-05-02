@@ -36,13 +36,13 @@ class DjangoRequestJSONFormatter(json_log_formatter.JSONFormatter):
         if hasattr(record,'request'):
             request = record.request
             # Overwrite request information in extra, avoid circular references by copying only selected items
-            extra['request'] = {} 
+            extra['request'] = {}
             if hasattr(request,'user'):
                 extra['user'] = request.user.get_username()
-            
+
             extra['request']['path'] = getattr(request,'path','n/a')
             extra['request']['method'] = getattr(request,'method','n/a')
-            
+
             if extra['request']['method'] == 'GET' and hasattr(request,'GET'):
                 extra['request']['get'] = request.GET
 

@@ -66,11 +66,11 @@ def group_by_zip_code(entities):
     for entity in entities:
         countrycode = entity.countrycode
         plz = entity.plz
-        
+
 
         if not countrycode in countrycode_plz_details:
             countrycode_plz_details[countrycode] = {}
-        
+
         country = countrycode_plz_details[countrycode]
         if not plz in country:
             country[plz] = {
@@ -79,7 +79,7 @@ def group_by_zip_code(entities):
                 "count": 0,
                 **get_plz_data(countrycode, plz)
             }
-        
+
         country[plz]['count'] += 1
     return countrycode_plz_details
 

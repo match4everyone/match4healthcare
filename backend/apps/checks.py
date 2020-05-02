@@ -66,7 +66,7 @@ def check_env_variables_set(app_configs=None, **kwargs):
                     "To use Slack Error notifications set the webhook in your environment using 'export SLACK_LOG_WEBHOOK=<<webhook URL>>="),
                 id='env.E003',
             )
-        )        
+        )
     return errors
 
 

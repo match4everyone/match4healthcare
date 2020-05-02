@@ -33,7 +33,7 @@ def generate_random_hospital(countrycode="DE", plz="14482", i=0, datenschutz_zug
                                plz=plz,
                                ansprechpartner='XY',
                                sonstige_infos='yeaah',
-                               datenschutz_zugestimmt=datenschutz_zugestimmt,                            
+                               datenschutz_zugestimmt=datenschutz_zugestimmt,
                                einwilligung_datenweitergabe=True,
                             )
     u.save()

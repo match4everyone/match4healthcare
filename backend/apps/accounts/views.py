@@ -232,7 +232,7 @@ def approve_hospitals(request):
 @login_required
 @staff_member_required
 def change_hospital_approval(request,uuid):
-    
+
     h = Hospital.objects.get(uuid=uuid)
     logger.info("Set Hospital {} approval to {}".format(uuid,(not h.is_approved)),extra = { 'request': request })
 

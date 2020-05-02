@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - System Checks (see Readme):
   - Mailversand über Sendgrid API Test
   - Umgebungsvariablen gesetzt
-  - Aufruf in Deployment-Skript 
+  - Aufruf in Deployment-Skript
 - Model für Newsletterversand
 - UI für Newsletterversand
 - Sendgrid Client API für Newsletterversand
@@ -81,7 +81,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Erde-icon für Sprachenwahl
 - Github-Link im Footer hinzugefügt
 - Logo marburger bund dauerhaft eingefügt (vorher nur als hot-fix)
-- ÖH-Logos auf Start-Seite 
+- ÖH-Logos auf Start-Seite
 - Anzeige der Helferdetails aus der Helfersuche
 - Anzeige der registrierten Einrichtungen auf der Gesuche-Karte
 - Eigenes Map-Design für Einrichtungen, muss wahrscheinlich noch überarbeitet werden.
@@ -91,7 +91,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Geändert
 - Herumfliegenden Text auf der "Kennwort setzen" Seite aus dem Nimbus geholt und zum Formular gepackt
 - Design Seite "Datenschutzerklärung zustimmen" für Institutionen verbessert
-- Überarbeitung aller Übersetzungen 
+- Überarbeitung aller Übersetzungen
 - Fehlerbehebung: Limit von 200 Mails wurde irrtümlich auf Lebenszeit und nicht pro Tag berechnet
 - fixes #174: Auswahlfelder für Assistenzarzt, Facharzt, usw. am Handy nicht auswählbar
 - fixes #375:  Auswahlfelder für Assistenzarzt, Facharzt, usw. mit Tab nicht erreichbar

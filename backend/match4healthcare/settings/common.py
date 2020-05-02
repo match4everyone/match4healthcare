@@ -14,8 +14,8 @@ import os
 from os import path
 from django.utils.translation import ugettext_lazy as _
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...) 
-# or better: 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# or better:
 # add paths here and import: from django.conf import settings and use settings.XXX_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RUN_DIR = os.path.join(BASE_DIR, 'run')
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'match4healthcare.urls'
@@ -164,13 +164,13 @@ LOGGING = {
         },
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
-        },    
+        },
     },
     'formatters': {
         'json': { # Made for Django Requests and General logging, will create parseable error logs
             'class': 'match4healthcare.logging.formatters.DjangoRequestJSONFormatter'
         },
-        'text': { 
+        'text': {
             'class': 'match4healthcare.logging.formatters.OneLineExceptionFormatter',
             'format': '%(asctime)s: %(name)-12s %(levelname)-8s |%(message)s|',
         },
@@ -223,12 +223,12 @@ LOGGING = {
         },
         'django.request': { # Main error logger and last line of defense for #500 Errors, will log all errors
             'level': 'WARNING',
-            'handlers': ['errorlogfile','console','slack'], 
+            'handlers': ['errorlogfile','console','slack'],
             'propagate': False
         },
         'django.server': { # Only for development server, all of these are mirrored on django.request anyway
             'level': 'ERROR',
-            'handlers': ['null'], 
+            'handlers': ['null'],
             'propagate': False
         },
     },
