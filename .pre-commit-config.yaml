@@ -13,6 +13,7 @@ repos:
     rev: stable
     hooks:
     -   id: black
+        exclude: ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py
 #-   repo: https://gitlab.com/pycqa/flake8
 #    rev: stable
 #    hooks:
