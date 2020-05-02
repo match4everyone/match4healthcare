@@ -14,6 +14,7 @@ services:
       - database.prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
+    user: ${CURRENT_UID:-0}
     command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
     depends_on:
       - database

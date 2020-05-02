@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 # First build containers, compile messages, collect static files (copy them to static_root) and migrate database
+export CURRENT_UID=$(id -u):$(id -g)
 docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build
 docker exec backend python3 manage.py migrate
 docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" backend django-admin makemessages --no-location
