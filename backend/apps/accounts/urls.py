@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from . import views
-
+from . import views_admin
 from . import generate_users
 
 urlpatterns = [
@@ -39,6 +39,7 @@ urlpatterns = [
     path('new_newsletter', views.new_newsletter, name='new_newsletter'),
     path('list_newsletter', views.list_newsletter, name='list_newsletter'),
     path('did_see_newsletter/<uuid>/<token>', views.did_see_newsletter, name='did_see_newsletter'),
+    path('stats', views_admin.view_statistics,name='statistics'),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
