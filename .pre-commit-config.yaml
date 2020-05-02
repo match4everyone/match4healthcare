@@ -8,6 +8,11 @@ repos:
     -   id: requirements-txt-fixer
     -   id: trailing-whitespace
         exclude: ^backend/static/
+# Note that this does not mix with git setup check-in LF check-out CRLF,
+# see https://github.com/pre-commit/pre-commit-hooks#mixed-line-ending
+    -   id: mixed-line-ending
+        args: [--fix=lf]
+        exclude: ^backend/static/
 # use black or autopep8 to automatically format files to pep8
 -   repo: https://github.com/psf/black
     rev: stable
