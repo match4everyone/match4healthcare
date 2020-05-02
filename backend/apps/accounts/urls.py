@@ -39,6 +39,7 @@ urlpatterns = [
     path('new_newsletter', views.new_newsletter, name='new_newsletter'),
     path('list_newsletter', views.list_newsletter, name='list_newsletter'),
     path('did_see_newsletter/<uuid>/<token>', views.did_see_newsletter, name='did_see_newsletter'),
+    path('profile_staff', views.staff_profile, name='staff_profile'),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 

@@ -47,6 +47,11 @@ from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 import logging
 logger = logging.getLogger(__name__)
 
+@login_required
+@staff_member_required
+def staff_profile(request):
+    return render(request,'staff_profile.html',{})
+
 
 def student_signup(request):
     # if this is a POST request we need to process the form data
@@ -149,7 +154,7 @@ def profile_redirect(request):
         return HttpResponseRedirect('profile_hospital')
 
     elif user.is_staff:
-        return HttpResponseRedirect('approve_hospitals')
+        return HttpResponseRedirect('profile_staff')
 
     else:
         #TODO: throw 404
