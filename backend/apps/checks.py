@@ -9,23 +9,21 @@ import os
 def does_sendgrid_sandbox_mail_work():
     conn = http.client.HTTPSConnection("api.sendgrid.com")
 
-    payload = {"personalizations": [
-        {
-            "to": [{"email": "john.doe@example.com", "name": "John Doe"}],
-            "subject": "Hello, World!"
-        }],
+    payload = {
+        "personalizations": [
+            {
+                "to": [{"email": "john.doe@example.com", "name": "John Doe"}],
+                "subject": "Hello, World!",
+            }
+        ],
         "content": [{"type": "text/plain", "value": "Heya!"}],
         "from": {"email": "sam.smith@example.com", "name": "Sam Smith"},
         "reply_to": {"email": "sam.smith@example.com", "name": "Sam Smith"},
-        "mail_settings": {
-            "sandbox_mode": {
-                "enable": True
-            }
-        }
+        "mail_settings": {"sandbox_mode": {"enable": True}},
     }
     headers = {
-        'authorization': "Bearer " + settings.SENDGRID_API_KEY,
-        'content-type': "application/json"
+        "authorization": "Bearer " + settings.SENDGRID_API_KEY,
+        "content-type": "application/json",
     }
 
     conn.request("POST", "/v3/mail/send", json.dumps(payload), headers)
@@ -37,8 +35,8 @@ def does_sendgrid_sandbox_mail_work():
 
 
 class Tags(DjangoTags):
-    mail_tag = 'mails'
-    env_tag = 'environment'
+    mail_tag = "mails"
+    env_tag = "environment"
 
 
 @register(Tags.env_tag)
@@ -51,11 +49,12 @@ def check_env_variables_set(app_configs=None, **kwargs):
             Error(
                 "Django secret key not found.",
                 hint=(
-                    "You have to set the django application secret key in you environment with 'export SECRET_KEY=<<yourKey>>'."),
-                id='env.E002',
+                    "You have to set the django application secret key in you environment with 'export SECRET_KEY=<<yourKey>>'."
+                ),
+                id="env.E002",
             )
         )
-    if os.environ.get('SLACK_LOG_WEBHOOK') is None:
+    if os.environ.get("SLACK_LOG_WEBHOOK") is None:
         errors.append(
             Warning(
                 "No Slack Webhook for logging set.",
@@ -63,8 +62,9 @@ def check_env_variables_set(app_configs=None, **kwargs):
                     "Currently no logging to Slack Channels is configured.\n\t"
                     "This is not necessary, but recommended for production deployment. A key can be generated using the documentation at:\n\t"
                     "https://slack.com/intl/en-at/help/articles/115005265063-Incoming-Webhooks-for-Slack\n\t"
-                    "To use Slack Error notifications set the webhook in your environment using 'export SLACK_LOG_WEBHOOK=<<webhook URL>>="),
-                id='env.E003',
+                    "To use Slack Error notifications set the webhook in your environment using 'export SLACK_LOG_WEBHOOK=<<webhook URL>>="
+                ),
+                id="env.E003",
             )
         )
     return errors
@@ -82,8 +82,9 @@ def check_send_mails(app_configs=None, **kwargs):
                 Error(
                     "Sendgrid API key not found.",
                     hint=(
-                        "You have to set the Sendgrid API key in you environment with 'export SENDGRID_API_KEY=<<yourKey>>'."),
-                    id='mails.E001',
+                        "You have to set the Sendgrid API key in you environment with 'export SENDGRID_API_KEY=<<yourKey>>'."
+                    ),
+                    id="mails.E001",
                 )
             )
         else:
@@ -91,8 +92,10 @@ def check_send_mails(app_configs=None, **kwargs):
                 errors.append(
                     Error(
                         "You want to use Sendgrid, but sending a mail in sandbox mode fails.",
-                        hint=("Your API key might be invalid, something is up with sendgrid... go check it!"),
-                        id='mails.E002',
+                        hint=(
+                            "Your API key might be invalid, something is up with sendgrid... go check it!"
+                        ),
+                        id="mails.E002",
                     )
                 )
 
@@ -103,8 +106,9 @@ def check_send_mails(app_configs=None, **kwargs):
                 "No SENDGRID API key.",
                 hint=(
                     "That's okay because you are using another email backend. "
-                    "If you do want to use the Sendgrid email backend, set the 'mail_relay_option' to sendgrid in 'development.py'"),
-                id='env.E001',
+                    "If you do want to use the Sendgrid email backend, set the 'mail_relay_option' to sendgrid in 'development.py'"
+                ),
+                id="env.E001",
             )
         )
 
