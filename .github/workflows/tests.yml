@@ -70,5 +70,5 @@ jobs:
         pip install -r ./backend/requirements.txt
 
     - name: "[TEST] Check if migrations were made"
-      run: django-admin makemigrations --check --dry-run
+      run: django-admin --settings=match4healthcare.settings.development makemigrations --check --dry-run
 
