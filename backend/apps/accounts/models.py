@@ -31,7 +31,7 @@ VALIDATED_AND_APPROVED = 3
 VALIDATION_CHOICES = (
     (ONLY_VALIDATED, _('validierte')),
     (ONLY_NOT_VALIDATED, _('nicht validierte')),
-    (ALL, _('varlidierte und nicht validierte')),
+    (ALL, _('validierte und nicht validierte')),
     (VALIDATED_AND_APPROVED, _('validiert und von uns approved')),
 )
 
