@@ -529,7 +529,7 @@ msgid "Passwort gesetzt"
 msgstr "Password reset"
 
 msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen."
-msgstr " Your password was changed. You can login now "
+msgstr " Your password was changed. You can login now. "
 
 msgid "Erfolgreiche Anmeldung"
 msgstr "Successful registration"
