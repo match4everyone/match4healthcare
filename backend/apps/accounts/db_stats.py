@@ -74,12 +74,15 @@ class DataBaseStats:
         for t in AUSBILDUNGS_TYPEN_COLUMNS:
             qs = Student.objects.filter(user__validated_email=True).values(t)\
                 .annotate(total=Count('user_id')).order_by(t)
-            res.append((form_labels[t], qs[1]['total']))
+            try:
+                count = next(x for x in qs if x[t] is True)['total']
+            except StopIteration:
+                count = 0
+            res.append((form_labels[t], count))
         return res
 
     def all_stats(self):
         results = [m(self) for m in self.stat_count]
-        print(results)
         for m in self.stat_list:
             for r in m(self):
                 results.append(r)
