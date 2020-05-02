@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 18:27+0000\n"
+"POT-Creation-Date: 2020-05-02 21:52+0000\n"
 "PO-Revision-Date: 2020-04-15 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -66,15 +66,6 @@ msgstr "Inspect"
 
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
-
-msgid "Abmelden"
-msgstr "Logout"
-
-msgid "Kennwort ändern"
-msgstr "Change password"
-
-msgid "Newsletter editieren"
-msgstr "Edit newsletter"
 
 msgid ""
 "\n"
@@ -169,6 +160,9 @@ msgstr "Feel free to update your infomation at any time."
 
 msgid "Profil Details"
 msgstr "Profile information"
+
+msgid "Abmelden"
+msgstr "Logout"
 
 msgid "Passwort ändern"
 msgstr "Change  password"
@@ -764,6 +758,18 @@ msgstr ""
 "regard. </li>\n"
 "</ul>\n"
 
+msgid "Kennwort ändern"
+msgstr "Change password"
+
+msgid "Funktionen für Staff-Member"
+msgstr "Staff-member functionality"
+
+msgid "Institutionen approven"
+msgstr "Approve institutions"
+
+msgid "Newsletter editieren"
+msgstr "Edit newsletter"
+
 msgid ""
 "\n"
 "Profil - Studierende\n"
@@ -804,9 +810,9 @@ msgid ""
 "href=\"https://www.marburger-bund.de/mitarbeit-studierenden-pandemie"
 "\">Übersicht des Marburger Bunds zur Mitarbeit in der Corona Pandemie</a>."
 msgstr ""
-"For legal questions we can recommend an <a "
-"href=\"https://www.marburger-bund.de/mitarbeit-studierenden-pandemie"
-"\">overview on contributing in the corona pandemic</a>."
+"For legal questions we can recommend an <a href=\"https://www.marburger-bund."
+"de/mitarbeit-studierenden-pandemie\">overview on contributing in the corona "
+"pandemic</a>."
 
 msgid ""
 "Zusätzlich wollen wir euch bestmöglich auf den Einsatz und den Kontakt mit "
