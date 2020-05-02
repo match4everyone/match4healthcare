@@ -1,4 +1,5 @@
 # Technische Dokumentation
+- Copy `backend.prod.env.example` and `database.prod.env.example` to `backend.prod.env` and `database.prod.env` and fill in appropriate values
 
 ## Docker
 ### First start
