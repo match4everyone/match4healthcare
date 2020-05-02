@@ -1753,14 +1753,10 @@ msgstr ""
 "With option 1 you actively select suitable helpers, with option 2 helpers "
 "actively select your institution based on your text."
 
-#, fuzzy
-#| msgid " Die Helfer*innen wurden kontaktiert. "
 msgid "Registrierte Helfer*innen kontaktieren"
-msgstr " Supporters have been contacted "
+msgstr "Contact registered supporters"
 
-#, fuzzy
-#| msgid "Einsatz erstellen/ändern"
-msgid "Eine Anzeige erstellen/ändern"
+msgid "Anzeige erstellen/ändern"
 msgstr "Create/update posting"
 
 msgid "Gesuch kontaktieren"
