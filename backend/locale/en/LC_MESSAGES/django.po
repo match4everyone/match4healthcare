@@ -52,7 +52,7 @@ msgstr "validated"
 msgid "nicht validierte"
 msgstr "not validated"
 
-msgid "varlidierte und nicht validierte"
+msgid "validierte und nicht validierte"
 msgstr "validated and not validated"
 
 msgid "validiert und von uns approved"
