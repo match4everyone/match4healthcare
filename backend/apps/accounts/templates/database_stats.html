@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Datenbankstatistiken{% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+<hr>
+
+<div class="container" style="margin-bottom:30px;">
+    <table>
+        {% for stat in statistics %}
+        <tr>
+            <td>{{ stat.0 }}</td>
+            <td>{{ stat.1 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+</div>
+
+{% endblock %}
