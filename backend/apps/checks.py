@@ -85,13 +85,14 @@ def check_send_mails(app_configs=None, **kwargs):
                 if settings.MAIL_RELAY_OPTION == 'sendgrid':
 
                     errors.append(
-                        Error("Sendgrid API key found.",
+                        Error("Sendgrid API key not found.",
                                 hint=("Your are in development mode, and want to use the sendgrid backend. "
                                       "We did not find an API key.\n"
                                       "You have to set the Sendgrid API key in you environment with 'export "
                                       "SENDGRID_API_KEY=<<yourKey>>'.\n"
                                       "If you want to use another backend set 'MAIL_RELAY_OPTION' in the development"
-                                      " settings to another value, e.g. 'file'.")))
+                                      " settings to another value, e.g. 'file'."),
+                              id='mails.E003'))
             else:
                 errors.append(
                     Error(
@@ -118,7 +119,7 @@ def check_send_mails(app_configs=None, **kwargs):
         # the user did not set a key at all and is in development, so we just mention that he's on a different backend.
         errors.append(
             Warning(
-                "No SENDGRID API key.",
+                "SENDGRID API key not found.",
                 hint=(
                     "That's okay because you are using another email backend. "
                     "If you do want to use the Sendgrid email backend, set the "
