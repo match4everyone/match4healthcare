@@ -13,6 +13,14 @@ repos:
     -   id: mixed-line-ending
         args: [--fix=lf]
         exclude: ^backend/static/
+        exclude: |
+                (?x)(
+                    ^backend/static/|
+                    ^backend/backups/|
+                    ^backend/run/|
+                    ^database/backups/|
+                    ^database/data/
+                )
 # use black or autopep8 to automatically format files to pep8
 -   repo: https://github.com/psf/black
     rev: stable
