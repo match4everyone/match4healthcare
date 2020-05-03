@@ -82,9 +82,7 @@ NEWSLETTER_REQUIRED_APPROVERS = 2
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
@@ -164,9 +162,7 @@ LOGGING = {
         "mail_admin": {
             "class": "logging.NullHandler"  # Make sure to disable Djangos default e-Mail Logger
         },
-        "null": {
-            "class": "logging.NullHandler",  # Disable Django Default Server Logger
-        },
+        "null": {"class": "logging.NullHandler",},  # Disable Django Default Server Logger
         "console": {"class": "logging.StreamHandler", "formatter": "text",},
         "errorlogfile": {
             "class": "logging.handlers.RotatingFileHandler",

@@ -6,14 +6,9 @@ from django.utils.translation import gettext as _
 
 
 class StudentTable(tables.Table):
-    select = tables.TemplateColumn(
-        template_name="checkbox_studenttable.html", visible=False
-    )
+    select = tables.TemplateColumn(template_name="checkbox_studenttable.html", visible=False)
     select.attrs = {
-        "td": {
-            "class": "bs-checkbox",
-            "id": lambda record: "display-table-%s" % record.user_id,
-        }
+        "td": {"class": "bs-checkbox", "id": lambda record: "display-table-%s" % record.user_id,}
     }
     detail_view = tables.TemplateColumn(
         '<a target="_blank" href="/iamstudent/view_student/{{record.uuid}}">Details</a>'

@@ -37,9 +37,7 @@ class SlackMessageHandler(logging.Handler):
 
         req = getattr(record, "request", None)
         request_fields = []
-        request_fields.append(
-            self.create_block("Method", getattr(req, "method", "n/a"))
-        )
+        request_fields.append(self.create_block("Method", getattr(req, "method", "n/a")))
         request_fields.append(self.create_block("Path", getattr(req, "path", "n/a")))
         request_fields.append(
             self.create_block("Status Code", getattr(record, "status_code", "n/a"))
@@ -62,10 +60,7 @@ class SlackMessageHandler(logging.Handler):
                 {
                     "type": "section",
                     "fields": [
-                        {
-                            "type": "mrkdwn",
-                            "text": "*Level*:\n{}".format(record.levelname),
-                        },
+                        {"type": "mrkdwn", "text": "*Level*:\n{}".format(record.levelname),},
                         *request_fields,
                     ],
                 },

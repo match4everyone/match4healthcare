@@ -84,9 +84,7 @@ class Student(models.Model):
     ## Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-    countrycode = models.CharField(
-        max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",
-    )
+    countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
     # Allgemeines
 
     # vorerkrankungen
@@ -97,9 +95,7 @@ class Student(models.Model):
     # Bezahlung
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
     name_first = models.CharField(max_length=50, default="")
     name_last = models.CharField(max_length=50, default="")
@@ -117,19 +113,13 @@ class Student(models.Model):
         choices=VERFUEGBARKEIT_CHOICES, null=True, blank=False
     )
 
-    datenschutz_zugestimmt = models.BooleanField(
-        default=False, validators=[validate_checkbox]
-    )
+    datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
     einwilligung_datenweitergabe = models.BooleanField(
         default=False, validators=[validate_checkbox]
     )
-    einwilligung_agb = models.BooleanField(
-        default=False, validators=[validate_checkbox]
-    )
+    einwilligung_agb = models.BooleanField(default=False, validators=[validate_checkbox])
 
-    sonstige_qualifikationen = models.CharField(
-        max_length=200, blank=True, default="keine"
-    )
+    sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default="keine")
     unterkunft_gewuenscht = models.BooleanField(default=False)
     is_activated = models.BooleanField(default=True)
 
@@ -163,8 +153,7 @@ wunschorte = [
 wunschorte_prefix = "wunsch_ort"
 for w in wunschorte:
     Student.add_to_class(
-        "%s_%s" % (wunschorte_prefix.lower(), w.lower()),
-        models.BooleanField(default=False),
+        "%s_%s" % (wunschorte_prefix.lower(), w.lower()), models.BooleanField(default=False),
     )
 
 # class MedstudAbschnitt(models.IntegerChoices):
@@ -272,34 +261,19 @@ AUSBILDUNGS_TYPEN = {
         "anerkennung_noetig": (models.BooleanField, {"default": False}),
     },
     "MFA": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "MTLA": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "MTA": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "OTA": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "ATA": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "NOTFALLSANI": {
         "abschnitt": (
@@ -308,10 +282,7 @@ AUSBILDUNGS_TYPEN = {
         ),
     },
     "PFLEGE": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "ERGOTHERAPIE": {
         "abschnitt": (
@@ -335,10 +306,7 @@ AUSBILDUNGS_TYPEN = {
         ),
     },
     "PHYSIO": {
-        "abschnitt": (
-            models.IntegerField,
-            {"choices": MFA_CHOICES, "default": 0, "null": True},
-        ),
+        "abschnitt": (models.IntegerField, {"choices": MFA_CHOICES, "default": 0, "null": True},),
     },
     "KINDERBETREUNG": {
         "ausgebildet_abschnitt": (
@@ -368,8 +336,7 @@ for ausbildungs_typ, felder in AUSBILDUNGS_TYPEN.items():
 # print("{%s:_('')}"% ": _(''),".join(["'%s'" % c for c in columns]))
 
 AUSBILDUNGS_TYPEN_COLUMNS = [
-    "ausbildung_typ_%s" % ausbildungs_typ.lower()
-    for ausbildungs_typ in AUSBILDUNGS_TYPEN
+    "ausbildung_typ_%s" % ausbildungs_typ.lower() for ausbildungs_typ in AUSBILDUNGS_TYPEN
 ]
 
 
@@ -377,9 +344,7 @@ class EmailGroup(models.Model):
     subject = models.CharField(max_length=200, default="")
     message = models.TextField(default="", max_length=10000)
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
 
@@ -394,15 +359,11 @@ class EmailToSend(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
     send_date = models.DateTimeField(null=True)
 
-    email_group = models.ForeignKey(
-        EmailGroup, on_delete=models.CASCADE, null=True, blank=True
-    )
+    email_group = models.ForeignKey(EmailGroup, on_delete=models.CASCADE, null=True, blank=True)
 
 
 # emails that students send to hospitals
@@ -415,9 +376,7 @@ class EmailToHospital(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     send_date = models.DateTimeField(null=True)
 
 
@@ -425,9 +384,7 @@ class LocationFilterModel(models.Model):
 
     plz = models.CharField(max_length=5, null=True)
     distance = models.IntegerField(default=0)
-    countrycode = models.CharField(
-        max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",
-    )
+    countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
 
 
@@ -437,9 +394,7 @@ class StudentListFilterModel(models.Model):
     location = LocationFilterModel
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     name = models.CharField(max_length=100)
 
 
@@ -467,6 +422,5 @@ for f_name, filter in jrf.base_filters.items():
         )
     else:
         raise ValueError(
-            "I do not know what to do with field type '%s' for '%s'"
-            % (type(filter.field), f_name)
+            "I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name)
         )

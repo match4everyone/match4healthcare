@@ -125,12 +125,8 @@ maxim = _("maximal")
 for field in fields_for_button_group:
     if field.split("_")[-1] == "abschnitt" and not "ausgebildet" in field:
         f = str(field)
-        form_labels[f + "_x_lt"] = format_lazy(
-            "{f} {extra}", f=form_labels[f], extra=maxim
-        )
-        form_labels[f + "_x_gt"] = format_lazy(
-            "{f} {extra}", f=form_labels[f], extra=mindest
-        )
+        form_labels[f + "_x_lt"] = format_lazy("{f} {extra}", f=form_labels[f], extra=maxim)
+        form_labels[f + "_x_gt"] = format_lazy("{f} {extra}", f=form_labels[f], extra=mindest)
 
 
 def button_group(field):
@@ -199,11 +195,7 @@ class StudentForm(forms.ModelForm):
         self.helper.attrs = {"onsubmit": "disableButton()"}
 
         self.helper.layout = Layout(
-            HTML(
-                "<h2 class='form-heading'>{}</h2>".format(
-                    _("Persönliche Informationen")
-                )
-            ),
+            HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
                 Column("name_first", css_class="form-group col-md-6 mb-0"),
                 Column("name_last", css_class="form-group col-md-6 mb-0"),
@@ -232,14 +224,10 @@ class StudentForm(forms.ModelForm):
             HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column("wunsch_ort_arzt", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_krankenhaus", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_pflege", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_labor", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_apotheke", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_ueberall", css_class="form-group col-md-6 mb-0"),
@@ -250,9 +238,7 @@ class StudentForm(forms.ModelForm):
                 css_class="form-row",
             ),
             Row(
-                Column(
-                    "zeitliche_verfuegbarkeit", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("zeitliche_verfuegbarkeit", css_class="form-group col-md-6 mb-0"),
                 css_class="form-row",
             ),
             Row(
@@ -287,12 +273,7 @@ class StudentForm(forms.ModelForm):
                             Div(
                                 HTML(
                                     "<h4>{}</h4>".format(
-                                        _(
-                                            form_labels[
-                                                "ausbildung_typ_%s"
-                                                % ausbildungstyp.lower()
-                                            ]
-                                        )
+                                        _(form_labels["ausbildung_typ_%s" % ausbildungstyp.lower()])
                                     )
                                 ),
                                 Row(
@@ -322,11 +303,9 @@ class StudentForm(forms.ModelForm):
                                     )
                                     for f in felder.keys()
                                     if "ausbildung_typ_medstud_abschnitt"
-                                    != "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ],
-                                css_id="div-ausbildung-%s"
-                                % AUSBILDUNGS_IDS[ausbildungstyp],
+                                css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
                                 css_class="hidden ausbildung-addon",
                             )
                         ]
@@ -337,12 +316,7 @@ class StudentForm(forms.ModelForm):
                             Div(
                                 HTML(
                                     "<h4>{}</h4>".format(
-                                        _(
-                                            form_labels[
-                                                "ausbildung_typ_%s"
-                                                % ausbildungstyp.lower()
-                                            ]
-                                        )
+                                        _(form_labels["ausbildung_typ_%s" % ausbildungstyp.lower()])
                                     )
                                 ),
                                 Row(
@@ -379,11 +353,9 @@ class StudentForm(forms.ModelForm):
                                     )
                                     for f in felder.keys()
                                     if "ausbildung_typ_medstud_abschnitt"
-                                    != "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ],
-                                css_id="div-ausbildung-%s"
-                                % AUSBILDUNGS_IDS[ausbildungstyp],
+                                css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
                                 css_class="hidden ausbildung-addon",
                             )
                         ]
@@ -409,11 +381,7 @@ class StudentForm(forms.ModelForm):
                         )
                     )
                 ),
-                Submit(
-                    "submit",
-                    _("Registriere mich"),
-                    css_class="btn blue text-white btn-md",
-                ),
+                Submit("submit", _("Registriere mich"), css_class="btn blue text-white btn-md",),
                 HTML(
                     "<script>function disableButton() {var btn = document.getElementById('submit-id-submit'); btn.disabled = true;btn.value = 'Sending...'}</script>"
                 ),
@@ -486,19 +454,14 @@ class StudentFormEditProfile(StudentForm):
     def __init__(self, *args, **kwargs):
         super(StudentFormEditProfile, self).__init__(*args, **kwargs)
         self.helper.layout = Layout(
-            HTML(
-                "<h2 class='form-heading'>{}</h2>".format(
-                    _("Persönliche Informationen")
-                )
-            ),
+            HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
             Row(
                 Column("name_first", css_class="form-group col-md-6 mb-0"),
                 Column("name_last", css_class="form-group col-md-6 mb-0"),
                 css_class="form-row",
             ),
             Row(
-                Column("phone_number", css_class="form-group col-md-6 mb-0"),
-                css_class="form-row",
+                Column("phone_number", css_class="form-group col-md-6 mb-0"), css_class="form-row",
             ),
             HTML(
                 "<hr style='margin-top: 30px; margin-bottom:30px;'><h2 class='form-heading'>{}</h2>".format(
@@ -518,14 +481,10 @@ class StudentFormEditProfile(StudentForm):
             HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column("wunsch_ort_arzt", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_krankenhaus", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_pflege", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_labor", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_apotheke", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_ueberall", css_class="form-group col-md-6 mb-0"),
@@ -536,9 +495,7 @@ class StudentFormEditProfile(StudentForm):
                 css_class="form-row",
             ),
             Row(
-                Column(
-                    "zeitliche_verfuegbarkeit", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("zeitliche_verfuegbarkeit", css_class="form-group col-md-6 mb-0"),
                 css_class="form-row",
             ),
             Row(
@@ -574,32 +531,28 @@ class StudentFormEditProfile(StudentForm):
                         *[
                             Column(
                                 button_group(
-                                    "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ),
                                 css_class="form-group",
                                 css_id=f.replace("_", "-"),
                             )
                             for f in felder.keys()
                             if "ausbildung_typ_medstud_abschnitt"
-                            == "ausbildung_typ_%s_%s"
-                            % (ausbildungstyp.lower(), f.lower())
+                            == "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                         ]
                     ),
                     Row(
                         *[
                             Column(
                                 button_group(
-                                    "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ),
                                 css_class="form-group col-md-6 mb-0",
                                 css_id=f.replace("_", "-"),
                             )
                             for f in felder.keys()
                             if "ausbildung_typ_medstud_abschnitt"
-                            != "ausbildung_typ_%s_%s"
-                            % (ausbildungstyp.lower(), f.lower())
+                            != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                         ]
                     ),
                     css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
@@ -616,11 +569,7 @@ class StudentFormEditProfile(StudentForm):
                     )
                 )
             ),
-            Submit(
-                "submit",
-                _("Profil Aktualisieren"),
-                css_class="btn blue text-white btn-md",
-            ),
+            Submit("submit", _("Profil Aktualisieren"), css_class="btn blue text-white btn-md",),
         )
 
 
@@ -652,7 +601,9 @@ class StudentFormView(StudentForm):
 
         self.fields["uuid"].disabled = False
         self.fields["uuid"].widget.attrs["readonly"] = True
-        self._hide_dropdown = "-webkit-appearance:none;-moz-appearance:none;text-indent:1px;text-overflow:'';"
+        self._hide_dropdown = (
+            "-webkit-appearance:none;-moz-appearance:none;text-indent:1px;text-overflow:'';"
+        )
 
         del self.fields["phone_number"]
         self.helper.layout = Layout(
@@ -661,16 +612,11 @@ class StudentFormView(StudentForm):
                     _("Allgemein")
                 )
             ),
-            Row(
-                Column("uuid", css_class="form-group col-md-4 mb-0"),
-                css_class="form-row",
-            ),
+            Row(Column("uuid", css_class="form-group col-md-4 mb-0"), css_class="form-row",),
             Row(
                 Column("plz", css_class="form-group col-md-4 mb-0"),
                 Column(
-                    "countrycode",
-                    css_class="form-group col-md-4 mb-0",
-                    style=self._hide_dropdown,
+                    "countrycode", css_class="form-group col-md-4 mb-0", style=self._hide_dropdown,
                 ),
                 # Column('umkreis', css_class='form-group col-md-4 mb-0'),
                 css_class="form-row",
@@ -722,32 +668,28 @@ class StudentFormView(StudentForm):
                         *[
                             Column(
                                 button_group(
-                                    "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ),
                                 css_class="form-group",
                                 css_id=f.replace("_", "-"),
                             )
                             for f in felder.keys()
                             if "ausbildung_typ_medstud_abschnitt"
-                            == "ausbildung_typ_%s_%s"
-                            % (ausbildungstyp.lower(), f.lower())
+                            == "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                         ]
                     ),
                     Row(
                         *[
                             Column(
                                 button_group(
-                                    "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ),
                                 css_class="form-group col-md-6 mb-0",
                                 css_id=f.replace("_", "-"),
                             )
                             for f in felder.keys()
                             if "ausbildung_typ_medstud_abschnitt"
-                            != "ausbildung_typ_%s_%s"
-                            % (ausbildungstyp.lower(), f.lower())
+                            != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                         ]
                     ),
                     css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
@@ -760,14 +702,10 @@ class StudentFormView(StudentForm):
             HTML("<h5 style='margin-top:20px'>{}</h5>".format(_("Wunscheinsatzort"))),
             Row(
                 Column("wunsch_ort_arzt", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_gesundheitsamt", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_krankenhaus", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_pflege", css_class="form-group col-md-6 mb-0"),
-                Column(
-                    "wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"
-                ),
+                Column("wunsch_ort_rettungsdienst", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_labor", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_apotheke", css_class="form-group col-md-6 mb-0"),
                 Column("wunsch_ort_ueberall", css_class="form-group col-md-6 mb-0"),
@@ -823,11 +761,7 @@ def get_form_helper_filter():
                         Div(
                             HTML(
                                 "<hr><h5>Zusätzliche Filter zu {}</h5>".format(
-                                    _(
-                                        form_labels[
-                                            "ausbildung_typ_%s" % ausbildungstyp.lower()
-                                        ]
-                                    )
+                                    _(form_labels["ausbildung_typ_%s" % ausbildungstyp.lower()])
                                 )
                             ),
                             Row(
@@ -842,26 +776,22 @@ def get_form_helper_filter():
                                     )
                                     for f in felder.keys()
                                     if "ausbildung_typ_medstud_abschnitt"
-                                    == "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    == "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ]
                             ),
                             *[
                                 Column(
                                     button_group_filter(
-                                        "ausbildung_typ_%s_%s"
-                                        % (ausbildungstyp.lower(), f.lower())
+                                        "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                     ),
                                     css_class="form-group col-md-6 mb-0",
                                     css_id=f.replace("_", "-"),
                                 )
                                 for f in felder.keys()
                                 if "ausbildung_typ_medstud_abschnitt"
-                                != "ausbildung_typ_%s_%s"
-                                % (ausbildungstyp.lower(), f.lower())
+                                != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                             ],
-                            css_id="div-ausbildung-%s"
-                            % AUSBILDUNGS_IDS[ausbildungstyp],
+                            css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
                             css_class="hidden ausbildung-addon",
                         )
                     ]
@@ -872,11 +802,7 @@ def get_form_helper_filter():
                         Div(
                             HTML(
                                 "<hr><h5>Zusätzliche Filter zu {}</h5>".format(
-                                    _(
-                                        form_labels[
-                                            "ausbildung_typ_%s" % ausbildungstyp.lower()
-                                        ]
-                                    )
+                                    _(form_labels["ausbildung_typ_%s" % ausbildungstyp.lower()])
                                 )
                             ),
                             Row(
@@ -891,8 +817,7 @@ def get_form_helper_filter():
                                     )
                                     for f in felder.keys()
                                     if "ausbildung_typ_medstud_abschnitt"
-                                    == "ausbildung_typ_%s_%s"
-                                    % (ausbildungstyp.lower(), f.lower())
+                                    == "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                 ]
                             ),
                             HTML("<p>"),
@@ -905,19 +830,16 @@ def get_form_helper_filter():
                             *[
                                 Column(
                                     button_group_filter(
-                                        "ausbildung_typ_%s_%s"
-                                        % (ausbildungstyp.lower(), f.lower())
+                                        "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                                     ),
                                     css_class="form-group col-md-6 mb-0",
                                     css_id=f.replace("_", "-"),
                                 )
                                 for f in felder.keys()
                                 if "ausbildung_typ_medstud_abschnitt"
-                                != "ausbildung_typ_%s_%s"
-                                % (ausbildungstyp.lower(), f.lower())
+                                != "ausbildung_typ_%s_%s" % (ausbildungstyp.lower(), f.lower())
                             ],
-                            css_id="div-ausbildung-%s"
-                            % AUSBILDUNGS_IDS[ausbildungstyp],
+                            css_id="div-ausbildung-%s" % AUSBILDUNGS_IDS[ausbildungstyp],
                             css_class="hidden ausbildung-addon",
                         )
                     ]

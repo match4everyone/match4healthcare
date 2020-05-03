@@ -150,9 +150,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         from .forms import form_labels
 
         self.Meta.labels = form_labels
-        self.Meta.labels["unterkunft_gewuenscht"] = _(
-            "Kann eine Unterkunft angeboten werden?"
-        )
+        self.Meta.labels["unterkunft_gewuenscht"] = _("Kann eine Unterkunft angeboten werden?")
 
         THREE_CHOICES = [("true", "notwendig")]
 
@@ -162,15 +160,11 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
                 if type(approved) is forms.NullBooleanField:
                     self.form.fields[a_field] = forms.MultipleChoiceField(
-                        choices=THREE_CHOICES,
-                        required=False,
-                        widget=forms.CheckboxSelectMultiple,
+                        choices=THREE_CHOICES, required=False, widget=forms.CheckboxSelectMultiple,
                     )
                 if type(approved) is forms.DecimalField:
                     basename = a_field.split("_x_")[0]
-                    CHOICES = self.Meta.model._meta._forward_fields_map[
-                        basename
-                    ].choices
+                    CHOICES = self.Meta.model._meta._forward_fields_map[basename].choices
                     from copy import deepcopy
 
                     if a_field.split("_x_")[1] == "gt":

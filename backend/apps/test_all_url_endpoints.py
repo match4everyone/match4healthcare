@@ -17,9 +17,7 @@ def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=
         )
     )
 
-    u = User.objects.create(
-        username=m, email=m, is_student=True, validated_email=validated_email
-    )
+    u = User.objects.create(username=m, email=m, is_student=True, validated_email=validated_email)
     u.set_password(pwd)
     s = Student.objects.create(
         user=u,
@@ -34,17 +32,11 @@ def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=
 
 
 def generate_random_hospital(
-    countrycode="DE",
-    plz="14482",
-    i=0,
-    datenschutz_zugestimmt=True,
-    validated_email=False,
+    countrycode="DE", plz="14482", i=0, datenschutz_zugestimmt=True, validated_email=False,
 ):
     m = str(i) + "hospital@email.de"
     pwd = User.objects.make_random_password()
-    u = User.objects.create(
-        username=m, email=m, is_hospital=True, validated_email=validated_email
-    )
+    u = User.objects.create(username=m, email=m, is_hospital=True, validated_email=validated_email)
     u.set_password(pwd)
     s = Hospital.objects.create(
         user=u,
@@ -94,16 +86,14 @@ class UrlEndpointTestCase(TestCase):
         response = self.client.get("/accounts/count", {})
         assert response.status_code == 200
         self.assertJSONEqual(
-            str(response.content, encoding="utf8"),
-            {"facility_count": 0, "user_count": 1},
+            str(response.content, encoding="utf8"), {"facility_count": 0, "user_count": 1},
         )
 
         generate_random_hospital(validated_email=True)
         response = self.client.get("/accounts/count", {})
         assert response.status_code == 200
         self.assertJSONEqual(
-            str(response.content, encoding="utf8"),
-            {"facility_count": 1, "user_count": 1},
+            str(response.content, encoding="utf8"), {"facility_count": 1, "user_count": 1},
         )
 
     def test_student(self):
@@ -130,9 +120,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert auth.get_user(self.client).username == student_email
 
-        assert (
-            Student.objects.get(user__email=student_email).user.validated_email == False
-        )
+        assert Student.objects.get(user__email=student_email).user.validated_email == False
         response = self.client.post(
             "/accounts/validate_email", {"email": student_email}, follow=True
         )
@@ -198,9 +186,7 @@ class UrlEndpointTestCase(TestCase):
         assert auth.get_user(self.client).is_anonymous
 
         # Only available to logged in users, should redirect
-        response = self.client.get(
-            "/ineedstudent/hospital_view/" + str(uuid1) + "/", follow=True
-        )
+        response = self.client.get("/ineedstudent/hospital_view/" + str(uuid1) + "/", follow=True)
         assert "login" in response.redirect_chain[0][0]
         assert response.status_code == 200
 
@@ -234,10 +220,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert auth.get_user(self.client).username == hospital_email
 
-        assert (
-            Hospital.objects.get(user__email=hospital_email).user.validated_email
-            == False
-        )
+        assert Hospital.objects.get(user__email=hospital_email).user.validated_email == False
         response = self.client.post(
             "/accounts/validate_email", {"email": hospital_email}, follow=True
         )
@@ -291,15 +274,9 @@ class UrlEndpointTestCase(TestCase):
         response = self.client.get("/ineedstudent/hospitals/DE/14482")
         assert response.status_code == 200
 
-        m1, p1, uuid1 = generate_random_student(
-            "DE", "14482", 1337, validated_email=True
-        )
-        m2, p2, uuid2 = generate_random_student(
-            "DE", "10115", 1234, validated_email=True
-        )
-        m3, p3, uuid3 = generate_random_student(
-            "DE", "10115", 12345, validated_email=False
-        )
+        m1, p1, uuid1 = generate_random_student("DE", "14482", 1337, validated_email=True)
+        m2, p2, uuid2 = generate_random_student("DE", "10115", 1234, validated_email=True)
+        m3, p3, uuid3 = generate_random_student("DE", "10115", 12345, validated_email=False)
         m4, p4, uuid4 = generate_random_student("AT", "4020", 420, validated_email=True)
         response = self.client.get("/ineedstudent/students/DE/14482/0")
 
@@ -338,10 +315,7 @@ class UrlEndpointTestCase(TestCase):
             {"username": hospital_email, "password": hospital_password,},
             follow=True,
         )
-        assert (
-            Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt
-            == False
-        )
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == False
         assert "zustimmung" in response.redirect_chain[1][0]
         assert auth.get_user(self.client).username == hospital_email
 
@@ -352,10 +326,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert response.status_code == 200
         assert "login_redirect" in response.redirect_chain[0][0]
-        assert (
-            Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt
-            == True
-        )
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == True
 
     def test_sudent_individual_view(self):
         staff_email, staff_password = generate_staff_user()
@@ -367,17 +338,13 @@ class UrlEndpointTestCase(TestCase):
             {"username": student_email, "password": student_password,},
             follow=True,
         )
-        response = self.client.get(
-            "/iamstudent/view_student/" + str(student_uuid), follow=True
-        )
+        response = self.client.get("/iamstudent/view_student/" + str(student_uuid), follow=True)
         assert response.status_code == 200
         assert "/accounts/profile_student" in response.redirect_chain[0][0]
 
         # TOOD: test which emails can be seen here!
         response = self.client.post(
-            "/accounts/login/",
-            {"username": staff_email, "password": staff_password,},
-            follow=True,
+            "/accounts/login/", {"username": staff_email, "password": staff_password,}, follow=True,
         )
         response = self.client.get("/iamstudent/view_student/" + str(student_uuid))
         assert response.status_code == 200
@@ -396,17 +363,13 @@ class UrlEndpointTestCase(TestCase):
 
         assert self.client.post("/accounts/logout/", {}).status_code == 200
 
-        response = self.client.post(
-            "/accounts/password_reset", {"email": staff_email}, follow=True
-        )
+        response = self.client.post("/accounts/password_reset", {"email": staff_email}, follow=True)
         # print(response.redirect_chain)
         assert response.status_code == 200
         # TODO why does this not redirect to /accounts/password_reset/done
 
         response = self.client.post(
-            "/accounts/login/",
-            {"username": staff_email, "password": staff_password,},
-            follow=True,
+            "/accounts/login/", {"username": staff_email, "password": staff_password,}, follow=True,
         )
         assert auth.get_user(self.client).username == staff_email
 
@@ -437,9 +400,7 @@ class UrlEndpointTestCase(TestCase):
         assert auth.get_user(self.client).is_anonymous
 
         response = self.client.post(
-            "/accounts/login/",
-            {"username": staff_email, "password": staff_password,},
-            follow=True,
+            "/accounts/login/", {"username": staff_email, "password": staff_password,}, follow=True,
         )
         assert auth.get_user(self.client).username == staff_email
 
@@ -454,9 +415,7 @@ class UrlEndpointTestCase(TestCase):
         assert self.client.get("/accounts/delete_me", {}).status_code == 200
 
         response = self.client.post(
-            "/accounts/login/",
-            {"username": staff_email, "password": staff_password,},
-            follow=True,
+            "/accounts/login/", {"username": staff_email, "password": staff_password,}, follow=True,
         )
         assert auth.get_user(self.client).is_anonymous
 

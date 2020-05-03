@@ -66,17 +66,10 @@ class NullBooleanRadioSelect(RadioSelect):
             value = {True: "2", False: "3", "2": "2", "3": "3"}[value]
         except KeyError:
             value = "1"
-        return super(NullBooleanRadioSelect, self).render(
-            name, value, attrs, renderer=renderer
-        )
+        return super(NullBooleanRadioSelect, self).render(name, value, attrs, renderer=renderer)
 
     def value_from_datadict(self, data, files, name):
         value = data.get(name)
-        return {
-            "2": True,
-            True: True,
-            "True": True,
-            "3": False,
-            "False": False,
-            False: False,
-        }.get(value)
+        return {"2": True, True: True, "True": True, "3": False, "False": False, False: False,}.get(
+            value
+        )

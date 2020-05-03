@@ -22,13 +22,9 @@ class Hospital(models.Model):
         ("DE", "Deutschland"),
         ("AT", "Österreich"),
     ]
-    countrycode = models.CharField(
-        max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",
-    )
+    countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
 
-    max_mails_per_day = models.IntegerField(
-        default=settings.MAX_EMAILS_PER_HOSPITAL_PER_DAY
-    )
+    max_mails_per_day = models.IntegerField(default=settings.MAX_EMAILS_PER_HOSPITAL_PER_DAY)
 
     ## Kontaktdaten
     sonstige_infos = models.TextField(default="", max_length=10000)
@@ -38,9 +34,7 @@ class Hospital(models.Model):
     plz = models.CharField(max_length=5, null=True)
 
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
     approval_date = models.DateTimeField(null=True)
     approved_by = models.ForeignKey(

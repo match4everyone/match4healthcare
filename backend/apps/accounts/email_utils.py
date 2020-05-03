@@ -6,11 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def send_mass_mail_sendgrid(
-    recipient_list,
-    subject,
-    html_body,
-    from_mail=settings.NOREPLY_MAIL,
-    use_sandbox_mode=False,
+    recipient_list, subject, html_body, from_mail=settings.NOREPLY_MAIL, use_sandbox_mode=False,
 ):
     if len(recipient_list) > 950:
         raise ValueError(

@@ -70,9 +70,7 @@ def thx(request):
 def successful_mail(request):
 
     return render(
-        request,
-        "emails_sent.html",
-        {"not_registered": not request.user.hospital.is_approved},
+        request, "emails_sent.html", {"not_registered": not request.user.hospital.is_approved},
     )
 
 
@@ -124,9 +122,7 @@ def send_mail_student_id_list(request, id_list):
             subject = form.cleaned_data["subject"]
 
             email_group = EmailGroup.objects.create(
-                subject=subject,
-                message=hospital_message,
-                hospital=request.user.hospital,
+                subject=subject, message=hospital_message, hospital=request.user.hospital,
             )
 
             for student_id in id_list:
@@ -183,9 +179,7 @@ def send_mails_for(hospital):
             sent_emailgroups.append(m.email_group_id)
             text = m.email_group.message
             send_mail(
-                _(
-                    "[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert"
-                ),
+                _("[match4healthcare] Sie haben gerade potentielle Helfer*innen kontaktiert"),
                 ("Hallo %s,\n\n" % hospital.ansprechpartner)
                 + (
                     "Sie haben potentielle Helfer*innen mit der folgenden Nachricht kontaktiert. "
@@ -199,9 +193,7 @@ def send_mails_for(hospital):
 
         if m.subject and m.message and m.student.user.email:
             try:
-                send_mail(
-                    m.subject, m.message, settings.NOREPLY_MAIL, [m.student.user.email]
-                )
+                send_mail(m.subject, m.message, settings.NOREPLY_MAIL, [m.student.user.email])
                 # todo: muss noch asynchron werden ...celery?
                 m.send_date = datetime.datetime.now()
                 m.was_sent = True

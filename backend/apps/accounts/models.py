@@ -45,22 +45,16 @@ class NewsletterState:
 class Newsletter(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
 
-    registration_date = models.DateTimeField(
-        default=datetime.now, blank=True, null=True
-    )
+    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     last_edited_date = models.DateTimeField(default=None, blank=True, null=True)
     frozen_date = models.DateTimeField(default=None, blank=True, null=True)
     send_date = models.DateTimeField(default=None, blank=True, null=True)
 
-    letter_authored_by = models.ManyToManyField(
-        to=User, related_name="letter_authored_by"
-    )
+    letter_authored_by = models.ManyToManyField(to=User, related_name="letter_authored_by")
     letter_approved_by = models.ManyToManyField(
         to="User", related_name="letter_approved_by", through="LetterApprovedBy"
     )
-    sent_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, related_name="sent_by"
-    )
+    sent_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="sent_by")
     frozen_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name="frozen_by"
     )
@@ -122,18 +116,14 @@ class Newsletter(models.Model):
 
     def has_been_approved_by(self, user):
         return (
-            LetterApprovedBy.objects.filter(
-                newsletter=self, user=user, did_see_email=True
-            ).count()
+            LetterApprovedBy.objects.filter(newsletter=self, user=user, did_see_email=True).count()
             == 1
         )
 
     def required_approvals(self):
         return (
             settings.NEWSLETTER_REQUIRED_APPROVERS
-            - LetterApprovedBy.objects.filter(
-                newsletter=self, did_see_email=True
-            ).count()
+            - LetterApprovedBy.objects.filter(newsletter=self, did_see_email=True).count()
         )
 
     def send_approval_mail(self, approval, host):
@@ -186,9 +176,7 @@ class Newsletter(models.Model):
                 "email", flat=True
             )
             n_hospital = recipient_hospitals_qs.count()
-            logger.info(
-                "Starting to send out newsletter to %s hospitals..." % n_hospital
-            )
+            logger.info("Starting to send out newsletter to %s hospitals..." % n_hospital)
             self._send_mail(recipient_hospitals_qs, n_hospital)
 
         if self.send_to_students:
@@ -196,9 +184,7 @@ class Newsletter(models.Model):
                 "email", flat=True
             )
             n_students = recipient_student_qs.count()
-            logger.info(
-                "Starting to send out newsletter to %s students..." % n_students
-            )
+            logger.info("Starting to send out newsletter to %s students..." % n_students)
             self._send_mail(recipient_student_qs, n_students)
 
     def _send_mail(self, recipients, n):

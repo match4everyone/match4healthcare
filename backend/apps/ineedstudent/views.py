@@ -240,9 +240,7 @@ def change_posting(request):
         if anzeige_form.is_valid():
             anzeige_form.save()
             messages.add_message(
-                request,
-                messages.INFO,
-                _("Deine Anzeige wurde erfolgreich aktualisiert."),
+                request, messages.INFO, _("Deine Anzeige wurde erfolgreich aktualisiert."),
             )
 
     else:

@@ -70,9 +70,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = UsernameField(
-        label=_("E-Mail"), widget=forms.TextInput(attrs={"autofocus": True})
-    )
+    username = UsernameField(label=_("E-Mail"), widget=forms.TextInput(attrs={"autofocus": True}))
 
 
 class BaseNewsletterForm(forms.ModelForm):
@@ -126,9 +124,7 @@ class NewsletterEditForm(BaseNewsletterForm):
         self.helper.form_action = "/accounts/view_newsletter/" + str(uuid)
 
         self.helper.attrs = {"onsubmit": "disableButton()"}
-        self.helper.add_input(
-            Submit("submit", _("Änderungen Speichern"), css_class="btn-success")
-        )
+        self.helper.add_input(Submit("submit", _("Änderungen Speichern"), css_class="btn-success"))
 
 
 class NewsletterViewForm(BaseNewsletterForm):

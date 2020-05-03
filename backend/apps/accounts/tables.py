@@ -14,9 +14,7 @@ NewsletterStateIcons = {
 
 class NewsletterTable(tables.Table):
     sending_state = tables.Column(
-        empty_values=(),
-        verbose_name=_("Status"),
-        attrs={"th": {"style": "width: 16.66%"}},
+        empty_values=(), verbose_name=_("Status"), attrs={"th": {"style": "width: 16.66%"}},
     )
 
     class Meta:
@@ -55,6 +53,4 @@ class NewsletterTable(tables.Table):
         return format_html(icon + " " + text)
 
     def render_letterapprovedby(self, value):
-        return format_html(
-            '<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _("Ansehen"))
-        )
+        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _("Ansehen")))

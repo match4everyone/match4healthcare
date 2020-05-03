@@ -46,9 +46,7 @@ def process_file(ttl_hash):
     groupby_keys = groupby.groups.keys()
 
     # Arbitrary column name of df which is not 'status_line'
-    arbitrary_column_name = df_names.columns.delete(
-        list(df_names.columns).index("status_line")
-    )[0]
+    arbitrary_column_name = df_names.columns.delete(list(df_names.columns).index("status_line"))[0]
     groupby = groupby[arbitrary_column_name].count()
 
     # df.to_dict('index') throws TypeError "unsupported type: <class 'str'>"

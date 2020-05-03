@@ -38,9 +38,7 @@ class HospitalFormO(ModelForm):
             "countrycode": _("Land"),
             "firmenname": _("Offizieller Name Ihrer Institution"),
             "ansprechpartner": _("Name der Kontaktperson"),
-            "appears_in_map": _(
-                "Auf der Karte sichtbar und kontaktierbar für Helfende sein"
-            ),
+            "appears_in_map": _("Auf der Karte sichtbar und kontaktierbar für Helfende sein"),
             "datenschutz_zugestimmt": _(
                 'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
             ),
@@ -122,9 +120,7 @@ class HospitalFormEditProfile(HospitalFormO):
             ),
             "firmenname": _("Offizieller Name Ihrer Institution"),
             "ansprechpartner": _("Name der Kontaktperson"),
-            "appears_in_map": _(
-                "Auf der Karte sichtbar und kontaktierbar für Helfende sein"
-            ),
+            "appears_in_map": _("Auf der Karte sichtbar und kontaktierbar für Helfende sein"),
         }
 
     def __init__(self, *args, **kwargs):
@@ -132,16 +128,10 @@ class HospitalFormEditProfile(HospitalFormO):
         self.fields["sonstige_infos"].required = False
         # self.fields['appears_in_map'].required = False
         self.helper.add_input(
-            Submit(
-                "submit",
-                _("Daten aktualisieren"),
-                css_class="btn blue text-white btn-md",
-            )
+            Submit("submit", _("Daten aktualisieren"), css_class="btn blue text-white btn-md",)
         )
         self.helper.layout = Layout(
-            Row(
-                Column("firmenname"), Column("ansprechpartner")
-            ),  # Row(Column('appears_in_map')),
+            Row(Column("firmenname"), Column("ansprechpartner")),  # Row(Column('appears_in_map')),
             Row(Column("telefon")),
             Row(Column("plz"), Column("countrycode")),
         )
@@ -165,11 +155,7 @@ class HospitalFormZustimmung(ModelForm):
         super(HospitalFormZustimmung, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(
-            Submit(
-                "submit",
-                _("Daten aktualisieren"),
-                css_class="btn blue text-white btn-md",
-            )
+            Submit("submit", _("Daten aktualisieren"), css_class="btn blue text-white btn-md",)
         )
         self.helper.layout = Layout(
             HTML('<p class="text-left">'),
@@ -198,8 +184,7 @@ def check_unique_email(value):
 
 class HospitalFormInfoSignUp(HospitalFormO):
     email = forms.EmailField(
-        validators=[check_unique_email],
-        label=_("Offizielle E-Mail-Adresse der Kontaktperson"),
+        validators=[check_unique_email], label=_("Offizielle E-Mail-Adresse der Kontaktperson"),
     )
 
 
@@ -228,11 +213,7 @@ class EmailToHospitalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.add_input(
-            Submit(
-                "submit",
-                _("Hilfsangebot abschicken"),
-                css_class="btn blue text-white btn-md",
-            )
+            Submit("submit", _("Hilfsangebot abschicken"), css_class="btn blue text-white btn-md",)
         )
 
     def clean_message(self):
@@ -267,9 +248,5 @@ class PostingForm(forms.ModelForm):
             "sonstige_infos",
         )
         self.helper.add_input(
-            Submit(
-                "submit",
-                _("Anzeige aktualisieren"),
-                css_class="btn blue text-white btn-md",
-            )
+            Submit("submit", _("Anzeige aktualisieren"), css_class="btn blue text-white btn-md",)
         )
