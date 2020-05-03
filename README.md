@@ -21,8 +21,9 @@ Migrations have to be executed with `docker exec backend python3 manage.py migra
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
-### Production
-Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
+## Production
+Set `SECRET_KEY`, `SENDGRID_API_KEY` and `MAPBOX_TOKEN` in `backend.prod.env` for Django
+
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
 

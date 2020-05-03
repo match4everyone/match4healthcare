@@ -69,6 +69,22 @@ def check_slack_webhook(app_configs=None, **kwargs):
             )
         )
     return errors
+  
+@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION],exclude_if_travis=True)
+def check_mapbox_token(app_configs=None, **kwargs):
+    errors = []
+    
+    if settings.MAPBOX_TOKEN is None:
+        errors.append(
+            Error(
+                "Mapbox token not found.",
+                hint=(
+                    "You have to set the Mapbox token in you environment with "
+                    "'export MAPBOX_TOKEN=<<yourToken>>'."),
+                id='env.E004',
+            )
+        )
+    return errors
 
 
 @register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION])

@@ -5,6 +5,7 @@ from django.template import loader
 from apps.mapview.utils import plzs,get_plz_data
 from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
+from django.conf import settings
 
 from functools import lru_cache
 import time
@@ -18,6 +19,7 @@ def index(request):
     template = loader.get_template('mapview/map.html')
     context = {
         'locations': list(locations_and_number.values()),
+        'mapbox_token': settings.MAPBOX_TOKEN
     }
     return HttpResponse(template.render(context, request))
 
