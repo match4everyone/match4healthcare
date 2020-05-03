@@ -84,7 +84,7 @@ def check_mapbox_token(app_configs=None, **kwargs):
                 id='env.E004',
             )
         )
-       return errors
+    return errors
 
 
 @register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION])
