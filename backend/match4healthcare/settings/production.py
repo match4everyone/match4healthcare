@@ -1,6 +1,10 @@
 from match4healthcare.settings.common import *
 from django.utils.log import DEFAULT_LOGGING
+import os
 import logging
+logger = logging.getLogger(__name__)
+
+THIS_ENV = ENVS.PRODUCTION
 
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
@@ -37,19 +41,26 @@ SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 # Use API instead of SMTP server
 use_sendgrid_api = True
 
-if use_sendgrid_api:
-    # Using the API
-    EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+if not IS_FORK:
+    if use_sendgrid_api:
+        # Using the API
+        EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
-    # Disable all tracking options
-    SENDGRID_TRACK_EMAIL_OPENS = False
-    SENDGRID_TRACK_CLICKS_HTML = False
-    SENDGRID_TRACK_CLICKS_PLAIN = False
+        # Disable all tracking options
+        SENDGRID_TRACK_EMAIL_OPENS = False
+        SENDGRID_TRACK_CLICKS_HTML = False
+        SENDGRID_TRACK_CLICKS_PLAIN = False
 
+    else:
+        # Normal SMTP
+        EMAIL_HOST = 'smtp.sendgrid.net'
+        EMAIL_HOST_USER = 'apikey'
+        EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
 else:
-    # Normal SMTP
-    EMAIL_HOST = 'smtp.sendgrid.net'
-    EMAIL_HOST_USER = 'apikey'
-    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
+    logger.warning("Thanks for forking our repository. Pay attention that Travis CI doesn't test your code "
+                   "with sendgrid. If you want to use sendgrid for your tests, "
+                   "add your repository name to the list in the if statement for IS_FORK in common.py")
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")

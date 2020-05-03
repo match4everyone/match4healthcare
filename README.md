@@ -23,6 +23,7 @@ After changes to the Docker configuration, you have to restart and build the con
 
 ## Production
 Set `SECRET_KEY`, `SENDGRID_API_KEY` and `MAPBOX_TOKEN` in `backend.prod.env` for Django
+
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
 
@@ -96,3 +97,7 @@ Student has an attribute for the user, user has an attribute for the student, ..
 
 These circular references will prevent the log entry from being written. 
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
+
+## Forks
+Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid. 
+If you want to use sendgrid for your tests, add your repository name to the list in the if statement for NOT_FORK in `backend/match4healthcare/settings/production.py` and specify the `SENDGRID_API_KEY` environment variable in the Travis run settings.

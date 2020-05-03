@@ -235,3 +235,21 @@ LOGGING = {
         },
     },
 }
+#========= envs
+class ENVS:
+    DEVELOPMENT = 0
+    PRODUCTION = 1
+
+#========== determine wether this is a forked version of m4h ==========#
+
+IS_TRAVIS = ('TRAVIS' in os.environ and bool(os.environ['TRAVIS']))
+
+if 'TRAVIS' not in os.environ or \
+        ('TRAVIS' in os.environ and not bool(os.environ['TRAVIS'])) or \
+        ('TRAVIS' in os.environ and bool(os.environ['TRAVIS']) and
+         os.environ['TRAVIS_PULL_REQUEST_SLUG'] is ['match4everyone/match4healthcare']):
+    IS_FORK = False
+else:
+    IS_FORK = True
+
+
