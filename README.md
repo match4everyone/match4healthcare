@@ -1,8 +1,10 @@
-# Technische Dokumentation
+# README
 - Copy `backend.prod.env.example` and `database.prod.env.example` to `backend.prod.env` and `database.prod.env` and fill in appropriate values
+- Run `./deploy.sh` (uses Docker) and visit `http://localhost:8000/`
+
 
 ## Docker
-### First start
+### Development
 - Build images and run containers
 `docker-compose -f docker-compose.dev.yml up --build`
 - Start previously built containers in background
@@ -14,11 +16,34 @@
 - Load test data:
 `docker exec backend python3 manage.py loaddata fixture.json`
 
-### Development
 File changes in python files trigger an auto-reload of the server.
-Migrations have to be executed with `docker exec backend python3 /matchedmedisvirus-backend/manage.py migrate`.
+Migrations have to be executed with `docker exec backend python3 manage.py migrate`.
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
+
+## Production
+Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
+`POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
+Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
+
+To run a container in production and in a new environment execute the `deploy.sh` script which builds the containers, runs all configurations and starts the web service.
+
+If you want to deploy manually follow these steps closly:
+
+1. Build the containers
+`docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d --build`
+2. Make messages
+`docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" backend django-admin makemessages --no-location`
+3. Compile messages
+`docker exec --env PYTHONPATH="/match4healthcare-backend:$PYTHONPATH" backend django-admin compilemessages`
+4. Collect static
+`docker exec backend python3 manage.py collectstatic --no-input`
+5. Migrate
+`docker exec backend python3 manage.py migrate`
+5. Check if all the variables are correct
+`docker exec backend python3 manage.py check`
+6. Restart the backend container (important, whitenoise does not reload static files after it has started)
+`docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml down && docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up -d`
 
 ## Local
 - create migration after model change:
@@ -42,22 +67,6 @@ After changes to the Docker configuration, you have to restart and build the con
 - Update the translation file
 `django-admin makemessages -l en --no-location`
 - Edit translations in `backend/locale/en/LC_MESSAGES/django.po`
-
-## Production
-Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django 
-`POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
-Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
-
-To run a container in production and in a new environment execute the `setup.sh` script which builds the containers, runs all configurations and starts the web service.
-
-If you want to deploy manually follow these steps closly:
-
-1. Build the containers
-2. Make messages
-3. Compile messages
-4. Collect static
-5. Migrate
-6. Restart the backend container (important, whitenoise does not reload static files after it has started)
 
 ## Testing
 
