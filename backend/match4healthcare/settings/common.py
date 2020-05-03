@@ -143,6 +143,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
+
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {

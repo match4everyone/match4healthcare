@@ -56,6 +56,16 @@ def check_env_variables_set(app_configs=None, **kwargs):
                 id='env.E002',
             )
         )
+    if settings.MAPBOX_TOKEN is None:
+        errors.append(
+            Error(
+                "Mapbox token not found.",
+                hint=(
+                    "You have to set the Mapbox token in you environment with "
+                    "'export MAPBOX_TOKEN=<<yourToken>>'."),
+                id='env.E004',
+            )
+        )
     if os.environ.get('SLACK_LOG_WEBHOOK') is None:
         errors.append(
             Warning(
