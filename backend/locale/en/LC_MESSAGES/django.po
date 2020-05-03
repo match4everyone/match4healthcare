@@ -1232,11 +1232,20 @@ msgstr "In which of the following areas is prior experience necessary?"
 msgid " Welche Infos über die zu vergebende Stelle sind schon bekannt?"
 msgstr " What information about the vacant position is already known?"
 
+msgid "Vergütung möglich"
+msgstr "Compensation possible"
+
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
 msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
 msgstr "I am happy to be compensated, but I also help out even without"
+
+msgid "Ich möchte ohne Bezahlung helfen"
+msgstr "I would like to help without being paid"
+
+msgid "individuell absprechbar"
+msgstr "both possible"
 
 msgid "egal"
 msgstr "not important"

@@ -13,7 +13,11 @@ from rest_framework.views import APIView
 
 from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
-from apps.ineedstudent.forms import HospitalFormInfoSignUp, HospitalFormEditProfile, HospitalFormInfoCreate
+from apps.ineedstudent.forms import (
+    HospitalFormInfoSignUp,
+    HospitalFormEditProfile,
+    HospitalFormInfoCreate,
+)
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
@@ -45,28 +49,30 @@ from .models import Newsletter, LetterApprovedBy
 from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 @login_required
 @staff_member_required
 def staff_profile(request):
-    return render(request,'staff_profile.html',{})
+    return render(request, "staff_profile.html", {})
 
 
 def student_signup(request):
     # if this is a POST request we need to process the form data
-    if request.method == 'POST':
+    if request.method == "POST":
         # create a form instance and populate it with data from the request:
-        logger.info('Student Signup request', extra={ 'request': request } )
+        logger.info("Student Signup request", extra={"request": request})
         form = StudentFormAndMail(request.POST)
 
         # check whether it's valid:
         if form.is_valid():
-            user, student = register_student_in_db(request, mail=form.cleaned_data['email'])
+            user, student = register_student_in_db(request, mail=form.cleaned_data["email"])
             send_password_set_email(
-                email=form.cleaned_data['email'],
-                host=request.META['HTTP_HOST'],
-                subject_template="registration/password_reset_email_subject.txt"
+                email=form.cleaned_data["email"],
+                host=request.META["HTTP_HOST"],
+                subject_template="registration/password_reset_email_subject.txt",
             )
             return HttpResponseRedirect("/iamstudent/thanks")
 
@@ -74,7 +80,7 @@ def student_signup(request):
     else:
         form = StudentFormAndMail()
 
-    return render(request, 'student_signup.html', {'form': form})
+    return render(request, "student_signup.html", {"form": form})
 
 
 @transaction.atomic
@@ -88,38 +94,38 @@ def register_student_in_db(request, mail):
     student = Student.objects.create(user=user)
     student = StudentForm(request.POST, instance=student)
     student.save()
-    #send_password(username, pwd, student.cleaned_data['name_first'])
+    # send_password(username, pwd, student.cleaned_data['name_first'])
     return user, student
 
 
 def hospital_signup(request):
-    if request.method == 'POST':
-        logger.info('Hospital registration request', extra={ 'request': request } )
+    if request.method == "POST":
+        logger.info("Hospital registration request", extra={"request": request})
         form_info = HospitalFormInfoSignUp(request.POST)
 
         if form_info.is_valid():
-            user, hospital = register_hospital_in_db(request, form_info.cleaned_data['email'])
+            user, hospital = register_hospital_in_db(request, form_info.cleaned_data["email"])
             send_password_set_email(
-                email=form_info.cleaned_data['email'],
-                host=request.META['HTTP_HOST'],
+                email=form_info.cleaned_data["email"],
+                host=request.META["HTTP_HOST"],
                 template="registration/password_set_email_hospital.html",
-                subject_template="registration/password_reset_email_subject.txt"
+                subject_template="registration/password_reset_email_subject.txt",
             )
             return HttpResponseRedirect("/iamstudent/thanks")
 
-
-            #plz = form_info.cleaned_data['plz']
-            #countrycode = form_info.cleaned_data['countrycode']
-            #distance = 0
-            #login(request, user)
-            #return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
+            # plz = form_info.cleaned_data['plz']
+            # countrycode = form_info.cleaned_data['countrycode']
+            # distance = 0
+            # login(request, user)
+            # return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
 
     else:
         form_info = HospitalFormInfoSignUp(
-            initial={'sonstige_infos': 'Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! '})
-        #form_user = HospitalSignUpForm()
+            initial={"sonstige_infos": "Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! "}
+        )
+        # form_user = HospitalSignUpForm()
     form_info.helper.form_tag = False
-    return render(request, 'hospital_signup.html', {'form_info': form_info })
+    return render(request, "hospital_signup.html", {"form_info": form_info})
 
 
 @transaction.atomic
@@ -137,6 +143,7 @@ def register_hospital_in_db(request, m):
     hospital.save()
     return user, hospital
 
+
 from django.contrib import messages
 
 
@@ -145,42 +152,47 @@ def profile_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect('profile_student')
+        return HttpResponseRedirect("profile_student")
 
     elif user.is_hospital:
         h = Hospital.objects.get(user=user)
         if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect('/ineedstudent/zustimmung')
-        return HttpResponseRedirect('profile_hospital')
+            return HttpResponseRedirect("/ineedstudent/zustimmung")
+        return HttpResponseRedirect("profile_hospital")
 
     elif user.is_staff:
-        return HttpResponseRedirect('profile_staff')
+        return HttpResponseRedirect("profile_staff")
 
     else:
-        #TODO: throw 404
-        logger.warning('User is unknown type, profile redirect not possible', extra={ 'request': request } )
-        HttpResponse('Something wrong in database')
+        # TODO: throw 404
+        logger.warning(
+            "User is unknown type, profile redirect not possible", extra={"request": request},
+        )
+        HttpResponse("Something wrong in database")
+
 
 @login_required
 def login_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect('/mapview')
+        return HttpResponseRedirect("/mapview")
 
     elif user.is_hospital:
         h = Hospital.objects.get(user=user)
         if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect('/ineedstudent/zustimmung')
-        return HttpResponseRedirect('/ineedstudent/hospital_dashboard')
+            return HttpResponseRedirect("/ineedstudent/zustimmung")
+        return HttpResponseRedirect("/ineedstudent/hospital_dashboard")
 
     elif user.is_staff:
-        return HttpResponseRedirect('approve_hospitals')
+        return HttpResponseRedirect("approve_hospitals")
 
     else:
-        #TODO: throw 404
-        logger.warning('User is unknown type, login redirect not possible', extra={ 'request': request } )
-        HttpResponse('Something wrong in database')
+        # TODO: throw 404
+        logger.warning(
+            "User is unknown type, login redirect not possible", extra={"request": request},
+        )
+        HttpResponse("Something wrong in database")
 
 
 @login_required
@@ -188,58 +200,78 @@ def login_redirect(request):
 def edit_student_profile(request):
     student = request.user.student
 
-    if request.method == 'POST':
-        logger.info('Update Student Profile',extra={ 'request': request })
-        form = StudentFormEditProfile(request.POST or None, instance=student, prefix='infos')
+    if request.method == "POST":
+        logger.info("Update Student Profile", extra={"request": request})
+        form = StudentFormEditProfile(request.POST or None, instance=student, prefix="infos")
 
         if form.is_valid():
-            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+            messages.success(
+                request, _("Deine Daten wurden erfolgreich geändert!"), extra_tags="alert-success",
+            )
             form.save()
 
     else:
-        form = StudentFormEditProfile(instance=student, prefix='infos')
+        form = StudentFormEditProfile(instance=student, prefix="infos")
 
-    return render(request, 'student_edit.html', {'form': form, 'is_activated': student.is_activated})
+    return render(
+        request, "student_edit.html", {"form": form, "is_activated": student.is_activated},
+    )
+
 
 @login_required
 @hospital_required
 def edit_hospital_profile(request):
     hospital = request.user.hospital
 
-    if request.method == 'POST':
-        logger.info('Update Hospital Profile',extra={ 'request': request })
-        form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix='infos')
+    if request.method == "POST":
+        logger.info("Update Hospital Profile", extra={"request": request})
+        form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix="infos")
 
         if form.is_valid():
-            messages.success(request, _('Deine Daten wurden erfolgreich geändert!'), extra_tags='alert-success')
+            messages.success(
+                request, _("Deine Daten wurden erfolgreich geändert!"), extra_tags="alert-success",
+            )
             form.save()
         else:
-            messages.info(request, _('Deine Daten wurden nicht erfolgreich geändert!'), extra_tags='alert-warning')
+            messages.info(
+                request,
+                _("Deine Daten wurden nicht erfolgreich geändert!"),
+                extra_tags="alert-warning",
+            )
 
     else:
-        form = HospitalFormEditProfile(instance=hospital, prefix='infos')
+        form = HospitalFormEditProfile(instance=hospital, prefix="infos")
 
-    return render(request, 'hospital_edit.html', {'form': form})
+    return render(request, "hospital_edit.html", {"form": form})
+
 
 @login_required
 @staff_member_required
 def approve_hospitals(request):
     table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
-    table_approved.prefix = 'approved'
+    table_approved.prefix = "approved"
     table_approved.paginate(page=request.GET.get(table_approved.prefix + "page", 1), per_page=5)
 
     table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
-    table_unapproved.prefix = 'unapproved'
+    table_unapproved.prefix = "unapproved"
     table_unapproved.paginate(page=request.GET.get(table_unapproved.prefix + "page", 1), per_page=5)
 
-    return render(request, 'approve_hospitals.html', {'table_approved': table_approved, 'table_unapproved': table_unapproved})
+    return render(
+        request,
+        "approve_hospitals.html",
+        {"table_approved": table_approved, "table_unapproved": table_unapproved},
+    )
+
 
 @login_required
 @staff_member_required
-def change_hospital_approval(request,uuid):
-    
+def change_hospital_approval(request, uuid):
+
     h = Hospital.objects.get(uuid=uuid)
-    logger.info("Set Hospital {} approval to {}".format(uuid,(not h.is_approved)),extra = { 'request': request })
+    logger.info(
+        "Set Hospital {} approval to {}".format(uuid, (not h.is_approved)),
+        extra={"request": request},
+    )
 
     if not h.is_approved:
         h.is_approved = True
@@ -254,30 +286,36 @@ def change_hospital_approval(request,uuid):
     if h.is_approved:
         send_mails_for(h)
 
-    return HttpResponseRedirect('/accounts/approve_hospitals')
+    return HttpResponseRedirect("/accounts/approve_hospitals")
+
 
 @login_required
 @staff_member_required
-def delete_hospital(request,uuid):
+def delete_hospital(request, uuid):
     h = Hospital.objects.get(uuid=uuid)
-    logger.info("Delete Hospital {} by {}".format(uuid,request.user),extra = { 'request': request })
+    logger.info(
+        "Delete Hospital {} by {}".format(uuid, request.user), extra={"request": request},
+    )
     name = h.user
     h.delete()
     text = format_lazy(_("Du hast die Institution mit user '{name}' gelöscht."), name=name)
-    messages.add_message(request, messages.INFO,text)
-    return HttpResponseRedirect('/accounts/approve_hospitals')
+    messages.add_message(request, messages.INFO, text)
+    return HttpResponseRedirect("/accounts/approve_hospitals")
+
 
 @login_required
 def delete_me(request):
     user = request.user
     logout(request)
     user.delete()
-    return render(request,'deleted_user.html')
+    return render(request, "deleted_user.html")
+
 
 @login_required
 def delete_me_ask(request):
     user = request.user
-    return render(request,'deleted_user_ask.html')
+    return render(request, "deleted_user_ask.html")
+
 
 @login_required
 def validate_email(request):
@@ -293,12 +331,13 @@ def resend_validation_email(request, email):
         if not User.objects.get(username=email).validated_email:
             send_password_set_email(
                 email=email,
-                host=request.META['HTTP_HOST'],
+                host=request.META["HTTP_HOST"],
                 template="registration/password_set_email_.html",
-                subject_template="registration/password_reset_email_subject.txt"
+                subject_template="registration/password_reset_email_subject.txt",
             )
             return HttpResponseRedirect("/accounts/password_reset/done")
     return HttpResponseRedirect("/")
+
 
 class UserCountView(APIView):
     """
@@ -308,12 +347,13 @@ class UserCountView(APIView):
     """
 
     def get(self, request, format=None):
-        supporter_count = User.objects.filter( is_student__exact = True, validated_email__exact = True ).count()
-        facility_count =  User.objects.filter( is_hospital__exact = True, validated_email__exact = True ).count()
-        content = {
-            'user_count': supporter_count,
-            'facility_count': facility_count
-        }
+        supporter_count = User.objects.filter(
+            is_student__exact=True, validated_email__exact=True
+        ).count()
+        facility_count = User.objects.filter(
+            is_hospital__exact=True, validated_email__exact=True
+        ).count()
+        content = {"user_count": supporter_count, "facility_count": facility_count}
         return JsonResponse(content)
 
 
@@ -321,21 +361,24 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
     def post(self, request, *args, **kwargs):
-        logger.info('Login Attempt ({})'.format(request.POST['username']))
-        return super().post(request,*args,**kwargs)
+        logger.info("Login Attempt ({})".format(request.POST["username"]))
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        logger.info('Login succesful ({})'.format(form.cleaned_data['username']))
+        logger.info("Login succesful ({})".format(form.cleaned_data["username"]))
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        logger.warning('Login failure ({})'.format(getattr(form.data,'username','')))
+        logger.warning("Login failure ({})".format(getattr(form.data, "username", "")))
         return super().form_invalid(form)
+
 
 @login_required
 @student_required
 def change_activation_ask(request):
-    return render(request, 'change_activation_ask.html', {'is_activated': request.user.student.is_activated})
+    return render(
+        request, "change_activation_ask.html", {"is_activated": request.user.student.is_activated},
+    )
 
 
 @login_required
@@ -346,12 +389,22 @@ def change_activation(request):
     s.is_activated = not s.is_activated
     s.save()
     if status:
-        messages.add_message(request, messages.INFO, _(
-            'Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen.'))
+        messages.add_message(
+            request,
+            messages.INFO,
+            _(
+                "Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen mehr von Hilfesuchenden bekommen."
+            ),
+        )
     else:
-        messages.add_message(request, messages.INFO, _(
-            'Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden.'))
-    return HttpResponseRedirect('profile_student')
+        messages.add_message(
+            request,
+            messages.INFO,
+            _(
+                "Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von Hilfesuchenden kontaktiert werden."
+            ),
+        )
+    return HttpResponseRedirect("profile_student")
 
 
 def switch_newsletter(nl, user, request, post=None, get=None):
@@ -366,16 +419,21 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 form.save()
                 nl.edit_meta_data(user)
                 nl.save()
-                messages.add_message(request, messages.INFO, _('Bearbeitungen gespeichert.'))
+                messages.add_message(request, messages.INFO, _("Bearbeitungen gespeichert."))
                 return switch_newsletter(nl, user, request, post=None, get=None)
 
         elif get is not None:
             # wants to freeze the form for review
-            if 'freezeNewsletter' in get:
+            if "freezeNewsletter" in get:
                 nl.freeze(user)
                 nl.save()
-                messages.add_message(request, messages.INFO, _(
-                    'Der Newsletter kann nun nicht mehr editiert werden. Andere Leute können ihn approven.'))
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    _(
+                        "Der Newsletter kann nun nicht mehr editiert werden. Andere Leute können ihn approven."
+                    ),
+                )
                 return switch_newsletter(nl, user, request, post=None, get=None)
             else:
                 # the form is a virgin
@@ -385,36 +443,46 @@ def switch_newsletter(nl, user, request, post=None, get=None):
 
     elif nl_state == NewsletterState.UNDER_APPROVAL:
         if get is not None:
-            if 'unFreezeNewsletter' in get:
+            if "unFreezeNewsletter" in get:
                 nl.unfreeze()
                 nl.save()
-                messages.add_message(request, messages.INFO, _('Der Newsletter kann wieder bearbeitet werden.'))
+                messages.add_message(
+                    request, messages.INFO, _("Der Newsletter kann wieder bearbeitet werden."),
+                )
                 return switch_newsletter(nl, user, request, post=None, get=None)
-            elif 'approveNewsletter' in get:
+            elif "approveNewsletter" in get:
                 # todo check that author cannot approve
                 nl.approve_from(user)
                 nl.save()
-                messages.add_message(request, messages.WARNING,
-                                     format_lazy(_(
-                                         'Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir gesendeten Mail ({mail}) anklicken.'),
-                                         mail=user.email))
+                messages.add_message(
+                    request,
+                    messages.WARNING,
+                    format_lazy(
+                        _(
+                            "Noch ist deine Zustimmung UNGÜLTIG. Du musst den Validierungslink in der dir gesendeten Mail ({mail}) anklicken."
+                        ),
+                        mail=user.email,
+                    ),
+                )
                 approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
-                nl.send_approval_mail(approval, host=request.META['HTTP_HOST'])
+                nl.send_approval_mail(approval, host=request.META["HTTP_HOST"])
                 switch_newsletter(nl, user, request, post=None, get=None)
 
         form = NewsletterViewForm(instance=nl)
 
     elif nl_state == NewsletterState.READY_TO_SEND:
         if get is not None:
-            if 'sendNewsletter' in get:
+            if "sendNewsletter" in get:
                 nl.send(user)
                 nl.save()
-                messages.add_message(request, messages.INFO, _('Der Newsletter wurde versendet.'))
+                messages.add_message(request, messages.INFO, _("Der Newsletter wurde versendet."))
                 switch_newsletter(nl, user, request)
-            if 'unFreezeNewsletter' in get:
+            if "unFreezeNewsletter" in get:
                 nl.unfreeze()
                 nl.save()
-                messages.add_message(request, messages.INFO, _('Der Newsletter kann wieder bearbeitet werden.'))
+                messages.add_message(
+                    request, messages.INFO, _("Der Newsletter kann wieder bearbeitet werden."),
+                )
                 return switch_newsletter(nl, user, request, post=None, get=None)
 
         form = NewsletterViewForm(instance=nl)
@@ -423,6 +491,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
         form = NewsletterViewForm(instance=nl)
     else:
         from django.http import Http404
+
         raise Http404
 
     return form, nl
@@ -434,33 +503,35 @@ def view_newsletter(request, uuid):
     # 404 if not there?
     nl = Newsletter.objects.get(uuid=uuid)
 
-    if request.method == 'GET' and 'email' in request.GET:
-        email = request.GET.get('email')
+    if request.method == "GET" and "email" in request.GET:
+        email = request.GET.get("email")
         nl.send_testmail_to(email)
-        messages.add_message(request, messages.INFO, _('Eine Test Email wurde an %s versendet.' % email))
+        messages.add_message(
+            request, messages.INFO, _("Eine Test Email wurde an %s versendet." % email)
+        )
 
-    post = request.POST if request.method == 'POST' else None
-    get = request.GET if request.method == 'GET' else None
+    post = request.POST if request.method == "POST" else None
+    get = request.GET if request.method == "GET" else None
 
     form, nl = switch_newsletter(nl, request.user, request, post=post, get=get)
 
     # special view if person was the freezer
 
     context = {
-        'form': form,
-        'uuid': uuid,
-        'newsletter_state': nl.sending_state(),
-        'state_enum': NewsletterState,
-        'mail_form': TestMailForm(),
-        'already_approved_by_this_user': nl.has_been_approved_by(request.user),
-        'required_approvals': nl.required_approvals(),
-        'frozen_by': nl.frozen_by,
-        'sent_by': nl.sent_by,
-        'send_date': nl.send_date,
-        'approvers': ', '.join([a.user.username for a in nl.letterapprovedby_set.all()])
+        "form": form,
+        "uuid": uuid,
+        "newsletter_state": nl.sending_state(),
+        "state_enum": NewsletterState,
+        "mail_form": TestMailForm(),
+        "already_approved_by_this_user": nl.has_been_approved_by(request.user),
+        "required_approvals": nl.required_approvals(),
+        "frozen_by": nl.frozen_by,
+        "sent_by": nl.sent_by,
+        "send_date": nl.send_date,
+        "approvers": ", ".join([a.user.username for a in nl.letterapprovedby_set.all()]),
     }
 
-    return render(request, 'newsletter_edit.html', context)
+    return render(request, "newsletter_edit.html", context)
 
 
 @login_required
@@ -469,7 +540,7 @@ def new_newsletter(request):
     newsletter = Newsletter.objects.create()
     newsletter.letter_authored_by.add(request.user)
     newsletter.save()
-    return HttpResponseRedirect('view_newsletter/' + str(newsletter.uuid))
+    return HttpResponseRedirect("view_newsletter/" + str(newsletter.uuid))
 
 
 from .tables import NewsletterTable
@@ -478,10 +549,8 @@ from .tables import NewsletterTable
 @login_required
 @staff_member_required
 def list_newsletter(request):
-    context = {
-        'table': NewsletterTable(Newsletter.objects.all().order_by('-registration_date'))
-    }
-    return render(request, 'newsletter_list.html', context)
+    context = {"table": NewsletterTable(Newsletter.objects.all().order_by("-registration_date"))}
+    return render(request, "newsletter_list.html", context)
 
 
 @login_required
@@ -493,9 +562,9 @@ def did_see_newsletter(request, uuid, token):
         if approval.approval_code == int(token):
             approval.did_see_email = True
             approval.save()
-            messages.add_message(request, messages.INFO, _('Dein Approval ist nun gültig.'))
+            messages.add_message(request, messages.INFO, _("Dein Approval ist nun gültig."))
         else:
-            return HttpResponse('Wrong code')
+            return HttpResponse("Wrong code")
     except:
-        return HttpResponse('Not registered')
-    return HttpResponseRedirect('/accounts/view_newsletter/' + str(uuid))
+        return HttpResponse("Not registered")
+    return HttpResponseRedirect("/accounts/view_newsletter/" + str(uuid))
