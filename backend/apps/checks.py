@@ -8,10 +8,10 @@ import os
 ENVS = settings.ENVS
 
 
-def register_check(tag, for_environments, exclude_if_travis=False, exclude_if_fork=False):
+def register_check(tag, for_environments, exclude_if_ci=False, exclude_if_fork=False):
     if settings.THIS_ENV in for_environments:
         if not ((settings.IS_FORK and exclude_if_fork)
-                or (settings.IS_TRAVIS and exclude_if_travis)):
+                or (settings.IS_CI and exclude_if_ci)):
             return register(tag)
     return lambda x: x
 
@@ -70,7 +70,7 @@ def check_slack_webhook(app_configs=None, **kwargs):
         )
     return errors
   
-@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION],exclude_if_travis=True)
+@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION], exclude_if_ci=True)
 def check_mapbox_token(app_configs=None, **kwargs):
     errors = []
     

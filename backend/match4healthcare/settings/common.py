@@ -244,6 +244,8 @@ class ENVS:
 
 IS_TRAVIS = ('TRAVIS' in os.environ and bool(os.environ['TRAVIS']))
 
+IS_CI = ('CI' in os.environ and bool(os.environ['CI']))
+
 if 'TRAVIS' not in os.environ or \
         ('TRAVIS' in os.environ and not bool(os.environ['TRAVIS'])) or \
         ('TRAVIS' in os.environ and bool(os.environ['TRAVIS']) and
