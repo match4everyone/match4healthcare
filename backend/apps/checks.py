@@ -94,16 +94,17 @@ def check_send_mails(app_configs=None, **kwargs):
                                       " settings to another value, e.g. 'file'."),
                               id='mails.E003'))
             else:
-                errors.append(
-                    Error(
-                        "Sendgrid API key not found.",
-                        hint=(
-                            "You have to set the Sendgrid API key in you environment with 'export "
-                            "SENDGRID_API_KEY=<<yourKey>>'."
-                            "If thats "),
-                        id='mails.E001',
+                if settings.NOT_FORK:
+                    errors.append(
+                        Error(
+                            "Sendgrid API key not found.",
+                            hint=(
+                                "You have to set the Sendgrid API key in you environment with 'export "
+                                "SENDGRID_API_KEY=<<yourKey>>'."
+                                "If thats "),
+                            id='mails.E001',
+                        )
                     )
-                )
         else:
             if not does_sendgrid_sandbox_mail_work():
                 errors.append(
