@@ -1,6 +1,7 @@
 from match4healthcare.settings.common import *
 from os import path
 
+THIS_ENV = ENVS.DEVELOPMENT
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
