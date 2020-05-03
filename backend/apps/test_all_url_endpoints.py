@@ -373,7 +373,7 @@ class UrlEndpointTestCase(TestCase):
 
         response = self.client.get('/accounts/profile_redirect', follow=True)
         assert response.status_code == 200
-        assert "approve_hospitals" in response.redirect_chain[0][0]
+        assert "profile_staff" in response.redirect_chain[0][0]
 
         response = self.client.get('/accounts/approve_hospitals', follow=True)
         assert response.status_code == 200
