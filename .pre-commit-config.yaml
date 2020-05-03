@@ -18,6 +18,7 @@ repos:
     rev: stable
     hooks:
     -   id: black
+        language_version: python3.6
         exclude: ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py
 #-   repo: https://gitlab.com/pycqa/flake8
 #    rev: stable
