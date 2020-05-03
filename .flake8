@@ -1,4 +1,5 @@
 [flake8]
 max-line-length = 100
 select=C,E,F,W,B
-ignore = E203, E501, W503, E231
+ignore = E203, E501, W503, E231, E722
+# E722: "do not use bare 'except'". In django this seems like a common thing, so we ignore it
