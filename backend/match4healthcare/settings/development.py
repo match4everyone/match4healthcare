@@ -25,15 +25,15 @@ NOREPLY_MAIL = "match4healthcare-DEVELOPMENT<noreply@example.de>"
 
 # Possible values are 'file', 'external', 'sendgrid'
 # For storing mails local in files files, sending external (uberspace) or sending over sendgrid (production like)
-mail_relay_option = "sendgrid"
+MAIL_RELAY_OPTION = "file"
 
 # +++ Store files locally
-if mail_relay_option == "file":
+if MAIL_RELAY_OPTION == "file":
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")
 
 # +++ Use local debug server
-elif mail_relay_option == "external":
+elif MAIL_RELAY_OPTION == "external":
     EMAIL_HOST = "spahr.uberspace.de"
     EMAIL_PORT = 587
     EMAIL_HOST_USER = "noreply@medisvs.spahr.uberspace.de"
@@ -41,7 +41,7 @@ elif mail_relay_option == "external":
     EMAIL_USE_TLS = False
 
 # +++ Use sendgrid
-elif mail_relay_option == "sendgrid":
+elif MAIL_RELAY_OPTION == "sendgrid":
     # Use API instead of SMTP server
     use_sendgrid_api = True
 

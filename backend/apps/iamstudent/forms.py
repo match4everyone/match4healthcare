@@ -867,4 +867,6 @@ from .models import StudentListFilterModel
 class StudentListFilterModelForm(forms.ModelForm):
     class Meta:
         model = StudentListFilterModel
+        labels = form_labels
+        labels["braucht_bezahlung"] = _("Vergütung möglich")
         exclude = []

@@ -25,14 +25,17 @@ EGAL = 0
 # todo: im form ändern zu radio
 BEZAHLUNG = 1
 UNENTGELTLICH = 2
+DARF_NICHT_BEZAHLT_WERDEN = 3
 BEZAHLUNG_CHOICES = (
     (UNENTGELTLICH, _("Ich freue mich über eine Vergütung, helfe aber auch ohne")),
     (BEZAHLUNG, _("Ich benötige eine Vergütung")),
+    (DARF_NICHT_BEZAHLT_WERDEN, _("Ich möchte ohne Bezahlung helfen")),
 )
 
 BEZAHLUNG_CHOICES_Filter = (
     (BEZAHLUNG, _("ja")),
     (UNENTGELTLICH, _("nein")),
+    (DARF_NICHT_BEZAHLT_WERDEN, _("individuell absprechbar")),
 )
 
 
