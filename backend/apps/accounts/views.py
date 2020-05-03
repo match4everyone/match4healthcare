@@ -23,11 +23,8 @@ from django.shortcuts import render
 from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
 from django.contrib import messages
 from django.utils.text import format_lazy
-from apps.iamstudent.forms import (
-    StudentForm,
-    StudentFormEditProfile,
-    StudentFormAndMail,
-)
+from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, \
+    StudentFormAndMail
 from .forms import StudentEmailForm, HospitalEmailForm, CustomAuthenticationForm
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
