@@ -21,7 +21,7 @@ Migrations have to be executed with `docker exec backend python3 manage.py migra
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
-## Production
+### Production
 Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
@@ -96,3 +96,7 @@ Student has an attribute for the user, user has an attribute for the student, ..
 
 These circular references will prevent the log entry from being written. 
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
+
+## Forks
+Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid. 
+If you want to use sendgrid for your tests, add your repository name to the list in the if statement for NOT_FORK in `backend/match4healthcare/settings/production.py` and specify the `SENDGRID_API_KEY` environment variable in the Travis run settings.
