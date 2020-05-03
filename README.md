@@ -21,7 +21,9 @@ Migrations have to be executed with `docker exec backend python3 manage.py migra
 
 After changes to the Docker configuration, you have to restart and build the containers with `docker-compose -f docker-compose.dev.yml up --build`.
 
-## Production
+In order to run pre-commit checks every time, please run `pre-commit install` once in the repository. Pay attention when using `git commit -a`, because then the automatic code formatting will be added irreversably to your changes. The recommended workflow would be to use `git add` first, resulting in staged changes and unstaged codeformatting that you can double-check if you wish. You can of course always run `pre-commit run` to manually check all staged files before attempting a commit.
+
+### Production
 Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
@@ -70,7 +72,7 @@ If you want to deploy manually follow these steps closly:
 
 ## Testing
 
-For executing the tests use `python3 manage.py test`. 
+For executing the tests use `python3 manage.py test`.
 
 In case you add more required environment variables for productions, please check for their existance in `backend/apps/checks.py`.
 
@@ -92,7 +94,11 @@ the logs, respecting the @method_decorator(sensitive_post_parameters()). For exa
 **Warning:** Special care must be taken to avoid errors from circular references. The extra parameters are written to the log file and serialized as JSON. Circular references will cause
 logging failure. One example would be adding the student to the extra dict:
 
-Student has an attribute for the user, user has an attribute for the student, ... 
+Student has an attribute for the user, user has an attribute for the student, ...
 
-These circular references will prevent the log entry from being written. 
+These circular references will prevent the log entry from being written.
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
+
+## Forks
+Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid.
+If you want to use sendgrid for your tests, add your repository name to the list in the if statement for NOT_FORK in `backend/match4healthcare/settings/production.py` and specify the `SENDGRID_API_KEY` environment variable in the Travis run settings.
