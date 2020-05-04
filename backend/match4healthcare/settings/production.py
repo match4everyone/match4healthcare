@@ -1,4 +1,4 @@
-from match4healthcare.settings.common import *
+from match4healthcare.settings.common import RUN_DIR, MIDDLEWARE
 from django.utils.log import DEFAULT_LOGGING
 import os
 import logging

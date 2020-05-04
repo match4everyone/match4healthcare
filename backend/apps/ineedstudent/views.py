@@ -2,24 +2,18 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 
-from apps.mapview.utils import plzs
 from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
-from apps.ineedstudent.forms import HospitalForm, EmailToHospitalForm
+from apps.ineedstudent.forms import EmailToHospitalForm
 from django.utils.translation import gettext_lazy as _
 
-from django.shortcuts import render
-
-from django.http import HttpResponse
-from django.template import loader
-from apps.mapview.utils import plzs, get_plzs_close_to, haversine
+from apps.mapview.utils import plzs, haversine
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from apps.accounts.decorator import student_required, hospital_required
-from django.contrib.admin.views.decorators import staff_member_required
+from apps.accounts.decorator import hospital_required
 
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
@@ -28,11 +22,13 @@ from django.conf import settings
 from apps.iamstudent.models import EmailToHospital
 from django.contrib import messages
 from datetime import datetime
-import time
-from apps.accounts.utils import send_password_set_email
 from apps.ineedstudent.forms import HospitalFormZustimmung
 
 from django.views.decorators.gzip import gzip_page
+
+from .forms import PostingForm
+from .tables import ContactedTable
+from django.db import models
 
 
 class StudentTable(tables.Table):
@@ -224,11 +220,6 @@ def hospital_view(request, uuid):
     context["email_form"] = email_form
 
     return render(request, "hospital_view.html", context)
-
-
-from .forms import PostingForm
-from .tables import ContactedTable
-from django.db import models
 
 
 @login_required
