@@ -37,6 +37,12 @@ repos:
                     ^database/backups/|
                     ^database/data/
                 )
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: 'v1.5.2'
+    hooks:
+    -   id: autopep8
+        args: [] # This is necessary, otherwise it does not
+                # find the .flake8 conf it is using
 -   repo: https://gitlab.com/pycqa/flake8
     rev: 3.7.9
     hooks:
