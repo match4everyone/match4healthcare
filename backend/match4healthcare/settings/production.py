@@ -1,4 +1,5 @@
 from match4healthcare.settings.common import RUN_DIR, MIDDLEWARE
+from match4healthcare.settings.common import *  # noqa
 from django.utils.log import DEFAULT_LOGGING
 import os
 import logging

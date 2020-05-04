@@ -1,4 +1,5 @@
 from match4healthcare.settings.common import RUN_DIR
+from match4healthcare.settings.common import *  # noqa
 from os import path
 import os
 
