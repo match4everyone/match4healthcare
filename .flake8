@@ -1,6 +1,6 @@
-[flake8] # This config is also used by autopep8
+[flake8]
 max-line-length = 100
 select=C,E,F,W,B
 ignore = E203, E501, W503, E231, E722
-# E231: "Missing whitespace after ,". Black and autopep8 conflict here
+# E231: "Missing whitespace after ,". Black styling and flake8 conflict here
 # E722: "do not use bare 'except'". In django this seems like a common thing, so we ignore it
