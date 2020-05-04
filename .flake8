@@ -2,5 +2,10 @@
 max-line-length = 100
 select=C,E,F,W,B
 ignore = E203, E501, W503, E231, E722
+# We ignore E203, E501, W503 because black itself does this and E231 until [1] is fixed, a concrete example can be found in [2].
+#
+# [1]: https://github.com/psf/black/issues/1288
+# [2]: https://github.com/psf/black/issues/1289
+#
 # E231: "Missing whitespace after ,". Black styling and flake8 conflict here
 # E722: "do not use bare 'except'". In django this seems like a common thing, so we ignore it
