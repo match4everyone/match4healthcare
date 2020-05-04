@@ -28,8 +28,7 @@ urlpatterns = [
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(
-            template_name="registration/password_reset_form_.html",
-            from_email=settings.NOREPLY_MAIL,
+            template_name="registration/password_reset_form_.html", from_email=settings.NOREPLY_MAIL
         ),
         name="password_reset_form",
     ),
@@ -89,7 +88,8 @@ urlpatterns = [
     path("view_newsletter/<uuid>", views.view_newsletter, name="view_newsletter"),
     path("new_newsletter", views.new_newsletter, name="new_newsletter"),
     path("list_newsletter", views.list_newsletter, name="list_newsletter"),
-    path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter",),
+    path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter"),
+    path("profile_staff", views.staff_profile, name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 
