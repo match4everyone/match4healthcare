@@ -120,7 +120,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert auth.get_user(self.client).username == student_email
 
-        assert Student.objects.get(user__email=student_email).user.validated_email == False
+        assert Student.objects.get(user__email=student_email).user.validated_email is False
         response = self.client.post(
             "/accounts/validate_email", {"email": student_email}, follow=True
         )
@@ -220,7 +220,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert auth.get_user(self.client).username == hospital_email
 
-        assert Hospital.objects.get(user__email=hospital_email).user.validated_email == False
+        assert Hospital.objects.get(user__email=hospital_email).user.validated_email is False
         response = self.client.post(
             "/accounts/validate_email", {"email": hospital_email}, follow=True
         )
@@ -315,7 +315,7 @@ class UrlEndpointTestCase(TestCase):
             {"username": hospital_email, "password": hospital_password,},
             follow=True,
         )
-        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == False
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt is False
         assert "zustimmung" in response.redirect_chain[1][0]
         assert auth.get_user(self.client).username == hospital_email
 
@@ -326,7 +326,7 @@ class UrlEndpointTestCase(TestCase):
         )
         assert response.status_code == 200
         assert "login_redirect" in response.redirect_chain[0][0]
-        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt == True
+        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt is True
 
     def test_sudent_individual_view(self):
         staff_email, staff_password = generate_staff_user()
