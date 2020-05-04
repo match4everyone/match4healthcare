@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-03 10:57+0000\n"
+"POT-Creation-Date: 2020-05-03 16:25+0000\n"
 "PO-Revision-Date: 2020-04-15 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -66,15 +66,6 @@ msgstr "Inspect"
 
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
-
-msgid "Abmelden"
-msgstr "Logout"
-
-msgid "Kennwort ändern"
-msgstr "Change password"
-
-msgid "Newsletter editieren"
-msgstr "Edit newsletter"
 
 msgid ""
 "\n"
@@ -169,6 +160,9 @@ msgstr "Feel free to update your infomation at any time."
 
 msgid "Profil Details"
 msgstr "Profile information"
+
+msgid "Abmelden"
+msgstr "Logout"
 
 msgid "Passwort ändern"
 msgstr "Change  password"
@@ -763,6 +757,21 @@ msgstr ""
 "complications, our students would be very happy to receive support in this "
 "regard. </li>\n"
 "</ul>\n"
+
+msgid "Kennwort ändern"
+msgstr "Change password"
+
+msgid "Funktionen für Staff-Member"
+msgstr "Staff-member functionality"
+
+msgid "Institutionen approven"
+msgstr "Approve institutions"
+
+msgid "Newsletter editieren"
+msgstr "Edit newsletter"
+
+msgid "Zugriffsstatistiken anzeigen"
+msgstr "Show access statistics"
 
 msgid ""
 "\n"
