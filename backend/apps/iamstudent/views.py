@@ -1,11 +1,8 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
 from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from django.utils.text import format_lazy
 
@@ -13,7 +10,7 @@ from apps.mapview.utils import plzs, get_plzs_close_to
 from .tables import StudentTable
 from .filters import StudentJobRequirementsFilter
 
-from .forms import StudentForm, EmailToSendForm, EmailForm
+from .forms import StudentForm, EmailToSendForm, StudentFormView
 from .models import (
     Student,
     EmailToSend,
@@ -21,20 +18,10 @@ from .models import (
     LocationFilterModel,
     EmailGroup,
 )
-from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
-from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
-
-from apps.accounts.models import User
-
-from apps.ineedstudent.forms import HospitalFormExtra
-from apps.ineedstudent.models import Hospital
-
-from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
-from apps.accounts.decorator import student_required, hospital_required
+from apps.accounts.decorator import hospital_required
 
-from crispy_forms.helper import FormHelper
 import datetime
 
 import logging
@@ -175,7 +162,7 @@ def send_mails_for(hospital):
 
     for m in emails:
 
-        if not m.email_group_id in sent_emailgroups:
+        if m.email_group_id not in sent_emailgroups:
             sent_emailgroups.append(m.email_group_id)
             text = m.email_group.message
             send_mail(
@@ -336,8 +323,8 @@ def student_list_view(request, countrycode, plz, distance):
         filter_model = StudentListFilterModel.objects.get(uuid=uuid)
         for f in filter_model._meta.fields:
             if (
-                not f.name in ["uuid", "hospital", "location", "registration_date"]
-                and not f.name in student_attr
+                f.name not in ["uuid", "hospital", "location", "registration_date"]
+                and f.name not in student_attr
             ):
                 if f.default != NOT_PROVIDED:
                     setattr(filter_model, f.name, f.get_default())

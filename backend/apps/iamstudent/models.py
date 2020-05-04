@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
@@ -6,6 +7,9 @@ from apps.mapview.utils import plzs
 from django.utils.translation import gettext_lazy as _
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
+
+from .filters import StudentJobRequirementsFilter
+import django_filters.fields as filter_fields
 
 
 def validate_semester(value):
@@ -84,7 +88,7 @@ COUNTRY_CODE_CHOICES = [
 
 class Student(models.Model):
 
-    ## Database stuff
+    # Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
@@ -401,11 +405,7 @@ class StudentListFilterModel(models.Model):
     name = models.CharField(max_length=100)
 
 
-from .filters import StudentJobRequirementsFilter
-
 jrf = StudentJobRequirementsFilter()
-import django.forms as forms
-import django_filters.fields as filter_fields
 
 for f_name, filter in jrf.base_filters.items():
 
