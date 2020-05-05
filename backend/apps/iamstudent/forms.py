@@ -861,7 +861,7 @@ def get_form_helper_filter():
     return helper
 
 
-from .models import StudentListFilterModel
+from .models_persistent_filter import StudentListFilterModel
 
 
 class StudentListFilterModelForm(forms.ModelForm):
