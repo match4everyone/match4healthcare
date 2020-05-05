@@ -1,15 +1,16 @@
-from django.db import models
-from django import forms
-import uuid
 from datetime import datetime
+import uuid
+
+from django import forms
 from django.core.exceptions import ValidationError
-from apps.mapview.utils import plzs
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+import django_filters.fields as filter_fields
+
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
-
+from apps.mapview.utils import plzs
 from .filters import StudentJobRequirementsFilter
-import django_filters.fields as filter_fields
 
 
 def validate_semester(value):
