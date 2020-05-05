@@ -6,6 +6,7 @@ from .models import (
 )
 import django.forms as forms
 from django.utils.translation import gettext_lazy as _
+from .forms import get_form_helper_filter
 
 
 class StudentJobRequirementsFilter(filters.FilterSet):
@@ -179,7 +180,5 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
-
-            from .forms import get_form_helper_filter
 
             self.form_helper = get_form_helper_filter()

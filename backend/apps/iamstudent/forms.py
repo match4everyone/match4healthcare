@@ -17,8 +17,6 @@ from crispy_forms.bootstrap import InlineRadios
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.accounts.models import User
 
-from .models_persistent_filter import StudentListFilterModel
-
 import logging
 
 form_labels = {
@@ -858,11 +856,3 @@ def get_form_helper_filter():
         ]
     )
     return helper
-
-
-class StudentListFilterModelForm(forms.ModelForm):
-    class Meta:
-        model = StudentListFilterModel
-        labels = form_labels
-        labels["braucht_bezahlung"] = _("Vergütung möglich")
-        exclude = []
