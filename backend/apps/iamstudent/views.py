@@ -17,12 +17,14 @@ from .forms import StudentForm, EmailToSendForm, EmailForm
 from .models import (
     Student,
     EmailToSend,
-    StudentListFilterModel,
-    LocationFilterModel,
     EmailGroup,
 )
+
+from .models_persistent_filter import (
+    StudentListFilterModel,
+    LocationFilterModel
+)
 from .forms import StudentForm, EmailToSendForm, EmailForm, StudentFormView
-from .models import Student, EmailToSend, StudentListFilterModel, LocationFilterModel
 
 from apps.accounts.models import User
 
