@@ -14,10 +14,9 @@ from .forms import StudentForm, EmailToSendForm, StudentFormView
 from .models import (
     Student,
     EmailToSend,
-    StudentListFilterModel,
-    LocationFilterModel,
     EmailGroup,
 )
+from .models_persistent_filter import StudentListFilterModel, LocationFilterModel
 
 from django.contrib.auth.decorators import login_required
 from apps.accounts.decorator import hospital_required

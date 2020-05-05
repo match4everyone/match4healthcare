@@ -17,7 +17,7 @@ from crispy_forms.bootstrap import InlineRadios
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.accounts.models import User
 
-from .models import StudentListFilterModel
+from .models_persistent_filter import StudentListFilterModel
 
 import logging
 
