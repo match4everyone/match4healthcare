@@ -38,8 +38,8 @@ jobs:
       continue-on-error: true
       # https://stackoverflow.com/a/14799019/3342058
       run: |
-        if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c ? c : "0" }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ]; 
-          then echo "Missing translations are present"; exit 1; 
+        if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c ? c : "0" }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ];
+          then echo "Missing translations are present"; exit 1;
         fi
 
     # Workaround because continue-on-error does not fail test
