@@ -539,6 +539,36 @@ class EmailToSendForm(forms.ModelForm):
             raise ValidationError(_('Bitte personalisiere diesen Text'), code='invalid')
         return message
 
+    def __init__(self, *args, **kwargs):
+        super(EmailToSendForm, self).__init__(*args, **kwargs)
+        #self.fields['phone_number'].required = False
+
+        self.helper = FormHelper()
+        #self.helper.form_id = 'id-exampleForm'
+        #self.helper.form_class = 'blueForms'
+        #self.helper.form_method = 'post'
+        #self.helper.form_action = 'signup_student'
+        self.helper.attrs = {
+            'onsubmit':'disableButton()'
+        }
+
+        self.helper.layout = Layout(
+            HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
+            Row(
+                Column('subject', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('message', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Div(
+                HTML("This is a info alert—check it {} out!".format(_("Berufsausbildung"))),
+                css_class='alert alert-info', role="alert",
+            ))
+
+        logging.debug(self.helper.layout)
+
 def get_form_helper_filter():
     helper = FormHelper()
     helper.form_id = 'id-exampleForm'
