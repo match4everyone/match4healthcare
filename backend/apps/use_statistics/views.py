@@ -10,6 +10,7 @@ import pandas as pd
 from datetime import datetime
 
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 logged_data_names = ["time", "status_line", "status", "request_time"]
 threshold_to_filter = 50
@@ -60,11 +61,19 @@ def process_file(ttl_hash):
 
 def parse_file(logfile_name="gunicorn-access.log",):
     requests = []
-    with open(os.path.join(settings.RUN_DIR, logfile_name), "r") as file:
-        for line in file:
-            logged_data = line.split("|")
-            requests.append(logged_data)
-    return requests
+    try:
+        with open(os.path.join(settings.RUN_DIR, logfile_name), "r") as file:
+            for line in file:
+                logged_data = line.split("|")
+                requests.append(logged_data)
+            return requests
+    except FileNotFoundError:
+        return HttpResponse(
+            _(
+                "<html><body>gunicorn-access.log nicht gefunden oder zugreifbar\
+                            </body></html>"
+            )
+        )
 
 
 class AccessCountTable(tables.Table):
