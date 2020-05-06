@@ -223,15 +223,7 @@ IS_TRAVIS = "TRAVIS" in os.environ and bool(os.environ["TRAVIS"])
 
 IS_CI = "CI" in os.environ and bool(os.environ["CI"])
 
-if (
-    "TRAVIS" not in os.environ
-    or ("TRAVIS" in os.environ and not bool(os.environ["TRAVIS"]))
-    or (
-        "TRAVIS" in os.environ
-        and bool(os.environ["TRAVIS"])
-        and os.environ["TRAVIS_PULL_REQUEST_SLUG"] is ["match4everyone/match4healthcare"]
-    )
-):
-    IS_FORK = False
-else:
+IS_FORK = False
+
+if IS_TRAVIS and os.environ["TRAVIS_PULL_REQUEST_SLUG"] is ["match4everyone/match4healthcare"]:
     IS_FORK = True
