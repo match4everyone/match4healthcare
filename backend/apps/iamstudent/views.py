@@ -173,7 +173,7 @@ def send_mails_for(hospital):
         if m.subject and m.message and m.student.user.email:
             try:
                 send_mail(m.subject, m.message, settings.NOREPLY_MAIL, [m.student.user.email])
-                # todo: muss noch asynchron werden ...celery?
+                # TODO: muss noch asynchron werden ...celery? # noqa: T003
                 m.send_date = datetime.datetime.now()
                 m.was_sent = True
                 m.save()

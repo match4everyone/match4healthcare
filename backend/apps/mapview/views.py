@@ -88,5 +88,5 @@ def group_by_zip_code(entities):
 
 
 def get_ttl_hash(seconds=300):
-    """Return the same value withing `seconds` time period"""
+    """Return the same value withing `seconds` time period."""
     return round(time.time() / seconds)

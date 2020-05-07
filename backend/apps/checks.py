@@ -78,7 +78,6 @@ def check_env_variables_set(app_configs=None, **kwargs):
 @register(Tags.mail_tag)
 def check_send_mails(app_configs=None, **kwargs):
     """Check that we are actually able to send emails."""
-
     errors = []
 
     try:

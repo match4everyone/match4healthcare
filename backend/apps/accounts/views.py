@@ -65,7 +65,7 @@ def student_signup(request):
 
 @transaction.atomic
 def register_student_in_db(request, mail):
-    # todo send mail with link to pwd
+    # TODO: send mail with link to pwd # noqa: T003
     pwd = User.objects.make_random_password()
     username = mail  # generate_random_username()
     user = User.objects.create(username=username, is_student=True, email=username)
@@ -141,7 +141,7 @@ def profile_redirect(request):
         return HttpResponseRedirect("profile_staff")
 
     else:
-        # TODO: throw 404
+        # TODO: throw 404  # noqa: T003
         logger.warning(
             "User is unknown type, profile redirect not possible", extra={"request": request},
         )
@@ -165,7 +165,7 @@ def login_redirect(request):
         return HttpResponseRedirect("approve_hospitals")
 
     else:
-        # TODO: throw 404
+        # TODO: throw 404  # noqa: T003
         logger.warning(
             "User is unknown type, login redirect not possible", extra={"request": request},
         )
@@ -322,7 +322,7 @@ class UserCountView(APIView):
     Source: https://stackoverflow.com/questions/25151586/django-rest-framework-retrieving-object-count-from-a-model
     """
 
-    def get(self, request, format=None):
+    def get(self, request, format=None):  # noqa: A002
         supporter_count = User.objects.filter(
             is_student__exact=True, validated_email__exact=True
         ).count()
@@ -427,7 +427,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 )
                 return switch_newsletter(nl, user, request, post=None, get=None)
             elif "approveNewsletter" in get:
-                # todo check that author cannot approve
+                # TODO: check that author cannot approve # noqa: T003
                 nl.approve_from(user)
                 nl.save()
                 messages.add_message(

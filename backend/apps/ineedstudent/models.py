@@ -51,7 +51,7 @@ class Hospital(models.Model):
 
     # Methods
     def __str__(self):
-        """String for representing the MyModelName object (in Admin site etc.)."""
+        """String for representing the MyModelName object (in Admin site etc.)."""  # noqa: D401
         return self.uuid
 
     def clean(self):

@@ -71,6 +71,6 @@ elif MAIL_RELAY_OPTION == "sendgrid":
         EMAIL_USE_TLS = True
 
 else:
-    # ToDo add logger message instead?
+    # TODO: add logger message instead? # noqa: T003
     print("No email option selected")
     exit(1)

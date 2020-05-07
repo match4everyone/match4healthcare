@@ -33,19 +33,19 @@ class StudentListFilterModel(models.Model):
 jrf = StudentJobRequirementsFilter()
 
 
-for f_name, filter in jrf.base_filters.items():
+for f_name, sjr_filter in jrf.base_filters.items():
 
-    if type(filter.field) == forms.NullBooleanField:
+    if type(sjr_filter.field) == forms.NullBooleanField:
         StudentListFilterModel.add_to_class(
             f_name, models.NullBooleanField(default=None, null=True)
         )
-    elif type(filter.field) == forms.DecimalField:
+    elif type(sjr_filter.field) == forms.DecimalField:
         StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
-    elif type(filter.field) == filter_fields.ChoiceField:
+    elif type(sjr_filter.field) == filter_fields.ChoiceField:
         StudentListFilterModel.add_to_class(
             f_name, models.IntegerField(default=0, choices=filter.field.choices)
         )
-    elif type(filter.field) == forms.DateField:
+    elif type(sjr_filter.field) == forms.DateField:
         StudentListFilterModel.add_to_class(
             f_name, models.DateField(null=True, default=datetime.now)
         )

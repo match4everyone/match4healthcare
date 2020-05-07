@@ -79,7 +79,7 @@ def prepare_hospitals(ttl_hash=None):
 def hospital_list(request, countrycode, plz):
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen
+        # TODO: niceren error werfen # noqa: T003
         return HttpResponse(
             "Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode
         )

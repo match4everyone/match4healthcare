@@ -43,7 +43,7 @@ MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
-# ToDo add environment variable based detection whether we are on prod or staging
+# TODO: add environment variable based detection whether we are on prod or staging # noqa: T003
 NOREPLY_MAIL = "match4healthcare<noreply@match4healthcare.de>"
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 

@@ -16,13 +16,11 @@ class LogLevel(Enum):
 
 class OneLineExceptionFormatter(logging.Formatter):
     def formatException(self, exc_info):
-        """
-        Format an exception so that it prints on a single line.
-        """
+        """Format an exception so that it prints on a single line."""
         result = super(OneLineExceptionFormatter, self).formatException(exc_info)
         return repr(result)  # or format into one line however you want to
 
-    def format(self, record):
+    def format(self, record):  # noqa: A003
         s = super(OneLineExceptionFormatter, self).format(record)
         if record.exc_text:
             s = s.replace("\n", "") + "|"
@@ -50,8 +48,8 @@ class DjangoRequestJSONFormatter(json_log_formatter.JSONFormatter):
                 extra["request"]["get"] = request.GET
 
             if extra["request"]["method"] == "POST" and hasattr(request, "POST"):
-                filter = SafeExceptionReporterFilter()
-                extra["request"]["post"] = filter.get_post_parameters(record.request)
+                ser_filter = SafeExceptionReporterFilter()
+                extra["request"]["post"] = ser_filter.get_post_parameters(record.request)
 
         if record.exc_info:
             extra["exc_info"] = self.formatException(record.exc_info)

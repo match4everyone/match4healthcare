@@ -29,13 +29,13 @@ def process_file(ttl_hash):
     df = pd.DataFrame(requests)
     df.columns = logged_data_names
 
-    # TODO: Check if columns are present in dataframe
+    # TODO: Check if columns are present in dataframe # noqa: T003
     df["status"] = df["status"].astype(float)
     df["status_line"] = df["status_line"].astype(str)
     # df['time'] = df['time'].astype(datetime)
 
     df_names = df
-    # TODO: Can we add the index to the groupby which would make any further processing like sorting easier?
+    # TODO: Can we add the index to the groupby which would make any further processing like sorting easier?  # noqa: T003
     # df['status_line'] = df.index
     groupby = df.groupby("status_line")
     groupby_keys = groupby.groups.keys()
