@@ -537,6 +537,6 @@ def did_see_newsletter(request, uuid, token):
             messages.add_message(request, messages.INFO, _("Dein Approval ist nun gültig."))
         else:
             return HttpResponse("Wrong code")
-    except:
+    except Exception:
         return HttpResponse("Not registered")
     return HttpResponseRedirect("/accounts/view_newsletter/" + str(uuid))
