@@ -33,7 +33,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        self.all_yes = options["no-input"]
+        self.all_yes = options["no_input"]
 
         if options["delete"]:
             self.stdout.write(
