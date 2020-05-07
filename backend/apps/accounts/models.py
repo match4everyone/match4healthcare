@@ -5,13 +5,13 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from .email_utils import send_mass_mail_sendgrid
 
-import logging
-
-logger = logging.getLogger("django")
-
 import uuid
 import numpy as np
 from django.utils.translation import gettext_lazy as _
+
+import logging
+
+logger = logging.getLogger("django")
 
 
 class User(AbstractUser):
