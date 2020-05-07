@@ -1,11 +1,16 @@
-from .models import *
-from django.db import models
-import uuid
 from datetime import datetime
-from apps.ineedstudent.models import Hospital
+import uuid
+
+from django.db import models
 import django.forms as forms
 import django_filters.fields as filter_fields
+
+from apps.ineedstudent.models import Hospital
+
 from .filters import StudentJobRequirementsFilter
+from .models import *  # noqa: F401, F403
+from .models import COUNTRY_CODE_CHOICES
+
 
 class LocationFilterModel(models.Model):
 
