@@ -3,7 +3,7 @@ max-line-length = 100
 # When adding a new category, make sure to include the lib in .pre-commit-config.yaml under
 # flake8>additional_dependencies, otherwise it will not be installed to pre-commits private env
 select=C,E,F,W,B,I,A,D,T,G
-ignore = E203, E501, W503, E231, E722, D1, T002, G202
+ignore = E203, E501, W503, E231, D1, T002, G202
 application-package-names = apps, match4healthcare
 import-order-style = appnexus
 # maybe switch back to google once all code is in a single app
@@ -13,4 +13,3 @@ import-order-style = appnexus
 # [2]: https://github.com/psf/black/issues/1289
 #
 # E231: "Missing whitespace after ,". Black styling and flake8 conflict here
-# E722: "do not use bare 'except'". In django this seems like a common thing, so we ignore it

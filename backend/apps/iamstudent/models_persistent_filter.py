@@ -43,7 +43,7 @@ for f_name, sjr_filter in jrf.base_filters.items():
         StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
     elif type(sjr_filter.field) == filter_fields.ChoiceField:
         StudentListFilterModel.add_to_class(
-            f_name, models.IntegerField(default=0, choices=filter.field.choices)
+            f_name, models.IntegerField(default=0, choices=sjr_filter.field.choices)
         )
     elif type(sjr_filter.field) == forms.DateField:
         StudentListFilterModel.add_to_class(
@@ -51,5 +51,6 @@ for f_name, sjr_filter in jrf.base_filters.items():
         )
     else:
         raise ValueError(
-            "I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name)
+            "I do not know what to do with field type '%s' for '%s'"
+            % (type(sjr_filter.field), f_name)
         )
