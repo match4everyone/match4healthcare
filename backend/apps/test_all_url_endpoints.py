@@ -1,10 +1,10 @@
-from django.test import TestCase, Client
-from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
-from apps.ineedstudent.models import Hospital
-from apps.accounts.models import User
 from django.contrib import auth
-
+from django.test import Client, TestCase
 import numpy as np
+
+from apps.accounts.models import User
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.ineedstudent.models import Hospital
 
 
 def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=False):

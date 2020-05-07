@@ -1,23 +1,18 @@
 # from django.forms import *
-from django import forms
-from apps.iamstudent.models import (
-    Student,
-    EmailToSend,
-    AUSBILDUNGS_TYPEN,
-    AUSBILDUNGS_IDS,
-)
-from django.core.exceptions import ValidationError
-
-from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
-from django.utils.text import format_lazy
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Row, Column, Div, HTML
-from crispy_forms.bootstrap import InlineRadios
-from apps.iamstudent.custom_crispy import RadioButtons
-from apps.accounts.models import User
-
 import logging
+
+from crispy_forms.bootstrap import InlineRadios
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Div, Field, HTML, Layout, Row, Submit
+from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
+from django.utils.translation import gettext_lazy as _
+
+from apps.accounts.models import User
+from apps.iamstudent.custom_crispy import RadioButtons
+from apps.iamstudent.models import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN, EmailToSend, Student
 
 form_labels = {
     "uuid": _("Writerekp"),

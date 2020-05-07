@@ -1,9 +1,11 @@
-from django.core.checks import register, Error, Warning
-from django.core.checks import Tags as DjangoTags
-from django.conf import settings
 import http.client
 import json
 import os
+
+from django.conf import settings
+from django.core.checks import Error, register
+from django.core.checks import Tags as DjangoTags
+from django.core.checks import Warning
 
 
 def does_sendgrid_sandbox_mail_work():

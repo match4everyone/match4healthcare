@@ -1,15 +1,15 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
 from datetime import datetime
-from django.core.mail import EmailMessage
-from django.conf import settings
-from .email_utils import send_mass_mail_sendgrid
-
-import uuid
-import numpy as np
-from django.utils.translation import gettext_lazy as _
-
 import logging
+import uuid
+
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.core.mail import EmailMessage
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+import numpy as np
+
+from .email_utils import send_mass_mail_sendgrid
 
 logger = logging.getLogger("django")
 

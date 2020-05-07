@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from os import path
-from django.utils.translation import ugettext_lazy as _
+
 from django.contrib.messages import constants as messages
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # or better:

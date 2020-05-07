@@ -2,7 +2,7 @@
 max-line-length = 100
 select=C,E,F,W,B,I,H101
 ignore = E203, E501, W503, E231, E722
-application-package-names = apps
+application-package-names = apps, match4healthcare
 import-order-style = appnexus
 # maybe switch back to google once all code is in a single app
 # We ignore E203, E501, W503 because black itself does this and E231 until [1] is fixed, a concrete example can be found in [2].

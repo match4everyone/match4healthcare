@@ -1,29 +1,22 @@
-from django.shortcuts import render
-
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.mail import BadHeaderError, send_mail
-from django.conf import settings
-from django.utils.translation import gettext as _
-from django.utils.text import format_lazy
-
-from apps.mapview.utils import plzs, get_plzs_close_to
-from .tables import StudentTable
-from .filters import StudentJobRequirementsFilter
-
-from .forms import StudentForm, EmailToSendForm, StudentFormView
-from .models import (
-    Student,
-    EmailToSend,
-    EmailGroup,
-)
-from .models_persistent_filter import StudentListFilterModel, LocationFilterModel
-
-from django.contrib.auth.decorators import login_required
-from apps.accounts.decorator import hospital_required
-
 import datetime
-
 import logging
+
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.utils.text import format_lazy
+from django.utils.translation import gettext as _
+
+from apps.accounts.decorator import hospital_required
+from apps.mapview.utils import get_plzs_close_to, plzs
+
+from .filters import StudentJobRequirementsFilter
+from .forms import EmailToSendForm, StudentForm, StudentFormView
+from .models import EmailGroup, EmailToSend, Student
+from .models_persistent_filter import LocationFilterModel, StudentListFilterModel
+from .tables import StudentTable
 
 logger = logging.getLogger("django")
 

@@ -1,42 +1,34 @@
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth import logout
-from django.contrib.auth.views import LoginView
-from django.contrib import messages
+from datetime import datetime
+import logging
 
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.db import transaction
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
+from django.utils.text import format_lazy
+from django.utils.translation import gettext as _
 from rest_framework.views import APIView
 
-from .models import User
-from apps.ineedstudent.forms import (
-    HospitalFormInfoSignUp,
-    HospitalFormEditProfile,
-    HospitalFormInfoCreate,
-)
-from apps.ineedstudent.models import Hospital
-from django.shortcuts import render
-from apps.ineedstudent.views import ApprovalHospitalTable
-from django.utils.text import format_lazy
-from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import CustomAuthenticationForm
+from apps.accounts.utils import send_password_set_email
+from apps.iamstudent.forms import StudentForm, StudentFormAndMail, StudentFormEditProfile
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
-from .models import NewsletterState
+from apps.ineedstudent.forms import (
+    HospitalFormEditProfile,
+    HospitalFormInfoCreate,
+    HospitalFormInfoSignUp,
+)
+from apps.ineedstudent.models import Hospital
+from apps.ineedstudent.views import ApprovalHospitalTable
 
-from django.contrib.auth.decorators import login_required
-from .decorator import student_required, hospital_required
-from django.contrib.admin.views.decorators import staff_member_required
-
-from datetime import datetime
-
-from django.utils.translation import gettext as _
-
-from django.db import transaction
-from apps.accounts.utils import send_password_set_email
-from .models import Newsletter, LetterApprovedBy
-from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
-
+from .decorator import hospital_required, student_required
+from .forms import CustomAuthenticationForm, NewsletterEditForm, NewsletterViewForm, TestMailForm
+from .models import LetterApprovedBy, Newsletter, NewsletterState, User
 from .tables import NewsletterTable
-
-import logging
 
 logger = logging.getLogger(__name__)
 

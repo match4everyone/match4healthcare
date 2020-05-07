@@ -1,6 +1,7 @@
+import logging
+
 from django.conf import settings
 import sendgrid
-import logging
 
 logger = logging.getLogger(__name__)
 

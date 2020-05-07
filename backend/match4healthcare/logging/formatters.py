@@ -1,8 +1,9 @@
-from enum import Enum
 from datetime import datetime
+from enum import Enum
+import logging
+
 from django.views.debug import SafeExceptionReporterFilter
 import json_log_formatter
-import logging
 
 
 class LogLevel(Enum):

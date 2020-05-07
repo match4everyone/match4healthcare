@@ -55,13 +55,13 @@ big_city_plzs = ["01067", "01069", "01097", "01099", "01109", "01127", "01129", 
                  "81476", "81477", "81479", "81539", "81541", "81543", "81545", "81547", "81549", "81667", "81669",
                  "81671", "81673", "81675", "81677", "81679", "81735", "81737", "81739", "81825", "81827", "81829",
                  "81925", "81927", "81929", ]
-import numpy as np
-from apps.ineedstudent.models import Hospital
-from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
-from apps.accounts.models import User
-from django.http import HttpResponse
-
 from django.conf import settings
+from django.http import HttpResponse
+import numpy as np
+
+from apps.accounts.models import User
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.ineedstudent.models import Hospital
 
 
 def delete_fakes():

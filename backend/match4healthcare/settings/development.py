@@ -1,8 +1,8 @@
-from match4healthcare.settings.common import RUN_DIR
-from match4healthcare.settings.common import *  # noqa
-from os import path
 import os
+from os import path
 
+from match4healthcare.settings.common import *  # noqa
+from match4healthcare.settings.common import RUN_DIR
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
