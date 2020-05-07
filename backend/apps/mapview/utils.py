@@ -1,4 +1,3 @@
-import csv
 from os.path import dirname, abspath, join
 from math import radians, sin, cos, asin, sqrt
 import json

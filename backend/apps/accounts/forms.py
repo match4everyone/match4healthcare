@@ -1,10 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    AuthenticationForm,
+    UsernameField,
+)
 from django.db import transaction
+from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Row, Column, Div, HTML, Button
-from crispy_forms.bootstrap import InlineRadios, PrependedText
+from crispy_forms.layout import Submit, Layout, Row, Column, HTML
+from crispy_forms.bootstrap import PrependedText
 
 from .models import User, Newsletter
 
@@ -62,11 +67,6 @@ class StudentSignUpForm(UserCreationForm):
         user.is_student = True
         user.save()
         return user
-
-
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
-from django.utils.translation import gettext_lazy as _
 
 
 class CustomAuthenticationForm(AuthenticationForm):
