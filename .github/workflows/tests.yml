@@ -72,3 +72,5 @@ jobs:
     - name: "[TEST] Check if migrations were made"
       run: PYTHONPATH="./backend:$PYTHONPATH" django-admin makemigrations --settings=match4healthcare.settings.development --check --dry-run
 
+  - name: pre-commit
+    uses: pre-commit/action@v1.0.1
