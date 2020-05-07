@@ -246,8 +246,7 @@ def change_hospital_approval(request, uuid):
 
     h = Hospital.objects.get(uuid=uuid)
     logger.info(
-        "Set Hospital {} approval to {}".format(uuid, (not h.is_approved)),
-        extra={"request": request},
+        "Set Hospital %s approval to %s", uuid, (not h.is_approved), extra={"request": request},
     )
 
     if not h.is_approved:
@@ -271,7 +270,7 @@ def change_hospital_approval(request, uuid):
 def delete_hospital(request, uuid):
     h = Hospital.objects.get(uuid=uuid)
     logger.info(
-        "Delete Hospital {} by {}".format(uuid, request.user), extra={"request": request},
+        "Delete Hospital %s by %s", uuid, request.user, extra={"request": request},
     )
     name = h.user
     h.delete()
@@ -337,15 +336,15 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
     def post(self, request, *args, **kwargs):
-        logger.info("Login Attempt ({})".format(request.POST["username"]))
+        logger.info("Login Attempt (%s)", request.POST["username"])
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        logger.info("Login succesful ({})".format(form.cleaned_data["username"]))
+        logger.info("Login succesful (%s)", form.cleaned_data["username"])
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        logger.warning("Login failure ({})".format(getattr(form.data, "username", "")))
+        logger.warning("Login failure (%s)", getattr(form.data, "username", ""))
         return super().form_invalid(form)
 
 

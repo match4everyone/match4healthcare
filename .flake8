@@ -1,9 +1,9 @@
 [flake8]
 max-line-length = 100
-select=C,E,F,W,B,I,A,D,T
-# Add G
-ignore = E203, E501, W503, E231, E722, D1, T002
-#0, D101, D102, D103, D104, D106, D107
+# When adding a new category, make sure to include the lib in .pre-commit-config.yaml under
+# flake8>additional_dependencies, otherwise it will not be installed to pre-commits private env
+select=C,E,F,W,B,I,A,D,T,G
+ignore = E203, E501, W503, E231, E722, D1, T002, G202
 application-package-names = apps, match4healthcare
 import-order-style = appnexus
 # maybe switch back to google once all code is in a single app

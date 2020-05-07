@@ -46,4 +46,4 @@ def send_mass_mail_sendgrid(
             },
         )
     else:
-        logger.info("Sent out a newsletter to %s recipients." % len(recipient_list))
+        logger.info("Sent out a newsletter to %s recipients.", len(recipient_list))

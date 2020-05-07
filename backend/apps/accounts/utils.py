@@ -44,4 +44,4 @@ def send_password_set_email(
         )
         logger.debug("Sent!")
     else:
-        logger.warn("Email to " + str(email) + " not sent because form is invalid")
+        logger.warning("Email to %s not sent because form is invalid", str(email))

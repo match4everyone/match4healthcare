@@ -176,7 +176,7 @@ class Newsletter(models.Model):
                 "email", flat=True
             )
             n_hospital = recipient_hospitals_qs.count()
-            logger.info("Starting to send out newsletter to %s hospitals..." % n_hospital)
+            logger.info("Starting to send out newsletter to %s hospitals...", n_hospital)
             self._send_mail(recipient_hospitals_qs, n_hospital)
 
         if self.send_to_students:
@@ -184,7 +184,7 @@ class Newsletter(models.Model):
                 "email", flat=True
             )
             n_students = recipient_student_qs.count()
-            logger.info("Starting to send out newsletter to %s students..." % n_students)
+            logger.info("Starting to send out newsletter to %s students...", n_students)
             self._send_mail(recipient_student_qs, n_students)
 
     def _send_mail(self, recipients, n):

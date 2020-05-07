@@ -181,12 +181,10 @@ def send_mails_for(hospital):
             except BadHeaderError:
                 # Do not show error message to malicous actor
                 # Do not send the email
-                logger.warn(
-                    "Email with email_group_id "
-                    + str(m.email_group_id)
-                    + " to Students from Hospital "
-                    + str(hospital.user.email)
-                    + " could not be sent due to a BadHeaderError"
+                logger.warning(
+                    "Email with email_group_id %s to Students from Hospital %s could not be sent due to a BadHeaderError",
+                    str(m.email_group_id),
+                    str(hospital.user.email),
                 )
 
 
