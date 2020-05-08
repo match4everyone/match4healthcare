@@ -73,7 +73,11 @@ jobs:
       run: PYTHONPATH="./backend:$PYTHONPATH" django-admin makemigrations --settings=match4healthcare.settings.development --check --dry-run
 
   test-code-style:
-   - uses: actions/checkout@v2
+    name: Test if code is properly formatted
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
     - name: Cache python packages
       uses: actions/cache@v1
