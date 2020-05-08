@@ -8,6 +8,8 @@ from apps.iamstudent.forms import form_labels
 
 from django.utils.translation import gettext_lazy as _
 
+import datetime
+
 
 class RegisterList(list):
     def register(self, method):
@@ -24,13 +26,22 @@ class DataBaseStats:
 
     @stat_count.register
     def admin_count(self):
-        return (_("Aktive Staffmember"), User.objects.filter(is_staff=True).count())
+        return (_("Aktive Staffmember"), User.objects.filter(is_staff=True).count(),
+                [User.objects.filter(is_staff=True,
+                                     # __lte "less than or equal"
+                                     date_joined__lte=str(datetime.date.today() -
+                                                          datetime.timedelta(days=i)))
+                .count() for i in range(0, 8)])
 
     @stat_count.register
     def approved_hospital_count(self):
         return (
             _("Akzeptierte Institutionen"),
             Hospital.objects.filter(is_approved=True, user__validated_email=True).count(),
+            [Hospital.objects.filter(is_approved=True, user__validated_email=True,
+                                     approval_date__lte=str(datetime.date.today() -
+                                                            datetime.timedelta(days=i)))
+                 .count() for i in range(0, 8)]
         )
 
     @stat_count.register
@@ -38,6 +49,10 @@ class DataBaseStats:
         return (
             _("Registrierte Helfende"),
             Student.objects.filter(user__validated_email=True).count(),
+            [User.objects.filter(user__validated_email=True,
+                                 date_joined__lte=str(datetime.date.today() -
+                                                      datetime.timedelta(days=i)))
+                 .count() for i in range(0, 8)]
         )
 
     @stat_count.register
@@ -45,6 +60,7 @@ class DataBaseStats:
         return (
             _("Anzahl deaktivierter Helfenden"),
             Student.objects.filter(is_activated=True).count(),
+            None
         )
 
     # todo:
@@ -53,15 +69,30 @@ class DataBaseStats:
     ## Contact stats
     @stat_count.register
     def students_contacted_by_hospital(self):
-        return (_("Kontaktanfragen an Helfende"), EmailToSend.objects.filter(was_sent=True).count())
+        return (_("Kontaktanfragen an Helfende"), EmailToSend.objects.filter(
+            was_sent=True).count(),
+                [EmailToSend.objects.filter(was_sent=True,
+                                            send_date__lte=str(datetime.date.today() -
+                                                          datetime.timedelta(days=i)))
+                .count() for i in range(0, 8)]
+                )
 
     @stat_count.register
     def hospitals_contacted_by_students(self):
-        return (_("Kontaktanfragen an Institutionen"), EmailToHospital.objects.filter().count())
+        return (_("Kontaktanfragen an Institutionen"), EmailToHospital.objects.filter().count(),
+                [EmailToHospital.objects.filter(send_date__lte=str(datetime.date.today() -
+                                                          datetime.timedelta(days=i)))
+                .count() for i in range(0, 8)])
 
     @stat_count.register
     def newsletter_count(self):
-        return (_("Anzahl gesendeter Newsletter"), Newsletter.objects.filter(was_sent=True).count())
+        return (_("Anzahl gesendeter Newsletter"), Newsletter.objects.filter(
+            was_sent=True).count(),
+                [Newsletter.objects.filter(was_sent=True,
+                                           send_date__lte=str(datetime.date.today() -
+                                                              datetime.timedelta(days=i)))
+                .count() for i in range(0, 8)]
+                )
 
     @stat_count.register
     def hospitals_allowing_contact_by_students(self):
@@ -70,6 +101,7 @@ class DataBaseStats:
             Hospital.objects.filter(
                 is_approved=True, user__validated_email=True, appears_in_map=True
             ).count(),
+            None
         )
 
     @stat_list.register
@@ -86,7 +118,7 @@ class DataBaseStats:
                 count = next(x for x in qs if x[t] is True)["total"]
             except StopIteration:
                 count = 0
-            res.append((form_labels[t], count))
+            res.append((form_labels[t], count, None))
         return res
 
     def all_stats(self):
