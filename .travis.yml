@@ -5,6 +5,8 @@ before_script:
  - ./scripts/write_envs_to_file.sh
  - ./deploy.sh
  - ./scripts/wait_for_backend.sh
+ - docker logs $(docker ps | grep backend | awk 'END {print $16}')
+ - docker logs $(docker ps | grep database | awk 'END {print $11}')
 
 
 script:
@@ -13,3 +15,6 @@ script:
 
 after_script:
  - docker-compose down
+
+env:
+ - POSTGRES_DB=match4healthcare POSTGRES_PASSWORD="BuZK@HPB_FDpGx3gvnnB9@eypozpC8PeesGP7PUC*DDgbbj-Zpv3kRwCkmU6FQoL" POSTGRES_USER=match4healthcare SECRET_KEY="QP=14DkrovY9qrqXmZk3sjgakmy@x#6Log7EiW-9K4g5W&xY)_yN3a*rsinLYP|"

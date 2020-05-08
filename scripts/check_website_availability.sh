@@ -43,9 +43,9 @@ function test() {
 
 function check_website_up() {
 	# Check if log file exists
-	for i in $(seq 1 10); do 
+	for i in $(seq 1 10); do
 		# GET request to website and get http code fromkk server https://superuser.com/a/442395
-		if [[  $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then 
+		if [[  $(curl -s -o /dev/null -w "%{http_code}\n" $URL) -eq 200 ]]; then
     		break
 		else
 			if [[ i -eq 10 ]]; then
@@ -60,7 +60,7 @@ function check_website_up() {
 
 function check_error_log_empty() {
 	# Check if log file exists
-	for i in $(seq 1 10); do 
+	for i in $(seq 1 10); do
 		if [ -f "$ERR_LOG_PATH" ]; then
     		break
 		else
@@ -88,6 +88,6 @@ test "Error log empty" "check_error_log_empty"
 # If everything went well we exit with zero, else one
 if [[ $failed = "True" ]]; then
 	exit 1
-else 
+else
 	exit 0
 fi

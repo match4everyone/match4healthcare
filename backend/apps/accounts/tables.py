@@ -13,21 +13,23 @@ NewsletterStateIcons = {
 
 
 class NewsletterTable(tables.Table):
-    sending_state = tables.Column(empty_values=(), verbose_name=_('Status'),attrs={'th':{'style':"width: 16.66%"}})
+    sending_state = tables.Column(
+        empty_values=(), verbose_name=_("Status"), attrs={"th": {"style": "width: 16.66%"}},
+    )
 
     class Meta:
         model = Newsletter
-        fields = ['registration_date', 'subject', 'uuid']
-        sequence = ('registration_date', 'subject', 'sending_state', 'uuid')
+        fields = ["registration_date", "subject", "uuid"]
+        sequence = ("registration_date", "subject", "sending_state", "uuid")
         template_name = "django_tables2/bootstrap4.html"
         attrs = {
-            'data-toggle': "table",
-            'data-search': "false",
-            'data-filter-control': "true",
-            'data-show-export': "false",
-            'data-click-to-select': "false",
-            'data-toolbar': "#toolbar",
-            'class': "table"
+            "data-toggle": "table",
+            "data-search": "false",
+            "data-filter-control": "true",
+            "data-show-export": "false",
+            "data-click-to-select": "false",
+            "data-toolbar": "#toolbar",
+            "class": "table",
         }
 
     def render_uuid(self, value):
@@ -37,18 +39,18 @@ class NewsletterTable(tables.Table):
         state = record.sending_state()
 
         if state == NewsletterState.UNDER_APPROVAL:
-            text = 'wartet auf approvals'
+            text = "wartet auf approvals"
         elif state == NewsletterState.SENT:
-            text = 'bereits gesendet'
+            text = "bereits gesendet"
         elif state == NewsletterState.READY_TO_SEND:
-            text = 'bereit zum abschicken'
+            text = "bereit zum abschicken"
         elif state == NewsletterState.BEING_EDITED:
-            text = 'wird noch editiert'
+            text = "wird noch editiert"
         else:
-            return '--'
+            return "--"
 
         icon = NewsletterStateIcons[state]
-        return format_html(icon + ' ' + text)
+        return format_html(icon + " " + text)
 
     def render_letterapprovedby(self, value):
-        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _('Ansehen')))
+        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _("Ansehen")))

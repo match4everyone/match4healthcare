@@ -15,30 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from match4healthcare import views
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic.base import RedirectView
-from django.conf.urls import (
-    handler404, handler500
-)
+
 handler404 = views.handler404
 handler500 = views.handler500
 
 urlpatterns = [
-    path('mapview/', include('apps.mapview.urls')),
-    path('iamstudent/', include('apps.iamstudent.urls')),
-    path('ineedstudent/', include('apps.ineedstudent.urls')),
-    path('accounts/', include('apps.accounts.urls')),
-    path('use_statistics/', include('apps.use_statistics.urls')),
-    path('admin/', admin.site.urls),
-    path('404/', views.handler404),
-    path('500/', views.handler500),
-    path('', views.home),
-    path('about/', views.about),
-    path('impressum/', views.impressum),
-    path('dataprotection/', views.dataprotection),
-    path('legal-questions/', views.legal_questions),
-    path('terms-of-use/', views.terms_of_use),
-    ]
+    path("mapview/", include("apps.mapview.urls")),
+    path("iamstudent/", include("apps.iamstudent.urls")),
+    path("ineedstudent/", include("apps.ineedstudent.urls")),
+    path("accounts/", include("apps.accounts.urls")),
+    path("use_statistics/", include("apps.use_statistics.urls")),
+    path("admin/", admin.site.urls),
+    path("404/", views.handler404),
+    path("500/", views.handler500),
+    path("", views.home),
+    path("about/", views.about),
+    path("impressum/", views.impressum),
+    path("dataprotection/", views.dataprotection),
+    path("legal-questions/", views.legal_questions),
+    path("terms-of-use/", views.terms_of_use),
+]

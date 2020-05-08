@@ -52,7 +52,7 @@ msgstr "validated"
 msgid "nicht validierte"
 msgstr "not validated"
 
-msgid "varlidierte und nicht validierte"
+msgid "validierte und nicht validierte"
 msgstr "validated and not validated"
 
 msgid "validiert und von uns approved"
@@ -66,15 +66,6 @@ msgstr "Inspect"
 
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
-
-msgid "Abmelden"
-msgstr "Logout"
-
-msgid "Kennwort ändern"
-msgstr "Change password"
-
-msgid "Newsletter editieren"
-msgstr "Edit newsletter"
 
 msgid ""
 "\n"
@@ -169,6 +160,9 @@ msgstr "Feel free to update your infomation at any time."
 
 msgid "Profil Details"
 msgstr "Profile information"
+
+msgid "Abmelden"
+msgstr "Logout"
 
 msgid "Passwort ändern"
 msgstr "Change  password"
@@ -516,7 +510,7 @@ msgstr ""
 "\n"
 " Password changed\n"
 
-msgid " Dein Passwort wurde geändert. "
+msgid " Ihr Passwort wurde geändert. "
 msgstr " Your password has been changed. "
 
 msgid "Bitte beheben Sie den unten angezeigten Fehler"
@@ -528,18 +522,18 @@ msgstr "Please correct the errors shown below"
 msgid "Passwort gesetzt"
 msgstr "Password reset"
 
-msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen "
-msgstr " Your password was changed. You can login now "
+msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen."
+msgstr " Your password was changed. You can login now. "
 
 msgid "Erfolgreiche Anmeldung"
 msgstr "Successful registration"
 
-msgid "Liebe*r Helfer*in,"
-msgstr "Dear supporter,"
+msgid "Liebe*r Benutzer*in,"
+msgstr "Dear user,"
 
 msgid ""
-"vielen Dank für deine Registrierung. Auf dieser Seite kannst du ein Passwort "
-"für deinen Account erstellen und dich damit einloggen."
+"vielen Dank für Ihre Registrierung. Auf dieser Seite können Sie ein Passwort "
+"für Ihren Account erstellen und sich damit einloggen."
 msgstr ""
 "thank you for your registration. On this page you can create a password for "
 "your account and log in with it."
@@ -577,7 +571,7 @@ msgid ""
 "Sie erhalten diese Mail um ein neues Passwort bei match4healthcare zu "
 "setzen.\n"
 "\n"
-"Bitte clicken sie auf den folgenden Link um ein Passwort zu wählen:\n"
+"Bitte klicken Sie auf den folgenden Link um ein Passwort zu wählen:\n"
 msgstr ""
 "\n"
 "You are receiving this mail to reset your password in match4healthcare.\n"
@@ -599,7 +593,7 @@ msgstr "Confirm e-Mail"
 msgid "Passwort Vergessen?"
 msgstr "Lost password?"
 
-msgid "Gib deine Email-Addresse an und du erhältst ein neues Passwort"
+msgid "Geben Sie Ihre Email-Addresse an und Sie erhalten ein neues Passwort."
 msgstr "Enter your e-Mail and we will send you a new password"
 
 msgid "Passwort zurücksetzen "
@@ -764,6 +758,21 @@ msgstr ""
 "regard. </li>\n"
 "</ul>\n"
 
+msgid "Kennwort ändern"
+msgstr "Change password"
+
+msgid "Funktionen für Staff-Member"
+msgstr "Staff-member functionality"
+
+msgid "Institutionen approven"
+msgstr "Approve institutions"
+
+msgid "Newsletter editieren"
+msgstr "Edit newsletter"
+
+msgid "Zugriffsstatistiken anzeigen"
+msgstr "Show access statistics"
+
 msgid ""
 "\n"
 "Profil - Studierende\n"
@@ -800,16 +809,13 @@ msgid "Nützliche Hinweise"
 msgstr "Useful tips"
 
 msgid ""
-"Wir haben <a href=\"/legal-questions\">rechtliche Hinweise und Tipps</a> zu "
-"deinem Einsatz nach bestem Wissen und Gewissen zusammen gefasst. Darunter "
-"sind hinweise für Arbeitszeitenregelung und Versicherungsschutz "
-"zusammengefasst. Wir erheben jedoch keinen Anspruch auf vollständigkeit "
-"dieser Sammlung an Tipps!"
+"Für rechtliche Hinweise und Tipps informieren Sie sich gerne beim der <a "
+"href=\"https://www.marburger-bund.de/mitarbeit-studierenden-pandemie"
+"\">Übersicht des Marburger Bunds zur Mitarbeit in der Corona Pandemie</a>."
 msgstr ""
-"We have compiled <a href=\"/legal-questions\">legal notices and tips</a> for "
-"your use to the best of our knowledge and belief. This includes information "
-"on working hours and insurance coverage. However, we make no claim to the "
-"completeness of this collection of tips!"
+"For legal questions we can recommend an <a href=\"https://www.marburger-bund."
+"de/mitarbeit-studierenden-pandemie\">overview on contributing in the corona "
+"pandemic</a>."
 
 msgid ""
 "Zusätzlich wollen wir euch bestmöglich auf den Einsatz und den Kontakt mit "
@@ -833,6 +839,9 @@ msgstr ""
 
 msgid "Informationen über dich"
 msgstr "Your information"
+
+msgid "Registrierung - Freiwillige"
+msgstr "Registration - Supporter"
 
 msgid "Du sitzt zuhause und kannst in der aktuellen Situation helfen?"
 msgstr "You are sitting at home and are able to help in the current situation?"
@@ -1226,11 +1235,20 @@ msgstr "In which of the following areas is prior experience necessary?"
 msgid " Welche Infos über die zu vergebende Stelle sind schon bekannt?"
 msgstr " What information about the vacant position is already known?"
 
+msgid "Vergütung möglich"
+msgstr "Compensation possible"
+
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
 
 msgid "Ich freue mich über eine Vergütung, helfe aber auch ohne"
 msgstr "I am happy to be compensated, but I also help out even without"
+
+msgid "Ich möchte ohne Bezahlung helfen"
+msgstr "I would like to help without being paid"
+
+msgid "individuell absprechbar"
+msgstr "both possible"
 
 msgid "egal"
 msgstr "not important"
@@ -2044,6 +2062,18 @@ msgstr "Recommended by"
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
 
+#~ msgid ""
+#~ "Wir haben <a href=\"/legal-questions\">rechtliche Hinweise und Tipps</a> "
+#~ "zu deinem Einsatz nach bestem Wissen und Gewissen zusammen gefasst. "
+#~ "Darunter sind hinweise für Arbeitszeitenregelung und Versicherungsschutz "
+#~ "zusammengefasst. Wir erheben jedoch keinen Anspruch auf vollständigkeit "
+#~ "dieser Sammlung an Tipps!"
+#~ msgstr ""
+#~ "We have compiled <a href=\"/legal-questions\">legal notices and tips</a> "
+#~ "for your use to the best of our knowledge and belief. This includes "
+#~ "information on working hours and insurance coverage. However, we make no "
+#~ "claim to the completeness of this collection of tips!"
+
 #~ msgid "gibt es"
 #~ msgstr "are"
 
@@ -2062,50 +2092,14 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Helferkarte"
 #~ msgstr "Map of volunteers"
 
-#, fuzzy
-#~| msgid ""
-#~| "Ich will\n"
-#~| "                            helfen"
-#~ msgid ""
-#~ "Jetzt Hilfe\n"
-#~ "                                anbieten"
-#~ msgstr "I want to help"
-
-#, fuzzy
-#~| msgid "Wir haben Bedarf an Unterstützung."
-#~ msgid ""
-#~ "Wir haben Bedarf an\n"
-#~ "                            Unterstützung."
-#~ msgstr "We need supporters."
-
-#, fuzzy
-#~| msgid ""
-#~| "Ich will\n"
-#~| "                            helfen"
-#~ msgid ""
-#~ "Jetzt Hilfe\n"
-#~ "                            suchen"
-#~ msgstr "I want to help"
-
-#, fuzzy
-#~| msgid ""
-#~| "Ich will\n"
-#~| "                            helfen"
-#~ msgid ""
-#~ "Empfohlen\n"
-#~ "                        von"
-#~ msgstr "I want to help"
-
 #~ msgid "Mit Unterstützung von"
 #~ msgstr "Supported by"
 
 #~ msgid "Notaufnahme"
 #~ msgstr "Emergency admissions"
 
-#, fuzzy
-#~| msgid "Kann eine Unterkunft angeboten werden?"
 #~ msgid "Unterkunft kann angeboten werden"
-#~ msgstr "Can accommodation be offered?"
+#~ msgstr "Accommodation can be offered?"
 
 #~ msgid "Hier soll Eure Stellenanzeige stehen, editiert den Text."
 #~ msgstr "Your posting should be here, edit the text."
@@ -2240,13 +2234,6 @@ msgstr ""
 #~ msgid "Einsatz"
 #~ msgstr "Deployment"
 
-#, fuzzy
-#~| msgid "Passwort zurücksetzen "
-#~ msgid ""
-#~ "\n"
-#~ "Passwort Setzen\n"
-#~ msgstr "Reset password"
-
 #~ msgid ""
 #~ "\n"
 #~ "Neues Passwort\n"
@@ -2254,13 +2241,8 @@ msgstr ""
 #~ "\n"
 #~ "New Password\n"
 
-#~ msgid " Passwort Ändern "
-#~ msgstr " Change password"
-
-#, fuzzy
-#~| msgid "Passwort zurücksetzen "
 #~ msgid "Passwort Ändern"
-#~ msgstr "Reset password"
+#~ msgstr "Change password"
 
 #~ msgid ""
 #~ "\n"
@@ -2269,8 +2251,6 @@ msgstr ""
 #~ "\n"
 #~ " Reset password\n"
 
-#, fuzzy
-#~| msgid "Passwort zurücksetzen "
 #~ msgid "Passort vergessen?"
 #~ msgstr "Reset password"
 
@@ -2282,31 +2262,6 @@ msgstr ""
 
 #~ msgid "Arzt/Ärztin"
 #~ msgstr "Medical doctor"
-
-#, fuzzy
-#~| msgid "Famulaturreife"
-#~ msgid "Famulatur Anästhesie"
-#~ msgstr "Qualified for internships"
-
-#, fuzzy
-#~| msgid "Famulaturreife"
-#~ msgid "Famulatur Chirurgie"
-#~ msgstr "Qualified for internships"
-
-#, fuzzy
-#~| msgid "Famulaturreife"
-#~ msgid "Famulatur Innere"
-#~ msgstr "Qualified for internships"
-
-#, fuzzy
-#~| msgid "Famulaturreife"
-#~ msgid "Famulatur Notaufnahme"
-#~ msgstr "Qualified for internships"
-
-#, fuzzy
-#~| msgid "Kinderbetreuer*in"
-#~ msgid "Kinderbetreuer_in"
-#~ msgstr "Child Carer"
 
 #~ msgid "Eintrag updaten"
 #~ msgstr "Update entry"
@@ -2320,11 +2275,6 @@ msgstr ""
 
 #~ msgid "Wohnort"
 #~ msgstr "Postal code"
-
-#, fuzzy
-#~| msgid "Registrierung - Studierende & Helfer"
-#~ msgid "  Registrierung - Hilfesuchende "
-#~ msgstr "Registration - students & volunteers"
 
 #~ msgid ""
 #~ "Zuvor möchten wir euch zu eurer und der allgemeinen Sicherheit über "
@@ -2521,17 +2471,6 @@ msgstr ""
 #~ " We’ve emailed you instructions for setting your password, if an account "
 #~ "exists with the email you entered. You should receive them shortly."
 
-#, fuzzy
-#~| msgid ""
-#~| "Hast du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
-#~| "wir senden dir ein Neues zu."
-#~ msgid ""
-#~ "Hast Du dein Kennwort vergessen? Gib deine e-Mail Adresse unten ein und "
-#~ "wir senden dir ein Neues zu."
-#~ msgstr ""
-#~ "Have you forgotten your password? Enter your e-mail address below and "
-#~ "we'll send you a new one."
-
 #~ msgid "e-Mail Adresse"
 #~ msgstr "e-mail address"
 
@@ -2623,38 +2562,3 @@ msgstr ""
 #~ "I work in a hospital or medical practice and need support to manage the "
 #~ "onrush of nCOV-19 patients. I am specifically looking for professionals "
 #~ "who can support me in my work in the healthcare sector."
-
-#, fuzzy
-#~| msgid "Krankenhauskarte"
-#~ msgid "Krankenhäuser"
-#~ msgstr "Map of hospitals"
-
-#, fuzzy
-#~| msgid "Registrierung - Hilfesuchendes Krankenhaus o.Ä."
-#~ msgid "Hilfesuchendes Krankenhaus o.Ä."
-#~ msgstr "Registration - hospital seeking help"
-
-#, fuzzy
-#~| msgid "Postleitzahl"
-#~ msgid "Postleitzahl:"
-#~ msgstr "Postal code"
-
-#, fuzzy
-#~| msgid "Pfleger*in"
-#~ msgid "Pflegehelfer_in"
-#~ msgstr "Caregiver"
-
-#, fuzzy
-#~| msgid "Ich brauche Unterstützung"
-#~ msgid "Pflegeunterstützung"
-#~ msgstr "I need support"
-
-#, fuzzy
-#~| msgid "Postleitzahl"
-#~ msgid "Postleitzahl: "
-#~ msgstr "Postal code"
-
-#, fuzzy
-#~| msgid "Bitte gib deine Postleitzahl ein"
-#~ msgid " ist keine valide Postleitzahl in "
-#~ msgstr "Please enter your zip code"
