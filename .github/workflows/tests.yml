@@ -91,6 +91,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install wheel
         pip install -r ./backend/requirements.txt
+    - name: set PY
+      run: echo "::set-env name=PY::$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')"
+    - name: Cache pre-commit libraries
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pre-commit
+        key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml', '.flake8', '.isort.cfg') }}
 
     - name: "[TEST] Check if code was properly formatted"
       uses: pre-commit/action@v1.0.1
