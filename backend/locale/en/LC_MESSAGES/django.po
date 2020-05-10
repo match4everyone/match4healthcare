@@ -2053,6 +2053,9 @@ msgid ""
 "Helfenden den Gesundheitseinrichtungen während des gesamten "
 "Matchingprozesses nicht preisgegeben."
 msgstr ""
+"In order to ensure data protection, no contact details nor names "
+"of supporters are shared with health facilities during the whole "
+"matching process"
 
 #, python-format
 msgid ""
