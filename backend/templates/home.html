@@ -133,8 +133,9 @@ Home
   <div class="container" style="margin-top:55px;">
 
 	<div class="row" style="margin-bottom: 75px;">
-	  		<div class="col-md-12 col-lg-8" style="text-align: left; margin: 0 auto;">
-			 <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Wie funktioniert{% endblocktrans %} <img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline">?</h2>
+        <div class="col-md-12 col-lg-8" style="text-align: left; margin: 0 auto;">
+          {% static 'img/match4healthcare-logo-text.svg' as static_m4h_svg_url %}
+			 <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Wie funktioniert <img src="{{ static_m4h_svg_url }}" width="180px" style="vertical-align: baseline">?{% endblocktrans %}</h2>
 				<hr style="width:60%; margin: 0 auto; margin-bottom:25px; border-width: 2px; ">
 			<p style="text-align:center;">{% blocktrans %}match4healthcare vernetzt Helfende und Hilfesuchende aus dem Gesundheitswesen anhand von Kriterien wie Qualifikation, Verfügbarkeit und Wunschtätigkeit auf der einen und Bedarf auf der anderen Seite. Die Bereitstellung der Plattform und die Durchführung der Vernetzung von Helfenden und Hilfesuchenden werden durch den ehrenamtlichen Einsatz vieler hilfsbereiter Freiwilliger ermöglicht und erfolgt unentgeltlich.{% endblocktrans %}</p>
 			<p style="text-align:center; margin-bottom:35px;">{% blocktrans %}Um den Datenschutz zu gewährleisten, werden Namen und Kontaktdaten der Helfenden den Gesundheitseinrichtungen während des gesamten Matchingprozesses nicht preisgegeben.{% endblocktrans %}</p>
