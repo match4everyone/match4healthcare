@@ -4,7 +4,10 @@ from django.conf import settings
 import http.client
 import json
 import os
+import logging
 from match4healthcare.constants.enum import Environment
+
+logger = logging.getLogger(__name__)
 
 
 def register_check(tag, for_environments, exclude_if_ci=False, exclude_if_fork=False):
@@ -45,6 +48,24 @@ def does_sendgrid_sandbox_mail_work():
 class Tags(DjangoTags):
     mail_tag = "mails"
     env_tag = "environment"
+
+
+@register_check(Tags.env_tag, [Environment.DEVELOPMENT, Environment.PRODUCTION])
+def check_fork(app_configs=None, **kwargs):
+    errors = []
+    if settings.IS_FORK:
+        errors.append(
+            Warning(
+                "This is a fork of the original 'match4healthcare' repo.",
+                hint=(
+                    "Thanks for forking our repository. Pay attention that Travis CI doesn't test your code "
+                    "with sendgrid. If you want to use sendgrid for your tests, "
+                    "add your repository name to the list in the if statement for IS_FORK in settings/common.py"
+                ),
+                id="env.E008",
+            )
+        )
+    return errors
 
 
 @register_check(Tags.env_tag, [Environment.DEVELOPMENT, Environment.PRODUCTION])

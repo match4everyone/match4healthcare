@@ -68,10 +68,5 @@ if not IS_FORK:
         EMAIL_PORT = 587
         EMAIL_USE_TLS = True
 else:
-    logger.warning(
-        "Thanks for forking our repository. Pay attention that Travis CI doesn't test your code "
-        "with sendgrid. If you want to use sendgrid for your tests, "
-        "add your repository name to the list in the if statement for IS_FORK in common.py"
-    )
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")
