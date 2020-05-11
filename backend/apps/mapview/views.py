@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from apps.mapview.utils import plzs, get_plz_data
@@ -74,11 +72,11 @@ def group_by_zip_code(entities):
         countrycode = entity.countrycode
         plz = entity.plz
 
-        if not countrycode in countrycode_plz_details:
+        if countrycode not in countrycode_plz_details:
             countrycode_plz_details[countrycode] = {}
 
         country = countrycode_plz_details[countrycode]
-        if not plz in country:
+        if plz not in country:
             country[plz] = {
                 "countrycode": countrycode,
                 "plz": plz,

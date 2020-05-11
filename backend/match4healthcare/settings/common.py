@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from os import path
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # or better:
@@ -131,8 +132,6 @@ STATIC_ROOT = os.path.join(RUN_DIR, "static")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
-
-from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",

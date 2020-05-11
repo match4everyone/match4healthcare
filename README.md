@@ -99,6 +99,9 @@ Student has an attribute for the user, user has an attribute for the student, ..
 These circular references will prevent the log entry from being written.
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
 
+## Creating fake data
+You can create and delete random fake students and hospitals using `manage.py createfakeusers --add-students 1000 --add-hospitals 50`. Use the `--help` flag to check out all the options. For creating a staff user, please use the builtin `createsuperuser` command.
+
 ## Forks
 Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid.
 If you want to use sendgrid for your tests, add your repository name to the list in the if statement for NOT_FORK in `backend/match4healthcare/settings/production.py` and specify the `SENDGRID_API_KEY` environment variable in the Travis run settings.
