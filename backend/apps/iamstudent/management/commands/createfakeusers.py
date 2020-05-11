@@ -6,7 +6,10 @@ from apps.accounts.models import User
 from django.core.management.base import BaseCommand
 
 FAKE_MAIL = "@example.com"
-new_mail = lambda x: ("%s" % x) + FAKE_MAIL
+
+
+def new_mail(x):
+    return ("%s" % x) + FAKE_MAIL
 
 
 class Command(BaseCommand):
@@ -33,14 +36,22 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        if (
+            not options["delete"]
+            and options["add_hospitals"] is None
+            and options["add_students"] is None
+        ):
+            self.print_help("", "")
+            return None
+
         self.all_yes = options["no_input"]
 
         if options["delete"]:
             self.delete_all_fakes()
         if options["add_hospitals"] is not None:
-            self.add_fakes(int(options["add_hospitals"][0]))
+            self.add_fake_hospitals(int(options["add_hospitals"][0]))
         if options["add_students"] is not None:
-            self.add_fakes(int(options["add_students"][0]))
+            self.add_fake_students(int(options["add_students"][0]))
 
     def delete_all_fakes(self):
         qs = User.objects.filter(email__contains=FAKE_MAIL)
@@ -65,7 +76,7 @@ class Command(BaseCommand):
         qs.delete()
         self.stdout.write(self.style.SUCCESS("Successfully deleted these %s fake users." % n))
 
-    def add_fakes(self, n):
+    def add_fake_students(self, n):
         plzs = np.random.choice(BIG_CITY_PLZS, size=n)
         months = np.random.choice(np.arange(1, 12), size=n)
         days = np.random.choice(np.arange(2, 15), size=n)
@@ -85,7 +96,7 @@ class Command(BaseCommand):
             u = User.objects.create(
                 username=m, email=m, is_student=True, password=pwd, validated_email=True
             )
-            s = Student.objects.create(
+            Student.objects.create(
                 user=u,
                 plz=plzs[i],
                 availability_start="{}-{:02d}-{:02d}".format(year, months[i], days[i]),
@@ -94,7 +105,7 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("Created %s students." % n))
 
-    def add_fake_students(self, n):
+    def add_fake_hospitals(self, n):
         plzs = np.random.choice(BIG_CITY_PLZS, size=n)
         n_users = User.objects.all().count()
         for i in range(n):
@@ -103,7 +114,7 @@ class Command(BaseCommand):
             u = User.objects.create(
                 username=m, email=m, is_student=True, password=pwd, validated_email=True
             )
-            s = Hospital.objects.create(
+            Hospital.objects.create(
                 user=u,
                 plz=plzs[i],
                 ansprechpartner="Frau Müller",
