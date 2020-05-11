@@ -44,7 +44,7 @@ class DataBaseStats:
     def deactivated_accounts(self):
         return (
             _("Anzahl deaktivierter Helfenden"),
-            Student.objects.filter(is_activated=True).count(),
+            Student.objects.filter(is_activated=False).count(),
         )
 
     # todo:
