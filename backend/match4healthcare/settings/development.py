@@ -1,8 +1,11 @@
 import os
 from os import path
 
+from match4healthcare.constants.enum import Environment
 from match4healthcare.settings.common import *  # noqa
 from match4healthcare.settings.common import RUN_DIR
+
+THIS_ENV = Environment.DEVELOPMENT
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 

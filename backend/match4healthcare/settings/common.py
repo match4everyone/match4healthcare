@@ -132,6 +132,8 @@ STATIC_ROOT = os.path.join(RUN_DIR, "static")
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
+
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",
     messages.INFO: "alert-info",
@@ -209,3 +211,14 @@ LOGGING = {
         },
     },
 }
+
+# ========== determine wether this is a forked version of m4h ==========#
+
+IS_TRAVIS = "TRAVIS" in os.environ and bool(os.environ["TRAVIS"])
+
+IS_CI = "CI" in os.environ and bool(os.environ["CI"])
+
+IS_FORK = False
+
+if IS_TRAVIS and os.environ["TRAVIS_PULL_REQUEST_SLUG"] is ["match4everyone/match4healthcare"]:
+    IS_FORK = True

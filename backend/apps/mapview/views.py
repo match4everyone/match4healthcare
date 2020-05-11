@@ -1,6 +1,7 @@
 from functools import lru_cache
 import time
 
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.gzip import gzip_page
@@ -17,6 +18,7 @@ def index(request):
     template = loader.get_template("mapview/map.html")
     context = {
         "locations": list(locations_and_number.values()),
+        "mapbox_token": settings.MAPBOX_TOKEN,
     }
     return HttpResponse(template.render(context, request))
 
