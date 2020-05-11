@@ -33,16 +33,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        self.all_yes = options["no-input"]
+        self.all_yes = options["no_input"]
 
         if options["delete"]:
-            self.stdout.write(
-                self.style.ERROR("Obviously, you cannot ADD and DELETE at the same time.")
-            )
-        if options["add-hospitals"] is not None:
-            self.add_fakes(int(options["add-hospitals"][0]))
-        if options["add-students"] is not None:
-            self.add_fakes(int(options["add-students"][0]))
+            self.delete_all_fakes()
+        if options["add_hospitals"] is not None:
+            self.add_fakes(int(options["add_hospitals"][0]))
+        if options["add_students"] is not None:
+            self.add_fakes(int(options["add_students"][0]))
 
     def delete_all_fakes(self):
         qs = User.objects.filter(email__contains=FAKE_MAIL)
