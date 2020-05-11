@@ -1,20 +1,4 @@
-"""
-Add testing data to database.
-
-route /accounts/add_data aufrufen um user zu generieren
-muss in urls.py auskommentiert werden
-"""
-
-from django.conf import settings
-from django.http import HttpResponse
-import numpy as np
-
-from apps.accounts.models import User
-from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
-from apps.ineedstudent.models import Hospital
-
-mail = lambda x: "%s@email.com" % x  # noqa: E731
-big_city_plzs = [
+BIG_CITY_PLZS = [
     "01067",
     "01069",
     "01097",
@@ -569,46 +553,3 @@ big_city_plzs = [
     "81927",
     "81929",
 ]
-
-
-def delete_fakes():
-    User.objects.filter(email__contains="email").delete()
-
-
-def populate_db(request):
-    if settings.DEBUG:
-        delete_fakes()
-        n_student = 2000
-        n_hospital = 200
-        plzs = np.random.choice(big_city_plzs, size=n_student)
-        months = np.random.choice(np.arange(1, 12), size=n_student)
-        days = np.random.choice(np.arange(2, 15), size=n_student)
-        year = 2020
-
-        for i in range(n_student):
-            m = mail(i)
-            kwd = dict(
-                zip(
-                    AUSBILDUNGS_TYPEN_COLUMNS,
-                    np.random.choice([True, False], size=len(AUSBILDUNGS_TYPEN_COLUMNS)),
-                )
-            )
-
-            pwd = User.objects.make_random_password()
-            u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
-            _ = Student.objects.create(
-                user=u,
-                plz=plzs[i],
-                availability_start="{}-{:02d}-{:02d}".format(year, months[i], days[i]),
-                **kwd
-            )
-        plzs = np.random.choice(big_city_plzs, size=n_student)
-        for i in range(n_hospital):
-            m = mail(i + n_student)
-            pwd = User.objects.make_random_password()
-            u = User.objects.create(username=m, email=m, is_student=True, password=pwd)
-            _ = Hospital.objects.create(
-                user=u, plz=plzs[i], ansprechpartner="XY", sonstige_infos="yeaah"
-            )
-        return HttpResponse("Done. %s entries." % User.objects.all().count())
-    return HttpResponse("Access forbidden: Not in debug mode.")
