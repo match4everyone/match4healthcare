@@ -3,7 +3,6 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from . import views
 from . import views_staff
-from . import generate_users
 
 
 urlpatterns = [
