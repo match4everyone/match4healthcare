@@ -197,9 +197,6 @@ msgstr "Feel free to update your infomation at any time."
 msgid "Profil Details"
 msgstr "Profile information"
 
-msgid "Abmelden"
-msgstr "Logout"
-
 msgid "Passwort ändern"
 msgstr "Change  password"
 
