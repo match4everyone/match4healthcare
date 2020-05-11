@@ -541,33 +541,36 @@ class EmailToSendForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EmailToSendForm, self).__init__(*args, **kwargs)
-        #self.fields['phone_number'].required = False
 
         self.helper = FormHelper()
-        #self.helper.form_id = 'id-exampleForm'
-        #self.helper.form_class = 'blueForms'
-        #self.helper.form_method = 'post'
-        #self.helper.form_action = 'signup_student'
-        self.helper.attrs = {
-            'onsubmit':'disableButton()'
-        }
+        self.helper.form_tag = False
 
         self.helper.layout = Layout(
             HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
-            Row(
-                Column('subject', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('message', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
+            'subject',
             Div(
-                HTML("This is a info alert—check it {} out!".format(_("Berufsausbildung"))),
-                css_class='alert alert-info', role="alert",
-            ))
+                HTML(
+                    _(
+                        'Bitte schreiben Sie in diese Mail an die Helfenden kurze Informationen zur geplanten Tätigkeit:\n\n'
+                        '<ul>'
+                        '<li>zeitlicher Umfang,</li>'
+                        '<li>Aufgabengebiet/Abteilung</li>'
+                        '<li>Vergütung / Modalitäten</li>'
+                        '<li>Arbeitsvertrag / Versicherungsverhältnis</li></ul>'
+                        'So können die Helfenden schneller sehen, ob diese Stelle zu Ihnen passt, sparen sich '
+                        'Nachfragen bei Ihnen und können zügiger zu- oder absagen.\n\n'
+                    )
+                ),
+                HTML(
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+                    '<span aria-hidden="true">&times;</span>'
+                    '</button>'
+                ),
+                css_class='alert alert-info alert-dismissable', role="alert",
+            ),
+            'message',
+            )
 
-        logging.debug(self.helper.layout)
 
 def get_form_helper_filter():
     helper = FormHelper()

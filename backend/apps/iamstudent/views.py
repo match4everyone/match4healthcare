@@ -81,13 +81,7 @@ def send_mail_student_id_list(request, id_list):
         # do something
 
     hospital = request.user.hospital
-    message = format_lazy(_('Bitte schreiben Sie in diese Mail an die Helfenden kurze Informationen zur geplanten Tätigkeit:\n\n'
-                            '- zeitlicher Umfang,\n'
-                            '- Aufgabengebiet/Abteilung,\n'
-                            '- Vergütung / Modalitäten\n'
-                            '- Arbeitsvertrag / Versicherungsverhältnis\n\n'
-                            'So können die Helfenden schneller sehen, ob diese Stelle zu Ihnen passt, sparen sich Nachfragen bei Ihnen und können zügiger zu- oder absagen.\n\n'
-                            'Liebe(r) Helfende(r),\n\n'
+    message = format_lazy(_('Liebe(r) Helfende(r),\n\n'
                             'Wir sind... \n'
                             'Wir suchen...\n\n'
                             'Meldet euch baldmöglichst!\n\nBeste Grüße,\n{ansprechpartner}\n\nTel: {telefon}\nEmail: {email}')
