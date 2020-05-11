@@ -797,8 +797,6 @@ msgstr "Approve Institutions"
 msgid "Newsletter editieren"
 msgstr "Edit newsletter"
 
-#, fuzzy
-#| msgid "Zugriffsstatistiken"
 msgid "Zugriffsstatistiken anzeigen"
 msgstr "Access statistics"
 
