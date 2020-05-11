@@ -26,6 +26,13 @@
         </tr>
         {% endfor %}
     </table>
+    <table>
+        {% for figure in figures %}
+            <tr>
+                <td>{{ figure | safe}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
 
 
