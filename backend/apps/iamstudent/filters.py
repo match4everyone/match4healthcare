@@ -136,7 +136,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
     import django.forms as forms
 
     def __init__(self, *args, **kwargs):
-        if not "display_version" in kwargs.keys():
+        if "display_version" not in kwargs.keys():
             display_version = False
         else:
             display_version = True
@@ -180,7 +180,5 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
-
-
 
             self.form_helper = get_form_helper_filter()
