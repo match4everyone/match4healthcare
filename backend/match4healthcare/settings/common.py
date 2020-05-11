@@ -211,11 +211,6 @@ LOGGING = {
         },
     },
 }
-# ========= envs
-class ENVS:
-    DEVELOPMENT = 0
-    PRODUCTION = 1
-
 
 # ========== determine wether this is a forked version of m4h ==========#
 

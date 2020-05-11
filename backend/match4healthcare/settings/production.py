@@ -2,10 +2,11 @@ from match4healthcare.settings.common import *
 from django.utils.log import DEFAULT_LOGGING
 import os
 import logging
+from match4healthcare.constants.enum import Environment
 
 logger = logging.getLogger(__name__)
 
-THIS_ENV = ENVS.PRODUCTION
+THIS_ENV = Environment.PRODUCTION
 
 DEFAULT_LOGGING["handlers"]["console"]["filters"] = []
 

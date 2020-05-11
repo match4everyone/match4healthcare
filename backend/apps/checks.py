@@ -4,8 +4,7 @@ from django.conf import settings
 import http.client
 import json
 import os
-
-ENVS = settings.ENVS
+from match4healthcare.constants.enum import Environment
 
 
 def register_check(tag, for_environments, exclude_if_ci=False, exclude_if_fork=False):
@@ -48,7 +47,7 @@ class Tags(DjangoTags):
     env_tag = "environment"
 
 
-@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION])
+@register_check(Tags.env_tag, [Environment.DEVELOPMENT, Environment.PRODUCTION])
 def check_slack_webhook(app_configs=None, **kwargs):
     errors = []
     if os.environ.get("SLACK_LOG_WEBHOOK") is None:
@@ -69,7 +68,7 @@ def check_slack_webhook(app_configs=None, **kwargs):
     return errors
 
 
-@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION], exclude_if_ci=True)
+@register_check(Tags.env_tag, [Environment.DEVELOPMENT, Environment.PRODUCTION], exclude_if_ci=True)
 def check_mapbox_token(app_configs=None, **kwargs):
     errors = []
 
@@ -87,7 +86,7 @@ def check_mapbox_token(app_configs=None, **kwargs):
     return errors
 
 
-@register_check(Tags.env_tag, [ENVS.DEVELOPMENT, ENVS.PRODUCTION])
+@register_check(Tags.env_tag, [Environment.DEVELOPMENT, Environment.PRODUCTION])
 def check_secret_key(app_configs=None, **kwargs):
     errors = []
     if settings.SECRET_KEY is None:
@@ -104,7 +103,7 @@ def check_secret_key(app_configs=None, **kwargs):
     return errors
 
 
-@register_check(Tags.mail_tag, [ENVS.DEVELOPMENT])
+@register_check(Tags.mail_tag, [Environment.DEVELOPMENT])
 def check_sendgrid_dev(app_configs=None, **kwargs):
     errors = []
     if settings.MAIL_RELAY_OPTION == "sendgrid":
@@ -138,7 +137,7 @@ def check_sendgrid_dev(app_configs=None, **kwargs):
     return errors
 
 
-@register_check(Tags.mail_tag, [ENVS.PRODUCTION], exclude_if_fork=True)
+@register_check(Tags.mail_tag, [Environment.PRODUCTION], exclude_if_fork=True)
 def check_sendgrid_prod(app_configs=None, **kwargs):
     errors = []
     if settings.SENDGRID_API_KEY is None:
