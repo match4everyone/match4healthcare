@@ -8,8 +8,8 @@ import django_tables2 as tables
 import os
 import pandas as pd
 
-from django.conf import settings
 from django.utils.translation import gettext as _
+from django.http import HttpResponse
 
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
@@ -59,7 +59,7 @@ def process_file(ttl_hash):
 
     # df.to_dict('index') throws TypeError "unsupported type: <class 'str'>"
     data = []
-    for _, (status_line, counts) in zip(groupby_keys, groupby.items()):
+    for _groupby_key, (status_line, counts) in zip(groupby_keys, groupby.items()):
         if counts > threshold_to_filter:
             data.append({"status_line": status_line, "counts": counts})
 
