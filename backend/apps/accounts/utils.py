@@ -2,12 +2,12 @@
 from random import choice
 from string import ascii_lowercase, digits
 from .models import User
-import logging
-
-logger = logging.getLogger("django")
 from django.contrib.auth.forms import PasswordResetForm
 
 from django.conf import settings
+import logging
+
+logger = logging.getLogger("django")
 
 
 def generate_random_username(length=16, chars=ascii_lowercase + digits, split=4, delimiter="-"):

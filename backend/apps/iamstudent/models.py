@@ -84,7 +84,7 @@ COUNTRY_CODE_CHOICES = [
 
 class Student(models.Model):
 
-    ## Database stuff
+    # Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)

@@ -1,4 +1,5 @@
-import multiprocessing, os
+import multiprocessing
+import os
 from django.conf import settings
 
 bind = "backend:8000"
