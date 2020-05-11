@@ -60,9 +60,9 @@ class DataBaseStats:
             _("Registrierte Helfende"),
             Student.objects.filter(user__validated_email=True).count(),
             [
-                User.objects.filter(
+                Student.objects.filter(
                     user__validated_email=True,
-                    date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
+                    user__date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
                 ).count()
                 for i in range(0, 8)
             ],
