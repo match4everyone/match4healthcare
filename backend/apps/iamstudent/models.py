@@ -84,7 +84,7 @@ COUNTRY_CODE_CHOICES = [
 
 class Student(models.Model):
 
-    ## Database stuff
+    # Database stuff
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
@@ -381,49 +381,3 @@ class EmailToHospital(models.Model):
     uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
     send_date = models.DateTimeField(null=True)
-
-
-class LocationFilterModel(models.Model):
-
-    plz = models.CharField(max_length=5, null=True)
-    distance = models.IntegerField(default=0)
-    countrycode = models.CharField(max_length=2, choices=COUNTRY_CODE_CHOICES, default="DE",)
-    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-
-
-class StudentListFilterModel(models.Model):
-
-    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
-    location = LocationFilterModel
-
-    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
-    registration_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
-    name = models.CharField(max_length=100)
-
-
-from .filters import StudentJobRequirementsFilter
-
-jrf = StudentJobRequirementsFilter()
-import django.forms as forms
-import django_filters.fields as filter_fields
-
-for f_name, filter in jrf.base_filters.items():
-
-    if type(filter.field) == forms.NullBooleanField:
-        StudentListFilterModel.add_to_class(
-            f_name, models.NullBooleanField(default=None, null=True)
-        )
-    elif type(filter.field) == forms.DecimalField:
-        StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
-    elif type(filter.field) == filter_fields.ChoiceField:
-        StudentListFilterModel.add_to_class(
-            f_name, models.IntegerField(default=0, choices=filter.field.choices)
-        )
-    elif type(filter.field) == forms.DateField:
-        StudentListFilterModel.add_to_class(
-            f_name, models.DateField(null=True, default=datetime.now)
-        )
-    else:
-        raise ValueError(
-            "I do not know what to do with field type '%s' for '%s'" % (type(filter.field), f_name)
-        )

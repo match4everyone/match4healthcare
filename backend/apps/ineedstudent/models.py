@@ -15,7 +15,7 @@ from django.conf import settings
 
 class Hospital(models.Model):
 
-    ## Datenbankfeatures
+    # Datenbankfeatures
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     COUNTRY_CODE_CHOICES = [
@@ -26,7 +26,7 @@ class Hospital(models.Model):
 
     max_mails_per_day = models.IntegerField(default=settings.MAX_EMAILS_PER_HOSPITAL_PER_DAY)
 
-    ## Kontaktdaten
+    # Kontaktdaten
     sonstige_infos = models.TextField(default="", max_length=10000)
     ansprechpartner = models.CharField(max_length=100, default="")
     telefon = models.CharField(max_length=100, default="")
@@ -44,6 +44,7 @@ class Hospital(models.Model):
 
     datenschutz_zugestimmt = models.BooleanField(default=False)
     einwilligung_datenweitergabe = models.BooleanField(default=False)
+
     # Metadata
     class Meta:
         ordering = ["registration_date"]

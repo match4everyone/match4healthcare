@@ -27,7 +27,7 @@ repos:
     hooks:
     -   id: black
         args: [--line-length=100]
-        language_version: python3.6
+        language_version: python3
         exclude: |
                 (?x)(
                     ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
@@ -37,7 +37,16 @@ repos:
                     ^database/backups/|
                     ^database/data/
                 )
-#-   repo: https://gitlab.com/pycqa/flake8
-#    rev: stable
-#    hooks:
-#    -   id: flake8
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+    -   id: flake8
+        exclude: |
+                (?x)(
+                    ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
+                    ^backend/apps/accounts/generate_users.py|
+                    ^backend/backups/|
+                    ^backend/run/|
+                    ^database/backups/|
+                    ^database/data/
+                )

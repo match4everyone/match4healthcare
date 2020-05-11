@@ -90,6 +90,7 @@ urlpatterns = [
     path("list_newsletter", views.list_newsletter, name="list_newsletter"),
     path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter"),
     path("stats", views_staff.view_statistics, name="statistics"),
+    path("profile_staff", views.staff_profile, name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 

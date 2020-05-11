@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 15:47+0000\n"
-"PO-Revision-Date: 2020-05-02 17:52+0200\n"
+"POT-Creation-Date: 2020-05-06 21:21+0000\n"
+"PO-Revision-Date: 2020-05-06 23:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -170,9 +170,6 @@ msgstr "Yes, activate account."
 msgid "Nein, zurück zur Homepage"
 msgstr "No, return to website"
 
-msgid "Datenbankstatistiken"
-msgstr "Database Statistics"
-
 msgid " Dein Account wurde gelöscht. "
 msgstr " Your account has been deleted. "
 
@@ -199,6 +196,9 @@ msgstr "Feel free to update your infomation at any time."
 
 msgid "Profil Details"
 msgstr "Profile information"
+
+msgid "Abmelden"
+msgstr "Logout"
 
 msgid "Passwort ändern"
 msgstr "Change  password"

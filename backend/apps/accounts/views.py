@@ -1,17 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth import login, logout
-from django.shortcuts import redirect
-from django.views.generic import CreateView
-from django_tables2 import MultiTableMixin
-from django.views.generic.base import TemplateView
+from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 
-from django.conf import settings
-from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 
-from .forms import StudentSignUpForm, HospitalSignUpForm
 from .models import User
 from apps.ineedstudent.forms import (
     HospitalFormInfoSignUp,
@@ -20,11 +13,10 @@ from apps.ineedstudent.forms import (
 )
 from apps.ineedstudent.models import Hospital
 from django.shortcuts import render
-from apps.ineedstudent.views import ApprovalHospitalTable, HospitalTable
-from django.contrib import messages
+from apps.ineedstudent.views import ApprovalHospitalTable
 from django.utils.text import format_lazy
 from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import StudentEmailForm, HospitalEmailForm, CustomAuthenticationForm
+from .forms import CustomAuthenticationForm
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
 from .models import NewsletterState
@@ -35,22 +27,24 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from datetime import datetime
 
-from .utils import generate_random_username
-from django.contrib.auth.base_user import BaseUserManager
-from django.core.mail import BadHeaderError, send_mail
-
 from django.utils.translation import gettext as _
-from django.template import loader
 
-from django.http import HttpResponse
 from django.db import transaction
 from apps.accounts.utils import send_password_set_email
 from .models import Newsletter, LetterApprovedBy
 from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 
+from .tables import NewsletterTable
+
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+@login_required
+@staff_member_required
+def staff_profile(request):
+    return render(request, "staff_profile.html", {})
 
 
 def student_signup(request):
@@ -138,9 +132,6 @@ def register_hospital_in_db(request, m):
     return user, hospital
 
 
-from django.contrib import messages
-
-
 @login_required
 def profile_redirect(request):
     user = request.user
@@ -155,7 +146,7 @@ def profile_redirect(request):
         return HttpResponseRedirect("profile_hospital")
 
     elif user.is_staff:
-        return HttpResponseRedirect("approve_hospitals")
+        return HttpResponseRedirect("profile_staff")
 
     else:
         # TODO: throw 404
@@ -307,7 +298,6 @@ def delete_me(request):
 
 @login_required
 def delete_me_ask(request):
-    user = request.user
     return render(request, "deleted_user_ask.html")
 
 
@@ -535,9 +525,6 @@ def new_newsletter(request):
     newsletter.letter_authored_by.add(request.user)
     newsletter.save()
     return HttpResponseRedirect("view_newsletter/" + str(newsletter.uuid))
-
-
-from .tables import NewsletterTable
 
 
 @login_required
