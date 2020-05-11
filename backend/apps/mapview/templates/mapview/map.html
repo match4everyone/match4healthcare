@@ -26,7 +26,7 @@
     supportersURL     : "{% url 'supportersJSON' %}",
     supporterListURL  : "{% url 'list_by_plz' 'COUNTRYCODE' 'PLZ' 0 %}",
     hospitalListURL   : "{% url 'hospital_list' 'COUNTRYCODE' 'PLZ' %}",
-    mapboxToken       : 'pk.eyJ1Ijoiam9zYXVkZXIiLCJhIjoiY2s4MWNxa2QzMDNkejNrcDVhbzV6MDMxYSJ9.O4sLC7VSSgy4S7EKjNoG1g',
+    mapboxToken       : "{{ mapbox_token }}",
     createPopupTextStudent  :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Helfer*innen.\n<a href="${url}" target="_blank">Detailansicht für Kliniken</a>{% endblocktrans %}`,
     createPopupTextHospital :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Orte an denen Hilfe gebraucht wird.\n<a href="${url}" target="_blank">Detailansicht</a>{% endblocktrans %}`,
     createFacilitiesCountText: (count) => `<img src="{% static 'img/map/facility-marker.svg' %}"> ${count} {% trans "Einrichtungen" %}`,
