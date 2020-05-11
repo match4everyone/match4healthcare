@@ -100,7 +100,7 @@ These circular references will prevent the log entry from being written.
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
 
 ## Creating fake data
-You can create and delete random fake students and hospitals using `manage.py createfakeusers`.
+You can create and delete random fake students and hospitals using `manage.py createfakeusers --add-students 1000 --add-hospitals 50`. Use the `--help` flag to check out all the options.
 
 ## Forks
 Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid.
