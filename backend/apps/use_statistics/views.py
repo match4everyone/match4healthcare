@@ -23,7 +23,16 @@ from apps.mapview.views import get_ttl_hash
 @login_required
 @staff_member_required
 def use_statistics(request):
-    data = process_file(ttl_hash=get_ttl_hash(60))
+
+    try:
+        data = process_file(ttl_hash=get_ttl_hash(60))
+    except FileNotFoundError:
+        return HttpResponse(
+            _(
+                "<html><body>gunicorn-access.log nicht gefunden oder zugreifbar\
+                            </body></html>"
+            )
+        )
 
     table_access_count = AccessCountTable(data)
     return render(request, "view.html", {"table_access_count": table_access_count})
@@ -61,19 +70,11 @@ def process_file(ttl_hash):
 
 def parse_file(logfile_name="gunicorn-access.log",):
     requests = []
-    try:
-        with open(os.path.join(settings.RUN_DIR, logfile_name), "r") as file:
-            for line in file:
-                logged_data = line.split("|")
-                requests.append(logged_data)
-            return requests
-    except FileNotFoundError:
-        return HttpResponse(
-            _(
-                "<html><body>gunicorn-access.log nicht gefunden oder zugreifbar\
-                            </body></html>"
-            )
-        )
+    with open(os.path.join(settings.RUN_DIR, logfile_name), "r") as file:
+        for line in file:
+            logged_data = line.split("|")
+            requests.append(logged_data)
+    return requests
 
 
 class AccessCountTable(tables.Table):
