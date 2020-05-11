@@ -1882,6 +1882,13 @@ msgstr "Access statistics"
 msgid "Anzahl der Zugriffe pro Seite"
 msgstr "Number of visits per page"
 
+msgid ""
+"<html><body>gunicorn-access.log nicht gefunden oder "
+"zugreifbar                            </body></html>"
+msgstr ""
+"<html><body>gunicorn-access.log not found or not "
+"accessible                            </body></html>"
+
 msgid "English"
 msgstr "English"
 

@@ -8,9 +8,11 @@ import django_tables2 as tables
 import os
 import pandas as pd
 
+from django.utils.translation import gettext as _
+from django.http import HttpResponse
+
 from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
-
 
 logged_data_names = ["time", "status_line", "status", "request_time"]
 threshold_to_filter = 50
@@ -19,7 +21,16 @@ threshold_to_filter = 50
 @login_required
 @staff_member_required
 def use_statistics(request):
-    data = process_file(ttl_hash=get_ttl_hash(60))
+
+    try:
+        data = process_file(ttl_hash=get_ttl_hash(60))
+    except FileNotFoundError:
+        return HttpResponse(
+            _(
+                "<html><body>gunicorn-access.log nicht gefunden oder zugreifbar\
+                            </body></html>"
+            )
+        )
 
     table_access_count = AccessCountTable(data)
     return render(request, "view.html", {"table_access_count": table_access_count})
@@ -48,7 +59,7 @@ def process_file(ttl_hash):
 
     # df.to_dict('index') throws TypeError "unsupported type: <class 'str'>"
     data = []
-    for _, (status_line, counts) in zip(groupby_keys, groupby.items()):
+    for _groupby_key, (status_line, counts) in zip(groupby_keys, groupby.items()):
         if counts > threshold_to_filter:
             data.append({"status_line": status_line, "counts": counts})
 
