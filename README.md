@@ -24,7 +24,7 @@ After changes to the Docker configuration, you have to restart and build the con
 In order to run pre-commit checks every time, please run `pre-commit install` once in the repository. Pay attention when using `git commit -a`, because then the automatic code formatting will be added irreversably to your changes. The recommended workflow would be to use `git add` first, resulting in staged changes and unstaged codeformatting that you can double-check if you wish. You can of course always run `pre-commit run` to manually check all staged files before attempting a commit.
 
 ### Production
-Set `SECRET_KEY` and `SENDGRID_API_KEY` in `backend.prod.env` for Django
+Set `SECRET_KEY`, `SENDGRID_API_KEY` and `MAPBOX_TOKEN`in `backend.prod.env` for Django
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
 
@@ -98,6 +98,9 @@ Student has an attribute for the user, user has an attribute for the student, ..
 
 These circular references will prevent the log entry from being written.
 Including request is always safe, because the logging formatter contains dedicated code for request logging.
+
+## Creating fake data
+You can create and delete random fake students and hospitals using `manage.py createfakeusers --add-students 1000 --add-hospitals 50`. Use the `--help` flag to check out all the options. For creating a staff user, please use the builtin `createsuperuser` command.
 
 ## Forks
 Thanks for forking our repository. Pay attention that Travis CI doesn't test your code with sendgrid.

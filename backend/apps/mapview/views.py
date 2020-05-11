@@ -1,10 +1,9 @@
-from django.shortcuts import render
-
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from apps.mapview.utils import plzs, get_plz_data
 from apps.iamstudent.models import Student
 from apps.ineedstudent.models import Hospital
+from django.conf import settings
 
 from functools import lru_cache
 import time
@@ -18,6 +17,7 @@ def index(request):
     template = loader.get_template("mapview/map.html")
     context = {
         "locations": list(locations_and_number.values()),
+        "mapbox_token": settings.MAPBOX_TOKEN,
     }
     return HttpResponse(template.render(context, request))
 
@@ -72,11 +72,11 @@ def group_by_zip_code(entities):
         countrycode = entity.countrycode
         plz = entity.plz
 
-        if not countrycode in countrycode_plz_details:
+        if countrycode not in countrycode_plz_details:
             countrycode_plz_details[countrycode] = {}
 
         country = countrycode_plz_details[countrycode]
-        if not plz in country:
+        if plz not in country:
             country[plz] = {
                 "countrycode": countrycode,
                 "plz": plz,

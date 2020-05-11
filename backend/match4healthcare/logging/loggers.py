@@ -29,7 +29,7 @@ class SlackMessageHandler(logging.Handler):
     def emit(self, record: logging.LogRecord, *args, **kwargs):
 
         # Check if a logging url was set
-        if self.webhook_url == None or self.webhook_url == "":
+        if self.webhook_url is None or self.webhook_url == "":
             return
 
         if getattr(record, "logHandlerException", None) == self.__class__:

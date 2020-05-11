@@ -1,16 +1,12 @@
 import django_filters as filters
 from .models import (
     Student,
-    BEZAHLUNG_CHOICES,
-    MEDSTUD_CHOICES,
     AUSBILDUNGS_TYPEN_COLUMNS,
     BEZAHLUNG_CHOICES_Filter,
 )
 import django.forms as forms
 from django.utils.translation import gettext_lazy as _
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Row, Column, Div, HTML
-from crispy_forms.bootstrap import InlineRadios
+from .forms import get_form_helper_filter
 
 
 class StudentJobRequirementsFilter(filters.FilterSet):
@@ -140,7 +136,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
     import django.forms as forms
 
     def __init__(self, *args, **kwargs):
-        if not "display_version" in kwargs.keys():
+        if "display_version" not in kwargs.keys():
             display_version = False
         else:
             display_version = True
@@ -184,7 +180,5 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
                 if a_field in form_labels.keys():
                     self.form.fields[a_field].label = form_labels[a_field]
-
-            from .forms import get_form_helper_filter
 
             self.form_helper = get_form_helper_filter()

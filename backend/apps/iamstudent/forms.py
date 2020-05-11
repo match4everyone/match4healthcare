@@ -3,12 +3,9 @@ from django import forms
 from apps.iamstudent.models import (
     Student,
     EmailToSend,
-    AUSBILDUNGS_DETAIL_COLUMNS,
     AUSBILDUNGS_TYPEN,
-    AUSBILDUNGS_TYPEN_COLUMNS,
     AUSBILDUNGS_IDS,
 )
-from django.db import models
 from django.core.exceptions import ValidationError
 
 from django.utils.safestring import mark_safe
@@ -123,7 +120,7 @@ fields_for_button_group = [
 mindest = _("mindestens")
 maxim = _("maximal")
 for field in fields_for_button_group:
-    if field.split("_")[-1] == "abschnitt" and not "ausgebildet" in field:
+    if field.split("_")[-1] == "abschnitt" and "ausgebildet" not in field:
         f = str(field)
         form_labels[f + "_x_lt"] = format_lazy("{f} {extra}", f=form_labels[f], extra=maxim)
         form_labels[f + "_x_gt"] = format_lazy("{f} {extra}", f=form_labels[f], extra=mindest)
@@ -142,7 +139,7 @@ def button_group_filter(field):
     if "empty" in field:
         return Column()
     if field in fields_for_button_group:
-        if field.split("_")[-1] == "abschnitt" and not "ausgebildet" in field:
+        if field.split("_")[-1] == "abschnitt" and "ausgebildet" not in field:
             return Field(
                 Row(Column(ButtonGroup(field + "_x_gt"))),
                 Row(Column(ButtonGroup(field + "_x_lt"))),
@@ -859,14 +856,3 @@ def get_form_helper_filter():
         ]
     )
     return helper
-
-
-from .models import StudentListFilterModel
-
-
-class StudentListFilterModelForm(forms.ModelForm):
-    class Meta:
-        model = StudentListFilterModel
-        labels = form_labels
-        labels["braucht_bezahlung"] = _("Vergütung möglich")
-        exclude = []
