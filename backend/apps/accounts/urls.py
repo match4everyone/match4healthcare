@@ -3,8 +3,6 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from . import views
 
-from . import generate_users
-
 urlpatterns = [
     path(
         "logout/",
@@ -92,6 +90,3 @@ urlpatterns = [
     path("profile_staff", views.staff_profile, name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
-
-if settings.DEBUG:
-    urlpatterns.append(path("add_data", generate_users.populate_db))
