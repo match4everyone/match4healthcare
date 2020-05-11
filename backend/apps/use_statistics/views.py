@@ -1,22 +1,19 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 
 import django_tables2 as tables
 
 import os
 import pandas as pd
-from datetime import datetime
 
-from django.conf import settings
+from functools import lru_cache
+from apps.mapview.views import get_ttl_hash
+
 
 logged_data_names = ["time", "status_line", "status", "request_time"]
 threshold_to_filter = 50
-
-from functools import lru_cache
-import time
-from apps.mapview.views import get_ttl_hash
 
 
 @login_required
