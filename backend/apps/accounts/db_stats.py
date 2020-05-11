@@ -56,7 +56,7 @@ class DataBaseStats:
         return (_("Kontaktanfragen an Helfende"), EmailToSend.objects.filter(was_sent=True).count())
 
     @stat_count.register
-    def hospitals_contacted_by_students(self):
+    def emails_to_hospitals(self):
         return (_("Kontaktanfragen an Institutionen"), EmailToHospital.objects.filter().count())
 
     @stat_count.register
