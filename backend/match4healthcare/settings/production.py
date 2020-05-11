@@ -1,10 +1,13 @@
-from match4healthcare.settings.common import RUN_DIR, MIDDLEWARE
+from match4healthcare.settings.common import RUN_DIR, MIDDLEWARE, IS_FORK
 from match4healthcare.settings.common import *  # noqa
 from django.utils.log import DEFAULT_LOGGING
 import os
 import logging
+from match4healthcare.constants.enum import Environment
 
 logger = logging.getLogger(__name__)
+
+THIS_ENV = Environment.PRODUCTION
 
 DEFAULT_LOGGING["handlers"]["console"]["filters"] = []
 
@@ -48,20 +51,7 @@ SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 # Use API instead of SMTP server
 use_sendgrid_api = True
 
-if (
-    "TRAVIS" not in os.environ
-    or ("TRAVIS" in os.environ and not bool(os.environ["TRAVIS"]))
-    or (
-        "TRAVIS" in os.environ
-        and bool(os.environ["TRAVIS"])
-        and os.environ["TRAVIS_PULL_REQUEST_SLUG"] is ["match4everyone/match4healthcare"]
-    )
-):
-    NOT_FORK = True
-else:
-    NOT_FORK = False
-
-if NOT_FORK:
+if not IS_FORK:
     if use_sendgrid_api:
         # Using the API
         EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
@@ -79,10 +69,5 @@ if NOT_FORK:
         EMAIL_PORT = 587
         EMAIL_USE_TLS = True
 else:
-    logger.warning(
-        "Thanks for forking our repository. Pay attention that Travis CI doesn't test your code "
-        "with sendgrid. If you want to use sendgrid for your tests, "
-        "add your repository name to the list in the if statement for NOT_FORK"
-    )
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")
