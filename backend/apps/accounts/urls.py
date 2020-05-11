@@ -5,6 +5,7 @@ from . import views
 from . import views_staff
 from . import generate_users
 
+
 urlpatterns = [
     path(
         "logout/",
@@ -93,6 +94,3 @@ urlpatterns = [
     path("profile_staff", views.staff_profile, name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
-
-if settings.DEBUG:
-    urlpatterns.append(path("add_data", generate_users.populate_db))

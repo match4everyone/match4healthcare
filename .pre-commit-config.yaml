@@ -31,7 +31,6 @@ repos:
         exclude: |
                 (?x)(
                     ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
-                    ^backend/apps/accounts/generate_users.py|
                     ^backend/backups/|
                     ^backend/run/|
                     ^database/backups/|
@@ -44,7 +43,6 @@ repos:
         exclude: |
                 (?x)(
                     ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
-                    ^backend/apps/accounts/generate_users.py|
                     ^backend/backups/|
                     ^backend/run/|
                     ^database/backups/|
