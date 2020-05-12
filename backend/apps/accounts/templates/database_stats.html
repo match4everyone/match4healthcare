@@ -18,7 +18,14 @@
 <hr>
 
 <div class="container" style="margin-bottom:30px;">
-    <table>
+
+    <table class="table">
+        <thead>
+    <tr>
+      <th scope="col">Stat</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
         {% for stat in count_statistics %}
         <tr>
             <td>{{ stat.0 }}</td>
@@ -27,7 +34,11 @@
         {% endfor %}
     </table>
     {% for g in graphs %}
-        {{ g.1 | safe}}
+    <div class="card">
+        <div class="card-body">
+            {{ g.1 | safe}}
+        </div>
+    </div>
     {% endfor %}
 </div>
 
