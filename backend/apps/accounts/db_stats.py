@@ -1,13 +1,13 @@
 import datetime
 
-from apps.iamstudent.forms import form_labels
-from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS
-from apps.iamstudent.models import Student, EmailToSend, EmailToHospital
-from apps.ineedstudent.models import Hospital
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, Newsletter
+from apps.iamstudent.forms import form_labels
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, EmailToHospital, EmailToSend, Student
+from apps.ineedstudent.models import Hospital
+
+from .models import Newsletter, User
 
 
 class RegisterList(list):
@@ -21,7 +21,7 @@ class DataBaseStats:
     stat_count = RegisterList()
     stat_list = RegisterList()
 
-    # todo: last X days?
+    # TODO: last X days? # noqa: T003
 
     length_history_days = 7
 
@@ -97,8 +97,8 @@ class DataBaseStats:
             (None, None),
         )
 
-    # todo:
-    # - helfende pro bundesland und großstadt
+    # TODO: helfende pro bundesland und großstadt. Requires
+    # https://github.com/match4everyone/match4healthcare/issues/492
 
     # Contact stats
     @stat_count.register
@@ -190,6 +190,5 @@ class DataBaseStats:
     def all_stats(self):
         results = [m(self) for m in self.stat_count]
         for m in self.stat_list:
-            for r in m(self):
-                results.append(r)
+            results.extend(m(self))
         return results

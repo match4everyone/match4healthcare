@@ -21,6 +21,11 @@ repos:
                     ^database/backups/|
                     ^database/data/
                 )
+-   repo: https://github.com/timothycrosley/isort
+    rev: 4.3.21
+    hooks:
+      - id: isort
+        # args: [--filter-files]
 # use black or autopep8 to automatically format files to pep8
 -   repo: https://github.com/psf/black
     rev: stable
@@ -40,6 +45,7 @@ repos:
     rev: 3.7.9
     hooks:
     -   id: flake8
+        additional_dependencies: [flake8-import-order,flake8-builtins,flake8-docstrings,flake8-logging-format,flake8-todos]
         exclude: |
                 (?x)(
                     ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|

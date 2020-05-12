@@ -1,10 +1,10 @@
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import mpld3
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 
 from .db_stats import DataBaseStats
 

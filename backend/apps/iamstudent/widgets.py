@@ -3,9 +3,7 @@ from django.utils.translation import ugettext_lazy
 
 
 class BootstrapWidget(object):
-    """
-    Base class for most widgets implemented here (with the exception of :class:`TemplateWidget`).
-    """
+    """Base class for most widgets implemented here (with the exception of :class:`TemplateWidget`)."""
 
     css_classes = ("form-control",)
     """
@@ -30,7 +28,7 @@ class BootstrapWidget(object):
 
 
 class RadioSelect(BootstrapWidget, forms.RadioSelect):
-    """ Bootstrap version of ``forms.RadioSelect`` """
+    """Bootstrap version of ``forms.RadioSelect``."""
 
     css_classes = ["form-check-input"]
     use_fieldset = True
@@ -47,7 +45,7 @@ class MyRadioSelect(forms.NullBooleanSelect):
 
 
 class NullBooleanRadioSelect(RadioSelect):
-    """ A ``RadioSelect`` widget for ``NullBooleanField`` """
+    """A ``RadioSelect`` widget for ``NullBooleanField``."""
 
     def __init__(self, attrs=None, unknown_label=None):
         super(NullBooleanRadioSelect, self).__init__(attrs=attrs)

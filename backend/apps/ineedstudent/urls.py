@@ -1,7 +1,8 @@
 from django.urls import path
 
-from . import views
 from apps.iamstudent.views import student_list_view
+
+from . import views
 
 urlpatterns = [
     path("students/<countrycode>/<plz>/<int:distance>", student_list_view, name="list_by_plz",),
