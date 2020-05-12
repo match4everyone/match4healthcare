@@ -19,7 +19,7 @@ def validate_semester(value):
 
 def validate_checkbox(value):
     pass
-    # TODO: Remove in a manner that does not brake migrations! # noqa: T003
+    # TODO: Remove in a manner that does not brake migrations!!! # noqa: T003
 
 
 # class Bezahlung(models.IntegerChoices):
