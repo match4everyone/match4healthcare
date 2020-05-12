@@ -1,14 +1,13 @@
-from apps.ineedstudent.models import Hospital
-from apps.iamstudent.models import Student, EmailToSend, EmailToHospital
-from .models import User, Newsletter
+import datetime
 
-from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS
-from django.db.models import Count
 from apps.iamstudent.forms import form_labels
-
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS
+from apps.iamstudent.models import Student, EmailToSend, EmailToHospital
+from apps.ineedstudent.models import Hospital
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
-import datetime
+from .models import User, Newsletter
 
 
 class RegisterList(list):
@@ -24,19 +23,27 @@ class DataBaseStats:
 
     # todo: last X days?
 
+    length_history_days = 7
+
     @stat_count.register
     def admin_count(self):
         return (
             _("Aktive Staffmember"),
             User.objects.filter(is_staff=True).count(),
-            [
-                User.objects.filter(
-                    is_staff=True,
-                    # __lte "less than or equal"
-                    date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    User.objects.filter(
+                        is_staff=True,
+                        # __lte "less than or equal"
+                        date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -44,14 +51,20 @@ class DataBaseStats:
         return (
             _("Akzeptierte Institutionen"),
             Hospital.objects.filter(is_approved=True, user__validated_email=True).count(),
-            [
-                Hospital.objects.filter(
-                    is_approved=True,
-                    user__validated_email=True,
-                    approval_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    Hospital.objects.filter(
+                        is_approved=True,
+                        user__validated_email=True,
+                        approval_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -59,13 +72,21 @@ class DataBaseStats:
         return (
             _("Registrierte Helfende"),
             Student.objects.filter(user__validated_email=True).count(),
-            [
-                Student.objects.filter(
-                    user__validated_email=True,
-                    user__date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    Student.objects.filter(
+                        user__validated_email=True,
+                        user__date_joined__lte=str(
+                            datetime.date.today() - datetime.timedelta(days=i)
+                        ),
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -73,7 +94,7 @@ class DataBaseStats:
         return (
             _("Anzahl deaktivierter Helfenden"),
             Student.objects.filter(is_activated=False).count(),
-            None,
+            (None, None),
         )
 
     # todo:
@@ -85,13 +106,19 @@ class DataBaseStats:
         return (
             _("Kontaktanfragen an Helfende"),
             EmailToSend.objects.filter(was_sent=True).count(),
-            [
-                EmailToSend.objects.filter(
-                    was_sent=True,
-                    send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    EmailToSend.objects.filter(
+                        was_sent=True,
+                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -99,12 +126,18 @@ class DataBaseStats:
         return (
             _("Kontaktanfragen an Institutionen"),
             EmailToHospital.objects.count(),
-            [
-                EmailToHospital.objects.filter(
-                    send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i))
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    EmailToHospital.objects.filter(
+                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i))
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -112,13 +145,19 @@ class DataBaseStats:
         return (
             _("Anzahl gesendeter Newsletter"),
             Newsletter.objects.filter(was_sent=True).count(),
-            [
-                Newsletter.objects.filter(
-                    was_sent=True,
-                    send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                ).count()
-                for i in range(0, 8)
-            ],
+            (
+                [
+                    datetime.date.today() - datetime.timedelta(days=i)
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+                [
+                    Newsletter.objects.filter(
+                        was_sent=True,
+                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
+                    ).count()
+                    for i in range(self.length_history_days, 0 - 1, -1)
+                ],
+            ),
         )
 
     @stat_count.register
@@ -128,7 +167,7 @@ class DataBaseStats:
             Hospital.objects.filter(
                 is_approved=True, user__validated_email=True, appears_in_map=True
             ).count(),
-            None,
+            (None, None),
         )
 
     @stat_list.register
@@ -145,7 +184,7 @@ class DataBaseStats:
                 count = next(x for x in qs if x[t] is True)["total"]
             except StopIteration:
                 count = 0
-            res.append((form_labels[t], count, None))
+            res.append((form_labels[t], count, (None, None)))
         return res
 
     def all_stats(self):

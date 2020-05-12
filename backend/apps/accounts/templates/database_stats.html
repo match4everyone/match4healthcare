@@ -26,16 +26,11 @@
         </tr>
         {% endfor %}
     </table>
-    <table>
-        {% for figure in figures %}
-            <tr>
-                <td>{{ figure | safe}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-
-
+    {% for stat in statistics %}
+            {% if stat.2 is not None %}
+                {{ stat.2 | safe}}
+            {% endif %}
+    {% endfor %}
 </div>
 
 {% endblock %}
