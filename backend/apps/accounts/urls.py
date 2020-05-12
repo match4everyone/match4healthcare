@@ -2,9 +2,7 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
-from . import views
-from . import views_staff
-
+from . import views, views_staff
 
 urlpatterns = [
     path(

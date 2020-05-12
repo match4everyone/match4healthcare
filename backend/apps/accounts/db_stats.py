@@ -1,12 +1,11 @@
-from apps.ineedstudent.models import Hospital
-from apps.iamstudent.models import Student, EmailGroup, EmailToSend, EmailToHospital
-from .models import User, Newsletter
-
-from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS
 from django.db.models import Count
-from apps.iamstudent.forms import form_labels
-
 from django.utils.translation import gettext_lazy as _
+
+from apps.iamstudent.forms import form_labels
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, EmailToHospital, EmailToSend, Student
+from apps.ineedstudent.models import Hospital
+
+from .models import Newsletter, User
 
 
 class RegisterList(list):
@@ -20,7 +19,7 @@ class DataBaseStats:
     stat_count = RegisterList()
     stat_list = RegisterList()
 
-    # todo: last X days?
+    # TODO: last X days?
 
     @stat_count.register
     def admin_count(self):
@@ -47,10 +46,9 @@ class DataBaseStats:
             Student.objects.filter(is_activated=False).count(),
         )
 
-    # todo:
-    # - helfende pro bundesland und großstadt
+    # TODO: helfende pro bundesland und großstadt
 
-    ## Contact stats
+    # Contact stats
     @stat_count.register
     def emails_to_students(self):
         return (_("Kontaktanfragen an Helfende"), EmailToSend.objects.filter(was_sent=True).count())
