@@ -95,10 +95,9 @@ class Command(BaseCommand):
                 )
             )
 
-            pwd = User.objects.make_random_password()
-            u = User.objects.create(
-                username=m, email=m, is_student=True, password=pwd, validated_email=True
-            )
+            u = User.objects.create(username=m, email=m, is_student=True, validated_email=True)
+            u.set_password(m)
+            u.save()
             Student.objects.create(
                 user=u,
                 plz=plzs[i],
@@ -113,10 +112,9 @@ class Command(BaseCommand):
         n_users = User.objects.all().count()
         for i in range(n):
             m = new_mail(i + n_users)
-            pwd = User.objects.make_random_password()
-            u = User.objects.create(
-                username=m, email=m, is_student=True, password=pwd, validated_email=True
-            )
+            u = User.objects.create(username=m, email=m, is_student=True, validated_email=True)
+            u.set_password(m)
+            u.save()
             Hospital.objects.create(
                 user=u,
                 plz=plzs[i],
