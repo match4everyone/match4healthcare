@@ -9,7 +9,8 @@ django-widget-tweaks==1.4.8
 djangorestframework==3.11.0
 djangorestframework-filters==0.11.1
 JSON-log-formatter==0.3.0
-matplotlibmpld3==0.3
+matplotlib==3.2.1
+mpld3==0.3
 numpy==1.18.2
 pandas==1.0.3
 pre-commit==2.2.0
