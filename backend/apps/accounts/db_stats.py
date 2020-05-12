@@ -90,6 +90,5 @@ class DataBaseStats:
     def all_stats(self):
         results = [m(self) for m in self.stat_count]
         for m in self.stat_list:
-            for r in m(self):
-                results.append(r)
+            results.extend(m(self))
         return results
