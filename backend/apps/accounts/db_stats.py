@@ -11,166 +11,104 @@ from .models import Newsletter, User
 
 
 class RegisterList(list):
-    def register(self, method):
-        self.append(method)
+    def register_named(self, name, method):
+        self.append((name, method))
         return method
+
+    def register(self, name):
+        return lambda func: self.register_named(name, func)
 
 
 class DataBaseStats:
-
     stat_count = RegisterList()
     stat_list = RegisterList()
+    dated_count = RegisterList()
 
     # TODO: last X days? # noqa: T003
 
-    length_history_days = 7
+    def __init__(self, length_history_days=7):
+        self.length_history_days = length_history_days
 
-    @stat_count.register
-    def admin_count(self):
+    def day_interval(self, i):
+        return datetime.date.today() - datetime.timedelta(days=i)
+
+    def day_range(self):
+        return [self.day_interval(i) for i in range(self.length_history_days, 0 - 1, -1)]
+
+    def generate_cum_graph(self, count_func):
         return (
-            _("Aktive Staffmember"),
-            User.objects.filter(is_staff=True).count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    User.objects.filter(
-                        is_staff=True,
-                        # __lte "less than or equal"
-                        date_joined__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
+            [
+                datetime.date.today() - datetime.timedelta(days=i)
+                for i in range(self.length_history_days, 0 - 1, -1)
+            ],
+            [
+                count_func(self, date=self.day_interval(i))
+                for i in range(self.length_history_days, 0 - 1, -1)
+            ],
         )
 
-    @stat_count.register
-    def approved_hospital_count(self):
-        return (
-            _("Akzeptierte Institutionen"),
-            Hospital.objects.filter(is_approved=True, user__validated_email=True).count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    Hospital.objects.filter(
-                        is_approved=True,
-                        user__validated_email=True,
-                        approval_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
-        )
+    @stat_count.register(name=_("Aktive Staffmember"))
+    def admin_count(self, date=None):
+        qs = User.objects.all()
+        if date is not None:
+            qs = qs.filter(date_joined__lte=str(date))
+        return qs.filter(is_staff=True).count()
 
-    @stat_count.register
-    def validated_student_count(self):
-        return (
-            _("Registrierte Helfende"),
-            Student.objects.filter(user__validated_email=True).count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    Student.objects.filter(
-                        user__validated_email=True,
-                        user__date_joined__lte=str(
-                            datetime.date.today() - datetime.timedelta(days=i)
-                        ),
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
-        )
+    @stat_count.register(name=_("Akzeptierte Institutionen"))
+    def approved_hospital_count(self, date=None):
+        qs = Hospital.objects.all()
+        if date is not None:
+            qs = qs.filter(approval_date__lte=str(date))
+        return qs.filter(is_approved=True, user__validated_email=True).count()
 
-    @stat_count.register
-    def deactivated_accounts(self):
-        return (
-            _("Anzahl deaktivierter Helfenden"),
-            Student.objects.filter(is_activated=False).count(),
-            (None, None),
-        )
+    @stat_count.register(name=_("Registrierte Helfende"))
+    def validated_student_count(self, date=None):
+        qs = Student.objects.all()
+        if date is not None:
+            qs = qs.filter(user__date_joined__lte=str(date))
+        return qs.filter(user__validated_email=True).count()
+
+    @stat_count.register(name=_("Anzahl deaktivierter Helfenden"))
+    def deactivated_accounts(self, date=None):
+        # no dates are available for this
+        return Student.objects.filter(is_activated=False).count()
 
     # TODO: helfende pro bundesland und großstadt. Requires
     # https://github.com/match4everyone/match4healthcare/issues/492
 
     # Contact stats
-    @stat_count.register
-    def emails_to_students(self):
-        return (
-            _("Kontaktanfragen an Helfende"),
-            EmailToSend.objects.filter(was_sent=True).count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    EmailToSend.objects.filter(
-                        was_sent=True,
-                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
-        )
+    @stat_count.register(name=_("Kontaktanfragen an Helfende"))
+    def emails_to_students(self, date=None):
+        qs = EmailToSend.objects.all()
+        if date is not None:
+            qs = qs.filter(send_date__lte=str(date))
+        return qs.filter(was_sent=True).count()
 
-    @stat_count.register
-    def emails_to_hospitals(self):
-        return (
-            _("Kontaktanfragen an Institutionen"),
-            EmailToHospital.objects.count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    EmailToHospital.objects.filter(
-                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i))
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
-        )
+    @stat_count.register(name=_("Kontaktanfragen an Institutionen"))
+    def emails_to_hospitals(self, date=None):
+        qs = EmailToHospital.objects.all()
+        if date is not None:
+            qs = qs.filter(send_date__lte=str(date))
+        return qs.count()
 
-    @stat_count.register
-    def newsletter_count(self):
-        return (
-            _("Anzahl gesendeter Newsletter"),
-            Newsletter.objects.filter(was_sent=True).count(),
-            (
-                [
-                    datetime.date.today() - datetime.timedelta(days=i)
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-                [
-                    Newsletter.objects.filter(
-                        was_sent=True,
-                        send_date__lte=str(datetime.date.today() - datetime.timedelta(days=i)),
-                    ).count()
-                    for i in range(self.length_history_days, 0 - 1, -1)
-                ],
-            ),
-        )
+    @stat_count.register(name=_("Anzahl gesendeter Newsletter"))
+    def newsletter_count(self, date=None):
+        qs = Newsletter.objects.all()
+        if date is not None:
+            qs = qs.filter(send_date__lte=str(date))
 
-    @stat_count.register
-    def hospitals_allowing_contact_by_students(self):
-        return (
-            _("Institutionen mit Anzeige"),
-            Hospital.objects.filter(
-                is_approved=True, user__validated_email=True, appears_in_map=True
-            ).count(),
-            (None, None),
-        )
+        return qs.filter(was_sent=True).count()
 
-    @stat_list.register
+    @stat_count.register(name=_("Institutionen mit Anzeige"))
+    def hospitals_allowing_contact_by_students(self, date=None):
+        qs = Hospital.objects.all()
+
+        if date is not None:
+            qs = qs.filter(user__date_joined__lte=str(date))
+
+        return qs.filter(is_approved=True, user__validated_email=True, appears_in_map=True).count()
+
+    @stat_list.register(name="gruppen")
     def berufsgruppen(self):
         res = []
         for t in AUSBILDUNGS_TYPEN_COLUMNS:
@@ -188,7 +126,10 @@ class DataBaseStats:
         return res
 
     def all_stats(self):
-        results = [m(self) for m in self.stat_count]
-        for m in self.stat_list:
+        results = [(description, count_func(self)) for description, count_func in self.stat_count]
+        for name, m in self.stat_list:
             results.extend(m(self))
         return results
+
+    def all_graphs(self):
+        return [(name, self.generate_cum_graph(count_func)) for name, count_func in self.stat_count]

@@ -14,17 +14,21 @@ matplotlib.use("agg")
 @login_required
 @staff_member_required
 def view_statistics(request):
-    stats = DataBaseStats()
+    stats = DataBaseStats(length_history_days=14)
+
+    count_stats = stats.all_stats()
+    graphs = stats.all_graphs()
+
     stats_with_plot = []
-    for name, count, history in stats.all_stats():
-        if not history == (None, None):
-            (x, y) = history
-            fig, ax = plt.subplots()
-            ax.plot(x, y, "ks-", mec="w", mew=5, ms=17)
-            ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-            ax.set_title(name)
-            fig_html = mpld3.fig_to_html(fig)
-            stats_with_plot.append((name, count, fig_html))
-        else:
-            stats_with_plot.append((name, count, None))
-    return render(request, "database_stats.html", {"statistics": stats_with_plot})
+    for name, history in graphs:
+        (x, y) = history
+        fig, ax = plt.subplots()
+        ax.plot(x, y, "ks-", mec="w", mew=5, ms=17)
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.set_title(name)
+        fig_html = mpld3.fig_to_html(fig)
+        stats_with_plot.append((name, fig_html))
+
+    return render(
+        request, "database_stats.html", {"count_statistics": count_stats, "graphs": stats_with_plot}
+    )

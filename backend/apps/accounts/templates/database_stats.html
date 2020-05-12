@@ -19,17 +19,15 @@
 
 <div class="container" style="margin-bottom:30px;">
     <table>
-        {% for stat in statistics %}
+        {% for stat in count_statistics %}
         <tr>
             <td>{{ stat.0 }}</td>
             <td>{{ stat.1 }}</td>
         </tr>
         {% endfor %}
     </table>
-    {% for stat in statistics %}
-            {% if stat.2 is not None %}
-                {{ stat.2 | safe}}
-            {% endif %}
+    {% for g in graphs %}
+        {{ g.1 | safe}}
     {% endfor %}
 </div>
 
