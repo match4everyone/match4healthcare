@@ -1,12 +1,9 @@
-import django_filters as filters
-from .models import (
-    Student,
-    AUSBILDUNGS_TYPEN_COLUMNS,
-    BEZAHLUNG_CHOICES_Filter,
-)
 import django.forms as forms
 from django.utils.translation import gettext_lazy as _
+import django_filters as filters
+
 from .forms import get_form_helper_filter
+from .models import AUSBILDUNGS_TYPEN_COLUMNS, BEZAHLUNG_CHOICES_Filter, Student
 
 
 class StudentJobRequirementsFilter(filters.FilterSet):

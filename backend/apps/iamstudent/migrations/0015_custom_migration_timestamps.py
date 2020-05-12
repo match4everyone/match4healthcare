@@ -1,5 +1,6 @@
-from django.db import migrations, transaction
 import logging
+
+from django.db import migrations, transaction
 
 logger = logging.getLogger("django")
 

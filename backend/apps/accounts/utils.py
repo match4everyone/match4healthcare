@@ -1,11 +1,12 @@
 # adapted from: https://gist.github.com/jcinis/2866253
+import logging
 from random import choice
 from string import ascii_lowercase, digits
-from .models import User
-from django.contrib.auth.forms import PasswordResetForm
 
 from django.conf import settings
-import logging
+from django.contrib.auth.forms import PasswordResetForm
+
+from .models import User
 
 logger = logging.getLogger("django")
 
@@ -43,4 +44,4 @@ def send_password_set_email(
         )
         logger.debug("Sent!")
     else:
-        logger.warn("Email to " + str(email) + " not sent because form is invalid")
+        logger.warning("Email to %s not sent because form is invalid", str(email))

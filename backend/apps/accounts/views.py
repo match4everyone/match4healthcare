@@ -1,42 +1,34 @@
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth import logout
-from django.contrib.auth.views import LoginView
-from django.contrib import messages
+from datetime import datetime
+import logging
 
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.db import transaction
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
+from django.utils.text import format_lazy
+from django.utils.translation import gettext as _
 from rest_framework.views import APIView
 
-from .models import User
-from apps.ineedstudent.forms import (
-    HospitalFormInfoSignUp,
-    HospitalFormEditProfile,
-    HospitalFormInfoCreate,
-)
-from apps.ineedstudent.models import Hospital
-from django.shortcuts import render
-from apps.ineedstudent.views import ApprovalHospitalTable
-from django.utils.text import format_lazy
-from apps.iamstudent.forms import StudentForm, StudentFormEditProfile, StudentFormAndMail
-from .forms import CustomAuthenticationForm
+from apps.accounts.utils import send_password_set_email
+from apps.iamstudent.forms import StudentForm, StudentFormAndMail, StudentFormEditProfile
 from apps.iamstudent.models import Student
 from apps.iamstudent.views import send_mails_for
-from .models import NewsletterState
+from apps.ineedstudent.forms import (
+    HospitalFormEditProfile,
+    HospitalFormInfoCreate,
+    HospitalFormInfoSignUp,
+)
+from apps.ineedstudent.models import Hospital
+from apps.ineedstudent.views import ApprovalHospitalTable
 
-from django.contrib.auth.decorators import login_required
-from .decorator import student_required, hospital_required
-from django.contrib.admin.views.decorators import staff_member_required
-
-from datetime import datetime
-
-from django.utils.translation import gettext as _
-
-from django.db import transaction
-from apps.accounts.utils import send_password_set_email
-from .models import Newsletter, LetterApprovedBy
-from .forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
-
+from .decorator import hospital_required, student_required
+from .forms import CustomAuthenticationForm, NewsletterEditForm, NewsletterViewForm, TestMailForm
+from .models import LetterApprovedBy, Newsletter, NewsletterState, User
 from .tables import NewsletterTable
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +65,7 @@ def student_signup(request):
 
 @transaction.atomic
 def register_student_in_db(request, mail):
-    # todo send mail with link to pwd
+    # TODO: send mail with link to pwd # noqa: T003
     pwd = User.objects.make_random_password()
     username = mail  # generate_random_username()
     user = User.objects.create(username=username, is_student=True, email=username)
@@ -149,7 +141,7 @@ def profile_redirect(request):
         return HttpResponseRedirect("profile_staff")
 
     else:
-        # TODO: throw 404
+        # TODO: throw 404  # noqa: T003
         logger.warning(
             "User is unknown type, profile redirect not possible", extra={"request": request},
         )
@@ -173,7 +165,7 @@ def login_redirect(request):
         return HttpResponseRedirect("approve_hospitals")
 
     else:
-        # TODO: throw 404
+        # TODO: throw 404  # noqa: T003
         logger.warning(
             "User is unknown type, login redirect not possible", extra={"request": request},
         )
@@ -254,8 +246,7 @@ def change_hospital_approval(request, uuid):
 
     h = Hospital.objects.get(uuid=uuid)
     logger.info(
-        "Set Hospital {} approval to {}".format(uuid, (not h.is_approved)),
-        extra={"request": request},
+        "Set Hospital %s approval to %s", uuid, (not h.is_approved), extra={"request": request},
     )
 
     if not h.is_approved:
@@ -279,7 +270,7 @@ def change_hospital_approval(request, uuid):
 def delete_hospital(request, uuid):
     h = Hospital.objects.get(uuid=uuid)
     logger.info(
-        "Delete Hospital {} by {}".format(uuid, request.user), extra={"request": request},
+        "Delete Hospital %s by %s", uuid, request.user, extra={"request": request},
     )
     name = h.user
     h.delete()
@@ -330,7 +321,7 @@ class UserCountView(APIView):
     Source: https://stackoverflow.com/questions/25151586/django-rest-framework-retrieving-object-count-from-a-model
     """
 
-    def get(self, request, format=None):
+    def get(self, request, format=None):  # noqa: A002
         supporter_count = User.objects.filter(
             is_student__exact=True, validated_email__exact=True
         ).count()
@@ -345,15 +336,15 @@ class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
 
     def post(self, request, *args, **kwargs):
-        logger.info("Login Attempt ({})".format(request.POST["username"]))
+        logger.info("Login Attempt (%s)", request.POST["username"])
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        logger.info("Login succesful ({})".format(form.cleaned_data["username"]))
+        logger.info("Login succesful (%s)", form.cleaned_data["username"])
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        logger.warning("Login failure ({})".format(getattr(form.data, "username", "")))
+        logger.warning("Login failure (%s)", getattr(form.data, "username", ""))
         return super().form_invalid(form)
 
 
@@ -435,7 +426,7 @@ def switch_newsletter(nl, user, request, post=None, get=None):
                 )
                 return switch_newsletter(nl, user, request, post=None, get=None)
             elif "approveNewsletter" in get:
-                # todo check that author cannot approve
+                # TODO: check that author cannot approve # noqa: T003
                 nl.approve_from(user)
                 nl.save()
                 messages.add_message(
@@ -546,6 +537,6 @@ def did_see_newsletter(request, uuid, token):
             messages.add_message(request, messages.INFO, _("Dein Approval ist nun gültig."))
         else:
             return HttpResponse("Wrong code")
-    except:
+    except Exception:
         return HttpResponse("Not registered")
     return HttpResponseRedirect("/accounts/view_newsletter/" + str(uuid))

@@ -1,10 +1,10 @@
-from django.test import TestCase, Client
-from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
-from apps.ineedstudent.models import Hospital
-from apps.accounts.models import User
 from django.contrib import auth
-
+from django.test import Client, TestCase
 import numpy as np
+
+from apps.accounts.models import User
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.ineedstudent.models import Hospital
 
 
 def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=False):
@@ -105,7 +105,7 @@ class UrlEndpointTestCase(TestCase):
         )
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_reset/done
+        # TODO: why does this not redirect to /accounts/password_reset/done # noqa: T003
 
         response = self.client.post(
             "/accounts/validate_email", {"email": student_email}, follow=True
@@ -138,7 +138,7 @@ class UrlEndpointTestCase(TestCase):
         )
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_change/done
+        # TODO: why does this not redirect to /accounts/password_change/done # noqa: T003
 
         assert self.client.get("/mapview/", {}).status_code == 200
 
@@ -205,7 +205,7 @@ class UrlEndpointTestCase(TestCase):
         )
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_reset/done
+        # TODO: why does this not redirect to /accounts/password_reset/done # noqa: T003
 
         response = self.client.post(
             "/accounts/validate_email", {"email": hospital_email}, follow=True
@@ -238,10 +238,10 @@ class UrlEndpointTestCase(TestCase):
         )
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_change/done
+        # TODO: why does this not redirect to /accounts/password_change/done  # noqa: T003
 
         assert self.client.get("/mapview/", {}).status_code == 200
-        # TODO Test Detailansicht for a hospital!
+        # TODO: Test Detailansicht for a hospital!  # noqa: T003
 
         response = self.client.get("/accounts/profile_redirect", follow=True)
         assert response.status_code == 200
@@ -366,7 +366,7 @@ class UrlEndpointTestCase(TestCase):
         response = self.client.post("/accounts/password_reset", {"email": staff_email}, follow=True)
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_reset/done
+        # TODO: why does this not redirect to /accounts/password_reset/done # noqa: T003
 
         response = self.client.post(
             "/accounts/login/", {"username": staff_email, "password": staff_password,}, follow=True,
@@ -384,10 +384,10 @@ class UrlEndpointTestCase(TestCase):
         )
         # print(response.redirect_chain)
         assert response.status_code == 200
-        # TODO why does this not redirect to /accounts/password_change/done
+        # TODO: why does this not redirect to /accounts/password_change/done # noqa: T003
 
         assert self.client.get("/mapview/", {}).status_code == 200
-        # TODO Test Detailansicht for a hospital!
+        # TODO: Test Detailansicht for a hospital! # noqa: T003
 
         response = self.client.get("/accounts/profile_redirect", follow=True)
         assert response.status_code == 200
@@ -406,7 +406,7 @@ class UrlEndpointTestCase(TestCase):
 
         # Test view list of studens witbeing logged in as staff user
         # Current behavior: Should redirect!
-        # TODO: discuss what the behavior of this should be!
+        # TODO: discuss what the behavior of this should be! # noqa: T003
         response = self.client.get("/ineedstudent/students/DE/14482/0", follow=True)
         assert "login" in response.redirect_chain[0][0]
         assert response.status_code == 200

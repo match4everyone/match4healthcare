@@ -1,17 +1,12 @@
+from crispy_forms.bootstrap import PrependedText
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, HTML, Layout, Row, Submit
 from django import forms
-from django.contrib.auth.forms import (
-    UserCreationForm,
-    AuthenticationForm,
-    UsernameField,
-)
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Row, Column, HTML
-from crispy_forms.bootstrap import PrependedText
-
-from .models import User, Newsletter
+from .models import Newsletter, User
 
 
 class HospitalSignUpForm(UserCreationForm):

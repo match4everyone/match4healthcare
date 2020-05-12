@@ -1,7 +1,8 @@
-import django_tables2 as tables
-from .models import Student
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
+import django_tables2 as tables
+
+from .models import Student
 
 
 class StudentTable(tables.Table):
