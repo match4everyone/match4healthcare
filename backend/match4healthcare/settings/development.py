@@ -1,9 +1,9 @@
-from match4healthcare.settings.common import RUN_DIR
-from match4healthcare.settings.common import *  # noqa
-from os import path
-from match4healthcare.constants.enum import Environment
 import os
+from os import path
 
+from match4healthcare.constants.enum import Environment
+from match4healthcare.settings.common import *  # noqa
+from match4healthcare.settings.common import RUN_DIR
 
 THIS_ENV = Environment.DEVELOPMENT
 
@@ -74,6 +74,6 @@ elif MAIL_RELAY_OPTION == "sendgrid":
         EMAIL_USE_TLS = True
 
 else:
-    # ToDo add logger message instead?
+    # TODO: add logger message instead? # noqa: T003
     print("No email option selected")
     exit(1)

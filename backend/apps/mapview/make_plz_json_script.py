@@ -1,4 +1,4 @@
-"""
+""" # noqa: D2,D400
 import pgeocode
 import json
 from os.path import dirname, abspath, join

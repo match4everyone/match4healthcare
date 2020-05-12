@@ -1,7 +1,8 @@
-import requests
 import json
 import logging
+
 from _collections import defaultdict
+import requests
 
 logger = logging.getLogger(__name__)
 

@@ -1,11 +1,13 @@
-from django.db import models
-import uuid
 from datetime import datetime
+import uuid
+
 from django.core.exceptions import ValidationError
-from apps.mapview.utils import plzs
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from apps.accounts.models import User
 from apps.ineedstudent.models import Hospital
+from apps.mapview.utils import plzs
 
 
 def validate_semester(value):
@@ -17,12 +19,12 @@ def validate_semester(value):
 
 def validate_checkbox(value):
     pass
-    # TODO: Remove in a manner that does not brake migrations!
+    # TODO: Remove in a manner that does not brake migrations! # noqa: T003
 
 
 # class Bezahlung(models.IntegerChoices):
 EGAL = 0
-# todo: im form ändern zu radio
+# TODO: im form ändern zu radio # noqa: T003
 BEZAHLUNG = 1
 UNENTGELTLICH = 2
 DARF_NICHT_BEZAHLT_WERDEN = 3
@@ -93,7 +95,7 @@ class Student(models.Model):
     # vorerkrankungen
     # Berufserfahrung
 
-    # TODO add more validators!
+    # TODO: add more validators! # noqa: T003
 
     # Bezahlung
 
@@ -132,7 +134,7 @@ class Student(models.Model):
 
     # Methods
     def __str__(self):
-        """String for representing the MyModelName object (in Admin site etc.)."""
+        """String for representing the MyModelName object (in Admin site etc.)."""  # noqa: D401
         return self.user.email
 
     def clean(self):

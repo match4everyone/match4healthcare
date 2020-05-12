@@ -4,9 +4,9 @@ from crispy_forms.utils import TEMPLATE_PACK
 
 class InputButtonGroup(Field):
     """
-    Layout object for rendering radio and checkbox elements as button groups::
+    Layout object for rendering radio and checkbox elements as button groups::.
 
-        RadioButtons('field_name', [option_label_class="btn blue text-white btn-lg"])
+    RadioButtons('field_name', [option_label_class="btn blue text-white btn-lg"])
     """
 
     template = "%s/layout/input_buttongroup.html"

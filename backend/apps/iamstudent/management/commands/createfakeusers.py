@@ -1,9 +1,11 @@
-from ._utils import BIG_CITY_PLZS
-import numpy as np
-from apps.ineedstudent.models import Hospital
-from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
-from apps.accounts.models import User
 from django.core.management.base import BaseCommand
+import numpy as np
+
+from apps.accounts.models import User
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.ineedstudent.models import Hospital
+
+from ._utils import BIG_CITY_PLZS
 
 FAKE_MAIL = "@example.com"
 
@@ -13,7 +15,8 @@ def new_mail(x):
 
 
 class Command(BaseCommand):
-    help = "Populates the database with fake users or deletes them."
+    # has to be "help" because we inherit from django manage.py Command, thus ignore A003
+    help = "Populates the database with fake users or deletes them."  # noqa: A003
 
     def add_arguments(self, parser):
 
