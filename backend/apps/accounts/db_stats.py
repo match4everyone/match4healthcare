@@ -33,18 +33,12 @@ class DataBaseStats:
         return datetime.date.today() - datetime.timedelta(days=i)
 
     def day_range(self):
-        return [self.day_interval(i) for i in range(self.length_history_days, 0 - 1, -1)]
+        return range(self.length_history_days, 0 - 2, -1)
 
     def generate_cum_graph(self, count_func):
         return (
-            [
-                datetime.date.today() - datetime.timedelta(days=i)
-                for i in range(self.length_history_days, 0 - 1, -1)
-            ],
-            [
-                count_func(self, date=self.day_interval(i))
-                for i in range(self.length_history_days, 0 - 1, -1)
-            ],
+            [self.day_interval(i) for i in self.day_range()],
+            [count_func(self, date=self.day_interval(i)) for i in self.day_range()],
         )
 
     @stat_count.register(name=_("Aktive Staffmember"))
