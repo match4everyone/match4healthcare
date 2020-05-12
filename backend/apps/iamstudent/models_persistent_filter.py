@@ -33,24 +33,24 @@ class StudentListFilterModel(models.Model):
 jrf = StudentJobRequirementsFilter()
 
 
-for f_name, sjr_filter in jrf.base_filters.items():
+for f_name, jr_filter in jrf.base_filters.items():
 
-    if type(sjr_filter.field) == forms.NullBooleanField:
+    if type(jr_filter.field) == forms.NullBooleanField:
         StudentListFilterModel.add_to_class(
             f_name, models.NullBooleanField(default=None, null=True)
         )
-    elif type(sjr_filter.field) == forms.DecimalField:
+    elif type(jr_filter.field) == forms.DecimalField:
         StudentListFilterModel.add_to_class(f_name, models.IntegerField(default=0))
-    elif type(sjr_filter.field) == filter_fields.ChoiceField:
+    elif type(jr_filter.field) == filter_fields.ChoiceField:
         StudentListFilterModel.add_to_class(
-            f_name, models.IntegerField(default=0, choices=sjr_filter.field.choices)
+            f_name, models.IntegerField(default=0, choices=jr_filter.field.choices)
         )
-    elif type(sjr_filter.field) == forms.DateField:
+    elif type(jr_filter.field) == forms.DateField:
         StudentListFilterModel.add_to_class(
             f_name, models.DateField(null=True, default=datetime.now)
         )
     else:
         raise ValueError(
             "I do not know what to do with field type '%s' for '%s'"
-            % (type(sjr_filter.field), f_name)
+            % (type(jr_filter.field), f_name)
         )
