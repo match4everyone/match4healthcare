@@ -1,8 +1,8 @@
-import django_tables2 as tables
-from django.utils.translation import gettext_lazy as _
-from .models import Newsletter
 from django.utils.html import format_html
-from .models import NewsletterState
+from django.utils.translation import gettext_lazy as _
+import django_tables2 as tables
+
+from .models import Newsletter, NewsletterState
 
 NewsletterStateIcons = {
     NewsletterState.READY_TO_SEND: '<svg class="bi bi-file-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9 1H4a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V8h-1v5a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1h5V1z"/> <path fill-rule="evenodd" d="M15.854 2.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708L12.5 4.793l2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/></svg>',
@@ -13,21 +13,23 @@ NewsletterStateIcons = {
 
 
 class NewsletterTable(tables.Table):
-    sending_state = tables.Column(empty_values=(), verbose_name=_('Status'),attrs={'th':{'style':"width: 16.66%"}})
+    sending_state = tables.Column(
+        empty_values=(), verbose_name=_("Status"), attrs={"th": {"style": "width: 16.66%"}},
+    )
 
     class Meta:
         model = Newsletter
-        fields = ['registration_date', 'subject', 'uuid']
-        sequence = ('registration_date', 'subject', 'sending_state', 'uuid')
+        fields = ["registration_date", "subject", "uuid"]
+        sequence = ("registration_date", "subject", "sending_state", "uuid")
         template_name = "django_tables2/bootstrap4.html"
         attrs = {
-            'data-toggle': "table",
-            'data-search': "false",
-            'data-filter-control': "true",
-            'data-show-export': "false",
-            'data-click-to-select': "false",
-            'data-toolbar': "#toolbar",
-            'class': "table"
+            "data-toggle": "table",
+            "data-search": "false",
+            "data-filter-control": "true",
+            "data-show-export": "false",
+            "data-click-to-select": "false",
+            "data-toolbar": "#toolbar",
+            "class": "table",
         }
 
     def render_uuid(self, value):
@@ -37,18 +39,18 @@ class NewsletterTable(tables.Table):
         state = record.sending_state()
 
         if state == NewsletterState.UNDER_APPROVAL:
-            text = 'wartet auf approvals'
+            text = "wartet auf approvals"
         elif state == NewsletterState.SENT:
-            text = 'bereits gesendet'
+            text = "bereits gesendet"
         elif state == NewsletterState.READY_TO_SEND:
-            text = 'bereit zum abschicken'
+            text = "bereit zum abschicken"
         elif state == NewsletterState.BEING_EDITED:
-            text = 'wird noch editiert'
+            text = "wird noch editiert"
         else:
-            return '--'
+            return "--"
 
         icon = NewsletterStateIcons[state]
-        return format_html(icon + ' ' + text)
+        return format_html(icon + " " + text)
 
     def render_letterapprovedby(self, value):
-        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _('Ansehen')))
+        return format_html('<a href="/accounts/view_newsletter/%s">%s</a>' % (value, _("Ansehen")))

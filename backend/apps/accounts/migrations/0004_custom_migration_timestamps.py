@@ -1,6 +1,8 @@
-from django.db import migrations, transaction
-import logging
 from datetime import datetime
+import logging
+
+from django.db import migrations, transaction
+
 logger = logging.getLogger("django")
 
 def update_emails(apps, schema_editor):
