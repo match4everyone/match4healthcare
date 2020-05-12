@@ -19,7 +19,7 @@ class DataBaseStats:
     stat_count = RegisterList()
     stat_list = RegisterList()
 
-    # TODO: last X days?
+    # TODO: last X days? # noqa: T003
 
     @stat_count.register
     def admin_count(self):
@@ -46,7 +46,8 @@ class DataBaseStats:
             Student.objects.filter(is_activated=False).count(),
         )
 
-    # TODO: helfende pro bundesland und großstadt
+    # TODO: helfende pro bundesland und großstadt. Requires
+    # https://github.com/match4everyone/match4healthcare/issues/492
 
     # Contact stats
     @stat_count.register
