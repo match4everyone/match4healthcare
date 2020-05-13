@@ -5,6 +5,15 @@ repos:
     -   id: check-added-large-files
     -   id: check-case-conflict
     -   id: check-merge-conflict
+    -   id: end-of-file-fixer
+        exclude: |
+                (?x)(
+                    ^backend/static/|
+                    ^backend/backups/|
+                    ^backend/run/|
+                    ^database/backups/|
+                    ^database/data/
+                )
     -   id: requirements-txt-fixer
     -   id: trailing-whitespace
         exclude: ^backend/static/
@@ -12,7 +21,6 @@ repos:
 # see https://github.com/pre-commit/pre-commit-hooks#mixed-line-ending
     -   id: mixed-line-ending
         args: [--fix=lf]
-        exclude: ^backend/static/
         exclude: |
                 (?x)(
                     ^backend/static/|
