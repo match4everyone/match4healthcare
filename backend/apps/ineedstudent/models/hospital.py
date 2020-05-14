@@ -59,3 +59,11 @@ class Hospital(models.Model):
             raise ValidationError(
                 _(str(self.plz) + " ist keine Postleitzahl in " + self.countrycode)
             )
+
+    @staticmethod
+    def create_user(mail):
+        pwd = User.objects.make_random_password()
+        username = mail
+        user = User.objects.create(username=username, is_hospital=True, email=username)
+        user.set_password(pwd)
+        return user

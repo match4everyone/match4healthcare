@@ -142,6 +142,14 @@ class Student(models.Model):
                 str(self.plz) + str(_(" ist keine Postleitzahl in ")) + self.countrycode
             )
 
+    @staticmethod
+    def create_user(mail):
+        pwd = User.objects.make_random_password()
+        username = mail
+        user = User.objects.create(username=username, is_student=True, email=username)
+        user.set_password(pwd)
+        return user
+
 
 """Add stufff to model"""
 wunschorte = [
