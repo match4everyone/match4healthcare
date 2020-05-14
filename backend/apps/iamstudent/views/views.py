@@ -10,12 +10,17 @@ from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
 
 from apps.accounts.decorator import hospital_required
+from apps.iamstudent.filters import StudentJobRequirementsFilter
+from apps.iamstudent.forms import EmailToSendForm, StudentForm, StudentFormView
+from apps.iamstudent.models import (
+    EmailGroup,
+    EmailToSend,
+    LocationFilterModel,
+    Student,
+    StudentListFilterModel,
+)
+from apps.iamstudent.tables import StudentTable
 from apps.mapview.utils import get_plzs_close_to, plzs
-
-from .filters import StudentJobRequirementsFilter
-from .forms import EmailToSendForm, StudentForm, StudentFormView
-from .models import EmailGroup, EmailToSend, LocationFilterModel, Student, StudentListFilterModel
-from .tables import StudentTable
 
 logger = logging.getLogger("django")
 
