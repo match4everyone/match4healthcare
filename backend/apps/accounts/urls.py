@@ -90,7 +90,7 @@ urlpatterns = [
     ),
     path(
         "signup_hospital",
-        views.views.ParticipantSignupView.as_view(
+        views.ParticipantSignupView.as_view(
             template_signup="hospital_signup.html",
             template_thanks_for_registering="/iamstudent/thanks",
             signup_form=HospitalFormInfoSignUp,
