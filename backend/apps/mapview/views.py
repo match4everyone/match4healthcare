@@ -1,14 +1,15 @@
-from django.http import HttpResponse, JsonResponse
-from django.template import loader
-from apps.mapview.utils import plzs, get_plz_data
-from apps.iamstudent.models import Student
-from apps.ineedstudent.models import Hospital
-from django.conf import settings
-
 from functools import lru_cache
 import time
 
+from django.conf import settings
+from django.http import HttpResponse, JsonResponse
+from django.template import loader
 from django.views.decorators.gzip import gzip_page
+
+from apps.iamstudent.models import Student
+from apps.ineedstudent.models import Hospital
+from apps.mapview.utils import get_plz_data, plzs
+
 
 # Should be safe against BREACH attack because we don't have user input in reponse body
 @gzip_page
@@ -89,5 +90,5 @@ def group_by_zip_code(entities):
 
 
 def get_ttl_hash(seconds=300):
-    """Return the same value withing `seconds` time period"""
+    """Return the same value withing `seconds` time period."""
     return round(time.time() / seconds)

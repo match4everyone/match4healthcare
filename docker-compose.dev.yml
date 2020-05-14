@@ -15,4 +15,3 @@ services:
       - CI
       - TRAVIS
       - TRAVIS_PULL_REQUEST_SLUG
-

@@ -19,6 +19,30 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Bookmarks: -1,169,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
+msgid "Aktive Staffmember"
+msgstr "Members of staff"
+
+msgid "Akzeptierte Institutionen"
+msgstr "Approved Institutions"
+
+msgid "Registrierte Helfende"
+msgstr "Registered Supporters"
+
+msgid "Anzahl deaktivierter Helfenden"
+msgstr "Deactivated Supporters"
+
+msgid "Kontaktanfragen an Helfende"
+msgstr "Contact requests to supporters"
+
+msgid "Kontaktanfragen an Institutionen"
+msgstr "Contact requests to institutions"
+
+msgid "Anzahl gesendeter Newsletter"
+msgstr "Sent newsletters"
+
+msgid "Institutionen mit Anzeige"
+msgstr "Institutions with posting"
+
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -133,6 +157,9 @@ msgstr "Yes, activate account."
 
 msgid "Nein, zurück zur Homepage"
 msgstr "No, return to website"
+
+msgid "Datenbankstatistiken"
+msgstr "Update data"
 
 msgid " Dein Account wurde gelöscht. "
 msgstr " Your account has been deleted. "
@@ -762,16 +789,19 @@ msgid "Kennwort ändern"
 msgstr "Change password"
 
 msgid "Funktionen für Staff-Member"
-msgstr "Staff-member functionality"
+msgstr "Members of staff"
 
 msgid "Institutionen approven"
-msgstr "Approve institutions"
+msgstr "Approve Institutions"
 
 msgid "Newsletter editieren"
 msgstr "Edit newsletter"
 
 msgid "Zugriffsstatistiken anzeigen"
-msgstr "Show access statistics"
+msgstr "Access statistics"
+
+msgid " Statistiken ansehen"
+msgstr "View statistics"
 
 msgid ""
 "\n"
@@ -1886,7 +1916,7 @@ msgid ""
 "<html><body>gunicorn-access.log nicht gefunden oder "
 "zugreifbar                            </body></html>"
 msgstr ""
-"<html><body>gunicorn-access.log not found or not "
+"<html><body>gunicorn-access.log not found or "
 "accessible                            </body></html>"
 
 msgid "English"
