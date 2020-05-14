@@ -16,13 +16,11 @@ from django_tables2 import TemplateColumn
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.models import EmailToHospital, Student
-from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
+from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung, PostingForm
 from apps.ineedstudent.models import Hospital
+from apps.ineedstudent.tables import ContactedTable
 from apps.mapview.utils import haversine, plzs
 from apps.mapview.views import get_ttl_hash
-
-from .forms import PostingForm
-from .tables import ContactedTable
 
 
 class StudentTable(tables.Table):
