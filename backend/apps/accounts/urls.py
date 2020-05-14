@@ -2,6 +2,11 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
+from apps.iamstudent.forms import StudentForm, StudentFormAndMail
+from apps.iamstudent.models import Student
+from apps.ineedstudent.forms import HospitalFormInfoCreate, HospitalFormInfoSignUp
+from apps.ineedstudent.models import Hospital
+
 from . import views
 
 urlpatterns = [
@@ -70,11 +75,35 @@ urlpatterns = [
     path("login_redirect", views.login_redirect, name="login_redirect"),
     path("delete_me_ask", views.delete_me_ask, name="delete_me_ask"),
     path("delete_me", views.delete_me, name="delete_me"),
-    path("signup_student", views.student_signup, name="student_signup"),
-    path("signup_hospital", views.hospital_signup, name="hospital_signup"),
+    path(
+        "signup_student",
+        views.ParticipantSignupView.as_view(
+            template_signup="student_signup.html",
+            template_thanks_for_registering="/iamstudent/thanks",
+            signup_form=StudentFormAndMail,
+            save_form=StudentForm,
+            subject_template="registration/password_reset_email_subject.txt",
+            model=Student,
+            mail_template="registration/password_set_email_.html",
+        ),
+        name="student_signup",
+    ),
+    path(
+        "signup_hospital",
+        views.views.ParticipantSignupView.as_view(
+            template_signup="hospital_signup.html",
+            template_thanks_for_registering="/iamstudent/thanks",
+            signup_form=HospitalFormInfoSignUp,
+            save_form=HospitalFormInfoCreate,
+            subject_template="registration/password_reset_email_subject.txt",
+            model=Hospital,
+            mail_template="registration/password_set_email_hospital.html",
+        ),
+        name="hospital_signup",
+    ),
     path("profile_student", views.edit_student_profile, name="edit_student_profile"),
     path("profile_hospital", views.edit_hospital_profile, name="edit_hospital_profile"),
-    path("approve_hospitals", views.approve_hospitals, name="approve_hospitals"),
+    path("approve_hospitals", views.ApproveHospitalsView.as_view(), name="approve_hospitals"),
     path(
         "change_hospital_approval/<str:uuid>/",
         views.change_hospital_approval,
@@ -89,6 +118,6 @@ urlpatterns = [
     path("list_newsletter", views.list_newsletter, name="list_newsletter"),
     path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter"),
     path("stats", views.view_statistics, name="statistics"),
-    path("profile_staff", views.staff_profile, name="staff_profile"),
+    path("profile_staff", views.StaffProfileView.as_view(), name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]

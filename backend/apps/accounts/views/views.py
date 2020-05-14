@@ -5,127 +5,22 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
-from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
-from rest_framework.views import APIView
 
 from apps.accounts.decorator import hospital_required, student_required
-from apps.accounts.forms import (
-    CustomAuthenticationForm,
-    NewsletterEditForm,
-    NewsletterViewForm,
-    TestMailForm,
-)
+from apps.accounts.forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 from apps.accounts.modelss import LetterApprovedBy, Newsletter, NewsletterState, User
 from apps.accounts.tables import NewsletterTable
 from apps.accounts.utils import send_password_set_email
-from apps.iamstudent.forms import StudentForm, StudentFormAndMail, StudentFormEditProfile
-from apps.iamstudent.models import Student
+from apps.iamstudent.forms import StudentFormEditProfile
 from apps.iamstudent.views import send_mails_for
-from apps.ineedstudent.forms import (
-    HospitalFormEditProfile,
-    HospitalFormInfoCreate,
-    HospitalFormInfoSignUp,
-)
+from apps.ineedstudent.forms import HospitalFormEditProfile
 from apps.ineedstudent.models import Hospital
-from apps.ineedstudent.views import ApprovalHospitalTable
 
 logger = logging.getLogger(__name__)
-
-
-@login_required
-@staff_member_required
-def staff_profile(request):
-    return render(request, "staff_profile.html", {})
-
-
-def student_signup(request):
-    # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        logger.info("Student Signup request", extra={"request": request})
-        form = StudentFormAndMail(request.POST)
-
-        # check whether it's valid:
-        if form.is_valid():
-            user, student = register_student_in_db(request, mail=form.cleaned_data["email"])
-            send_password_set_email(
-                email=form.cleaned_data["email"],
-                host=request.META["HTTP_HOST"],
-                subject_template="registration/password_reset_email_subject.txt",
-            )
-            return HttpResponseRedirect("/iamstudent/thanks")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = StudentFormAndMail()
-
-    return render(request, "student_signup.html", {"form": form})
-
-
-@transaction.atomic
-def register_student_in_db(request, mail):
-    # TODO: send mail with link to pwd # noqa: T003
-    pwd = User.objects.make_random_password()
-    username = mail  # generate_random_username()
-    user = User.objects.create(username=username, is_student=True, email=username)
-    user.set_password(pwd)
-    user.save()
-    student = Student.objects.create(user=user)
-    student = StudentForm(request.POST, instance=student)
-    student.save()
-    # send_password(username, pwd, student.cleaned_data['name_first'])
-    return user, student
-
-
-def hospital_signup(request):
-    if request.method == "POST":
-        logger.info("Hospital registration request", extra={"request": request})
-        form_info = HospitalFormInfoSignUp(request.POST)
-
-        if form_info.is_valid():
-            user, hospital = register_hospital_in_db(request, form_info.cleaned_data["email"])
-            send_password_set_email(
-                email=form_info.cleaned_data["email"],
-                host=request.META["HTTP_HOST"],
-                template="registration/password_set_email_hospital.html",
-                subject_template="registration/password_reset_email_subject.txt",
-            )
-            return HttpResponseRedirect("/iamstudent/thanks")
-
-            # plz = form_info.cleaned_data['plz']
-            # countrycode = form_info.cleaned_data['countrycode']
-            # distance = 0
-            # login(request, user)
-            # return HttpResponseRedirect('/ineedstudent/students/%s/%s/%s'%(countrycode,plz,distance))
-
-    else:
-        form_info = HospitalFormInfoSignUp(
-            initial={"sonstige_infos": "Liebe Studis,\n\nwir suchen euch weil ...\n\nBeste Grüße! "}
-        )
-        # form_user = HospitalSignUpForm()
-    form_info.helper.form_tag = False
-    return render(request, "hospital_signup.html", {"form_info": form_info})
-
-
-@transaction.atomic
-def register_hospital_in_db(request, m):
-
-    pwd = User.objects.make_random_password()
-    user = User.objects.create(username=m, is_hospital=True, email=m)
-    user.set_password(pwd)
-    print("Saving User")
-    user.save()
-
-    hospital = Hospital.objects.create(user=user)
-    hospital = HospitalFormInfoCreate(request.POST, instance=hospital)
-    print("Saving Hospital")
-    hospital.save()
-    return user, hospital
 
 
 @login_required
@@ -228,24 +123,6 @@ def edit_hospital_profile(request):
 
 @login_required
 @staff_member_required
-def approve_hospitals(request):
-    table_approved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=True))
-    table_approved.prefix = "approved"
-    table_approved.paginate(page=request.GET.get(table_approved.prefix + "page", 1), per_page=5)
-
-    table_unapproved = ApprovalHospitalTable(Hospital.objects.filter(is_approved=False))
-    table_unapproved.prefix = "unapproved"
-    table_unapproved.paginate(page=request.GET.get(table_unapproved.prefix + "page", 1), per_page=5)
-
-    return render(
-        request,
-        "approve_hospitals.html",
-        {"table_approved": table_approved, "table_unapproved": table_unapproved},
-    )
-
-
-@login_required
-@staff_member_required
 def change_hospital_approval(request, uuid):
 
     h = Hospital.objects.get(uuid=uuid)
@@ -316,40 +193,6 @@ def resend_validation_email(request, email):
             )
             return HttpResponseRedirect("/accounts/password_reset/done")
     return HttpResponseRedirect("/")
-
-
-class UserCountView(APIView):
-    """
-    A view that returns the count of active users.
-
-    Source: https://stackoverflow.com/questions/25151586/django-rest-framework-retrieving-object-count-from-a-model
-    """
-
-    def get(self, request, format=None):  # noqa: A002
-        supporter_count = User.objects.filter(
-            is_student__exact=True, validated_email__exact=True
-        ).count()
-        facility_count = User.objects.filter(
-            is_hospital__exact=True, validated_email__exact=True
-        ).count()
-        content = {"user_count": supporter_count, "facility_count": facility_count}
-        return JsonResponse(content)
-
-
-class CustomLoginView(LoginView):
-    authentication_form = CustomAuthenticationForm
-
-    def post(self, request, *args, **kwargs):
-        logger.info("Login Attempt (%s)", request.POST["username"])
-        return super().post(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        logger.info("Login succesful (%s)", form.cleaned_data["username"])
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        logger.warning("Login failure (%s)", getattr(form.data, "username", ""))
-        return super().form_invalid(form)
 
 
 @login_required
