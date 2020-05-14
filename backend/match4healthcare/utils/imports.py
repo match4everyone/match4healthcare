@@ -2,6 +2,9 @@ import pkgutil
 
 import six
 
+# inspired from:
+# https://github.com/getsentry/sentry/blob/118f500bc87cb0e8ccacd8ce7ad140f7d793d867/src/sentry/utils/imports.py#L36
+
 
 def import_submodules(context, root_module, path):
     """
