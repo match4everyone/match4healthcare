@@ -14,8 +14,7 @@ from apps.mapview.utils import get_plzs_close_to, plzs
 
 from .filters import StudentJobRequirementsFilter
 from .forms import EmailToSendForm, StudentForm, StudentFormView
-from .models import EmailGroup, EmailToSend, Student
-from .models_persistent_filter import LocationFilterModel, StudentListFilterModel
+from .models import EmailGroup, EmailToSend, LocationFilterModel, Student, StudentListFilterModel
 from .tables import StudentTable
 
 logger = logging.getLogger("django")

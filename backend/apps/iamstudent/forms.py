@@ -12,7 +12,9 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.modelss import User
 from apps.iamstudent.custom_crispy import RadioButtons
-from apps.iamstudent.models import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN, EmailToSend, Student
+
+from .models import EmailToSend, Student
+from .models.student import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN
 
 form_labels = {
     "uuid": _("Writerekp"),
