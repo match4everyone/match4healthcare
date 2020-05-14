@@ -24,9 +24,6 @@ class LetterApprovedBy(models.Model):
             "newsletter",
         )
 
-        app_label = "accounts"
-        db_table = "accounts_newsletterapprovedby"
-
     def verify_url(self, host):
         return "%s/accounts/did_see_newsletter/%s/%s" % (
             host,

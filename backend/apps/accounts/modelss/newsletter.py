@@ -62,10 +62,6 @@ class Newsletter(models.Model):
         choices=VALIDATION_CHOICES, default=ONLY_VALIDATED, blank=False
     )
 
-    class Meta:
-        app_label = "accounts"
-        db_table = "accounts_newsletter"
-
     def sending_state(self):
         if self.was_sent:
             return NewsletterState.SENT
