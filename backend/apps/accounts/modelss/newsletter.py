@@ -7,7 +7,8 @@ from django.core.mail import EmailMessage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .email_utils import send_mass_mail_sendgrid
+from match4healthcare.utils.email import send_mass_mail_sendgrid
+
 from .user import User
 
 logger = logging.getLogger(__name__)

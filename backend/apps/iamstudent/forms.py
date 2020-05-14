@@ -10,7 +10,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.user import User
+from apps.accounts.modelss import User
 from apps.iamstudent.custom_crispy import RadioButtons
 from apps.iamstudent.models import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN, EmailToSend, Student
 

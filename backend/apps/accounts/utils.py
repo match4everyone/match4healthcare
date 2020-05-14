@@ -6,7 +6,7 @@ from string import ascii_lowercase, digits
 from django.conf import settings
 from django.contrib.auth.forms import PasswordResetForm
 
-from .user import User
+from .modelss import User
 
 logger = logging.getLogger("django")
 

@@ -27,10 +27,8 @@ from apps.ineedstudent.views import ApprovalHospitalTable
 
 from .decorator import hospital_required, student_required
 from .forms import CustomAuthenticationForm, NewsletterEditForm, NewsletterViewForm, TestMailForm
-from .newsletter import Newsletter, NewsletterState
-from .newsletter_approved_by import LetterApprovedBy
+from .modelss import LetterApprovedBy, Newsletter, NewsletterState, User
 from .tables import NewsletterTable
-from .user import User
 
 logger = logging.getLogger(__name__)
 
