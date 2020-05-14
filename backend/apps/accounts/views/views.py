@@ -13,6 +13,15 @@ from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
 from rest_framework.views import APIView
 
+from apps.accounts.decorator import hospital_required, student_required
+from apps.accounts.forms import (
+    CustomAuthenticationForm,
+    NewsletterEditForm,
+    NewsletterViewForm,
+    TestMailForm,
+)
+from apps.accounts.modelss import LetterApprovedBy, Newsletter, NewsletterState, User
+from apps.accounts.tables import NewsletterTable
 from apps.accounts.utils import send_password_set_email
 from apps.iamstudent.forms import StudentForm, StudentFormAndMail, StudentFormEditProfile
 from apps.iamstudent.models import Student
@@ -24,11 +33,6 @@ from apps.ineedstudent.forms import (
 )
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.views import ApprovalHospitalTable
-
-from .decorator import hospital_required, student_required
-from .forms import CustomAuthenticationForm, NewsletterEditForm, NewsletterViewForm, TestMailForm
-from .modelss import LetterApprovedBy, Newsletter, NewsletterState, User
-from .tables import NewsletterTable
 
 logger = logging.getLogger(__name__)
 

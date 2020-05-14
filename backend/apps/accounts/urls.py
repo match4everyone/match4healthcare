@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
-from . import views, views_staff
+from . import views
 
 urlpatterns = [
     path(
@@ -88,7 +88,7 @@ urlpatterns = [
     path("new_newsletter", views.new_newsletter, name="new_newsletter"),
     path("list_newsletter", views.list_newsletter, name="list_newsletter"),
     path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter"),
-    path("stats", views_staff.view_statistics, name="statistics"),
+    path("stats", views.view_statistics, name="statistics"),
     path("profile_staff", views.staff_profile, name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
