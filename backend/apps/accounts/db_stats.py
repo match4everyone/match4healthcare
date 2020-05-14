@@ -5,7 +5,8 @@ from apps.iamstudent.forms import form_labels
 from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, EmailToHospital, EmailToSend, Student
 from apps.ineedstudent.models import Hospital
 
-from .models import Newsletter, User
+from .newsletter import Newsletter
+from .user import User
 
 
 class RegisterList(list):

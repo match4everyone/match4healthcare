@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.models import User
+from apps.accounts.user import User
 from apps.ineedstudent.models import Hospital
 from apps.mapview.utils import plzs
 

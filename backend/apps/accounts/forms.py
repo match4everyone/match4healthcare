@@ -6,7 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
-from .models import Newsletter, User
+from .newsletter import Newsletter
+from .user import User
 
 
 class HospitalSignUpForm(UserCreationForm):

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 import numpy as np
 
-from apps.accounts.models import User
+from apps.accounts.user import User
 from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
 from apps.ineedstudent.models import Hospital
 

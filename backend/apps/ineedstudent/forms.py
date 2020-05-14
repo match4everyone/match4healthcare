@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.models import User
+from apps.accounts.user import User
 from apps.iamstudent.models import EmailToHospital
 from apps.ineedstudent.models import Hospital
 

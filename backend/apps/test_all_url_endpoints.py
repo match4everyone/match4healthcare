@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.test import Client, TestCase
 import numpy as np
 
-from apps.accounts.models import User
+from apps.accounts.models2 import User
 from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
 from apps.ineedstudent.models import Hospital
 
