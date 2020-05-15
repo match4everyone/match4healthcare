@@ -3,7 +3,6 @@ import logging
 
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -14,19 +13,6 @@ from apps.accounts.modelss import Newsletter, User
 from apps.accounts.utils import send_password_set_email
 
 logger = logging.getLogger(__name__)
-
-
-@login_required
-def delete_me(request):
-    user = request.user
-    logout(request)
-    user.delete()
-    return render(request, "deleted_user.html")
-
-
-@login_required
-def delete_me_ask(request):
-    return render(request, "deleted_user_ask.html")
 
 
 @login_required
