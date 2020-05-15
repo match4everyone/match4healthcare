@@ -82,14 +82,6 @@ class HospitalForm(HospitalFormO):
         )
 
 
-class HospitalFormExtra(HospitalFormO):
-    def __init__(self, *args, **kwargs):
-        super(HospitalFormExtra, self).__init__(*args, **kwargs)
-        # !!! namen der knöpe dürfen nicht verändert werden, sonst geht code woanders kaputt
-        self.helper.add_input(Submit("submit", _("Schicke Mails")))
-        self.helper.add_input(Submit("submit", _("Schicke Mails + Erstelle Anzeige")))
-
-
 class HospitalFormEditProfile(HospitalFormO):
     class Meta:
         model = Hospital
@@ -118,7 +110,6 @@ class HospitalFormEditProfile(HospitalFormO):
     def __init__(self, *args, **kwargs):
         super(HospitalFormEditProfile, self).__init__(*args, **kwargs)
         self.fields["sonstige_infos"].required = False
-        # self.fields['appears_in_map'].required = False
         self.helper.add_input(
             Submit("submit", _("Daten aktualisieren"), css_class="btn blue text-white btn-md",)
         )
