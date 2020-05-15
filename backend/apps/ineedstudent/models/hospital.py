@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import uuid
 
 from django.conf import settings
@@ -67,3 +67,11 @@ class Hospital(models.Model):
         user = User.objects.create(username=username, is_hospital=True, email=username)
         user.set_password(pwd)
         return user
+
+    def leftover_emails_for_today(self):
+        date_from = datetime.now() - timedelta(days=1)
+        return max(
+            0,
+            self.max_mails_per_day
+            - self.emailtosend_set.filter(registration_date__gte=date_from).count(),
+        )

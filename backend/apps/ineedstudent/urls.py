@@ -1,11 +1,15 @@
 from django.urls import path
 
-from apps.iamstudent.views import student_list_view
+from apps.iamstudent.views import StudentSelectionView
 
 from . import views
 
 urlpatterns = [
-    path("students/<countrycode>/<plz>/<int:distance>", student_list_view, name="list_by_plz",),
+    path(
+        "students/<countrycode>/<plz>/<int:distance>",
+        StudentSelectionView.as_view(),
+        name="list_by_plz",
+    ),
     # path('students_testing/<countrycode>/<plz>/<int:distance>', views.student_list_view, name='student_list_view'),
     path("hospitals/<countrycode>/<plz>", views.hospital_list, name="hospital_list"),
     path("hospital_map", views.hospital_overview, name="hopsital_map"),
