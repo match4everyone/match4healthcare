@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.filters import StudentJobRequirementsFilter
-from apps.iamstudent.forms import EmailToSendForm, StudentForm, StudentFormView
+from apps.iamstudent.forms import EmailToSendForm, StudentFormView
 from apps.iamstudent.models import (
     EmailGroup,
     EmailToSend,
@@ -23,25 +23,6 @@ from apps.iamstudent.tables import StudentTable
 from apps.mapview.utils import get_plzs_close_to, plzs
 
 logger = logging.getLogger("django")
-
-
-def get_student(request):
-    # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = StudentForm(request.POST)
-
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            # redirect to a new URL:
-            return HttpResponseRedirect("thanks")
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = StudentForm()
-
-    return render(request, "student.html", {"form": form})
 
 
 def thx(request):
