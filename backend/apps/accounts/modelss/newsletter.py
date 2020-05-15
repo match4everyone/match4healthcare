@@ -76,7 +76,7 @@ class Newsletter(models.Model):
     def unfreeze(self):
         self.frozen_by = None
         self.frozen_date = None
-        self.letter_approved_by.filter(newsletter=self).delete()
+        self.letter_approved_by.clear()
 
     def approve_from(self, user):
         self.letter_approved_by.add(user)
