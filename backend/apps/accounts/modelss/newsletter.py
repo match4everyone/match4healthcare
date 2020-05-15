@@ -106,22 +106,18 @@ class Newsletter(models.Model):
         email.send()
 
     def has_been_approved_by(self, user):
-        # check: this
-        return self.letter_approved_by.filter(user=user, did_see_email=True).count() == 1
-        # return (
-        #    LetterApprovedBy.objects.filter(newsletter=self, user=user, did_see_email=True).count()
-        #    == 1
-        # )
+        return (
+            self.letter_approved_by.filter(
+                letterapprovedby__user=user, letterapprovedby__did_see_email=True
+            ).count()
+            == 1
+        )
 
     def required_approvals(self):
         return (
             settings.NEWSLETTER_REQUIRED_APPROVERS
-            - self.letter_approved_by_set.filter(did_see_email=True).count()
+            - self.letter_approved_by.filter(letterapprovedby__did_see_email=True).count()
         )
-        # return (
-        #    settings.NEWSLETTER_REQUIRED_APPROVERS
-        #    - LetterApprovedBy.objects.filter(newsletter=self, did_see_email=True).count()
-        # )
 
     def send_approval_mail(self, approval, host):
         body = "<h3>Link zum Approven ganz unten</h3><hr>"
