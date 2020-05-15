@@ -7,7 +7,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
 
 from apps.accounts.decorator import student_required
@@ -41,20 +40,6 @@ def change_hospital_approval(request, uuid):
     if h.is_approved:
         send_mails_for(h)
 
-    return HttpResponseRedirect("/accounts/approve_hospitals")
-
-
-@login_required
-@staff_member_required
-def delete_hospital(request, uuid):
-    h = Hospital.objects.get(uuid=uuid)
-    logger.info(
-        "Delete Hospital %s by %s", uuid, request.user, extra={"request": request},
-    )
-    name = h.user
-    h.delete()
-    text = format_lazy(_("Du hast die Institution mit user '{name}' gelöscht."), name=name)
-    messages.add_message(request, messages.INFO, text)
     return HttpResponseRedirect("/accounts/approve_hospitals")
 
 
