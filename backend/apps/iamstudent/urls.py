@@ -5,8 +5,7 @@ from . import views
 
 urlpatterns = [
     path("thanks", TemplateView.as_view(template_name="thanks.html"), name="thanks"),
-    # path('send_mail_student', views.send_mail_student, name='send_mail_student'),
-    path("successful_mail", views.successful_mail, name="success"),
+    path("successful_mail", views.EmailToStudentSuccessView.as_view(), name="success"),
     # path('students_testing/<countrycode>/<plz>/<int:distance>', views.student_list_view, name='student_list_view'),
     path(
         "send_mail_student/<id_list>",
