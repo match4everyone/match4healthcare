@@ -25,7 +25,7 @@ class LoginRedirect(View):
             return HttpResponseRedirect("/ineedstudent/hospital_dashboard")
 
         elif user.is_staff:
-            return HttpResponseRedirect("profile_hospital")
+            return HttpResponseRedirect("profile_staff")
 
         else:
             logger.warning(
