@@ -20,54 +20,6 @@ logger = logging.getLogger(__name__)
 
 
 @login_required
-def profile_redirect(request):
-    user = request.user
-
-    if user.is_student:
-        return HttpResponseRedirect("profile_student")
-
-    elif user.is_hospital:
-        h = Hospital.objects.get(user=user)
-        if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect("/ineedstudent/zustimmung")
-        return HttpResponseRedirect("profile_hospital")
-
-    elif user.is_staff:
-        return HttpResponseRedirect("profile_staff")
-
-    else:
-        # TODO: throw 404  # noqa: T003
-        logger.warning(
-            "User is unknown type, profile redirect not possible", extra={"request": request},
-        )
-        HttpResponse("Something wrong in database")
-
-
-@login_required
-def login_redirect(request):
-    user = request.user
-
-    if user.is_student:
-        return HttpResponseRedirect("/mapview")
-
-    elif user.is_hospital:
-        h = Hospital.objects.get(user=user)
-        if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect("/ineedstudent/zustimmung")
-        return HttpResponseRedirect("/ineedstudent/hospital_dashboard")
-
-    elif user.is_staff:
-        return HttpResponseRedirect("approve_hospitals")
-
-    else:
-        # TODO: throw 404  # noqa: T003
-        logger.warning(
-            "User is unknown type, login redirect not possible", extra={"request": request},
-        )
-        HttpResponse("Something wrong in database")
-
-
-@login_required
 @staff_member_required
 def change_hospital_approval(request, uuid):
 
