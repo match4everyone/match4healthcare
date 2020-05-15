@@ -12,35 +12,8 @@ from django.utils.translation import gettext as _
 from apps.accounts.decorator import student_required
 from apps.accounts.modelss import Newsletter, User
 from apps.accounts.utils import send_password_set_email
-from apps.iamstudent.views import send_mails_for
-from apps.ineedstudent.models import Hospital
 
 logger = logging.getLogger(__name__)
-
-
-@login_required
-@staff_member_required
-def change_hospital_approval(request, uuid):
-
-    h = Hospital.objects.get(uuid=uuid)
-    logger.info(
-        "Set Hospital %s approval to %s", uuid, (not h.is_approved), extra={"request": request},
-    )
-
-    if not h.is_approved:
-        h.is_approved = True
-        h.approval_date = datetime.now()
-        h.approved_by = request.user
-    else:
-        h.is_approved = False
-        h.approval_date = None
-        h.approved_by = None
-    h.save()
-
-    if h.is_approved:
-        send_mails_for(h)
-
-    return HttpResponseRedirect("/accounts/approve_hospitals")
 
 
 @login_required

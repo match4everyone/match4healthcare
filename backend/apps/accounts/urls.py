@@ -106,7 +106,7 @@ urlpatterns = [
     path("approve_hospitals", views.ApproveHospitalsView.as_view(), name="approve_hospitals"),
     path(
         "change_hospital_approval/<str:uuid>/",
-        views.change_hospital_approval,
+        views.ChangeHospitalApprovalRedirect.as_view(),
         name="change_hospital_approval",
     ),
     path(
