@@ -12,13 +12,13 @@ logger = logging.getLogger(__name__)
 
 class ParticipantSignupView(View):
 
-    template_signup = None  # "student_signup.html"
-    template_thanks_for_registering = None  # "/iamstudent/thanks"
-    signup_form = None  # StudentFormAndMail
-    save_form = None  # StudentForm
-    subject_template = None  # "registration/password_reset_email_subject.txt"
-    model = None  # Student
-    mail_template = None
+    template_signup = None  # template used for the signup dialog
+    template_thanks_for_registering = None  # template to redirect to after successful signup
+    signup_form = None  # form that should be displayed for signup
+    save_form = None  # form that should be used for saving
+    subject_template = None  # template for password reset email
+    model = None  # model that should be signed up
+    mail_template = None  # template for the email body
 
     def get(self, request):
         form = self.signup_form()
