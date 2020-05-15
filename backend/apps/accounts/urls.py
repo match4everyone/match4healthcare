@@ -122,7 +122,7 @@ urlpatterns = [
         name="activate_student",
     ),
     path("view_newsletter/<uuid>", views.NewsletterDetailView.as_view(), name="view_newsletter"),
-    path("new_newsletter", views.new_newsletter, name="new_newsletter"),
+    path("new_newsletter", views.NewNewsletterRedirect.as_view(), name="new_newsletter"),
     path("list_newsletter", views.NewsletterListView.as_view(), name="list_newsletter"),
     path(
         "did_see_newsletter/<uuid>/<token>",

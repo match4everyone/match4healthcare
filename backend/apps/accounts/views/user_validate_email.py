@@ -1,11 +1,10 @@
 from datetime import datetime
 import logging
 
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
-from apps.accounts.modelss import Newsletter, User
+from apps.accounts.modelss import User
 from apps.accounts.utils import send_password_set_email
 
 logger = logging.getLogger(__name__)
@@ -31,12 +30,3 @@ def resend_validation_email(request, email):
             )
             return HttpResponseRedirect("/accounts/password_reset/done")
     return HttpResponseRedirect("/")
-
-
-@login_required
-@staff_member_required
-def new_newsletter(request):
-    newsletter = Newsletter.objects.create()
-    newsletter.letter_authored_by.add(request.user)
-    newsletter.save()
-    return HttpResponseRedirect("view_newsletter/" + str(newsletter.uuid))
