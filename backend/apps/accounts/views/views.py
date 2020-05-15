@@ -13,7 +13,6 @@ from django.utils.translation import gettext as _
 from apps.accounts.decorator import student_required
 from apps.accounts.forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 from apps.accounts.modelss import LetterApprovedBy, Newsletter, NewsletterState, User
-from apps.accounts.tables import NewsletterTable
 from apps.accounts.utils import send_password_set_email
 from apps.iamstudent.views import send_mails_for
 from apps.ineedstudent.models import Hospital
@@ -311,13 +310,6 @@ def new_newsletter(request):
     newsletter.letter_authored_by.add(request.user)
     newsletter.save()
     return HttpResponseRedirect("view_newsletter/" + str(newsletter.uuid))
-
-
-@login_required
-@staff_member_required
-def list_newsletter(request):
-    context = {"table": NewsletterTable(Newsletter.objects.all().order_by("-registration_date"))}
-    return render(request, "newsletter_list.html", context)
 
 
 @login_required
