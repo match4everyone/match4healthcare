@@ -83,11 +83,11 @@ var signUpHelper = {
                 {% blocktrans %}Account Details{% endblocktrans %}
             </div>
             <div class="card-body">
-                {% if is_activated %} {% else %}{% blocktrans %}<mark>Vorsicht!</mark> Dein Profil ist deaktiviert, aktuell kannst du nicht kontaktiert werden.{% endblocktrans %} <br> {% endif %}
+                {% if participant.is_activated %} {% else %}{% blocktrans %}<mark>Vorsicht!</mark> Dein Profil ist deaktiviert, aktuell kannst du nicht kontaktiert werden.{% endblocktrans %} <br> {% endif %}
 
                     <a role="button" class="btn blue text-white btn-md" href="logout">{% blocktrans %}Logout{% endblocktrans %}</a>
                     <a role="button" class="btn blue text-white btn-md" href="password_change">{% blocktrans %}Passwort ändern{% endblocktrans %}</a>
-                <a role="button" class="btn btn-info" href="change_activation">{% if is_activated %} {% blocktrans %}Profil deaktivieren{% endblocktrans %} {% else %}{% blocktrans %}Profil aktivieren{% endblocktrans %} {% endif %}</a>
+                <a role="button" class="btn btn-info" href="change_activation">{% if participant.is_activated %} {% blocktrans %}Profil deaktivieren{% endblocktrans %} {% else %}{% blocktrans %}Profil aktivieren{% endblocktrans %} {% endif %}</a>
                 <a role="button" class="btn btn-info" href="delete_me_ask">{% blocktrans %}Mein Profil löschen{% endblocktrans %}</a>
 
             </div>

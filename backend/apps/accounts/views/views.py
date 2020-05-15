@@ -10,14 +10,12 @@ from django.shortcuts import render
 from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
 
-from apps.accounts.decorator import hospital_required, student_required
+from apps.accounts.decorator import student_required
 from apps.accounts.forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
 from apps.accounts.modelss import LetterApprovedBy, Newsletter, NewsletterState, User
 from apps.accounts.tables import NewsletterTable
 from apps.accounts.utils import send_password_set_email
-from apps.iamstudent.forms import StudentFormEditProfile
 from apps.iamstudent.views import send_mails_for
-from apps.ineedstudent.forms import HospitalFormEditProfile
 from apps.ineedstudent.models import Hospital
 
 logger = logging.getLogger(__name__)
@@ -69,56 +67,6 @@ def login_redirect(request):
             "User is unknown type, login redirect not possible", extra={"request": request},
         )
         HttpResponse("Something wrong in database")
-
-
-@login_required
-@student_required
-def edit_student_profile(request):
-    student = request.user.student
-
-    if request.method == "POST":
-        logger.info("Update Student Profile", extra={"request": request})
-        form = StudentFormEditProfile(request.POST or None, instance=student, prefix="infos")
-
-        if form.is_valid():
-            messages.success(
-                request, _("Deine Daten wurden erfolgreich geändert!"), extra_tags="alert-success",
-            )
-            form.save()
-
-    else:
-        form = StudentFormEditProfile(instance=student, prefix="infos")
-
-    return render(
-        request, "student_edit.html", {"form": form, "is_activated": student.is_activated},
-    )
-
-
-@login_required
-@hospital_required
-def edit_hospital_profile(request):
-    hospital = request.user.hospital
-
-    if request.method == "POST":
-        logger.info("Update Hospital Profile", extra={"request": request})
-        form = HospitalFormEditProfile(request.POST or None, instance=hospital, prefix="infos")
-
-        if form.is_valid():
-            messages.success(
-                request, _("Deine Daten wurden erfolgreich geändert!"), extra_tags="alert-success",
-            )
-            form.save()
-        else:
-            messages.info(
-                request,
-                _("Deine Daten wurden nicht erfolgreich geändert!"),
-                extra_tags="alert-warning",
-            )
-
-    else:
-        form = HospitalFormEditProfile(instance=hospital, prefix="infos")
-
-    return render(request, "hospital_edit.html", {"form": form})
 
 
 @login_required

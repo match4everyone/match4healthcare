@@ -101,8 +101,8 @@ urlpatterns = [
         ),
         name="hospital_signup",
     ),
-    path("profile_student", views.edit_student_profile, name="edit_student_profile"),
-    path("profile_hospital", views.edit_hospital_profile, name="edit_hospital_profile"),
+    path("profile_student", views.StudentEditProfileView.as_view(), name="edit_student_profile"),
+    path("profile_hospital", views.HospitalEditProfileView.as_view(), name="edit_hospital_profile"),
     path("approve_hospitals", views.ApproveHospitalsView.as_view(), name="approve_hospitals"),
     path(
         "change_hospital_approval/<str:uuid>/",
