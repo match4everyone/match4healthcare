@@ -5,12 +5,12 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import gettext as _
 
 from apps.accounts.decorator import student_required
-from apps.accounts.modelss import LetterApprovedBy, Newsletter, User
+from apps.accounts.modelss import Newsletter, User
 from apps.accounts.utils import send_password_set_email
 from apps.iamstudent.views import send_mails_for
 from apps.ineedstudent.models import Hospital
@@ -119,20 +119,3 @@ def new_newsletter(request):
     newsletter.letter_authored_by.add(request.user)
     newsletter.save()
     return HttpResponseRedirect("view_newsletter/" + str(newsletter.uuid))
-
-
-@login_required
-@staff_member_required
-def did_see_newsletter(request, uuid, token):
-    nl = Newsletter.objects.get(uuid=uuid)
-    try:
-        approval = LetterApprovedBy.objects.get(newsletter=nl, user=request.user)
-        if approval.approval_code == int(token):
-            approval.did_see_email = True
-            approval.save()
-            messages.add_message(request, messages.INFO, _("Dein Approval ist nun gültig."))
-        else:
-            return HttpResponse("Wrong code")
-    except Exception:
-        return HttpResponse("Not registered")
-    return HttpResponseRedirect("/accounts/view_newsletter/" + str(uuid))

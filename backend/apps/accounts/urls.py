@@ -120,7 +120,11 @@ urlpatterns = [
     path("view_newsletter/<uuid>", views.NewsletterDetailView.as_view(), name="view_newsletter"),
     path("new_newsletter", views.new_newsletter, name="new_newsletter"),
     path("list_newsletter", views.NewsletterListView.as_view(), name="list_newsletter"),
-    path("did_see_newsletter/<uuid>/<token>", views.did_see_newsletter, name="did_see_newsletter"),
+    path(
+        "did_see_newsletter/<uuid>/<token>",
+        views.ApproveNewsletterTextRedirect.as_view(),
+        name="did_see_newsletter",
+    ),
     path("stats", views.view_statistics, name="statistics"),
     path("profile_staff", views.StaffProfileView.as_view(), name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
