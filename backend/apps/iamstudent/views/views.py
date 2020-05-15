@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.filters import StudentJobRequirementsFilter
-from apps.iamstudent.forms import EmailToSendForm, StudentFormView
+from apps.iamstudent.forms import EmailToSendForm
 from apps.iamstudent.models import (
     EmailGroup,
     EmailToSend,
@@ -316,13 +316,3 @@ def student_list_view(request, countrycode, plz, distance):
         context["filter_is_being_saved"] = False
 
     return render(request, "student_list_view.html", context)
-
-
-@login_required
-def view_student(request, uuid):
-    if request.user.is_student:
-        return HttpResponseRedirect("/accounts/profile_student")
-    s = Student.objects.get(uuid=uuid)
-    form = StudentFormView(instance=s, prefix="infos")
-    context = {"form": form}
-    return render(request, "view_student.html", context)
