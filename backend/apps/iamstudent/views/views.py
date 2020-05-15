@@ -25,10 +25,6 @@ from apps.mapview.utils import get_plzs_close_to, plzs
 logger = logging.getLogger("django")
 
 
-def thx(request):
-    return render(request, "thanks.html")
-
-
 @login_required
 @hospital_required
 def successful_mail(request):
