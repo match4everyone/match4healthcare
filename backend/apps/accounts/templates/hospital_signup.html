@@ -60,7 +60,7 @@ Registrierung - Institution
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
 
-                {% crispy form_info form_info.helper %}
+                {% crispy form form.helper %}
 
                 <button type="submit" id="btSubmitForm" class="btn blue text-white btn-md">{% blocktrans %}Jetzt registrieren{% endblocktrans %}
                     <svg class="bi bi-person-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"

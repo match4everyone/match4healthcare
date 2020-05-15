@@ -10,6 +10,12 @@ from apps.accounts.modelss import User
 from apps.iamstudent.models import EmailToHospital
 from apps.ineedstudent.models import Hospital
 
+# Base hospital Form
+# for signup
+# for saving
+# for editing
+#
+
 
 class HospitalFormO(ModelForm):
     class Meta:
@@ -169,6 +175,10 @@ class HospitalFormInfoSignUp(HospitalFormO):
     email = forms.EmailField(
         validators=[check_unique_email], label=_("Offizielle E-Mail-Adresse der Kontaktperson"),
     )
+
+    def __init__(self, *args, **kwargs):
+        super(HospitalFormInfoSignUp, self).__init__(*args, **kwargs)
+        self.helper.form_tag = False
 
 
 class HospitalFormInfoCreate(HospitalFormO):
