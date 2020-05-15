@@ -129,7 +129,7 @@ urlpatterns = [
         views.ApproveNewsletterTextRedirect.as_view(),
         name="did_see_newsletter",
     ),
-    path("stats", views.view_statistics, name="statistics"),
+    path("stats", views.DBStatsView.as_view(), name="statistics"),
     path("profile_staff", views.StaffProfileView.as_view(), name="staff_profile"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
