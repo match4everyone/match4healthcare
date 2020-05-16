@@ -2,7 +2,6 @@ from datetime import datetime
 from functools import lru_cache
 
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.db import models
@@ -16,7 +15,7 @@ from django_tables2 import TemplateColumn
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.models import EmailToHospital, Student
-from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung, PostingForm
+from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.tables import ContactedTable
 from apps.mapview.utils import haversine, plzs
@@ -212,25 +211,6 @@ def hospital_view(request, uuid):
     context["email_form"] = email_form
 
     return render(request, "hospital_view.html", context)
-
-
-@login_required
-@hospital_required
-def change_posting(request):
-    if request.method == "POST":
-        anzeige_form = PostingForm(request.POST, instance=request.user.hospital)
-
-        if anzeige_form.is_valid():
-            anzeige_form.save()
-            messages.add_message(
-                request, messages.INFO, _("Deine Anzeige wurde erfolgreich aktualisiert."),
-            )
-
-    else:
-        anzeige_form = PostingForm(instance=request.user.hospital)
-
-    context = {"anzeige_form": anzeige_form}
-    return render(request, "change_posting.html", context)
 
 
 @login_required

@@ -16,5 +16,5 @@ urlpatterns = [
     path("zustimmung", views.zustimmung, name="zustimmung"),
     path("hospital_view/<str:uuid>/", views.hospital_view, name="hospital_view"),
     path("hospital_dashboard", views.hospital_dashboard, name="hospital_dashboard"),
-    path("change_posting", views.change_posting, name="change_posting"),
+    path("change_posting", views.HospitalPostingEditView.as_view(), name="change_posting"),
 ]

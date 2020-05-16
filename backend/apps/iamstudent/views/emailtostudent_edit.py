@@ -89,6 +89,8 @@ class EmailToStudentEditView(FormView):
         if self.request.user.hospital.is_approved:
             send_mails_for(self.request.user.hospital)
 
+        return super().form_valid(form)
+
 
 # TODO: extract method to EmailToSendModel #noqa T003
 def send_mails_for(hospital):
