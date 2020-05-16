@@ -8,7 +8,7 @@ urlpatterns = [
     path("successful_mail", views.EmailToStudentSuccessView.as_view(), name="success"),
     path(
         "send_mail_student/<id_list>",
-        views.send_mail_student_id_list,
+        views.EmailToStudentEditView.as_view(),
         name="send_mail_student_id_list",
     ),
     path("view_student/<uuid>", views.StudentDetailView.as_view(), name="view_student"),
