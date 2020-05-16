@@ -3,50 +3,15 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
-import django_tables2 as tables
-from django_tables2 import TemplateColumn
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.models import EmailToHospital, Student
 from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
 from apps.ineedstudent.models import Hospital
 from apps.mapview.utils import haversine, plzs
-
-
-class StudentTable(tables.Table):
-    info = TemplateColumn(template_name="info_button.html")
-    checkbox = TemplateColumn(template_name="checkbox_studenttable.html")
-
-    class Meta:
-        model = Student
-        template_name = "django_tables2/bootstrap4.html"
-        exclude = ["uuid", "registration_date", "id"]
-        fields = ["user"]
-
-
-@login_required
-def hospital_list(request, countrycode, plz):
-
-    if countrycode not in plzs or plz not in plzs[countrycode]:
-        # TODO: niceren error werfen # noqa: T003
-        return HttpResponse(
-            "Postleitzahl: " + plz + " ist keine valide Postleitzahl in " + countrycode
-        )
-
-    lat, lon, ort = plzs[countrycode][plz]
-
-    table = HospitalTable(
-        Hospital.objects.filter(
-            user__validated_email=True, is_approved=True, plz=plz, appears_in_map=True
-        )
-    )
-    table.paginate(page=request.GET.get("page", 1), per_page=25)
-    context = {"countrycode": countrycode, "plz": plz, "ort": ort, "table": table}
-
-    return render(request, "list_hospitals_by_plz.html", context)
 
 
 @login_required
@@ -64,37 +29,6 @@ def zustimmung(request):
     else:
         form_info = HospitalFormZustimmung()
     return render(request, "zustimmung.html", {"form_info": form_info})
-
-
-class HospitalTable(tables.Table):
-    info = TemplateColumn(template_name="info_button.html")
-
-    class Meta:
-        model = Hospital
-        template_name = "django_tables2/bootstrap4.html"
-        fields = ["firmenname", "ansprechpartner"]
-        exclude = ["uuid", "registration_date", "id"]
-
-
-class ApprovalHospitalTable(HospitalTable):
-    info = TemplateColumn(template_name="info_button.html")
-    status = TemplateColumn(template_name="approval_button.html")
-    delete = TemplateColumn(template_name="delete_button.html")
-
-    class Meta:
-        model = Hospital
-        template_name = "django_tables2/bootstrap4.html"
-        fields = [
-            "firmenname",
-            "ansprechpartner",
-            "user",
-            "telefon",
-            "plz",
-            "user__validated_email",
-            "approval_date",
-            "approved_by",
-        ]
-        exclude = ["uuid", "id", "registration_date"]
 
 
 @login_required

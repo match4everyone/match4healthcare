@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from apps.ineedstudent.models import Hospital
-from apps.ineedstudent.views import ApprovalHospitalTable
+from apps.ineedstudent.tables import ApprovalHospitalTable
 
 logger = logging.getLogger(__name__)
 

@@ -10,7 +10,7 @@ urlpatterns = [
         StudentSelectionView.as_view(),
         name="list_by_plz",
     ),
-    path("hospitals/<countrycode>/<plz>", views.hospital_list, name="hospital_list"),
+    path("hospitals/<countrycode>/<plz>", views.HospitalListView.as_view(), name="hospital_list"),
     path("hospital_map", views.HospitalMapView.as_view(), name="hopsital_map"),
     path("zustimmung", views.zustimmung, name="zustimmung"),
     path("hospital_view/<str:uuid>/", views.hospital_view, name="hospital_view"),
