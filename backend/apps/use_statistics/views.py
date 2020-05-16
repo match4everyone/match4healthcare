@@ -1,17 +1,15 @@
-from django.shortcuts import render
+from functools import lru_cache
+import os
+
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.utils.translation import gettext as _
 import django_tables2 as tables
-
-import os
 import pandas as pd
 
-from django.utils.translation import gettext as _
-from django.http import HttpResponse
-
-from functools import lru_cache
 from apps.mapview.views import get_ttl_hash
 
 logged_data_names = ["time", "status_line", "status", "request_time"]
@@ -42,13 +40,13 @@ def process_file(ttl_hash):
     df = pd.DataFrame(requests)
     df.columns = logged_data_names
 
-    # TODO: Check if columns are present in dataframe
+    # TODO: Check if columns are present in dataframe # noqa: T003
     df["status"] = df["status"].astype(float)
     df["status_line"] = df["status_line"].astype(str)
     # df['time'] = df['time'].astype(datetime)
 
     df_names = df
-    # TODO: Can we add the index to the groupby which would make any further processing like sorting easier?
+    # TODO: Can we add the index to the groupby which would make any further processing like sorting easier?  # noqa: T003
     # df['status_line'] = df.index
     groupby = df.groupby("status_line")
     groupby_keys = groupby.groups.keys()

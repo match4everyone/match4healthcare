@@ -1,9 +1,11 @@
-from match4healthcare.settings.common import RUN_DIR, MIDDLEWARE, IS_FORK
-from match4healthcare.settings.common import *  # noqa
-from django.utils.log import DEFAULT_LOGGING
-import os
 import logging
+import os
+
+from django.utils.log import DEFAULT_LOGGING
+
 from match4healthcare.constants.enum import Environment
+from match4healthcare.settings.common import *  # noqa
+from match4healthcare.settings.common import IS_FORK, MIDDLEWARE, RUN_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +46,7 @@ MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # =============== MAIL RELAY SERVER CONFIGURATION ===============
-# ToDo add environment variable based detection whether we are on prod or staging
+# TODO: add environment variable based detection whether we are on prod or staging # noqa: T003
 NOREPLY_MAIL = "match4healthcare<noreply@match4healthcare.de>"
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 

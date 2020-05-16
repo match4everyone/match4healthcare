@@ -1,9 +1,13 @@
-from ._utils import BIG_CITY_PLZS
-import numpy as np
-from apps.ineedstudent.models import Hospital
-from apps.iamstudent.models import Student, AUSBILDUNGS_TYPEN_COLUMNS
-from apps.accounts.models import User
+from datetime import datetime, timedelta
+
 from django.core.management.base import BaseCommand
+import numpy as np
+
+from apps.accounts.models import User
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.ineedstudent.models import Hospital
+
+from ._utils import BIG_CITY_PLZS
 
 FAKE_MAIL = "@example.com"
 
@@ -13,7 +17,8 @@ def new_mail(x):
 
 
 class Command(BaseCommand):
-    help = "Populates the database with fake users or deletes them."
+    # has to be "help" because we inherit from django manage.py Command, thus ignore A003
+    help = "Populates the database with fake users or deletes them."  # noqa: A003
 
     def add_arguments(self, parser):
 
@@ -92,13 +97,23 @@ class Command(BaseCommand):
                 )
             )
 
-            pwd = User.objects.make_random_password()
             u = User.objects.create(
-                username=m, email=m, is_student=True, password=pwd, validated_email=True
+                username=m,
+                email=m,
+                is_student=True,
+                validated_email=True,
+                date_joined=datetime.now() - timedelta(days=np.random.randint(0, 30)),
             )
+            u.set_password(m)
+            u.save()
             Student.objects.create(
                 user=u,
                 plz=plzs[i],
+                braucht_bezahlung=np.random.choice([0, 1]),
+                is_activated=np.random.choice([True, False], p=[0.95, 0.05]),
+                einwilligung_agb=True,
+                datenschutz_zugestimmt=True,
+                einwilligung_datenweitergabe=True,
                 availability_start="{}-{:02d}-{:02d}".format(year, months[i], days[i]),
                 **kwd
             )
@@ -110,15 +125,22 @@ class Command(BaseCommand):
         n_users = User.objects.all().count()
         for i in range(n):
             m = new_mail(i + n_users)
-            pwd = User.objects.make_random_password()
             u = User.objects.create(
-                username=m, email=m, is_student=True, password=pwd, validated_email=True
+                username=m,
+                email=m,
+                is_student=True,
+                validated_email=True,
+                date_joined=datetime.now() - timedelta(days=np.random.randint(0, 30)),
             )
+            u.set_password(m)
+            u.save()
             Hospital.objects.create(
                 user=u,
                 plz=plzs[i],
                 ansprechpartner="Frau Müller",
                 sonstige_infos="Wir haben viel zu tun.",
+                is_approved=np.random.choice([True, False], p=[0.7, 0.3]),
+                appears_in_map=np.random.choice([True, False], p=[0.8, 0.2]),
             )
 
         self.stdout.write(self.style.SUCCESS("Created %s hospitals." % n))
