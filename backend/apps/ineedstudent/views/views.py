@@ -3,32 +3,13 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.decorator import hospital_required
 from apps.iamstudent.models import EmailToHospital, Student
-from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
+from apps.ineedstudent.forms import EmailToHospitalForm
 from apps.ineedstudent.models import Hospital
 from apps.mapview.utils import haversine, plzs
-
-
-@login_required
-@hospital_required
-def zustimmung(request):
-    user = request.user
-    h = Hospital.objects.get(user=user)
-    if request.method == "POST":
-        form_info = HospitalFormZustimmung(request.POST, instance=h)
-
-        if form_info.is_valid():
-            h.save()
-            return HttpResponseRedirect("/accounts/login_redirect")
-
-    else:
-        form_info = HospitalFormZustimmung()
-    return render(request, "zustimmung.html", {"form_info": form_info})
 
 
 @login_required
