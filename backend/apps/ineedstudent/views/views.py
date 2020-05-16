@@ -4,7 +4,6 @@ from functools import lru_cache
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-from django.db import models
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
@@ -17,7 +16,6 @@ from apps.accounts.decorator import hospital_required
 from apps.iamstudent.models import EmailToHospital, Student
 from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
 from apps.ineedstudent.models import Hospital
-from apps.ineedstudent.tables import ContactedTable
 from apps.mapview.utils import haversine, plzs
 from apps.mapview.views import get_ttl_hash
 
@@ -211,23 +209,3 @@ def hospital_view(request, uuid):
     context["email_form"] = email_form
 
     return render(request, "hospital_view.html", context)
-
-
-@login_required
-@hospital_required
-def hospital_dashboard(request):
-
-    # tabelle kontaktierter Studis
-    values = ["student", "registration_date", "message", "subject"]
-    qs = request.user.hospital.emailtosend_set.all().values(
-        *values, is_activated=models.F("student__is_activated")
-    )
-    kontaktiert_table = ContactedTable(qs)
-
-    context = {
-        "already_contacted": len(qs) > 0,
-        "has_posting": request.user.hospital.appears_in_map,
-        "posting_text": request.user.hospital.sonstige_infos,
-        "kontaktiert_table": kontaktiert_table,
-    }
-    return render(request, "hospital_dashboard.html", context)
