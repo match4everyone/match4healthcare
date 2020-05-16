@@ -1,14 +1,11 @@
 from datetime import datetime
-from functools import lru_cache
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import loader
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.gzip import gzip_page
 import django_tables2 as tables
 from django_tables2 import TemplateColumn
 
@@ -17,7 +14,6 @@ from apps.iamstudent.models import EmailToHospital, Student
 from apps.ineedstudent.forms import EmailToHospitalForm, HospitalFormZustimmung
 from apps.ineedstudent.models import Hospital
 from apps.mapview.utils import haversine, plzs
-from apps.mapview.views import get_ttl_hash
 
 
 class StudentTable(tables.Table):
@@ -29,45 +25,6 @@ class StudentTable(tables.Table):
         template_name = "django_tables2/bootstrap4.html"
         exclude = ["uuid", "registration_date", "id"]
         fields = ["user"]
-
-
-# Should be safe against BREACH attack because we don't have user input in reponse body
-@gzip_page
-def hospital_overview(request):
-    locations_and_number = prepare_hospitals(ttl_hash=get_ttl_hash(60))
-    template = loader.get_template("map_hospitals.html")
-    context = {
-        "locations": list(locations_and_number.values()),
-    }
-    return HttpResponse(template.render(context, request))
-
-
-@lru_cache(maxsize=1)
-def prepare_hospitals(ttl_hash=None):
-    hospitals = Hospital.objects.filter(
-        user__validated_email=True, is_approved=True, appears_in_map=True
-    )
-    locations_and_number = {}
-    for hospital in hospitals:
-        if len(hospital.sonstige_infos) != 0:
-            cc = hospital.countrycode
-            plz = hospital.plz
-            key = cc + "_" + plz
-            if key in locations_and_number:
-                locations_and_number[key]["count"] += 1
-                locations_and_number[key]["uuid"] = None
-            else:
-                lat, lon, ort = plzs[cc][plz]
-                locations_and_number[key] = {
-                    "uuid": hospital.uuid,
-                    "countrycode": cc,
-                    "plz": plz,
-                    "count": 1,
-                    "lat": lat,
-                    "lon": lon,
-                    "ort": ort,
-                }
-    return locations_and_number
 
 
 @login_required
