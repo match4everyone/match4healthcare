@@ -1,7 +1,6 @@
-import csv
-from os.path import dirname, abspath, join
-from math import radians, sin, cos, asin, sqrt
 import json
+from math import asin, cos, radians, sin, sqrt
+from os.path import abspath, dirname, join
 
 current_location = dirname(abspath(__file__))
 
@@ -28,10 +27,7 @@ def get_plzs_close_to(countrycode, plz, distance_in_km):
 
     return close
 
+
 def get_plz_data(countrycode, plz):
     lat, lon, ort = plzs[countrycode][plz]
-    return {
-        'latitude': lat,
-        'longitude': lon,
-        'city': ort
-    }
+    return {"latitude": lat, "longitude": lon, "city": ort}

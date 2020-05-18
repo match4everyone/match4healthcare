@@ -1,5 +1,7 @@
-from django.db import migrations, transaction
 import logging
+
+from django.db import migrations, transaction
+
 
 def update_emails(apps, schema_editor):
     EmailToSend = apps.get_model('iamstudent', 'EmailToSend')

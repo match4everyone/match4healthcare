@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-03 10:57+0000\n"
-"PO-Revision-Date: 2020-04-15 17:01+0200\n"
+"POT-Creation-Date: 2020-05-11 16:17+0000\n"
+"PO-Revision-Date: 2020-05-11 18:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,6 +18,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Bookmarks: -1,169,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+msgid "Aktive Staffmember"
+msgstr "Members of staff"
+
+msgid "Akzeptierte Institutionen"
+msgstr "Approved Institutions"
+
+msgid "Registrierte Helfende"
+msgstr "Registered Supporters"
+
+msgid "Anzahl deaktivierter Helfenden"
+msgstr "Deactivated Supporters"
+
+msgid "Kontaktanfragen an Helfende"
+msgstr "Contact requests to supporters"
+
+msgid "Kontaktanfragen an Institutionen"
+msgstr "Contact requests to institutions"
+
+msgid "Anzahl gesendeter Newsletter"
+msgstr "Sent newsletters"
+
+msgid "Institutionen mit Anzeige"
+msgstr "Institutions with posting"
 
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -66,15 +90,6 @@ msgstr "Inspect"
 
 msgid "Verwalte Hilfesuchende (Admin)"
 msgstr "Manage Supporters (Admin)"
-
-msgid "Abmelden"
-msgstr "Logout"
-
-msgid "Kennwort ändern"
-msgstr "Change password"
-
-msgid "Newsletter editieren"
-msgstr "Edit newsletter"
 
 msgid ""
 "\n"
@@ -143,6 +158,9 @@ msgstr "Yes, activate account."
 msgid "Nein, zurück zur Homepage"
 msgstr "No, return to website"
 
+msgid "Datenbankstatistiken"
+msgstr "Update data"
+
 msgid " Dein Account wurde gelöscht. "
 msgstr " Your account has been deleted. "
 
@@ -169,6 +187,9 @@ msgstr "Feel free to update your infomation at any time."
 
 msgid "Profil Details"
 msgstr "Profile information"
+
+msgid "Abmelden"
+msgstr "Logout"
 
 msgid "Passwort ändern"
 msgstr "Change  password"
@@ -763,6 +784,24 @@ msgstr ""
 "complications, our students would be very happy to receive support in this "
 "regard. </li>\n"
 "</ul>\n"
+
+msgid "Kennwort ändern"
+msgstr "Change password"
+
+msgid "Funktionen für Staff-Member"
+msgstr "Members of staff"
+
+msgid "Institutionen approven"
+msgstr "Approve Institutions"
+
+msgid "Newsletter editieren"
+msgstr "Edit newsletter"
+
+msgid "Zugriffsstatistiken anzeigen"
+msgstr "Access statistics"
+
+msgid " Statistiken ansehen"
+msgstr "View statistics"
 
 msgid ""
 "\n"
@@ -1872,6 +1911,13 @@ msgstr "Access statistics"
 
 msgid "Anzahl der Zugriffe pro Seite"
 msgstr "Number of visits per page"
+
+msgid ""
+"<html><body>gunicorn-access.log nicht gefunden oder "
+"zugreifbar                            </body></html>"
+msgstr ""
+"<html><body>gunicorn-access.log not found or "
+"accessible                            </body></html>"
 
 msgid "English"
 msgstr "English"
