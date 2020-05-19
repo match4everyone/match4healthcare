@@ -1,11 +1,14 @@
-from django.urls import path
+from django.urls import path, register_converter
 
 from apps.iamstudent.views import student_list_view
 
-from . import views
+from . import converters, views
+
+register_converter(converters.DecimalPointFloatConverter, 'float')
+
 
 urlpatterns = [
-    path("students/<countrycode>/<plz>/<int:distance>", student_list_view, name="list_by_plz",),
+    path("students/<countrycode>/<plz>/<float:distance>", student_list_view, name="list_by_plz",),
     # path('students_testing/<countrycode>/<plz>/<int:distance>', views.student_list_view, name='student_list_view'),
     path("hospitals/<countrycode>/<plz>", views.hospital_list, name="hospital_list"),
     path("hospital_map", views.hospital_overview, name="hopsital_map"),
