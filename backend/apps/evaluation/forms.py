@@ -106,5 +106,5 @@ class InstitutionEvaluationForm(forms.ModelForm):
 
     def clean_overall_rating(self):
         if not self.cleaned_data['overall_rating']:
-            raise forms.ValidationError(_('Bitte gib eine Gesamtbewertung ab!'), code='invalid')
+            raise forms.ValidationError(_('Bitte geben Sie eine Gesamtbewertung ab!'), code='invalid')
         return True
