@@ -109,7 +109,7 @@ class Command(BaseCommand):
             Student.objects.create(
                 user=u,
                 plz=plzs[i],
-                braucht_bezahlung=np.random.choice([0, 1]),
+                braucht_bezahlung=np.random.choice([1, 2, 3]),
                 is_activated=np.random.choice([True, False], p=[0.95, 0.05]),
                 einwilligung_agb=True,
                 datenschutz_zugestimmt=True,
