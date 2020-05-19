@@ -58,6 +58,7 @@ repos:
     rev: 2.0.5
     hooks:
       - id: prettier
+        args: [--loglevel=warn]
         files: "\\.(\
           css|less|scss\
           |js|jsx\
