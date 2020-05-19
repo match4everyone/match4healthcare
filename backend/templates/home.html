@@ -131,22 +131,23 @@ Home
     </div>
   </div>
   <div class="container" style="margin-top:55px;">
-    <div class="row">
-      <div class="col-md-12" style="text-align: left; margin: 0 auto;">
-        <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Gemeinsam unser Gesundheitssystem stärken, mit einem{% endblocktrans %} <img src="{% static 'img/match4healthcare-logo-text.svg' %}" width="180px" style="vertical-align: baseline"></h2>
-        <hr style="width:60%; margin: 0 auto; margin-bottom:45px; border-width: 2px; ">
-      </div>
-      <div class="col-lg-7 order-sm-2 order-lg-3" style="text-align: left; margin-bottom: 45px;">
-        <p>{% blocktrans %}Der Glaube daran, dass Mitmenschen in Not helfen können, die Liebe zum Fach Medizin und der Zusammenhalt untereinander sind in den letzten Wochen und Monaten im Gesundheitswesen noch viel präsenter denn je.{% endblocktrans %}</p>
-        <p>{% blocktrans %}Gerade aus diesem Grund brauchen wir zur jetzigen Zeit eine einfache und vor allen Dingen eine effiziente Schnittstelle, zwischen den medizinischen Einrichtungen und Fachkräften. Eine Schnittstelle, die es ermöglicht, dass Hilfebietende und Hilfesuchende schnell und unkompliziert miteinander vernetzt werden.{% endblocktrans %}</p>
-        <p>{% blocktrans %}Die Plattform "match4healthcare" bietet die ideale Schnittstelle zur schnellen und effizienten Vernetzung eben dieser Parteien und bietet vor allem zu Zeiten wie jetzt die ideale Problemlösung.{% endblocktrans %}</p>
-      </div>
-      <div class="col-lg-5 order-sm-3 order-lg-2" style="text-align: center; margin-bottom: 45px;">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/g8-EqUU55Bo" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
+
+	<div class="row" style="margin-bottom: 75px;">
+        <div class="col-md-12 col-lg-8" style="text-align: left; margin: 0 auto;">
+          {% static 'img/match4healthcare-logo-text.svg' as static_m4h_svg_url %}
+			 <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 15px">{% blocktrans %}Wie funktioniert <img src="{{ static_m4h_svg_url }}" width="180px" style="vertical-align: baseline">?{% endblocktrans %}</h2>
+        <hr style="width:60%; margin: 0 auto; margin-bottom:25px; border-width: 2px; ">
+			<p style="text-align:center;">{% blocktrans %}match4healthcare vernetzt Helfende und Hilfesuchende aus dem Gesundheitswesen anhand von Kriterien wie Qualifikation, Verfügbarkeit und Wunschtätigkeit auf der einen und Bedarf auf der anderen Seite. Die Bereitstellung der Plattform und die Durchführung der Vernetzung von Helfenden und Hilfesuchenden werden durch den ehrenamtlichen Einsatz vieler hilfsbereiter Freiwilliger ermöglicht und erfolgt unentgeltlich.{% endblocktrans %}</p>
+			<p style="text-align:center; margin-bottom:35px;">{% blocktrans %}Um den Datenschutz zu gewährleisten, werden Namen und Kontaktdaten der Helfenden den Gesundheitseinrichtungen während des gesamten Matchingprozesses nicht preisgegeben.{% endblocktrans %}</p>
+      {% get_current_language as LANGUAGE_CODE %}
+      <!-- { % if request.session.lang == "en" % } does not work until we save the language choice in cookie-->
+      <center>
+        {% with 'img/wie-funktionierts-home-'|add:request.LANGUAGE_CODE|add:'.png' as image_static_wiefunktionierts %}
+          <img src="{% static image_static_wiefunktionierts %}" width="100%">
+        {% endwith %}
+      </center>
+		</div>
+	</div>
     <div class="col-md-12" style="text-align: left; margin: 0 auto;">
       <h2 style="text-align:center; font-size: 1.5rem; font-weight:600; margin-bottom: 55px">{% blocktrans %}100% ehrenamtlich und uneigennützig von Studierenden als Open-Source Projekt entwickelt{% endblocktrans %}</h2>
     </div>
@@ -183,6 +184,10 @@ Home
           <img src="{% static 'img/KBV-logo.png' %}" height="50px">
         </a>
 
+		<a href="https://biss-fest.com" target="_blank">
+          <img src="{% static 'img/bissfest.png' %}" height="120px" style="margin:0 10px;">
+        </a>
+
 		  </div>
 
 	  </div>
@@ -192,8 +197,11 @@ Home
     <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto;">
       <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 15px;">{% blocktrans %}Empfohlen von{% endblocktrans %}</h2>
 
+        <a href="https://www.zusammengegencorona.de/" target="_blank">
+          <img src="{% static 'img/bmg.png' %}" height="120px">
+        </a>
 
-
+    <br>
 
         <a href="https://hashtag-gesundheit.de" target="_blank">
           <img src="{% static 'img/Hashtag-Gesundheit.png' %}" height="90px">
@@ -207,14 +215,13 @@ Home
           <img src="{% static 'img/aerzteblatt_logo.svg' %}" height="18px">
         </a>
 
-      <a href="https://biss-fest.com" target="_blank">
-          <img src="{% static 'img/bissfest.png' %}" height="120px" style="margin:0 10px;">
-        </a>
-		<br>
+
 
         <a href="https://www.thieme.de/de/index.htm" target="_blank">
           <img src="{% static 'img/thieme.png' %}" height="80px">
         </a>
+
+          <br>
 
         <a href="https://oehmedwien.at/" target="_blank">
           <img src="{% static 'img/oeh-wien.svg' %}" height="50px" style="margin-left:20px;">
@@ -233,7 +240,11 @@ Home
         </a>
 
         <a href="https://oeh-sfu.at/" target="_blank">
-          <img src="{% static 'img/oeh-sfu.jpg' %}" height="30px" style="margin-left:20px; margin-right:20px;">
+          <img src="{% static 'img/oeh-sfu.png' %}" height="30px" style="margin-left:20px; margin-right:20px;">
+        </a>
+
+        <a href="https://www.oeh-kl.at/" target="_blank">
+          <img src="{% static 'img/oeh-klu.png' %}" height="45px" margin-top="10px"style="margin-left:20px; margin-right:20px;">
         </a>
 </div>
     </div>

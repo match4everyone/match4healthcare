@@ -38,6 +38,13 @@ def legal_questions(request):
     return HttpResponse(template.render(context, request))
 
 
+def terms_of_use(request):
+    context = {}
+    template = loader.get_template("terms-of-use.html")
+
+    return HttpResponse(template.render(context, request))
+
+
 def handler404(request, exception=None):
     template = loader.get_template("404.html")
     return HttpResponse(template.render({}, request), status=404)
