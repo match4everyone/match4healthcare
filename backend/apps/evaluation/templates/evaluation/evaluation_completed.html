@@ -44,7 +44,11 @@ Danke!
 <div class="container login-form">
  <div class="col-lg-6 col-md-10 col-sm-12 col-12" >
   <div class="card login-card text-center align-items-center">
-      <h4>{% blocktrans %} Vielen Dank für Dein Feedback!{% endblocktrans %}</h4>
+      {% if request.session.eval_completed_referer == 'student' %}
+      <h4>{% blocktrans %}Vielen Dank für Dein Feedback!{% endblocktrans %}</h4>
+      {% elif request.session.eval_completed_referer == 'institution' %}
+      <h4>{% blocktrans %}Vielen Dank für Ihr Feedback!{% endblocktrans %}</h4>
+      {% endif %}
       <hr>
       <a href="/">
       <button type="button" class="btn blue text-white btn-md">{% blocktrans %}Zurück zur Startseite!{% endblocktrans %}</button>

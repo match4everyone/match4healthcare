@@ -11,6 +11,7 @@ def student_evaluation(request):
         if form_info.is_valid():
             form_info.save()
             request.session['eval_completed'] = True
+            request.session['eval_completed_referer'] = 'student'
             return HttpResponseRedirect(reverse('evaluation_completed'))
 
     else:
@@ -28,6 +29,7 @@ def institution_evaluation(request):
         if form_info.is_valid():
             form_info.save()
             request.session['eval_completed'] = True
+            request.session['eval_completed_referer'] = 'institution'
             return HttpResponseRedirect(reverse('evaluation_completed'))
 
     else:
