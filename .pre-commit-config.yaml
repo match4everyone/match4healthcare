@@ -72,3 +72,8 @@ repos:
               ^backend/static/css/[0-9A-z/_\-\.]*[0-9]|
               ^backend/static/js/[0-9A-z/_\-\.]*[0-9]
           )
+  - repo: https://github.com/thibaudcolas/curlylint
+    rev: "" # select a tag / sha to point at
+    hooks:
+      - id: curlylint
+        types: [html]
