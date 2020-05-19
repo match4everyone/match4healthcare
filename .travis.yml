@@ -5,8 +5,8 @@ before_script:
  - ./scripts/write_envs_to_file.sh
  - ./deploy.sh
  - ./scripts/wait_for_backend.sh
- - docker logs $(docker ps | grep backend | awk 'END {print $16}')
- - docker logs $(docker ps | grep database | awk 'END {print $11}')
+ - docker logs $(docker ps --format '{{.Names}}' | grep backend)
+ - docker logs $(docker ps --format '{{.Names}}' | grep database)
 
 
 script:
