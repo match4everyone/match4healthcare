@@ -4,7 +4,7 @@ from apps.iamstudent.views import student_list_view
 
 from . import converters, views
 
-register_converter(converters.DecimalPointFloatConverter, 'float')
+register_converter(converters.DecimalPointFloatConverter, "float")
 
 
 urlpatterns = [
