@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 16:17+0000\n"
+"POT-Creation-Date: 2020-05-19 22:19+0000\n"
 "PO-Revision-Date: 2020-05-11 18:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -943,6 +943,201 @@ msgstr "A test email to %s has been sent."
 msgid "Dein Approval ist nun gültig."
 msgstr "Your approval is now valid :)"
 
+msgid "Bitte bewerte deine Erfahrung mit match4healthcare insgesamt!"
+msgstr "Please rate your overall experience with match4healthcare!"
+
+msgid ""
+"Hier hast du die Möglichkeit, uns allgemeines Feedback zum "
+"Registrierungsprozess auf match4healthcare zu geben."
+msgstr "Please enter your feedback regarding the registration process."
+
+msgid ""
+"Falls du allgemeine Verbesserungsvorschläge hast, dann kannst du sie hier "
+"loswerden"
+msgstr "Please enter general feedback here."
+
+msgid ""
+"Wie hoch ist die Wahrscheinlichkeit, dass du unsere Seite "
+"weiterempfehlenwirst?"
+msgstr "How likely are you to recommend match4healthcare to a  friend?"
+
+msgid ""
+"Hier kannst du deine Mail angeben, falls du uns für potentiell auftretende "
+"Rückfragen bezüglich deiner Evaluation zur Verfügung stehen möchtest."
+msgstr ""
+"If you want us to contact you with further questions regarding your "
+"evaluation, please put your email-address here."
+
+msgid "Wie lief für dich die Kommunikation mit den Institutionen?"
+msgstr "How did the communication with the institutions go for you?"
+
+msgid "Bitte gib eine Gesamtbewertung ab!"
+msgstr "Please enter an overall rating of our page!"
+
+msgid ""
+"Bitte wählen Sie die am besten zutreffende Beschreibung für Ihre Institution "
+"aus."
+msgstr "Please choose the option best describing your institution."
+
+msgid "Bitte bewerten Sie Ihre Erfahrung mit match4healthcare insgesamt."
+msgstr "Please rate your overall experience with match4healthcare!"
+
+msgid ""
+"Hier haben Sie die Möglichkeit, uns Feedback zum Registrierungsprozess auf "
+"match4healthcare zu geben."
+msgstr "Please enter your feedback regarding the registration process."
+
+msgid ""
+"Falls Sie allgemeine Verbesserungsvorschläge haben, können Sie diese hier "
+"anbringen."
+msgstr "Please enter general feedback here."
+
+msgid ""
+"Wie hoch ist die Wahrscheinlichkeit, dass Sie unsere Seite weiterempfehlen "
+"werden?"
+msgstr "How likely are you to recommend match4healthcare to a colleague?"
+
+msgid ""
+"Falls Sie uns als Ansprechpartner für weitere Rückfragen bezüglich Ihrer "
+"Evaluation zur Verfügung stehen möchten, geben Sie bitte hier Ihre Kontakt E-"
+"Mail-Adresse an."
+msgstr ""
+"If you want us to contact you with further questions regarding your "
+"evaluation, please put your email-address here."
+
+msgid "Wie lief für Sie die Kommunikation mit den Helfenden?"
+msgstr "How did the communication with supporters work for you?"
+
+msgid "Bitte geben Sie eine Gesamtbewertung ab!"
+msgstr "Please enter an overall rating of our page!"
+
+msgid "Sehr gut"
+msgstr "Very good"
+
+msgid "Gut"
+msgstr "Good"
+
+msgid "Durchschnittlich"
+msgstr "Average"
+
+msgid "Schlecht"
+msgstr "Bad"
+
+msgid "Sehr schlecht"
+msgstr "Very Bad"
+
+msgid "Sehr hoch"
+msgstr "Very likely"
+
+msgid "Hoch"
+msgstr "Likely"
+
+msgid "Mittel"
+msgstr "Average"
+
+msgid "Gering"
+msgstr "Unlikely"
+
+msgid "Sehr gering"
+msgstr "Very unlikely"
+
+msgid "Krankenhaus/Spital"
+msgstr "Hospital"
+
+msgid "Arztpraxis"
+msgstr "General practice"
+
+msgid "Gesundheitsamt"
+msgstr "Health authority"
+
+msgid "Rettungsdienst"
+msgstr "Emergency medical service"
+
+msgid "Andere"
+msgstr "Other"
+
+msgid "Vielen Dank für Dein Feedback!"
+msgstr "Thank you for your Feedback!"
+
+msgid "Vielen Dank für Ihr Feedback!"
+msgstr "Thank you for your Feedback!"
+
+msgid "Zurück zur Startseite!"
+msgstr "Take me back!"
+
+msgid ""
+"\n"
+"Evaluation Institutionen\n"
+msgstr ""
+"\n"
+"Evaluation institutions\n"
+
+msgid "Sie haben match4healthcare genutzt und möchten uns Feedback geben?"
+msgstr "Do you want to give us feedback about match4healthcare?"
+
+msgid ""
+"Sagen Sie uns Ihre Meinung und helfen Sie uns dabei, unser Angebot zu "
+"verbessern!"
+msgstr "Tell us your opinion and help us improve our website."
+
+msgid "Ich habe auf match4healthcare.de Hilfe..."
+msgstr "I used match4healthcare to..."
+
+msgid "angeboten."
+msgstr "offer my support."
+
+msgid "gesucht."
+msgstr "find support."
+
+msgid "Vielen Dank für Ihr Vertrauen in match4healthcare!"
+msgstr "Thank you very much for your trust in match4healthcare!"
+
+msgid ""
+"Im Folgenden finden Sie einige Fragen, die uns dabei helfen sollen, den "
+"Vermittlungsprozess und die Nutzbarkeit der Website zur verbessern.\n"
+"            Wir freuen uns über Konstruktives Feedback und – da wir die "
+"Daten von angemeldeten Nutzern nicht gemeinsam mit der Evaluation speichern "
+"– auch über Ihre Kontakt-Mail für Rückfragen. "
+msgstr ""
+"Following you will find some questions that will help us improve our cross-"
+"matching-process and the usability of our website.\n"
+"We are looking forward to your feedback and – because we save your "
+"evaluation without referencing your account – your contact email address"
+
+msgid "Evaluation absenden!"
+msgstr "Send evaluation!"
+
+msgid ""
+"\n"
+"Evaluation Helfende\n"
+msgstr ""
+"\n"
+"Evaluation supporters\n"
+
+msgid "Du hast match4healthcare genutzt und möchtest uns Feedback geben?"
+msgstr "Do you want to give us feedback about match4healthcare?"
+
+msgid "Sag uns deine Meinung und hilf uns dabei, unser Angebot zu verbessern!"
+msgstr "Tell us your opinion and help us improve our website."
+
+msgid ""
+"Vielen Dank für Deine Bereitschaft, dich in diesen Zeiten für die "
+"medizinische Versorgung zu engagieren und für Vertrauen, das du uns mit "
+"deiner Anmeldung entgegengebracht hast!"
+msgstr "Thank you very much for your trust in match4healthcare!"
+
+msgid ""
+"Im Anschluss findest du ein paar Fragen, die uns dabei helfen sollen, den "
+"Vermittlungsprozess und die Nutzbarkeit der Website zu verbessern.\n"
+"            Wir freuen uns über konstruktives Feedback und – da wir die "
+"Daten von angemeldeten Nutzern nicht gemeinsam mit der Evaluation speichern "
+"– auch über deine Kontakt-Mail für Rückfragen."
+msgstr ""
+"Following you will find some questions that will help us improve our cross-"
+"matching-process and the usability of our website.\n"
+"We are looking forward to your feedback and – because we save your "
+"evaluation without referencing your account – your contact email address"
+
 msgid "Kann eine Vergütung angeboten werden?"
 msgstr "Can compensation be offered?"
 
@@ -1117,9 +1312,6 @@ msgstr "Hospital"
 
 msgid "Pflegeeinrichtungen"
 msgstr "Nursing facilities"
-
-msgid "Rettungsdienst"
-msgstr "Emergency services"
 
 msgid "Labor"
 msgstr "Laboratory"
@@ -2123,9 +2315,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Detailansicht für Kliniken"
 #~ msgstr "Detail view for hospitals"
 
-#~ msgid "Gesuche"
-#~ msgstr "Direct search"
-
 #~ msgid "Helferkarte"
 #~ msgstr "Map of volunteers"
 
@@ -2464,9 +2653,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 #~ msgid "Beatmungsgeräte Bedienen"
 #~ msgstr "Respirator Settings"
 
-#~ msgid "Bitte gib deine Postleitzahl ein"
-#~ msgstr "Please enter your zip code"
-
 #~ msgid "in Monaten"
 #~ msgstr "in months"
 
@@ -2541,9 +2727,6 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 
 #~ msgid "Informatikstudent (TU Berlin)"
 #~ msgstr "Computer science student (TU Berlin)"
-
-#~ msgid "Krankenhauskarte"
-#~ msgstr "Map of hospitals"
 
 #~ msgid " Liebe Medizinstudierende, Freiwillige, Ärzte und Ärztinnen,"
 #~ msgstr " Dear medical students, volunteers, doctors,"
