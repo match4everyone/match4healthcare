@@ -43,6 +43,7 @@ def hospital_overview(request):
     template = loader.get_template("map_hospitals.html")
     context = {
         "locations": list(locations_and_number.values()),
+        "mapbox_token": settings.MAPBOX_TOKEN,
     }
     return HttpResponse(template.render(context, request))
 
