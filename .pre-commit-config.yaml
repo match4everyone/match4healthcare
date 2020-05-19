@@ -73,8 +73,9 @@ repos:
               ^backend/static/js/[0-9A-z/_\-\.]*[0-9]
           )
   - repo: https://github.com/motet-a/jinjalint
-    rev: pre-commit-hooks
+    rev: master
     hooks:
       - id: jinjalint
+        args: [--config=.jinjalint.cfg]
         types: [file] # restore the default `types` matching
         files: \.html$
