@@ -1,6 +1,5 @@
 exclude: |
   (?x)(
-      ^backend/static/|
       ^backend/backups/|
       ^backend/run/|
       ^database/backups/|
@@ -14,12 +13,14 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: end-of-file-fixer
+        exclude: ^backend/static/
       - id: requirements-txt-fixer
       - id: trailing-whitespace
         exclude: ^backend/static/
       # Note that this does not mix with git setup check-in LF check-out CRLF,
       # see https://github.com/pre-commit/pre-commit-hooks#mixed-line-ending
       - id: mixed-line-ending
+        exclude: ^backend/static/
         args: [--fix=lf]
   - repo: https://github.com/timothycrosley/isort
     rev: 4.3.21
@@ -63,3 +64,10 @@ repos:
           |md|markdown|mdown|mkdn\
           |yaml|yml\
           )$"
+        exclude: |
+          (?x)(
+              ^[0-9A-z/_\-\.]*.min.js|
+              ^[0-9A-z/_\-\.]*.min.css|
+              ^backend/static/css/[0-9A-z/_\-\.]*[0-9]|
+              ^backend/static/js/[0-9A-z/_\-\.]*[0-9]
+          )
