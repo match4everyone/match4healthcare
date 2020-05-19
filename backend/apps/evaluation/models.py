@@ -65,3 +65,4 @@ INSTITUTION_CHOICES = [
 class InstitutionEvaluation(BaseEvaluation):
 
     institution_type = models.CharField(max_length=30, choices=INSTITUTION_CHOICES, default=INSTITUTION_HOSPITAL)
+    communication_with_students = models.TextField(blank=True, null=True)
