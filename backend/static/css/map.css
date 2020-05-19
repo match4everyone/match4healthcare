@@ -2,46 +2,47 @@
   min-height: 480px;
 }
 @media only screen and (max-width: 767px) {
-  .map-dropdown, .map-input {
+  .map-dropdown,
+  .map-input {
     margin-bottom: 5px;
   }
 }
 .map-dropdown {
   height: 2.35rem;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .map-input {
   height: calc(2.25rem + 2px);
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out, box-
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-;
 }
 head {
-  Background-color: #7dd1c5;
-  font-family: 'proxima-nova', sans-serif;
+  background-color: #7dd1c5;
+  font-family: "proxima-nova", sans-serif;
 }
 .mt-2 {
   background-color: black;
   color: white;
   text-align: center;
-  font-family: 'proxima-nova', sans-serif;
+  font-family: "proxima-nova", sans-serif;
 }
 h2 {
-  font-family: 'proxima-nova', sans-serif;
+  font-family: "proxima-nova", sans-serif;
   text-align: center;
 }
 /*form {
@@ -94,48 +95,56 @@ body {
   background-color: #cfdce3;
 }
 
+.leaflet-container a {
+  color: #ed0a71;
+}
+.leaflet-container a:hover {
+  color: #8c0442;
+}
 
-
-.leaflet-container a { color: #ed0a71 }
-.leaflet-container a:hover { color: #8c0442;;  }
-
-.leaflet-popup-content-wrapper { border-radius: .5rem;}
+.leaflet-popup-content-wrapper {
+  border-radius: 0.5rem;
+}
 
 .leaflet-container {
-	font: 14px/1.5 "proxima-nova", Arial, Helvetica, sans-serif; font-weight: 300;}
+  font: 14px/1.5 "proxima-nova", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
 
 .leaflet-container a.leaflet-popup-close-button {
-	width: 30px;
-	padding: 0;
-font: 30px/30px proxima-nova, Verdana, sans-serif;}
+  width: 30px;
+  padding: 0;
+  font: 30px/30px proxima-nova, Verdana, sans-serif;
+}
 
-
-.footer { z-index: 2; }
+.footer {
+  z-index: 2;
+}
 
 .user-container {
   position: absolute;
-  top:8px;
-  right:8px;
+  top: 8px;
+  right: 8px;
 }
 
-	.user-container, .leaflet-control-layers-expanded {
-		color:#000943;
-		z-index:99999;
-		padding:10px 15px;
-		font-weight:700;
-		border-radius:5px;
-		background-color: rgba(255, 255, 255, 0.9);
-		}
-
-		@supports (-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px)) {
-
-		.user-container, .leaflet-control-layers-expanded {
-			-webkit-backdrop-filter: blur(4px);
-  		 	backdrop-filter: blur(4px);
-			background-color: rgba(255, 255, 255, 0.6);
-			}
+.user-container,
+.leaflet-control-layers-expanded {
+  color: #000943;
+  z-index: 99999;
+  padding: 10px 15px;
+  font-weight: 700;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
+@supports (-webkit-backdrop-filter: blur(4px)) or (backdrop-filter: blur(4px)) {
+  .user-container,
+  .leaflet-control-layers-expanded {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}
 
 /* Disable css that would overwrite JS color
 path.leaflet-interactive  {
@@ -144,7 +153,10 @@ path.leaflet-interactive  {
 }
 */
 
-	a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {color: #000943 !important;}
+a.leaflet-control-zoom-in,
+a.leaflet-control-zoom-out {
+  color: #000943 !important;
+}
 .mapbox-wordmark {
   position: absolute;
   display: block;
@@ -164,74 +176,68 @@ path.leaflet-interactive  {
 }
 
 div.leaflet-control-layers-overlays {
-  font-size:12pt;
+  font-size: 12pt;
 }
-
 
 .leaflet-control-layers-overlays img {
   height: 20pt;
 }
 
 .leaflet-control-layers-overlays input[type="checkbox"] {
-  display:none;
+  display: none;
 }
 
 .leaflet-control-layers-overlays input[type="checkbox"] + span:before {
-  content:"☐ ";
+  content: "☐ ";
   font-size: 18pt;
   vertical-align: middle;
 }
 
 .leaflet-control-layers-overlays input:checked + span:before {
-  content:"☑ ";
+  content: "☑ ";
   font-size: 18pt;
   vertical-align: middle;
 }
 
-
-
 .supporterMarker.marker-cluster-small,
 .supporterMarker.marker-cluster-medium,
 .supporterMarker.marker-cluster-large {
-	background-color: rgba(237, 10, 113, 0.4);
+  background-color: rgba(237, 10, 113, 0.4);
 }
 
 .supporterMarker.marker-cluster-single div,
 .supporterMarker.marker-cluster-small div,
 .supporterMarker.marker-cluster-medium div,
 .supporterMarker.marker-cluster-large div {
-	background-color: rgba(237, 10, 113, 1);
+  background-color: rgba(237, 10, 113, 1);
 }
-
 
 .facilityMarker.marker-cluster-small,
 .facilityMarker.marker-cluster-medium,
 .facilityMarker.marker-cluster-large {
-	background-color: rgba(0, 9, 67, 0.4);
+  background-color: rgba(0, 9, 67, 0.4);
 }
 
 .facilityMarker.marker-cluster-single div,
 .facilityMarker.marker-cluster-small div,
 .facilityMarker.marker-cluster-medium div,
 .facilityMarker.marker-cluster-large div {
-	background-color: rgba(0, 9, 67, 1);
+  background-color: rgba(0, 9, 67, 1);
 }
-
-
 
 .marker-cluster-single div,
 .marker-cluster-small div,
 .marker-cluster-medium div,
 .marker-cluster-large div {
-	color: white;
+  color: white;
 }
 
-.supporterMarker.marker-cluster div, 
+.supporterMarker.marker-cluster div,
 .facilityMarker.marker-cluster div {
   font-weight: bold;
 }
 
-.marker-cluster-single.supporterMarker, 
+.marker-cluster-single.supporterMarker,
 .marker-cluster-single.facilityMarker {
   background-color: transparent;
 }
