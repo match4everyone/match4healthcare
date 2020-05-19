@@ -7,97 +7,98 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-    - name: Install gettext
-      run: sudo apt-get update && sudo apt-get install gettext
-    - name: Cache python packages
-      uses: actions/cache@v1
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install python dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install wheel
-        pip install -r ./backend/requirements.txt
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - name: Install gettext
+        run: sudo apt-get update && sudo apt-get install gettext
+      - name: Cache python packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r ./backend/requirements.txt
 
-    - name: Generate updated .po file
-      run: django-admin makemessages -l en --no-location
+      - name: Generate updated .po file
+        run: django-admin makemessages -l en --no-location
 
-    - name: "[TEST] Check for fuzzy translations"
-      id: fuzzy_translations
-      continue-on-error: true
-      run: bash -c 'if [ $(cat ./backend/locale/en/LC_MESSAGES/django.po | grep "#, fuzzy" | wc -l) -gt 0 ];
-                    then echo "Unresolved fuzzy translations are present"; exit 1; fi'
+      - name: "[TEST] Check for fuzzy translations"
+        id: fuzzy_translations
+        continue-on-error: true
+        run:
+          bash -c 'if [ $(cat ./backend/locale/en/LC_MESSAGES/django.po | grep "#, fuzzy" | wc -l) -gt 0 ];
+          then echo "Unresolved fuzzy translations are present"; exit 1; fi'
 
-    - name: "[TEST] Check for missing translations"
-      id: missing_translations
-      continue-on-error: true
-      # https://stackoverflow.com/a/14799019/3342058
-      run: |
-        if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c ? c : "0" }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ];
-          then echo "Missing translations are present"; exit 1;
-        fi
+      - name: "[TEST] Check for missing translations"
+        id: missing_translations
+        continue-on-error: true
+        # https://stackoverflow.com/a/14799019/3342058
+        run: |
+          if [ $(awk '$NF == "msgstr \"\"" { c++ } END { print c ? c : "0" }' FS="\n" RS= ./backend/locale/en/LC_MESSAGES/django.po) -gt 0 ];
+            then echo "Missing translations are present"; exit 1;
+          fi
 
-    # Workaround because continue-on-error does not fail test
-    - name: Stop if tests failed
-      run: |
-        echo "Tests failed. Please check the individual test logs for more details"
-        exit 1
-      if: ${{ steps.fuzzy_translations.outcome == 'failure' || steps.missing_translations.outcome == 'failure' }}
+      # Workaround because continue-on-error does not fail test
+      - name: Stop if tests failed
+        run: |
+          echo "Tests failed. Please check the individual test logs for more details"
+          exit 1
+        if: ${{ steps.fuzzy_translations.outcome == 'failure' || steps.missing_translations.outcome == 'failure' }}
 
   test-migrations:
     name: Test if makemigrations was executed
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-    - name: Cache python packages
-      uses: actions/cache@v1
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install python dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install wheel
-        pip install -r ./backend/requirements.txt
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - name: Cache python packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r ./backend/requirements.txt
 
-    - name: "[TEST] Check if migrations were made"
-      run: PYTHONPATH="./backend:$PYTHONPATH" django-admin makemigrations --settings=match4healthcare.settings.development --check --dry-run
+      - name: "[TEST] Check if migrations were made"
+        run: PYTHONPATH="./backend:$PYTHONPATH" django-admin makemigrations --settings=match4healthcare.settings.development --check --dry-run
 
   test-code-style:
     name: Test if code is properly formatted
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-    - name: Cache python packages
-      uses: actions/cache@v1
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install python dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install wheel
-        pip install -r ./backend/requirements.txt
-    - name: set PY
-      run: echo "::set-env name=PY::$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')"
-    - name: Cache pre-commit libraries
-      uses: actions/cache@v1
-      with:
-        path: ~/.cache/pre-commit
-        key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml', '.flake8', '.isort.cfg') }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - name: Cache python packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('./backend/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r ./backend/requirements.txt
+      - name: set PY
+        run: echo "::set-env name=PY::$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')"
+      - name: Cache pre-commit libraries
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml', '.flake8', '.isort.cfg') }}
 
-    - name: "[TEST] Check if code was properly formatted"
-      uses: pre-commit/action@v1.0.1
+      - name: "[TEST] Check if code was properly formatted"
+        uses: pre-commit/action@v1.0.1

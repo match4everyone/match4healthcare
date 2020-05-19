@@ -1,4 +1,5 @@
 ﻿# Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
@@ -14,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [1.6.0-rc1]
 
 ### Hinzugefügt
+
 - Links zu allen Supporterlogos auf der Startseite
 - added license agreement for images
 - System Checks (see Readme):
@@ -25,7 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Sendgrid Client API für Newsletterversand
 - Einstellung für Anzahl nötiger Newsletter-Genehmigungen vor Versand
 - Slack Channel Log Handler für Benachrichtigung über Fehler
-- JSON Routen für Einrichtungen und Helfer*innen zum dynamischen Nachladen in die Karte
+- JSON Routen für Einrichtungen und Helfer\*innen zum dynamischen Nachladen in die Karte
 - Komplett neue Implementierung der Karte mit https://github.com/Leaflet/Leaflet.markercluster und ein- und ausschaltbarer Anzeige von Helfern und Einrichtungen in einer Karte
 - Logging von Anmeldeversuchen
 - Neues Logfile-Format: JSON
@@ -35,6 +37,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Prüfung ob Text eingegeben wurde, bevor ein Mail versendet werden kann
 
 ### Geändert
+
 - new design for language switcher
 - new logos and structure landing page
 - Redirect nach Login für Einrichtungen auf Profil
@@ -50,6 +53,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Deploy-Skript Reihenfolge von migrate und den anderen Schritten geändert
 
 ### Entfernt
+
 - CDN Einbindung von bootstrap, jQuery, leaflet und popper entfernt aus Datenschutzgründen
 - Überflüssige jQuery Einbindung
 - Bug: e-mail an Einrichtungen wurden nicht in DB gespeichert nach dem Senden
@@ -60,6 +64,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [1.5.1]
 
 ### Hinzugefügt
+
 - Links zu allen Supporterlogos auf der Startseite
 
 ### Geändert
@@ -69,6 +74,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [1.5] - 2020-04-06
 
 ### Hinzugefügt
+
 - Versendete eMails auf Datenbank nach Sendevorgang gruppieren, Voraussetzung für Anzeige gesendeter e-Mails später
 - Migrationsskript für Mailgruppierung
 - Neue Qualifikation Medstudent/Arzt -> Allgemeinmedizin
@@ -89,12 +95,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Bissfest Logo hinzugefügt
 
 ### Geändert
+
 - Herumfliegenden Text auf der "Kennwort setzen" Seite aus dem Nimbus geholt und zum Formular gepackt
 - Design Seite "Datenschutzerklärung zustimmen" für Institutionen verbessert
 - Überarbeitung aller Übersetzungen
 - Fehlerbehebung: Limit von 200 Mails wurde irrtümlich auf Lebenszeit und nicht pro Tag berechnet
 - fixes #174: Auswahlfelder für Assistenzarzt, Facharzt, usw. am Handy nicht auswählbar
-- fixes #375:  Auswahlfelder für Assistenzarzt, Facharzt, usw. mit Tab nicht erreichbar
+- fixes #375: Auswahlfelder für Assistenzarzt, Facharzt, usw. mit Tab nicht erreichbar
 - Verschiedenste kleine Textänderungen
 - Text in Bausteine aufteilen zur besseren Übersetzbarkeit
 - Filterseite: "Unterkunft kann angeboten werden" statt "Unterkunft gewünscht"
@@ -106,6 +113,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Anzeige der registrierten User jetzt nur noch validierte
 
 ### Entfernt
+
 - viele Rechtschreibfehler
 - Doppelte Logos entfernt
 - Doppelter Aufruf jQuery entfernt
