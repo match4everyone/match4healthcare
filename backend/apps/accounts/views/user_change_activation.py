@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic.base import RedirectView, View
 
-from apps.accounts.decorator import student_required
+from apps.accounts.admin import student_required
 
 logger = logging.getLogger(__name__)
 

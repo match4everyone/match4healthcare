@@ -9,7 +9,7 @@ from django.utils.text import format_lazy
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 from apps.iamstudent.forms import EmailToSendForm
 from apps.iamstudent.models import EmailGroup, EmailToSend, Student
 

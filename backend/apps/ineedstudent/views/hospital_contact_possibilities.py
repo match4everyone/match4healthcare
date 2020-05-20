@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 from apps.ineedstudent.tables import ContactedTable
 
 logger = logging.getLogger(__name__)

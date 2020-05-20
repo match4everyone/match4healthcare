@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 from apps.ineedstudent.forms import HospitalFormZustimmung
 
 logger = logging.getLogger(__name__)

@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 from apps.iamstudent.filters import StudentJobRequirementsFilter
 from apps.iamstudent.models import Student
 from apps.iamstudent.tables import StudentTable

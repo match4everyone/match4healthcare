@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from apps.accounts.db_stats import DataBaseStats
+from apps.accounts.src.statistics import DataBaseStats
 
 logger = logging.getLogger(__name__)
 

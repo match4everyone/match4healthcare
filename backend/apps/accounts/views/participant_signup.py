@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 
-from apps.accounts.utils import send_password_set_email
+from apps.accounts.src.notifications import send_password_set_email
 
 logger = logging.getLogger(__name__)
 

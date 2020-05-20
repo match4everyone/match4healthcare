@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 
 logger = logging.getLogger(__name__)
 

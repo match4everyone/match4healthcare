@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
 
-from apps.accounts.decorator import hospital_required, student_required
+from apps.accounts.admin import hospital_required, student_required
 from apps.iamstudent.forms import StudentFormEditProfile
 from apps.iamstudent.models import Student
 from apps.ineedstudent.forms import HospitalFormEditProfile

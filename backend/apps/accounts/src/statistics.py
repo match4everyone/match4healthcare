@@ -1,11 +1,10 @@
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
+from apps.accounts.modelss import Newsletter, User
 from apps.iamstudent.forms import form_labels
 from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, EmailToHospital, EmailToSend, Student
 from apps.ineedstudent.models import Hospital
-
-from .modelss import Newsletter, User
 
 
 class RegisterList(list):

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
-from apps.accounts.decorator import hospital_required
+from apps.accounts.admin import hospital_required
 from apps.iamstudent.forms import StudentFormView
 from apps.iamstudent.models import Student
 

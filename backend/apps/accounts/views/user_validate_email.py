@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
 from apps.accounts.modelss import User
-from apps.accounts.utils import send_password_set_email
+from apps.accounts.src.notifications import send_password_set_email
 
 logger = logging.getLogger(__name__)
 
