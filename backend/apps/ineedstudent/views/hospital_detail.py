@@ -12,7 +12,7 @@ from django.views.generic.base import TemplateView
 from apps.iamstudent.models import EmailToHospital, Student
 from apps.ineedstudent.forms import EmailToHospitalForm
 from apps.ineedstudent.models import Hospital
-from apps.mapview.utils import haversine, plzs
+from apps.mapview.src.map import haversine, plzs
 
 logger = logging.getLogger(__name__)
 

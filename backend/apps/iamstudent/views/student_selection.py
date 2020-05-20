@@ -10,7 +10,7 @@ from apps.accounts.admin import hospital_required
 from apps.iamstudent.filters import StudentJobRequirementsFilter
 from apps.iamstudent.models import Student
 from apps.iamstudent.tables import StudentTable
-from apps.mapview.utils import get_plzs_close_to, plzs
+from apps.mapview.src.map import get_plzs_close_to, plzs
 
 logger = logging.getLogger(__name__)
 

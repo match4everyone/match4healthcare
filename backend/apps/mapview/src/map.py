@@ -1,26 +1,34 @@
 from functools import lru_cache
+from math import asin, cos, radians, sin, sqrt
 import time
 
-from django.conf import settings
-from django.http import HttpResponse, JsonResponse
-from django.template import loader
-from django.views.decorators.gzip import gzip_page
-
 from apps.iamstudent.models import Student
-from apps.ineedstudent.models import Hospital
-from apps.mapview.utils import get_plz_data, plzs
+from apps.mapview.files.map_data import plzs
 
 
-# Should be safe against BREACH attack because we don't have user input in reponse body
-@gzip_page
-def index(request):
-    locations_and_number = prepare_students(ttl_hash=get_ttl_hash())
-    template = loader.get_template("mapview/map.html")
-    context = {
-        "locations": list(locations_and_number.values()),
-        "mapbox_token": settings.MAPBOX_TOKEN,
-    }
-    return HttpResponse(template.render(context, request))
+def haversine(lon1, lat1, lon2, lat2):
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    return 2 * 6371 * asin(sqrt(a))
+
+
+def get_plzs_close_to(countrycode, plz, distance_in_km):
+    lon1, lat1, _ = plzs[countrycode][plz]
+
+    close = []
+    for other_plz, (lon2, lat2, ort) in plzs[countrycode].items():
+        dist = haversine(lon1, lat1, lon2, lat2)
+        if dist < distance_in_km:
+            close.append(other_plz)
+
+    return close
+
+
+def get_plz_data(countrycode, plz):
+    lat, lon, ort = plzs[countrycode][plz]
+    return {"latitude": lat, "longitude": lon, "city": ort}
 
 
 @lru_cache(maxsize=1)
@@ -50,20 +58,6 @@ def prepare_students(ttl_hash=None):
             }
             i += 1
     return locations_and_number
-
-
-def facilitiesJSON(request):
-    hospitals = Hospital.objects.filter(
-        user__validated_email=True, is_approved=True, appears_in_map=True
-    )
-    facilities = group_by_zip_code(hospitals)
-    return JsonResponse(facilities)
-
-
-def supportersJSON(request):
-    students = Student.objects.filter(user__validated_email=True)
-    supporters = group_by_zip_code(students)
-    return JsonResponse(supporters)
 
 
 def group_by_zip_code(entities):

@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.modelss import User
-from apps.mapview.utils import plzs
+from apps.mapview.files.map_data import plzs
 
 
 def validate_semester(value):

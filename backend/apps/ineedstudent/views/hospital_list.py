@@ -8,7 +8,7 @@ from django.views.generic.base import View
 
 from apps.ineedstudent.models import Hospital
 from apps.ineedstudent.tables import HospitalTable
-from apps.mapview.utils import plzs
+from apps.mapview.src.map import plzs
 
 logger = logging.getLogger(__name__)
 

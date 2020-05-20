@@ -7,7 +7,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.modelss import User
-from apps.mapview.utils import plzs
+from apps.mapview.files.map_data import plzs
 
 # Create your models here.
 """A typical class defining a model, derived from the Model class."""

@@ -6,7 +6,7 @@ from django.views.decorators.gzip import gzip_page
 from django.views.generic.base import TemplateView
 
 from apps.ineedstudent.models import Hospital
-from apps.mapview.utils import plzs
+from apps.mapview.src.map import plzs
 from apps.mapview.views import get_ttl_hash
 
 logger = logging.getLogger(__name__)
