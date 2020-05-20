@@ -2,9 +2,9 @@ import django.forms as forms
 from django.utils.translation import gettext_lazy as _
 import django_filters as filters
 
-from .forms import get_form_helper_filter
-from .models import Student
-from .models.student import AUSBILDUNGS_TYPEN_COLUMNS, BEZAHLUNG_CHOICES_Filter
+from apps.iamstudent.forms import form_labels, get_form_helper_filter
+from apps.iamstudent.models import Student
+from apps.iamstudent.models.student import AUSBILDUNGS_TYPEN_COLUMNS, BEZAHLUNG_CHOICES_Filter
 
 
 class StudentJobRequirementsFilter(filters.FilterSet):
@@ -131,8 +131,6 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         ]:
             fields.append(f)
 
-    import django.forms as forms
-
     def __init__(self, *args, **kwargs):
         if "display_version" not in kwargs.keys():
             display_version = False
@@ -141,7 +139,6 @@ class StudentJobRequirementsFilter(filters.FilterSet):
             del kwargs["display_version"]
 
         super(StudentJobRequirementsFilter, self).__init__(*args, **kwargs)
-        from .forms import form_labels
 
         self.Meta.labels = form_labels
         self.Meta.labels["unterkunft_gewuenscht"] = _("Kann eine Unterkunft angeboten werden?")

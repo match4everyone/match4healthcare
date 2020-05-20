@@ -8,7 +8,7 @@ from django.views.generic.base import View
 
 from apps.accounts.decorator import hospital_required
 from apps.iamstudent.filters import StudentJobRequirementsFilter
-from apps.iamstudent.models import LocationFilterModel, Student, StudentListFilterModel
+from apps.iamstudent.models import Student
 from apps.iamstudent.tables import StudentTable
 from apps.mapview.utils import get_plzs_close_to, plzs
 
@@ -69,66 +69,6 @@ class StudentSelectionView(View):
             "max": max_mails,
             "email": request.user.email,
         }
-
-        # saving logic
-
-        uuid = request.GET.get("uuid", "")
-        save_filter = request.GET.get("saveFilter", "false")
-        filter_name = request.GET.get("filterName", "")
-
-        if save_filter == "true" and filter_name != "":
-
-            student_attr = self.clean_request_for_saving(request_filtered)
-            loc = LocationFilterModel(plz=plz, distance=distance, countrycode=countrycode)
-            loc.save()
-            filter_model = StudentListFilterModel(
-                **student_attr, name=filter_name, hospital=request.user.hospital
-            )
-            filter_model.location = loc
-            filter_model.save()
-
-            context["uuid"] = filter_model.uuid
-            context["filter_name"] = filter_model.name
-            context["filter_is_being_saved"] = True
-
-        elif uuid != "":
-            # update saved filter
-            filter_model = StudentListFilterModel.objects.get(uuid=uuid)
-
-            # update filter
-            uuid_filter = str(filter_model.uuid)
-            student_attr = self.clean_request_for_saving(request_filtered)
-            qs = StudentListFilterModel.objects.filter(uuid=uuid_filter)
-            qs.update(**student_attr)
-            from django.db.models.fields import NOT_PROVIDED
-
-            for r in qs:
-                r.save()
-
-            # reset all fields that have not been set to default
-            filter_model = StudentListFilterModel.objects.get(uuid=uuid)
-            for f in filter_model._meta.fields:
-                if (
-                    f.name not in ["uuid", "hospital", "location", "registration_date"]
-                    and f.name not in student_attr
-                ):
-                    if f.default != NOT_PROVIDED:
-                        setattr(filter_model, f.name, f.get_default())
-            filter_model.save()
-
-            # update location
-            uuid_loc = str(filter_model.location.uuid)
-            qs = LocationFilterModel.objects.filter(uuid=uuid_loc)
-            qs.update(plz=plz, distance=distance, countrycode=countrycode)
-            for r in qs:
-                r.save()
-
-            context["filter_name"] = filter_model.name
-            context["uuid"] = filter_model.uuid
-            context["filter_is_being_saved"] = True
-        else:
-            # user does not want to save filter
-            context["filter_is_being_saved"] = False
 
         return render(request, "student_list_view.html", context)
 
