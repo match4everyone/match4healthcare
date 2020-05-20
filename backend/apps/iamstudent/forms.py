@@ -11,7 +11,7 @@ from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.modelss import User
-from apps.iamstudent.custom_crispy import RadioButtons
+from apps.iamstudent.web.buttongroup import RadioButtons
 
 from .models import EmailToSend, Student
 from .models.student import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN
