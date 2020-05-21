@@ -4,6 +4,20 @@
   font-style: normal;
   font-weight: 300;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
 body {
   font-family: 'proxima-nova', sans-serif !important;
 	-webkit-font-smoothing: antialiased;

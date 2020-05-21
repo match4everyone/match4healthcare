@@ -1,5 +1,8 @@
-export const myFunnyThing = [
-    'content'
-]
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './css/general.css'
+import $ from 'jquery'
 
-window.THING = myFunnyThing
+/* Globally export jQuery */
+window.jQuery = $
+window.$ = $ 

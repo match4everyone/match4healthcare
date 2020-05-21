@@ -3,6 +3,7 @@ const path = require('path')
 const BundleTracker = require('webpack-bundle-tracker')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // Generate entry points from all .js files in src root
 const srcDir = path.resolve(__dirname, 'src')
@@ -16,14 +17,15 @@ const entryPoints = fs
     },{})
 
 module.exports = {
+    mode: 'production',
     watchOptions: {
         ignored: /node_modules/,
     },
-    externals: {
-        jquery: 'jQuery',
-    },
     context: __dirname,
-    mode: 'production',
+    performance: {
+        maxEntrypointSize: 600000,
+        maxAssetSize: 400000
+    },
     module: {
         rules: [
             {
@@ -79,19 +81,31 @@ module.exports = {
             }
         ]
     },
-    entry: entryPoints, // generated from src/*.js
+    entry: Object.assign({
+        vendor: ['bootstrap','jquery','leaflet','leaflet.markercluster','leaflet.featuregroup.subgroup']
+    },entryPoints), // generated from src/*.js
     output: {
         filename: '[name]-[hash].js',
+        chunkFilename: '[name]-[hash].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/static/'
     },
     optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    chunks: 'initial',
+                    name: 'vendor',
+                    test: 'vendor',
+                    enforce: true
+                },
+            }
+        },
         minimize: true,
         minimizer: [new TerserPlugin({
             terserOptions: {
                 keep_fnames: false
             }
-
         })],
     },
     plugins: [
@@ -102,5 +116,6 @@ module.exports = {
             logTime: true,
             indent: '\t',
         }),
+        new CompressionPlugin(),
     ],
 }
