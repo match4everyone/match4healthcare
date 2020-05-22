@@ -94,25 +94,20 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
     braucht_bezahlung = filters.ChoiceFilter(
         field_name="braucht_bezahlung",
-        lookup_expr="gte",
+        method="not_equal",
         choices=BEZAHLUNG_CHOICES_Filter,
-        label=_("Kann eine Vergütung angeboten werden?"),
         widget=forms.RadioSelect,
     )
-    availability_start = filters.DateFilter(
-        field_name="availability_start",
-        lookup_expr="lte",
-        label=_("Die Helfenden sollten verfügbar sein ab "),
-    )
+    availability_start = filters.DateFilter(field_name="availability_start", lookup_expr="lte",)
     unterkunft_gewuenscht = filters.ChoiceFilter(
-        field_name="unterkunft_gewuenscht",
-        label=_("Kann eine Unterkunft angeboten werden?"),
-        choices=[(True, _("ja")), (False, _("nein"))],
-        widget=forms.RadioSelect,
+        field_name="unterkunft_gewuenscht", choices=[(False, _("nein"))], widget=forms.RadioSelect,
     )
 
-    unterkunft_gewuenscht.field.empty_label = _("wissen wir nicht")
-    braucht_bezahlung.field.empty_label = _("wissen wir nicht")
+    unterkunft_gewuenscht.field.empty_label = _("ist möglich")
+    braucht_bezahlung.field.empty_label = _(
+        "Wir können zwar Vergütung anbieten, nehmen aber auch Unterstützung von Helfenden an, "
+        "die keine Bezahlung wünschen."
+    )
 
     class Meta:
         model = Student
@@ -130,7 +125,12 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         ]:
             fields.append(f)
 
-    import django.forms as forms
+    def not_equal(self, queryset, name, value):
+        lookup = "__".join([name, "exact"])
+        if value == "1":  # nur bezahlung
+            return queryset.exclude(**{lookup: 3})
+        else:  # nur ohne Vergütung
+            return queryset.exclude(**{lookup: 1})
 
     def __init__(self, *args, **kwargs):
         if "display_version" not in kwargs.keys():
@@ -144,6 +144,10 @@ class StudentJobRequirementsFilter(filters.FilterSet):
 
         self.Meta.labels = form_labels
         self.Meta.labels["unterkunft_gewuenscht"] = _("Kann eine Unterkunft angeboten werden?")
+        self.Meta.labels["availability_start"] = _(
+            "Die Helfenden sollten mindestens verfügbar sein ab dem"
+        )
+        self.Meta.labels["braucht_bezahlung"] = _("Vergütungsmodell für Helfende")
 
         THREE_CHOICES = [("true", "notwendig")]
 
