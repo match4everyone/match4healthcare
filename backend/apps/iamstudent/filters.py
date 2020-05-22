@@ -149,7 +149,7 @@ class StudentJobRequirementsFilter(filters.FilterSet):
         )
         self.Meta.labels["braucht_bezahlung"] = _("Vergütungsmodell für Helfende")
 
-        THREE_CHOICES = [("true", "notwendig")]
+        THREE_CHOICES = [("true", _("notwendig"))]
 
         if display_version:
             for a_field in self.form.fields.keys():
