@@ -24,15 +24,15 @@ export class MapViewPage {
 
             // eslint-disable-next-line no-unused-vars
             createPopupTextHospital :  (countrycode,city, plz, count, url) => '',
-            
+
             // eslint-disable-next-line no-unused-vars
             createFacilitiesCountText: (count) => '',
-            
+
             // eslint-disable-next-line no-unused-vars
             createSupportersCountText: (count) => '',
             facilityIcon: new L.Icon.Default(),
         }
-        
+
         Object.assign(defaultOptions,options)
         this.options = defaultOptions
         this.mapObject = null
@@ -71,8 +71,8 @@ export class MapViewPage {
             cssClasses.push(cssClass)
             return new L.DivIcon({
                 html: '<div><span>' + childCount + '</span></div>',
-                className: cssClasses.join(' '), 
-                iconSize: new L.Point(40, 40) 
+                className: cssClasses.join(' '),
+                iconSize: new L.Point(40, 40)
             })
         })
     }
@@ -82,7 +82,7 @@ export class MapViewPage {
             center: [51.13, 10.018],
             zoom: 6
         }
-    
+
         let tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token=' + this.options.mapboxToken
         let tileLayerOptions = {
             attribution: ' <a href="https://www.mapbox.com/about/maps/">© Mapbox</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a> | Icons by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a>',
@@ -92,9 +92,9 @@ export class MapViewPage {
             zoomOffset: -1,
             preferCanvas: true,
         }
-    
+
         this.mapObject = L.map(this.options.mapViewContainerId,mapOptions)
-        L.tileLayer(tileLayerURL, tileLayerOptions).addTo(this.mapObject)    
+        L.tileLayer(tileLayerURL, tileLayerOptions).addTo(this.mapObject)
 
         // Enhance MarkerCluster - override getChildCount
         L.MarkerCluster.prototype.getChildCount = function (){
@@ -126,7 +126,7 @@ export class MapViewPage {
             iconCreateFunction: this.cssClassedIconCreateFunction('facilityMarker'),
         })
         let facilityMarkers = L.featureGroup.subGroup(facilityClusterMarkerGroup, this.createMapMarkers(facilities,(lat,lon,countrycode,city,plz,count) => {
-            return L.marker([lon,lat],{ 
+            return L.marker([lon,lat],{
                 icon:  this.createFacilityIcon(count),
                 itemCount: count,
             }).bindPopup(this.options.createPopupTextHospital(countrycode,city, plz, count, this.options.hospitalListURL.replace('COUNTRYCODE',countrycode).replace('PLZ',plz)))
@@ -146,7 +146,7 @@ export class MapViewPage {
         supporterMarkers.addTo(this.mapObject)
         facilityClusterMarkerGroup.addTo(this.mapObject)
         facilityMarkers.addTo(this.mapObject)
-        
+
         const countItems = (o) => {
             let count = 0
             for (let countryCode in o) {
@@ -168,7 +168,7 @@ export class MapViewPage {
 
     createMapMarkers(markers, createMarkerFunction) {
         let markerArray = []
-        
+
         for (let countryCode in markers) {
             for (let zipCodeKey in markers[countryCode]) {
                 let zipCode = markers[countryCode][zipCodeKey]
@@ -180,6 +180,3 @@ export class MapViewPage {
     }
 
 }
-
-
-

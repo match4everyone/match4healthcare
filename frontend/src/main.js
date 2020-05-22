@@ -5,4 +5,4 @@ import $ from 'jquery'
 
 /* Globally export jQuery */
 window.jQuery = $
-window.$ = $ 
+window.$ = $

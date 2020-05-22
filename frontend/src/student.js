@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         element.addEventListener('change', (event) => helper.handleQualificationInput(event) )
         // To handle Mozillas brilliant idea to keep state of checkboxes on refresh, trigger dummy handler for every checkbox
         helper.handleQualificationInput({ srcElement: element })
-    })        
+    })
     $('#id_availability_start').attr('type', 'date')
 })

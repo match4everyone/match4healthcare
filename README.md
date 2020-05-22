@@ -117,13 +117,13 @@ Notable examples are
 
 Javascript sources are created in frontend/src folder
 
-To build them node needs to be installed. We suggest using [Node Version Manager](https://github.com/nvm-sh/nvm) to install node. Dependencies can be installed using 
+To build them node needs to be installed. We suggest using [Node Version Manager](https://github.com/nvm-sh/nvm) to install node. Dependencies can be installed using
 
 ```
 cd frontend && npm install
 ```
 
-### Build 
+### Build
 
 All commands need to be executed in `./frontend`
 

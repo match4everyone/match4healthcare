@@ -55,7 +55,7 @@ module.exports = {
                     emitWarning: true,
                     configFile: './.eslintrc.js',
                 }
-            },      
+            },
             {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,

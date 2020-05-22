@@ -1,7 +1,7 @@
 export class ProfileHelper {
     handleQualificationInput(event) {
         let qualificationSelected = event.srcElement.checked
-        
+
         // Extract qualification Id from parent div with suitable class, name ausbildung-checkbox-<id>
         let qualificationId = event.srcElement.closest('div.ausbildung-checkbox').id.split('-').slice(-1)
         this.setQualificationSectionVisibility(qualificationId, qualificationSelected)
@@ -17,6 +17,6 @@ export class ProfileHelper {
             section.querySelectorAll('input[type=\'checkbox\']').forEach( (checkbox) => checkbox.checked = false )
             section.querySelectorAll('input[type=\'text\'], select').forEach( (textbox) => textbox.value = '' )
         }
-        
+
     }
 }

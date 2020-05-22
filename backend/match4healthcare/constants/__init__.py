@@ -1,5 +1,5 @@
-export const myFunnyThing = [
-    'content'
-]
+# export const myFunnyThing = [
+#    'content'
+# ] not valid python
 
-window.THING = myFunnyThing
+# window.THING = myFunnyThing
