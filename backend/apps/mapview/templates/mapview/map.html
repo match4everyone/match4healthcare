@@ -8,37 +8,35 @@
 {% endblock %}
 
 {% block header %}
-<link rel="stylesheet" href="{% static 'js/leaflet-1.6.0/leaflet.css' %}" />
-<link rel="stylesheet" href="{% static 'js/leaflet.markercluster-1.4.1/MarkerCluster.css' %}" />
-<link rel="stylesheet" href="{% static 'js/leaflet.markercluster-1.4.1/MarkerCluster.Default.css' %}" />
-<link rel="stylesheet" href="{% static 'css/map.css' %}">
-
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="{% static 'js/leaflet-1.6.0/leaflet.js' %}" ></script>
-<script src="{% static 'js/leaflet.markercluster-1.4.1/leaflet.markercluster.js' %}" ></script>
-<script src="{% static 'js/Leaflet.FeatureGroup.SubGroup-1.0.2/leaflet.featuregroup.subgroup.js' %}" ></script>
-
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'map' %}
 <script type="text/javascript">
 
-  pageOptions = {
-    mapViewContainerId: 'mapContainer',
-    facilitiesURL     : "{% url 'facilitiesJSON' %}",
-    supportersURL     : "{% url 'supportersJSON' %}",
-    supporterListURL  : "{% url 'list_by_plz' 'COUNTRYCODE' 'PLZ' 0 %}",
-    hospitalListURL   : "{% url 'hospital_list' 'COUNTRYCODE' 'PLZ' %}",
-    mapboxToken       : "{{ mapbox_token }}",
-    createPopupTextStudent  :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Helfer*innen.\n<a href="${url}" target="_blank">Detailansicht für Kliniken</a>{% endblocktrans %}`,
-    createPopupTextHospital :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Orte an denen Hilfe gebraucht wird.\n<a href="${url}" target="_blank">Detailansicht</a>{% endblocktrans %}`,
-    createFacilitiesCountText: (count) => `<img src="{% static 'img/map/facility-marker.svg' %}"> ${count} {% trans "Einrichtungen" %}`,
-    createSupportersCountText: (count) => `<img src="{% static 'img/map/supporter-marker.svg' %}"> ${count} {% trans "Helfende" %}`,
-    facilityIcon: L.icon({
-      iconUrl: "{% static 'img/map/facility-marker.svg' %}",
-      iconSize: [40, 40],
-    }),
-  }
+  document.addEventListener("DOMContentLoaded", function domReady() {
+    let mapViewPage = new MapViewPage({
+      mapViewContainerId: 'mapContainer',
+      facilitiesURL     : "{% url 'facilitiesJSON' %}",
+      supportersURL     : "{% url 'supportersJSON' %}",
+      supporterListURL  : "{% url 'list_by_plz' 'COUNTRYCODE' 'PLZ' 0 %}",
+      hospitalListURL   : "{% url 'hospital_list' 'COUNTRYCODE' 'PLZ' %}",
+      mapboxToken       : '{{ mapbox_token }}',
+      createPopupTextStudent  :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Helfer*innen.\n<a href="${url}" target="_blank">Detailansicht für Kliniken</a>{% endblocktrans %}`,
+      createPopupTextHospital :  (countrycode,city, plz, count, url) => `{% blocktrans %}In ${city}, (PLZ ${plz}) gibt es ${count} Orte an denen Hilfe gebraucht wird.\n<a href="${url}" target="_blank">Detailansicht</a>{% endblocktrans %}`,
+      createFacilitiesCountText: (count) => `<img src="{% static 'img/map/facility-marker.svg' %}"> ${count} {% trans "Einrichtungen" %}`,
+      createSupportersCountText: (count) => `<img src="{% static 'img/map/supporter-marker.svg' %}"> ${count} {% trans "Helfende" %}`,
+      facilityIcon: L.icon({
+        iconUrl: "{% static 'img/map/facility-marker.svg' %}",
+        iconSize: [40, 40],
+      }),
+    })
 
+    mapViewPage.initializeMap()
+    mapViewPage.loadMapMarkers()
+    mapViewPage.registerEventHandlers(window)
+
+  })
 </script>
-<script type="text/javascript" src="{% static 'js/mapview.js' %}"></script>
+
 
 {% endblock %}
 

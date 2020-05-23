@@ -4,6 +4,20 @@
   font-style: normal;
   font-weight: 300;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
 body {
   font-family: 'proxima-nova', sans-serif !important;
 	-webkit-font-smoothing: antialiased;
@@ -95,7 +109,7 @@ b {
 .btn-md.blue {
  background-color: #000943;
   border-color: #000943;
-  border: 0px;	
+  border: 0px;
 }
 
 .btn-md.blue:hover {
@@ -141,7 +155,7 @@ div.boxed {
 }
 
 @media only screen and (min-width: 768px) {
-	
+
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -149,7 +163,7 @@ div.boxed {
   li.nav-item:first-child > a {
     padding-left: 0 !important;
   }
-	
+
 }
 .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
   color: #ed0a71;
@@ -157,7 +171,7 @@ div.boxed {
 
 .navbar-light .navbar-nav .nav-link { color: #000943; }
 
-.navbar-light .navbar-nav .nav-link:hover { color: #ed0a71; } 
+.navbar-light .navbar-nav .nav-link:hover { color: #ed0a71; }
 
 .footer {
   background: rgb(0, 9, 67);
@@ -178,7 +192,7 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle, .btn-info:hover {
 	background-color: #ed0a71 !important;
 	border-color: #ed0a71 !important;
-	border:0px; 
+	border:0px;
 }
 
 .btn-info { background-color: #efefef; color: #888; border:0px; }
@@ -193,20 +207,20 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
 .form-group > div { display:block; }
-	
+
 }
 
 .form-group label { margin-bottom: 0.2rem;}
 .form-group {margin-bottom: .5rem;}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) { 
-	
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
 	.navbar > .container { width: 100%; max-width: none; padding-left: 0px; padding-right: 0px; }
 
 	.navbar-brand > img { width: 150px !important;}
-	 .navbar-light .navbar-nav .nav-link { font-size: .98rem; padding-left: .7rem; padding-right: .7rem; } 
-	
-	
+	 .navbar-light .navbar-nav .nav-link { font-size: .98rem; padding-left: .7rem; padding-right: .7rem; }
+
+
 }
 
 /* Make qualification selecter stacked on smaller screens to see all options */
@@ -214,13 +228,13 @@ h5.card-title { color: #000943; font-weight: 300; font-size: 1.1rem;}
   .ausbildung-addon .btn-group {
     display:flex;
     flex-direction: column;
-  } 
+  }
 }
 
 .login-card {
-	
-	padding: 30px; 
-	
+
+	padding: 30px;
+
 }
 
 .login-form { min-height: 650px; }
@@ -255,7 +269,7 @@ Student Form
 
 
 .card {
-	
+
 	border:0px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -285,18 +299,18 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
+.uneditable-input:focus {
   border-color: rgba(0, 9, 67, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 20, 146, 0.4);
   outline: 0 none;
 }
 
 
-.dropdown-menu { 
+.dropdown-menu {
 	background-color: rgba(255, 255, 255, 0.9);
 	border-radius:0px !important;
 	border: 0px !important;
-	
+
 }
 .dropdown-toggle:hover > svg {stroke: #ed0a71 !important;}
 .dropdown-toggle, .dropdown-item { cursor: pointer; }

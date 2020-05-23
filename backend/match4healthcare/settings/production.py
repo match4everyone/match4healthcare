@@ -5,7 +5,7 @@ from django.utils.log import DEFAULT_LOGGING
 
 from match4healthcare.constants.enum import Environment
 from match4healthcare.settings.common import *  # noqa
-from match4healthcare.settings.common import IS_FORK, MIDDLEWARE, RUN_DIR
+from match4healthcare.settings.common import BASE_DIR, IS_FORK, MIDDLEWARE, RUN_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -73,3 +73,18 @@ if not IS_FORK:
 else:
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(RUN_DIR, "sent_emails")
+
+
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": True,
+        "BUNDLE_DIR_NAME": "/",  # must end with slash
+        "STATS_FILE": os.path.normpath(
+            os.path.join(os.path.join(os.path.dirname(BASE_DIR), "frontend"), "webpack-stats.json")
+        ),
+        "POLL_INTERVAL": 0.1,
+        "TIMEOUT": None,
+        # 'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+        "LOADER_CLASS": "webpack_loader.loader.WebpackLoader",
+    }
+}

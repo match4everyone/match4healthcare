@@ -1,0 +1,42 @@
+{
+  "name": "match4healthcare-frontend",
+  "version": "0.1.0",
+  "description": "Frontend components for match4healthcare django backend",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "build-dev": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^4.4.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^4.0.0",
+    "css-loader": "^3.5.3",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.2",
+    "expose-loader": "^0.7.5",
+    "leaflet": "^1.6.0",
+    "leaflet.featuregroup.subgroup": "^1.0.2",
+    "leaflet.markercluster": "^1.4.1",
+    "style-loader": "^1.2.0",
+    "terser-webpack-plugin": "^2.3.5",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.42.1",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "jquery": "^3.5.0",
+    "popper.js": "^1.16.1"
+  }
+}

@@ -226,12 +226,12 @@ div.leaflet-control-layers-overlays {
 	color: white;
 }
 
-.supporterMarker.marker-cluster div, 
+.supporterMarker.marker-cluster div,
 .facilityMarker.marker-cluster div {
   font-weight: bold;
 }
 
-.marker-cluster-single.supporterMarker, 
+.marker-cluster-single.supporterMarker,
 .marker-cluster-single.facilityMarker {
   background-color: transparent;
 }
