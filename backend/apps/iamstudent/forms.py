@@ -720,6 +720,39 @@ class EmailToSendForm(forms.ModelForm):
             raise ValidationError(_("Bitte personalisiere diesen Text"), code="invalid")
         return message
 
+    def __init__(self, *args, **kwargs):
+        super(EmailToSendForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            HTML("<h2 class='form-heading'>{}</h2>".format(_("Persönliche Informationen"))),
+            "subject",
+            Div(
+                HTML(
+                    _(
+                        "Bitte schreiben Sie in diese Mail an die Helfenden kurze Informationen zur geplanten Tätigkeit:\n\n"
+                        "<ul>"
+                        "<li>zeitlicher Umfang,</li>"
+                        "<li>Aufgabengebiet/Abteilung</li>"
+                        "<li>Vergütung / Modalitäten</li>"
+                        "<li>Arbeitsvertrag / Versicherungsverhältnis</li></ul>"
+                        "So können die Helfenden schneller sehen, ob diese Stelle zu Ihnen passt, sparen sich "
+                        "Nachfragen bei Ihnen und können zügiger zu- oder absagen.\n\n"
+                    )
+                ),
+                HTML(
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+                    '<span aria-hidden="true">&times;</span>'
+                    "</button>"
+                ),
+                css_class="alert alert-info alert-dismissable",
+                role="alert",
+            ),
+            "message",
+        )
+
 
 def get_form_helper_filter():
     helper = FormHelper()
