@@ -3,7 +3,7 @@ const path = require('path')
 const BundleTracker = require('webpack-bundle-tracker')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
 
 // Generate entry points from all .js files in src root
 const srcDir = path.resolve(__dirname, 'src')
