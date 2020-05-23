@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 16:17+0000\n"
-"PO-Revision-Date: 2020-05-11 18:18+0200\n"
+"POT-Creation-Date: 2020-05-23 13:05+0000\n"
+"PO-Revision-Date: 2020-05-23 15:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,30 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Bookmarks: -1,169,-1,-1,-1,-1,-1,-1,-1,-1\n"
-
-msgid "Aktive Staffmember"
-msgstr "Members of staff"
-
-msgid "Akzeptierte Institutionen"
-msgstr "Approved Institutions"
-
-msgid "Registrierte Helfende"
-msgstr "Registered Supporters"
-
-msgid "Anzahl deaktivierter Helfenden"
-msgstr "Deactivated Supporters"
-
-msgid "Kontaktanfragen an Helfende"
-msgstr "Contact requests to supporters"
-
-msgid "Kontaktanfragen an Institutionen"
-msgstr "Contact requests to institutions"
-
-msgid "Anzahl gesendeter Newsletter"
-msgstr "Sent newsletters"
-
-msgid "Institutionen mit Anzeige"
-msgstr "Institutions with posting"
 
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -81,6 +57,30 @@ msgstr "validated and not validated"
 
 msgid "validiert und von uns approved"
 msgstr "validated and approved by us"
+
+msgid "Aktive Staffmember"
+msgstr "Members of staff"
+
+msgid "Akzeptierte Institutionen"
+msgstr "Approved Institutions"
+
+msgid "Registrierte Helfende"
+msgstr "Registered Supporters"
+
+msgid "Anzahl deaktivierter Helfenden"
+msgstr "Deactivated Supporters"
+
+msgid "Kontaktanfragen an Helfende"
+msgstr "Contact requests to supporters"
+
+msgid "Kontaktanfragen an Institutionen"
+msgstr "Contact requests to institutions"
+
+msgid "Anzahl gesendeter Newsletter"
+msgstr "Sent newsletters"
+
+msgid "Institutionen mit Anzeige"
+msgstr "Institutions with posting"
 
 msgid "Status"
 msgstr "Status"
@@ -890,29 +890,23 @@ msgstr ""
 "support. For this purpose, we ask you to provide the following information "
 "so that we can connect you with the appropriate requests."
 
-msgid "Deine Daten wurden erfolgreich geändert!"
-msgstr "Your profile has been updated!"
-
-msgid "Deine Daten wurden nicht erfolgreich geändert!"
-msgstr "Your profile has not been updated successfully!"
-
 #, python-brace-format
 msgid "Du hast die Institution mit user '{name}' gelöscht."
 msgstr "You deleted the facility with user ‘{name}’."
 
-msgid ""
-"Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen "
-"mehr von Hilfesuchenden bekommen."
-msgstr ""
-"You have successfully deactivated your profile, you can no longer receive "
-"requests from people seeking help."
+msgid "Dein Approval ist nun gültig."
+msgstr "Your approval is now valid :)"
 
 msgid ""
-"Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von "
-"Hilfesuchenden kontaktiert werden."
+"Der Link ist nicht mehr gültig. Versuch dir eine nochmal neue Mail zu "
+"schicken (approve den Text nochmals)."
 msgstr ""
-"You have successfully activated your profile, you can now be contacted again "
-"by people seeking help."
+"This link is no longer valid. Please try to resend this mail (you need to "
+"approve the text again)."
+
+#, python-format
+msgid "Eine Test Email wurde an %s versendet."
+msgstr "A test email to %s has been sent."
 
 msgid "Bearbeitungen gespeichert."
 msgstr "Edits have been saved"
@@ -936,12 +930,25 @@ msgstr ""
 msgid "Der Newsletter wurde versendet."
 msgstr "Newsletter has been sent"
 
-#, python-format
-msgid "Eine Test Email wurde an %s versendet."
-msgstr "A test email to %s has been sent."
+msgid "Deine Daten wurden erfolgreich geändert!"
+msgstr "Your profile has been updated!"
 
-msgid "Dein Approval ist nun gültig."
-msgstr "Your approval is now valid :)"
+msgid "Deine Daten wurden nicht erfolgreich geändert!"
+msgstr "Your profile has not been updated successfully!"
+
+msgid ""
+"Du hast dein Profil erfolgreich deaktiviert, du kannst nun keine Anfragen "
+"mehr von Hilfesuchenden bekommen."
+msgstr ""
+"You have successfully deactivated your profile, you can no longer receive "
+"requests from people seeking help."
+
+msgid ""
+"Du hast dein Profil erfolgreich aktiviert, du kannst nun wieder von "
+"Hilfesuchenden kontaktiert werden."
+msgstr ""
+"You have successfully activated your profile, you can now be contacted again "
+"by people seeking help."
 
 msgid "Kann eine Vergütung angeboten werden?"
 msgstr "Can compensation be offered?"
@@ -963,6 +970,18 @@ msgstr "we do not know"
 
 msgid "Egal"
 msgstr "Irrelevant"
+
+msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
+msgstr "In which of the following areas is prior experience necessary?"
+
+msgid " Welche Infos über die zu vergebende Stelle sind schon bekannt?"
+msgstr " What information about the vacant position is already known?"
+
+msgid "Nachrichtentext"
+msgstr "Message"
+
+msgid "Bitte personalisiere diesen Text"
+msgstr "Please personalize this text"
 
 msgid "Writerekp"
 msgstr "Writerekp"
@@ -1252,21 +1271,6 @@ msgstr "Pharmacy"
 
 msgid "Allgemein"
 msgstr "General"
-
-msgid "Nachrichtentext"
-msgstr "Message"
-
-msgid "Bitte personalisiere diesen Text"
-msgstr "Please personalize this text"
-
-msgid "In welchen der folgenden Bereiche sind Vorerfahrungen notwendig?"
-msgstr "In which of the following areas is prior experience necessary?"
-
-msgid " Welche Infos über die zu vergebende Stelle sind schon bekannt?"
-msgstr " What information about the vacant position is already known?"
-
-msgid "Vergütung möglich"
-msgstr "Compensation possible"
 
 msgid "Semester darf nicht negativ sein"
 msgstr "Semester has to be positive"
@@ -1639,12 +1643,6 @@ msgstr ""
 "I accept that all registrations will be carefully validated and checked for "
 "accuracy by us. Should an error occur and your data be passed on to third "
 "parties, we do not accept any liability for this."
-
-msgid "Schicke Mails"
-msgstr "Send Mails"
-
-msgid "Schicke Mails + Erstelle Anzeige"
-msgstr "Send Mails and advertise requirement"
 
 msgid ""
 "Text Ihrer Suchanzeige. Wird nur öffentlich gezeigt wenn Sie auf der Karte "
@@ -2098,6 +2096,15 @@ msgstr "Recommended by"
 
 msgid "Rechtliche Fragen für Helfende bei der Corona-Pandemie"
 msgstr "Legal questions for helpers during the Corona pandemic"
+
+#~ msgid "Vergütung möglich"
+#~ msgstr "Compensation possible"
+
+#~ msgid "Schicke Mails"
+#~ msgstr "Send Mails"
+
+#~ msgid "Schicke Mails + Erstelle Anzeige"
+#~ msgstr "Send Mails and advertise requirement"
 
 #~ msgid ""
 #~ "Wir haben <a href=\"/legal-questions\">rechtliche Hinweise und Tipps</a> "
