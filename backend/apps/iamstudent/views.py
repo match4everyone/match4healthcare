@@ -223,7 +223,7 @@ def clean_request(request):
 @login_required
 @hospital_required
 def student_list_view(request, countrycode, plz, distance):
-    # remove parameters fro mthe get request that should not be taken into account
+    # remove parameters from the get request that should not be taken into account
     request_filtered = clean_request(request)
 
     # only show validated students
@@ -232,7 +232,8 @@ def student_list_view(request, countrycode, plz, distance):
     # filter by location
     countrycode = request.GET.get("countrycode", countrycode)
     plz = request.GET.get("plz", plz)
-    distance = int(request.GET.get("distance", distance))
+    if request.GET.get("distance"):
+        distance = float(request.GET.get("distance").replace(",", "."))
 
     if countrycode not in plzs or plz not in plzs[countrycode]:
         return HttpResponse(
