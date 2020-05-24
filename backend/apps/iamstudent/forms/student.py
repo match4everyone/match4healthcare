@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.modelss import User
+from apps.accounts.models import User
 from apps.iamstudent.models import Student
 from apps.iamstudent.models.student import AUSBILDUNGS_IDS, AUSBILDUNGS_TYPEN
 from apps.iamstudent.web.buttongroup import RadioButtons

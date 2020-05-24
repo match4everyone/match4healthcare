@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from django.views.generic.base import View
 
 from apps.accounts.forms import NewsletterEditForm, NewsletterViewForm, TestMailForm
-from apps.accounts.modelss import LetterApprovedBy, Newsletter, NewsletterState
+from apps.accounts.models import LetterApprovedBy, Newsletter, NewsletterState
 
 logger = logging.getLogger(__name__)
 

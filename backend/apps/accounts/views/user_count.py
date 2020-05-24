@@ -3,7 +3,7 @@ import logging
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
-from apps.accounts.modelss import User
+from apps.accounts.models import User
 
 logger = logging.getLogger(__name__)
 

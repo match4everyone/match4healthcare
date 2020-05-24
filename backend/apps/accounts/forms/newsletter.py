@@ -4,7 +4,7 @@ from crispy_forms.layout import Column, HTML, Layout, Row, Submit
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from apps.accounts.modelss import Newsletter
+from apps.accounts.models import Newsletter
 
 
 class BaseNewsletterForm(forms.ModelForm):

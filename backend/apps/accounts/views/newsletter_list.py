@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 
-from apps.accounts.modelss import Newsletter
+from apps.accounts.models import Newsletter
 from apps.accounts.tables import NewsletterTable
 
 logger = logging.getLogger(__name__)

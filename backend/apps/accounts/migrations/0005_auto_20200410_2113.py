@@ -7,7 +7,7 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-import apps.accounts.modelss
+import apps.accounts.models
 
 
 class Migration(migrations.Migration):
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             name='LetterApprovedBy',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('approval_code', models.IntegerField(default=apps.accounts.modelss.random_number)),
+                ('approval_code', models.IntegerField(default=apps.accounts.models.random_number)),
                 ('did_see_email', models.BooleanField(default=False)),
             ],
         ),

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import RedirectView
 
-from apps.accounts.modelss import Newsletter
+from apps.accounts.models import Newsletter
 
 logger = logging.getLogger(__name__)
 

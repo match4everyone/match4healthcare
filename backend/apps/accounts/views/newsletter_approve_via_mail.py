@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic.base import RedirectView
 
-from apps.accounts.modelss import LetterApprovedBy, Newsletter
+from apps.accounts.models import LetterApprovedBy, Newsletter
 
 logger = logging.getLogger(__name__)
 
