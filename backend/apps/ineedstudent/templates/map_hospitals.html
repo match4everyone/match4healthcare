@@ -125,7 +125,7 @@ $(window).on("resize", function () {
 <script type="text/javascript">
 
 	var mymap = L.map('mapid').setView([51.13, 10.018], 6);
-   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoiam9zYXVkZXIiLCJhIjoiY2s4MWNxa2QzMDNkejNrcDVhbzV6MDMxYSJ9.O4sLC7VSSgy4S7EKjNoG1g', {
+   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={{ mapbox_token }}', {
     attribution: ' <a href="https://www.mapbox.com/about/maps/">© Mapbox</a> | <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
