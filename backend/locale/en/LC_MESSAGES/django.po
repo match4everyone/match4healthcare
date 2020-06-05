@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-17 20:46+0000\n"
-"PO-Revision-Date: 2020-05-18 17:44+0200\n"
+"POT-Creation-Date: 2020-05-22 13:28+0000\n"
+"PO-Revision-Date: 2020-05-22 15:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Bookmarks: -1,169,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 msgid "Aktive Staffmember"
@@ -943,23 +943,30 @@ msgstr "A test email to %s has been sent."
 msgid "Dein Approval ist nun gültig."
 msgstr "Your approval is now valid :)"
 
-msgid "Kann eine Vergütung angeboten werden?"
-msgstr "Can compensation be offered?"
+msgid "nein"
+msgstr "no"
 
-msgid "Die Helfenden sollten verfügbar sein ab "
-msgstr "When should the supporters be available?"
+msgid "ist möglich"
+msgstr "is possible"
+
+msgid ""
+"Wir können zwar Vergütung anbieten, nehmen aber auch Unterstützung von "
+"Helfenden an, die keine Bezahlung wünschen."
+msgstr ""
+"We can offer compensation, but we also accept support from those who do not "
+"want to get a payment."
 
 msgid "Kann eine Unterkunft angeboten werden?"
 msgstr "Can accommodation be offered?"
 
-msgid "ja"
-msgstr "yes"
+msgid "Die Helfenden sollten mindestens verfügbar sein ab dem"
+msgstr "The helpers should be at least available starting from the"
 
-msgid "nein"
-msgstr "no"
+msgid "Vergütungsmodell für Helfende"
+msgstr "Compensation models for helpers"
 
-msgid "wissen wir nicht"
-msgstr "we do not know"
+msgid "notwendig"
+msgstr "required"
 
 msgid "Egal"
 msgstr "Irrelevant"
@@ -1299,8 +1306,11 @@ msgstr "I am happy to be compensated, but I also help out even without"
 msgid "Ich möchte ohne Bezahlung helfen"
 msgstr "I would like to help without being paid"
 
-msgid "individuell absprechbar"
-msgstr "both possible"
+msgid "Helfende müssen eine Vergütung annehmen."
+msgstr "Helpers must accept payment."
+
+msgid "Wir können keine Vergütung anbieten."
+msgstr "We cannot offer compensation."
 
 msgid "egal"
 msgstr "not important"
@@ -1392,8 +1402,8 @@ msgstr "Needs accomodation"
 msgid "Verfügbarkeit"
 msgstr "Availability"
 
-msgid "Bezahlung Notwendig"
-msgstr "Pay Required"
+msgid "Möchte Bezahlung"
+msgstr "Wants payment"
 
 msgid ""
 " Wir speichern deine E-Mails und senden sie sobald wir dich als Krankenhaus "
@@ -1713,6 +1723,9 @@ msgstr "E-Mail sent on"
 
 msgid "Helfer*in noch verfügbar"
 msgstr "Supporter still available"
+
+msgid "ja"
+msgstr "yes"
 
 msgid "Einsatz erstellen/ändern"
 msgstr "Create/update posting"
@@ -2136,6 +2149,12 @@ msgstr "Legal questions for helpers during the Corona pandemic"
 
 msgid "Allgemeine Nutzungsbedingungen"
 msgstr "Terms and conditions"
+
+#~ msgid "wissen wir nicht"
+#~ msgstr "we do not know"
+
+#~ msgid "individuell absprechbar"
+#~ msgstr "both possible"
 
 #~ msgid "Ein Projekt im Rahmen des"
 #~ msgstr "A submission of"
