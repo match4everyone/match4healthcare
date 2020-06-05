@@ -34,10 +34,11 @@ BEZAHLUNG_CHOICES = (
     (DARF_NICHT_BEZAHLT_WERDEN, _("Ich möchte ohne Bezahlung helfen")),
 )
 
+NUR_BEZAHLUNG = 1
+NUR_UNENTGELTLICH = 2
 BEZAHLUNG_CHOICES_Filter = (
-    (BEZAHLUNG, _("ja")),
-    (UNENTGELTLICH, _("nein")),
-    (DARF_NICHT_BEZAHLT_WERDEN, _("individuell absprechbar")),
+    (NUR_BEZAHLUNG, _("Helfende müssen eine Vergütung annehmen.")),
+    (NUR_UNENTGELTLICH, _("Wir können keine Vergütung anbieten.")),
 )
 
 
