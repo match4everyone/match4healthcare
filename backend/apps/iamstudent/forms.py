@@ -360,7 +360,7 @@ class StudentForm(forms.ModelForm):
                 HTML(
                     '<div class="registration_disclaimer">{}</div>'.format(
                         _(
-                            "Wir benötigen die Information, die Sie uns zur Verfügung stellen, um Helfende und Hilfesuchende miteinander zu vernetzen. Informationen dazu, welche personenbezogenen Daten bei dem Besuch und der Nutzung der Angebote auf unserer Seite erhoben und verarbeitet werden finden Sie in unseren Datenschutzbestimmungen (Link: https://match4healthcare.de/dataprotection/)."
+                            'Wir benötigen die Information, die Sie uns zur Verfügung stellen, um Helfende und Hilfesuchende miteinander zu vernetzen. Informationen dazu, welche personenbezogenen Daten bei dem Besuch und der Nutzung der Angebote auf unserer Seite erhoben und verarbeitet werden finden Sie in unseren Datenschutzbestimmungen (Link: <a target="_blank" href="/dataprotection/">https://match4healthcare.de/dataprotection/</a>).'
                         )
                     )
                 ),
