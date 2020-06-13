@@ -168,7 +168,7 @@ Home
         {% get_current_language as LANGUAGE_CODE %}
         <!-- { % if request.session.lang == "en" % } does not work until we save the language choice in cookie-->
 
-        {% with 'img/BMBF_logo_'|add:request.LANGUAGE_CODE|add:'.jpg' as image_static_bmbf %}
+        {% with 'img/BMBF_logo_'|add:request.LANGUAGE_CODE|add:'.png' as image_static_bmbf %}
         {% blocktrans %}<a href="https://www.bmbf.de/de/ueber-uns-21.html" target="_blank">{% endblocktrans %}
           <img src="{% static image_static_bmbf %}" height="160px">
         </a>
