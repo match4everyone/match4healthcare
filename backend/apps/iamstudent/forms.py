@@ -357,19 +357,10 @@ class StudentForm(forms.ModelForm):
             (
                 "sonstige_qualifikationen",
                 HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-                HTML('<p class="text-left">'),
-                "datenschutz_zugestimmt",
-                HTML("</p>"),
-                HTML('<p class="text-left">'),
-                "einwilligung_datenweitergabe",
-                HTML("</p>"),
-                HTML('<p class="text-left">'),
-                "einwilligung_agb",
-                HTML("</p>"),
                 HTML(
                     '<div class="registration_disclaimer">{}</div>'.format(
                         _(
-                            "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen."
+                            "Wir benötigen die Information, die Sie uns zur Verfügung stellen, um Helfende und Hilfesuchende miteinander zu vernetzen. Informationen dazu, welche personenbezogenen Daten bei dem Besuch und der Nutzung der Angebote auf unserer Seite erhoben und verarbeitet werden finden Sie in unseren Datenschutzbestimmungen (Link: https://match4healthcare.de/dataprotection/)."
                         )
                     )
                 ),
