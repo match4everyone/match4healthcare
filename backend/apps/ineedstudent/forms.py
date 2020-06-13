@@ -83,8 +83,6 @@ class HospitalFormEditProfile(HospitalFormO):
             "uuid",
             "registration_date",
             "user",
-            "datenschutz_zugestimmt",
-            "einwilligung_datenweitergabe",
             "max_mails_per_day",
             "approval_date",
             "approved_by",
@@ -113,45 +111,6 @@ class HospitalFormEditProfile(HospitalFormO):
             Row(Column("telefon")),
             Row(Column("plz"), Column("countrycode")),
         )
-
-
-class HospitalFormZustimmung(ModelForm):
-    class Meta:
-        model = Hospital
-        fields = ["datenschutz_zugestimmt", "einwilligung_datenweitergabe"]
-
-        labels = {
-            "datenschutz_zugestimmt": _(
-                'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
-            ),
-            "einwilligung_datenweitergabe": _(
-                "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden."
-            ),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(HospitalFormZustimmung, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.add_input(
-            Submit("submit", _("Daten aktualisieren"), css_class="btn blue text-white btn-md",)
-        )
-        self.helper.layout = Layout(
-            HTML('<p class="text-left">'),
-            "datenschutz_zugestimmt",
-            HTML("</p>"),
-            HTML('<p class="text-left">'),
-            "einwilligung_datenweitergabe",
-        )
-
-    def clean_datenschutz_zugestimmt(self):
-        if not self.cleaned_data["datenschutz_zugestimmt"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
-
-    def clean_einwilligung_datenweitergabe(self):
-        if not self.cleaned_data["einwilligung_datenweitergabe"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
 
 
 def check_unique_email(value):

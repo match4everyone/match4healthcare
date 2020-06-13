@@ -119,11 +119,9 @@ class Student(models.Model):
         choices=VERFUEGBARKEIT_CHOICES, null=True, blank=False
     )
 
-    datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
-    einwilligung_datenweitergabe = models.BooleanField(
-        default=False, validators=[validate_checkbox]
-    )
-    einwilligung_agb = models.BooleanField(default=False, validators=[validate_checkbox])
+    datenschutz_zugestimmt = models.BooleanField(default=False)
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
+    einwilligung_agb = models.BooleanField(default=False)
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default="keine")
     unterkunft_gewuenscht = models.BooleanField(default=False)
