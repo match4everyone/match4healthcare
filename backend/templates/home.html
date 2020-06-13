@@ -159,9 +159,25 @@ Home
       <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 15px;  ">{% blocktrans %}Ein gemeinsames Projekt von{% endblocktrans %}</h2>
       <a href="https://www.medis-vs-covid19.de" target="_blank"><img src="{% static 'img/medis-vs-covid19-logo.svg' %}" height="45px"></a> <a href="https://www.bvmd.de/" target="_blank"><img src="{% static 'img/logo-bvmd.svg' %}" height="80px"></a> <a href="https://wirvsvirushackathon.org/" target="_blank"><img src="{% static 'img/wir-vs-virus.svg' %}" height="130px" style="margin:0px;"></a> </div>
 
-	  </div></div>
+    </div></div>
 
 
+      <div class="container" style="padding: 40px 0;">
+      <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto;">
+        <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 15px;">{% blocktrans %}Gefördert von{% endblocktrans %}</h2>
+        {% get_current_language as LANGUAGE_CODE %}
+        <!-- { % if request.session.lang == "en" % } does not work until we save the language choice in cookie-->
+
+        {% with 'img/BMBF_logo_'|add:request.LANGUAGE_CODE|add:'.jpg' as image_static_bmbf %}
+        {% blocktrans %}<a href="https://www.bmbf.de/de/ueber-uns-21.html" target="_blank">{% endblocktrans %}
+          <img src="{% static image_static_bmbf %}" height="160px">
+        </a>
+        {% endwith %}
+        </div>
+      </div>
+
+
+    <div style="background-color: #f5f5f5;">
 	  <div class="container" style="padding: 60px 0;">
     <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto; ">
       <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 35px;  ">{% blocktrans %}Unsere Kooperations&shy;partner{% endblocktrans %}</h2>
@@ -191,8 +207,8 @@ Home
 		  </div>
 
 	  </div>
+  </div>
 
-		 <div style="background-color: #f5f5f5;">
 	  <div class="container" style="padding: 40px 0;">
     <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto;">
       <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 15px;">{% blocktrans %}Empfohlen von{% endblocktrans %}</h2>
@@ -248,6 +264,6 @@ Home
         </a>
 </div>
     </div>
-  </div>
+
 </main>
 {% endblock %}
