@@ -375,7 +375,7 @@ class StudentForm(forms.ModelForm):
             )
         return email
 
-    def clean_datenschutz_zugestimmt(self):
+    def clean_datenschutz_zugestimmt(self):  # TODO: Remove
         if not self.cleaned_data["datenschutz_zugestimmt"]:
             raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
         return True
