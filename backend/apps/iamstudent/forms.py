@@ -71,13 +71,6 @@ form_labels = {
     "ausbildung_typ_sonstige": _("Sonstige"),
     "ausbildung_typ_sonstige_eintragen": _("Bitte die Qualifikationen hier eintragen"),
     "sonstige_qualifikationen": _("Weitere Qualifikationen"),
-    "datenschutz_zugestimmt": _(
-        'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
-    ),
-    "einwilligung_datenweitergabe": _(
-        "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. "
-        "Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden."
-    ),
     "wunsch_ort_arzt": _("Arztpraxis/Ordination/MVZ"),
     "wunsch_ort_gesundheitsamt": _("Gesundheitsamt und sonstige Einrichtungen"),
     "wunsch_ort_krankenhaus": _("Klinikum/Spital"),
@@ -90,11 +83,6 @@ form_labels = {
     ),
     "wunsch_ort_ueberall": _("Keiner, ich helfe dort, wo ich kann"),
     "zeitliche_verfuegbarkeit": _("Zeitliche Verfügbarkeit, bis zu"),
-    "einwilligung_agb": _(
-        "Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. "
-        "Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. "
-        "Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür."
-    ),
 }
 fields_for_button_group = [
     "ausbildung_typ_kinderbetreung_ausgebildet_abschnitt",
