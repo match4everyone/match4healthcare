@@ -5,6 +5,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.7.0]
+
+
+
+### Geändert
+
+- Bump Django requirements to from 3.0.5 to 3.0.7
+- Übersetzungen
+- Trailing Whitespaces
+- Dummy-User Generierung aktualisiert
+- Datenschutzerklärung aktualisiert
+- Neue Beschriftungen in der Helfendensuchmaske
+- Name des Vereins "in Gründung" entfernt
+- Kleinere Textänderungen
+- Logos auf der Startseite
+- Anpassungen an einheitlichen Code-Style
+- Generierte Dummy-User: Kennwort gleich Username
+- IS_FORK Check (see Readme) aus Log entfernt und in pre-deploy Checks migriert
+- Dev/Prod Env ENUM refactored
+- Readme aktualisiert
+- Nutzungsbedingungen aktualisiert
+- Admin-Dashboard überarbeitet
+- Link auf neues Youtube Video
+- Moved .env files to .env.sample files
+- Travis Anpassungen
+- Bissfest Logo zu Kooperationspartnern verschoben
+- Slack Logger in dev and prod aktiv sobald die Env-Variable gesetzt wird
+- Freezed postgres Version
+
+### Hinzugefügt
+
+- Link auf Datenschutzerklärung im Helfendenprofil
+- Aufklärung über Datenschutzerklärung
+- Datenschutzbeauftragten in Erklärung aufgenommen
+- Mapbox-Token in Env-Files verlagert
+- Wie funktionert es Infografik
+- Verpflichtender Code-Style und Pre-Commit
+- Statistik-Seite im Backend
+- GitHub Templates für PRs, Issues, etc.
+- Pre-Commit in Test Environment
+- PEP8 Code-Style
+- Automatisches Import sortieren
+- Run backend docker as non root
+- Don't use sendgrid and disable checks in travis of forks
+
+### Entfernt
+
+- Logik zum (nachträglichen) Bestätigen der Datenschutzerklärung
+- Fehler bei Eingabe von Kommazahlen bei Entfernungen
+- Hardcoded Mapbox Token in Seiten
+- Fehler #440 
+
 ## [1.6.0]
 
 ### Geändert
@@ -109,3 +161,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - viele Rechtschreibfehler
 - Doppelte Logos entfernt
 - Doppelter Aufruf jQuery entfernt
+
+
+
