@@ -52,7 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Logik zum (nachträglichen) Bestätigen der Datenschutzerklärung
 - Fehler bei Eingabe von Kommazahlen bei Entfernungen
 - Hardcoded Mapbox Token in Seiten
-- Fehler #440 
+- Fehler #440
 
 ## [1.6.0]
 
@@ -158,6 +158,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - viele Rechtschreibfehler
 - Doppelte Logos entfernt
 - Doppelter Aufruf jQuery entfernt
-
-
-
