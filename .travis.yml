@@ -3,7 +3,7 @@ services:
 
 before_script:
  - ./scripts/write_envs_to_file.sh
- - ./deploy.sh
+ - docker-compose -f docker-compose.dev.yml -f docker-compose.prod.yml up --build -d
  - ./scripts/wait_for_backend.sh
  - docker logs $(docker ps --format '{{.Names}}' | grep backend)
  - docker logs $(docker ps --format '{{.Names}}' | grep database)
