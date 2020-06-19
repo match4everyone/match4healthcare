@@ -21,6 +21,7 @@ ALLOWED_HOSTS = [
     "matchmedisvsvirus.dynalias.org",
     "helping-health.from-de.com",
     "match4healthcare.de",
+    "www.match4healthcare.de",
     "match4healthcare.eu",
     "match4healthcare.org",
     "medis-vs-covid19.de",
