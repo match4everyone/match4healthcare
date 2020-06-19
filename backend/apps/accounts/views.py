@@ -150,7 +150,7 @@ def login_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect("/mapview")
+        return HttpResponseRedirect("/accounts/profile_student")
 
     elif user.is_hospital:
         return HttpResponseRedirect("/ineedstudent/hospital_dashboard")
