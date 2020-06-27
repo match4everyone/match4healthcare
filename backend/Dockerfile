@@ -9,9 +9,10 @@ COPY requirements.prod.txt /match4healthcare-backend/requirements.prod.txt
 RUN pip3 install -r requirements.prod.txt
 
 COPY . .
-RUN django-admin makemessages --no-location --ignore 00_old_m4h_matching_code
-RUN django-admin compilemessages
-RUN python3 manage.py collectstatic --no-input
+
+RUN python3 manage.py makemessages --no-location --ignore 00_old_m4h_matching_code
+RUN python3 manage.py compilemessages
+
 
 EXPOSE 8000
 ENTRYPOINT ["./entrypoint.sh"]
