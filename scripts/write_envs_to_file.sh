@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-echo "POSTGRES_DB=${POSTGRES_DB}" > database.prod.env
-echo "POSTGRES_USER=${POSTGRES_USER}" >> database.prod.env
-echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> database.prod.env
+DATABASE_ENV_VARS="POSTGRES_DB POSTGRES_USER POSTGRES_PASSWORD"
+BACKEND_ENV_VARS="SECRET_KEY SENDGRID_API_KEY SLACK_LOG_WEBHOOK LEAFLET_TILESERVER MAPBOX_TOKEN"
 
-echo "SECRET_KEY=${SECRET_KEY}" > backend.prod.env
-echo "SENDGRID_API_KEY=${SENDGRID_API_KEY}" >> backend.prod.env
-echo "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}" >> backend.prod.env
-echo "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}" >> backend.prod.env
+# Write env variables into env file
+# This way you can set them in the travis configuration and they
+# will be written into the appropriate env files by  this script
+
+for ENVVAR in ${DATABASE_ENV_VARS}; do
+    echo "${ENVVAR}=${!ENVVAR}" >> database.prod.env
+done
+
+for ENVVAR in ${BACKEND_ENV_VARS; do
+    echo "${ENVVAR}=${!ENVVAR}" >> backend.prod.env
+done

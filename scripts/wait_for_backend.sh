@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-while ! [ $(docker ps | grep backend | wc -l) -gt 0 ]; do
+while [ -z "$(docker-compose -f docker-compose.yml -f docker-compose.prod.yml ps --services --filter "status=running"|grep backend)" ]; do
     sleep 1
 done
