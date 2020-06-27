@@ -42,5 +42,5 @@ services:
 networks:
  network:
 
-#volumes:
-#  postgres-data:
+volumes:
+  backend-run:
