@@ -26,7 +26,10 @@ failed=False
 URL=localhost:8000
 
 # Log file location
-ERR_LOG_PATH=backend/run/match4healthcare.json.error.log
+ERR_LOG_PATH=./run/match4healthcare.json.error.log
+
+# docker-compose to run command in backend
+DC_EXEC="docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec backend bash -c "
 
 # Execute command and print status
 function test() {
@@ -61,8 +64,8 @@ function check_website_up() {
 function check_error_log_empty() {
 	# Check if log file exists
 	for i in $(seq 1 10); do
-		if [ -f "$ERR_LOG_PATH" ]; then
-    		break
+		if $DC_EXEC "[ -f \"$ERR_LOG_PATH\" ]"; then
+			break
 		else
 			if [[ i -eq 10 ]]; then
 				printf "Log file not found\t"
@@ -74,9 +77,9 @@ function check_error_log_empty() {
 
 	curl --silent --output /dev/null localhost:8000
 	sleep 5
-	if [  -s "$ERR_LOG_PATH" ]; then
+	if $DC_EXEC "[  -s \"$ERR_LOG_PATH\" ]"; then
 		printf "\n"
-		cat "$ERR_LOG_PATH"
+		$DC_EXEC "cat \"$ERR_LOG_PATH\""
 		printf "\n"
 		return 1
 	fi
