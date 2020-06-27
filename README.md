@@ -30,7 +30,9 @@ In order to run pre-commit checks every time, please run `pre-commit install` on
 We recommend running the gunicorn server behind a reverse proxy to provide ssl and possibly run multiple services on one server.
 The default configuration will make the docker container reachable on port 8000 only on 127.0.0.1.
 
-A sample nginx configuration can be found at ./tools/nginx-sample-site.
+#### Build the containers
+(Copy `.env.example` to `.env` and adjust variables if you want to run the backend as non-root)
+`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`
 
 ## Setup
 Set `SECRET_KEY`, `SENDGRID_API_KEY` and `MAPBOX_TOKEN`in `backend.prod.env` for Django
