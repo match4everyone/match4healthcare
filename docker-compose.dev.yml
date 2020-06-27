@@ -10,6 +10,7 @@ services:
       - './backend:/match4healthcare-backend'
     ports:
       - '127.0.0.1:8000:8000'
+    tty: true
     environment:
       - DJANGO_SETTINGS_MODULE=match4everyone.settings.development
       - CI
