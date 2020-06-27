@@ -11,6 +11,6 @@ for ENVVAR in ${DATABASE_ENV_VARS}; do
     echo "${ENVVAR}=${!ENVVAR}" >> database.prod.env
 done
 
-for ENVVAR in ${BACKEND_ENV_VARS; do
+for ENVVAR in ${BACKEND_ENV_VARS}; do
     echo "${ENVVAR}=${!ENVVAR}" >> backend.prod.env
 done
