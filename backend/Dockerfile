@@ -2,10 +2,10 @@ FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y python3 python3-pip libpq-dev gettext
 
-WORKDIR /match4everyone-backend
-COPY requirements.txt /match4everyone-backend/requirements.txt
+WORKDIR /backend
+COPY requirements.txt /backend/requirements.txt
 RUN pip3 install -r requirements.txt
-COPY requirements.prod.txt /match4healthcare-backend/requirements.prod.txt
+COPY requirements.prod.txt /backend/requirements.prod.txt
 RUN pip3 install -r requirements.prod.txt
 
 COPY . .

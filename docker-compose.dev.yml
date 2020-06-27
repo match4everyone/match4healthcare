@@ -15,5 +15,5 @@ services:
       - CI
       - TRAVIS
       - TRAVIS_PULL_REQUEST_SLUG
-      - PYTHONPATH=/match4everyone-backend # needed for django-admin to find the module
+      - PYTHONPATH=/backend # needed for django-admin to find the module
     user: ${BACKEND_USER:-0}
