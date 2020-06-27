@@ -16,8 +16,9 @@ services:
       - database.prod.env
     environment:
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
+     - PRODUCTION=True
     user: ${BACKEND_USER:-0}
-    command: bash -c 'while ! (< /dev/tcp/database/5432) &> /dev/null; do echo "Waiting for database..."; sleep 1; done; gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi'
+    command: gunicorn -c /match4healthcare-backend/gunicorn.conf.py match4healthcare.wsgi
     depends_on:
       - database
 
