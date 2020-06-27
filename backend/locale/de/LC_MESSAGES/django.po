@@ -1,0 +1,510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 1900-01-01 00:00+0000\n"
+"PO-Revision-Date: 2020-06-21 09:42+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3.1\n"
+
+msgid "E-Mail"
+msgstr "E-Mail"
+
+msgid "Email adress for your account."
+msgstr "E-Mail-Adresse für Ihr Konto."
+
+msgid "<10 km"
+msgstr "<10 km"
+
+msgid "<20 km"
+msgstr "<20 km"
+
+msgid "<40 km"
+msgstr "<20 km"
+
+msgid ">40 km"
+msgstr ">40 km"
+
+msgid "Germany"
+msgstr "Deutschland"
+
+msgid "Austria"
+msgstr "Österreich"
+
+msgid " is not a postcode in "
+msgstr "ist keine Postleitzahl in"
+
+msgid "This email is already taken."
+msgstr "Diese E-Mail wurde bereits vergeben."
+
+msgid "Map"
+msgstr "Karte"
+
+#, python-brace-format
+msgid ""
+"In ${city}, (PLZ ${plz}) there are ${count} A's.\\n<a href=\"${url}\" target="
+"\"_blank\">Detail</a>"
+msgstr ""
+"In ${city}, (PLZ ${plz}) gibt es ${count} A's.\\n<a href=\"${url}\" target="
+"\"_blank\">Detail</a>"
+
+#, python-brace-format
+msgid ""
+"In ${city}, (PLZ ${plz}) there are ${count} B's.\\n<a href=\"${url}\" target="
+"\"_blank\">Detail</a>"
+msgstr ""
+"In ${city}, (PLZ ${plz}) gibt es ${count} B's.\\n<a href=\"${url}\" target="
+"\"_blank\">Detail</a>"
+
+msgid "B's"
+msgstr "B's"
+
+msgid "A's"
+msgstr "A's"
+
+msgid "Direct Search"
+msgstr "Direkte Suche"
+
+msgid " Your account has been deleted. "
+msgstr "Ihr Konto wurde gelöscht."
+
+msgid "Are you sure you want to delete your account?"
+msgstr "Sind Sie sicher, dass Sie Ihr Konto löschen wollen?"
+
+msgid "Yes, delete my account."
+msgstr "Ja, löschen Sie mein Konto."
+
+msgid "No, return to my dashboard."
+msgstr "Nein, kehren Sie zu meinem Dashboard zurück."
+
+msgid "Thank you"
+msgstr "Vielen Dank"
+
+msgid "Thank you."
+msgstr "Vielen Dank."
+
+msgid ""
+"<h2 class=\"font-weight-light\">Welcome to match4everyone,</h2>\n"
+"    <p>To complete registration we sent you a <b style=\"font-weight:500;"
+"\">Registration Link</b>.\n"
+"        So please check your mails :)\n"
+"     <p>Your Team</p>\n"
+"    "
+msgstr ""
+"<h2 class=\"font-weight-light\">Hi,</h2>\n"
+"    <p>Es gibt einen Registrierungslink zum Account validieren.\n"
+"        Bitte mails checken :)\n"
+"     <p>Dein Team</p>\n"
+"    "
+
+msgid "Deactivate account"
+msgstr "Konto löschen"
+
+msgid ""
+"\n"
+"                           Are you sure, that you want to deactivate your "
+"account? (This is not deleting, you can always reactivate it.)\n"
+"                        "
+msgstr ""
+"\n"
+"                        Sicher, dass Sie den Account deaktivieren wollen?\n"
+"                        "
+
+msgid ""
+"\n"
+"                                Yes, deactivate my account.\n"
+"                            "
+msgstr ""
+"\n"
+"                                Ja, löschen Sie mein Konto.\n"
+"                            "
+
+msgid ""
+"\n"
+"                         Are you sure, that you want to reactivate your "
+"account?\n"
+"                        "
+msgstr ""
+"\n"
+"Sind Sie sicher, dass Sie Ihr Konto löschen wollen?"
+
+msgid "Yes, reactivate my account."
+msgstr "Ja, Account reaktivieren."
+
+msgid "No, take me back to the dashboard."
+msgstr "Nein, zurück zum Dashboard."
+
+msgid ""
+"\n"
+"        Registration\n"
+"    "
+msgstr ""
+"\n"
+"        Registrierung\n"
+"    "
+
+msgid " Already registered? "
+msgstr "Schon registriert?"
+
+msgid "Login"
+msgstr "Login"
+
+msgid " or "
+msgstr "oder"
+
+msgid "Reset Password"
+msgstr "Password zurücksetzen"
+
+#, python-format
+msgid ""
+"\n"
+"        Your Profile %(p_type)s\n"
+"    "
+msgstr ""
+"\n"
+"        Mein Profil %(p_type)s\n"
+"    "
+
+msgid "Profile Details"
+msgstr "Profil"
+
+msgid ""
+"\n"
+"                    Logout"
+msgstr ""
+"\n"
+"                    Logout"
+
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+msgid ""
+"Delete my\n"
+"                    profile"
+msgstr "Profil löschen"
+
+msgid "Deactivate Profile"
+msgstr "Profil deaktivieren"
+
+msgid "Activate Profile"
+msgstr "Profil aktivieren"
+
+msgid "Profile Editing"
+msgstr "Infos editieren"
+
+msgid ""
+"\n"
+"                    Edit my profile"
+msgstr ""
+"\n"
+"                    Meine Infos editieren"
+
+msgid ""
+"\n"
+"        Edit Info\n"
+"    "
+msgstr ""
+"\n"
+"        Infos editieren"
+
+msgid "Registration"
+msgstr "Registrierung"
+
+msgid "Sign In"
+msgstr "Einloggen"
+
+msgid "Forgot password?"
+msgstr "Passwort vergessen"
+
+msgid "Reset password"
+msgstr "Password zurücksetzen"
+
+msgid "Not registered?"
+msgstr "Noch nicht registriert?"
+
+msgid "I am A"
+msgstr "Ich bin A"
+
+msgid "I am B"
+msgstr "Ich bin B"
+
+msgid ""
+"\n"
+"Logout\n"
+msgstr ""
+"\n"
+"Logout\n"
+
+msgid "Logout successful"
+msgstr "Logout erfolgreich"
+
+msgid ""
+"\n"
+"        <p>Thanks for dropping by.</p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>Danke fürs vorbeischauen.</p>\n"
+"    "
+
+msgid "Log in again"
+msgstr "Wieder einloggen"
+
+msgid ""
+"\n"
+"Password changed\n"
+msgstr ""
+"\n"
+"Passwort wurde geändert\n"
+
+msgid " Your password has been updated. "
+msgstr "Passwort wurde geändert"
+
+msgid "Please correct the error"
+msgstr "Bitte den Fehler korrigieren"
+
+msgid "Change password"
+msgstr "Passwort ändern"
+
+msgid "Password set"
+msgstr "Passwort setzen"
+
+msgid " Your password has been set. You can log in anytime."
+msgstr "Das Passwort wurde gesetzt, Sie können sich jederzeit einloggen."
+
+msgid "Succsessful Login"
+msgstr "Login erfolgreich"
+
+msgid "Hi,"
+msgstr "Hi,"
+
+msgid "New Password"
+msgstr "Neues Passwort"
+
+msgid "Set password"
+msgstr "Passwort setzen"
+
+msgid "The link for setting the password is invalid. Maybe it was used before"
+msgstr ""
+"Der Link zum setzten des Passworts ist ungültig. Vielleicht wurde er vorher "
+"schon benutzt"
+
+msgid "Forgot you password?"
+msgstr "Passwort vergessen?"
+
+msgid "Set Password"
+msgstr "Passwort setzen"
+
+msgid ""
+"In case there is an account with this email address, we have sent you the a "
+"reset link."
+msgstr ""
+"Falls es einen Account mit dieser E-Mail gibt, haben wir Ihnen einen Reset-"
+"Link geschickt."
+
+msgid ""
+"\n"
+"You are receiving this mail to create a new password with the following "
+"link.\n"
+msgstr ""
+"\n"
+"Sie bekommen diese  E-Mail um mit dem folgenden Link ein neues Passwort zu "
+"setzen.\n"
+
+msgid ""
+"\n"
+"Thank you,\n"
+"    match4everyone\n"
+msgstr ""
+"\n"
+"Danke,\n"
+"    match4everyone\n"
+
+msgid "Confirm email"
+msgstr "E-Mail bestätigen"
+
+msgid "Forgot your password?"
+msgstr "Passwort vergessen?"
+
+msgid "Thanks for registering!"
+msgstr "Schön, dass Sie sich registriert haben."
+
+msgid "Please validate your email by clicking this:"
+msgstr ""
+"Bitte validieren Sie Ihre E-Mail indem Sie den folgenden Link anklicken:"
+
+msgid "Approvals"
+msgstr "Freischalten"
+
+msgid ""
+"\n"
+"    Approve\n"
+"    "
+msgstr ""
+"\n"
+"    Freischalten\n"
+"    "
+
+msgid "These participants require approval."
+msgstr "Diese Teilnehmer müssen noch freigeschaltet werden."
+
+msgid "These participants are approved, but you can disapprove them any time."
+msgstr ""
+"Diese Teilnehmer sind freigeschaltet, aber Sie können die Freischaltung "
+"jederzeit wieder rückgängig machen."
+
+msgid "Staff"
+msgstr "Administrator"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Functions for staff members"
+msgstr "Funktionen für Administratoren"
+
+msgid "Approve"
+msgstr "Freischalten"
+
+msgid "Do something"
+msgstr "Mach etwas"
+
+msgid "You successfully deactivated your profile."
+msgstr "Sie haben ihr Profil deaktiviert."
+
+msgid "You successfully reactivated your profile."
+msgstr "Sie haben Ihr Profil aktiviert."
+
+msgid "Successfully updated info."
+msgstr "Sie haben Ihre Infos aktualisiert."
+
+#, python-brace-format
+msgid "You deleted the participant with email '{name}'."
+msgstr "Sie haben den Teilnehmer mit der E-Mail-Adresse '{name}' gelöscht."
+
+#, python-brace-format
+msgid "You changed the approval of the participant with email '{name}'."
+msgstr ""
+"Sie haben für den Teilnehmer mit der E-Mail-Adresse '{name}' den Status "
+"geändert."
+
+msgid "Access stats"
+msgstr "Website Zugriffe"
+
+msgid "Number of page calls"
+msgstr "Anzahl der Website Zugriffe"
+
+msgid ""
+"<html><body>gunicorn-access.log not found or "
+"accessible                            </body></html>"
+msgstr ""
+"<html><body>gunicorn-access.log nicht gefunden oder zugreifbar</body></html>"
+
+msgid "English"
+msgstr "Englisch"
+
+msgid "German"
+msgstr "Deutsch"
+
+msgid ""
+"\n"
+"        404 Error\n"
+"    "
+msgstr ""
+"\n"
+"        404 Error\n"
+"    "
+
+msgid "This page could not be found."
+msgstr "Diese Seite konnte nicht gefunden werden."
+
+msgid "Back to homepage"
+msgstr "Zurück zur Homepage."
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "An error occurred."
+msgstr "Ein Fehler ist aufgetreten."
+
+msgid "About"
+msgstr "Über uns"
+
+msgid "We are the team of match4everyone! Muhahaha"
+msgstr "M4E Team! Muhahaha"
+
+msgid "Developed by Open Source Team"
+msgstr "Entwickelt von"
+
+msgid "during th hackathon #wirvsvirus"
+msgstr "während #wirvsvirus"
+
+msgid "Signup A"
+msgstr "Signup A"
+
+msgid "Signup B"
+msgstr "Signup B"
+
+msgid "My Profile"
+msgstr "Mein Profil"
+
+msgid ""
+"A project that originated from\n"
+"            <a href=\"https://wirvsvirushackathon.org/\" target=\"_blank"
+"\">#WirVsVirus hackathon</a>."
+msgstr ""
+"Ein Projekt entstanden aus dem \n"
+"            <a href=\"https://wirvsvirushackathon.org/\" target=\"_blank"
+"\">#WirVsVirus hackathon</a>."
+
+msgid "Imprint"
+msgstr "Impressum"
+
+msgid "Data Protection"
+msgstr "Datenschutz"
+
+msgid "and"
+msgstr "und"
+
+msgid "Terms of Use"
+msgstr "AGBs"
+
+msgid "We match for everyone."
+msgstr "Wir matchen jeden."
+
+msgid "I am"
+msgstr "Ich bin"
+
+msgid "A"
+msgstr "A"
+
+msgid "I own an ice cream parlor."
+msgstr "Ich besitze einen Eiscreme Laden."
+
+msgid "This is me"
+msgstr "Das bin ich."
+
+msgid "B"
+msgstr "B"
+
+msgid "I feel hungry."
+msgstr "Ich habe Hunger."
+
+msgid "How does this work?"
+msgstr "Wie funktioniert das?"
+
+msgid "We match."
+msgstr "Wir matchen."
+
+msgid "another open-source project"
+msgstr "noch ein open-source Projekt"
