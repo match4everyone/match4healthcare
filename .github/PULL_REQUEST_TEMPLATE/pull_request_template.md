@@ -1,8 +1,8 @@
 **Topic:**
-*Please describe what this pull request does/improves/fixes in a short sentence*
+_Please describe what this pull request does/improves/fixes in a short sentence_
 
 **Relevant issues:**
-*Consider using the 'Closes' keyword in order to automatically close the issue upon merge.*
+_Consider using the 'Closes' keyword in order to automatically close the issue upon merge._
 
 **Further description:**
 

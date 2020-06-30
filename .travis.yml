@@ -2,19 +2,18 @@ services:
   - docker
 
 before_script:
- - ./scripts/write_envs_to_file.sh
- - ./deploy.sh
- - ./scripts/wait_for_backend.sh
- - docker logs $(docker ps --format '{{.Names}}' | grep backend)
- - docker logs $(docker ps --format '{{.Names}}' | grep database)
-
+  - ./scripts/write_envs_to_file.sh
+  - ./deploy.sh
+  - ./scripts/wait_for_backend.sh
+  - docker logs $(docker ps --format '{{.Names}}' | grep backend)
+  - docker logs $(docker ps --format '{{.Names}}' | grep database)
 
 script:
- - bash scripts/check_website_availability.sh
- - docker exec backend python3 manage.py test
+  - bash scripts/check_website_availability.sh
+  - docker exec backend python3 manage.py test
 
 after_script:
- - docker-compose down
+  - docker-compose down
 
 env:
- - POSTGRES_DB=match4healthcare POSTGRES_PASSWORD="BuZK@HPB_FDpGx3gvnnB9@eypozpC8PeesGP7PUC*DDgbbj-Zpv3kRwCkmU6FQoL" POSTGRES_USER=match4healthcare SECRET_KEY="QP=14DkrovY9qrqXmZk3sjgakmy@x#6Log7EiW-9K4g5W&xY)_yN3a*rsinLYP|"
+  - POSTGRES_DB=match4healthcare POSTGRES_PASSWORD="BuZK@HPB_FDpGx3gvnnB9@eypozpC8PeesGP7PUC*DDgbbj-Zpv3kRwCkmU6FQoL" POSTGRES_USER=match4healthcare SECRET_KEY="QP=14DkrovY9qrqXmZk3sjgakmy@x#6Log7EiW-9K4g5W&xY)_yN3a*rsinLYP|"

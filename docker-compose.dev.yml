@@ -1,16 +1,15 @@
-version: '3.7'
+version: "3.7"
 
 services:
-
   backend:
     container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - './backend:/match4healthcare-backend'
+      - "./backend:/match4healthcare-backend"
     ports:
-      - '8000:8000'
+      - "8000:8000"
     environment:
       - CI
       - TRAVIS

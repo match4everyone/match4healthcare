@@ -1,64 +1,81 @@
+exclude: |
+  (?x)(
+      ^backend/backups/|
+      ^backend/run/|
+      ^database/backups/|
+      ^database/data/
+  )
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: check-added-large-files
-    -   id: check-case-conflict
-    -   id: check-merge-conflict
-    -   id: end-of-file-fixer
-        exclude: |
-                (?x)(
-                    ^backend/static/|
-                    ^backend/backups/|
-                    ^backend/run/|
-                    ^database/backups/|
-                    ^database/data/
-                )
-    -   id: requirements-txt-fixer
-    -   id: trailing-whitespace
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
         exclude: ^backend/static/
-# Note that this does not mix with git setup check-in LF check-out CRLF,
-# see https://github.com/pre-commit/pre-commit-hooks#mixed-line-ending
-    -   id: mixed-line-ending
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+        exclude: ^backend/static/
+      # Note that this does not mix with git setup check-in LF check-out CRLF,
+      # see https://github.com/pre-commit/pre-commit-hooks#mixed-line-ending
+      - id: mixed-line-ending
+        exclude: ^backend/static/
         args: [--fix=lf]
-        exclude: |
-                (?x)(
-                    ^backend/static/|
-                    ^backend/backups/|
-                    ^backend/run/|
-                    ^database/backups/|
-                    ^database/data/
-                )
--   repo: https://github.com/timothycrosley/isort
+  - repo: https://github.com/timothycrosley/isort
     rev: 4.3.21
     hooks:
       - id: isort
         # args: [--filter-files]
-# use black or autopep8 to automatically format files to pep8
--   repo: https://github.com/psf/black
+  # use black or autopep8 to automatically format files to pep8
+  - repo: https://github.com/psf/black
     rev: stable
     hooks:
-    -   id: black
+      - id: black
         args: [--line-length=100]
         language_version: python3
         exclude: |
-                (?x)(
-                    ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
-                    ^backend/backups/|
-                    ^backend/run/|
-                    ^database/backups/|
-                    ^database/data/
-                )
--   repo: https://gitlab.com/pycqa/flake8
+          (?x)(
+              ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py
+          )
+  - repo: https://gitlab.com/pycqa/flake8
     rev: 3.7.9
     hooks:
-    -   id: flake8
-        additional_dependencies: [flake8-import-order,flake8-builtins,flake8-docstrings,flake8-logging-format,flake8-todos]
+      - id: flake8
+        additional_dependencies:
+          [
+            flake8-import-order,
+            flake8-builtins,
+            flake8-docstrings,
+            flake8-logging-format,
+            flake8-todos,
+          ]
         exclude: |
-                (?x)(
-                    ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py|
-                    ^backend/backups/|
-                    ^backend/run/|
-                    ^database/backups/|
-                    ^database/data/
-                )
+          (?x)(
+              ^backend/apps/[a-z]*/migrations/[0-9A-z]*.py
+          )
+  - repo: https://github.com/prettier/prettier
+    rev: 2.0.5
+    hooks:
+      - id: prettier
+        args: [--loglevel=warn]
+        files: "\\.(\
+          css|less|scss\
+          |js|jsx\
+          |md|markdown|mdown|mkdn\
+          |yaml|yml\
+          )$"
+        exclude: |
+          (?x)(
+              ^[0-9A-z/_\-\.]*.min.js|
+              ^[0-9A-z/_\-\.]*.min.css|
+              ^backend/static/css/[0-9A-z/_\-\.]*[0-9]|
+              ^backend/static/js/[0-9A-z/_\-\.]*[0-9]
+          )
+  - repo: https://github.com/motet-a/jinjalint
+    rev: master
+    hooks:
+      - id: jinjalint
+        args: [--config=.jinjalint.cfg]
+        types: [file] # restore the default `types` matching
+        files: \.html$
