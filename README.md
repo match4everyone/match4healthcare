@@ -24,6 +24,12 @@ After changes to the Docker configuration, you have to restart and build the con
 In order to run pre-commit checks every time, please run `pre-commit install` once in the repository. Pay attention when using `git commit -a`, because then the automatic code formatting will be added irreversably to your changes. The recommended workflow would be to use `git add` first, resulting in staged changes and unstaged codeformatting that you can double-check if you wish. You can of course always run `pre-commit run` to manually check all staged files before attempting a commit.
 
 ### Production
+
+## Reverse Proxy
+We recommend running the gunicorn server behind a reverse proxy to provide ssl and possibly run multiple services on one server.
+A sample nginx configuration can be found at ./tools/nginx-sample-site.
+
+## Setup
 Set `SECRET_KEY`, `SENDGRID_API_KEY` and `MAPBOX_TOKEN`in `backend.prod.env` for Django
 `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`  inside `database.prod.env` for postgres on your host machine.
 Also add a `SLACK_LOG_WEBHOOK` to enable slack logging.
