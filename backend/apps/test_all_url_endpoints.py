@@ -32,20 +32,14 @@ def generate_random_student(countrycode="DE", plz="14482", i=0, validated_email=
 
 
 def generate_random_hospital(
-    countrycode="DE", plz="14482", i=0, datenschutz_zugestimmt=True, validated_email=False,
+    countrycode="DE", plz="14482", i=0, validated_email=False,
 ):
     m = str(i) + "hospital@email.de"
     pwd = User.objects.make_random_password()
     u = User.objects.create(username=m, email=m, is_hospital=True, validated_email=validated_email)
     u.set_password(pwd)
     s = Hospital.objects.create(
-        user=u,
-        countrycode=countrycode,
-        plz=plz,
-        ansprechpartner="XY",
-        sonstige_infos="yeaah",
-        datenschutz_zugestimmt=datenschutz_zugestimmt,
-        einwilligung_datenweitergabe=True,
+        user=u, countrycode=countrycode, plz=plz, ansprechpartner="XY", sonstige_infos="yeaah",
     )
     u.save()
     s.save()
@@ -307,26 +301,15 @@ class UrlEndpointTestCase(TestCase):
         assert "login" in response.redirect_chain[0][0]
         assert response.status_code == 200
 
-        hospital_email, hospital_password, uuid = generate_random_hospital(
-            datenschutz_zugestimmt=False, i=9999
-        )
+        hospital_email, hospital_password, uuid = generate_random_hospital(i=9999)
         response = self.client.post(
             "/accounts/login/",
             {"username": hospital_email, "password": hospital_password,},
             follow=True,
         )
-        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt is False
-        assert "zustimmung" in response.redirect_chain[1][0]
         assert auth.get_user(self.client).username == hospital_email
-
-        response = self.client.post(
-            "/ineedstudent/zustimmung",
-            {"datenschutz_zugestimmt": True, "einwilligung_datenweitergabe": True,},
-            follow=True,
-        )
         assert response.status_code == 200
         assert "login_redirect" in response.redirect_chain[0][0]
-        assert Hospital.objects.get(user__email=hospital_email).datenschutz_zugestimmt is True
 
     def test_sudent_individual_view(self):
         staff_email, staff_password = generate_staff_user()

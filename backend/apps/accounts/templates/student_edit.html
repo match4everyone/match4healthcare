@@ -92,21 +92,26 @@ var signUpHelper = {
 
             </div>
         </div>
-        <div class="card" style="margin-bottom:35px;">
-            <div class="card-header">
+        <div class="card my-5">
+            <div class="card-header font-weight-bold">
                 {% blocktrans %}Nützliche Hinweise{% endblocktrans %}
             </div>
             <div class="card-body">
-                <p>
-                    {% blocktrans %}Für rechtliche Hinweise und Tipps informieren Sie sich gerne beim der <a href="https://www.marburger-bund.de/mitarbeit-studierenden-pandemie">Übersicht des Marburger Bunds zur Mitarbeit in der Corona Pandemie</a>.{% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans %}Zusätzlich wollen wir euch bestmöglich auf den Einsatz und den Kontakt mit COVID-19 Patienten vorbereiten.  Hierfür stellen wir euch eine <a href="https://www.amboss.com/de/wissen/COVID-19">Zusammenfassung der Symptome und Therapiemöglichkeiten</a> zur Verfügung.{% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans %}Zur Vorbereitung auf euren Einsatz hat ein weiteres Team des #WirVsVirus Hackathon eine <a href="https://helferhaende.it-servicehost.de/">interaktive E-Learning Plattform</a> entwickelt.{% endblocktrans %}
-                </p>
-
+                <p>Unter den folgenden Adressen findest du Informationen, die du im Hinterkopf behalten solltest, bevor du mit einer Instution Kontakt aufnimmst:</p>
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" href="https://www.marburger-bund.de/mitarbeit-studierenden-pandemie" target="_blank">
+                        {% blocktrans %}Übersicht mit rechtlichen Informationen des Marburger Bunds zur Mitarbeit in der Corona Pandemie{% endblocktrans %}
+                        <span class="font-weight-bold">https://www.marburger-bund.de/mitarbeit-studierenden-pandemie</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="https://www.amboss.com/de/wissen/COVID-19" target="_blank">
+                        {% blocktrans %}AMBOSS Informationsseite zu Kontakt und Behandlung von COVID-19 Patienten{% endblocktrans %}
+                        <span class="font-weight-bold">https://www.amboss.com/de/wissen/COVID-19</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="https://helferhaende.it-servicehost.de/" target="_blank">
+                        {% blocktrans %}Durch ein weiteres Team des #WirVsVirus Hackathon entwickelte Interaktive E-Learning Plattform zur Vorbereitung auf deinen Einsatz.{% endblocktrans %}
+                        <span class="font-weight-bold">https://helferhaende.it-servicehost.de/</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card">

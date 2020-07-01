@@ -49,7 +49,7 @@ class StudentTable(tables.Table):
             "sonstige_qualifikationen": _("Sonst. Qualifikationen"),
             "unterkunft_gewuenscht": _("Braucht Unterkunft"),
             "zeitliche_verfuegbarkeit": _("Verfügbarkeit"),
-            "braucht_bezahlung": _("Bezahlung Notwendig"),
+            "braucht_bezahlung": _("Möchte Bezahlung"),
         }
 
     def render_name_first(self, record):
@@ -64,7 +64,9 @@ class StudentTable(tables.Table):
             return "✘"
 
     def render_braucht_bezahlung(self, value):
-        if "freue" in value:
-            return "✘"
+        if value == _("Ich möchte ohne Bezahlung helfen"):
+            return "nein"
+        elif "freue" in value:
+            return "egal"
         else:
-            return "✔"
+            return "ja"

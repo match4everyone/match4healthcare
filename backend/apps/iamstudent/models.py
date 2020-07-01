@@ -34,10 +34,11 @@ BEZAHLUNG_CHOICES = (
     (DARF_NICHT_BEZAHLT_WERDEN, _("Ich möchte ohne Bezahlung helfen")),
 )
 
+NUR_BEZAHLUNG = 1
+NUR_UNENTGELTLICH = 2
 BEZAHLUNG_CHOICES_Filter = (
-    (BEZAHLUNG, _("ja")),
-    (UNENTGELTLICH, _("nein")),
-    (DARF_NICHT_BEZAHLT_WERDEN, _("individuell absprechbar")),
+    (NUR_BEZAHLUNG, _("Helfende müssen eine Vergütung annehmen.")),
+    (NUR_UNENTGELTLICH, _("Wir können keine Vergütung anbieten.")),
 )
 
 
@@ -118,11 +119,9 @@ class Student(models.Model):
         choices=VERFUEGBARKEIT_CHOICES, null=True, blank=False
     )
 
-    datenschutz_zugestimmt = models.BooleanField(default=False, validators=[validate_checkbox])
-    einwilligung_datenweitergabe = models.BooleanField(
-        default=False, validators=[validate_checkbox]
-    )
-    einwilligung_agb = models.BooleanField(default=False, validators=[validate_checkbox])
+    datenschutz_zugestimmt = models.BooleanField(default=False)
+    einwilligung_datenweitergabe = models.BooleanField(default=False)
+    einwilligung_agb = models.BooleanField(default=False)
 
     sonstige_qualifikationen = models.CharField(max_length=200, blank=True, default="keine")
     unterkunft_gewuenscht = models.BooleanField(default=False)
