@@ -1,18 +1,20 @@
-maltezacharias@match4healthcare:~$ cat /etc/nginx/sites-available/match4healthcare
+# This example uses certbot and letsencrypt SSL certificates
+# Adjust this file accordingly if you employ a different SSL service.
+# Also adjust the hostname by replacing YOUR-HOSTNAME.TLD with the appropriate one
 
 # HTTP Redirection Server
 server {
-        if ($host = www.match4healthcare.de) {
+        if ($host = www.YOUR-HOSTNAME.TLD) {
                 return 301 https://$host$request_uri;
         } # managed by Certbot
 
-        if ($host = match4healthcare.de) {
+        if ($host = YOUR-HOSTNAME.TLD) {
                 return 301 https://$host$request_uri;
         } # managed by Certbot
 
         listen 80 ;
         listen [::]:80 ;
-        server_name www.match4healthcare.de match4healthcare.de;
+        server_name www.YOUR-HOSTNAME.TLD YOUR-HOSTNAME.TLD;
         return 404; # managed by Certbot
 
 }
@@ -22,7 +24,7 @@ server {
 
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
-        server_name www.match4healthcare.de match4healthcare.de; # managed by Certbot
+        server_name www.YOUR-HOSTNAME.TLD YOUR-HOSTNAME.TLD; # managed by Certbot
 
         listen [::]:443 ssl; # managed by Certbot
         listen 443 ssl; # managed by Certbot
