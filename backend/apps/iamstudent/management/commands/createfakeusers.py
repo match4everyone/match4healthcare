@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 import numpy as np
 
 from apps.accounts.models import User
-from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, Student
+from apps.iamstudent.models import AUSBILDUNGS_TYPEN_COLUMNS, BEZAHLUNG_CHOICES, Student
 from apps.ineedstudent.models import Hospital
 
 from ._utils import BIG_CITY_PLZS
@@ -109,12 +109,12 @@ class Command(BaseCommand):
             Student.objects.create(
                 user=u,
                 plz=plzs[i],
-                braucht_bezahlung=np.random.choice([0, 1]),
+                braucht_bezahlung=BEZAHLUNG_CHOICES[np.random.choice([0, 1, 2])][0],
                 is_activated=np.random.choice([True, False], p=[0.95, 0.05]),
-                einwilligung_agb=True,
-                datenschutz_zugestimmt=True,
-                einwilligung_datenweitergabe=True,
                 availability_start="{}-{:02d}-{:02d}".format(year, months[i], days[i]),
+                zeitliche_verfuegbarkeit=np.random.choice([1, 2, 3, 4]),
+                umkreis=np.random.choice([1, 2, 3, 4], p=[0.2, 0.5, 0.27, 0.03]),
+                unterkunft_gewuenscht=np.random.choice([True, False], p=[0.1, 0.9]),
                 **kwd
             )
 
