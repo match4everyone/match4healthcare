@@ -14,7 +14,6 @@ from .email_utils import send_mass_mail_sendgrid
 logger = logging.getLogger("django")
 
 
-
 class User(AbstractUser):
 
     is_student = models.BooleanField(default=False)
