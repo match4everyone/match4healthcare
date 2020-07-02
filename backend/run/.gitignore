@@ -7,15 +7,16 @@
 
 # Except for the static folder
 !static
-!static/.gitkeep
 # But its content
 static/*
+!static/.gitkeep
+
 # Except for the media folder
 !media
-!media/.gitkeep
 # But its content
 media/*
+!media/.gitkeep
 
 !log
-!log/.gitkeep
 log/*
+!log/.gitkeep
