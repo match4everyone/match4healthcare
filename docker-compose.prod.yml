@@ -23,12 +23,12 @@ services:
 
 
   database:
-    image: postgres:12
+    build:
+      context: ./database
+      dockerfile: Dockerfile
     volumes:
-     - ./database/data:/var/lib/postgresql/data
-     - ./database/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-     - ./database/postgresql.conf:/etc/postgresql.conf
-     - ./database/backups:/backups/
+     - db-data:/var/lib/postgresql/data
+     - db-backup:/backups/
     restart: always
     env_file:
      - database.prod.env
@@ -42,4 +42,5 @@ networks:
  network:
 
 volumes:
-  backend-run:
+  db-data:
+  db-backup:
