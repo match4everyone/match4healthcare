@@ -21,7 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 # add paths here and import: from django.conf import settings and use settings.XXX_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RUN_DIR = os.path.join(BASE_DIR, "run")
-
+LOG_DIR = os.path.join(RUN_DIR, "log")
 
 # Application definition
 
@@ -170,7 +170,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "json",
             "level": "ERROR",
-            "filename": path.join(RUN_DIR, "match4healthcare.json.error.log"),
+            "filename": path.join(LOG_DIR, "match4healthcare.json.error.log"),
             "maxBytes": 1024 * 1024 * 15,  # 15MB
             "backupCount": 10,
         },
@@ -178,7 +178,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "json",
             "level": "INFO",
-            "filename": path.join(RUN_DIR, "match4healthcare.json.audit.log"),
+            "filename": path.join(LOG_DIR, "match4healthcare.json.audit.log"),
             "maxBytes": 1024 * 1024 * 15,  # 15MB
             "backupCount": 10,
         },

@@ -15,3 +15,7 @@ static/*
 !media/.gitkeep
 # But its content
 media/*
+
+!log
+!log/.gitkeep
+log/*
