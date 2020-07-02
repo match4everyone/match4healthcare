@@ -5,8 +5,10 @@ services:
   backend:
     volumes:
       - './backend:/match4healthcare-backend'
-    ports:
-      - '80:8000'
+#    ports:
+#      Port definitions from the .dev file will be carried on to prod
+#      so even if there is no port defined here, the docker image will be exposed
+#      as configured in the .dev file
     networks:
       - network
     env_file:

@@ -26,7 +26,10 @@ In order to run pre-commit checks every time, please run `pre-commit install` on
 ### Production
 
 ## Reverse Proxy
+
 We recommend running the gunicorn server behind a reverse proxy to provide ssl and possibly run multiple services on one server.
+The default configuration will make the docker container reachable on port 8000 only on 127.0.0.1.
+
 A sample nginx configuration can be found at ./tools/nginx-sample-site.
 
 ## Setup
