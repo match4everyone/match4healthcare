@@ -4,10 +4,12 @@ set -e -o pipefail
 if ! [[ -z "${PRODUCTION}" ]]; then
   echo Running in production mode, waiting for database to come up
   # Moved from docker-compose, as this is needed for migrate
+  echo -n "Waiting for database"
   while ! (< /dev/tcp/database/5432) &> /dev/null; do
-    echo "Waiting for database..."
-    sleep 1
+    echo -n .
+    sleep .2
   done
+  echo " OK"
 fi
 
 # While collectstatic should rather run in the Dockerfile build
