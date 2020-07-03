@@ -31,12 +31,6 @@ class HospitalFormO(ModelForm):
             "firmenname": _("Offizieller Name Ihrer Institution"),
             "ansprechpartner": _("Name der Kontaktperson"),
             "appears_in_map": _("Auf der Karte sichtbar und kontaktierbar für Helfende sein"),
-            "datenschutz_zugestimmt": _(
-                'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
-            ),
-            "einwilligung_datenweitergabe": _(
-                "Ich akzeptiere, dass alle Registrierungen von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert werden. Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür."
-            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -52,22 +46,14 @@ class HospitalFormO(ModelForm):
             Row(Column("telefon"), Column("email")),
             Row(Column("plz"), Column("countrycode")),
             HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-            HTML('<p class="text-left">'),
-            "datenschutz_zugestimmt",
-            HTML("</p>"),
-            HTML('<p class="text-left">'),
-            "einwilligung_datenweitergabe",
+            HTML(
+                '<div class="registration_disclaimer">{}</div>'.format(
+                    _(
+                        'Wir benötigen die Information, die Sie uns zur Verfügung stellen, um Helfende und Hilfesuchende miteinander zu vernetzen. Informationen dazu, welche personenbezogenen Daten bei dem Besuch und der Nutzung der Angebote auf unserer Seite erhoben und verarbeitet werden finden Sie in unseren Datenschutzbestimmungen (Link: <a target="_blank" href="/dataprotection/">https://match4healthcare.de/dataprotection/</a>).'
+                    )
+                )
+            ),
         )
-
-    def clean_datenschutz_zugestimmt(self):
-        if not self.cleaned_data["datenschutz_zugestimmt"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
-
-    def clean_einwilligung_datenweitergabe(self):
-        if not self.cleaned_data["einwilligung_datenweitergabe"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
 
 
 class HospitalForm(HospitalFormO):
@@ -97,8 +83,6 @@ class HospitalFormEditProfile(HospitalFormO):
             "uuid",
             "registration_date",
             "user",
-            "datenschutz_zugestimmt",
-            "einwilligung_datenweitergabe",
             "max_mails_per_day",
             "approval_date",
             "approved_by",
@@ -127,45 +111,6 @@ class HospitalFormEditProfile(HospitalFormO):
             Row(Column("telefon")),
             Row(Column("plz"), Column("countrycode")),
         )
-
-
-class HospitalFormZustimmung(ModelForm):
-    class Meta:
-        model = Hospital
-        fields = ["datenschutz_zugestimmt", "einwilligung_datenweitergabe"]
-
-        labels = {
-            "datenschutz_zugestimmt": _(
-                'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
-            ),
-            "einwilligung_datenweitergabe": _(
-                "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden."
-            ),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(HospitalFormZustimmung, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.add_input(
-            Submit("submit", _("Daten aktualisieren"), css_class="btn blue text-white btn-md",)
-        )
-        self.helper.layout = Layout(
-            HTML('<p class="text-left">'),
-            "datenschutz_zugestimmt",
-            HTML("</p>"),
-            HTML('<p class="text-left">'),
-            "einwilligung_datenweitergabe",
-        )
-
-    def clean_datenschutz_zugestimmt(self):
-        if not self.cleaned_data["datenschutz_zugestimmt"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
-
-    def clean_einwilligung_datenweitergabe(self):
-        if not self.cleaned_data["einwilligung_datenweitergabe"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
 
 
 def check_unique_email(value):

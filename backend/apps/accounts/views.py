@@ -132,9 +132,6 @@ def profile_redirect(request):
         return HttpResponseRedirect("profile_student")
 
     elif user.is_hospital:
-        h = Hospital.objects.get(user=user)
-        if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect("/ineedstudent/zustimmung")
         return HttpResponseRedirect("profile_hospital")
 
     elif user.is_staff:
@@ -153,12 +150,9 @@ def login_redirect(request):
     user = request.user
 
     if user.is_student:
-        return HttpResponseRedirect("/mapview")
+        return HttpResponseRedirect("/accounts/profile_student")
 
     elif user.is_hospital:
-        h = Hospital.objects.get(user=user)
-        if not h.datenschutz_zugestimmt or not h.einwilligung_datenweitergabe:
-            return HttpResponseRedirect("/ineedstudent/zustimmung")
         return HttpResponseRedirect("/ineedstudent/hospital_dashboard")
 
     elif user.is_staff:

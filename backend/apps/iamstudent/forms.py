@@ -71,13 +71,6 @@ form_labels = {
     "ausbildung_typ_sonstige": _("Sonstige"),
     "ausbildung_typ_sonstige_eintragen": _("Bitte die Qualifikationen hier eintragen"),
     "sonstige_qualifikationen": _("Weitere Qualifikationen"),
-    "datenschutz_zugestimmt": _(
-        'Hiermit akzeptiere ich die <a href="/dataprotection/">Datenschutzbedingungen</a>.'
-    ),
-    "einwilligung_datenweitergabe": _(
-        "Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann. "
-        "Mit der Weitergabe meiner Kontaktdaten an die Institutionen bin ich einverstanden."
-    ),
     "wunsch_ort_arzt": _("Arztpraxis/Ordination/MVZ"),
     "wunsch_ort_gesundheitsamt": _("Gesundheitsamt und sonstige Einrichtungen"),
     "wunsch_ort_krankenhaus": _("Klinikum/Spital"),
@@ -90,11 +83,6 @@ form_labels = {
     ),
     "wunsch_ort_ueberall": _("Keiner, ich helfe dort, wo ich kann"),
     "zeitliche_verfuegbarkeit": _("Zeitliche Verfügbarkeit, bis zu"),
-    "einwilligung_agb": _(
-        "Mit dem Absenden Ihrer Daten erlauben Sie die Übermittlung Ihrer abgegebenen Informationen an die bei uns registrierten Institutionen. "
-        "Alle Registrierungen werden von uns sorgfältig validiert und auf Ihre Richtigkeit kontrolliert. "
-        "Sollte dabei ein Fehler entstehen und Ihre Daten an dritte Personen gelangen, so übernehmen wir keine Haftung dafür."
-    ),
 }
 fields_for_button_group = [
     "ausbildung_typ_kinderbetreung_ausgebildet_abschnitt",
@@ -357,19 +345,10 @@ class StudentForm(forms.ModelForm):
             (
                 "sonstige_qualifikationen",
                 HTML('<hr style="margin-top: 20px; margin-bottom:30px;">'),
-                HTML('<p class="text-left">'),
-                "datenschutz_zugestimmt",
-                HTML("</p>"),
-                HTML('<p class="text-left">'),
-                "einwilligung_datenweitergabe",
-                HTML("</p>"),
-                HTML('<p class="text-left">'),
-                "einwilligung_agb",
-                HTML("</p>"),
                 HTML(
                     '<div class="registration_disclaimer">{}</div>'.format(
                         _(
-                            "Die Bereitstellung unseres Services erfolgt unentgeltlich. Mir ist bewusst, dass die Ausgestaltung des Verhältnisses zur Institution allein mich und die entsprechende Institution betrifft. Insbesondere Art und Umfang der Arbeit, eine etwaige Vergütung und vergleichbares betreffen nur mich und die entsprechende Institution. Eine Haftung von match4healthcare ist ausgeschlossen."
+                            'Wir benötigen die Information, die Sie uns zur Verfügung stellen, um Helfende und Hilfesuchende miteinander zu vernetzen. Informationen dazu, welche personenbezogenen Daten bei dem Besuch und der Nutzung der Angebote auf unserer Seite erhoben und verarbeitet werden finden Sie in unseren Datenschutzbestimmungen (Link: <a target="_blank" href="/dataprotection/">https://match4healthcare.de/dataprotection/</a>).'
                         )
                     )
                 ),
@@ -395,21 +374,6 @@ class StudentForm(forms.ModelForm):
                 )
             )
         return email
-
-    def clean_datenschutz_zugestimmt(self):
-        if not self.cleaned_data["datenschutz_zugestimmt"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
-
-    def clean_einwilligung_datenweitergabe(self):
-        if not self.cleaned_data["einwilligung_datenweitergabe"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
-
-    def clean_einwilligung_agb(self):
-        if not self.cleaned_data["einwilligung_agb"]:
-            raise ValidationError(_("Zustimmung erforderlich."), code="invalid")
-        return True
 
 
 class StudentFormAndMail(StudentForm):
