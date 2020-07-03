@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-13 17:30+0200\n"
-"PO-Revision-Date: 2020-05-22 15:28+0200\n"
+"PO-Revision-Date: 2020-07-03 11:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Bookmarks: -1,169,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 msgid "Aktive Staffmember"
@@ -452,10 +452,10 @@ msgstr ""
 "want to edit the text?"
 
 msgid "Text nochmal ändern "
-msgstr "Edit text again"
+msgstr "Edit text again "
 
 msgid "Testmail verschicken "
-msgstr "Send test email"
+msgstr "Send test email "
 
 msgid "An welche Adresse?"
 msgstr "To which e-mail address?"
@@ -550,7 +550,7 @@ msgid "Passwort gesetzt"
 msgstr "Password reset"
 
 msgid " Ihr Passwort wurde gesetzt. Sie können sich jetzt einloggen."
-msgstr " Your password was changed. You can login now. "
+msgstr " Your password was changed. You can login now."
 
 msgid "Erfolgreiche Anmeldung"
 msgstr "Successful registration"
@@ -621,7 +621,7 @@ msgid "Passwort Vergessen?"
 msgstr "Lost password?"
 
 msgid "Geben Sie Ihre Email-Addresse an und Sie erhalten ein neues Passwort."
-msgstr "Enter your e-Mail and we will send you a new password"
+msgstr "Enter your e-Mail and we will send you a new password."
 
 msgid "Passwort zurücksetzen "
 msgstr "Password reset "
@@ -801,7 +801,7 @@ msgid "Zugriffsstatistiken anzeigen"
 msgstr "Access statistics"
 
 msgid " Statistiken ansehen"
-msgstr "View statistics"
+msgstr " View statistics"
 
 msgid ""
 "\n"
@@ -915,12 +915,12 @@ msgstr ""
 "by people seeking help."
 
 msgid "Bearbeitungen gespeichert."
-msgstr "Edits have been saved"
+msgstr "Edits have been saved."
 
 msgid ""
 "Der Newsletter kann nun nicht mehr editiert werden. Andere Leute können ihn "
 "approven."
-msgstr "The newsletter cannot be edited anymore. It is open for review. "
+msgstr "The newsletter cannot be edited anymore. It is open for review."
 
 msgid "Der Newsletter kann wieder bearbeitet werden."
 msgstr "The newsletter can be edited again."
@@ -934,7 +934,7 @@ msgstr ""
 "the link in the e-mail sent to ({mail})."
 
 msgid "Der Newsletter wurde versendet."
-msgstr "Newsletter has been sent"
+msgstr "Newsletter has been sent."
 
 #, python-format
 msgid "Eine Test Email wurde an %s versendet."
@@ -2124,7 +2124,7 @@ msgid ""
 msgstr ""
 "In order to ensure data protection, no contact details nor names of "
 "supporters are shared with health facilities during the whole matching "
-"process"
+"process."
 
 #, python-format
 msgid ""
