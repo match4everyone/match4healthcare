@@ -166,7 +166,6 @@ Home
       <div class="col-lg-12 logos-home" style="text-align: center; margin: 0 auto;">
         <h2 style="text-align:center; font-size: 1.3rem; margin-bottom: 15px;">{% blocktrans %}Gefördert von{% endblocktrans %}</h2>
         {% get_current_language as LANGUAGE_CODE %}
-        <!-- { % if request.session.lang == "en" % } does not work until we save the language choice in cookie-->
 
         {% with 'img/BMBF_logo_'|add:request.LANGUAGE_CODE|add:'.png' as image_static_bmbf %}
         {% blocktrans %}<a href="https://www.bmbf.de/de/ueber-uns-21.html" target="_blank">{% endblocktrans %}
