@@ -13,8 +13,5 @@ services:
     tty: true
     environment:
       - DJANGO_SETTINGS_MODULE=match4everyone.settings.development
-      - CI
-      - TRAVIS
-      - TRAVIS_PULL_REQUEST_SLUG
       - PYTHONPATH=/backend # needed for django-admin to find the module
     user: ${BACKEND_USER:-0}

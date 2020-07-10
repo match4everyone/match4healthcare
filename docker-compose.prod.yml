@@ -15,6 +15,9 @@ services:
       - backend.prod.env
       - database.prod.env
     environment:
+     - CI
+     - TRAVIS
+     - TRAVIS_PULL_REQUEST_SLUG
      - DJANGO_SETTINGS_MODULE=match4healthcare.settings.production
      - PRODUCTION=True
     command: gunicorn -c /backend/gunicorn.conf.py match4healthcare.wsgi
