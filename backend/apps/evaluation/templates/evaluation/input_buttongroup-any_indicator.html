@@ -1,0 +1,37 @@
+{% load crispy_forms_filters %}
+{% load l10n %}
+{% load i18n %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+
+<style>
+    button.btn.btn-md.active{
+        background-color: #ed0a71;
+        pointer-events: none;
+    }
+</style>
+
+    <div id="div_{{ field.auto_id }}" class="form-group{% if using_grid_layout %} row{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_show_errors and field.errors %} has-danger{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        {% if field.label %}
+        <div class="form-group">
+            <label for="{{ field.auto_id }}"  class="form-control-label {{ label_class }}{% if field.field.required %} requiredField{% endif %}">
+                    {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+            </label>
+            {% endif %}
+            <div class="btn-group" style="width: 100%; margin-top: -15px" data-toggle="buttons" {% if flat_attrs %} {{ flat_attrs|safe }}{% endif %} >
+                {% include 'bootstrap4/layout/field_errors_block.html' %}
+
+                 {% for choice in field.field.choices %}
+                    <button type="button" class="{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %}active {% endif %}{{ option_label_class }}">
+                        <input autocomplete="off" type="{{ input_type }}"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }} hidden />
+                        {{choice.1}}
+                    </button>
+                {% endfor %}
+
+                {% include 'bootstrap4/layout/help_text.html' %}
+            </div>
+        </div>
+    </div>
+{% endif %}

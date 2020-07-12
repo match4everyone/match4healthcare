@@ -15,6 +15,7 @@ logger = logging.getLogger("django")
 
 
 class User(AbstractUser):
+
     is_student = models.BooleanField(default=False)
     is_hospital = models.BooleanField(default=False)
     validated_email = models.BooleanField(default=False)

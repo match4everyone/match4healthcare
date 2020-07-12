@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.ineedstudent",
     "apps.accounts",
     "apps.use_statistics",
+    "apps.evaluation",
 ]
 
 MIDDLEWARE = [
